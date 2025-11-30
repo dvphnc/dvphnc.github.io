@@ -4,184 +4,136 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Burp Suite Fundamentals • dvphnc SyberVault</title>
-  <meta name="description" content="Complete guide to Burp Suite — Proxy, Repeater, Intruder, Scanner, Sequencer + DVWA practice">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-dark.min.css">
+  <meta name="description" content="Interactive Burp Suite workshop — Proxy, Repeater, Intruder, Sequencer + live payloads">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
-    :root { --accent: #ff2d55; }
-    body {
-      background: #000;
-      color: #fff;
-      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 3rem 1.5rem;
-    }
-    .back {
-      display: inline-block;
-      margin-bottom: 2rem;
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
-    }
-    .back:hover { text-decoration: underline; }
-    .markdown-body {
-      background: #111111;
-      padding: 3rem;
-      border-radius: 20px;
-      box-shadow: 0 20px 70px rgba(0,0,0,0.8);
-      line-height: 1.7;
-    }
-    h1 {
-      font-size: 3.2rem;
-      background: linear-gradient(90deg, #ff2d55, #ff9500, #ff2d55);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 1.5rem;
-      text-align: center;
-    }
-    h2, h3 { color: #ff2d55; margin-top: 2.5rem; }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1.5rem 0;
-      background: #1c1c1e;
-      border-radius: 12px;
-      overflow: hidden;
-    }
-    th, td {
-      padding: 1rem;
-      text-align: left;
-      border-bottom: 1px solid #333;
-    }
-    th { background: #252525; }
-    pre, code { border-radius: 10px; }
-    blockquote {
-      border-left: 4px solid var(--accent);
-      padding-left: 1.5rem;
-      color: #ccc;
-      font-style: italic;
-      margin: 2rem 0;
-    }
-    img { border-radius: 14px; max-width: 100%; }
+    :root { --burp: #ff5f57; --bg: #0d1117; --card: #161b22; }
+    body { background:#000; color:#fff; font-family:'SF Pro Display',sans-serif; margin:0; padding:2rem 1rem; }
+    .container { max-width:1100px; margin:0 auto; }
+    .back { color:var(--burp); text-decoration:none; font-size:1.1rem; } 
+    .back:hover { display:inline-flex; align-items:center; gap:8px; margin-bottom:2rem; }
+    h1 { font-size:3.5rem; background:linear-gradient(90deg,#ff5f57,#ff9500); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-align:center; margin:2rem 0; }
+    .tabs { display:flex; gap:1rem; flex-wrap:wrap; margin:3rem 0; justify-content:center; }
+    .tab-btn { padding:1rem 2rem; background:#1c1c1e; border:none; color:#fff; border-radius:12px; cursor:pointer; font-weight:600; transition:0.3s; }
+    .tab-btn.active, .tab-btn:hover { background:var(--burp); transform:translateY(-4px); }
+    .tab-content { display:none; background:#111; padding:3rem; border-radius:20px; box-shadow:0 20px 60px rgba(0,0,0,0.8); animation:fadeIn 0.6s; }
+    .tab-content.active { display:block; }
+    .component-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:2rem; margin-top:2rem; }
+    .component-card { background:#1e1e1e; padding:2rem; border-radius:16px; border:2px solid #333; transition:0.4s; cursor:pointer; }
+    .component-card:hover { border-color:var(--burp); transform:scale(1.05); }
+    .component-card h3 { color:var(--burp); margin-top:0; }
+    .copy-btn { background:var(--burp); color:#000; border:none; padding:after { content:"Copied!"; } }
+    .copy-btn { background:var(--burp); color:#000; border:none; padding:0.6rem 1.2rem; border-radius:8px; cursor:pointer; font-weight:bold; margin-top:1rem; }
+    pre { background:#161b22; padding:1.5rem; border-radius:12px; overflow-x:auto; position:relative; }
+    .copy-btn { position:absolute; top:12px; right:12px; background:rgba(255,95,87,0.9); }
+    .emoji { font-size:2rem; display:block; margin-bottom:0.5rem; }
+    @keyframes fadeIn { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:none;} }
   </style>
 </head>
 <body>
   <div class="container">
-    <a href="../index.html" class="back">← Back to SyberVault</a>
-    <article class="markdown-body">
+    <a href="../index.html" class="back">Back to SyberVault</a>
+    <h1>Burp Suite Fundamentals</h1>
 
-# Burp Suite Fundamentals
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="proxy">Proxy</button>
+      <button class="tab-btn" data-tab="repeater">Repeater</button>
+      <button class="tab-btn" data-tab="intruder">Intruder</button>
+      <button class="tab-btn" data-tab="sequencer">Sequencer</button>
+      <button class="tab-btn" data-tab="dvwa">DVWA Lab</button>
+    </div>
 
-### What is Burp Suite?
-**Burp Suite** is an integrated platform for **web security testing**. Used by **security professionals** and **bug bounty hunters**, it identifies vulnerabilities in web applications.
+    <!-- PROXY TAB -->
+    <div id="proxy" class="tab-content active">
+      <h2>Proxy — Your Traffic Middleman</h2>
+      <p>Intercept → Inspect → Modify → Forward. This is where the magic starts.</p>
+      <div class="component-grid">
+        <div class="component-card">
+          <span class="emoji">Intercept On/Off</span>
+          <h3>Turn Intercept ON</h3>
+          <p>Capture the next request and play with it.</p>
+          <button class="copy-btn" onclick="copyToClipboard('GET /login HTTP/1.1')">Copy example request</button>
+        </div>
+        <div class="component-card">
+          <span class="emoji">Match & Replace</span>
+          <h3>Auto-replace User-Agent</h3>
+          <p>Rule → Add: <code>Match: Mozilla.* Replace: BurpWasHere/1.0</code></p>
+        </div>
+      </div>
+      <pre id="proxy-payload">GET /admin HTTP/1.1
+Host: vulnerable-app.com
+User-Agent: Mozilla/5.0...
+Cookie: session=abc123</pre>
+      <button class="copy-btn" onclick="copyToClipboard(document.querySelector('#proxy-payload').textContent)">Copy Request</button>
+    </div>
 
-> Think of it as a **powerful magnifying glass and toolkit** for analyzing web traffic.
+    <!-- REPEATER TAB -->
+    <div id="repeater" class="tab-content">
+      <h2>Repeater — Manual Testing Heaven</h2>
+      <p>Send → Modify → Send → Modify → Send… until it breaks</p>
+      <pre id="repeater-payload">POST /login HTTP/1.1
+Host: app.com
+Content-Type: application/x-www-form-urlencoded
 
-### Core Burp Suite Components
+username=admin' OR '1'='1'-- -&password=anything</pre>
+      <button class="copy-btn" onclick="copyToClipboard(document.querySelector('#repeater-payload').textContent)">Copy SQLi Payload</button>
+      <p style="margin-top:2rem 0">Try changing <code>-- -</code> to <code>#</code> to <code>/*comment*/</code> and watch responses change!</p>
+    </div>
 
-| **Component** | **Description** |
-|---------------|-----------------|
-| **Proxy**     | Intercepts and modifies web traffic between the browser and the server. |
-| **Repeater**  | Allows manual modification and resending of individual HTTP requests. |
-| **Intruder**  | Automates custom attacks like brute force, SQLi, and XSS. |
-| **Scanner**   | Automatically finds vulnerabilities (Professional edition only). |
-| **Sequencer** | Analyzes session token randomness and identifies weak session management. |
+    <!-- INTRUDER TAB -->
+    <div id="intruder" class="tab-content">
+      <h2>Intruder — Automated Attack Engine</h2>
+      <div class="component-grid">
+        <div class="component-card"><span class="emoji">Sniper</span><h3>Fuzz one parameter</h3></div>
+        <div class="component-card"><span class="emoji">Battering Ram</span><h3>Same payload everywhere</h3></div>
+        <div class="component-card"><span class="emoji">Pitchfork</span><h3>Parallel lists</h3></div>
+        <div class="component-card"><span class="emoji">Cluster Bomb</span><h3>Every combination (use with care!)</h3></div>
+      </div>
+      <p style="margin-top:2rem"><strong>Try this now:</strong> Send login request to Intruder → mark password field → Payloads → Load <code>SecLists/Passwords/top-1000.txt</code></p>
+    </div>
 
-### The Proxy: Your Web Traffic Middleman
-- Acts as a **middleman** for all web traffic.  
-- Intercepts requests and responses between browser and server.  
-- Lets you **view and modify** requests before reaching the server.  
-- Logs traffic in the **HTTP History tab**, even when interception is off.
+    <!-- SEQUENCER TAB -->
+    <div id="sequencer" class="tab-content">
+      <h2>Sequencer — Is Your Token Random?</h2>
+      <p>Capture 5000+ tokens → Live Analysis → See entropy score instantly</p>
+      <div style="text-align:center;margin:3rem 0">
+        <div style="display:inline-block;padding:2rem 4rem;background:#1e1e1e;border-radius:16px;border:3px solid var(--burp)">
+          <h3 style="margin:0">Expected good score: >90 bits</h3>
+          <p>Anything below 70 → weak & predictable</p>
+        </div>
+      </div>
+    </div>
 
-### Intercepting Your First Request
-When interception is **on**, Burp pauses each HTTP request before it’s sent.
-
-You can:
-- View or edit headers, parameters, and cookies  
-- Forward, drop, or modify responses  
-- Analyze hidden parameters or authentication tokens  
-
-> This helps uncover vulnerabilities like **XSS**, **SQLi**, or **IDOR**.
-
-### Burp Repeater: Manual Request Manipulation
-**Repeater** lets you manually **edit and resend HTTP requests** repeatedly.
-
-Useful for:
-- Testing **multi-step processes** (login flows, transactions)
-- Sending varying inputs to test for **input-based vulnerabilities**
-- Observing how the server reacts to modified requests
-
-> Perfect for precise, controlled testing.
-
-### Burp Intruder: Automated Attacks
-**Intruder** automates custom attacks to test web app defenses.
-
-| **Attack Type**   | **Description**                                 |
-|-------------------|-------------------------------------------------|
-| **Sniper**        | Tests one parameter at a time — ideal for fuzzing. |
-| **Battering Ram** | Sends the same payload to multiple positions.   |
-| **Pitchfork**     | Uses multiple payload sets in parallel.         |
-| **Cluster Bomb**  | Tests all combinations of payloads across parameters. |
-
-**Common Uses:**
-- Brute-forcing credentials
-- Testing for **SQL Injection** and **XSS**
-- Automating fuzzing for parameters
-
-### Burp Sequencer: Analyzing Session Tokens
-**Sequencer** tests the **randomness and entropy** of tokens and session IDs.
-
-Detects:
-- Weak session management
-- Predictable authentication tokens
-- Poor randomness that may lead to **session hijacking**
-
-### Burp Suite Summary
-
-| **Tool**      | **Main Purpose**                                |
-|---------------|-------------------------------------------------|
-| **Proxy**     | Capture and modify HTTP(S) requests/responses   |
-| **Repeater**  | Replay and tweak requests manually              |
-| **Intruder**  | Automate attacks using payload lists            |
-| **Scanner**   | Automatically detect vulnerabilities            |
-| **Sequencer** | Analyze session token randomness                |
-
-### What is DVWA?
-**DVWA (Damn Vulnerable Web Application)** is a **PHP/MySQL web app** intentionally made insecure. It helps **security professionals and students** safely practice web security testing.
-
-#### Purpose
-- Test your skills and tools in a **legal environment**
-- Learn how vulnerabilities work
-- Understand **how to secure** web applications
-
-### Using DVWA with Burp Suite
-**Why Use DVWA with Burp**
-- **Controlled environment** for hands-on web hacking
-- **Realistic vulnerabilities** (SQLi, XSS, File Upload, etc.)
-- Works perfectly with **Burp Proxy**, **Repeater**, and **Intruder**
-
-**Quick Setup Tips**
-1. Configure your browser to use **Burp Proxy** (`127.0.0.1:8080`).
-2. Open DVWA in your browser and log in.
-3. Capture HTTP requests in Burp’s **HTTP History** tab.
-4. Send interesting ones to:
-   - **Repeater** → manual testing  
-   - **Intruder** → automated fuzzing  
-   - **Sequencer** → session token analysis
-
-### Safety & Ethics
-- Run DVWA **only in isolated labs** (VM, sandbox, or localhost).
-- Never test **public or production** websites without permission.
-- Always follow **ethical hacking guidelines**.
-
-> **Combine Burp Suite + DVWA for the ultimate beginner-friendly web security lab!**
-
-    </article>
+    <!-- DVWA LAB TAB -->
+    <div id="dvwa" class="tab-content">
+      <h2>Hands-on Lab: DVWA + Burp</h2>
+      <p>1. Set browser proxy → 127.0.0.1:8080<br>2. Install CA certificate<br>3. Hit DVWA → capture login → send to Repeater → profit</p>
+      <div style="text-align:center;margin:3rem">
+        <a href="http://127.0.0.1/dvwa" target="_blank" style="background:var(--burp);color:#000;padding:1rem 3rem;border-radius:50px;text-decoration:none;font-weight:bold;font-size:1.3rem">Open DVWA Lab (localhost)</a>
+      </div>
+    </div>
   </div>
+
+  <script>
+    // Tab switching
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(btn.dataset.tab).classList.add('active');
+        btn.classList.add('active');
+      });
+    });
+
+    // Copy to clipboard
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text);
+      const btn = event.target;
+      const original = btn.textContent;
+      btn.textContent = 'Copied!';
+      btn.style.background = '#0f0';
+      setTimeout(() => { btn.textContent = original; btn.style.background = ''; }, 1500);
+    }
+  </script>
 </body>
 </html>
