@@ -88,20 +88,6 @@
       position: relative;
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
-    .copy {
-      position: absolute;
-      top: 12px;
-      right: 16px;
-      background: var(--accent);
-      color: black;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: bold;
-      opacity: 0.9;
-    }
-    .copy:hover { opacity: 1; }
 
     blockquote {
       font-size: 1.8rem;
@@ -135,7 +121,7 @@
 <body>
 
 <div class="container">
-  <a href="../index.html" class="back">Back to Vault</a>
+  <a href="../index.html" class="back">Vault</a>
 
   <header>
     <h1>Burp Suite<br>Fundamentals</h1>
@@ -172,7 +158,7 @@
 Host: vulnerable-lab.com
 Cookie: session=eyJ1c2VyIjo...
 User-Agent: Mozilla/5.0...</pre>
-    <button class="copy" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent);this.textContent='Copied!'">Copy</button>
+
 
     <h2>Repeater: The Loop Pedal</h2>
     <p>Found something interesting? Right-click → “Send to Repeater”. Now change one character and hit Go. Again. And again. Until the app finally tells you its secrets.</p>
