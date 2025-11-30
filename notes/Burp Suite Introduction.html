@@ -26,23 +26,28 @@
       margin: 0 auto;
       padding: 2rem 1.5rem;
     }
+
+    /* Back link — Apple Music style */
     .back {
+      position: fixed;
+      top: 2.5rem;
+      left: 2.5rem;
       color: var(--accent);
       text-decoration: none;
       font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 4rem;
+      font-size: 1.1rem;
+      z-index: 100;
+      opacity: 0.9;
+      transition: opacity 0.3s;
     }
-    .back:hover { text-decoration: underline; }
+    .back:hover { opacity: 1; }
 
     header {
       text-align: center;
-      padding: 5rem 0 4rem;
+      padding: 7rem 0 4rem;
     }
     h1 {
-      font-size: 5.5rem;
+      font-size: 5.8rem;
       font-weight: 800;
       background: var(--gradient);
       -webkit-background-clip: text;
@@ -59,147 +64,122 @@
 
     article { margin: 4rem 0; }
     h2 {
-      font-size: 3rem;
-      margin: 4rem 0 1.5rem;
+      font-size: 3.2rem;
+      margin: 5rem 0 1.8rem;
       background: var(--gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    p { margin: 1.4rem 0; color: #ddd; }
+    p { margin: 1.6rem 0; color: #ddd; }
 
     .cover {
       width: 100%;
-      max-width: 700px;
-      margin: 4rem auto;
-      border-radius: 24px;
+      max-width: 720px;
+      margin: 5rem auto;
+      border-radius: 28px;
       overflow: hidden;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.8);
-      display: block;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.9);
     }
     .cover img { width: 100%; display: block; }
 
     pre {
       background: #111;
-      padding: 2rem;
-      border-radius: 20px;
+      padding: 2.2rem;
+      border-radius: 24px;
       overflow-x: auto;
-      font-size: 1.1rem;
-      margin: 3rem 0;
-      position: relative;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      font-size: 1.05rem;
+      margin: 4rem 0;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+      color: #aaa;
     }
-    .copy {
-      position: absolute;
-      top: 12px;
-      right: 16px;
-      background: var(--accent);
-      color: black;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: bold;
-      opacity: 0.9;
-    }
-    .copy:hover { opacity: 1; }
 
     blockquote {
-      font-size: 1.8rem;
+      font-size: 2rem;
       font-style: italic;
       text-align: center;
       color: var(--muted);
-      padding: 3rem 2rem;
-      margin: 4rem 0;
-      border-left: none;
+      padding: 4rem 2rem;
+      margin: 6rem 0;
     }
 
     .cta {
       text-align: center;
-      margin: 6rem 0 4rem;
+      margin: 8rem 0 6rem;
     }
     .cta a {
       background: var(--gradient);
       color: black;
-      padding: 1.4rem 3.5rem;
+      padding: 1.6rem 4rem;
       border-radius: 60px;
-      font-size: 1.4rem;
-      font-weight: 700;
+      font-size: 1.5rem;
+      font-weight: 800;
       text-decoration: none;
-      box-shadow: 0 15px 40px rgba(255,45,85,0.4);
+      box-shadow: 0 20px 50px rgba(255,45,85,0.35);
       display: inline-block;
-      transition: 0.3s;
+      transition: transform 0.3s;
     }
-    .cta a:hover { transform: scale(1.05); }
+    .cta a:hover { transform: scale(1.06); }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <a href="../index.html" class="back">Back to Vault</a>
+  <a href="../index.html" class="back">Vault</a>
 
-  <header>
-    <h1>Burp Suite<br>Fundamentals</h1>
-    <p class="subtitle">The tool that turns traffic into art</p>
-  </header>
+  <div class="container">
 
-  <picture class="cover">
-    <img src="../covers/burp.jpg" alt="Burp Suite in action">
-  </picture>
+    <header>
+      <h1>Burp Suite<br>Fundamentals</h1>
+      <p class="subtitle">The tool that turns traffic into art</p>
+    </header>
 
-  <article>
-    <p>Every great pentester has one tool they can’t live without. For web application security, that tool is <strong>Burp Suite</strong>.</p>
-    
-    <p>It’s not just a proxy. It’s not just a scanner. It’s the complete platform that lets you see, touch, and reshape every byte flowing between browser and server — like a producer sitting at the mixing desk of the internet.</p>
+    <picture class="cover">
+      <img src="../covers/burp.jpg" alt="Burp Suite">
+    </picture>
 
-    <blockquote>
-      “If you can see it, you can break it.<br>If you can break it, you can fix it.”
-    </blockquote>
+    <article>
+      <p>Every great pentester has one tool they can’t live without. For web security, that tool is <strong>Burp Suite</strong>.</p>
+      
+      <p>It’s not just a proxy. It’s the complete studio where you dissect, reshape, and master every request and response — like a producer behind the glass watching the perfect take.</p>
 
-    <h2>The Core Tools</h2>
-    <p>Burp Suite is built around five legendary components:</p>
-    <ul style="font-size:1.3rem; padding-left:2rem; margin:2rem 0;">
-      <li><strong>Proxy</strong> — intercept everything</li>
-      <li><strong>Repeater</strong> — tweak and resend forever</li>
-      <li><strong>Intruder</strong> — automate the chaos</li>
-      <li><strong>Scanner</strong> — find bugs while you sleep (Pro only)</li>
-      <li><strong>Sequencer</strong> — test if randomness is real</li>
-    </ul>
+      <blockquote>
+        If you can see it, you can break it.<br>
+        If you can break it, you can fix it.
+      </blockquote>
 
-    <h2>Proxy: Your Invisible Middleman</h2>
-    <p>Set your browser to 127.0.0.1:8080 and suddenly you’re in the room. Every request, every response, every cookie — you see it before it leaves your machine.</p>
+      <h2>The Core Tools</h2>
+      <p>Five components. One legendary workflow.</p>
+      <ul style="font-size:1.35rem;padding-left:2rem;margin:3rem 0;">
+        <li>Proxy — intercept everything</li>
+        <li>Repeater — tweak and resend forever</li>
+        <li>Intruder — automate the chaos</li>
+        <li>Scanner — find bugs while you sleep (Pro)</li>
+        <li>Sequencer — test true randomness</li>
+      </ul>
 
-    <pre>GET /admin HTTP/1.1
+      <h2>Proxy</h2>
+      <p>Set your browser to 127.0.0.1:8080 and suddenly you’re in control. Every request pauses for your approval.</p>
+
+      <pre>GET /admin HTTP/1.1
 Host: vulnerable-lab.com
 Cookie: session=eyJ1c2VyIjo...
 User-Agent: Mozilla/5.0...</pre>
-    <button class="copy" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent);this.textContent='Copied!'">Copy</button>
 
-    <h2>Repeater: The Loop Pedal</h2>
-    <p>Found something interesting? Right-click → “Send to Repeater”. Now change one character and hit Go. Again. And again. Until the app finally tells you its secrets.</p>
+      <h2>Repeater</h2>
+      <p>The loop pedal of web hacking. Change one character. Hit Go. Repeat until the server sings.</p>
 
-    <h2>Intruder: When Manual Isn’t Enough</h2>
-    <p>Need to test 10,000 passwords? Fuzz every parameter? Brute-force a hidden API endpoint? Intruder does it with four attack types: Sniper, Battering Ram, Pitchfork, and the infamous Cluster Bomb.</p>
+      <h2>Intruder</h2>
+      <p>From fuzzing parameters to brute-forcing hidden endpoints — choose your attack type and let it fly.</p>
 
-    <h2>Sequencer: Entropy Never Lies</h2>
-    <p>Capture 5,000 session tokens and watch Burp calculate the real randomness. Anything under 80 bits of entropy is basically a “please hack me” sign.</p>
+      <h2>Sequencer</h2>
+      <p>Capture thousands of tokens. Watch Burp calculate real entropy. Weak randomness has nowhere to hide.</p>
 
-    <div class="cta">
-      <a href="https://portswigger.net/burp/communitydownload" target="_blank">
-        Download Burp Community • Start Today
-      </a>
-    </div>
-  </article>
-</div>
+      <div class="cta">
+        <a href="https://portswigger.net/burp/communitydownload" target="_blank">
+          Download Burp Community • Free Forever
+        </a>
+      </div>
+    </article>
 
-<script>
-  // Tiny smooth scroll for future anchor links (optional)
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', e => {
-      e.preventDefault();
-      document.querySelector(anchor.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-    });
-  });
-</script>
-
+  </div>
 </body>
 </html>
