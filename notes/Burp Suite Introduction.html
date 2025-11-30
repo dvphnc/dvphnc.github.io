@@ -4,252 +4,201 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Burp Suite Fundamentals • dvphnc SyberVault</title>
-  <meta name="description" content="The ultimate interactive guide to Burp Suite — Proxy, Repeater, Intruder, Sequencer, and DVWA lab">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <meta name="description" content="The definitive, beautiful guide to mastering Burp Suite">
   <style>
     :root {
-      --bg: #000000;
-      --card: #111111;
-      --text: #ffffff;
-      --text-dim: #aaaaaa;
-      --accent: #ff5f57;        /* PortSwigger red */
-      --gradient: linear-gradient(135deg, #ff5f57, #ff9500);
+      --bg: #000;
+      --text: #f5f5f7;
+      --muted: #999;
+      --accent: #ff2d55;
+      --gradient: linear-gradient(120deg, #ff2d55, #ff9500, #ff2d55);
     }
-    * { margin:0; padding:0; box-sizing:border-box; }
     body {
+      margin: 0;
       background: var(--bg);
       color: var(--text);
-      font-family: 'SF Pro Display', -apple-system, sans-serif;
-      line-height: 1.6;
-      padding: 2rem 1rem;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      line-height: 1.7;
+      font-size: 1.15rem;
     }
-    .container { max-width: 1200px; margin: 0 auto; }
-
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
     .back {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
       color: var(--accent);
       text-decoration: none;
       font-weight: 600;
-      margin-bottom: 3rem;
-      font-size: 1.1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4rem;
     }
     .back:hover { text-decoration: underline; }
 
-    .hero {
+    header {
       text-align: center;
-      padding: 4rem 0 5rem;
+      padding: 5rem 0 4rem;
     }
-    .hero h1 {
-      font-size: 5rem;
+    h1 {
+      font-size: 5.5rem;
       font-weight: 800;
       background: var(--gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 1rem;
+      line-height: 1.1;
+      margin: 0 0 1.5rem 0;
     }
-    .hero p {
-      font-size: 1.5rem;
-      color: var(--text-dim);
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .tracklist {
-      display: grid;
-      gap: 1.2rem;
-      margin: 4rem 0;
-    }
-    .track {
-      background: var(--card);
-      border-radius: 18px;
-      padding: 1.8rem 2rem;
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .track:hover {
-      background: #1c1c1e;
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-    }
-    .track-number {
-      font-size: 1.4rem;
-      color: var(--text-dim);
-      width: 40px;
-      text-align: center;
-    }
-    .track-title {
+    .subtitle {
       font-size: 1.6rem;
-      font-weight: 600;
+      color: var(--muted);
+      font-weight: 400;
     }
-    .track-subtitle {
-      color: var(--text-dim);
-      font-size: 1.1rem;
-    }
-    .play-icon {
-      margin-left: auto;
-      font-size: 2rem;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .track:hover .play-icon { opacity: 1; }
 
-    .content {
-      background: var(--card);
-      border-radius: 24px;
-      padding: 3rem;
-      margin: 3rem 0;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.7);
-      display: none;
+    article { margin: 4rem 0; }
+    h2 {
+      font-size: 3rem;
+      margin: 4rem 0 1.5rem;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    .content.active { display: block; animation: fade 0.6s; }
-    @keyframes fade { from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:none;} }
+    p { margin: 1.4rem 0; color: #ddd; }
+
+    .cover {
+      width: 100%;
+      max-width: 700px;
+      margin: 4rem auto;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+      display: block;
+    }
+    .cover img { width: 100%; display: block; }
 
     pre {
-      background: #000;
-      padding: 1.5rem;
-      border-radius: 16px;
+      background: #111;
+      padding: 2rem;
+      border-radius: 20px;
       overflow-x: auto;
+      font-size: 1.1rem;
+      margin: 3rem 0;
       position: relative;
-      margin: 2rem 0;
-      font-size: 1rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
     .copy {
       position: absolute;
       top: 12px;
-      right: 12px;
+      right: 16px;
       background: var(--accent);
-      color: #000;
+      color: black;
       border: none;
-      padding: 0.6rem 1.2rem;
+      padding: 0.5rem 1rem;
       border-radius: 10px;
       cursor: pointer;
       font-weight: bold;
+      opacity: 0.9;
+    }
+    .copy:hover { opacity: 1; }
+
+    blockquote {
+      font-size: 1.8rem;
+      font-style: italic;
+      text-align: center;
+      color: var(--muted);
+      padding: 3rem 2rem;
+      margin: 4rem 0;
+      border-left: none;
     }
 
-    .dvwa-btn {
-      display: block;
-      width: fit-content;
-      margin: 4rem auto;
+    .cta {
+      text-align: center;
+      margin: 6rem 0 4rem;
+    }
+    .cta a {
       background: var(--gradient);
-      color: #000;
-      padding: 1.5rem 4rem;
+      color: black;
+      padding: 1.4rem 3.5rem;
       border-radius: 60px;
-      font-size: 1.5rem;
-      font-weight: 800;
+      font-size: 1.4rem;
+      font-weight: 700;
       text-decoration: none;
-      box-shadow: 0 10px 30px rgba(255,95,87,0.4);
+      box-shadow: 0 15px 40px rgba(255,45,85,0.4);
+      display: inline-block;
       transition: 0.3s;
     }
-    .dvwa-btn:hover { transform: scale(1.05); }
+    .cta a:hover { transform: scale(1.05); }
   </style>
 </head>
 <body>
 
 <div class="container">
-
   <a href="../index.html" class="back">Back to Vault</a>
 
-  <div class="hero">
+  <header>
     <h1>Burp Suite<br>Fundamentals</h1>
-    <p>The complete interactive workshop — from your first intercept to breaking DVWA</p>
-  </div>
+    <p class="subtitle">The tool that turns traffic into art</p>
+  </header>
 
-  <div class="tracklist">
-    <div class="track" data-target="intro"><div class="track-number">1</div><div><div class="track-title">What is Burp Suite?</div><div class="track-subtitle">Your web traffic superpower</div></div><div class="play-icon">Play</div></div>
-    <div class="track" data-target="proxy"><div class="track-number">2</div><div><div class="track-title">Proxy</div><div class="track-subtitle">Intercept • Inspect • Modify</div></div></div><div class="play-icon">Play</div></div>
-    <div class="track" data-target="repeater"><div class="track-number">3</div><div><div class="track-title">Repeater</div><div class="track-subtitle">Manual request playground</div></div><div class="play-icon">Play</div></div>
-    <div class="track" data-target="intruder"><div class="track-number">4</div><div><div class="track-title">Intruder</div><div class="track-subtitle">Automated attack engine</div></div><div class="play-icon">Play</div></div>
-    <div class="track" data-target="sequencer"><div class="track-number">5</div><div><div class="track-title">Sequencer</div><div class="track-subtitle">Are your tokens truly random?</div></div><div class="play-icon">Play</div></div>
-    <div class="track" data-target="dvwa"><div class="track-number">6</div><div><div class="track-title">Hands-on Lab: DVWA</div><div class="track-subtitle">Break it legally</div></div><div class="play-icon">Play</div></div>
-  </div>
+  <picture class="cover">
+    <img src="../covers/burp.jpg" alt="Burp Suite in action">
+  </picture>
 
-  <!-- CONTENT SECTIONS -->
-  <div id="intro" class="content active">
-    <h2>What is Burp Suite?</h2>
-    <p>Think of it as a <strong>powerful magnifying glass and toolkit</strong> for web traffic. Used daily by pentesters, red teamers, and bug bounty hunters worldwide.</p>
-    <blockquote>“If you can see it, you can change it.”</blockquote>
-  </div>
+  <article>
+    <p>Every great pentester has one tool they can’t live without. For web application security, that tool is <strong>Burp Suite</strong>.</p>
+    
+    <p>It’s not just a proxy. It’s not just a scanner. It’s the complete platform that lets you see, touch, and reshape every byte flowing between browser and server — like a producer sitting at the mixing desk of the internet.</p>
 
-  <div id="proxy" class="content">
-    <h2>Proxy — The Middleman</h2>
-    <p>Every request and response passes through Burp when you set your browser proxy to 127.0.0.1:8080.</p>
-    <pre>GET /admin HTTP/1.1
-Host: app.com
-Cookie: session=abc123
-User-Agent: Mozilla/5.0...</pre>
-    <button class="copy" onclick="copyCode(this)">Copy Request</button>
-  </div>
+    <blockquote>
+      “If you can see it, you can break it.<br>If you can break it, you can fix it.”
+    </blockquote>
 
-  <div id="repeater" class="content">
-    <h2>Repeater — Manual Testing Heaven</h2>
-    <p>Send the same request 100 times while changing only one parameter.</p>
-    <pre>POST /login HTTP/1.1
-Content-Type: application/x-www-form-urlencoded
-
-username=admin' OR '1'='1'-- -&password=x</pre>
-    <button class="copy" onclick="copyCode(this)">Copy SQLi Payload</button>
-  </div>
-
-  <div id="intruder" class="content">
-    <h2>Intruder — Automation Beast</h2>
-    <p>Choose your attack type:</p>
-    <ul style="font-size:1.3rem; margin:2rem 0;">
-      <li>Sniper → fuzz one position</li>
-      <li>Battering Ram → same payload everywhere</li>
-      <li>Pitchfork → parallel lists</li>
-      <li>Cluster Bomb → every combination (dangerous!)</li>
+    <h2>The Core Tools</h2>
+    <p>Burp Suite is built around five legendary components:</p>
+    <ul style="font-size:1.3rem; padding-left:2rem; margin:2rem 0;">
+      <li><strong>Proxy</strong> — intercept everything</li>
+      <li><strong>Repeater</strong> — tweak and resend forever</li>
+      <li><strong>Intruder</strong> — automate the chaos</li>
+      <li><strong>Scanner</strong> — find bugs while you sleep (Pro only)</li>
+      <li><strong>Sequencer</strong> — test if randomness is real</li>
     </ul>
-  </div>
 
-  <div id="sequencer" class="content">
-    <h2>Sequencer — Token Entropy Check</h2>
-    <p>Capture 5,000+ tokens → Burp tells you instantly if they’re predictable.</p>
-    <div style="text-align:center; padding:3rem; background:#111; border-radius:20px; margin:2rem 0;">
-      <h3 style="color:var(--accent); font-size:2.5rem;">> 90 bits = strong</h3>
-      <p>< 70 bits → easily guessable</p>
+    <h2>Proxy: Your Invisible Middleman</h2>
+    <p>Set your browser to 127.0.0.1:8080 and suddenly you’re in the room. Every request, every response, every cookie — you see it before it leaves your machine.</p>
+
+    <pre>GET /admin HTTP/1.1
+Host: vulnerable-lab.com
+Cookie: session=eyJ1c2VyIjo...
+User-Agent: Mozilla/5.0...</pre>
+    <button class="copy" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent);this.textContent='Copied!'">Copy</button>
+
+    <h2>Repeater: The Loop Pedal</h2>
+    <p>Found something interesting? Right-click → “Send to Repeater”. Now change one character and hit Go. Again. And again. Until the app finally tells you its secrets.</p>
+
+    <h2>Intruder: When Manual Isn’t Enough</h2>
+    <p>Need to test 10,000 passwords? Fuzz every parameter? Brute-force a hidden API endpoint? Intruder does it with four attack types: Sniper, Battering Ram, Pitchfork, and the infamous Cluster Bomb.</p>
+
+    <h2>Sequencer: Entropy Never Lies</h2>
+    <p>Capture 5,000 session tokens and watch Burp calculate the real randomness. Anything under 80 bits of entropy is basically a “please hack me” sign.</p>
+
+    <div class="cta">
+      <a href="https://portswigger.net/burp/communitydownload" target="_blank">
+        Download Burp Community • Start Today
+      </a>
     </div>
-  </div>
-
-  <div id="dvwa" class="content">
-    <h2>Hands-on Lab: DVWA + Burp</h2>
-    <p style="text-align:center; font-size:1.4rem; margin-bottom:3rem;">
-      Set proxy → 127.0.0.1:8080<br>
-      Install Burp CA certificate<br>
-      → Start breaking things legally
-    </p>
-    <a href="https://github.com/digininja/DVWA" target="_blank" class="dvwa-btn">
-      Open DVWA Lab Now
-    </a>
-  </div>
-
+  </article>
 </div>
 
 <script>
-  // Click track → show content
-  document.querySelectorAll('.track').forEach(track => {
-    track.addEventListener('click', () => {
-      const target = track.dataset.target;
-      document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
-      document.getElementById(target).classList.add('active');
-
-      // smooth scroll to content
-      document.getElementById(target).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Tiny smooth scroll for future anchor links (optional)
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelector(anchor.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
     });
   });
-
-  // Copy to clipboard
-  function copyCode(btn) {
-    const code = btn.previousElementSibling.textContent;
-    navigator.clipboard.writeText(code);
-    btn.textContent = 'Copied!';
-    setTimeout(() => btn.textContent = 'Copy Request', 2000);
-  }
 </script>
 
 </body>
