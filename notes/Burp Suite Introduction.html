@@ -1,62 +1,104 @@
-
-
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CWE-89 — SQL Injection • dvphnc SyberVault</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Burp Suite Fundamentals • dvphnc SyberVault</title>
+  <meta name="description" content="Complete guide to Burp Suite — Proxy, Repeater, Intruder, Scanner, Sequencer + DVWA practice">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-dark.min.css">
   <style>
-    body { font-family: -apple-system,system-ui,sans-serif; background:#000; color:#fff; padding:2rem; max-width:900px; margin:0 auto; }
-    .markdown-body { background:#111; padding:3rem; border-radius:18px; box-shadow:0 20px 60px rgba(0,0,0,0.8); }
-    img { border-radius:12px; }
-    pre, code { border-radius:8px; }
-    a { color:#ff2d55; }
-    h1 { background:linear-gradient(90deg,#ff2d55,#ff9500); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-size:3rem; }
+    :root { --accent: #ff2d55; }
+    body {
+      background: #000;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+    .back {
+      display: inline-block;
+      margin-bottom: 2rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .back:hover { text-decoration: underline; }
+    .markdown-body {
+      background: #111111;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 20px 70px rgba(0,0,0,0.8);
+      line-height: 1.7;
+    }
+    h1 {
+      font-size: 3.2rem;
+      background: linear-gradient(90deg, #ff2d55, #ff9500, #ff2d55);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    h2, h3 { color: #ff2d55; margin-top: 2.5rem; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: #1c1c1e;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #333;
+    }
+    th { background: #252525; }
+    pre, code { border-radius: 10px; }
+    blockquote {
+      border-left: 4px solid var(--accent);
+      padding-left: 1.5rem;
+      color: #ccc;
+      font-style: italic;
+      margin: 2rem 0;
+    }
+    img { border-radius: 14px; max-width: 100%; }
   </style>
 </head>
 <body>
-<div class="markdown-body">
+  <div class="container">
+    <a href="../index.html" class="back">← Back to SyberVault</a>
+    <article class="markdown-body">
 
-<!-- PASTE YOUR MARKDOWN CONTENT CONVERTED TO HTML HERE -->
+# Burp Suite Fundamentals
 
----
-title: 🧰 Burp Suite Fundamentals
-tags: [burp-suite, web-security, tools, penetration-testing]
-created: 2025-10-18
----
----
-# 🧰 Burp Suite Fundamentals
-
-### 🕵️ What is Burp Suite?
-
+### What is Burp Suite?
 **Burp Suite** is an integrated platform for **web security testing**. Used by **security professionals** and **bug bounty hunters**, it identifies vulnerabilities in web applications.
 
 > Think of it as a **powerful magnifying glass and toolkit** for analyzing web traffic.
 
----
-### ⚙️ Core Burp Suite Components
+### Core Burp Suite Components
 
 | **Component** | **Description** |
-|----------------|-----------------|
-| **Proxy** | Intercepts and modifies web traffic between the browser and the server. |
-| **Repeater** | Allows manual modification and resending of individual HTTP requests. |
-| **Intruder** | Automates custom attacks like brute force, SQLi, and XSS. |
-| **Scanner** | Automatically finds vulnerabilities (Professional edition only). |
+|---------------|-----------------|
+| **Proxy**     | Intercepts and modifies web traffic between the browser and the server. |
+| **Repeater**  | Allows manual modification and resending of individual HTTP requests. |
+| **Intruder**  | Automates custom attacks like brute force, SQLi, and XSS. |
+| **Scanner**   | Automatically finds vulnerabilities (Professional edition only). |
 | **Sequencer** | Analyzes session token randomness and identifies weak session management. |
 
----
-### 🌐 The Proxy: Your Web Traffic Middleman
-
+### The Proxy: Your Web Traffic Middleman
 - Acts as a **middleman** for all web traffic.  
 - Intercepts requests and responses between browser and server.  
 - Lets you **view and modify** requests before reaching the server.  
 - Logs traffic in the **HTTP History tab**, even when interception is off.
 
----
-### 🧩 Intercepting Your First Request
-
+### Intercepting Your First Request
 When interception is **on**, Burp pauses each HTTP request before it’s sent.
 
 You can:
@@ -66,97 +108,80 @@ You can:
 
 > This helps uncover vulnerabilities like **XSS**, **SQLi**, or **IDOR**.
 
----
-### 🔁 Burp Repeater: Manual Request Manipulation
-
-**Repeater** lets you manually **edit and resend HTTP requests** repeatedly.  
+### Burp Repeater: Manual Request Manipulation
+**Repeater** lets you manually **edit and resend HTTP requests** repeatedly.
 
 Useful for:
-- Testing **multi-step processes** (login flows, transactions)  
-- Sending varying inputs to test for **input-based vulnerabilities**  
-- Observing how the server reacts to modified requests  
+- Testing **multi-step processes** (login flows, transactions)
+- Sending varying inputs to test for **input-based vulnerabilities**
+- Observing how the server reacts to modified requests
 
 > Perfect for precise, controlled testing.
 
----
-### 💣 Burp Intruder: Automated Attacks
-
+### Burp Intruder: Automated Attacks
 **Intruder** automates custom attacks to test web app defenses.
 
-| **Attack Type** | **Description** |
-|------------------|-----------------|
-| **Sniper** | Tests one parameter at a time — ideal for fuzzing. |
-| **Battering Ram** | Sends the same payload to multiple positions. |
-| **Pitchfork** | Uses multiple payload sets in parallel. |
-| **Cluster Bomb** | Tests all combinations of payloads across parameters. |
+| **Attack Type**   | **Description**                                 |
+|-------------------|-------------------------------------------------|
+| **Sniper**        | Tests one parameter at a time — ideal for fuzzing. |
+| **Battering Ram** | Sends the same payload to multiple positions.   |
+| **Pitchfork**     | Uses multiple payload sets in parallel.         |
+| **Cluster Bomb**  | Tests all combinations of payloads across parameters. |
 
 **Common Uses:**
-- Brute-forcing credentials  
-- Testing for **SQL Injection** and **XSS**  
-- Automating fuzzing for parameters  
+- Brute-forcing credentials
+- Testing for **SQL Injection** and **XSS**
+- Automating fuzzing for parameters
 
----
-### 🎲 Burp Sequencer: Analyzing Session Tokens
-
+### Burp Sequencer: Analyzing Session Tokens
 **Sequencer** tests the **randomness and entropy** of tokens and session IDs.
 
 Detects:
-- Weak session management  
-- Predictable authentication tokens  
+- Weak session management
+- Predictable authentication tokens
 - Poor randomness that may lead to **session hijacking**
 
----
-### 🧭 Burp Suite Summary
+### Burp Suite Summary
 
-| **Tool** | **Main Purpose** |
-|-----------|------------------|
-| **Proxy** | Capture and modify HTTP(S) requests/responses |
-| **Repeater** | Replay and tweak requests manually |
-| **Intruder** | Automate attacks using payload lists |
-| **Scanner** | Automatically detect vulnerabilities |
-| **Sequencer** | Analyze session token randomness |
+| **Tool**      | **Main Purpose**                                |
+|---------------|-------------------------------------------------|
+| **Proxy**     | Capture and modify HTTP(S) requests/responses   |
+| **Repeater**  | Replay and tweak requests manually              |
+| **Intruder**  | Automate attacks using payload lists            |
+| **Scanner**   | Automatically detect vulnerabilities            |
+| **Sequencer** | Analyze session token randomness                |
 
----
-### 🧱 What is DVWA?
+### What is DVWA?
+**DVWA (Damn Vulnerable Web Application)** is a **PHP/MySQL web app** intentionally made insecure. It helps **security professionals and students** safely practice web security testing.
 
-**DVWA (Damn Vulnerable Web Application)** is a **PHP/MySQL web app** intentionally made insecure.  It helps **security professionals and students** safely practice web security testing.
+#### Purpose
+- Test your skills and tools in a **legal environment**
+- Learn how vulnerabilities work
+- Understand **how to secure** web applications
 
-####  Purpose
-- Test your skills and tools in a **legal environment**  
-- Learn how vulnerabilities work  
-- Understand **how to secure** web applications  
-
----
-### 🔗 Using DVWA with Burp Suite
-
-### Why Use DVWA with Burp
-
-- **Controlled environment** for hands-on web hacking  
-- **Realistic vulnerabilities** (SQLi, XSS, File Upload, etc.)  
+### Using DVWA with Burp Suite
+**Why Use DVWA with Burp**
+- **Controlled environment** for hands-on web hacking
+- **Realistic vulnerabilities** (SQLi, XSS, File Upload, etc.)
 - Works perfectly with **Burp Proxy**, **Repeater**, and **Intruder**
 
-### Quick Setup Tips
-
-1. Configure your browser to use **Burp Proxy** (`127.0.0.1:8080`).  
-2. Open DVWA in your browser and log in.  
-3. Capture HTTP requests in Burp’s **HTTP History** tab.  
+**Quick Setup Tips**
+1. Configure your browser to use **Burp Proxy** (`127.0.0.1:8080`).
+2. Open DVWA in your browser and log in.
+3. Capture HTTP requests in Burp’s **HTTP History** tab.
 4. Send interesting ones to:
    - **Repeater** → manual testing  
    - **Intruder** → automated fuzzing  
-   - **Sequencer** → session token analysis  
+   - **Sequencer** → session token analysis
 
----
-### 🧠 Safety & Ethics
-
-- Run DVWA **only in isolated labs** (VM, sandbox, or localhost).  
-- Never test **public or production** websites without permission.  
+### Safety & Ethics
+- Run DVWA **only in isolated labs** (VM, sandbox, or localhost).
+- Never test **public or production** websites without permission.
 - Always follow **ethical hacking guidelines**.
 
-> 💡 Combine Burp Suite + DVWA for the ultimate beginner-friendly web security lab!
+> **Combine Burp Suite + DVWA for the ultimate beginner-friendly web security lab!**
 
----
-
-<!-- end of content -->
-</div>
+    </article>
+  </div>
 </body>
 </html>
