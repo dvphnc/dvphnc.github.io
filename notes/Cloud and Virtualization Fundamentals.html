@@ -8,7 +8,6 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@3.5.0/tsparticles.bundle.min.js"></script>
 
   <style>
     :root{--grad:linear-gradient(120deg,#00d2d3,#00b4d8,#48cae4,#0077b6,#00d2d3);}
@@ -26,34 +25,46 @@
     strong{color:#a0f7f8;}
 
     .cinematic-quote{
-      position:relative;margin:28rem 0;padding:24rem 3rem 22rem;text-align:center;
-      background:radial-gradient(circle at center,rgba(0,210,211,.28) 0%,transparent 70%);
+      position:relative;margin:28rem 0;padding:26rem 3rem 24rem;text-align:center;
+      background:radial-gradient(circle at center,rgba(0,210,211,.26) 0%,transparent 70%);
       overflow:hidden;isolation:isolate;
     }
     .cinematic-quote::before{
       content:'';position:absolute;inset:0;background:var(--grad);opacity:.18;filter:blur(160px);
-      animation:aurora-bg 22s infinite alternate;
+      animation:aurora-bg 20s infinite alternate;
     }
     .quote-text{
-      position:relative;z-index:3;font-size:5.8rem;font-weight:900;line-height:1.34;
+      position:relative;z-index:10;font-size:5.8rem;font-weight:900;line-height:1.34;
       background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
       text-shadow:0 0 140px rgba(0,210,211,.9);
       animation:quote-breath 9s infinite ease-in-out;
     }
-    .quote-glow{position:absolute;inset:0;background:var(--grad);opacity:.16;filter:blur(260px);
+    .quote-glow{
+      position:absolute;inset:0;background:var(--grad);opacity:.16;filter:blur(260px);
       animation:aurora 12s infinite alternate;z-index:1;
     }
-    .quote-marks{font-size:32rem;font-weight:100;opacity:.08;position:absolute;z-index:2;pointer-events:none;line-height:1;}
+    .quote-marks{font-size:32rem;font-weight:100;opacity:.08;position:absolute;z-index:9;pointer-events:none;line-height:1;}
     .quote-marks.left{top:-8rem;left:-4rem;}
     .quote-marks.right{bottom:-10rem;right:-4rem;transform:scaleX(-1);}
-    #tsparticles{position:absolute;inset:0;z-index:1;pointer-events:none;}
 
-    @keyframes aurora{0%{transform:scale(1) rotate(0deg);}100%{transform:scale(1.35) rotate(5deg);}}
-    @keyframes aurora-bg{0%{opacity:.18}100%{opacity:.30}}
+    .particles{position:absolute;inset:0;z-index:2;pointer-events:none;}
+    .particle{
+      position:absolute;width:5px;height:5px;background:#48cae4;border-radius:50%;
+      opacity:0;animation:float 18s infinite linear;
+      box-shadow:0 0 12px #00d2d3;
+    }
+    @keyframes float{
+      0%{transform:translateY(120vh) scale(0);opacity:0;}
+      12%{opacity:0.7;}
+      88%{opacity:0.7;}
+      100%{transform:translateY(-30vh) scale(1.2);opacity:0;}
+    }
     @keyframes quote-breath{
       0%,100%{text-shadow:0 0 140px rgba(0,210,211,.9);}
       50%{text-shadow:0 0 220px rgba(0,210,211,1);}
     }
+    @keyframes aurora{0%{transform:scale(1) rotate(0deg);}100%{transform:scale(1.35) rotate(5deg);}}
+    @keyframes aurora-bg{0%{opacity:.18}100%{opacity:.30}}
   </style>
 </head>
 <body>
@@ -99,14 +110,14 @@
       <p>It strengthens cloud environments by providing visibility and control over data usage.</p>
 
       <div class="cinematic-quote">
-        <div id="tsparticles"></div>
+        <div class="particles" id="particles"></div>
         <div class="quote-glow"></div>
         <div class="quote-marks left">“</div>
         <div class="quote-marks right">”</div>
         <div class="quote-text">
           Though the term “cloud” sounds abstract,<br>
           it represents complex infrastructures powered by virtualization<br>
-          and secured by layered defenses.<br>
+          and secured by layered defenses.<br><br>
           Together, they make modern computing<br>
           flexible, efficient, and secure.
         </div>
@@ -124,162 +135,16 @@
       });
     });
 
-    tsParticles.load("tsparticles", {
-      background:{color:{value:"transparent"}},
-      fpsLimit:120,
-      particles:{
-        number:{value:45,density:{enable:true,value_area:800}},
-        color:{value:["#48cae4","#00d2d3","#90e0ef"]},
-        shape:{type:"circle"},
-        opacity:{value:0.6,random:true,anim:{enable:true,speed:0.6,opacity_min:0.1,sync:false}},
-        size:{value:3,random:true,anim:{enable:true,speed:2,size_min:0.3}},
-        move:{enable:true,speed:0.8,direction:"top",random:true,straight:false,outModes:"out"}
-      },
-      interactivity:{detectsOn:"canvas",events:{resize:true}},
-      detectRetina:true
-    });
-  </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cloud & Virtualization Fundamentals • dvphnc SyberVault</title>
-  <meta name="description" content="The invisible foundation of the modern internet">
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@3.5.0/tsparticles.bundle.min.js"></script>
-
-  <style>
-    :root{--grad:linear-gradient(120deg,#00d2d3,#00b4d8,#48cae4,#0077b6,#00d2d3);}
-    body{margin:0;background:#000;color:#f5f5f7;font-family:-apple-system,'SF Pro Display',sans-serif;line-height:1.8;font-size:1.18rem;overflow-x:hidden;}
-    .container{max-width:880px;margin:0 auto;padding:2rem 1.5rem;position:relative;z-index:2;}
-    .back{position:fixed;top:2.5rem;left:2.5rem;color:#48cae4;text-decoration:none;font-weight:600;font-size:1.1rem;z-index:100;opacity:0;}
-
-    header{text-align:center;padding:9rem 0 6rem;}
-    h1{font-size:6.6rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1;margin-bottom:1.8rem;opacity:0;transform:translateY(60px);}
-    .subtitle{font-size:1.9rem;color:#90e0ef;opacity:0;transform:translateY(40px);}
-    .cover{max-width:780px;margin:7rem auto;border-radius:38px;overflow:hidden;box-shadow:0 70px 160px rgba(0,210,211,.45);opacity:0;transform:scale(0.94);}
-    .cover img{width:100%;display:block;}
-    h2{font-size:3.6rem;margin:9rem 0 3rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:0;transform:translateY(50px);}
-    p,ul,li{opacity:0;transform:translateY(30px);}
-    strong{color:#a0f7f8;}
-
-    .cinematic-quote{
-      position:relative;margin:28rem 0;padding:24rem 3rem 22rem;text-align:center;
-      background:radial-gradient(circle at center,rgba(0,210,211,.28) 0%,transparent 70%);
-      overflow:hidden;isolation:isolate;
+    // Only 18 super-light particles — perfect smoothness
+    const container = document.getElementById('particles');
+    for(let i = 0; i < 18; i++){
+      const p = document.createElement('div');
+      p.classList.add('particle');
+      p.style.left = Math.random() * 100 + '%';
+      p.style.animationDelay = Math.random() * 18 + 's';
+      p.style.animationDuration = (16 + Math.random() * 12) + 's';
+      container.appendChild(p);
     }
-    .cinematic-quote::before{
-      content:'';position:absolute;inset:0;background:var(--grad);opacity:.18;filter:blur(160px);
-      animation:aurora-bg 22s infinite alternate;
-    }
-    .quote-text{
-      position:relative;z-index:3;font-size:5.8rem;font-weight:900;line-height:1.34;
-      background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
-      text-shadow:0 0 140px rgba(0,210,211,.9);
-      animation:quote-breath 9s infinite ease-in-out;
-    }
-    .quote-glow{position:absolute;inset:0;background:var(--grad);opacity:.16;filter:blur(260px);
-      animation:aurora 12s infinite alternate;z-index:1;
-    }
-    .quote-marks{font-size:32rem;font-weight:100;opacity:.08;position:absolute;z-index:2;pointer-events:none;line-height:1;}
-    .quote-marks.left{top:-8rem;left:-4rem;}
-    .quote-marks.right{bottom:-10rem;right:-4rem;transform:scaleX(-1);}
-    #tsparticles{position:absolute;inset:0;z-index:1;pointer-events:none;}
-
-    @keyframes aurora{0%{transform:scale(1) rotate(0deg);}100%{transform:scale(1.35) rotate(5deg);}}
-    @keyframes aurora-bg{0%{opacity:.18}100%{opacity:.30}}
-    @keyframes quote-breath{
-      0%,100%{text-shadow:0 0 140px rgba(0,210,211,.9);}
-      50%{text-shadow:0 0 220px rgba(0,210,211,1);}
-    }
-  </style>
-</head>
-<body>
-
-  <a href="../index.html" class="back">Vault</a>
-
-  <div class="container">
-
-    <header>
-      <h1>Cloud &<br>Virtualization<br>Fundamentals</h1>
-      <p class="subtitle">The invisible foundation of the modern internet</p>
-    </header>
-
-    <picture class="cover">
-      <img src="../covers/cloud.jpg" alt="Cloud & Virtualization">
-    </picture>
-
-    <article>
-
-      <p>The <strong>cloud</strong> refers to a network of servers that provide storage, software, and computing resources over the internet. Instead of owning hardware, users rent computing resources, gaining flexibility and scalability while reducing infrastructure costs.</p>
-
-      <h2>Virtualization</h2>
-      <p><strong>Virtualization</strong> enables multiple operating systems to run on a single physical machine using a <em>hypervisor</em>. The hypervisor allocates CPU, memory, and storage resources to each <em>virtual machine (VM)</em>, creating isolated environments that operate independently. This improves resource efficiency and system management.</p>
-
-      <h2>Cloud Storage</h2>
-      <p><em>Cloud storage</em> allows data to be stored and accessed remotely through the internet. It supports documents, backups, and system images, ensuring availability and reducing reliance on local storage devices.</p>
-
-      <h2>Deployment Models</h2>
-      <ul>
-        <li><strong>Public Cloud:</strong> Shared resources available to multiple users (e.g., AWS, Azure, Google Cloud).</li>
-        <li><strong>Private Cloud:</strong> Dedicated infrastructure for a single organization with greater control and privacy.</li>
-        <li><strong>Hybrid Cloud:</strong> Combines public and private clouds for balanced flexibility, control, and cost efficiency.</li>
-      </ul>
-
-      <h2>Cloud Access Security Broker (CASB)</h2>
-      <p>A CASB operates between users and cloud services to:</p>
-      <ul>
-        <li>Monitor data movement</li>
-        <li>Enforce security policies</li>
-        <li>Detect and mitigate threats</li>
-        <li>Ensure compliance with standards</li>
-      </ul>
-      <p>It strengthens cloud environments by providing visibility and control over data usage.</p>
-
-      <div class="cinematic-quote">
-        <div id="tsparticles"></div>
-        <div class="quote-glow"></div>
-        <div class="quote-marks left">“</div>
-        <div class="quote-marks right">”</div>
-        <div class="quote-text">
-          Though the term “cloud” sounds abstract,<br>
-          it represents complex infrastructures powered by virtualization<br>
-          and secured by layered defenses.<br>
-          Together, they make modern computing<br>
-          flexible, efficient, and secure.
-        </div>
-      </div>
-
-    </article>
-  </div>
-
-  <script>
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.to(".back", {opacity:1, duration:1, delay:0.6});
-    gsap.utils.toArray("h1, .subtitle, .cover, h2, p, ul").forEach(el => {
-      gsap.to(el, {opacity:1, y:0, duration:1.3, ease:"power3.out",
-        scrollTrigger:{trigger:el, start:"top 82%", toggleActions:"play none none reverse"}
-      });
-    });
-
-    tsParticles.load("tsparticles", {
-      background:{color:{value:"transparent"}},
-      fpsLimit:120,
-      particles:{
-        number:{value:45,density:{enable:true,value_area:800}},
-        color:{value:["#48cae4","#00d2d3","#90e0ef"]},
-        shape:{type:"circle"},
-        opacity:{value:0.6,random:true,anim:{enable:true,speed:0.6,opacity_min:0.1,sync:false}},
-        size:{value:3,random:true,anim:{enable:true,speed:2,size_min:0.3}},
-        move:{enable:true,speed:0.8,direction:"top",random:true,straight:false,outModes:"out"}
-      },
-      interactivity:{detectsOn:"canvas",events:{resize:true}},
-      detectRetina:true
-    });
   </script>
 </body>
 </html>
