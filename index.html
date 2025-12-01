@@ -5,18 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>dvphnc • SyberVault</title>
   <meta name="description" content="Personal Knowledge Vault • Cybersecurity & Beyond" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 
-  <!-- Google Font moved to <link> so it always loads -->
+  <!-- AOS Animation Library (tiny & perfect) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <!-- SF Pro Display -->
   <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --apple: linear-gradient(120deg, #007AFF, #00C2FF, #FF9D00, #FF453A, #FF2D92);
-      --card-bg: rgba(28,28,30,0.82);
-      --card-hover: rgba(44,44,46,0.96);
+      --card-bg: rgba(28,28,30,0.84);
+      --card-hover: rgba(44,44,46,0.98);
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     html { scroll-behavior:smooth; }
@@ -25,12 +26,11 @@
       background:#000; color:#f5f5f7; line-height:1.6; overflow-x:hidden;
     }
 
-    /* Navbar */
     nav {
       position:fixed; top:0; left:0; right:0; height:84px;
       display:flex; align-items:center; justify-content:space-between;
       padding:0 3rem; z-index:1000;
-      background:rgba(0,0,0,0.88); backdrop-filter:blur(32px);
+      background:rgba(0,0,0,0.9); backdrop-filter:blur(32px);
       border-bottom:1px solid rgba(255,255,255,0.08);
     }
     .logo {
@@ -43,7 +43,6 @@
     }
     .nav-links a:hover { color:#fff; }
 
-    /* Hero */
     .hero {
       height:100vh; min-height:720px;
       display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;
@@ -60,10 +59,11 @@
     h2 {
       font-size:4.2rem; font-weight:800;
       background:var(--apple); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-      margin-bottom:4rem;
+      margin-bottom:4.5rem;
     }
 
-    /* About */
+    }
+
     .about-grid {
       max-width:1200px; margin:0 auto;
       display:grid; grid-template-columns:1fr 480px; gap:6rem; align-items:center;
@@ -75,7 +75,6 @@
       box-shadow:0 40px 100px rgba(0,0,0,0.7);
     }
 
-    /* Certifications */
     .certs-grid {
       max-width:1100px; margin:0 auto;
       display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:3rem;
@@ -91,31 +90,30 @@
     }
     .cert p { font-size:1.05rem; color:#aaa; }
 
-    /* Compact Album Cards */
     .albums-grid {
       display:grid;
       grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));
       gap:3rem;
-      max-width:1400px;
-      margin:0 auto;
+      max-width:1400px; margin:0 auto;
       padding:0 2rem 8rem;
     }
     .album {
       display:block; text-decoration:none; border-radius:26px; overflow:hidden;
       background:var(--card-bg); backdrop-filter:blur(28px);
       border:1px solid rgba(255,255,255,0.09);
-      transition:all .7s ease;
+      transition:transform .7s cubic-bezier(0.22,1,0.36,1), box-shadow .7s;
       box-shadow:0 8px 32px rgba(0,0,0,0.4);
     }
     .album:hover {
       transform:translateY(-16px) scale(1.04);
+      box-shadow:0 32px 80px rgba(0,0,0,0.6);
       background:var(--card-hover);
-      box-shadow:0 30px 70px rgba(0,0,0,0.6);
     }
     .album-art {
       height:320px; background-size:cover; background-position:center;
-      position:relative;
+      position:relative; transition:transform .9s;
     }
+    .album:hover .album-art { transform:scale(1.06); }
     .album-art::after {
       content:''; position:absolute; inset:0;
       background:linear-gradient(transparent 60%, rgba(0,0,0,0.88));
@@ -136,12 +134,14 @@
     .contact a { color:#007AFF; text-decoration:none; }
 
     @media (max-width:968px){
-      .about-grid { grid-template-columns:1fr; text-align:center; }
+      .about-grid { grid-template-columns:1fr; text-align:center; gap:4.5rem; }
       .hero h1 { font-size:6.2rem; }
       h2 { font-size:3.6rem; }
     }
     @media (max-width:768px){
       .hero h1 { font-size:5.4rem; }
+      .hero p { font-size:1.6rem; }
+      section { padding:100px 0 80px; }
       .albums-grid { gap:2.5rem; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); }
       .album-art { height:280px; }
       nav { padding:0 1.5rem; }
@@ -160,52 +160,62 @@
     </div>
   </nav>
 
-  <section class="hero">
-    <h1>dvphnc</h1>
-    <p>SyberVault • Cybersecurity Knowledge System</p>
+  <section class="hero" data-aos="fade-down">
+    <h1 data-aos="fade-up" data-aos-delay="200">dvphnc</h1>
+    <p data-aos="fade-up" data-aos-delay="400">SyberVault • Cybersecurity Knowledge System</p>
   </section>
 
-  <section id="about">
-    <h2>About Me</h2>
+  <section id="about" data-aos="fade-up">
+    <h2 data-aos="fade-up" data-aos-delay="100">About Me</h2>
     <div class="about-grid">
-      <div class="about-text">
+      <div class="about-text" data-aos="fade-right" data-aos-delay="200">
         <p>Offensive security engineer • Web application pentester • Bug bounty hunter</p>
         <p>I break things professionally and document every technique in extreme detail.</p>
         <p>This vault is my personal knowledge base — clean, practical, and battle-tested over years of real engagements.</p>
-        <p>From SQLi to cloud exploitation, everything here has been used in live pentests.</p>
+        <p>From SQLi to cloud exploitation, everything here has been used in live pentests and red team operations.</p>
       </div>
-      <div class="about-img">
+      <div class="about-img" data-aos="fade-left" data-aos-delay="400">
         <img src="covers/profile.jpg" alt="dvphnc">
       </div>
     </div>
   </section>
 
-  <section id="certifications">
-    <h2>Certifications</h2>
+  <section id="certifications" data-aos="fade-up">
+    <h2 data-aos="fade-up">Certifications</h2>
     <div class="certs-grid">
-      <div class="cert"><h3>eJPT</h3><p>eLearnSecurity Junior Penetration Tester</p></div>
-      <div class="cert"><h3>Burp Suite Certified Practitioner</h3><p>PortSwigger Academy</p></div>
-      <div class="cert"><h3>CompTIA Security+</h3><p>Active 2024–2027</p></div>
-      <div class="cert"><h3>OSCP</h3><p>In Progress • Target 2025</p></div>
+      <div class="cert" data-aos="fade-up" data-aos-delay="100"><h3>eJPT</h3><p>eLearnSecurity Junior Penetration Tester</p></div>
+      <div class="cert" data-aos="fade-up" data-aos-delay="200"><h3>Burp Suite Certified Practitioner</h3><p>PortSwigger Academy</p></div>
+      <div class="cert" data-aos="fade-up" data-aos-delay="fade-up" data-aos-delay="300"><h3>CompTIA Security+</h3><p>Active 2024–2027</p></div>
+      <div class="cert" data-aos="fade-up" data-aos-delay="400"><h3>OSCP</h3><p>In Progress • Target 2025</p></div>
     </div>
   </section>
 
-  <section id="vault">
-    <h2>SyberVault</h2>
+  <section id="vault" data-aos="fade-up">
+    <h2 data-aos="fade-up">SyberVault</h2>
     <div class="albums-grid" id="grid"></div>
   </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <div class="contact">
+  <section id="contact" data-aos="fade-up">
+    <h2 data-aos="fade-up">Contact</h2>
+    <div class="contact" data-aos="fade-up" data-aos-delay="200">
       <p>Available for freelance pentesting & consulting</p>
       <p><a href="mailto:your@email.com">your@email.com</a> • GitHub • LinkedIn</p>
     </div>
   </section>
 
-  <!-- Your script – runs only after page loads -->
+  <!-- Initialize AOS -->
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 100
+    });
+  </script>
+
+  <!-- Your album generator -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
       const notes = [
         { title: "Introduction to Web Application Security", cover: "covers/websec.jpg", link: "notes/Introduction to Web Application Security.html", tags: "OWASP • Fundamentals" },
         { title: "SQL Injection (CWE-89)", cover: "covers/sqli.jpg", link: "notes/CWE-89 - SQL Injection.html", tags: "Injection • Critical" },
@@ -220,10 +230,13 @@
       ];
 
       const grid = document.getElementById('grid');
-      notes.forEach(note => {
+      notes.forEach((note, i) => {
         const album = document.createElement('a');
         album.href = note.link;
         album.className = 'album';
+        album.setAttribute('data-aos', 'fade-up');
+        album.setAttribute('data-aos-delay', `fade-up`);
+        album.setAttribute('data-aos-delay', 100 + i * 100);
         album.innerHTML = `
           <div class="album-art" style="background-image: url(${note.cover})"></div>
           <div class="album-info">
