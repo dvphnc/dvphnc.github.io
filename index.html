@@ -4,17 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>dvphnc • SyberVault</title>
-  <meta name="description" content="Cybersecurity Engineer • Pentester • Knowledge Vault" />
+  <meta name="description" content="Cybersecurity Engineer • Penetration Tester • Knowledge Vault" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   
   <style>
     @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700;800;900&display=swap');
-    
+
     :root {
-      --accent: linear-gradient(120deg, #ffdd00, #ff006e, #ff1744);
-      --accent-glow: rgba(255, 0, 110, 0.3);
+      /* Apple Store Holiday 2024 Gradient */
+      --apple-gradient: linear-gradient(120deg, #007AFF, #00C2FF, #FF9D00, #FF453A, #FF2D92);
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
@@ -24,56 +24,81 @@
       line-height: 1.6;
       overflow-x: hidden;
     }
-    .container { max-width: 1240px; margin: 0 auto; padding: 0 2rem; }
+    .container { max-width: 1320px; margin: 0 auto; padding: 0 2rem; }
 
-    /* Hero */
-    header {
-      height: 100vh;
-      min-height: 680px;
+    /* Fixed Nav */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 80px;
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+      z-index: 1000;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(30px);
+      border-bottom: 1px solid #111;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: var(--apple-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-links a {
+      color: #999;
+      margin-left: 3rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: #fff; }
+
+    /* Hero */
+    .hero {
+      height: 100vh;
+      min-height: 800px;
+      display: flex;
+      flex-direction: column;
       justify-content: center;
+      align-items: center;
       text-align: center;
-      padding-top: 80px;
     }
     .hero h1 {
-      font-size: 7.5rem;
+      font-size: 9rem;
       font-weight: 900;
-      background: var(--accent);
+      background: var(--apple-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       line-height: 1;
-      margin-bottom: 1rem;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeInUp 1.2s 0.4s forwards;
-    }
-    .hero p {
-      font-size: 2rem;
-      font-weight: 500;
-      color: #aaa;
       margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeInUp 1.2s 0.7s forwards;
+      letter-spacing: -3px;
+    }
+    .hero .tagline {
+      font-size: 2.4rem;
+      font-weight: 500;
+      color: #ccc;
+      margin-bottom: 1rem;
     }
     .hero .subtitle {
-      font-size: 1.4rem;
-      color: #ff006e;
+      font-size: 1.6rem;
       font-weight: 600;
-      letter-spacing: 1px;
-      opacity: 0;
-      animation: fadeInUp 1.2s 1s forwards;
+      background: var(--apple-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    /* Sections */
-    section { padding: 10rem 0; }
+    section { padding: 140px 0; }
     h2.section-title {
-      font-size: 4rem;
+      font-size: 5rem;
       font-weight: 800;
       text-align: center;
       margin-bottom: 5rem;
-      background: var(--accent);
+      background: var(--apple-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -82,65 +107,71 @@
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 6rem;
+      gap: 7rem;
       align-items: center;
     }
-    .about-text {
-      font-size: 1.4rem;
-      line-height: 1.9;
-      color: #ccc;
+    .about-text p {
+      font-size: 1.45rem;
+      line-height: 2;
+      color: #ddd;
+      margin-bottom: 1.8rem;
     }
-    .about-text strong { color: #ffdd00; }
     .about-img {
-      border-radius: 32px;
+      border-radius: 36px;
       overflow: hidden;
-      box-shadow: 0 30px 80px rgba(255,0,110,.3);
+      box-shadow: 0 40px 100px rgba(0, 194, 255, 0.15);
     }
     .about-img img { width: 100%; display: block; }
 
     /* Certifications */
-    .certs {
+    .certs-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 3rem;
     }
-    .cert-card {
-      background: #111;
-      border-radius: 24px;
-      padding: 2rem;
+    .cert {
+      background: #0d0d0d;
+      border-radius: 28px;
+      padding: 3rem 2rem;
       text-align: center;
-      border: 1px solid #222;
-      transition: all 0.4s ease;
+      border: 1px solid #1a1a1a;
+      transition: all 0.5s ease;
     }
-    .cert-card:hover {
-      transform: translateY(-12px);
-      box-shadow: 0 20px 50px var(--accent-glow);
-      border-color: #ff006e;
+    .cert:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 30px 80px rgba(0, 194, 255, 0.2);
+      border-color: #007AFF;
     }
-    .cert-card h3 { font-size: 1.5rem; margin: 1rem 0; color: #ffdd00; }
-    .cert-card p { font-size: 1rem; color: #999; }
+    .cert h3 {
+      font-size: 1.8rem;
+      margin: 1.2rem 0;
+      background: var(--apple-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .cert p { color: #888; font-size: 1.1rem; }
 
-    /* Notes Grid */
+    /* SyberVault Grid — untouched style */
     .albums-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 3rem;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 3.5rem;
     }
     .album {
       display: block;
       text-decoration: none;
-      border-radius: 28px;
+      border-radius: 32px;
       overflow: hidden;
-      background: #111;
-      transition: all 0.5s ease;
-      box-shadow: 0 10px 30px rgba(0,0,0,.5);
+      background: #0f0f0f;
+      transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.6);
     }
     .album:hover {
-      transform: translateY(-16px) scale(1.02);
-      box-shadow: 0 30px 80px var(--accent-glow);
+      transform: translateY(-20px) scale(1.04);
+      box-shadow: 0 40px 100px rgba(0, 194, 255, 0.25);
     }
     .album-art {
-      height: 220px;
+      height: 240px;
       background-size: cover;
       background-position: center;
       position: relative;
@@ -149,56 +180,68 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(transparent, rgba(0,0,0,.8));
+      background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.9));
     }
     .album-info {
-      padding: 1.8rem;
+      padding: 2rem;
     }
     .album-info h3 {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
+      font-size: 1.6rem;
       color: #fff;
+      margin-bottom: 0.6rem;
     }
     .album-info p {
-      font-size: 1rem;
-      color: #ff006e;
-      font-weight: 500;
+      font-size: 1.05rem;
+      background: var(--apple-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 600;
     }
 
-    /* Animations */
-    @keyframes fadeInUp {
-      to { opacity: 1; transform: translateY(0); }
+    footer {
+      text-align: center;
+      padding: 5rem 0 3rem;
+      color: #666;
+      font-size: 1rem;
     }
 
     @media (max-width: 768px) {
-      .hero h1 { font-size: 5rem; }
+      .hero h1 { font-size: 6rem; }
       .about-grid { grid-template-columns: 1fr; text-align: center; }
-      h2.section-title { font-size: 3rem; }
+      h2.section-title { font-size: 3.8rem; }
+      nav { padding: 0 1.5rem; }
+      .nav-links a { margin-left: 1.5rem; font-size: 0.95rem; }
     }
   </style>
 </head>
 <body>
 
+  <nav>
+    <div class="logo">dvphnc</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#certs">Certifications</a>
+      <a href="#vault">SyberVault</a>
+      <a href="mailto:your@email.com">Contact</a>
+    </div>
+  </nav>
+
   <div class="container">
 
-    <!-- Hero -->
-    <header class="hero">
-      <div>
-        <h1>dvphnc</h1>
-        <p>Cybersecurity Engineer & Penetration Tester</p>
-        <div class="subtitle">SyberVault • Personal Knowledge System</div>
-      </div>
-    </header>
+    <section class="hero">
+      <h1>dvphnc</h1>
+      <p class="tagline">Cybersecurity Engineer & Penetration Tester</p>
+      <p class="subtitle">SyberVault • Elite Knowledge System</p>
+    </section>
 
-    <!-- About Me -->
     <section id="about">
       <h2 class="section-title">About Me</h2>
       <div class="about-grid">
         <div class="about-text">
-          <p>I’m a <strong>passionate cybersecurity professional</strong> focused on offensive security, web application testing, and building unbreakable systems.</p>
-          <p>Red teamer by heart. Defender by logic. Always learning, always breaking, always documenting.</p>
-          <p>This vault contains everything I’ve mastered: from <strong>SQLi & XSS</strong> to <strong>cloud exploitation</strong>, <strong>cryptography</strong>, and real-world pentesting workflows.</p>
-          <p><strong>Currently:</strong> Hunting bugs • Writing tools • Teaching the next generation</p>
+          <p>Offensive security specialist. Web application hunter. Breaker by design.</p>
+          <p>I spend my days finding zero-days, chaining exploits, and turning complex vulnerabilities into simple, beautiful explanations.</p>
+          <p>This vault is the result of thousands of hours in Burp Suite, Metasploit, and real client environments — distilled into clean, actionable knowledge.</p>
+          <p>Currently breaking things professionally and documenting everything here for the community.</p>
         </div>
         <div class="about-img">
           <img src="covers/profile.jpg" alt="dvphnc">
@@ -206,36 +249,38 @@
       </div>
     </section>
 
-    <!-- Certifications -->
     <section id="certs">
       <h2 class="section-title">Certifications</h2>
-      <div class="certs">
-        <div class="cert-card">
+      <div class="certs-grid">
+        <div class="cert">
           <h3>eJPT</h3>
           <p>eLearnSecurity Junior Penetration Tester</p>
         </div>
-        <div class="cert-card">
-          <h3>OSCP (In Progress)</h3>
-          <p>Offensive Security Certified Professional</p>
-        </div>
-        <div class="cert-card">
-          <h3>Burp Suite Certified Practitioner</h3>
+        <div class="cert">
+          <h3>Burp Suite Certified</h3>
           <p>PortSwigger Web Security Academy</p>
         </div>
-        <div class="cert-card">
+        <div class="cert">
           <h3>CompTIA Security+</h3>
-          <p>Certified • 2024</p>
+          <p>Active • 2024–2027</p>
+        </div>
+        <div class="cert">
+          <h3>OSCP</h3>
+          <p>In Progress • Target 2025</p>
         </div>
       </div>
     </section>
 
-    <!-- Knowledge Vault -->
     <section id="vault">
       <h2 class="section-title">SyberVault</h2>
       <div class="albums-grid" id="grid"></div>
     </section>
 
   </div>
+
+  <footer>
+    © 2025 dvphnc • Built with passion, precision, and zero trust
+  </footer>
 
   <script>
     const notes = [
