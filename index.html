@@ -33,7 +33,8 @@
       background:rgba(0,0,0,0.88); backdrop-filter:blur(32px);
       border-bottom:1px solid rgba(255,255,255,0.08);
     }
-    .logo { font-size:1.9rem; font-weight:900;
+    .logo {
+      font-size:1.9rem; font-weight:900;
       background:var(--apple); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
     }
     .nav-links a {
@@ -60,7 +61,6 @@
       animation:fadeInUp 1s 0.8s forwards;
     }
 
-    /* Section animations */
     section { padding:140px 0 100px; text-align:center; opacity:0; transform:translateY(40px); }
     section.animate { opacity:1; transform:none; transition:all 1.2s cubic-bezier(0.22,1,0.36,1); }
 
@@ -72,7 +72,7 @@
     }
     section.animate h2 { opacity:1; transform:none; transition:all 1s 0.2s cubic-bezier(0.22,1,0.36,1); }
 
-    /* BEAUTIFUL ABOUT SECTION */
+    /* About – Gorgeous */
     .about-grid {
       max-width:1200px; margin:0 auto;
       display:grid; grid-template-columns:1fr 480px; gap:6rem; align-items:center;
@@ -83,14 +83,13 @@
     .about-text {
       text-align:left; font-size:1.38rem; line-height:2; color:#ddd;
     }
-    .about-text p { margin-bottom:1.4rem; opacity:0.92; }
+    .about-text p { margin-bottom:1.4rem; }
     .about-img {
       border-radius:40px; overflow:hidden;
       box-shadow:0 40px 100px rgba(0,0,0,0.7);
       opacity:0; transform:scale(0.94);
     }
     section.animate .about-img { opacity:1; transform:scale(1); transition:all 1.6s 0.5s cubic-bezier(0.22,1,0.36,1); }
-
     .about-img img { width:100%; display:block; }
 
     /* Certifications */
@@ -110,7 +109,7 @@
     section.animate .cert:nth-child(4) { transition:all 0.9s 1s; }
     section.animate .cert { opacity:1; transform:none; }
 
-    /* ALBUM CARDS – Compact & Premium */
+    /* Compact Premium Album Cards */
     .albums-grid {
       display:grid;
       grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));
@@ -143,8 +142,7 @@
       background:linear-gradient(transparent, rgba(0,0,0,0.88));
     }
     .album-info {
-      padding:1.9rem;
-      text-align:left;
+      padding:1.9rem; text-align:left;
     }
     .album-info h3 {
       font-size:1.58rem; font-weight:700; color:#fff;
@@ -160,12 +158,10 @@
     section.animate .contact { opacity:1; transition:opacity 1.4s 0.6s; }
     .contact a { color:#007AFF; text-decoration:none; }
 
-    /* Animations */
     @keyframes fadeInUp {
       to { opacity:1; transform:none; }
     }
 
-    /* Responsive */
     @media (max-width:968px){
       .about-grid { grid-template-columns:1fr; text-align:center; gap:4rem; }
       .hero h1 { font-size:6.2rem; }
@@ -183,14 +179,12 @@
 </head>
 <body>
 
-  <!-- Scroll animation trigger -->
+  <!-- Animation trigger -->
   <script>
-    // Trigger animations when sections enter viewport
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('animate');
-          // Stagger album cards
           if (entry.target.querySelector('.albums-grid')) {
             entry.target.querySelectorAll('.album').forEach((el, i) => {
               el.style.setProperty('--i', i);
@@ -220,7 +214,7 @@
     <p>SyberVault • Cybersecurity Knowledge System</p>
   </section>
 
-  <!-- About – Now Gorgeous -->
+  <!-- About -->
   <section id="about">
     <h2>About Me</h2>
     <div class="about-grid">
@@ -262,7 +256,7 @@
     </div>
   </section>
 
-  <!-- Your original script — untouched -->
+  <!-- Your original script (100% untouched) -->
   <script>
     const notes = [
       { title: "Introduction to Web Application Security", cover: "covers/websec.jpg", link: "notes/Introduction to Web Application Security.html", tags: "OWASP • Fundamentals" },
@@ -292,5 +286,6 @@
       grid.appendChild(album);
     });
   </script>
+
 </body>
 </html>
