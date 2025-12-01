@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CWE-35 — Path Traversal • dvphnc SyberVault</title>
+  <meta name="description" content="Directory Traversal: How attackers walk outside the web root">
+  <style>
+    :root {
+      --bg: #000;
+      --text: #f5f5f7;
+      --muted: #aaaaaa;
+      --grad: linear-gradient(120deg, #1e3a8a, #4c1d95, #7c3aed, #1e3a8a);
+      /* Deep Midnight Blue → Indigo → Violet → back */
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      line-height: 1.78;
+      font-size: 1.18rem;
+    }
+    .container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem; }
+    
+    .back {
+      position: fixed;
+      top: 2.5rem;
+      left: 2.5rem;
+      color: #818cf8;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      z-index: 100;
+      opacity: 0.92;
+      transition: opacity .3s;
+    }
+    .back:hover { opacity: 1; }
+
+    header {
+      text-align: center;
+      padding: 7rem 0 4rem;
+    }
+    h1 {
+      font-size: 5.9rem;
+      font-weight: 800;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+      margin: 0 0 1.6rem 0;
+    }
+    .subtitle {
+      font-size: 1.65rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .cover {
+      width: 100%;
+      max-width: 740px;
+      margin: 5.5rem auto;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: 0 40px 110px rgba(0,0,0,0.9);
+    }
+    .cover img { width: 100%; display: block; }
+
+    article { margin: 4rem 0; }
+    h2 {
+      font-size: 3.3rem;
+      margin: 6rem 0 2rem;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    p, li { margin: 1.7rem 0; color: #e0e0e0; }
+    ul { padding-left: 2.2rem; margin: 2.5rem 0; }
+    li { margin: 1.2rem 0; font-size: 1.25rem; }
+    strong { color: #c4b5fd; }
+
+    blockquote {
+      font-size: 2.1rem;
+      font-style: italic;
+      text-align: center;
+      color: #a78bfa;
+      padding: 5rem 2rem;
+      margin: 7rem 0;
+      line-height: 1.6;
+    }
+
+    .techniques {
+      background: #0f0a1a;
+      padding: 2.5rem;
+      border-radius: 24px;
+      margin: 4rem 0;
+      font-family: ui-monospace, 'SF Mono', monospace;
+      color: #ddd;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="../index.html" class="back">Vault</a>
+
+  <div class="container">
+
+    <header>
+      <h1>CWE-35<br>Path Traversal</h1>
+      <p class="subtitle">Directory Traversal — Walking outside the web root</p>
+    </header>
+
+    <picture class="cover">
+      <img src="../covers/traversal.jpg" alt="Path Traversal">
+    </picture>
+
+    <article>
+
+      <p><em>Directory Traversal</em> (aka Path Traversal) is a vulnerability that allows an attacker to access files and directories <strong>outside the intended application directory</strong> by manipulating file path input. Exploits often use traversal sequences (e.g., <code>../</code>) or encoded variants to reach sensitive filesystem locations.</p>
+
+      <h2>File System</h2>
+      <p>A <strong>file system</strong> is the operating system component that organizes and stores files and directories on persistent storage. Web applications interact with the file system to read or write resources (pages, uploads, config files). Improper handling of file paths can expose the underlying file system to attacker control.</p>
+
+      <h2>Directory Traversal Attacks</h2>
+      <p><strong>Directory Traversal Attacks</strong> occur when an application accepts a path or filename from an external source and fails to properly validate or normalize it. The attacker crafts input to traverse directories (e.g., <code>../../etc/passwd</code>) and access files outside the web root or allowed directories.</p>
+
+      <h2>Consequences of Directory Traversal</h2>
+      <ul>
+        <li><strong>Unauthorized Access to Sensitive Information</strong><br>Attackers can read confidential files outside the web root (e.g., system config, <code>/etc/passwd</code>, database credentials, source code), causing data breaches and privacy violations.</li>
+        <li><strong>Modification or Deletion of Files</strong><br>If write access is possible, attackers may modify or delete critical files, causing service disruption, data loss, and financial or operational damage.</li>
+        <li><strong>Further System Compromise</strong><br>Access to sensitive files can reveal server architecture, credentials, and configurations that facilitate privilege escalation or lateral movement.</li>
+        <li><strong>Information Disclosure & Reconnaissance</strong><br>Even read-only access can provide valuable intelligence for subsequent attacks (paths, versions, error messages).</li>
+      </ul>
+
+      <h2>Directory Traversal Techniques</h2>
+      <div class="techniques">
+        • Simple Dot-Dot-Slash (<code>../</code>) — basic upward traversal<br>
+        • Path Separator Variations (<code>/</code>, <code>\</code>) — platform-specific separators<br>
+        • Percent-Encoding (<code>%2e%2e%2f</code>) — URL-encoded traversal<br>
+        • Double Encoding (<code>%252e%252e%252f</code>) — encoder confusion bypass<br>
+        • Unicode Encoding (<code>%u002e%u002e%u002f</code>) — Unicode-encoded traversal<br>
+        • Mangled Paths (<code>....//...</code>) — path normalization tricks<br>
+        • NULL Byte Injection (<code>%00</code>) — terminating strings in some legacy APIs<br><br>
+        <em>Attackers chain these techniques to bypass naive filters and normalization routines.</em>
+      </div>
+
+      <h2>Preventing Directory Traversal</h2>
+      <ul>
+        <li><strong>Validate and Sanitize User Input (Allowlist)</strong><br>Use an <em>accept-known-good</em> strategy: only permit specific filenames/IDs and reject everything else.</li>
+        <li><strong>Use Allow Lists for File Access</strong><br>Map user-provided identifiers to pre-approved files or directories rather than using raw paths.</li>
+        <li><strong>Avoid Using User Input Directly in File Paths</strong><br>Construct paths programmatically from safe components; do not concatenate unchecked user data.</li>
+        <li><strong>Path Normalization Functions</strong><br>Use built-in path normalization APIs (e.g., <code>realpath</code>, <code>Path.resolve</code>) to resolve <code>.</code>/<code>..</code> sequences then verify the resolved path is inside an allowed directory.</li>
+        <li><strong>Access Control & Least Privilege</strong><br>Ensure the application runs with minimal permissions and restrict which files the process can read/write.</li>
+        <li><strong>Isolate Execution Environments</strong><br>Run the application in a confined environment (chroot, containers, restricted mounts) to limit what an attacker can access.</li>
+        <li><strong>Reject Encoded/Alternate Representations</strong><br>Normalize and decode inputs before validation to catch encoded traversal attempts.</li>
+      </ul>
+
+      <h2>Directory Traversal Tools (for testing & assessment)</h2>
+      <ul>
+        <li><strong>Burp Suite</strong> — web testing platform with scanning and manual testing features</li>
+        <li><strong>OWASP ZAP</strong> — open-source scanner for automated detection</li>
+        <li><strong>Nikto</strong> — web server scanner that checks for dangerous files</li>
+        <li><strong>DotDotPwn</strong> — tool specifically designed to test directory traversal payloads</li>
+        <li><strong>Metasploit</strong> — penetration testing framework with modules</li>
+        <li><strong>DirBuster / Dirsearch</strong> — brute-forcing tools to discover hidden directories and files</li>
+      </ul>
+      <p><em>Use these tools responsibly for authorized testing only.</em></p>
+
+      <h2>Summary / Conclusion</h2>
+      <p><strong>CWE-35 Path Traversal</strong> enables attackers to break directory boundaries and access unintended filesystem resources.</p>
+      <p>Mitigation centers on <strong>strict input allowlisting, path normalization + verification, least privilege, and environment isolation</strong>.</p>
+      <p>Regular testing with vetted tools and secure coding practices reduce the risk and impact of traversal vulnerabilities.</p>
+
+    </article>
+
+  </div>
+</body>
+</html>
