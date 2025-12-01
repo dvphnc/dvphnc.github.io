@@ -9,19 +9,19 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700;800;900&display=swap');
+  <!-- Google Font moved to <link> so it always loads -->
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
+  <style>
     :root {
       --apple: linear-gradient(120deg, #007AFF, #00C2FF, #FF9D00, #FF453A, #FF2D92);
-      --card-bg: rgba(28, 28, 30, 0.82);
-      --card-hover: rgba(44, 44, 46, 0.96);
+      --card-bg: rgba(28,28,30,0.82);
+      --card-hover: rgba(44,44,46,0.96);
     }
-
     * { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior:smooth; }
     body {
-      font-family: 'SF Pro Display', -apple-system, sans-serif;
+      font-family:'SF Pro Display', -apple-system, sans-serif;
       background:#000; color:#f5f5f7; line-height:1.6; overflow-x:hidden;
     }
 
@@ -45,52 +45,35 @@
 
     /* Hero */
     .hero {
-      height:100vh; min-height:780px;
-      display:flex; flex-direction:column; justify-content:center; align-items:center;
-      text-align:center;
+      height:100vh; min-height:720px;
+      display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;
     }
     .hero h1 {
       font-size:8rem; font-weight:900; letter-spacing:-4px;
       background:var(--apple); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-      opacity:0; transform:translateY(30px);
-      animation:fadeInUp 1.2s 0.3s forwards;
     }
     .hero p {
       font-size:1.9rem; color:#aaa; margin-top:1.2rem; font-weight:500;
-      opacity:0; transform:translateY(20px);
-      animation:fadeInUp 1s 0.8s forwards;
     }
 
-    section { padding:140px 0 100px; text-align:center; opacity:0; transform:translateY(40px); }
-    section.animate { opacity:1; transform:none; transition:all 1.2s cubic-bezier(0.22,1,0.36,1); }
-
+    section { padding:140px 0 100px; text-align:center; }
     h2 {
       font-size:4.2rem; font-weight:800;
       background:var(--apple); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-      margin-bottom:4.5rem;
-      opacity:0; transform:translateY(20px);
+      margin-bottom:4rem;
     }
-    section.animate h2 { opacity:1; transform:none; transition:all 1s 0.2s cubic-bezier(0.22,1,0.36,1); }
 
-    /* About – Gorgeous */
+    /* About */
     .about-grid {
       max-width:1200px; margin:0 auto;
       display:grid; grid-template-columns:1fr 480px; gap:6rem; align-items:center;
-      opacity:0; transform:translateY(40px);
     }
-    section.animate .about-grid { opacity:1; transform:none; transition:all 1.4s 0.3s; }
-
-    .about-text {
-      text-align:left; font-size:1.38rem; line-height:2; color:#ddd;
-    }
+    .about-text { text-align:left; font-size:1.38rem; line-height:2; color:#ddd; }
     .about-text p { margin-bottom:1.4rem; }
-    .about-img {
-      border-radius:40px; overflow:hidden;
+    .about-img img {
+      width:100%; border-radius:40px;
       box-shadow:0 40px 100px rgba(0,0,0,0.7);
-      opacity:0; transform:scale(0.94);
     }
-    section.animate .about-img { opacity:1; transform:scale(1); transition:all 1.6s 0.5s cubic-bezier(0.22,1,0.36,1); }
-    .about-img img { width:100%; display:block; }
 
     /* Certifications */
     .certs-grid {
@@ -101,15 +84,14 @@
       background:var(--card-bg); backdrop-filter:blur(24px);
       border-radius:28px; padding:2.8rem 2rem;
       border:1px solid rgba(255,255,255,0.09);
-      opacity:0; transform:translateY(30px);
     }
-    section.animate .cert:nth-child(1) { transition:all 0.9s 0.4s; }
-    section.animate .cert:nth-child(2) { transition:all 0.9s 0.6s; }
-    section.animate .cert:nth-child(3) { transition:all 0.9s 0.8s; }
-    section.animate .cert:nth-child(4) { transition:all 0.9s 1s; }
-    section.animate .cert { opacity:1; transform:none; }
+    .cert h3 {
+      font-size:1.65rem; margin-bottom:0.6rem;
+      background:var(--apple); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    .cert p { font-size:1.05rem; color:#aaa; }
 
-    /* Compact Premium Album Cards */
+    /* Compact Album Cards */
     .albums-grid {
       display:grid;
       grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));
@@ -119,14 +101,12 @@
       padding:0 2rem 8rem;
     }
     .album {
-      border-radius:26px; overflow:hidden;
+      display:block; text-decoration:none; border-radius:26px; overflow:hidden;
       background:var(--card-bg); backdrop-filter:blur(28px);
       border:1px solid rgba(255,255,255,0.09);
-      opacity:0; transform:translateY(40px);
-      transition:all .8s cubic-bezier(0.22,1,0.36,1);
+      transition:all .7s ease;
+      box-shadow:0 8px 32px rgba(0,0,0,0.4);
     }
-    section.animate .album { opacity:1; transform:none; }
-    section.animate .album:nth-child(n) { transition-delay:calc(0.1s * var(--i)); }
     .album:hover {
       transform:translateY(-16px) scale(1.04);
       background:var(--card-hover);
@@ -134,12 +114,11 @@
     }
     .album-art {
       height:320px; background-size:cover; background-position:center;
-      position:relative; transition:transform .9s;
+      position:relative;
     }
-    .album:hover .album-art { transform:scale(1.06); }
     .album-art::after {
-      content:''; position:absolute; bottom:0; left:0; right:0; height:140px;
-      background:linear-gradient(transparent, rgba(0,0,0,0.88));
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(transparent 60%, rgba(0,0,0,0.88));
     }
     .album-info {
       padding:1.9rem; text-align:left;
@@ -153,24 +132,16 @@
       letter-spacing:0.7px; text-transform:uppercase;
     }
 
-    /* Contact */
-    .contact { font-size:1.38rem; color:#ccc; line-height:2; opacity:0; }
-    section.animate .contact { opacity:1; transition:opacity 1.4s 0.6s; }
+    .contact { font-size:1.38rem; color:#ccc; line-height:2; }
     .contact a { color:#007AFF; text-decoration:none; }
 
-    @keyframes fadeInUp {
-      to { opacity:1; transform:none; }
-    }
-
     @media (max-width:968px){
-      .about-grid { grid-template-columns:1fr; text-align:center; gap:4rem; }
+      .about-grid { grid-template-columns:1fr; text-align:center; }
       .hero h1 { font-size:6.2rem; }
       h2 { font-size:3.6rem; }
     }
     @media (max-width:768px){
-      .hero h1 { font-size:5.6rem; }
-      .hero p { font-size:1.6rem; }
-      section { padding:100px 0 80px; }
+      .hero h1 { font-size:5.4rem; }
       .albums-grid { gap:2.5rem; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); }
       .album-art { height:280px; }
       nav { padding:0 1.5rem; }
@@ -179,25 +150,6 @@
 </head>
 <body>
 
-  <!-- Animation trigger -->
-  <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate');
-          if (entry.target.querySelector('.albums-grid')) {
-            entry.target.querySelectorAll('.album').forEach((el, i) => {
-              el.style.setProperty('--i', i);
-            });
-          }
-        }
-      });
-    }, { threshold: 0.15 });
-
-    document.querySelectorAll('section').forEach(sec => observer.observe(sec));
-  </script>
-
-  <!-- Navbar -->
   <nav>
     <div class="logo">dvphnc</div>
     <div class="nav-links">
@@ -208,13 +160,11 @@
     </div>
   </nav>
 
-  <!-- Hero -->
   <section class="hero">
     <h1>dvphnc</h1>
     <p>SyberVault • Cybersecurity Knowledge System</p>
   </section>
 
-  <!-- About -->
   <section id="about">
     <h2>About Me</h2>
     <div class="about-grid">
@@ -222,7 +172,7 @@
         <p>Offensive security engineer • Web application pentester • Bug bounty hunter</p>
         <p>I break things professionally and document every technique in extreme detail.</p>
         <p>This vault is my personal knowledge base — clean, practical, and battle-tested over years of real engagements.</p>
-        <p>From SQLi to cloud exploitation, everything here has been used in live pentests and red team operations.</p>
+        <p>From SQLi to cloud exploitation, everything here has been used in live pentests.</p>
       </div>
       <div class="about-img">
         <img src="covers/profile.jpg" alt="dvphnc">
@@ -230,7 +180,6 @@
     </div>
   </section>
 
-  <!-- Certifications -->
   <section id="certifications">
     <h2>Certifications</h2>
     <div class="certs-grid">
@@ -241,13 +190,11 @@
     </div>
   </section>
 
-  <!-- SyberVault -->
   <section id="vault">
     <h2>SyberVault</h2>
     <div class="albums-grid" id="grid"></div>
   </section>
 
-  <!-- Contact -->
   <section id="contact">
     <h2>Contact</h2>
     <div class="contact">
@@ -256,34 +203,36 @@
     </div>
   </section>
 
-  <!-- Your original script (100% untouched) -->
+  <!-- Your script – runs only after page loads -->
   <script>
-    const notes = [
-      { title: "Introduction to Web Application Security", cover: "covers/websec.jpg", link: "notes/Introduction to Web Application Security.html", tags: "OWASP • Fundamentals" },
-      { title: "SQL Injection (CWE-89)", cover: "covers/sqli.jpg", link: "notes/CWE-89 - SQL Injection.html", tags: "Injection • Critical" },
-      { title: "Cross-Site Scripting (XSS)", cover: "covers/xss.jpg", link: "notes/CWE-79 - Cross-Site Scripting (XSS).html", tags: "OWASP Top 10" },
-      { title: "OS Command Injection (CWE-78)", cover: "covers/cmd.jpg", link: "notes/CWE-78 - OS Command Injection.html", tags: "RCE • Dangerous" },
-      { title: "Path Traversal (CWE-35)", cover: "covers/traversal.jpg", link: "notes/CWE-35 - Path Traversal.html", tags: "File System" },
-      { title: "Encryption Fundamentals", cover: "covers/encryption.jpeg", link: "notes/Encryption Fundamentals.html", tags: "Cryptography" },
-      { title: "Burp Suite Fundamentals", cover: "covers/burp.jpg", link: "notes/Burp Suite Introduction.html", tags: "Tools • Pentesting" },
-      { title: "Cloud & Virtualization", cover: "covers/cloud.jpg", link: "notes/Cloud and Virtualization Fundamentals.html", tags: "Infrastructure" },
-      { title: "Importance of Cyber Security", cover: "covers/cia.jpg", link: "notes/Importance of Cyber Security.html", tags: "CIA Triad" },
-      { title: "Career in IT Security", cover: "covers/career.jpg", link: "notes/Career Opportunities in IT Security.html", tags: "Red vs Blue" },
-    ];
+    document.addEventListener("DOMContentLoaded", function() {
+      const notes = [
+        { title: "Introduction to Web Application Security", cover: "covers/websec.jpg", link: "notes/Introduction to Web Application Security.html", tags: "OWASP • Fundamentals" },
+        { title: "SQL Injection (CWE-89)", cover: "covers/sqli.jpg", link: "notes/CWE-89 - SQL Injection.html", tags: "Injection • Critical" },
+        { title: "Cross-Site Scripting (XSS)", cover: "covers/xss.jpg", link: "notes/CWE-79 - Cross-Site Scripting (XSS).html", tags: "OWASP Top 10" },
+        { title: "OS Command Injection (CWE-78)", cover: "covers/cmd.jpg", link: "notes/CWE-78 - OS Command Injection.html", tags: "RCE • Dangerous" },
+        { title: "Path Traversal (CWE-35)", cover: "covers/traversal.jpg", link: "notes/CWE-35 - Path Traversal.html", tags: "File System" },
+        { title: "Encryption Fundamentals", cover: "covers/encryption.jpeg", link: "notes/Encryption Fundamentals.html", tags: "Cryptography" },
+        { title: "Burp Suite Fundamentals", cover: "covers/burp.jpg", link: "notes/Burp Suite Introduction.html", tags: "Tools • Pentesting" },
+        { title: "Cloud & Virtualization", cover: "covers/cloud.jpg", link: "notes/Cloud and Virtualization Fundamentals.html", tags: "Infrastructure" },
+        { title: "Importance of Cyber Security", cover: "covers/cia.jpg", link: "notes/Importance of Cyber Security.html", tags: "CIA Triad" },
+        { title: "Career in IT Security", cover: "covers/career.jpg", link: "notes/Career Opportunities in IT Security.html", tags: "Red vs Blue" },
+      ];
 
-    const grid = document.getElementById('grid');
-    notes.forEach(note => {
-      const album = document.createElement('a');
-      album.href = note.link;
-      album.className = 'album';
-      album.innerHTML = `
-        <div class="album-art" style="background-image: url(${note.cover})"></div>
-        <div class="album-info">
-          <h3>${note.title}</h3>
-          <p>${note.tags}</p>
-        </div>
-      `;
-      grid.appendChild(album);
+      const grid = document.getElementById('grid');
+      notes.forEach(note => {
+        const album = document.createElement('a');
+        album.href = note.link;
+        album.className = 'album';
+        album.innerHTML = `
+          <div class="album-art" style="background-image: url(${note.cover})"></div>
+          <div class="album-info">
+            <h3>${note.title}</h3>
+            <p>${note.tags}</p>
+          </div>
+        `;
+        grid.appendChild(album);
+      });
     });
   </script>
 
