@@ -24,10 +24,11 @@
     p{margin:2rem 0;opacity:0;transform:translateY(30px);}
     strong{color:#a0f7f8;}
 
-    /* Lists now animate perfectly */
+    /* Bullet lists — now guaranteed to show */
     ul{
       padding-left:2.6rem;
       margin:3rem 0;
+      list-style:disc;
       opacity:0;
       transform:translateY(30px);
     }
@@ -38,7 +39,6 @@
       transform:translateY(20px);
     }
 
-    /* Clean, elegant quote */
     .cinematic-quote{
       margin:18rem 0 14rem;
       padding:8rem 3rem;
@@ -63,9 +63,7 @@
       -webkit-text-fill-color:transparent;
       text-shadow:0 0 60px rgba(0,210,211,.6);
     }
-    .quote-marks{
-      font-size:12rem;font-weight:100;opacity:.08;position:absolute;pointer-events:none;line-height:1;
-    }
+    .quote-marks{font-size:12rem;font-weight:100;opacity:.08;position:absolute;pointer-events:none;line-height:1;}
     .quote-marks.left{top:-2rem;left:-1rem;}
     .quote-marks.right{bottom:-3rem;right:-1rem;transform:scaleX(-1);}
   </style>
@@ -132,18 +130,20 @@
     
     gsap.to(".back", {opacity:1, duration:1, delay:0.6});
 
-    // Main elements
+    // Main sections
     gsap.utils.toArray("h1, .subtitle, .cover, h2, p, .cinematic-quote").forEach(el => {
       gsap.to(el, {opacity:1, y:0, duration:1.4, ease:"power3.out",
         scrollTrigger:{trigger:el, start:"top 82%", toggleActions:"play none none reverse"}
       });
     });
 
-    // Perfect staggered list animation
-    gsap.utils.toArray("ul").forEach(ul => {
+    // Perfect bullet-list animation (no more disappearing)
+    document.querySelectorAll("ul").forEach(ul => {
+      // Animate the whole list container
       gsap.to(ul, {opacity:1, y:0, duration:1, ease:"power3.out",
         scrollTrigger:{trigger:ul, start:"top 82%"}
       });
+      // Stagger the individual items
       gsap.to(ul.querySelectorAll("li"), {
         opacity:1,
         y:0,
