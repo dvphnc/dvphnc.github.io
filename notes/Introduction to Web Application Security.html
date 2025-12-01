@@ -10,48 +10,48 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <style>
-    :root{--grad:linear-gradient(120deg,#000000,#330000,#8B0000,#FF4500,#FF8C00,#B22222,#000000);}
-    body{margin:0;background:#000;color:#f5f5f7;font-family:-apple-system,'SF Pro Display',sans-serif;line-height:1.8;font-size:1.18rem;overflow-x:hidden;}
+    :root{--grad:linear-gradient(120deg,#0f172a,#1e293b,#334155,#64748b,#e2e8f0,#94a3b8,#0f172a);}
+    body{margin:0;background:#0a0e1a;color:#e2e8f0;font-family:-apple-system,'SF Pro Display',sans-serif;line-height:1.8;font-size:1.18rem;overflow-x:hidden;}
     .container{max-width:880px;margin:0 auto;padding:2rem 1.5rem;}
-    .back{position:fixed;top:2.5rem;left:2.5rem;color:#FF4500;text-decoration:none;font-weight:600;font-size:1.1rem;z-index:100;opacity:0;}
+    .back{position:fixed;top:2.5rem;left:2.5rem;color:#94a3b8;text-decoration:none;font-weight:600;font-size:1.1rem;z-index:100;opacity:0;}
 
     header{text-align:center;padding:7rem 0 4rem;}
     h1{font-size:6.2rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1;margin-bottom:1.4rem;opacity:0;transform:translateY(60px);}
-    .subtitle{font-size:1.8rem;color:#FF4500;opacity:0;transform:translateY(40px);}
-    .cover{max-width:720px;margin:4rem auto;border-radius:36px;overflow:hidden;box-shadow:0 60px 140px rgba(255,69,0,.5);opacity:0;transform:scale(0.94);}
+    .subtitle{font-size:1.8rem;color:#94a3b8;opacity:0;transform:translateY(40px);}
+    .cover{max-width:720px;margin:4rem auto;border-radius:36px;overflow:hidden;box-shadow:0 60px 140px rgba(148,163,184,.4);opacity:0;transform:scale(0.94);}
     .cover img{width:100%;display:block;}
     
     h2{font-size:3.2rem;margin:4.5rem 0 2rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:0;transform:translateY(50px);}
-    h3{font-size:2.1rem;margin:3.5rem 0 1.8rem;color:#FF4500;opacity:0;transform:translateY(30px);}
+    h3{font-size:2.1rem;margin:3.5rem 0 1.8rem;color:#94a3b8;opacity:0;transform:translateY(30px);}
     p{margin:1.6rem 0;opacity:0;transform:translateY(30px);}
-    strong{color:#FFB366;}
+    strong{color:#e2e8f0;}
 
-    pre{background:#1a0000;padding:1.8rem;border-radius:18px;overflow-x:auto;margin:2rem 0;
-        box-shadow:0 12px 40px rgba(255,69,0,.4);border:1px solid #660000;}
-    pre code{color:#ffb366;font-family:'SF Mono',monospace;font-size:1rem;line-height:1.6;}
+    pre{background:#1e293b;padding:1.8rem;border-radius:18px;overflow-x:auto;margin:2rem 0;
+        box-shadow:0 12px 40px rgba(148,163,184,.25);border:1px solid #334155;}
+    pre code{color:#94a3b8;font-family:'SF Mono',monospace;font-size:1rem;line-height:1.6;}
 
-    table{width:100%;border-collapse:collapse;margin:2.8rem 0;background:#1a0000;border-radius:22px;overflow:hidden;box-shadow:0 16px 50px rgba(255,69,0,.35);}
-    th,td{padding:1.4rem 1.8rem;text-align:left;border-bottom:1px solid #330000;}
-    th{background:#330000;color:#FF4500;font-weight:700;font-size:1.05rem;}
-    td{color:#ffcc99;vertical-align:top;}
+    table{width:100%;border-collapse:collapse;margin:2.8rem 0;background:#1e293b;border-radius:22px;overflow:hidden;box-shadow:0 16px 50px rgba(148,163,184,.2);}
+    th,td{padding:1.4rem 1.8rem;text-align:left;border-bottom:1px solid #334155;}
+    th{background:#334155;color:#e2e8f0;font-weight:700;font-size:1.05rem;}
+    td{color:#cbd5e1;vertical-align:top;}
 
     ul{padding-left:2.4rem;margin:2.4rem 0;opacity:0;transform:translateY(30px);}
     li{margin:1.2rem 0;font-size:1.26rem;opacity:0;transform:translateY(20px);}
 
     .cinematic-quote{
       margin:9rem 0 7rem;padding:5rem 2.5rem;text-align:center;position:relative;
-      background:radial-gradient(circle at center,rgba(255,69,0,.25) 0%,transparent 70%);
+      background:radial-gradient(circle at center,rgba(148,163,184,.2) 0%,transparent 70%);
       border-radius:28px;overflow:hidden;opacity:0;transform:translateY(60px);
     }
     .cinematic-quote::before{
-      content:'';position:absolute;inset:0;background:var(--grad);opacity:.18;filter:blur(100px);
+      content:'';position:absolute;inset:0;background:var(--grad);opacity:.15;filter:blur(100px);
     }
     .quote-text{
       position:relative;font-size:2.6rem;font-weight:700;line-height:1.48;
       background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
-      text-shadow:0 0 70px rgba(255,69,0,1);
+      text-shadow:0 0 70px rgba(148,163,184,.8);
     }
-    .quote-marks{font-size:10rem;font-weight:100;opacity:.09;position:absolute;pointer-events:none;line-height:1;color:#660000;}
+    .quote-marks{font-size:10rem;font-weight:100;opacity:.08;position:absolute;pointer-events:none;line-height:1;color:#334155;}
     .quote-marks.left{top:-1.5rem;left:-1rem;}
     .quote-marks.right{bottom:-2.5rem;right:-1rem;transform:scaleX(-1);}
   </style>
@@ -84,7 +84,7 @@
       <p>In 1989, <strong>Tim Berners-Lee</strong> invented the <strong>World Wide Web (WWW)</strong> while at CERN. By 1991, he published the first website — introducing the idea of hyperlinks and HTML pages accessible to everyone.</p>
 
       <h3>The Modern Web</h3>
-      <p>Today’s web is dynamic and interactive. Web applications drive commerce, communication, and collaboration. However, as connectivity grew, so did vulnerabilities — from basic misconfigurations to advanced ransomware and phishing attacks.</p>
+      <p>Today’s web is dynamic and interactive. Web applications drive commerce, communication, and collaboration. However, as connectivity grew, so did vulnerabilities — from:// from basic misconfigurations to advanced ransomware and phishing attacks.</p>
 
       <h2>Comparative Analysis: ARPANET vs. Old Web vs. Modern Web</h2>
       <table>
