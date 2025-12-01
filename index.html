@@ -1,55 +1,55 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-&nbsp;&nbsp;<meta charset="UTF-8" />
-&nbsp;&nbsp;<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-&nbsp;&nbsp;<title>dvphnc • SyberVault</title>
-&nbsp;&nbsp;<meta name="description" content="Personal Knowledge Vault • Cybersecurity & Beyond" />
-&nbsp;&nbsp;<link rel="stylesheet" href="style.css" />
-&nbsp;&nbsp;<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-&nbsp;&nbsp;<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-&nbsp;&nbsp;<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-&nbsp;&nbsp;<style>
-&nbsp;&nbsp;&nbsp;&nbsp;@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap');
-&nbsp;&nbsp;</style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>dvphnc • SyberVault</title>
+<meta name="description" content="Personal Knowledge Vault • Cybersecurity & Beyond" />
+<link rel="stylesheet" href="style.css" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap');
+</style>
 </head>
 <body>
-&nbsp;&nbsp;<div class="container">
-&nbsp;&nbsp;&nbsp;&nbsp;<header>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h1>dvphnc</h1>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<p>SyberVault • Cybersecurity Knowledge System</p>
-&nbsp;&nbsp;&nbsp;&nbsp;</header>
-&nbsp;&nbsp;&nbsp;&nbsp;<div class="albums-grid" id="grid">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<!-- Albums injected by JS -->
-&nbsp;&nbsp;&nbsp;&nbsp;</div>
-&nbsp;&nbsp;</div>
-&nbsp;&nbsp;<script>
-&nbsp;&nbsp;&nbsp;&nbsp;const notes = [
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ title: "Introduction to Web Application Security", cover: "covers/websec.jpg", link: "notes/Introduction to Web Application Security.html", tags: "OWASP • Fundamentals" },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ title: "SQL Injection (CWE-89)", cover: "covers/sqli.jpg", link: "notes/CWE-89 - SQL Injection.html", tags: "Injection • Critical" },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ title: "Cross-Site Scripting (XSS)", cover: "covers/xss.jpg", link: "notes/CWE-79 - Cross-Site Scripting (XSS).html", tags: "OWASP Top 10" },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ title: "OS Command Injection (CWE-78)", cover: "covers/cmd.jpg", link: "notes/CWE-78 - OS Command Injection.html", tags: "RCE • Dangerous" },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ title: "Path Traversal (CWE-35)", cover: "covers/traversal.jpg", link: "notes/CWE-35 - Path Traversal.html", tags: "File System" },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ title: "Encryption Fundamentals", cover: "covers/encryption.jpeg", link: "notes/Encryption Fundamentals.html", tags: "Cryptography" },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ title: "Burp Suite Fundamentals", cover: "covers/burp.jpg", link: "notes/Burp Suite Introduction.html", tags: "Tools • Pentesting" },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ title: "Cloud & Virtualization", cover: "covers/cloud.jpg", link: "notes/Cloud and Virtualization Fundamentals.html", tags: "Infrastructure" },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ title: "Importance of Cyber Security", cover: "covers/cia.jpg", link: "notes/Importance of Cyber Security.html", tags: "CIA Triad" },
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ title: "Career in IT Security", cover: "covers/career.jpg", link: "notes/Career Opportunities in IT Security.html", tags: "Red vs Blue" },
-&nbsp;&nbsp;&nbsp;&nbsp;];
-&nbsp;&nbsp;&nbsp;&nbsp;const grid = document.getElementById('grid');
-&nbsp;&nbsp;&nbsp;&nbsp;notes.forEach(note => {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const album = document.createElement('a');
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;album.href = note.link;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;album.className = 'album';
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;album.innerHTML = `
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div class="album-art" style="background-image: url(${note.cover})"></div>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div class="album-info">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h3>${note.title}</h3>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<p>${note.tags}</p>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;grid.appendChild(album);
-&nbsp;&nbsp;&nbsp;&nbsp;});
-&nbsp;&nbsp;</script>
+<div class="container">
+<header>
+<h1>dvphnc</h1>
+<p>SyberVault • Cybersecurity Knowledge System</p>
+</header>
+<div class="albums-grid" id="grid">
+<!-- Albums injected by JS -->
+</div>
+</div>
+<script>
+const notes = [
+{ title: "Introduction to Web Application Security", cover: "covers/websec.jpg", link: "notes/Introduction to Web Application Security.html", tags: "OWASP • Fundamentals" },
+{ title: "SQL Injection (CWE-89)", cover: "covers/sqli.jpg", link: "notes/CWE-89 - SQL Injection.html", tags: "Injection • Critical" },
+{ title: "Cross-Site Scripting (XSS)", cover: "covers/xss.jpg", link: "notes/CWE-79 - Cross-Site Scripting (XSS).html", tags: "OWASP Top 10" },
+{ title: "OS Command Injection (CWE-78)", cover: "covers/cmd.jpg", link: "notes/CWE-78 - OS Command Injection.html", tags: "RCE • Dangerous" },
+{ title: "Path Traversal (CWE-35)", cover: "covers/traversal.jpg", link: "notes/CWE-35 - Path Traversal.html", tags: "File System" },
+{ title: "Encryption Fundamentals", cover: "covers/encryption.jpeg", link: "notes/Encryption Fundamentals.html", tags: "Cryptography" },
+{ title: "Burp Suite Fundamentals", cover: "covers/burp.jpg", link: "notes/Burp Suite Introduction.html", tags: "Tools • Pentesting" },
+{ title: "Cloud & Virtualization", cover: "covers/cloud.jpg", link: "notes/Cloud and Virtualization Fundamentals.html", tags: "Infrastructure" },
+{ title: "Importance of Cyber Security", cover: "covers/cia.jpg", link: "notes/Importance of Cyber Security.html", tags: "CIA Triad" },
+{ title: "Career in IT Security", cover: "covers/career.jpg", link: "notes/Career Opportunities in IT Security.html", tags: "Red vs Blue" },
+];
+const grid = document.getElementById('grid');
+notes.forEach(note => {
+const album = document.createElement('a');
+album.href = note.link;
+album.className = 'album';
+album.innerHTML = `
+<div class="album-art" style="background-image: url(${note.cover})"></div>
+<div class="album-info">
+<h3>${note.title}</h3>
+<p>${note.tags}</p>
+</div>
+`;
+grid.appendChild(album);
+});
+</script>
 </body>
 </html>
