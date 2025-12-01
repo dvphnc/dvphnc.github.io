@@ -6,53 +6,77 @@
   <title>Encryption Fundamentals • dvphnc SyberVault</title>
   <meta name="description" content="How the internet learned to keep a secret">
   <style>
-    :root {
-      --bg: #000;
-      --text: #f5f5f7;
-      --muted: #aaaaaa;
-      --grad: linear-gradient(120deg, #ffd700, #ffb84d, #ff8c8c, #ff6b6b, #ffd700);
-    }
-    body {margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,'SF Pro Display',sans-serif;line-height:1.78;font-size:1.18rem;}
-    .container {max-width:860px;margin:0 auto;padding:2rem 1.5rem;}
-    .back {position:fixed;top:2.5rem;left:2.5rem;color:#ffab40;text-decoration:none;font-weight:600;font-size:1.1rem;z-index:100;opacity:0.94;transition:opacity .3s;}
-    .back:hover {opacity:1;}
-    header {text-align:center;padding:7rem 0 4rem;}
-    h1 {font-size:5.9rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1;margin-bottom:1.6rem;}
-    .subtitle {font-size:1.65rem;color:var(--muted);}
-    .cover {max-width:740px;margin:5.5rem auto;border-radius:30px;overflow:hidden;box-shadow:0 40px 110px rgba(0,0,0,.9);}
-    .cover img {width:100%;display:block;}
-    h2 {font-size:3.3rem;margin:6.5rem 0 2rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-    p, li {margin:1.7rem 0;color:#e0e0e0;}
-    ul {padding-left:2.2rem;margin:2.5rem 0;}
-    li {margin:1.2rem 0;font-size:1.25rem;}
-    strong {color:#ffeb99;}
+    :root{--grad:linear-gradient(120deg,#ffd700,#ffb84d,#ff8c8c,#ff6b6b,#ffd700);}
+    body{margin:0;background:#000;color:#f5f5f7;font-family:-apple-system,'SF Pro Display',sans-serif;line-height:1.78;font-size:1.18rem;}
+    .container{max-width:860px;margin:0 auto;padding:2rem 1.5rem;}
+    .back{position:fixed;top:2.5rem;left:2.5rem;color:#ffab40;text-decoration:none;font-weight:600;font-size:1.1rem;z-index:100;}
+    header{text-align:center;padding:7rem 0 4rem;}
+    h1{font-size:5.9rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1;margin-bottom:1.6rem;}
+    .subtitle{font-size:1.65rem;color:#aaa;}
+    .cover{max-width:740px;margin:5.5rem auto;border-radius:30px;overflow:hidden;box-shadow:0 40px 110px rgba(0,0,0,.9);}
+    .cover img{width:100%;display:block;}
+    h2{font-size:3.3rem;margin:6.5rem 0 2rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    p,li{margin:1.7rem 0;color:#e0e0e0;}
+    ul{padding-left:2.2rem;margin:2.5rem 0;}
+    li{margin:1.2rem 0;font-size:1.25rem;}
+    strong{color:#ffeb99;}
 
-    .epic-quote {
-      font-size: 2.7rem;
-      font-weight: 700;
+    /* CINEMATIC QUOTE — PURE DRAMA */
+    .cinematic-quote {
+      position: relative;
+      margin: 12rem 0;
+      padding: 10rem 2rem;
       text-align: center;
+      background: radial-gradient(circle at center, rgba(255,215,0,0.15) 0%, transparent 70%);
+      overflow: hidden;
+    }
+    .cinematic-quote::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--grad);
+      opacity: 0.08;
+      filter: blur(80px);
+      z-index: 0;
+    }
+    .quote-text {
+      position: relative;
+      z-index: 1;
+      font-size: 3.8rem;
+      font-weight: 800;
+      line-height: 1.35;
       background: var(--grad);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      padding: 7rem 2rem 6rem;
-      margin: 9rem 0 8rem;
-      line-height: 1.5;
-      position: relative;
+      text-shadow: 0 0 60px rgba(255,215,0,0.4);
     }
-    .epic-quote::before,
-    .epic-quote::after {
-      font-size: 9rem;
-      opacity: 0.12;
+    .quote-glow {
       position: absolute;
+      inset: 0;
+      background: var(--grad);
+      opacity: 0.06;
+      filter: blur(120px);
+      animation: pulse 8s infinite alternate;
+    }
+    @keyframes pulse {
+      from {opacity:0.06;transform:scale(1);}
+      to   {opacity:0.12;transform:scale(1.1);}
+    }
+    .quote-marks {
+      position: absolute;
+      font-size: 20rem;
+      font-weight: 100;
+      opacity: 0.08;
+      pointer-events: none;
       line-height: 1;
     }
-    .epic-quote::before {content:'“';top:-1.5rem;left:1rem;}
-    .epic-quote::after  {content:'”';bottom:-4rem;right:1rem;}
+    .quote-marks.left  {top:-2rem;left:-1rem;}
+    .quote-marks.right {bottom:-4rem;right:-1rem;transform:scaleX(-1);}
 
-    .cta {text-align:center;margin:10rem 0 8rem;}
-    .cta a {background:var(--grad);color:#000;padding:1.8rem 5rem;border-radius:70px;font-size:1.6rem;font-weight:800;text-decoration:none;box-shadow:0 30px 70px rgba(255,215,0,.3);display:inline-block;transition:transform .3s;}
-    .cta a:hover {transform:scale(1.06);}
+    .cta{text-align:center;margin:10rem 0 8rem;}
+    .cta a{background:var(--grad);color:#000;padding:1.8rem 5rem;border-radius:70px;font-size:1.6rem;font-weight:800;text-decoration:none;box-shadow:0 30px 70px rgba(255,215,0,.3);display:inline-block;transition:transform .3s;}
+    .cta a:hover{transform:scale(1.06);}
   </style>
 </head>
 <body>
@@ -72,6 +96,7 @@
 
     <article>
 
+      <!-- Your exact content above the quote -->
       <p><strong>Encryption</strong> converts readable information into <em>ciphertext</em>, which can only be accessed using the correct <em>key</em>. This process ensures data confidentiality, integrity, and trust across digital communications.</p>
 
       <h2>Principles of Cryptography</h2>
@@ -99,13 +124,18 @@
       <p><strong>Certificate Authorities (CAs)</strong>, <strong>Trusted Root-CAs</strong>, and <strong>X.509 Certificates</strong> validate identities and issue digital certificates.</p>
       <p>These entities create a chain of trust, ensuring that users can confirm the legitimacy of websites and services.</p>
 
-      <!-- YOUR ORIGINAL QUOTE — NOW EPIC -->
-      <div class="epic-quote">
-        Encryption not only hides information<br>
-        but also builds digital trust and security.<br>
-        It is a fundamental pillar<br>
-        of privacy and safe communication<br>
-        in the modern internet.
+      <!-- MAXIMUM DRAMA QUOTE -->
+      <div class="cinematic-quote">
+        <div class="quote-glow"></div>
+        <div class="quote-marks left">“</div>
+        <div class="quote-marks right">”</div>
+        <div class="quote-text">
+          Encryption not only hides information<br>
+          but also builds digital trust and security.<br><br>
+          It is a fundamental pillar<br>
+          of privacy and safe communication<br>
+          in the modern internet.
+        </div>
       </div>
 
       <div class="cta">
