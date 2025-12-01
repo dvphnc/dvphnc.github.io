@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloud & Virtualization Fundamentals • dvphnc SyberVault</title>
+  <meta name="description" content="From bare metal to infinite scale — how the modern internet actually works">
+  <style>
+    :root{--grad:linear-gradient(120deg,#00d2d3,#00b4d8,#48cae4,#0077b6,#00d2d3);}
+    body{margin:0;background:#000;color:#f5f5f7;font-family:-apple-system,'SF Pro Display',sans-serif;line-height:1.8;font-size:1.18rem;}
+    .container{max-width:880px;margin:0 auto;padding:2rem 1.5rem;}
+    .back{position:fixed;top:2.5rem;left:2.5rem;color:#48cae4;text-decoration:none;font-weight:600;font-size:1.1rem;z-index:100;}
+    header{text-align:center;padding:8rem 0 5rem;}
+    h1{font-size:6.6rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1;margin-bottom:1.8rem;}
+    .subtitle{font-size:1.9rem;color:#90e0ef;font-weight:500;}
+    .cover{max-width:780px;margin:6rem auto;border-radius:38px;overflow:hidden;box-shadow:0 70px 160px rgba(0,210,211,.45);}
+    .cover img{width:100%;display:block;}
+    h2{font-size:3.6rem;margin:8rem 0 3rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    p{margin:2rem 0;color:#e8e8e8;}
+    ul{padding-left:2.6rem;margin:3rem 0;}
+    li{margin:1.6rem 0;font-size:1.3rem;}
+    strong{color:#a0f7f8;}
+
+    /* AURORA-LEVEL CINEMATIC QUOTE */
+    .cinematic-quote{
+      position:relative;margin:22rem 0;padding:20rem 3rem;text-align:center;
+      background:radial-gradient(circle at center,rgba(0,210,211,.32) 0%,transparent 65%);
+      overflow:hidden;
+    }
+    .cinematic-quote::before{
+      content:'';position:absolute;inset:0;background:var(--grad);opacity:.18;filter:blur(150px);z-index:0;
+    }
+    .quote-text{
+      position:relative;z-index:1;font-size:5.8rem;font-weight:900;line-height:1.34;
+      background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      text-shadow:0 0 140px rgba(0,210,211,.9);
+    }
+    .quote-glow{
+      position:absolute;inset:0;background:var(--grad);opacity:.16;filter:blur(240px);
+      animation:aurora 11s infinite alternate;
+    }
+    @keyframes aurora{
+      from{opacity:.16;transform:scale(1) rotate(0deg);}
+      to{opacity:.30;transform:scale(1.25) rotate(3deg);}
+    }
+    .quote-marks{font-size:32rem;font-weight:100;opacity:.08;position:absolute;pointer-events:none;line-height:1;}
+    .quote-marks.left{top:-8rem;left:-4rem;}
+    .quote-marks.right{bottom:-10rem;right:-4rem;transform:scaleX(-1);}
+  </style>
+</head>
+<body>
+
+  <a href="../index.html" class="back">Vault</a>
+
+  <div class="container">
+
+    <header>
+      <h1>Cloud &<br>Virtualization</h1>
+      <p class="subtitle">Where the modern internet actually lives</p>
+    </header>
+
+    <picture class="cover">
+      <img src="../covers/cloud.jpg" alt="Cloud & Virtualization">
+    </picture>
+
+    <article>
+
+      <p>The <strong>cloud</strong> refers to a network of servers that provide storage, software, and computing resources over the internet. Instead of owning hardware, users rent computing power — gaining flexibility, scalability, and cost efficiency at planetary scale.</p>
+
+      <h2>Virtualization</h2>
+      <p><strong>Virtualization</strong> enables multiple operating systems to run on a single physical machine using a <em>hypervisor</em>. The hypervisor intelligently allocates CPU, memory, and storage to each <em>virtual machine (VM)</em>, creating fully isolated environments that behave like dedicated servers.</p>
+      <p>This is the magic that makes the cloud possible.</p>
+
+      <h2>Cloud Storage</h2>
+      <p><em>Cloud storage</em> allows data to be stored and accessed remotely through the internet. Documents, backups, container images, and entire databases live in distributed data centers — available anywhere, resilient to hardware failure, and infinitely scalable.</p>
+
+      <h2>Deployment Models</h2>
+      <ul>
+        <li><strong>Public Cloud</strong> — Shared infrastructure (AWS, Azure, GCP)</li>
+        <li><strong>Private Cloud</strong> — Dedicated to one organization, maximum control</li>
+        <li><strong>Hybrid Cloud</strong> — Best of both worlds: burst to public when needed, keep sensitive data private</li>
+      </ul>
+
+      <h2>Cloud Access Security Broker (CASB)</h2>
+      <p>A <strong>CASB</strong> sits between users and cloud services to:</p>
+      <ul>
+        <li>Monitor all data movement</li>
+        <li>Enforce security policies</li>
+        <li>Detect shadow IT and threats</li>
+        <li>Ensure regulatory compliance</li>
+      </ul>
+      <p>It’s the invisible guardian of the cloud era.</p>
+
+      <!-- AURORA CINEMATIC QUOTE — PURE MAGIC -->
+      <div class="cinematic-quote">
+        <div class="quote-glow"></div>
+        <div class="quote-marks left">“</div>
+        <div class="quote-marks right">”</div>
+        <div class="quote-text">
+          Though the term “cloud”<br>
+          sounds abstract,<br><br>
+          it represents<br>
+          the most complex,<br>
+          most resilient,<br>
+          and most secure<br>
+          infrastructure<br>
+          humanity has ever built.
+        </div>
+      </div>
+
+    </article>
+  </div>
+</body>
+</html>
