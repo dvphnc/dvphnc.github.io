@@ -24,7 +24,7 @@
     p,ul,li{opacity:0;transform:translateY(30px);}
     strong{color:#a0f7f8;}
 
-    /* CLEAN, ELEGANT, PERFECTLY SIZED QUOTE */
+    /* PERFECTLY SIZED, SMOOTHLY ANIMATED QUOTE */
     .cinematic-quote{
       margin:18rem 0 14rem;
       padding:8rem 3rem;
@@ -103,14 +103,14 @@
       </ul>
       <p>It strengthens cloud environments by providing visibility and control over data usage.</p>
 
-      <!-- CLEAN, SMOOTH, PERFECTLY SIZED ANIMATED QUOTE -->
+      <!-- FINAL CLEAN & SMOOTH QUOTE -->
       <div class="cinematic-quote">
         <div class="quote-marks left">“</div>
         <div class="quote-marks right">”</div>
         <div class="quote-text">
           Though the term “cloud” sounds abstract,<br>
           it represents complex infrastructures powered by virtualization<br>
-          and secured by layered defenses.<br><br>
+          and secured by layered defenses.<br>
           Together, they make modern computing<br>
           flexible, efficient, and secure.
         </div>
@@ -124,7 +124,7 @@
     
     gsap.to(".back", {opacity:1, duration:1, delay:0.6});
 
-    // Same smooth animation for ALL content + quote
+    // One smooth animation rule for everything — including the quote
     gsap.utils.toArray("h1, .subtitle, .cover, h2, p, ul, .cinematic-quote").forEach(el => {
       gsap.to(el, {
         opacity: 1,
