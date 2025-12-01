@@ -21,10 +21,24 @@
     .cover{max-width:780px;margin:7rem auto;border-radius:38px;overflow:hidden;box-shadow:0 70px 160px rgba(0,210,211,.45);opacity:0;transform:scale(0.94);}
     .cover img{width:100%;display:block;}
     h2{font-size:3.6rem;margin:9rem 0 3rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:0;transform:translateY(50px);}
-    p,ul,li{opacity:0;transform:translateY(30px);}
+    p{margin:2rem 0;opacity:0;transform:translateY(30px);}
     strong{color:#a0f7f8;}
 
-    /* PERFECTLY SIZED, SMOOTHLY ANIMATED QUOTE */
+    /* Lists now animate perfectly */
+    ul{
+      padding-left:2.6rem;
+      margin:3rem 0;
+      opacity:0;
+      transform:translateY(30px);
+    }
+    li{
+      margin:1.6rem 0;
+      font-size:1.3rem;
+      opacity:0;
+      transform:translateY(20px);
+    }
+
+    /* Clean, elegant quote */
     .cinematic-quote{
       margin:18rem 0 14rem;
       padding:8rem 3rem;
@@ -50,12 +64,7 @@
       text-shadow:0 0 60px rgba(0,210,211,.6);
     }
     .quote-marks{
-      font-size:12rem;
-      font-weight:100;
-      opacity:.08;
-      position:absolute;
-      pointer-events:none;
-      line-height:1;
+      font-size:12rem;font-weight:100;opacity:.08;position:absolute;pointer-events:none;line-height:1;
     }
     .quote-marks.left{top:-2rem;left:-1rem;}
     .quote-marks.right{bottom:-3rem;right:-1rem;transform:scaleX(-1);}
@@ -103,14 +112,13 @@
       </ul>
       <p>It strengthens cloud environments by providing visibility and control over data usage.</p>
 
-      <!-- FINAL CLEAN & SMOOTH QUOTE -->
       <div class="cinematic-quote">
         <div class="quote-marks left">“</div>
         <div class="quote-marks right">”</div>
         <div class="quote-text">
           Though the term “cloud” sounds abstract,<br>
           it represents complex infrastructures powered by virtualization<br>
-          and secured by layered defenses.<br>
+          and secured by layered defenses.<br><br>
           Together, they make modern computing<br>
           flexible, efficient, and secure.
         </div>
@@ -124,18 +132,25 @@
     
     gsap.to(".back", {opacity:1, duration:1, delay:0.6});
 
-    // One smooth animation rule for everything — including the quote
-    gsap.utils.toArray("h1, .subtitle, .cover, h2, p, ul, .cinematic-quote").forEach(el => {
-      gsap.to(el, {
-        opacity: 1,
-        y: 0,
-        duration: 1.4,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 82%",
-          toggleActions: "play none none reverse"
-        }
+    // Main elements
+    gsap.utils.toArray("h1, .subtitle, .cover, h2, p, .cinematic-quote").forEach(el => {
+      gsap.to(el, {opacity:1, y:0, duration:1.4, ease:"power3.out",
+        scrollTrigger:{trigger:el, start:"top 82%", toggleActions:"play none none reverse"}
+      });
+    });
+
+    // Perfect staggered list animation
+    gsap.utils.toArray("ul").forEach(ul => {
+      gsap.to(ul, {opacity:1, y:0, duration:1, ease:"power3.out",
+        scrollTrigger:{trigger:ul, start:"top 82%"}
+      });
+      gsap.to(ul.querySelectorAll("li"), {
+        opacity:1,
+        y:0,
+        duration:0.8,
+        stagger:0.15,
+        ease:"power2.out",
+        scrollTrigger:{trigger:ul, start:"top 82%"}
       });
     });
   </script>
