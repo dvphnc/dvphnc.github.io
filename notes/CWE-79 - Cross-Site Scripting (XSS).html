@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⚔️ Cross-Site Scripting (XSS) • dvphnc SyberVault</title>
+  <meta name="description" content="The most common and dangerous web vulnerability">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    :root{--grad:linear-gradient(120deg,#e91e63,#9c27b0,#7b1fa2,#ba68c8,#e91e63);}
+    body{margin:0;background:#000;color:#f5f5f7;font-family:-apple-system,'SF Pro Display',sans-serif;line-height:1.8;font-size:1.18rem;overflow-x:hidden;}
+    .container{max-width:880px;margin:0 auto;padding:2rem 1.5rem;}
+    .back{position:fixed;top:2.5rem;left:2.5rem;color:#ba68c8;text-decoration:none;font-weight:600;font-size:1.1rem;z-index:100;opacity:0;}
+
+    header{text-align:center;padding:9rem 0 6rem;}
+    h1{font-size:6.6rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1;margin-bottom:1.8rem;opacity:0;transform:translateY(60px);}
+    .subtitle{font-size:1.9rem;color:#e0407a;opacity:0;transform:translateY(40px);}
+    .cover{max-width:780px;margin:7rem auto;border-radius:38px;overflow:hidden;box-shadow:0 70px 160px rgba(156,39,176,.5);opacity:0;transform:scale(0.94);}
+    .cover img{width:100%;display:block;}
+    h2{font-size:3.6rem;margin:9rem 0 3rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:0;transform:translateY(50px);}
+    p{margin:2rem 0;opacity:0;transform:translateY(30px);}
+    strong{color:#e1bee7;}
+
+    table{width:100%;border-collapse:collapse;margin:4rem 0;background:#1a0a1a;border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(156,39,176,.3);}
+    th,td{padding:1.6rem 2rem;text-align:left;border-bottom:1px solid #333;}
+    th{background:#2a0a2a;color:#ba68c8;font-weight:700;font-size:1.1rem;}
+    td{color:#ddd;vertical-align:top;}
+
+    ul{padding-left:2.6rem;margin:3rem 0;opacity:0;transform:translateY(30px);}
+    li{margin:1.6rem 0;font-size:1.3rem;opacity:0;transform:translateY(20px);}
+
+    .cinematic-quote{
+      margin:18rem 0 14rem;padding:8rem 3rem;text-align:center;position:relative;
+      background:radial-gradient(circle at center,rgba(156,39,176,.22) 0%,transparent 70%);
+      border-radius:32px;overflow:hidden;opacity:0;transform:translateY(60px);
+    }
+    .cinematic-quote::before{
+      content:'';position:absolute;inset:0;background:var(--grad);opacity:.14;filter:blur(120px);
+    }
+    .quote-text{
+      position:relative;font-size:2.8rem;font-weight:700;line-height:1.5;
+      background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      text-shadow:0 0 60px rgba(156,39,176,.7);
+    }
+    .quote-marks{font-size:12rem;font-weight:100;opacity:.08;position:absolute;pointer-events:none;line-height:1;}
+    .quote-marks.left{top:-2rem;left:-1rem;}
+    .quote-marks.right{bottom:-3rem;right:-1rem;transform:scaleX(-1);}
+  </style>
+</head>
+<body>
+
+  <a href="../index.html" class="back">Vault</a>
+
+  <div class="container">
+
+    <header>
+      <h1>Cross-Site<br>Scripting<br>(XSS)</h1>
+      <p class="subtitle">The most common and dangerous web vulnerability</p>
+    </header>
+
+    <picture class="cover">
+      <img src="../covers/xss.jpg" alt="Cross-Site Scripting">
+    </picture>
+
+    <article>
+
+      <p>A <strong>web security vulnerability</strong> that allows an attacker to <strong>compromise user interactions</strong> with a vulnerable web application.<br>
+      It happens due to <strong>improper neutralization of user input</strong> that gets rendered in a web page.<br>
+      <strong>CWE-79:</strong> Improper Neutralization of Input During Web Page Generation (‘Cross-site Scripting’).<br>
+      <strong>Goal:</strong> Circumvent the <strong>Same-Origin Policy</strong>.</p>
+
+      <h2>How Does XSS Work?</h2>
+      <p>XSS occurs when:</p>
+      <ul>
+        <li>User input is included in web pages <strong>without proper validation or encoding</strong>.</li>
+        <li>Attackers inject <strong>malicious scripts (usually JavaScript)</strong> that execute in the victim’s browser.</li>
+        <li>The browser <strong>trusts час</strong> the script because it appears to come from the legitimate site.</li>
+      </ul>
+
+      <h2>Types of XSS Attacks</h2>
+      <table>
+        <tr><th>Type</th><th>Description</th></tr>
+        <tr><td><strong>Reflected XSS (Type 1 / Non-Persistent)</strong></td><td>The malicious script is <strong>immediately reflected</strong> off the web server, typically via a crafted link or form submission.</td></tr>
+        <tr><td><strong>Stored XSS (Type 2 / Persistent)</strong></td><td>The injected script is <strong>stored on the server</strong> (e.g., in a database, forum post, or comment) and runs when users view that content.</td></tr>
+        <tr><td><strong>DOM-Based XSS (Type 0)</strong></td><td>The attack happens <strong>entirely on the client side</strong> when JavaScript modifies the DOM without sanitizing user input.</td></tr>
+        <tr><td><strong>uXSS (Universal XSS)</strong></td><td>Exploits <strong>vulnerabilities in browsers or plugins</strong> rather than the web app itself.</td></tr>
+        <tr><td><strong>Self-XSS</strong></td><td>Tricks the user into <strong>executing malicious scripts</strong> in their own browser console or input field.</td></tr>
+      </table>
+
+      <h2>XSS Attack Consequences</h2>
+      <ul>
+        <li><strong>Session Hijacking</strong> — Steal cookies or session tokens.</li>
+        <li><strong>Data Theft</strong> — Access sensitive user data.</li>
+        <li><strong>Website Defacement</strong> — Modify or vandalize site content.</li>
+        <li><strong>Malware Distribution</strong> — Inject malicious code to infect visitors.</li>
+        <li><strong>Account Takeover</strong> — Gain control of user accounts.</li>
+        <li><strong>Unauthorized Actions</strong> — Perform actions as the victim.</li>
+        <li><strong>Further Attacks</strong> — Launch phishing or lateral attacks.</li>
+      </ul>
+
+      <h2>XSS Prevention Techniques</h2>
+      <table>
+        <tr><th>Method</th><th>Description</th></tr>
+        <tr><td><strong>Input Validation</strong></td><td>Check and restrict input to expected patterns, length, and type.</td></tr>
+        <tr><td><strong>Contextual Output Encoding/Escaping</strong></td><td>Encode data based on where it appears (HTML, JS, URL, etc.) to prevent script execution.</td></tr>
+        <tr><td><strong>Sanitization</strong></td><td>Remove or modify harmful input before rendering.</td></tr>
+        <tr><td><strong>HTTPOnly Cookies</strong></td><td>Prevent JavaScript from accessing sensitive cookies.</td></tr>
+        <tr><td><strong>Content Security Policy (CSP)</strong></td><td>A browser-level defense restricting which scripts can execute on the page.</td></tr>
+      </table>
+
+      <h2>Summary</h2>
+      <ul>
+        <li><strong>XSS</strong> lets attackers execute malicious scripts in users’ browsers.</li>
+        <li>It exploits <strong>trust between browser and site</strong>.</li>
+        <li>Prevent by <strong>validating, encoding, sanitizing</strong>, and enforcing <strong>CSP</strong>.</li>
+      </ul>
+
+      <div class="cinematic-quote">
+        <div class="quote-marks left">“</div>
+        <div class="quote-marks right">”</div>
+        <div class="quote-text">
+          Never trust<br>
+          what the user sends.<br><br>
+          Because one day,<br>
+          the user<br>
+          will be you.
+        </div>
+      </div>
+
+    </article>
+  </div>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.to(".back", {opacity:1, duration:1, delay:0.6});
+
+    // Main content
+    gsap.utils.toArray("h1, .subtitle, .cover, h2, p, table, .cinematic-quote").forEach(el => {
+      gsap.to(el, {opacity:1, y:0, duration:1.4, ease:"power3.out",
+        scrollTrigger:{trigger:el, start:"top 82%", toggleActions:"play none none reverse"}
+      });
+    });
+
+    // Bullet-proof list animation
+    document.querySelectorAll("ul").forEach(ul => {
+      gsap.to(ul, {opacity:1, y:0, duration:1, ease:"power3.out",
+        scrollTrigger:{trigger:ul, start:"top 82%"}
+      });
+      gsap.to(ul.querySelectorAll("li"), {
+        opacity:1, y:0, duration:0.8, stagger:0.15, ease:"power2.out",
+        scrollTrigger:{trigger:ul, start:"top 82%"}
+      });
+    });
+  </script>
+</body>
+</html>
