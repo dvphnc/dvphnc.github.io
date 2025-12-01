@@ -4,53 +4,56 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Introduction to Web Application Security • dvphnc SyberVault</title>
-  <meta name="description" content="From ARPANET to OWASP — the story of trust on the internet">
-  <style>
-    :root{--grad:linear-gradient(120deg,#dc143c,#ff4500,#ff6347,#ff8c00,#dc143c);}
-    body{margin:0;background:#000;color:#f5f5f7;font-family:-apple-system,'SF Pro Display',sans-serif;line-height:1.8;font-size:1.18rem;}
-    .container{max-width:900px;margin:0 auto;padding:2rem 1.5rem;}
-    .back{position:fixed;top:2.5rem;left:2.5rem;color:#ff4444;text-decoration:none;font-weight:600;font-size:1.1rem;z-index:100;}
-    header{text-align:center;padding:8rem 0 5rem;}
-    h1{font-size:6.4rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1;margin-bottom:1.8rem;}
-    .subtitle{font-size:1.8rem;color:#ff6666;font-weight:500;}
-    .cover{max-width:780px;margin:6rem auto;border-radius:36px;overflow:hidden;box-shadow:0 60px 140px rgba(220,20,60,.45);}
-    .cover img{width:100%;display:block;}
-    h2{font-size:3.6rem;margin:8rem 0 3rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-    p{margin:2rem 0;color:#e8e8e8;}
-    ul{padding-left:2.5rem;margin:3rem 0;}
-    li{margin:1.5rem 0;font-size:1.28rem;}
-    strong{color:#ffb4a2;}
-    table{width:100%;border-collapse:collapse;margin:4rem 0;background:#1a0f0f;border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(220,20,60,.3);}
-    th,td{padding:1.6rem 2rem;text-align:left;border-bottom:1px solid #333;}
-    th{background:#2a0a0a;color:#ff6666;font-weight:700;font-size:1.1rem;}
-    td{color:#ddd;vertical-align:top;}
-    code{background:#2a0a0a;padding:0.3rem 0.8rem;border-radius:10px;color:#ff8c8c;}
+  <meta name="description" content="The foundation of online trust">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-    /* FINAL BOSS CINEMATIC QUOTE */
+  <style>
+    :root{--grad:linear-gradient(120deg,#000000,#330000,#8B0000,#FF4500,#FF8C00,#B22222,#000000);}
+    body{margin:0;background:#000;color:#f5f5f7;font-family:-apple-system,'SF Pro Display',sans-serif;line-height:1.8;font-size:1.18rem;overflow-x:hidden;}
+    .container{max-width:880px;margin:0 auto;padding:2rem 1.5rem;}
+    .back{position:fixed;top:2.5rem;left:2.5rem;color:#FF4500;text-decoration:none;font-weight:600;font-size:1.1rem;z-index:100;opacity:0;}
+
+    header{text-align:center;padding:7rem 0 4rem;}
+    h1{font-size:6.2rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1;margin-bottom:1.4rem;opacity:0;transform:translateY(60px);}
+    .subtitle{font-size:1.8rem;color:#FF4500;opacity:0;transform:translateY(40px);}
+    .cover{max-width:720px;margin:4rem auto;border-radius:36px;overflow:hidden;box-shadow:0 60px 140px rgba(255,69,0,.5);opacity:0;transform:scale(0.94);}
+    .cover img{width:100%;display:block;}
+    
+    h2{font-size:3.2rem;margin:4.5rem 0 2rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:0;transform:translateY(50px);}
+    h3{font-size:2.1rem;margin:3.5rem 0 1.8rem;color:#FF4500;opacity:0;transform:translateY(30px);}
+    p{margin:1.6rem 0;opacity:0;transform:translateY(30px);}
+    strong{color:#FFB366;}
+
+    pre{background:#1a0000;padding:1.8rem;border-radius:18px;overflow-x:auto;margin:2rem 0;
+        box-shadow:0 12px 40px rgba(255,69,0,.4);border:1px solid #660000;}
+    pre code{color:#ffb366;font-family:'SF Mono',monospace;font-size:1rem;line-height:1.6;}
+
+    table{width:100%;border-collapse:collapse;margin:2.8rem 0;background:#1a0000;border-radius:22px;overflow:hidden;box-shadow:0 16px 50px rgba(255,69,0,.35);}
+    th,td{padding:1.4rem 1.8rem;text-align:left;border-bottom:1px solid #330000;}
+    th{background:#330000;color:#FF4500;font-weight:700;font-size:1.05rem;}
+    td{color:#ffcc99;vertical-align:top;}
+
+    ul{padding-left:2.4rem;margin:2.4rem 0;opacity:0;transform:translateY(30px);}
+    li{margin:1.2rem 0;font-size:1.26rem;opacity:0;transform:translateY(20px);}
+
     .cinematic-quote{
-      position:relative;margin:20rem 0;padding:18rem 3rem;text-align:center;
-      background:radial-gradient(circle at center,rgba(220,20,60,.25) 0%,transparent 60%);
-      overflow:hidden;
+      margin:9rem 0 7rem;padding:5rem 2.5rem;text-align:center;position:relative;
+      background:radial-gradient(circle at center,rgba(255,69,0,.25) 0%,transparent 70%);
+      border-radius:28px;overflow:hidden;opacity:0;transform:translateY(60px);
     }
     .cinematic-quote::before{
-      content:'';position:absolute;inset:0;background:var(--grad);opacity:.14;filter:blur(120px);z-index:0;
+      content:'';position:absolute;inset:0;background:var(--grad);opacity:.18;filter:blur(100px);
     }
     .quote-text{
-      position:relative;z-index:1;font-size:5.2rem;font-weight:900;line-height:1.32;
+      position:relative;font-size:2.6rem;font-weight:700;line-height:1.48;
       background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
-      text-shadow:0 0 120px rgba(220,20,60,.9);
+      text-shadow:0 0 70px rgba(255,69,0,1);
     }
-    .quote-glow{
-      position:absolute;inset:0;background:var(--grad);opacity:.12;filter:blur(200px);
-      animation:crimson-breath 9s infinite alternate;
-    }
-    @keyframes crimson-breath{
-      from{opacity:.12;transform:scale(1);}
-      to{opacity:.25;transform:scale(1.2);}
-    }
-    .quote-marks{font-size:28rem;font-weight:100;opacity:.08;position:absolute;pointer-events:none;line-height:1;}
-    .quote-marks.left{top:-6rem;left:-3rem;}
-    .quote-marks.right{bottom:-8rem;right:-3rem;transform:scaleX(-1);}
+    .quote-marks{font-size:10rem;font-weight:100;opacity:.09;position:absolute;pointer-events:none;line-height:1;color:#660000;}
+    .quote-marks.left{top:-1.5rem;left:-1rem;}
+    .quote-marks.right{bottom:-2.5rem;right:-1rem;transform:scaleX(-1);}
   </style>
 </head>
 <body>
@@ -61,11 +64,11 @@
 
     <header>
       <h1>Web Application<br>Security</h1>
-      <p class="subtitle">The invisible shield behind every login, payment, and message</p>
+      <p class="subtitle">The foundation of online trust</p>
     </header>
 
     <picture class="cover">
-      <img src="../covers/websec.jpg" alt="Web Application Security">
+      <img src="../covers/web-security-intro.jpg" alt="Web Application Security">
     </picture>
 
     <article>
@@ -74,89 +77,125 @@
 
       <h2>A Look Back: The Evolution of the Web</h2>
 
-      <h2>ARPANET (1969): The Foundation</h2>
-      <p>In 1969, the <strong>Advanced Research Projects Agency Network (ARPANET)</strong> was born — the first packet-switching network and the true ancestor of the internet, built for research and military communication.</p>
+      <h3>ARPANET (1969): The Foundation of the Internet</h3>
+      <p>In 1969, the <strong>Advanced Research Projects Agency Network (ARPANET)</strong> was developed by the U.S. Department of Defense. It was the first operational packet-switching network and the ancestor of today’s internet — built primarily for research communication between universities.</p>
 
-      <h2>The Old Web: 1989–1990s</h2>
-      <p>In 1989, <strong>Tim Berners-Lee</strong> invented the <strong>World Wide Web</strong> at CERN. By 1991, the first website went live — static pages connected by hyperlinks. Security? Almost none. Trust was the default.</p>
+      <h3>The Old Web: The Dawn of the World Wide Web</h3>
+      <p>In 1989, <strong>Tim Berners-Lee</strong> invented the <strong>World Wide Web (WWW)</strong> while at CERN. By 1991, he published the first website — introducing the idea of hyperlinks and HTML pages accessible to everyone.</p>
 
-      <h2>The Modern Web</h2>
-      <p>Today’s web is alive, dynamic, and global. We shop, bank, date, govern, and fight on it. With great connectivity comes great responsibility — and an explosion of sophisticated attacks.</p>
+      <h3>The Modern Web</h3>
+      <p>Today’s web is dynamic and interactive. Web applications drive commerce, communication, and collaboration. However, as connectivity grew, so did vulnerabilities — from basic misconfigurations to advanced ransomware and phishing attacks.</p>
 
-      <h2>Comparative Analysis</h2>
+      <h2>Comparative Analysis: ARPANET vs. Old Web vs. Modern Web</h2>
       <table>
         <tr><th>Feature</th><th>ARPANET (1969)</th><th>Old Web (1990s)</th><th>Modern Web (Today)</th></tr>
-        <tr><td><strong>Purpose</strong></td><td>Research & military</td><td>Information sharing</td><td>Commerce, social, global interconnectivity</td></tr>
-        <tr><td><strong>Security Focus</strong></td><td>Minimal — trust-based</td><td>Basic authentication</td><td>Advanced encryption, defense-in-depth</td></tr>
+        <tr><td><strong>Purpose</strong></td><td>Research and military communication</td><td>Information sharing</td><td>Commerce, social, global interconnectivity</td></tr>
+        <tr><td><strong>Security Focus</strong></td><td>Minimal — trust-based</td><td>Basic authentication</td><td>Advanced encryption, multi-layered defense</td></tr>
         <tr><td><strong>Technology</strong></td><td>Packet switching</td><td>HTML, static pages</td><td>Cloud, APIs, AI, dynamic content</td></tr>
-        <tr><td><strong>Threat Landscape</strong></td><td>Low</td><td>Viruses, defacement</td><td>Ransomware, breaches, nation-state attacks</td></tr>
+        <tr><td><strong>User Access</strong></td><td>Restricted to researchers</td><td>Public, but limited interaction</td><td>Global, highly interactive</td></tr>
+        <tr><td><strong>Threat Landscape</strong></td><td>Low (few users)</td><td>Viruses, defacement</td><td>Ransomware, data breaches, phishing</td></tr>
       </table>
 
       <h2>Why It Matters: The CIA Triad</h2>
+      <p>Web security upholds the <strong>CIA Triad</strong> — the foundation of digital protection.</p>
       <ul>
-        <li><strong>Confidentiality:</strong> Prevents unauthorized eyes.<br><em>Example:</em> HTTPS encrypting your password</li>
-        <li><strong>Integrity:</strong> Ensures nothing was tampered with.<br><em>Example:</em> Digital signatures on software updates</li>
-        <li><strong>Availability:</strong> Keeps services online for real users.<br><em>Example:</em> DDoS protection</li>
+        <li><strong>Confidentiality:</strong> Prevents unauthorized access to sensitive data.<br><em>Example:</em> Encrypting login credentials using HTTPS.</li>
+        <li><strong>Integrity:</strong> Ensures that data and web content aren’t tampered with.<br><em>Example:</em> Using digital signatures to validate code updates.</li>
+        <li><strong>Availability:</strong> Keeps websites and services accessible to legitimate users.<br><em>Example:</em> Protecting against DDoS attacks to maintain uptime.</li>
       </ul>
 
-      <h2>Case Study: BlackCat Ransomware (ALPHV)</h2>
-      <p>The <strong>BlackCat ransomware group</strong> showed the world how fast a single web app vulnerability can become a multi-billion-dollar catastrophe.</p>
-      <p><strong>Timeline:</strong><br>Feb 2024 → Detection<br>Mar 2024 → Exfiltration confirmed<br>Jan 2025 → 190 million records exposed</p>
+      <h2>Case Study: BlackCat Ransomware Group (ALPHV)</h2>
+      <p>The <strong>BlackCat ransomware group</strong> is known for targeting large organizations and exfiltrating sensitive data before encryption. Their attacks highlight the growing sophistication of cyber threats facing web applications.</p>
+      <p><strong>Incident Timeline:</strong></p>
+      <ul>
+        <li><strong>Feb 21, 2024:</strong> Ransomware detected, systems disconnected.</li>
+        <li><strong>Mar 7, 2024:</strong> Data exfiltration confirmed.</li>
+        <li><strong>Apr 22, 2024:</strong> Broad impact acknowledged.</li>
+        <li><strong>Jul 19, 2024:</strong> Breach reported — 500 affected.</li>
+        <li><strong>Jan 2025:</strong> 190 million individuals' data exposed.</li>
+        <li><strong>Ongoing:</strong> Recovery and investigation continue.</li>
+      </ul>
+      <p>This case underscores the critical importance of <strong>proactive defense</strong>, <strong>incident response</strong>, and <strong>regular vulnerability assessments</strong>.</p>
 
       <h2>Proactive Security Measures</h2>
       <ul>
-        <li>Multi-Factor Authentication (MFA) everywhere</li>
-        <li>Regular Security Awareness Training</li>
-        <li>Vulnerability Assessments & Penetration Testing</li>
-        <li>Patch everything — always</li>
-        <li>Network Segmentation</li>
-        <li>Tested Incident Response Plan</li>
+        <li>Implement <strong>Multi-Factor Authentication (MFA)</strong> on all critical systems.</li>
+        <li>Conduct regular <strong>Security Awareness Training</strong> for employees.</li>
+        <li>Perform <strong>Vulnerability Assessments</strong> and <strong>Penetration Testing</strong>.</li>
+        <li>Keep all <strong>software and systems updated</strong> with the latest patches.</li>
+        <li>Use <strong>Robust Network Segmentation</strong> to contain breaches.</li>
+        <li>Develop and test an <strong>Incident Response Plan</strong> regularly.</li>
       </ul>
 
-      <h2>Anatomy of a URL</h2>
-      <p><code>https://www.example.com:443/blog/article?id=123#comments</code></p>
+      <h2>Anatomy of the Web</h2>
+      <p>A <strong>URL (Uniform Resource Locator)</strong> identifies and locates resources on the web.</p>
+      <p><strong>Example:</strong><br><code>https://www.example.com:443/blog/article?id=123#comments</code></p>
       <table>
         <tr><th>Part</th><th>Name</th><th>Description</th></tr>
-        <tr><td><code>https://</code></td><td>Protocol</td><td>Secure encrypted connection</td></tr>
-        <tr><td><code>www.example.com</code></td><td>Domain</td><td>The website address</td></tr>
-        <tr><td><code>:443</code></td><td>Port</td><td>Standard HTTPS port</td></tr>
-        <tr><td><code>/blog/article</code></td><td>Path</td><td>Resource location</td></tr>
-        <tr><td><code>?id=123</code></td><td>Query String</td><td>Parameters sent to server</td></tr>
-        <tr><td><code>#comments</code></td><td>Fragment</td><td>Jump to section on page</td></tr>
+        <tr><td><code>https://</code></td><td><strong>Protocol</strong></td><td>Specifies the communication method; HTTPS encrypts data for secure transfer.</td></tr>
+        <tr><td><code>www.example.com</code></td><td><strong>Domain Name</strong></td><td>Identifies the website’s main address or host.</td></tr>
+        <tr><td><code>:443</code></td><td><strong>Port Number</strong></td><td>Defines the communication channel; port 443 is standard for HTTPS.</td></tr>
+        <tr><td><code>/blog/article</code></td><td><strong>Path</strong></td><td>Indicates the specific location or directory of the resource.</td></tr>
+        <tr><td><code>?id=123</code></td><td><strong>Query String</strong></td><td>Sends parameters or variables to the web server for dynamic content.</td></tr>
+        <tr><td><code>#comments</code></td><td><strong>Fragment</strong></td><td>Points to a specific section or anchor within the page.</td></tr>
       </table>
 
-      <h2>Challenges of Modern Web Apps</h2>
+      <h2>Challenges of Modern Web Applications</h2>
       <ul>
-        <li>Lack of secure coding knowledge</li>
-        <li>Usability vs Security trade-offs</li>
-        <li>Complex, tangled architecture</li>
-        <li>Rapid deployment skipping security</li>
+        <li>Lack of <strong>technical expertise</strong> in secure coding practices</li>
+        <li>Conflict between <strong>usability and security</strong></li>
+        <li><strong>Safe browsing</strong> requires deeper understanding and discipline</li>
+        <li>Complex, <strong>tangled architecture</strong> increases attack surface</li>
+        <li>Rapid deployment cycles often <strong>overlook security testing</strong></li>
       </ul>
 
-      <h2>OWASP Top 10 — The Industry Bible</h2>
-      <p>It’s not just a list — it’s the <strong>common language of web security</strong>.</p>
-      <p>Whether you’re building or breaking, start here.</p>
+      <h2>Web Application Security Checklist (OWASP)</h2>
+      <p>The <strong>OWASP Top 10</strong> serves as the industry standard for understanding and mitigating the most critical web application security risks.</p>
+      <ul>
+        <li><strong>It’s a benchmark:</strong> Provides a <em>common language</em> and shared understanding of web application security risks.</li>
+        <li><strong>It’s a starting point:</strong> Whether building a <em>new application</em> or securing an <em>existing one</em>, the OWASP Top 10 is the best foundation.</li>
+        <li><strong>It’s constantly evolving:</strong> The list is <em>regularly updated</em> to match the ever-changing threat landscape.</li>
+        <li><strong>It can save money and reputation:</strong> Addressing vulnerabilities <em>proactively</em> prevents costly <em>data breaches</em>, <em>reputational damage</em>, and <em>legal issues</em>.</li>
+      </ul>
 
-      <!-- THE MOST BEAUTIFUL QUOTE IN THE VAULT -->
       <div class="cinematic-quote">
-        <div class="quote-glow"></div>
         <div class="quote-marks left">“</div>
         <div class="quote-marks right">”</div>
         <div class="quote-text">
-          Web Application Security<br>
-          isn’t just a technical discipline —<br><br>
-          it’s the foundation<br>
-          of online trust.<br><br>
+          Web Application Security isn’t just a technical discipline —<br>
+          it’s the foundation of online trust.<br><br>
           From ARPANET’s open beginnings<br>
           to today’s hyperconnected world,<br>
-          the mission remains the same:<br><br>
-          Protect information.<br>
-          Ensure availability.<br>
-          Maintain integrity.
+          the mission remains the same:<br>
+          <strong>to protect information,<br>
+          ensure availability,<br>
+          and maintain integrity<br>
+          across the web.</strong>
         </div>
       </div>
 
     </article>
   </div>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.to(".back", {opacity:1, duration:1, delay:0.6});
+
+    gsap.utils.toArray("h1, .subtitle, .cover, h2, h3, p, pre, table, .cinematic-quote").forEach(el => {
+      gsap.to(el, {opacity:1, y:0, duration:1.4, ease:"power3.out",
+        scrollTrigger:{trigger:el, start:"top 84%", toggleActions:"play none none reverse"}
+      });
+    });
+
+    document.querySelectorAll("ul").forEach(ul => {
+      gsap.to(ul, {opacity:1, y:0, duration:1, ease:"power3.out",
+        scrollTrigger:{trigger:ul, start:"top 84%"}
+      });
+      gsap.to(ul.querySelectorAll("li"), {
+        opacity:1, y:0, duration:0.8, stagger:0.14, ease:"power2.out",
+        scrollTrigger:{trigger:ul, start:"top 84%"}
+      });
+    });
+  </script>
 </body>
 </html>
