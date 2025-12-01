@@ -4,100 +4,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CWE-35 — Path Traversal • dvphnc SyberVault</title>
-  <meta name="description" content="Directory Traversal: How attackers walk outside the web root">
+  <meta name="description" content="How attackers walk outside the web root — and how to stop them">
   <style>
-    :root {
-      --bg: #000;
-      --text: #f5f5f7;
-      --muted: #aaaaaa;
-      --grad: linear-gradient(120deg, #1e3a8a, #4c1d95, #7c3aed, #1e3a8a);
-      /* Deep Midnight Blue → Indigo → Violet → back */
-    }
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-      line-height: 1.78;
-      font-size: 1.18rem;
-    }
-    .container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem; }
-    
-    .back {
-      position: fixed;
-      top: 2.5rem;
-      left: 2.5rem;
-      color: #818cf8;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1.1rem;
-      z-index: 100;
-      opacity: 0.92;
-      transition: opacity .3s;
-    }
-    .back:hover { opacity: 1; }
+    :root{--grad:linear-gradient(120deg,#1e3a8a,#4338ca,#6d28d9,#7c3aed,#4338ca,#1e3a8a);}
+    body{margin:0;background:#000;color:#f5f5f7;font-family:-apple-system,'SF Pro Display',sans-serif;line-height:1.78;font-size:1.18rem;}
+    .container{max-width:880px;margin:0 auto;padding:2rem 1.5rem;}
+    .back{position:fixed;top:2.5rem;left:2.5rem;color:#818cf8;text-decoration:none;font-weight:600;font-size:1.1rem;z-index:100;}
+    header{text-align:center;padding:7rem 0 4rem;}
+    h1{font-size:6rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1;margin-bottom:1.6rem;}
+    .subtitle{font-size:1.7rem;color:#a78bfa;font-weight:500;}
+    .cover{max-width:760px;margin:5.5rem auto;border-radius:32px;overflow:hidden;box-shadow:0 50px 120px rgba(124,60,174,.4);}
+    .cover img{width:100%;display:block;}
+    h2{font-size:3.4rem;margin:7rem 0 2.5rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    p{margin:1.8rem 0;color:#e0e0e0;}
+    ul{padding-left:2.4rem;margin:2.5rem 0;}
+    li{margin:1.4rem 0;font-size:1.25rem;}
+    strong{color:#c4b5fd;}
+    table{width:100%;border-collapse:collapse;margin:3rem 0;background:#0f0a1a;border-radius:20px;overflow:hidden;box-shadow:0 15px 40px rgba(0,0,0,.7);}
+    th,td{padding:1.5rem 1.8rem;text-align:left;border-bottom:1px solid #333;}
+    th{background:#1a1528;color:#a78bfa;font-weight:700;}
+    td{color:#ddd;}
+    code{background:#1a1528;padding:0.2rem 0.6rem;border-radius:8px;font-family:ui-monospace,'SF Mono',monospace;}
 
-    header {
-      text-align: center;
-      padding: 7rem 0 4rem;
+    /* EPIC CINEMATIC QUOTE */
+    .cinematic-quote{
+      position:relative;margin:16rem 0;padding:14rem 2rem;text-align:center;
+      background:radial-gradient(circle at center,rgba(124,60,174,.18) 0%,transparent 70%);
+      overflow:hidden;
     }
-    h1 {
-      font-size: 5.9rem;
-      font-weight: 800;
-      background: var(--grad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1.1;
-      margin: 0 0 1.6rem 0;
+    .cinematic-quote::before{
+      content:'';position:absolute;inset:0;background:var(--grad);opacity:.1;filter:blur(100px);z-index:0;
     }
-    .subtitle {
-      font-size: 1.65rem;
-      color: var(--muted);
-      font-weight: 400;
+    .quote-text{
+      position:relative;z-index:1;font-size:4.6rem;font-weight:800;line-height:1.3;
+      background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      text-shadow:0 0 90px rgba(124,60,174,.6);
     }
-
-    .cover {
-      width: 100%;
-      max-width: 740px;
-      margin: 5.5rem auto;
-      border-radius: 30px;
-      overflow: hidden;
-      box-shadow: 0 40px 110px rgba(0,0,0,0.9);
+    .quote-glow{position:absolute;inset:0;background:var(--grad);opacity:.08;filter:blur(160px);
+      animation:pulse 12s infinite alternate;
     }
-    .cover img { width: 100%; display: block; }
-
-    article { margin: 4rem 0; }
-    h2 {
-      font-size: 3.3rem;
-      margin: 6rem 0 2rem;
-      background: var(--grad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    p, li { margin: 1.7rem 0; color: #e0e0e0; }
-    ul { padding-left: 2.2rem; margin: 2.5rem 0; }
-    li { margin: 1.2rem 0; font-size: 1.25rem; }
-    strong { color: #c4b5fd; }
-
-    blockquote {
-      font-size: 2.1rem;
-      font-style: italic;
-      text-align: center;
-      color: #a78bfa;
-      padding: 5rem 2rem;
-      margin: 7rem 0;
-      line-height: 1.6;
-    }
-
-    .techniques {
-      background: #0f0a1a;
-      padding: 2.5rem;
-      border-radius: 24px;
-      margin: 4rem 0;
-      font-family: ui-monospace, 'SF Mono', monospace;
-      color: #ddd;
-    }
+    @keyframes pulse{from{opacity:.08;transform:scale(1);}to{opacity:.16;transform:scale(1.15);}}
+    .quote-marks{font-size:24rem;font-weight:100;opacity:.07;position:absolute;pointer-events:none;line-height:1;}
+    .quote-marks.left{top:-4rem;left:-1.5rem;}
+    .quote-marks.right{bottom:-6rem;right:-1.5rem;transform:scaleX(-1);}
   </style>
 </head>
 <body>
@@ -108,7 +57,7 @@
 
     <header>
       <h1>CWE-35<br>Path Traversal</h1>
-      <p class="subtitle">Directory Traversal — Walking outside the web root</p>
+      <p class="subtitle">Directory Traversal — When attackers walk outside the web root</p>
     </header>
 
     <picture class="cover">
@@ -134,15 +83,30 @@
       </ul>
 
       <h2>Directory Traversal Techniques</h2>
-      <div class="techniques">
-        • Simple Dot-Dot-Slash (<code>../</code>) — basic upward traversal<br>
-        • Path Separator Variations (<code>/</code>, <code>\</code>) — platform-specific separators<br>
-        • Percent-Encoding (<code>%2e%2e%2f</code>) — URL-encoded traversal<br>
-        • Double Encoding (<code>%252e%252e%252f</code>) — encoder confusion bypass<br>
-        • Unicode Encoding (<code>%u002e%u002e%u002f</code>) — Unicode-encoded traversal<br>
-        • Mangled Paths (<code>....//...</code>) — path normalization tricks<br>
-        • NULL Byte Injection (<code>%00</code>) — terminating strings in some legacy APIs<br><br>
-        <em>Attackers chain these techniques to bypass naive filters and normalization routines.</em>
+      <ul>
+        <li><strong>Simple Dot-Dot-Slash (<code>../</code>)</strong> — basic upward traversal.</li>
+        <li><strong>Path Separator Variations (<code>/</code>, <code>\</code>)</strong> — platform-specific separators.</li>
+        <li><strong>Percent-Encoding (<code>%2e%2e%2f</code>)</strong> — URL-encoded traversal.</li>
+        <li><strong>Double Encoding (<code>%252e%252e%252f</code>)</strong> — encoder confusion bypass.</li>
+        <li><strong>Unicode Encoding (<code>%u002e%u002e%u002f</code>)</strong> — Unicode-encoded traversal.</li>
+        <li><strong>Mangled Paths (<code>....//...</code>)</strong> — path normalization tricks.</li>
+        <li><strong>NULL Byte Injection (<code>%00</code>)</strong> — terminating strings in some legacy APIs.</li>
+      </ul>
+      <p><em>Attackers chain these techniques to bypass naive filters and normalization routines.</em></p>
+
+      <!-- FULL CINEMATIC QUOTE — MAXIMUM DRAMA -->
+      <div class="cinematic-quote">
+        <div class="quote-glow"></div>
+        <div class="quote-marks left">“</div>
+        <div class="quote-marks right">”</div>
+        <div class="quote-text">
+          In secure coding,<br>
+          the door is locked.<br><br>
+          Path Traversal<br>
+          doesn’t break the lock —<br>
+          it simply walks<br>
+          around the wall.
+        </div>
       </div>
 
       <h2>Preventing Directory Traversal</h2>
@@ -158,12 +122,12 @@
 
       <h2>Directory Traversal Tools (for testing & assessment)</h2>
       <ul>
-        <li><strong>Burp Suite</strong> — web testing platform with scanning and manual testing features</li>
-        <li><strong>OWASP ZAP</strong> — open-source scanner for automated detection</li>
-        <li><strong>Nikto</strong> — web server scanner that checks for dangerous files</li>
-        <li><strong>DotDotPwn</strong> — tool specifically designed to test directory traversal payloads</li>
-        <li><strong>Metasploit</strong> — penetration testing framework with modules</li>
-        <li><strong>DirBuster / Dirsearch</strong> — brute-forcing tools to discover hidden directories and files</li>
+        <li><strong>Burp Suite</strong> — web testing platform with scanning and manual testing features.</li>
+        <li><strong>OWASP ZAP</strong> — open-source scanner for automated detection.</li>
+        <li><strong>Nikto</strong> — web server scanner that checks for dangerous files and misconfigurations.</li>
+        <li><strong>DotDotPwn</strong> — tool specifically designed to test directory traversal payloads.</li>
+        <li><strong>Metasploit</strong> — penetration testing framework with modules for traversal exploits.</li>
+        <li><strong>DirBuster / Dirsearch</strong> — brute-forcing tools to discover hidden directories and files.</li>
       </ul>
       <p><em>Use these tools responsibly for authorized testing only.</em></p>
 
@@ -173,7 +137,6 @@
       <p>Regular testing with vetted tools and secure coding practices reduce the risk and impact of traversal vulnerabilities.</p>
 
     </article>
-
   </div>
 </body>
 </html>
