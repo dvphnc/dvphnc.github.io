@@ -1,28 +1,240 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>dvphnc • SyberVault</title>
-  <meta name="description" content="Personal Knowledge Vault • Cybersecurity & Beyond" />
-  <link rel="stylesheet" href="style.css" />
+  <meta name="description" content="Cybersecurity Engineer • Pentester • Knowledge Vault" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700;800;900&display=swap');
+    
+    :root {
+      --accent: linear-gradient(120deg, #ffdd00, #ff006e, #ff1744);
+      --accent-glow: rgba(255, 0, 110, 0.3);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'SF Pro Display', -apple-system, sans-serif;
+      background: #000;
+      color: #f5f5f7;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 2rem; }
+
+    /* Hero */
+    header {
+      height: 100vh;
+      min-height: 680px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: 80px;
+    }
+    .hero h1 {
+      font-size: 7.5rem;
+      font-weight: 900;
+      background: var(--accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1.2s 0.4s forwards;
+    }
+    .hero p {
+      font-size: 2rem;
+      font-weight: 500;
+      color: #aaa;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeInUp 1.2s 0.7s forwards;
+    }
+    .hero .subtitle {
+      font-size: 1.4rem;
+      color: #ff006e;
+      font-weight: 600;
+      letter-spacing: 1px;
+      opacity: 0;
+      animation: fadeInUp 1.2s 1s forwards;
+    }
+
+    /* Sections */
+    section { padding: 10rem 0; }
+    h2.section-title {
+      font-size: 4rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 5rem;
+      background: var(--accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+    .about-text {
+      font-size: 1.4rem;
+      line-height: 1.9;
+      color: #ccc;
+    }
+    .about-text strong { color: #ffdd00; }
+    .about-img {
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(255,0,110,.3);
+    }
+    .about-img img { width: 100%; display: block; }
+
+    /* Certifications */
+    .certs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+    }
+    .cert-card {
+      background: #111;
+      border-radius: 24px;
+      padding: 2rem;
+      text-align: center;
+      border: 1px solid #222;
+      transition: all 0.4s ease;
+    }
+    .cert-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 20px 50px var(--accent-glow);
+      border-color: #ff006e;
+    }
+    .cert-card h3 { font-size: 1.5rem; margin: 1rem 0; color: #ffdd00; }
+    .cert-card p { font-size: 1rem; color: #999; }
+
+    /* Notes Grid */
+    .albums-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 3rem;
+    }
+    .album {
+      display: block;
+      text-decoration: none;
+      border-radius: 28px;
+      overflow: hidden;
+      background: #111;
+      transition: all 0.5s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,.5);
+    }
+    .album:hover {
+      transform: translateY(-16px) scale(1.02);
+      box-shadow: 0 30px 80px var(--accent-glow);
+    }
+    .album-art {
+      height: 220px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .album-art::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,.8));
+    }
+    .album-info {
+      padding: 1.8rem;
+    }
+    .album-info h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+    .album-info p {
+      font-size: 1rem;
+      color: #ff006e;
+      font-weight: 500;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 5rem; }
+      .about-grid { grid-template-columns: 1fr; text-align: center; }
+      h2.section-title { font-size: 3rem; }
+    }
   </style>
 </head>
 <body>
+
   <div class="container">
-    <header>
-      <h1>dvphnc</h1>
-      <p>SyberVault • Cybersecurity Knowledge System</p>
+
+    <!-- Hero -->
+    <header class="hero">
+      <div>
+        <h1>dvphnc</h1>
+        <p>Cybersecurity Engineer & Penetration Tester</p>
+        <div class="subtitle">SyberVault • Personal Knowledge System</div>
+      </div>
     </header>
 
-    <div class="albums-grid" id="grid">
-      <!-- Albums injected by JS -->
-    </div>
+    <!-- About Me -->
+    <section id="about">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>I’m a <strong>passionate cybersecurity professional</strong> focused on offensive security, web application testing, and building unbreakable systems.</p>
+          <p>Red teamer by heart. Defender by logic. Always learning, always breaking, always documenting.</p>
+          <p>This vault contains everything I’ve mastered: from <strong>SQLi & XSS</strong> to <strong>cloud exploitation</strong>, <strong>cryptography</strong>, and real-world pentesting workflows.</p>
+          <p><strong>Currently:</strong> Hunting bugs • Writing tools • Teaching the next generation</p>
+        </div>
+        <div class="about-img">
+          <img src="covers/profile.jpg" alt="dvphnc">
+        </div>
+      </div>
+    </section>
+
+    <!-- Certifications -->
+    <section id="certs">
+      <h2 class="section-title">Certifications</h2>
+      <div class="certs">
+        <div class="cert-card">
+          <h3>eJPT</h3>
+          <p>eLearnSecurity Junior Penetration Tester</p>
+        </div>
+        <div class="cert-card">
+          <h3>OSCP (In Progress)</h3>
+          <p>Offensive Security Certified Professional</p>
+        </div>
+        <div class="cert-card">
+          <h3>Burp Suite Certified Practitioner</h3>
+          <p>PortSwigger Web Security Academy</p>
+        </div>
+        <div class="cert-card">
+          <h3>CompTIA Security+</h3>
+          <p>Certified • 2024</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Knowledge Vault -->
+    <section id="vault">
+      <h2 class="section-title">SyberVault</h2>
+      <div class="albums-grid" id="grid"></div>
+    </section>
+
   </div>
 
   <script>
