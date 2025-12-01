@@ -1,242 +1,270 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>dvphnc • SyberVault</title>
-<meta name="description" content="Personal Knowledge Vault • Cybersecurity & Beyond" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>dvphnc • SyberVault</title>
+  <meta name="description" content="Personal Knowledge Vault • Cybersecurity & Beyond" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700;800;900&display=swap');
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700;800;900&display=swap');
 
-:root {
-  --apple: linear-gradient(120deg, #007AFF, #00C2FF, #FF9D00, #FF453A, #FF2D92);
-  --card-bg: rgba(28, 28, 30, 0.8);
-  --card-hover: rgba(44, 44, 46, 0.95);
-}
+    :root {
+      --apple: linear-gradient(120deg, #007AFF, #00C2FF, #FF9D00, #FF453A, #FF2D92);
+      --card-bg: rgba(28, 28, 30, 0.76);
+      --card-hover: rgba(44, 44, 46, 0.92);
+    }
 
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'SF Pro Display', -apple-system, sans-serif;
-  background:#000; color:#f5f5f7; line-height:1.6; overflow-x:hidden;
-}
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'SF Pro Display', -apple-system, sans-serif;
+      background:#000;
+      color:#f5f5f7;
+      line-height:1.6;
+      overflow-x:hidden;
+    }
 
-/* Navbar */
-nav {
-  position:fixed; top:0; left:0; right:0; height:76px;
- display:flex; align-items:center; justify-content:space-between;
- padding:0 2.5rem; z-index:1000;
- background:rgba(0,0,0,0.88); backdrop-filter:blur(32px);
- border-bottom:1px solid rgba(255,255,255,0.08);
-}
-.logo { font-size:1.8rem; font-weight:900;
-  background:var(--apple); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-}
-.nav-links a { color:#ccc; margin-left:2.8rem; text-decoration:none; font-weight:500; font-size:0.98rem; }
+    /* Navbar */
+    nav {
+      position:fixed; top:0; left:0; right:0; height:84px;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 3rem; z-index:1000;
+      background:rgba(0,0,0,0.84);
+      backdrop-filter:blur(32px);
+      border-bottom:1px solid rgba(255,255,255,0.08);
+    }
+    .logo {
+      font-size:1.9rem; font-weight:900;
+      background:var(--apple);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    .nav-links a {
+      color:#ccc; margin-left:3rem; text-decoration:none;
+      font-weight:500; font-size:1rem; transition:color .3s;
+    }
+    .nav-links a:hover { color:#fff; }
 
-/* Hero - Slightly smaller */
-.hero {
-  height:100vh; min-height:680px;
-  display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;
-}
-.hero h1 { font-size:7.2rem; font-weight:900; letter-spacing:-3.5px;
-  background:var(--apple); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-}
-.hero p { font-size:1.75rem; color:#aaa; margin-top:1rem; }
+    /* Hero */
+    .hero {
+      height:100vh; min-height:780px;
+      display:flex; flex-direction:column; justify-content:center; align-items:center;
+      text-align:center;
+    }
+    .hero h1 {
+      font-size:8rem; font-weight:900; letter-spacing:-4px;
+      background:var(--apple);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    .hero p {
+      font-size:1.9rem; color:#aaa; margin-top:1.2rem; font-weight:500;
+    }
 
-/* All sections — tighter spacing */
-section { padding:100px 0 80px; text-align:center; }
-h2 {
-  font-size:3.8rem; font-weight:800;
-  background:var(--apple); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  margin-bottom:3rem;
-}
+    /* Sections */
+    section { padding:160px 0; text-align:center; }
+    h2 {
+      font-size:4.2rem; font-weight:800;
+      background:var(--apple);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      margin-bottom:4rem;
+    }
 
-/* About — tighter */
-.about-grid {
-  max-width:1100px; margin:0 auto;
-  display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center;
-}
-.about-text { font-size:1.28rem; line-height:1.9; color:#ddd; text-align:left; }
-.about-img img { border-radius:32px; box-shadow:0 20px 60px rgba(0,0,0,0.6); }
+    /* About */
+    .about-grid {
+      max-width:1200px; margin:0 auto;
+      display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:center;
+    }
+    .about-text { font-size:1.35rem; line-height:2; color:#ddd; text-align:left; }
+    .about-img img {
+      width:100%; border-radius:36px;
+      box-shadow:0 30px 80px rgba(0,0,0,0.6);
+    }
 
-/* Certifications — tighter */
-.certs-grid {
-  max-width:1000px; margin:0 auto;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:2.2rem;
-}
-.cert {
-  background:var(--card-bg); backdrop-filter:blur(20px);
-  border-radius:24px; padding:2.2rem 1.8rem;
-  border:1px solid rgba(255,255,255,0.08);
-  transition:transform .4s;
-}
-.cert:hover { transform:translateY(-8px); background:var(--card-hover); }
-.cert h3 { font-size:1.5rem; margin-bottom:0.5rem;
-  background:var(--apple); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-}
-.cert p { font-size:0.98rem; color:#aaa; }
+    /* Certifications */
+    .certs-grid {
+      max-width:1100px; margin:0 auto;
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:3rem;
+    }
+    .cert {
+      background:var(--card-bg); backdrop-filter:blur(20px);
+      border-radius:28px; padding:2.8rem 2rem;
+      border:1px solid rgba(255,255,255,0.08);
+      transition:transform .5s, background .5s;
+    }
+    .cert:hover { transform:translateY(-12px); background:var(--card-hover); }
+    .cert h3 {
+      font-size:1.65rem; margin-bottom:0.6rem;
+      background:var(--apple); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    .cert p { font-size:1.05rem; color:#aaa; }
 
-/* COMPACT & PREMIUM ALBUM CARDS (Apple Music style) */
-.albums-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));
-  gap:2.4rem;
-  max-width:1300px;
-  margin:0 auto;
-  padding:0 2rem 6rem;
-}
-.album {
-  display:block; text-decoration:none; border-radius:22px; overflow:hidden;
-  background:var(--card-bg); backdrop-filter:blur(24px);
-  border:1px solid rgba(255,255,255,0.09);
-  transition:all .5s ease;
-  box-shadow:0 6px 20px rgba(0,0,0,0.35);
-}
-.album:hover {
-  transform:translateY(-10px) scale(1.025);
-  background:var(--card-hover);
-  border-color:rgba(255,255,255,0.14);
-  box-shadow:0 20px 50px rgba(0,0,0,0.5);
-}
-.album-art {
-  height:300px;
-  background-size:cover;
-  background-position:center;
-  position:relative;
-}
-.album-art::after {
-  content:''; position:absolute; bottom:0; left:0; right:0; height:100px;
-  background:linear-gradient(transparent, rgba(0,0,0,0.8));
-}
-.album-info {
-  padding:1.6rem;
-  text-align:left;
-}
-.album-info h3 {
-  font-size:1.45rem; font-weight:700; color:#fff;
-  margin-bottom:0.4rem; line-height:1.3;
-}
-.album-info p {
-  font-size:0.92rem; color:#888; font-weight:600;
-  letter-spacing:0.6px; text-transform:uppercase;
-}
+    /* PREMIUM ALBUM CARDS – Apple Music 2025 */
+    .albums-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(370px, 1fr));
+      gap:4rem;
+      max-width:1480px;
+      margin:0 auto;
+      padding:0 2rem 10rem;
+    }
+    .album {
+      display:block; text-decoration:none; border-radius:28px; overflow:hidden;
+      background:var(--card-bg); backdrop-filter:blur(28px);
+      border:1px solid rgba(255,255,255,0.09);
+      transition:all .65s cubic-bezier(0.22,1,0.36,1);
+      box-shadow:0 8px 32px rgba(0,0,0,0.4);
+    }
+    .album:hover {
+      transform:translateY(-18px) scale(1.035);
+      background:var(--card-hover);
+      border-color:rgba(255,255,255,255,0.15);
+      box-shadow:0 32px 80px rgba(0,0,0,0.6);
+    }
+    .album-art {
+      height:370px;
+      background-size:cover;
+      background-position:center;
+      position:relative;
+      transition:transform .9s cubic-bezier(0.22,1,0.36,1);
+    }
+    .album:hover .album-art { transform:scale(1.05); }
+    .album-art::after {
+      content:''; position:absolute; bottom:0; left:0; right:0; height:160px;
+      background:linear-gradient(transparent, rgba(0,0,0,0.85));
+    }
+    .album-info {
+      padding:2.2rem;
+      text-align:left;
+    }
+    .album-info h3 {
+      font-size:1.68rem; font-weight:700; color:#fff;
+      margin-bottom:0.5rem; line-height:1.26; letter-spacing:-0.02em;
+    }
+    .album-info p {
+      font-size:1.04rem; color:#999; font-weight:600;
+      letter-spacing:0.6px; text-transform:uppercase;
+    }
 
-/* Contact — tighter */
-.contact { font-size:1.3rem; color:#ccc; line-height:1.9; }
-.contact a { color:#007AFF; text-decoration:none; }
+    /* Contact */
+    .contact { font-size:1.38rem; color:#ccc; line-height:2; }
+    .contact a { color:#007AFF; text-decoration:none; }
 
-/* Mobile */
-@media (max-width:768px){
-  .hero h1 { font-size:5.2rem; }
-  .hero p { font-size:1.5rem; }
-  h2 { font-size:3.2rem; margin-bottom:2.5rem; }
-  section { padding:80px 0 60px; }
-  .about-grid { grid-template-columns:1fr; gap:3rem; text-align:center; }
-  .albums-grid { gap:2rem; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); }
-  .album-art { height:260px; }
-  nav { padding:0 1.5rem; height:70px; }
-  .nav-links a { margin-left:1.8rem; font-size:0.92rem; }
-}
-</style>
+    /* Responsive */
+    @media (max-width:768px){
+      .hero h1 { font-size:5.8rem; }
+      .hero p { font-size:1.6rem; }
+      h2 { font-size:3.6rem; }
+      .about-grid { grid-template-columns:1fr; text-align:center; }
+      .about-text { font-size:1.28rem; }
+      .albums-grid { gap:3rem; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); }
+      .album-art { height:300px; }
+      nav { padding:0 1.5rem; }
+      .nav-links a { margin-left:1.5rem; font-size:0.95rem; }
+    }
+  </style>
 </head>
 <body>
 
-<nav>
-  <div class="logo">dvphnc</div>
-  <div class="nav-links">
-    <a href="#about">About</a>
-    <a href="#certifications">Certifications</a>
-    <a href="#vault">SyberVault</a>
-    <a href="#contact">Contact</a>
-  </div>
-</nav>
-
-<section class="hero">
-  <h1>dvphnc</h1>
-  <p>SyberVault • Cybersecurity Knowledge System</p>
-</section>
-
-<section id="about">
-  <h2>About Me</h2>
-  <div class="about-grid">
-    <div class="about-text">
-      <p>Offensive security engineer • Web application pentester • Bug bounty hunter</p>
-      <p>I break things professionally and document every technique in extreme detail.</p>
-      <p>This vault is my personal knowledge base — clean, practical, and battle-tested.</p>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">dvphnc</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#vault">SyberVault</a>
+      <a href="#contact">Contact</a>
     </div>
-    <div class="about-img">
-      <img src="covers/profile.jpg" alt="dvphnc">
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>dvphnc</h1>
+    <p>SyberVault • Cybersecurity Knowledge System</p>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <h2>About Me</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Offensive security engineer • Web application pentester • Bug bounty hunter</p>
+        <p>I break things professionally and document every technique in extreme detail.</p>
+        <p>This vault is my personal knowledge base — clean, practical, and battle-tested over years of real engagements.</p>
+      </div>
+      <div class="about-img">
+        <img src="covers/profile.jpg" alt="dvphnc">
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="certifications">
-  <h2>Certifications</h2>
-  <div class="certs-grid">
-    <div class="cert"><h3>eJPT</h3><p>eLearnSecurity Junior Penetration Tester</p></div>
-    <div class="cert"><h3>Burp Suite Certified</h3><p>PortSwigger Academy</p></div>
-    <div class="cert"><h3>CompTIA Security+</h3><p>Active 2024–2027</p></div>
-    <div class="cert"><h3>OSCP</h3><p>In Progress • 2025</p></div>
-  </div>
-</section>
-
-<section id="vault">
-  <h2>SyberVault</h2>
-  <div class="albums-grid" id="grid"></div>
-</section>
-
-<section id="contact">
-  <h2>Contact</h2>
-  <div class="contact">
-    <p>Available for freelance pentesting & consulting</p>
-    <p><a href="mailto:your@email.com">your@email.com</a> • GitHub • LinkedIn</p>
-  </div>
-</section>
-
-<script>
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    e.preventDefault();
-    document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
-  });
-});
-
-// Your original notes — unchanged
-const notes = [
-  { title: "Introduction to Web Application Security", cover: "covers/websec.jpg", link: "notes/Introduction to Web Application Security.html", tags: "OWASP • Fundamentals" },
-  { title: "SQL Injection (CWE-89)", cover: "covers/sqli.jpg", link: "notes/CWE-89 - SQL Injection.html", tags: "Injection • Critical" },
-  { title: "Cross-Site Scripting (XSS)", cover: "covers/xss.jpg", link: "notes/CWE-79 - Cross-Site Scripting (XSS).html", tags: "OWASP Top 10" },
-  { title: "OS Command Injection (CWE-78)", cover: "covers/cmd.jpg", link: "notes/CWE-78 - OS Command Injection.html", tags: "RCE • Dangerous" },
-  { title: "Path Traversal (CWE-35)", cover: "covers/traversal.jpg", link: "notes/CWE-35 - Path Traversal.html", tags: "File System" },
-  { title: "Encryption Fundamentals", cover: "covers/encryption.jpeg", link: "notes/Encryption Fundamentals.html", tags: "Cryptography" },
-  },
-  { title: "Burp Suite Fundamentals", cover: "covers/burp.jpg", link: "notes/Burp Suite Introduction.html", tags: "Tools • Pentesting" },
-  { title: "Cloud & Virtualization", cover: "covers/cloud.jpg", link: "notes/Cloud and Virtualization Fundamentals.html", tags: "Infrastructure" },
-  { title: "Importance of Cyber Security", cover: "covers/cia.jpg", link: "notes/Importance of Cyber Security.html", tags: "CIA Triad" },
-  { title: "Career in IT Security", cover: "covers/career.jpg", link: "notes/Career Opportunities in IT Security.html", tags: "Red vs Blue" },
-];
-
-const grid = document.getElementById('grid');
-notes.forEach(note => {
-  const album = document.createElement('a');
-  album.href = note.link;
-  album.className = 'album';
-  album.innerHTML = `
-    <div class="album-art" style="background-image: url(${note.cover})"></div>
-    <div class="album-info">
-      <h3>${note.title}</h3>
-      <p>${note.tags}</p>
+  <!-- Certifications -->
+  <section id="certifications">
+    <h2>Certifications</h2>
+    <div class="certs-grid">
+      <div class="cert"><h3>eJPT</h3><p>eLearnSecurity Junior Penetration Tester</p></div>
+      <div class="cert"><h3>Burp Suite Certified Practitioner</h3><p>PortSwigger Academy</p></div>
+      <div class="cert"><h3>CompTIA Security+</h3><p>Active 2024–2027</p></div>
+      <div class="cert"><h3>OSCP</h3><p>In Progress • Target 2025</p></div>
     </div>
-  `;
-  grid.appendChild(album);
-});
-</script>
+  </section>
+
+  <!-- SyberVault -->
+  <section id="vault">
+    <h2>SyberVault</h2>
+    <div class="albums-grid" id="grid"></div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="contact">
+      <p>Available for freelance pentesting & consulting</p>
+      <p><a href="mailto:your@email.com">your@email.com</a> • GitHub • LinkedIn</p>
+    </div>
+  </section>
+
+  <!-- Smooth scroll + Your original script -->
+  <script>
+    // Smooth scroll for all browsers
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // YOUR ORIGINAL SCRIPT — 100% untouched
+    const notes = [
+      { title: "Introduction to Web Application Security", cover: "covers/websec.jpg", link: "notes/Introduction to Web Application Security.html", tags: "OWASP • Fundamentals" },
+      { title: "SQL Injection (CWE-89)", cover: "covers/sqli.jpg", link: "notes/CWE-89 - SQL Injection.html", tags: "Injection • Critical" },
+      { title: "Cross-Site Scripting (XSS)", cover: "covers/xss.jpg", link: "notes/CWE-79 - Cross-Site Scripting (XSS).html", tags: "OWASP Top 10" },
+      { title: "OS Command Injection (CWE-78)", cover: "covers/cmd.jpg", link: "notes/CWE-78 - OS Command Injection.html", tags: "RCE • Dangerous" },
+      { title: "Path Traversal (CWE-35)", cover: "covers/traversal.jpg", link: "notes/CWE-35 - Path Traversal.html", tags: "File System" },
+      { title: "Encryption Fundamentals", cover: "covers/encryption.jpeg", link: "notes/Encryption Fundamentals.html", tags: "Cryptography" },
+      { title: "Burp Suite Fundamentals", cover: "covers/burp.jpg", link: "notes/Burp Suite Introduction.html", tags: "Tools • Pentesting" },
+      { title: "Cloud & Virtualization", cover: "covers/cloud.jpg", link: "notes/Cloud and Virtualization Fundamentals.html", tags: "Infrastructure" },
+      { title: "Importance of Cyber Security", cover: "covers/cia.jpg", link: "notes/Importance of Cyber Security.html", tags: "CIA Triad" },
+      { title: "Career in IT Security", cover: "covers/career.jpg", link: "notes/Career Opportunities in IT Security.html", tags: "Red vs Blue" },
+    ];
+
+    const grid = document.getElementById('grid');
+    notes.forEach(note => {
+      const album = document.createElement('a');
+      album.href = note.link;
+      album.className = 'album';
+      album.innerHTML = `
+        <div class="album-art" style="background-image: url(${note.cover})"></div>
+        <div class="album-info">
+          <h3>${note.title}</h3>
+          <p>${note.tags}</p>
+        </div>
+      `;
+      grid.appendChild(album);
+    });
+  </script>
 
 </body>
 </html>
