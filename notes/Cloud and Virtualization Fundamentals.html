@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cloud & Virtualization Fundamentals • dvphnc SyberVault</title>
-  <meta name="description" content="From bare metal to infinite scale — how the modern internet actually works">
+  <meta name="description" content="The invisible infrastructure that powers the modern internet">
   <style>
     :root{--grad:linear-gradient(120deg,#00d2d3,#00b4d8,#48cae4,#0077b6,#00d2d3);}
     body{margin:0;background:#000;color:#f5f5f7;font-family:-apple-system,'SF Pro Display',sans-serif;line-height:1.8;font-size:1.18rem;}
@@ -16,12 +16,11 @@
     .cover{max-width:780px;margin:6rem auto;border-radius:38px;overflow:hidden;box-shadow:0 70px 160px rgba(0,210,211,.45);}
     .cover img{width:100%;display:block;}
     h2{font-size:3.6rem;margin:8rem 0 3rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-    p{margin:2rem 0;color:#e8e8e8;}
+    p,li{margin:2rem 0;color:#e8e8e8;}
     ul{padding-left:2.6rem;margin:3rem 0;}
     li{margin:1.6rem 0;font-size:1.3rem;}
     strong{color:#a0f7f8;}
 
-    /* AURORA-LEVEL CINEMATIC QUOTE */
     .cinematic-quote{
       position:relative;margin:22rem 0;padding:20rem 3rem;text-align:center;
       background:radial-gradient(circle at center,rgba(0,210,211,.32) 0%,transparent 65%);
@@ -40,8 +39,8 @@
       animation:aurora 11s infinite alternate;
     }
     @keyframes aurora{
-      from{opacity:.16;transform:scale(1) rotate(0deg);}
-      to{opacity:.30;transform:scale(1.25) rotate(3deg);}
+      from{opacity:.16;transform:scale(1);}
+      to{opacity:.30;transform:scale(1.25);}
     }
     .quote-marks{font-size:32rem;font-weight:100;opacity:.08;position:absolute;pointer-events:none;line-height:1;}
     .quote-marks.left{top:-8rem;left:-4rem;}
@@ -56,7 +55,7 @@
 
     <header>
       <h1>Cloud &<br>Virtualization</h1>
-      <p class="subtitle">Where the modern internet actually lives</p>
+      <p class="subtitle">The invisible foundation of the modern internet</p>
     </header>
 
     <picture class="cover">
@@ -65,46 +64,43 @@
 
     <article>
 
-      <p>The <strong>cloud</strong> refers to a network of servers that provide storage, software, and computing resources over the internet. Instead of owning hardware, users rent computing power — gaining flexibility, scalability, and cost efficiency at planetary scale.</p>
+      <p>The <strong>cloud</strong> refers to a network of servers that provide storage, software, and computing resources over the internet. Instead of owning hardware, users rent computing resources, gaining flexibility and scalability while reducing infrastructure costs.</p>
 
       <h2>Virtualization</h2>
-      <p><strong>Virtualization</strong> enables multiple operating systems to run on a single physical machine using a <em>hypervisor</em>. The hypervisor intelligently allocates CPU, memory, and storage to each <em>virtual machine (VM)</em>, creating fully isolated environments that behave like dedicated servers.</p>
-      <p>This is the magic that makes the cloud possible.</p>
+      <p><strong>Virtualization</strong> enables multiple operating systems to run on a single physical machine using a <em>hypervisor</em>. The hypervisor allocates CPU, memory, and storage resources to each <em>virtual machine (VM)</em>, creating isolated environments that operate independently. This improves resource efficiency and system management.</p>
 
       <h2>Cloud Storage</h2>
-      <p><em>Cloud storage</em> allows data to be stored and accessed remotely through the internet. Documents, backups, container images, and entire databases live in distributed data centers — available anywhere, resilient to hardware failure, and infinitely scalable.</p>
+      <p><em>Cloud storage</em> allows data to be stored and accessed remotely through the internet. It supports documents, backups, and system images, ensuring availability and reducing reliance on local storage devices.</p>
 
       <h2>Deployment Models</h2>
       <ul>
-        <li><strong>Public Cloud</strong> — Shared infrastructure (AWS, Azure, GCP)</li>
-        <li><strong>Private Cloud</strong> — Dedicated to one organization, maximum control</li>
-        <li><strong>Hybrid Cloud</strong> — Best of both worlds: burst to public when needed, keep sensitive data private</li>
+        <li><strong>Public Cloud:</strong> Shared resources available to multiple users (e.g., AWS, Azure, Google Cloud).</li>
+        <li><strong>Private Cloud:</strong> Dedicated infrastructure for a single organization with greater control and privacy.</li>
+        <li><strong>Hybrid Cloud:</strong> Combines public and private clouds for balanced flexibility, control, and cost efficiency.</li>
       </ul>
 
       <h2>Cloud Access Security Broker (CASB)</h2>
-      <p>A <strong>CASB</strong> sits between users and cloud services to:</p>
+      <p>A CASB operates between users and cloud services to:</p>
       <ul>
-        <li>Monitor all data movement</li>
+        <li>Monitor data movement</li>
         <li>Enforce security policies</li>
-        <li>Detect shadow IT and threats</li>
-        <li>Ensure regulatory compliance</li>
+        <li>Detect and mitigate threats</li>
+        <li>Ensure compliance with standards</li>
       </ul>
-      <p>It’s the invisible guardian of the cloud era.</p>
+      <p>It strengthens cloud environments by providing visibility and control over data usage.</p>
 
-      <!-- AURORA CINEMATIC QUOTE — PURE MAGIC -->
+      <!-- YOUR ORIGINAL QUOTE — NOW CINEMATIC -->
       <div class="cinematic-quote">
         <div class="quote-glow"></div>
         <div class="quote-marks left">“</div>
         <div class="quote-marks right">”</div>
         <div class="quote-text">
-          Though the term “cloud”<br>
-          sounds abstract,<br><br>
-          it represents<br>
-          the most complex,<br>
-          most resilient,<br>
-          and most secure<br>
-          infrastructure<br>
-          humanity has ever built.
+          Though the term “cloud” sounds abstract,<br>
+          it represents complex infrastructures<br>
+          powered by virtualization<br>
+          and secured by layered defenses.<br><br>
+          Together, they make modern computing<br>
+          flexible, efficient, and secure.
         </div>
       </div>
 
