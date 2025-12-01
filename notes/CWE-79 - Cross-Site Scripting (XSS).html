@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>⚔️ Cross-Site Scripting (XSS) • dvphnc SyberVault</title>
+  <title>Cross-Site Scripting (XSS) • dvphnc SyberVault</title>
   <meta name="description" content="The most common and dangerous web vulnerability">
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -15,39 +15,48 @@
     .container{max-width:880px;margin:0 auto;padding:2rem 1.5rem;}
     .back{position:fixed;top:2.5rem;left:2.5rem;color:#ba68c8;text-decoration:none;font-weight:600;font-size:1.1rem;z-index:100;opacity:0;}
 
-    header{text-align:center;padding:9rem 0 6rem;}
-    h1{font-size:6.6rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1;margin-bottom:1.8rem;opacity:0;transform:translateY(60px);}
-    .subtitle{font-size:1.9rem;color:#e0407a;opacity:0;transform:translateY(40px);}
-    .cover{max-width:780px;margin:7rem auto;border-radius:38px;overflow:hidden;box-shadow:0 70px 160px rgba(156,39,176,.5);opacity:0;transform:scale(0.94);}
+    header{text-align:center;padding:7rem 0 4rem;}
+    h1{font-size:6.2rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1;margin-bottom:1.4rem;opacity:0;transform:translateY(60px);}
+    .subtitle{font-size:1.8rem;color:#e0407a;opacity:0;transform:translateY(40px);}
+    .cover{max-width:720px;margin:4rem auto;border-radius:36px;overflow:hidden;box-shadow:0 60px 140px rgba(156,39,176,.45);opacity:0;transform:scale(0.94);}
     .cover img{width:100%;display:block;}
-    h2{font-size:3.6rem;margin:9rem 0 3rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:0;transform:translateY(50px);}
-    p{margin:2rem 0;opacity:0;transform:translateY(30px);}
+    
+    h2{font-size:3.2rem;margin:4.5rem 0 2rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:0;transform:translateY(50px);}
+    p{margin:1.6rem 0;opacity:0;transform:translateY(30px);}
     strong{color:#e1bee7;}
 
-    table{width:100%;border-collapse:collapse;margin:4rem 0;background:#1a0a1a;border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(156,39,176,.3);}
-    th,td{padding:1.6rem 2rem;text-align:left;border-bottom:1px solid #333;}
-    th{background:#2a0a2a;color:#ba68c8;font-weight:700;font-size:1.1rem;}
+    table{width:100%;border-collapse:collapse;margin:2.8rem 0;background:#1a0a1a;border-radius:22px;overflow:hidden;box-shadow:0 16px 50px rgba(156,39,176,.25);}
+    th,td{padding:1.4rem 1.8rem;text-align:left;border-bottom:1px solid #333;}
+    th{background:#2a0a2a;color:#ba68c8;font-weight:700;font-size:1.05rem;}
     td{color:#ddd;vertical-align:top;}
 
-    ul{padding-left:2.6rem;margin:3rem 0;opacity:0;transform:translateY(30px);}
-    li{margin:1.6rem 0;font-size:1.3rem;opacity:0;transform:translateY(20px);}
+    ul{padding-left:2.4rem;margin:2.4rem 0;opacity:0;transform:translateY(30px);}
+    li{margin:1.2rem 0;font-size:1.26rem;opacity:0;transform:translateY(20px);}
 
+    /* Tight, elegant quote — no wasted space */
     .cinematic-quote{
-      margin:18rem 0 14rem;padding:8rem 3rem;text-align:center;position:relative;
+      margin:9rem 0 7rem;
+      padding:5rem 2.5rem;
+      text-align:center;
+      position:relative;
       background:radial-gradient(circle at center,rgba(156,39,176,.22) 0%,transparent 70%);
-      border-radius:32px;overflow:hidden;opacity:0;transform:translateY(60px);
+      border:radial-gradient;
+      border-radius:28px;
+      overflow:hidden;
+      opacity:0;
+      transform:translateY(60px);
     }
     .cinematic-quote::before{
-      content:'';position:absolute;inset:0;background:var(--grad);opacity:.14;filter:blur(120px);
+      content:'';position:absolute;inset:0;background:var(--grad);opacity:.14;filter:blur(100px);
     }
     .quote-text{
-      position:relative;font-size:2.8rem;font-weight:700;line-height:1.5;
+      position:relative;font-size:2.6rem;font-weight:700;line-height:1.48;
       background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
       text-shadow:0 0 60px rgba(156,39,176,.7);
     }
-    .quote-marks{font-size:12rem;font-weight:100;opacity:.08;position:absolute;pointer-events:none;line-height:1;}
-    .quote-marks.left{top:-2rem;left:-1rem;}
-    .quote-marks.right{bottom:-3rem;right:-1rem;transform:scaleX(-1);}
+    .quote-marks{font-size:10rem;font-weight:100;opacity:.09;position:absolute;pointer-events:none;line-height:1;}
+    .quote-marks.left{top:-1.5rem;left:-1rem;}
+    .quote-marks.right{bottom:-2.5rem;right:-1rem;transform:scaleX(-1);}
   </style>
 </head>
 <body>
@@ -67,17 +76,17 @@
 
     <article>
 
-      <p><strong>Cross-Site Scripting</strong> is a web security vulnerability that allows an attacker to <strong>compromise user interactions</strong> with a vulnerable web application.
+      <p>A <strong>web security vulnerability</strong> that allows an attacker to <strong>compromise user interactions</strong> with a vulnerable web application.<br>
       It happens due to <strong>improper neutralization of user input</strong> that gets rendered in a web page.<br>
-     
-
+      <strong>CWE-79:</strong> Improper Neutralization of Input During Web Page Generation (‘Cross-site Scripting’).<br>
+      <strong>Goal:</strong> Circumvent the <strong>Same-Origin Policy</strong>.</p>
 
       <h2>How Does XSS Work?</h2>
       <p>XSS occurs when:</p>
       <ul>
         <li>User input is included in web pages <strong>without proper validation or encoding</strong>.</li>
         <li>Attackers inject <strong>malicious scripts (usually JavaScript)</strong> that execute in the victim’s browser.</li>
-        <li>The browser <strong>trusts час</strong> the script because it appears to come from the legitimate site.</li>
+        <li>The browser <strong>trusts</strong> the script because it appears to come from the legitimate site.</li>
       </ul>
 
       <h2>Types of XSS Attacks</h2>
@@ -137,21 +146,19 @@
     gsap.registerPlugin(ScrollTrigger);
     gsap.to(".back", {opacity:1, duration:1, delay:0.6});
 
-    // Main content
     gsap.utils.toArray("h1, .subtitle, .cover, h2, p, table, .cinematic-quote").forEach(el => {
       gsap.to(el, {opacity:1, y:0, duration:1.4, ease:"power3.out",
-        scrollTrigger:{trigger:el, start:"top 82%", toggleActions:"play none none reverse"}
+        scrollTrigger:{trigger:el, start:"top 84%", toggleActions:"play none none reverse"}
       });
     });
 
-    // Bullet-proof list animation
     document.querySelectorAll("ul").forEach(ul => {
       gsap.to(ul, {opacity:1, y:0, duration:1, ease:"power3.out",
-        scrollTrigger:{trigger:ul, start:"top 82%"}
+        scrollTrigger:{trigger:ul, start:"top 84%"}
       });
       gsap.to(ul.querySelectorAll("li"), {
-        opacity:1, y:0, duration:0.8, stagger:0.15, ease:"power2.out",
-        scrollTrigger:{trigger:ul, start:"top 82%"}
+        opacity:1, y:0, duration:0.8, stagger:0.14, ease:"power2.out",
+        scrollTrigger:{trigger:ul, start:"top 84%"}
       });
     });
   </script>
