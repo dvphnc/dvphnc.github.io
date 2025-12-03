@@ -11,7 +11,7 @@
 
   <style>
     :root {
-      --grad: linear-gradient(120deg, #1e3a8a, #4338ca, #6d28d9, #7c3aed, #5b21b6);
+      --grad: linear-gradient(120deg,#1e3a8a,#4338ca,#6d28d9,#7c3aed,#4338ca,#1e3a8a);
       --accent: #818cf8;
     }
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -65,6 +65,15 @@
       font-family: 'SF Mono', monospace; color: #a78bfa;
     }
 
+    table {
+      width: 100%; border-collapse: collapse; margin: 2.2rem 0;
+      background: rgba(15,10,26,0.7); border-radius: 20px; overflow: hidden;
+      box-shadow: 0 20px 60px rgba(124,60,174,0.3);
+    }
+    th, td { padding: 1.4rem 1.8rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    th { background: rgba(124,60,174,0.5); color: #fff; font-weight: 700; }
+    td { color: #ddd; }
+
     ul { padding-left: 2.8rem; margin: 2rem 0; }
     li { margin: 1rem 0; font-size: 1.32rem; color: #d8c4ff; }
     li::marker { color: var(--accent); font-size: 1.4em; }
@@ -114,30 +123,40 @@
 
     <article>
       <p data-aos="fade-up">
-        <em>Path Traversal</em> allows attackers to access files and directories <strong>outside the intended web root</strong> by manipulating file path parameters — often using <code>../</code> sequences.
+        <em>Directory Traversal</em> (aka Path Traversal) is a vulnerability that allows an attacker to access files and directories <strong>outside the intended application directory</strong> by manipulating file path input. Exploits often use traversal sequences (e.g., <code>../</code>) or encoded variants to reach sensitive filesystem locations.
       </p>
 
-      <h2 data-aos="fade-up">How It Works</h2>
+      <h2 data-aos="fade-up">File System</h2>
       <p data-aos="fade-up">
-        The application uses unvalidated user input directly in filesystem paths → attacker crafts <code>../../etc/passwd</code> → server happily serves restricted files.
+        A <strong>file system</strong> is the operating system component that organizes and stores files and directories on persistent storage. Web applications interact with the file system to read or write resources (pages, uploads, config files). Improper handling of file paths can expose the underlying file system to attacker control.
       </p>
 
-      <h2 data-aos="fade-up">Deadly Consequences</h2>
+      <h2 data-aos="fade-up">Directory Traversal Attacks</h2>
+      <p data-aos="fade-up">
+        <strong>Directory Traversal Attacks</strong> occur when an application accepts a path or filename from an external source and fails to properly validate or normalize it. The attacker crafts input to traverse directories (e.g., <code>../../etc/passwd</code>) and access files outside the web root or allowed directories.
+      </p>
+
+      <h2 data-aos="fade-up">Consequences of Directory Traversal</h2>
       <ul data-aos="fade-up">
-        <li>Read <code>/etc/passwd</code>, config files, source code</li>
-        <li>Steal database credentials</li>
-        <li>Enable further compromise & privilege escalation</li>
-        <li>If write access exists → full server takeover</li>
+        <li><strong>Unauthorized Access to Sensitive Information</strong><br>Attackers can read confidential files outside the web root (e.g., system config, <code>/etc/passwd</code>, database credentials, source code), causing data breaches and privacy violations.</li>
+        <li><strong>Modification or Deletion of Files</strong><br>If write access is possible, attackers may modify or delete critical files, causing service disruption, data loss, and financial or operational damage.</li>
+        <li><strong>Further System Compromise</strong><br>Access to sensitive files can reveal server architecture, credentials, and configurations that facilitate privilege escalation or lateral movement.</li>
+        <li><strong>Information Disclosure & Reconnaissance</strong><br>Even read-only access can provide valuable intelligence for subsequent attacks (paths, versions, error messages).</li>
       </ul>
 
-      <h2 data-aos="fade-up">Traversal Techniques (Bypass Arsenal)</h2>
+      <h2 data-aos="fade-up">Directory Traversal Techniques</h2>
       <ul data-aos="fade-up">
-        <li><code>../../etc/passwd</code></li>
-        <li><code>%2e%2e%2f%2e%2e%2fetc%2fpasswd</code> (URL encoding)</li>
-        <li><code>%252e%252e%252f</code> (double encoding)</li>
-        <li><code>....//....//etc/passwd</code> (filter evasion)</li>
-        <li><code>..%00/</code> (null byte — legacy systems)</li>
+        <li><strong>Simple Dot-Dot-Slash (<code>../</code>)</strong> — basic upward traversal.</li>
+        <li><strong>Path Separator Variations (<code>/</code>, <code>\</code>)</strong> — platform-specific separators.</li>
+        <li><strong>Percent-Encoding (<code>%2e%2e%2f</code>)</strong> — URL-encoded traversal.</li>
+        <li><strong>Double Encoding (<code>%252e%252e%252f</code>)</strong> — encoder confusion bypass.</li>
+        <li><strong>Unicode Encoding (<code>%u002e%u002e%u002f</code>)</strong> — Unicode-encoded traversal.</li>
+        <li><strong>Mangled Paths (<code>....//...</code>)</strong> — path normalization tricks.</li>
+        <li><strong>NULL Byte Injection (<code>%00</code>)</strong> — terminating strings in some legacy APIs.</li>
       </ul>
+      <p data-aos="fade-up">
+        <em>Attackers chain these techniques to bypass naive filters and normalization routines.</em>
+      </p>
 
       <div class="cinematic-quote" data-aos="fade-up">
         <div class="quote-marks left">“</div>
@@ -152,32 +171,39 @@
         </div>
       </div>
 
-      <h2 data-aos="fade-up">Prevention — Lock It Down</h2>
+      <h2 data-aos="fade-up">Preventing Directory Traversal</h2>
       <ul data-aos="fade-up">
-        <li><strong>Never trust user input in file paths</strong></li>
-        <li>Use <strong>allowlists</strong> (e.g., map IDs → real files)</li>
-        <li>Normalize + validate: resolve <code>..</code> then check if path starts with base directory</li>
-        <li>Run app with <strong>least privilege</strong></li>
-        <li>Chroot / containerize if possible</li>
-        <li>Decode input before validation</li>
+        <li><strong>Validate and Sanitize User Input (Allowlist)</strong><br>Use an <em>accept-known-good</em> strategy: only permit specific filenames/IDs and reject everything else.</li>
+        <li><strong>Use Allow Lists for File Access</strong><br>Map user-provided identifiers to pre-approved files or directories rather than using raw paths.</li>
+        <li><strong>Avoid Using User Input Directly in File Paths</strong><br>Construct paths programmatically from safe components; do not concatenate unchecked user data.</li>
+        <li><strong>Path Normalization Functions</strong><br>Use built-in path normalization APIs (e.g., <code>realpath</code>, <code>Path.resolve</code>) to resolve <code>.</code>/<code>..</code> sequences then verify the resolved path is inside an allowed directory.</li>
+        <li><strong>Access Control & Least Privilege</strong><br>Ensure the application runs with minimal permissions and restrict which files the process can read/write.</li>
+        <li><strong>Isolate Execution Environments</strong><br>Run the application in a confined environment (chroot, containers, restricted mounts) to limit what an attacker can access.</li>
+        <li><strong>Reject Encoded/Alternate Representations</strong><br>Normalize and decode inputs before validation to catch encoded traversal attempts.</li>
       </ul>
 
-      <h2 data-aos="fade-up">Testing Tools</h2>
+      <h2 data-aos="fade-up">Directory Traversal Tools (for testing & assessment)</h2>
       <ul data-aos="fade-up">
-        <li>Burp Suite (Intruder + payloads)</li>
-        <li>OWASP ZAP</li>
-        <li>DotDotPwn (dedicated traversal fuzzer)</li>
-        <li>DirBuster / ffuf</li>
+        <li><strong>Burp Suite</strong> — web testing platform with scanning and manual testing features.</li>
+        <li><strong>OWASP ZAP</strong> — open-source scanner for automated detection.</li>
+        <li><strong>Nikto</strong> — web server scanner that checks for dangerous files and misconfigurations.</li>
+        <li><strong>DotDotPwn</strong> — tool specifically designed to test directory traversal payloads.</li>
+        <li><strong>Metasploit</strong> — penetration testing framework with modules for traversal exploits.</li>
+        <li><strong>DirBuster / Dirsearch</strong> — brute-forcing tools to discover hidden directories and files.</li>
       </ul>
-
-      <h2 data-aos="fade-up">Final Word</h2>
       <p data-aos="fade-up">
-        Path Traversal isn’t loud. It doesn’t crash servers.<br>
-        It just <strong>quietly walks past your defenses</strong> and reads everything you tried to hide.
+        <em>Use these tools responsibly for authorized testing only.</em>
       </p>
-      <p data-aos="fade-up" style="text-align:center;font-weight:700;color:#c4b5fd;">
-        Validate. Normalize. Contain.<br>
-        Or the filesystem becomes public.
+
+      <h2 data-aos="fade-up">Summary / Conclusion</h2>
+      <p data-aos="fade-up">
+        <strong>CWE-35 Path Traversal</strong> enables attackers to break directory boundaries and access unintended filesystem resources.
+      </p>
+      <p data-aos="fade-up">
+        Mitigation centers on <strong>strict input allowlisting, path normalization + verification, least privilege, and environment isolation</strong>.
+      </p>
+      <p data-aos="fade-up">
+        Regular testing with vetted tools and secure coding practices reduce the risk and impact of traversal vulnerabilities.
       </p>
     </article>
   </div>
