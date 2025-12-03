@@ -5,163 +5,194 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SQL Injection • dvphnc SyberVault</title>
   <meta name="description" content="The crown jewel of web vulnerabilities">
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
   <style>
-    :root{--grad:linear-gradient(120deg,#4a00e0,#8e2de2,#b026ff,#d946ef,#4a00e0);}
-    body{margin:0;background:#000;color:#f5f5f7;font-family:-apple-system,'SF Pro Display',sans-serif;line-height:1.8;font-size:1.18rem;overflow-x:hidden;}
-    .container{max-width:880px;margin:0 auto;padding:2rem 1.5rem;}
-    .back{position:fixed;top:2.5rem;left:2.5rem;color:#b026ff;text-decoration:none;font-weight:600;font-size:1.1rem;z-index:100;opacity:0;}
-
-    header{text-align:center;padding:7rem 0 4rem;}
-    h1{font-size:6.2rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1;margin-bottom:1.4rem;opacity:0;transform:translateY(60px);}
-    .subtitle{font-size:1.8rem;color:#d946ef;opacity:0;transform:translateY(40px);}
-    .cover{max-width:720px;margin:4rem auto;border-radius:36px;overflow:hidden;box-shadow:0 60px 140px rgba(176,38,255,.45);opacity:0;transform:scale(0.94);}
-    .cover img{width:100%;display:block;}
-    
-    h2{font-size:3.2rem;margin:4.5rem 0 2rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:0;transform:translateY(50px);}
-    h3{font-size:2.1rem;margin:3.5rem 0 1.8rem;color:#d946ef;opacity:0;transform:translateY(30px);}
-    p{margin:1.6rem 0;opacity:0;transform:translateY(30px);}
-    strong{color:#e1bee7;}
-
-    pre{background:#1a001a;padding:1.8rem;border-radius:18px;overflow-x:auto;margin:2rem 0;
-        box-shadow:0 12px 40px rgba(176,38,255,.35);border:1px solid #4a148c;}
-    pre code{color:#d946ef;font-family:'SF Mono',monospace;font-size:1rem;line-height:1.6;}
-
-    table{width:100%;border-collapse:collapse;margin:2.8rem 0;background:#1a0a1a;border-radius:22px;overflow:hidden;box-shadow:0 16px 50px rgba(176,38,255,.3);}
-    th,td{padding:1.4rem 1.8rem;text-align:left;border-bottom:1px solid #333;}
-    th{background:#2a0a2a;color:#b026ff;font-weight:700;font-size:1.05rem;}
-    td{color:#ddd;vertical-align:top;}
-
-    ul{padding-left:2.4rem;margin:2.4rem 0;opacity:0;transform:translateY(30px);}
-    li{margin:1.2rem 0;font-size:1.26rem;opacity:0;transform:translateY(20px);}
-
-    .cinematic-quote{
-      margin:9rem 0 7rem;padding:5rem 2.5rem;text-align:center;position:relative;
-      background:radial-gradient(circle at center,rgba(176,38,255,.25) 0%,transparent 70%);
-      border-radius:28px;overflow:hidden;opacity:0;transform:translateY(60px);
+    :root {
+      --grad: linear-gradient(120deg, #4a00e0, #8e2de2, #b026ff, #d946ef, #9d4edd);
+      --accent: #b026ff;
     }
-    .cinematic-quote::before{
-      content:'';position:absolute;inset:0;background:var(--grad);opacity:.16;filter:blur(100px);
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'SF Pro Display', -apple-system, sans-serif;
+      background: #000;
+      color: #f0f0ff;
+      line-height: 1.9;
+      font-size: 1.25rem;
+      overflow-x: hidden;
     }
-    .quote-text{
-      position:relative;font-size:2.6rem;font-weight:700;line-height:1.48;
-      background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
-      text-shadow:0 0 70px rgba(176,38,255,.9);
+    .container { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    .back {
+      position: fixed; top: 2.5rem; left: 2.5rem; z-index: 1000;
+      color: var(--accent); text-decoration: none; font-weight: 600; font-size: 1.15rem;
+      background: rgba(176,38,255,0.15); padding: 0.8rem 1.6rem; border-radius: 20px;
+      backdrop-filter: blur(12px); border: 1px solid rgba(176,38,255,0.3);
+      opacity: 0; transition: all 0.4s;
     }
-    .quote-marks{font-size:10rem;font-weight:100;opacity:.09;position:absolute;pointer-events:none;line-height:1;}
-    .quote-marks.left{top:-1.5rem;left:-1rem;}
-    .quote-marks.right{bottom:-2.5rem;right:-1rem;transform:scaleX(-1);}
+    .back:hover { background: rgba(176,38,255,0.25); transform: translateY(-4px); }
+
+    header { text-align: center; padding: 8rem 0 4rem; }
+    h1 {
+      font-size: 7.2rem; font-weight: 900; line-height: 1.1; letter-spacing: -3px;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .subtitle { font-size: 2.1rem; color: #d946ef; margin-top: 1rem; font-weight: 500; }
+
+    .cover {
+      max-width: 820px; margin: 4rem auto;
+      border-radius: 42px; overflow: hidden;
+      box-shadow: 0 80px 180px rgba(176,38,255,0.4);
+      border: 2px solid rgba(176,38,255,0.25);
+    }
+    .cover img { width: 100%; display: block; transition: transform 1.2s ease; }
+    .cover:hover img { transform: scale(1.06); }
+
+    h2 {
+      font-size: 4.2rem; font-weight: 800; text-align: center;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin: 5rem 0 2rem;
+    }
+    h3 {
+      font-size: 2.4rem; font-weight: 700; color: #e0aaff;
+      margin: 4rem 0 1.6rem;
+    }
+    p {
+      margin: 1.4rem 0;
+      color: #e0d0ff; font-size: 1.3rem;
+    }
+    strong { color: #e1bee7; font-weight: 700; }
+    code { background: rgba(176,38,255,0.15); padding: 0.2rem 0.6rem; border-radius: 8px; font-family: 'SF Mono', monospace; }
+
+    pre {
+      background: #1a001a; padding: 2rem; border-radius: 20px; overflow-x: auto;
+      margin: 2rem 0; border: 1px solid rgba(176,38,255,0.3);
+      box-shadow: 0 20px 60px rgba(176,38,255,0.3);
+    }
+    pre code { color: #d946ef; font-size: 1.05rem; }
+
+    table {
+      width: 100%; border-collapse: collapse; margin: 2.2rem 0;
+      background: rgba(26,0,26,0.6); border-radius: 20px; overflow: hidden;
+      box-shadow: 0 20px 60px rgba(176,38,255,0.25);
+    }
+    th, td { padding: 1.4rem 1.8rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    th { background: rgba(74,0,224,0.6); color: #fff; font-weight: 700; }
+    td { color: #e0d0ff; }
+
+    ul { padding-left: 2.8rem; margin: 2rem 0; }
+    li { margin: 1rem 0; font-size: 1.32rem; color: #e0d0ff; }
+    li::marker { color: var(--accent); font-size: 1.4em; }
+
+    .cinematic-quote {
+      margin: 10rem auto;
+      padding: 6rem 3rem;
+      max-width: 960px; text-align: center; position: relative;
+      background: radial-gradient(circle at center, rgba(176,38,255,.18) 0%, transparent 70%);
+      border-radius: 40px; overflow: hidden;
+      border: 1px solid rgba(176,38,255,0.2); backdrop-filter: blur(20px);
+    }
+    .cinematic-quote::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--grad); opacity: .15; filter: blur(140px);
+    }
+    .quote-text {
+      position: relative; font-size: 3.1rem; font-weight: 700; line-height: 1.6;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 80px rgba(176,38,255,.8);
+    }
+    .quote-marks {
+      font-size: 14rem; font-weight: 100; opacity: .09; position: absolute; pointer-events: none;
+      color: #b026ff;
+    }
+    .quote-marks.left { top: -3rem; left: -1.5rem; }
+    .quote-marks.right { bottom: -4rem; right: -1.5rem; transform: scaleX(-1); }
   </style>
 </head>
 <body>
 
-  <a href="../index.html" class="back">Vault</a>
+  <a href="../index.html" class="back" data-aos="fade-down">Vault</a>
 
   <div class="container">
-
-    <header>
-      <h1>CWE-89<br>SQL Injection</h1>
-      <p class="subtitle">The crown jewel of web vulnerabilities</p>
+    <header data-aos="fade-up">
+      <h1 data-aos="fade-up" data-aos-delay="200">
+        CWE-89<br>SQL Injection
+      </h1>
+      <p class="subtitle" data-aos="fade-up" data-aos-delay="400">
+        The crown jewel of web vulnerabilities
+      </p>
     </header>
 
-    <picture class="cover">
+    <div class="cover" data-aos="zoom-in" data-aos-delay="500">
       <img src="../covers/sqli.jpg" alt="SQL Injection">
-    </picture>
+    </div>
 
     <article>
+      <p data-aos="fade-up">
+        SQL Injection (SQLi) is one of the most notorious and impactful web vulnerabilities. It occurs when a web application builds a database query using <strong>unvalidated user input</strong>, allowing attackers to manipulate SQL commands and gain unauthorized access to data.
+      </p>
+      <p data-aos="fade-up">
+        When software fails to <strong>neutralize special characters</strong> (like <code>'</code>, <code>"</code>, <code>;</code>, <code>--</code>), attackers can alter how queries are executed — often with devastating results.
+      </p>
 
-      <p>SQL Injection (SQLi) is one of the most notorious and impactful web vulnerabilities. It occurs when a web application builds a database query using <strong>unvalidated user input</strong>, allowing attackers to manipulate SQL commands and gain unauthorized access to data.</p>
-      <p>When software fails to <strong>neutralize special characters</strong> (like <code>'</code>, <code>"</code>, <code>;</code>, <code>--</code>), attackers can alter how queries are executed — often with devastating results.</p>
-
-      <h2>What Is SQL?</h2>
-      <p><strong>Structured Query Language (SQL)</strong> is the standard language for managing and manipulating relational databases.</p>
-      <p>It allows developers to:</p>
-      <ul>
+      <h2 data-aos="fade-up">What Is SQL?</h2>
+      <p data-aos="fade-up">
+        <strong>Structured Query Language (SQL)</strong> is the standard language for managing and manipulating relational databases.
+      </p>
+      <p data-aos="fade-up">It allows developers to:</p>
+      <ul data-aos="fade-up">
         <li>Retrieve information (<code>SELECT</code>)</li>
         <li>Add or modify data (<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>)</li>
         <li>Control access (<code>GRANT</code>, <code>REVOKE</code>)</li>
       </ul>
-      <p>When applications use SQL dynamically with external input, they risk being tricked into executing unintended commands.</p>
 
-      <h2>What Does “Injection” Mean?</h2>
-      <p><strong>Injection</strong> refers to inserting malicious input into a program to alter its execution.<br>In SQL Injection, this means feeding crafted SQL code into a field or parameter to manipulate the database.</p>
-
-      <h2>How SQL Injection Happens — The Core Vulnerability</h2>
-      <p>A vulnerable app constructs SQL commands directly from user input without proper sanitization or parameterization.</p>
-      <pre><code># Vulnerable example
+      <h2 data-aos="fade-up">How SQL Injection Happens</h2>
+      <p data-aos="fade-up">
+        A vulnerable app constructs SQL commands directly from user input without proper sanitization.
+      </p>
+      <pre data-aos="fade-up"><code># Vulnerable example
 username = request.GET['user']
 query = "SELECT * FROM users WHERE username = '" + username + "';"
 cursor.execute(query)</code></pre>
-      <p>If a user enters:<br><code>' OR '1'='1</code></p>
-      <p>The final query becomes:<br><code>SELECT * FROM users WHERE username = '' OR '1'='1';</code></p>
-      <p>This condition is always true — granting access to all user accounts.</p>
+      <p data-aos="fade-up">
+        Input: <code>' OR '1'='1</code> → Final query: <code>SELECT * FROM users WHERE username = '' OR '1'='1';</code>
+      </p>
 
-      <h2>The Login Bypass</h2>
-      <table>
+      <h2 data-aos="fade-up">The Login Bypass</h2>
+      <table data-aos="fade-up">
         <tr><th>Input Field</th><th>Attacker Enters</th><th>Result</th></tr>
         <tr><td><strong>Username</strong></td><td><code>' OR '1'='1</code></td><td>Bypasses authentication</td></tr>
-        <tr><td><strong>Password</strong></td><td><code>anything</code></td><td>Ignored — the injected logic returns true</td></tr>
+        <tr><td><strong>Password</strong></td><td><code>anything</code></td><td>Ignored — always true</td></tr>
       </table>
-      <p><strong>Effect:</strong> The attacker logs in as the first user in the database, often the administrator.</p>
 
-      <h2>Why SQL Injection Is Dangerous</h2>
-      <table>
+      <h2 data-aos="fade-up">Why SQL Injection Is Dangerous</h2>
+      <table data-aos="fade-up">
         <tr><th>Impact</th><th>Description</th></tr>
-        <tr><td><strong>Data Breach</strong></td><td>Attackers can steal sensitive info (credentials, personal data, credit cards).</td></tr>
-        <tr><td><strong>Data Loss/Corruption</strong></td><td>Data can be modified or deleted.</td></tr>
-        <tr><td><strong>Loss of Accountability</strong></td><td>Attack actions may be untraceable.</td></tr>
-        <tr><td><strong>Denial of Service (DoS)</strong></td><td>Overloaded queries can crash databases.</td></tr>
-        <tr><td><strong>Full System Compromise</strong></td><td>In severe cases, attackers can execute OS-level commands via the DB.</td></tr>
+        <tr><td><strong>Data Breach</strong></td><td>Steal credentials, PII, credit cards</td></tr>
+        <tr><td><strong>Data Loss</strong></td><td>Modify or delete records</td></tr>
+        <tr><td><strong>Full Compromise</strong></td><td>RCE via DB in extreme cases</td></tr>
       </table>
 
-      <h2>Mitigation Strategies</h2>
-
-      <h3>1. Prepared Statements (Parameterized Queries)</h3>
-      <ul>
-        <li><strong>How:</strong> Define query structure first; user input is bound later as data.</li>
-        <li><strong>Why:</strong> Prevents user input from being treated as SQL code.</li>
+      <h2 data-aos="fade-up">Mitigation Strategies</h2>
+      <h3 data-aos="fade-up">1. Prepared Statements</h3>
+      <ul data-aos="fade-up">
+        <li>Define query structure first</li>
+        <li>Bind user input as data, never code</li>
       </ul>
-      <pre><code>SELECT * FROM users WHERE username = ? AND status = ?;</code></pre>
+      <pre data-aos="fade-up"><code>SELECT * FROM users WHERE username = ? AND status = ?;</code></pre>
 
-      <h3>2. Input Validation</h3>
-      <ul>
-        <li><strong>How:</strong> Enforce strict rules for input (type, length, format, character set).</li>
-        <li><strong>Examples:</strong> Whitelist allowed characters, ensure numbers are numeric, limit max input length.</li>
-      </ul>
-
-      <h3>3. Stored Procedures (Used Safely)</h3>
-      <p>Use predefined database logic without dynamically building queries.<br>Warning: Still vulnerable if they build dynamic SQL with unvalidated input.</p>
-
-      <h3>4. Escaping User Input (Use with Caution)</h3>
-      <p><strong>Danger:</strong> Database-specific and error-prone. Use only as a last resort.</p>
-
-      <h2>Additional Best Practices</h2>
-      <ul>
-        <li><strong>Principle of Least Privilege:</strong> Database users should have only the permissions they need.</li>
-        <li><strong>Error Handling:</strong> Don’t expose SQL error messages to users.</li>
-        <li><strong>Regular Security Testing:</strong> Perform code reviews, scans, and pentests.</li>
+      <h3 data-aos="fade-up">2. Input Validation + Least Privilege</h3>
+      <ul data-aos="fade-up">
+        <li>Whitelist allowed characters</li>
+        <li>Never run DB as root/sa</li>
+        <li>Hide real errors from users</li>
       </ul>
 
-      <h2>Conclusion</h2>
-      <ul>
-        <li>SQL Injection (SQLi) allows attackers to <strong>manipulate database queries</strong> via malicious input.</li>
-        <li>It can lead to <strong>data theft, corruption, unauthorized access</strong>, or even <strong>complete system compromise</strong>.</li>
-        <li>The root cause is <strong>unsafe handling of user input</strong>.</li>
-      </ul>
-      <p>Defend with:</p>
-      <ul>
-        <li>Prepared Statements</li>
-        <li>Input Validation</li>
-        <li>Stored Procedures (Safe Use)</li>
-        <li>Least Privilege Principle</li>
-      </ul>
-
-      <div class="cinematic-quote">
+      <div class="cinematic-quote" data-aos="fade-up">
         <div class="quote-marks left">“</div>
-        <div class="quote-marks right">”</div>
+        <div class="quote-marks right">”></div>
         <div class="quote-text">
           Remember: SQL Injection thrives<br>
           where trust is misplaced.<br><br>
@@ -169,29 +200,20 @@ cursor.execute(query)</code></pre>
           and never trust user input.
         </div>
       </div>
-
     </article>
   </div>
 
   <script>
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.to(".back", {opacity:1, duration:1, delay:0.6});
-
-    gsap.utils.toArray("h1, .subtitle, .cover, h2, h3, p, pre, table, .cinematic-quote").forEach(el => {
-      gsap.to(el, {opacity:1, y:0, duration:1.4, ease:"power3.out",
-        scrollTrigger:{trigger:el, start:"top 84%", toggleActions:"play none none reverse"}
-      });
+    AOS.init({
+      duration: 1100,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 80
     });
 
-    document.querySelectorAll("ul").forEach(ul => {
-      gsap.to(ul, {opacity:1, y:0, duration:1, ease:"power3.out",
-        scrollTrigger:{trigger:ul, start:"top 84%"}
-      });
-      gsap.to(ul.querySelectorAll("li"), {
-        opacity:1, y:0, duration:0.8, stagger:0.14, ease:"power2.out",
-        scrollTrigger:{trigger:ul, start:"top 84%"}
-      });
-    });
+    setTimeout(() => {
+      document.querySelector('.back').style.opacity = '1';
+    }, 500);
   </script>
 </body>
 </html>
