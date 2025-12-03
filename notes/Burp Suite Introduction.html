@@ -5,131 +5,167 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Burp Suite Fundamentals • dvphnc SyberVault</title>
   <meta name="description" content="The complete guide to the world’s most powerful web testing platform">
+
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
   <style>
-    :root{--grad:linear-gradient(120deg,#ff2d55,#ff6b38,#ff4500,#ff2d55);}
-    body{margin:0;background:#000;color:#f5f5f7;font-family:-apple-system,'SF Pro Display',sans-serif;line-height:1.78;font-size:1.18rem;}
-    .container{max-width:880px;margin:0 auto;padding:2rem 1.5rem;}
-    .back{position:fixed;top:2.5rem;left:2.5rem;color:#ff5555;text-decoration:none;font-weight:600;font-size:1.1rem;z-index:100;}
-    header{text-align:center;padding:7rem 0 4rem;}
-    h1{font-size:6rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1;margin-bottom:1.6rem;}
-    .subtitle{font-size:1.7rem;color:#ff6b6b;font-weight:500;}
-    .cover{max-width:760px;margin:5.5rem auto;border-radius:32px;overflow:hidden;box-shadow:0 50px 120px rgba(255,45,85,.4);}
-    .cover img{width:100%;display:block;}
-    h2{font-size:3.4rem;margin:7rem 0 2.5rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-    p{margin:1.8rem 0;color:#e0e0e0;}
-    ul{padding-left:2.2rem;margin:2.5rem 0;}
-    li{margin:1.3rem 0;font-size:1.25rem;}
-    strong{color:#ff8c8c;}
-    table{width:100%;border-collapse:collapse;margin:3rem 0;background:#111;border-radius:20px;overflow:hidden;box-shadow:0 15px 40px rgba(0,0,0,.6);}
-    th,td{padding:1.4rem 1.8rem;text-align:left;border-bottom:1px solid #333;}
-    th{background:#1a1a1a;color:#ff6b6b;font-weight:700;}
-    td{color:#ddd;}
+    :root {
+      --grad: linear-gradient(120deg, #ff2d55, #ff6b38, #ff4500, #ff1744, #ff5e3a);
+      --accent: #ff2d55;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'SF Pro Display', -apple-system, sans-serif;
+      background: #000;
+      color: #ffe0e0;
+      line-height: 1.9;
+      font-size: 1.25rem;
+      overflow-x: hidden;
+    }
+    .container { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem; }
 
-    /* FULL-SCREEN CINEMATIC QUOTE */
-    .cinematic-quote{
-      position:relative;margin:14rem 0;padding:12rem 2rem;text-align:center;
-      background:radial-gradient(circle at center,rgba(255,45,85,.15) 0%,transparent 70%);
-      overflow:hidden;
+    .back {
+      position: fixed; top: 2.5rem; left: 2.5rem; z-index: 1000;
+      color: var(--accent); text-decoration: none; font-weight: 600; font-size: 1.15rem;
+      background: rgba(255,45,85,0.15); padding: 0.8rem 1.6rem; border-radius: 20px;
+      backdrop-filter: blur(12px); border: 1px solid rgba(255,45,85,0.3);
+      opacity: 0; transition: all 0.4s;
     }
-    .cinematic-quote::before{
-      content:'';position:absolute;inset:0;background:var(--grad);opacity:.09;filter:blur(90px);z-index:0;
-    }
-    .quote-text{
-      position:relative;z-index:1;font-size:4.2rem;font-weight:800;line-height:1.32;
-      background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
-      text-shadow:0 0 80px rgba(255,45,85,.5);
-    }
-    .quote-glow{position:absolute;inset:0;background:var(--grad);opacity:.07;filter:blur(140px);
-      animation:pulse 10s infinite alternate;
-    }
-    @keyframes pulse{from{opacity:.07;transform:scale(1);}to{opacity:.14;transform:scale(1.12);}}
-    .quote-marks{font-size:22rem;font-weight:100;opacity:.08;position:absolute;pointer-events:none;line-height:1;}
-    .quote-marks.left{top:-3rem;left:-1rem;}
-    .quote-marks.right{bottom:-5rem;right:-1rem;transform:scaleX(-1);}
+    .back:hover { background: rgba(255,45,85,0.28); transform: translateY(-4px); }
 
-    .cta{text-align:center;margin:12rem 0 10rem;}
-    .cta a{background:var(--grad);color:#000;padding:2rem 5.5rem;border-radius:80px;font-size:1.7rem;font-weight:800;text-decoration:none;
-      box-shadow:0 35px 80px rgba(255,45,85,.4);display:inline-block;transition:transform .3s;}
-    .cta a:hover{transform:scale(1.07);}
+    header { text-align: center; padding: 8rem 0 4rem; }
+    h1 {
+      font-size: 7.2rem; font-weight: 900; line-height: 1.1; letter-spacing: -3px;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .subtitle { font-size: 2.1rem; color: #ff6b6b; margin-top: 1rem; font-weight: 500; }
+
+    .cover {
+      max-width: 820px; margin: 4rem auto;
+      border-radius: 42px; overflow: hidden;
+      box-shadow: 0 80px 180px rgba(255,45,85,0.45);
+      border: 2px solid rgba(255,45,85,0.3);
+    }
+    .cover img { width: 100%; display: block; transition: transform 1.2s ease; }
+    .cover:hover img { transform: scale(1.06); }
+
+    h2 {
+      font-size: 4.2rem; font-weight: 800; text-align: center;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin: 5rem 0 2rem;
+    }
+    p {
+      margin: 1.4rem 0;
+      color: #ffd0d0; font-size: 1.3rem;
+    }
+    strong { color: #ff8c8c; font-weight: 700; }
+    code {
+      background: rgba(255,45,85,0.15); padding: 0.2rem 0.7rem; border-radius: 8px;
+      font-family: 'SF Mono', monospace; color: #ff6b38;
+    }
+
+    table {
+      width: 100%; border-collapse: collapse; margin: 2.2rem 0;
+      background: rgba(26,0,0,0.6); border-radius: 20px; overflow: hidden;
+      box-shadow: 0 20px 60px rgba(255,45,85,0.3);
+    }
+    th, td { padding: 1.4rem 1.8rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    th { background: rgba(255,45,85,0.6); color: #fff; font-weight: 700; }
+    td { color: #ffd0d0; }
+
+    ul { padding-left: 2.8rem; margin: 2rem 0; }
+    li { margin: 1rem 0; font-size: 1.32rem; color: #ffd0d0; }
+    li::marker { color: var(--accent); font-size: 1.4em; }
+
+    .cinematic-quote {
+      margin: 10rem auto;
+      padding: 6rem 3rem;
+      max-width: 960px; text-align: center; position: relative;
+      background: radial-gradient(circle at center, rgba(255,45,85,.18) 0%, transparent 70%);
+      border-radius: 40px; overflow: hidden;
+      border: 1px solid rgba(255,45,85,0.22); backdrop-filter: blur(20px);
+    }
+    .cinematic-quote::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--grad); opacity: .16; filter: blur(140px);
+    }
+    .quote-text {
+      position: relative; font-size: 3.6rem; font-weight: 900; line-height: 1.4;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 90px rgba(255,45,85,.9);
+    }
+    .quote-marks {
+      font-size: 14rem; font-weight: 100; opacity: .09; position: absolute; pointer-events: none;
+      color: #ff2d55;
+    }
+    .quote-marks.left { top: -3rem; left: -1.5rem; }
+    .quote-marks.right { bottom: -4rem; right: -1.5rem; transform: scaleX(-1); }
+
+    .cta {
+      text-align: center; margin: 10rem 0 6rem;
+    }
+    .cta a {
+      background: var(--grad); color: #000; padding: 1.4rem 4rem; border-radius: 80px;
+      font-size: 1.8rem; font-weight: 800; text-decoration: none; display: inline-block;
+      box-shadow: 0 30px 80px rgba(255,45,85,0.5); transition: all 0.3s;
+    }
+    .cta a:hover { transform: scale(1.08); }
   </style>
 </head>
 <body>
 
-  <a href="../index.html" class="back">Vault</a>
+  <a href="../index.html" class="back" data-aos="fade-down">Vault</a>
 
   <div class="container">
-
-    <header>
-      <h1>Burp Suite<br>Fundamentals</h1>
-      <p class="subtitle">The platform that redefined web security testing</p>
+    <header data-aos="fade-up">
+      <h1 data-aos="fade-up" data-aos-delay="200">
+        Burp Suite<br>Fundamentals
+      </h1>
+      <p class="subtitle" data-aos="fade-up" data-aos-delay="400">
+        The platform that redefined web security testing
+      </p>
     </header>
 
-    <picture class="cover">
+    <div class="cover" data-aos="zoom-in" data-aos-delay="500">
       <img src="../covers/burp.jpg" alt="Burp Suite">
-    </picture>
+    </div>
 
     <article>
+      <p data-aos="fade-up">
+        <strong>Burp Suite</strong> is the gold standard integrated platform for web application security testing — used by pentesters, bug bounty hunters, and red teams worldwide.
+      </p>
 
-      <p><strong>Burp Suite</strong> is an integrated platform for <strong>web security testing</strong>. Used by security professionals and bug bounty hunters worldwide, it identifies vulnerabilities in web applications.</p>
-
-      <h2>What is Burp Suite?</h2>
-      <p>Think of it as a <strong>powerful magnifying glass and toolkit</strong> for analyzing web traffic.</p>
-
-      <h2>Core Burp Suite Components</h2>
-      <table>
-        <tr><th>Component</th><th>Description</th></tr>
-        <tr><td><strong>Proxy</strong></td><td>Intercepts and modifies web traffic between the browser and the server.</td></tr>
-        <tr><td><strong>Repeater</strong></td><td>Allows manual modification and resending of individual HTTP requests.</td></tr>
-        <tr><td><strong>Intruder</strong></td><td>Automates custom attacks like brute force, SQLi, and XSS.</td></tr>
-        <tr><td><strong>Scanner</strong></td><td>Automatically finds vulnerabilities (Professional edition only).</td></tr>
-        <tr><td><strong>Sequencer</strong></td><td>Analyzes session token randomness and identifies weak session management.</td></tr>
+      <h2 data-aos="fade-up">Core Components</h2>
+      <table data-aos="fade-up">
+        <tr><th>Tool</th><th>Purpose</th></tr>
+        <tr><td><strong>Proxy</strong></td><td>Intercept & modify HTTP traffic</td></tr>
+        <tr><td><strong>Repeater</strong></td><td>Manually edit and resend requests</td></tr>
+        <tr><td><strong>Intruder</strong></td><td>Automate brute-force, fuzzing, and payload attacks</td></tr>
+        <tr><td><strong>Scanner</strong></td><td>Automated vulnerability detection (Pro)</td></tr>
+        <tr><td><strong>Sequencer</strong></td><td>Analyze randomness of tokens & sessions</td></tr>
       </table>
 
-      <h2>The Proxy: Your Web Traffic Middleman</h2>
-      <ul>
-        <li>Acts as a <strong>middleman</strong> for all web traffic.</li>
-        <li>Intercepts requests and responses between browser and server.</li>
-        <li>Lets you <strong>view and modify</strong> requests before reaching the server.</li>
-        <li>Logs traffic in the <strong>HTTP History tab</strong>, even when interception is off.</li>
+      <h2 data-aos="fade-up">Intruder Attack Types</h2>
+      <table data-aos="fade-up">
+        <tr><th>Type</th><th>Use Case</th></tr>
+        <tr><td><strong>Sniper</strong></td><td>Fuzz one parameter at a time</td></tr>
+        <tr><td><strong>Battering Ram</strong></td><td>Same payload in multiple positions</td></tr>
+        <tr><td><strong>Pitchfork</strong></td><td>Different payloads per position</td></tr>
+        <tr><td><strong>Cluster Bomb</strong></td><td>All combinations (brute force)</td></tr>
+      </table>
+
+      <h2 data-aos="fade-up">Best Practice: Pair with DVWA</h2>
+      <p data-aos="fade-up">
+        <strong>DVWA (Damn Vulnerable Web Application)</strong> is the perfect legal playground to master Burp Suite.
+      </p>
+      <ul data-aos="fade-up">
+        <li>Practice SQLi, XSS, Command Injection, File Upload</li>
+        <li>Learn how real vulnerabilities behave</li>
+        <li>Safe, isolated, fully controllable environment</li>
       </ul>
 
-      <h2>Intercepting Your First Request</h2>
-      <p>When interception is <strong>on</strong>, Burp pauses each HTTP request before it’s sent.</p>
-      <p>You can:<br>• View or edit headers, parameters, and cookies<br>• Forward, drop, or modify responses<br>• Analyze hidden parameters or authentication tokens</p>
-      <p>This helps uncover vulnerabilities like <strong>XSS</strong>, <strong>SQLi</strong>, or <strong>IDOR</strong>.</p>
-
-      <h2>Repeater: Manual Request Manipulation</h2>
-      <p><strong>Repeater</strong> lets you manually <strong>edit and resend HTTP requests</strong> repeatedly.</p>
-      <p>Useful for:<br>• Testing <strong>multi-step processes</strong> (login flows, transactions)<br>• Sending varying inputs to test for <strong>input-based vulnerabilities</strong><br>• Observing how the server reacts to modified requests</p>
-      <p>Perfect for precise, controlled testing.</p>
-
-      <h2>Intruder: Automated Attacks</h2>
-      <table>
-        <tr><th>Attack Type</th><th>Description</th></tr>
-        <tr><td><strong>Sniper</strong></td><td>Tests one parameter at a time — ideal for fuzzing.</td></tr>
-        <tr><td><strong>Battering Ram</strong></td><td>Sends the same payload to multiple positions.</td></tr>
-        <tr><td><strong>Pitchfork</strong></td><td>Uses multiple payload sets in parallel.</td></tr>
-        <tr><td><strong>Cluster Bomb</strong></td><td>Tests all combinations of payloads across parameters.</td></tr>
-      </table>
-      <p><strong>Common Uses:</strong><br>• Brute-forcing credentials<br>• Testing for <strong>SQL Injection</strong> and <strong>XSS</strong><br>• Automating fuzzing for parameters</p>
-
-      <h2>Sequencer: Analyzing Session Tokens</h2>
-      <p><strong>Sequencer</strong> tests the <strong>randomness and entropy</strong> of tokens and session IDs.</p>
-      <p>Detects:<br>• Weak session management<br>• Predictable authentication tokens<br>• Poor randomness that may lead to <strong>session hijacking</strong></p>
-
-      <h2>Burp Suite Summary</h2>
-      <table>
-        <tr><th>Tool</th><th>Main Purpose</th></tr>
-        <tr><td><strong>Proxy</strong></td><td>Capture and modify HTTP(S) requests/responses</td></tr>
-        <tr><td><strong>Repeater</strong></td><td>Replay and tweak requests manually</td></tr>
-        <tr><td><strong>Intruder</strong></td><td>Automate attacks using payload lists</td></tr>
-        <tr><td><strong>Scanner</strong></td><td>Automatically detect vulnerabilities</td></tr>
-        <tr><td><strong>Sequencer</strong></td><td>Analyze session token randomness</td></tr>
-      </table>
-
-      <!-- THE EPIC CINEMATIC QUOTE -->
-      <div class="cinematic-quote">
-        <div class="quote-glow"></div>
+      <div class="cinematic-quote" data-aos="fade-up">
         <div class="quote-marks left">“</div>
         <div class="quote-marks right">”</div>
         <div class="quote-text">
@@ -140,29 +176,33 @@
         </div>
       </div>
 
-      <h2>What is DVWA?</h2>
-      <p><strong>DVWA (Damn Vulnerable Web Application)</strong> is a PHP/MySQL web app intentionally made insecure. It helps security professionals and students safely practice web security testing.</p>
-      <p><strong>Purpose:</strong><br>• Test your skills and tools in a <strong>legal environment</strong><br>• Learn how vulnerabilities work<br>• Understand <strong>how to secure</strong> web applications</p>
-
-      <h2>Using DVWA with Burp Suite</h2>
-      <p><strong>Why Use DVWA with Burp:</strong><br>• Controlled environment for hands-on web hacking<br>• Realistic vulnerabilities (SQLi, XSS, File Upload, etc.)<br>• Works perfectly with <strong>Burp Proxy</strong>, <strong>Repeater</strong>, and <strong>Intruder</strong></p>
-
-      <p><strong>Quick Setup Tips:</strong><br>1. Configure your browser to use <strong>Burp Proxy</strong> (<code>127.0.0.1:8080</code>)<br>2. Open DVWA and log in<br>3. Capture requests in <strong>HTTP History</strong><br>4. Send to Repeater / Intruder / Sequencer</p>
-
-      <h2>Safety & Ethics</h2>
-      <ul>
-        <li>Run DVWA <strong>only in isolated labs</strong> (VM, sandbox, localhost)</li>
-        <li>Never test public or production websites without permission</li>
-        <li>Always follow <strong>ethical hacking guidelines</strong></li>
+      <h2 data-aos="fade-up">Quick Setup Reminder</h2>
+      <ul data-aos="fade-up">
+        <li>Browser → Proxy: <code>127.0.0.1:8080</code></li>
+        <li>Install Burp CA certificate</li>
+        <li>Turn Intercept ON → Capture → Send to Repeater/Intruder</li>
+        <li>Never test without permission</li>
       </ul>
 
-      <div class="cta">
+      <div class="cta" data-aos="fade-up" data-aos-delay="200">
         <a href="https://portswigger.net/burp/communitydownload" target="_blank">
           Download Burp Suite Community • Free Forever
         </a>
       </div>
-
     </article>
   </div>
+
+  <script>
+    AOS.init({
+      duration: 1100,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 80
+    });
+
+    setTimeout(() => {
+      document.querySelector('.back').style.opacity = '1';
+    }, 500);
+  </script>
 </body>
 </html>
