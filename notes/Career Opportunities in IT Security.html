@@ -366,19 +366,19 @@
       });
     });
 
+    // === Custom Cursor ===
     const cursor = document.querySelector('.cursor');
-    if ('ontouchstart' in window || navigator.maxTouchPoints) {
-      cursor.style.display = 'none';
-    } else {
-      document.addEventListener('mousemove', e => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-      });
-      document.querySelectorAll('a, .cover, table, tr').forEach(el => {
-        el.addEventListener('mouseenter', () => cursor.classList.add('follow'));
-        el.addEventListener('mouseleave', () => cursor.classList.remove('follow'));
-      });
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+    document.querySelectorAll('a, button, .cover').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('follow'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('follow'));
+    });
     }
   </script>
+
+  
 </body>
 </html>
