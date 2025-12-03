@@ -5,112 +5,227 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cloud & Virtualization Fundamentals • dvphnc SyberVault</title>
   <meta name="description" content="The invisible foundation of the modern internet">
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- AOS for smooth scroll animations (same as SQLi note) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
   <style>
-    :root{--grad:linear-gradient(120deg,#00d2d3,#00b4d8,#48cae4,#0077b6,#00d2d3);}
-    body{margin:0;background:#000;color:#f5f5f7;font-family:-apple-system,'SF Pro Display',sans-serif;line-height:1.8;font-size:1.18rem;overflow-x:hidden;}
-    .container{max-width:880px;margin:0 auto;padding:2rem 1.5rem;}
-    .back{position:fixed;top:2.5rem;left:2.5rem;color:#48cae4;text-decoration:none;font-weight:600;font-size:1.1rem;z-index:100;opacity:0;}
+    :root {
+      --grad: linear-gradient(120deg, #00d2d3, #00b4d8, #48cae4, #0077b6, #023e8a);
+      --card: rgba(20, 25, 40, 0.88);
+      --card-hover: rgba(30, 40, 70, 0.96);
+      --text: #f0f8ff;
+      --accent: #48cae4;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'SF Pro Display', -apple-system, sans-serif;
+      background: #000;
+      color: var(--text);
+      line-height: 1.9;
+      font-size: 1.25rem;
+      overflow-x: hidden;
+    }
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+    .back {
+      position: fixed;
+      top: 2.5rem;
+      left: 2.5rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.15rem;
+      z-index: 1000;
+      opacity: 0;
+      background: rgba(0,210,211,0.15);
+      padding: 0.8rem 1.6rem;
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(72,202,228,0.3);
+      transition: all 0.4s;
+    }
+    .back:hover {
+      background: rgba(72,202,228,0.25);
+      transform: translateY(-4px);
+    }
 
-    header{text-align:center;padding:9rem 0 6rem;}
-    h1{font-size:6.6rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1;margin-bottom:1.8rem;opacity:0;transform:translateY(60px);}
-    .subtitle{font-size:1.9rem;color:#90e0ef;opacity:0;transform:translateY(40px);}
-    .cover{max-width:780px;margin:7rem auto;border-radius:38px;overflow:hidden;box-shadow:0 70px 160px rgba(0,210,211,.45);opacity:0;transform:scale(0.94);}
-    .cover img{width:100%;display:block;}
-    h2{font-size:3.6rem;margin:9rem 0 3rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:0;transform:translateY(50px);}
-    p{margin:2rem 0;opacity:0;transform:translateY(30px);}
-    strong{color:#a0f7f8;}
-
-    /* Bullet lists — now guaranteed to show */
-    ul{
-      padding-left:2.6rem;
-      margin:3rem 0;
-      list-style:disc;
-      opacity:0;
-      transform:translateY(30px);
+    header {
+      text-align: center;
+      padding: 10rem 0 7rem;
     }
-    li{
-      margin:1.6rem 0;
-      font-size:1.3rem;
-      opacity:0;
-      transform:translateY(20px);
+    h1 {
+      font-size: 7.2rem;
+      font-weight: 900;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.1;
+      letter-spacing: -3px;
+    }
+    .subtitle {
+      font-size: 2.1rem;
+      color: #90e0ef;
+      margin-top: 1.5rem;
+      font-weight: 500;
     }
 
-    .cinematic-quote{
-      margin:18rem 0 14rem;
-      padding:8rem 3rem;
-      text-align:center;
-      position:relative;
-      background:radial-gradient(circle at center,rgba(0,210,211,.18) 0%,transparent 70%);
-      border-radius:32px;
-      overflow:hidden;
-      opacity:0;
-      transform:translateY(60px);
+    .cover {
+      max-width: 820px;
+      margin: 8rem auto;
+      border-radius: 42px;
+      overflow: hidden;
+      box-shadow: 0 80px 180px rgba(0, 210, 211, 0.4);
+      backdrop-filter: blur(20px);
+      border: 2px solid rgba(72,202,228,0.25);
     }
-    .cinematic-quote::before{
-      content:'';position:absolute;inset:0;background:var(--grad);opacity:.12;filter:blur(120px);
+    .cover img {
+      width: 100%;
+      display: block;
+      transition: transform 1.2s ease;
     }
-    .quote-text{
-      position:relative;
-      font-size:2.8rem;
-      font-weight:700;
-      line-height:1.5;
-      background:var(--grad);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      text-shadow:0 0 60px rgba(0,210,211,.6);
+    .cover:hover img {
+      transform: scale(1.06);
     }
-    .quote-marks{font-size:12rem;font-weight:100;opacity:.08;position:absolute;pointer-events:none;line-height:1;}
-    .quote-marks.left{top:-2rem;left:-1rem;}
-    .quote-marks.right{bottom:-3rem;right:-1rem;transform:scaleX(-1);}
+
+    h2 {
+      font-size: 4.2rem;
+      font-weight: 800;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 10rem 0 3.5rem;
+      text-align: center;
+    }
+
+    p {
+      margin: 2.2rem 0;
+      color: #d0e8f2;
+      font-size: 1.3rem;
+    }
+    strong {
+      color: #a0f7f8;
+      font-weight: 700;
+    }
+
+    ul {
+      padding-left: 2.8rem;
+      margin: 3.5rem 0;
+    }
+    li {
+      margin: 1.8rem 0;
+      font-size: 1.32rem;
+      color: #c5e8f5;
+      position: relative;
+    }
+    li::marker {
+      color: var(--accent);
+      font-size: 1.4em;
+    }
+
+    /* Cinematic Quote — same epic style */
+    .cinematic-quote {
+      margin: 20rem auto;
+      padding: 9rem 4rem;
+      text-align: center;
+      position: relative;
+      background: radial-gradient(circle at center, rgba(0,210,211,.18) 0%, transparent 70%);
+      border-radius: 40px;
+      overflow: hidden;
+      max-width: 960px;
+      border: 1px solid rgba(72,202,228,0.2);
+      backdrop-filter: blur(20px);
+    }
+    .cinematic-quote::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--grad);
+      opacity: .15;
+      filter: blur(140px);
+    }
+    .quote-text {
+      position: relative;
+      font-size: 3.1rem;
+      font-weight: 700;
+      line-height: 1.6;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 80px rgba(0,210,211,.7);
+    }
+    .quote-marks {
+      font-size: 14rem;
+      font-weight: 100;
+      opacity: .09;
+      position: absolute;
+      pointer-events: none;
+      line-height: 1;
+      color: #48cae4;
+    }
+    .quote-marks.left { top: -3rem; left: -1.5rem; }
+    .quote-marks.right { bottom: -4rem; right: -1.5rem; transform: scaleX(-1); }
   </style>
 </head>
 <body>
 
-  <a href="../index.html" class="back">Vault</a>
+  <a href="../index.html" class="back" data-aos="fade-down">Vault</a>
 
   <div class="container">
-
-    <header>
-      <h1>Cloud &<br>Virtualization<br>Fundamentals</h1>
-      <p class="subtitle">The invisible foundation of the modern internet</p>
+    <header data-aos="fade-up">
+      <h1 data-aos="fade-up" data-aos-delay="200">
+        Cloud &<br>Virtualization<br>Fundamentals
+      </h1>
+      <p class="subtitle" data-aos="fade-up" data-aos-delay="400">
+        The invisible foundation of the modern internet
+      </p>
     </header>
 
-    <picture class="cover">
+    <div class="cover" data-aos="zoom-in" data-aos-delay="600">
       <img src="../covers/cloudstorage.jpg" alt="Cloud & Virtualization">
-    </picture>
+    </div>
 
     <article>
+      <p data-aos="fade-up" data-aos-delay="100">
+        The <strong>cloud</strong> refers to a network of servers that provide storage, software, and computing resources over the internet. Instead of owning hardware, users rent computing resources, gaining flexibility and scalability while reducing infrastructure costs.
+      </p>
 
-      <p>The <strong>cloud</strong> refers to a network of servers that provide storage, software, and computing resources over the internet. Instead of owning hardware, users rent computing resources, gaining flexibility and scalability while reducing infrastructure costs.</p>
+      <h2 data-aos="fade-up" data-aos-delay="200">Virtualization</h2>
+      <p data-aos="fade-up" data-aos-delay="300">
+        <strong>Virtualization</strong> enables multiple operating systems to run on a single physical machine using a <em>hypervisor</em>. The hypervisor allocates CPU, memory, and storage resources to each <em>virtual machine (VM)</em>, creating isolated environments that operate independently. This improves resource efficiency and system management.
+      </p>
 
-      <h2>Virtualization</h2>
-      <p><strong>Virtualization</strong> enables multiple operating systems to run on a single physical machine using a <em>hypervisor</em>. The hypervisor allocates CPU, memory, and storage resources to each <em>virtual machine (VM)</em>, creating isolated environments that operate independently. This improves resource efficiency and system management.</p>
+      <h2 data-aos="fade-up" data-aos-delay="400">Cloud Storage</h2>
+      <p data-aos="fade-up" data-aos-delay="500">
+        <strong>Cloud Storage</strong> allows data to be stored and accessed remotely through the internet. It supports documents, backups, and system images, ensuring availability and reducing reliance on local storage devices.
+      </p>
 
-      <h2>Cloud Storage</h2>
-      <p><strong>Cloud Storage</strong>allows data to be stored and accessed remotely through the internet. It supports documents, backups, and system images, ensuring availability and reducing reliance on local storage devices.</p>
-
-      <h2>Deployment Models</h2>
-      <ul>
+      <h2 data-aos="fade-up" data-aos-delay="600">Deployment Models</h2>
+      <ul data-aos="fade-up" data-aos-delay="700">
         <li><strong>Public Cloud:</strong> Shared resources available to multiple users (e.g., AWS, Azure, Google Cloud).</li>
         <li><strong>Private Cloud:</strong> Dedicated infrastructure for a single organization with greater control and privacy.</li>
         <li><strong>Hybrid Cloud:</strong> Combines public and private clouds for balanced flexibility, control, and cost efficiency.</li>
       </ul>
 
-      <h2>Cloud Access Security Broker (CASB)</h2>
-      <p>A CASB operates between users and cloud services to:</p>
-      <ul>
+      <h2 data-aos="fade-up" data-aos-delay="800">Cloud Access Security Broker (CASB)</h2>
+      <p data-aos="fade-up" data-aos-delay="900">
+        A CASB operates between users and cloud services to:
+      </p>
+      <ul data-aos="fade-up" data-aos-delay="1000">
         <li>Monitor data movement</li>
         <li>Enforce security policies</li>
         <li>Detect and mitigate threats</li>
         <li>Ensure compliance with standards</li>
       </ul>
-      <p>It strengthens cloud environments by providing visibility and control over data usage.</p>
+      <p data-aos="fade-up" data-aos-delay="1100">
+        It strengthens cloud environments by providing visibility and control over data usage.
+      </p>
 
-      <div class="cinematic-quote">
+      <div class="cinematic-quote" data-aos="fade-up" data-aos-delay="1200">
         <div class="quote-marks left">“</div>
         <div class="quote-marks right">”</div>
         <div class="quote-text">
@@ -121,38 +236,21 @@
           flexible, efficient, and secure.
         </div>
       </div>
-
     </article>
   </div>
 
   <script>
-    gsap.registerPlugin(ScrollTrigger);
-    
-    gsap.to(".back", {opacity:1, duration:1, delay:0.6});
-
-    // Main sections
-    gsap.utils.toArray("h1, .subtitle, .cover, h2, p, .cinematic-quote").forEach(el => {
-      gsap.to(el, {opacity:1, y:0, duration:1.4, ease:"power3.out",
-        scrollTrigger:{trigger:el, start:"top 82%", toggleActions:"play none none reverse"}
-      });
+    AOS.init({
+      duration: 1200,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 100
     });
 
-    // Perfect bullet-list animation (no more disappearing)
-    document.querySelectorAll("ul").forEach(ul => {
-      // Animate the whole list container
-      gsap.to(ul, {opacity:1, y:0, duration:1, ease:"power3.out",
-        scrollTrigger:{trigger:ul, start:"top 82%"}
-      });
-      // Stagger the individual items
-      gsap.to(ul.querySelectorAll("li"), {
-        opacity:1,
-        y:0,
-        duration:0.8,
-        stagger:0.15,
-        ease:"power2.out",
-        scrollTrigger:{trigger:ul, start:"top 82%"}
-      });
-    });
+    // Back button fade-in
+    setTimeout(() => {
+      document.querySelector('.back').style.opacity = '1';
+    }, 600);
   </script>
 </body>
 </html>
