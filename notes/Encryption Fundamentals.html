@@ -5,128 +5,163 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Encryption Fundamentals • dvphnc SyberVault</title>
   <meta name="description" content="How the internet learned to keep a secret">
-  <style>
-    :root{--grad:linear-gradient(120deg,#ffd700,#ffb84d,#ff8c8c,#ff6b6b,#ffd700);}
-    body{margin:0;background:#000;color:#f5f5f7;font-family:-apple-system,'SF Pro Display',sans-serif;line-height:1.78;font-size:1.18rem;}
-    .container{max-width:860px;margin:0 auto;padding:2rem 1.5rem;}
-    .back{position:fixed;top:2.5rem;left:2.5rem;color:#ffab40;text-decoration:none;font-weight:600;font-size:1.1rem;z-index:100;}
-    header{text-align:center;padding:7rem 0 4rem;}
-    h1{font-size:5.9rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1;margin-bottom:1.6rem;}
-    .subtitle{font-size:1.65rem;color:#aaa;}
-    .cover{max-width:740px;margin:5.5rem auto;border-radius:30px;overflow:hidden;box-shadow:0 40px 110px rgba(0,0,0,.9);}
-    .cover img{width:100%;display:block;}
-    h2{font-size:3.3rem;margin:6.5rem 0 2rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-    p,li{margin:1.7rem 0;color:#e0e0e0;}
-    ul{padding-left:2.2rem;margin:2.5rem 0;}
-    li{margin:1.2rem 0;font-size:1.25rem;}
-    strong{color:#ffeb99;}
 
-    /* CINEMATIC QUOTE — PURE DRAMA */
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <style>
+    :root {
+      /* Electric cyan → glowing orange → deep blue — straight from your shield image */
+      --grad: linear-gradient(120deg, #00f2ff, #00d4ff, #ff8c00, #ff6b00, #00b0ff, #0088ff);
+      --accent: #00e0ff;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'SF Pro Display', -apple-system, sans-serif;
+      background: #000;
+      color: #ccffff;
+      line-height: 1.9;
+      font-size: 1.25rem;
+      overflow-x: hidden;
+    }
+    .container { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    .back {
+      position: fixed; top: 2.5rem; left: 2.5rem; z-index: 1000;
+      color: var(--accent); text-decoration: none; font-weight: 600; font-size: 1.15rem;
+      background: rgba(0,226,255,0.15); padding: 0.8rem 1.6rem; border-radius: 20px;
+      backdrop-filter: blur(12px); border: 1px solid rgba(0,226,255,0.3);
+      opacity: 0; transition: all 0.4s;
+    }
+    .back:hover { background: rgba(0,226,255,0.28); transform: translateY(-4px); }
+
+    header { text-align: center; padding: 8rem 0 4rem; }
+    h1 {
+      font-size: 7.2rem; font-weight: 900; line-height: 1.1; letter-spacing: -3px;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .subtitle { font-size: 2.1rem; color: #66ffff; margin-top: 1rem; font-weight: 500; }
+
+    .cover {
+      max-width: 820px; margin: 4rem auto;
+      border-radius: 42px; overflow: hidden;
+      box-shadow: 0 80px 180px rgba(0,226,255,0.45);
+      border: 2px solid rgba(0,226,255,0.3);
+    }
+    .cover img { width: 100%; display: block; transition: transform 1.2s ease; }
+    .cover:hover img { transform: scale(1.06); }
+
+    h2 {
+      font-size: 4.2rem; font-weight: 800; text-align: center;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin: 5rem 0 2rem;
+    }
+    p {
+      margin: 1.4rem 0;
+      color: #b3ffff; font-size: 1.3rem;
+    }
+    strong { color: #80faff; font-weight: 700; }
+
+    ul { padding-left: 2.8rem; margin: 2rem 0; }
+    li { margin: 1rem 0; font-size: 1.32rem; color: #b3ffff; }
+    li::marker { color: var(--accent); font-size: 1.4em; }
+
     .cinematic-quote {
-      position: relative;
-      margin: 12rem 0;
-      padding: 10rem 2rem;
-      text-align: center;
-      background: radial-gradient(circle at center, rgba(255,215,0,0.15) 0%, transparent 70%);
-      overflow: hidden;
+      margin: 10rem auto;
+      padding: 6rem 3rem;
+      max-width: 960px; text-align: center; position: relative;
+      background: radial-gradient(circle at center, rgba(0,226,255,.18) 0%, transparent 70%);
+      border-radius: 40px; overflow: hidden;
+      border: 1px solid rgba(0,226,255,0.22); backdrop-filter: blur(20px);
     }
     .cinematic-quote::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--grad);
-      opacity: 0.08;
-      filter: blur(80px);
-      z-index: 0;
+      content: ''; position: absolute; inset: 0;
+      background: var(--grad); opacity: .16; filter: blur(140px);
     }
     .quote-text {
-      position: relative;
-      z-index: 1;
-      font-size: 3.8rem;
-      font-weight: 800;
-      line-height: 1.35;
-      background: var(--grad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-shadow: 0 0 60px rgba(255,215,0,0.4);
-    }
-    .quote-glow {
-      position: absolute;
-      inset: 0;
-      background: var(--grad);
-      opacity: 0.06;
-      filter: blur(120px);
-      animation: pulse 8s infinite alternate;
-    }
-    @keyframes pulse {
-      from {opacity:0.06;transform:scale(1);}
-      to   {opacity:0.12;transform:scale(1.1);}
+      position: relative; font-size: 3.6rem; font-weight: 900; line-height: 1.4;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 90px rgba(0,226,255,.9);
     }
     .quote-marks {
-      position: absolute;
-      font-size: 20rem;
-      font-weight: 100;
-      opacity: 0.08;
-      pointer-events: none;
-      line-height: 1;
+      font-size: 14rem; font-weight: 100; opacity: .09; position: absolute; pointer-events: none;
+      color: #00e0ff;
     }
-    .quote-marks.left  {top:-2rem;left:-1rem;}
-    .quote-marks.right {bottom:-4rem;right:-1rem;transform:scaleX(-1);}
+    .quote-marks.left { top: -3rem; left: -1.5rem; }
+    .quote-marks.right { bottom: -4rem; right: -1.5rem; transform: scaleX(-1); }
 
-    .cta{text-align:center;margin:10rem 0 8rem;}
-    .cta a{background:var(--grad);color:#000;padding:1.8rem 5rem;border-radius:70px;font-size:1.6rem;font-weight:800;text-decoration:none;box-shadow:0 30px 70px rgba(255,215,0,.3);display:inline-block;transition:transform .3s;}
-    .cta a:hover{transform:scale(1.06);}
+    .cta {
+      text-align: center; margin: 10rem 0 6rem;
+    }
+    .cta a {
+      background: var(--grad); color: #000; padding: 1.4rem 4rem; border-radius: 80px;
+      font-size: 1.8rem; font-weight: 800; text-decoration: none; display: inline-block;
+      box-shadow: 0 30px 80px rgba(0,226,255,0.5); transition: all 0.3s;
+    }
+    .cta a:hover { transform: scale(1.08); }
   </style>
 </head>
 <body>
 
-  <a href="../index.html" class="back">Vault</a>
+  <a href="../index.html" class="back" data-aos="fade-down">Vault</a>
 
   <div class="container">
-
-    <header>
-      <h1>Encryption<br>Fundamentals</h1>
-      <p class="subtitle">How the internet learned to keep a secret</p>
+    <header data-aos="fade-up">
+      <h1 data-aos="fade-up" data-aos-delay="200">
+        Encryption<br>Fundamentals
+      </h1>
+      <p class="subtitle" data-aos="fade-up" data-aos-delay="400">
+        How the internet learned to keep a secret
+      </p>
     </header>
 
-    <picture class="cover">
+    <div class="cover" data-aos="zoom-in" data-aos-delay="500">
       <img src="../covers/crypto.jpg" alt="Encryption">
-    </picture>
+    </div>
 
     <article>
+      <p data-aos="fade-up">
+        <strong>Encryption</strong> converts readable information into <em>ciphertext</em>, which can only be accessed using the correct <em>key</em>. This process ensures data confidentiality, integrity, and trust across digital communications.
+      </p>
 
-      <!-- Your exact content above the quote -->
-      <p><strong>Encryption</strong> converts readable information into <em>ciphertext</em>, which can only be accessed using the correct <em>key</em>. This process ensures data confidentiality, integrity, and trust across digital communications.</p>
+      <h2 data-aos="fade-up">Principles of Cryptography</h2>
+      <p data-aos="fade-up">
+        These principles define how data is protected, transformed, and verified. They establish the foundation for secure communication through confidentiality, integrity, authentication, and non-repudiation.
+      </p>
 
-      <h2>Principles of Cryptography</h2>
-      <p>These principles define how data is protected, transformed, and verified. They establish the foundation for secure communication through confidentiality, integrity, authentication, and non-repudiation.</p>
-
-      <h2>Core Components</h2>
-      <p><strong>Hash Functions, Ciphers, and Key Exchange Algorithms</strong> are essential to cryptographic systems.</p>
-      <ul>
+      <h2 data-aos="fade-up">Core Components</h2>
+      <p data-aos="fade-up">
+        <strong>Hash Functions, Ciphers, and Key Exchange Algorithms</strong> are essential to cryptographic systems.
+      </p>
+      <ul data-aos="fade-up">
         <li><em>Hash functions</em> generate unique representations of data for verification.</li>
         <li><em>Ciphers</em> encrypt and decrypt information using mathematical operations.</li>
         <li><em>Key exchange algorithms</em> enable secure sharing of encryption keys between parties.</li>
       </ul>
 
-      <h2>Cryptography in Internet Security</h2>
-      <p>Modern internet communication relies on encryption to protect data in transit. Secure websites, online transactions, and private messages use cryptographic algorithms to ensure confidentiality and authenticity.</p>
+      <h2 data-aos="fade-up">Cryptography in Internet Security</h2>
+      <p data-aos="fade-up">
+        Modern internet communication relies on encryption to protect data in transit. Secure websites, online transactions, and private messages use cryptographic algorithms to ensure confidentiality and authenticity.
+      </p>
 
-      <h2>End-to-End vs. Transport Encryption</h2>
-      <ul>
+      <h2 data-aos="fade-up">End-to-End vs. Transport Encryption</h2>
+      <ul data-aos="fade-up">
         <li><em>End-to-end encryption</em> ensures that only communicating parties can read messages.</li>
         <li><em>Transport encryption</em> secures data only during transmission between systems.</li>
       </ul>
-      <p>Understanding these layers helps identify potential points of vulnerability.</p>
+      <p data-aos="fade-up">
+        Understanding these layers helps identify potential points of vulnerability.
+      </p>
 
-      <h2>Certificate Authorities and Digital Trust</h2>
-      <p><strong>Certificate Authorities (CAs)</strong>, <strong>Trusted Root-CAs</strong>, and <strong>X.509 Certificates</strong> validate identities and issue digital certificates.</p>
-      <p>These entities create a chain of trust, ensuring that users can confirm the legitimacy of websites and services.</p>
+      <h2 data-aos="fade-up">Certificate Authorities and Digital Trust</h2>
+      <p data-aos="fade-up">
+        <strong>Certificate Authorities (CAs)</strong>, <strong>Trusted Root-CAs</strong>, and <strong>X.509 Certificates</strong> validate identities and issue digital certificates.
+      </p>
+      <p data-aos="fade-up">
+        These entities create a chain of trust, ensuring that users can confirm the legitimacy of websites and services.
+      </p>
 
-      <!-- MAXIMUM DRAMA QUOTE -->
-      <div class="cinematic-quote">
-        <div class="quote-glow"></div>
+      <div class="cinematic-quote" data-aos="fade-up">
         <div class="quote-marks left">“</div>
         <div class="quote-marks right">”</div>
         <div class="quote-text">
@@ -138,13 +173,25 @@
         </div>
       </div>
 
-      <div class="cta">
+      <div class="cta" data-aos="fade-up" data-aos-delay="200">
         <a href="https://en.wikipedia.org/wiki/Cryptography" target="_blank">
           Explore the History of Cryptography
         </a>
       </div>
-
     </article>
   </div>
+
+  <script>
+    AOS.init({
+      duration: 1100,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 80
+    });
+
+    setTimeout(() => {
+      document.querySelector('.back').style.opacity = '1';
+    }, 500);
+  </script>
 </body>
 </html>
