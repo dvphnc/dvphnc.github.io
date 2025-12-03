@@ -5,98 +5,141 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CWE-35 — Path Traversal • dvphnc SyberVault</title>
   <meta name="description" content="How attackers walk outside the web root — and how to stop them">
-  <style>
-    :root{--grad:linear-gradient(120deg,#1e3a8a,#4338ca,#6d28d9,#7c3aed,#4338ca,#1e3a8a);}
-    body{margin:0;background:#000;color:#f5f5f7;font-family:-apple-system,'SF Pro Display',sans-serif;line-height:1.78;font-size:1.18rem;}
-    .container{max-width:880px;margin:0 auto;padding:2rem 1.5rem;}
-    .back{position:fixed;top:2.5rem;left:2.5rem;color:#818cf8;text-decoration:none;font-weight:600;font-size:1.1rem;z-index:100;}
-    header{text-align:center;padding:7rem 0 4rem;}
-    h1{font-size:6rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1;margin-bottom:1.6rem;}
-    .subtitle{font-size:1.7rem;color:#a78bfa;font-weight:500;}
-    .cover{max-width:760px;margin:5.5rem auto;border-radius:32px;overflow:hidden;box-shadow:0 50px 120px rgba(124,60,174,.4);}
-    .cover img{width:100%;display:block;}
-    h2{font-size:3.4rem;margin:7rem 0 2.5rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-    p{margin:1.8rem 0;color:#e0e0e0;}
-    ul{padding-left:2.4rem;margin:2.5rem 0;}
-    li{margin:1.4rem 0;font-size:1.25rem;}
-    strong{color:#c4b5fd;}
-    table{width:100%;border-collapse:collapse;margin:3rem 0;background:#0f0a1a;border-radius:20px;overflow:hidden;box-shadow:0 15px 40px rgba(0,0,0,.7);}
-    th,td{padding:1.5rem 1.8rem;text-align:left;border-bottom:1px solid #333;}
-    th{background:#1a1528;color:#a78bfa;font-weight:700;}
-    td{color:#ddd;}
-    code{background:#1a1528;padding:0.2rem 0.6rem;border-radius:8px;font-family:ui-monospace,'SF Mono',monospace;}
 
-    /* EPIC CINEMATIC QUOTE */
-    .cinematic-quote{
-      position:relative;margin:16rem 0;padding:14rem 2rem;text-align:center;
-      background:radial-gradient(circle at center,rgba(124,60,174,.18) 0%,transparent 70%);
-      overflow:hidden;
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <style>
+    :root {
+      --grad: linear-gradient(120deg, #1e3a8a, #4338ca, #6d28d9, #7c3aed, #5b21b6);
+      --accent: #818cf8;
     }
-    .cinematic-quote::before{
-      content:'';position:absolute;inset:0;background:var(--grad);opacity:.1;filter:blur(100px);z-index:0;
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'SF Pro Display', -apple-system, sans-serif;
+      background: #000;
+      color: #e0d4ff;
+      line-height: 1.9;
+      font-size: 1.25rem;
+      overflow-x: hidden;
     }
-    .quote-text{
-      position:relative;z-index:1;font-size:4.6rem;font-weight:800;line-height:1.3;
-      background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
-      text-shadow:0 0 90px rgba(124,60,174,.6);
+    .container { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    .back {
+      position: fixed; top: 2.5rem; left: 2.5rem; z-index: 1000;
+      color: var(--accent); text-decoration: none; font-weight: 600; font-size: 1.15rem;
+      background: rgba(124,60,174,0.15); padding: 0.8rem 1.6rem; border-radius: 20px;
+      backdrop-filter: blur(12px); border: 1px solid rgba(124,60,174,0.3);
+      opacity: 0; transition: all 0.4s;
     }
-    .quote-glow{position:absolute;inset:0;background:var(--grad);opacity:.08;filter:blur(160px);
-      animation:pulse 12s infinite alternate;
+    .back:hover { background: rgba(124,60,174,0.28); transform: translateY(-4px); }
+
+    header { text-align: center; padding: 8rem 0 4rem; }
+    h1 {
+      font-size: 7.2rem; font-weight: 900; line-height: 1.1; letter-spacing: -3px;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
-    @keyframes pulse{from{opacity:.08;transform:scale(1);}to{opacity:.16;transform:scale(1.15);}}
-    .quote-marks{font-size:24rem;font-weight:100;opacity:.07;position:absolute;pointer-events:none;line-height:1;}
-    .quote-marks.left{top:-4rem;left:-1.5rem;}
-    .quote-marks.right{bottom:-6rem;right:-1.5rem;transform:scaleX(-1);}
+    .subtitle { font-size: 2.1rem; color: #a78bfa; margin-top: 1rem; font-weight: 500; }
+
+    .cover {
+      max-width: 820px; margin: 4rem auto;
+      border-radius: 42px; overflow: hidden;
+      box-shadow: 0 80px 180px rgba(124,60,174,0.45);
+      border: 2px solid rgba(124,60,174,0.28);
+    }
+    .cover img { width: 100%; display: block; transition: transform 1.2s ease; }
+    .cover:hover img { transform: scale(1.06); }
+
+    h2 {
+      font-size: 4.2rem; font-weight: 800; text-align: center;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin: 5rem 0 2rem;
+    }
+    p {
+      margin: 1.4rem 0;
+      color: #d8c4ff; font-size: 1.3rem;
+    }
+    strong { color: #c4b5fd; font-weight: 700; }
+    code {
+      background: rgba(124,60,174,0.15); padding: 0.2rem 0.7rem; border-radius: 8px;
+      font-family: 'SF Mono', monospace; color: #a78bfa;
+    }
+
+    ul { padding-left: 2.8rem; margin: 2rem 0; }
+    li { margin: 1rem 0; font-size: 1.32rem; color: #d8c4ff; }
+    li::marker { color: var(--accent); font-size: 1.4em; }
+
+    .cinematic-quote {
+      margin: 10rem auto;
+      padding: 6rem 3rem;
+      max-width: 960px; text-align: center; position: relative;
+      background: radial-gradient(circle at center, rgba(124,60,174,.18) 0%, transparent 70%);
+      border-radius: 40px; overflow: hidden;
+      border: 1px solid rgba(124,60,174,0.22); backdrop-filter: blur(20px);
+    }
+    .cinematic-quote::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--grad); opacity: .16; filter: blur(140px);
+    }
+    .quote-text {
+      position: relative; font-size: 3.6rem; font-weight: 900; line-height: 1.4;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 90px rgba(124,60,174,.9);
+    }
+    .quote-marks {
+      font-size: 14rem; font-weight: 100; opacity: .09; position: absolute; pointer-events: none;
+      color: #7c3aed;
+    }
+    .quote-marks.left { top: -3rem; left: -1.5rem; }
+    .quote-marks.right { bottom: -4rem; right: -1.5rem; transform: scaleX(-1); }
   </style>
 </head>
 <body>
 
-  <a href="../index.html" class="back">Vault</a>
+  <a href="../index.html" class="back" data-aos="fade-down">Vault</a>
 
   <div class="container">
-
-    <header>
-      <h1>CWE-35<br>Path Traversal</h1>
-      <p class="subtitle">Directory Traversal — When attackers walk outside the web root</p>
+    <header data-aos="fade-up">
+      <h1 data-aos="fade-up" data-aos-delay="200">
+        CWE-35<br>Path Traversal
+      </h1>
+      <p class="subtitle" data-aos="fade-up" data-aos-delay="400">
+        Directory Traversal — When attackers walk outside the web root
+      </p>
     </header>
 
-    <picture class="cover">
+    <div class="cover" data-aos="zoom-in" data-aos-delay="500">
       <img src="../covers/traversal.png" alt="Path Traversal">
-    </picture>
+    </div>
 
     <article>
+      <p data-aos="fade-up">
+        <em>Path Traversal</em> allows attackers to access files and directories <strong>outside the intended web root</strong> by manipulating file path parameters — often using <code>../</code> sequences.
+      </p>
 
-      <p><em>Directory Traversal</em> (aka Path Traversal) is a vulnerability that allows an attacker to access files and directories <strong>outside the intended application directory</strong> by manipulating file path input. Exploits often use traversal sequences (e.g., <code>../</code>) or encoded variants to reach sensitive filesystem locations.</p>
+      <h2 data-aos="fade-up">How It Works</h2>
+      <p data-aos="fade-up">
+        The application uses unvalidated user input directly in filesystem paths → attacker crafts <code>../../etc/passwd</code> → server happily serves restricted files.
+      </p>
 
-      <h2>File System</h2>
-      <p>A <strong>file system</strong> is the operating system component that organizes and stores files and directories on persistent storage. Web applications interact with the file system to read or write resources (pages, uploads, config files). Improper handling of file paths can expose the underlying file system to attacker control.</p>
-
-      <h2>Directory Traversal Attacks</h2>
-      <p><strong>Directory Traversal Attacks</strong> occur when an application accepts a path or filename from an external source and fails to properly validate or normalize it. The attacker crafts input to traverse directories (e.g., <code>../../etc/passwd</code>) and access files outside the web root or allowed directories.</p>
-
-      <h2>Consequences of Directory Traversal</h2>
-      <ul>
-        <li><strong>Unauthorized Access to Sensitive Information</strong><br>Attackers can read confidential files outside the web root (e.g., system config, <code>/etc/passwd</code>, database credentials, source code), causing data breaches and privacy violations.</li>
-        <li><strong>Modification or Deletion of Files</strong><br>If write access is possible, attackers may modify or delete critical files, causing service disruption, data loss, and financial or operational damage.</li>
-        <li><strong>Further System Compromise</strong><br>Access to sensitive files can reveal server architecture, credentials, and configurations that facilitate privilege escalation or lateral movement.</li>
-        <li><strong>Information Disclosure & Reconnaissance</strong><br>Even read-only access can provide valuable intelligence for subsequent attacks (paths, versions, error messages).</li>
+      <h2 data-aos="fade-up">Deadly Consequences</h2>
+      <ul data-aos="fade-up">
+        <li>Read <code>/etc/passwd</code>, config files, source code</li>
+        <li>Steal database credentials</li>
+        <li>Enable further compromise & privilege escalation</li>
+        <li>If write access exists → full server takeover</li>
       </ul>
 
-      <h2>Directory Traversal Techniques</h2>
-      <ul>
-        <li><strong>Simple Dot-Dot-Slash (<code>../</code>)</strong> — basic upward traversal.</li>
-        <li><strong>Path Separator Variations (<code>/</code>, <code>\</code>)</strong> — platform-specific separators.</li>
-        <li><strong>Percent-Encoding (<code>%2e%2e%2f</code>)</strong> — URL-encoded traversal.</li>
-        <li><strong>Double Encoding (<code>%252e%252e%252f</code>)</strong> — encoder confusion bypass.</li>
-        <li><strong>Unicode Encoding (<code>%u002e%u002e%u002f</code>)</strong> — Unicode-encoded traversal.</li>
-        <li><strong>Mangled Paths (<code>....//...</code>)</strong> — path normalization tricks.</li>
-        <li><strong>NULL Byte Injection (<code>%00</code>)</strong> — terminating strings in some legacy APIs.</li>
+      <h2 data-aos="fade-up">Traversal Techniques (Bypass Arsenal)</h2>
+      <ul data-aos="fade-up">
+        <li><code>../../etc/passwd</code></li>
+        <li><code>%2e%2e%2f%2e%2e%2fetc%2fpasswd</code> (URL encoding)</li>
+        <li><code>%252e%252e%252f</code> (double encoding)</li>
+        <li><code>....//....//etc/passwd</code> (filter evasion)</li>
+        <li><code>..%00/</code> (null byte — legacy systems)</li>
       </ul>
-      <p><em>Attackers chain these techniques to bypass naive filters and normalization routines.</em></p>
 
-      <!-- FULL CINEMATIC QUOTE — MAXIMUM DRAMA -->
-      <div class="cinematic-quote">
-        <div class="quote-glow"></div>
+      <div class="cinematic-quote" data-aos="fade-up">
         <div class="quote-marks left">“</div>
         <div class="quote-marks right">”</div>
         <div class="quote-text">
@@ -109,34 +152,47 @@
         </div>
       </div>
 
-      <h2>Preventing Directory Traversal</h2>
-      <ul>
-        <li><strong>Validate and Sanitize User Input (Allowlist)</strong><br>Use an <em>accept-known-good</em> strategy: only permit specific filenames/IDs and reject everything else.</li>
-        <li><strong>Use Allow Lists for File Access</strong><br>Map user-provided identifiers to pre-approved files or directories rather than using raw paths.</li>
-        <li><strong>Avoid Using User Input Directly in File Paths</strong><br>Construct paths programmatically from safe components; do not concatenate unchecked user data.</li>
-        <li><strong>Path Normalization Functions</strong><br>Use built-in path normalization APIs (e.g., <code>realpath</code>, <code>Path.resolve</code>) to resolve <code>.</code>/<code>..</code> sequences then verify the resolved path is inside an allowed directory.</li>
-        <li><strong>Access Control & Least Privilege</strong><br>Ensure the application runs with minimal permissions and restrict which files the process can read/write.</li>
-        <li><strong>Isolate Execution Environments</strong><br>Run the application in a confined environment (chroot, containers, restricted mounts) to limit what an attacker can access.</li>
-        <li><strong>Reject Encoded/Alternate Representations</strong><br>Normalize and decode inputs before validation to catch encoded traversal attempts.</li>
+      <h2 data-aos="fade-up">Prevention — Lock It Down</h2>
+      <ul data-aos="fade-up">
+        <li><strong>Never trust user input in file paths</strong></li>
+        <li>Use <strong>allowlists</strong> (e.g., map IDs → real files)</li>
+        <li>Normalize + validate: resolve <code>..</code> then check if path starts with base directory</li>
+        <li>Run app with <strong>least privilege</strong></li>
+        <li>Chroot / containerize if possible</li>
+        <li>Decode input before validation</li>
       </ul>
 
-      <h2>Directory Traversal Tools (for testing & assessment)</h2>
-      <ul>
-        <li><strong>Burp Suite</strong> — web testing platform with scanning and manual testing features.</li>
-        <li><strong>OWASP ZAP</strong> — open-source scanner for automated detection.</li>
-        <li><strong>Nikto</strong> — web server scanner that checks for dangerous files and misconfigurations.</li>
-        <li><strong>DotDotPwn</strong> — tool specifically designed to test directory traversal payloads.</li>
-        <li><strong>Metasploit</strong> — penetration testing framework with modules for traversal exploits.</li>
-        <li><strong>DirBuster / Dirsearch</strong> — brute-forcing tools to discover hidden directories and files.</li>
+      <h2 data-aos="fade-up">Testing Tools</h2>
+      <ul data-aos="fade-up">
+        <li>Burp Suite (Intruder + payloads)</li>
+        <li>OWASP ZAP</li>
+        <li>DotDotPwn (dedicated traversal fuzzer)</li>
+        <li>DirBuster / ffuf</li>
       </ul>
-      <p><em>Use these tools responsibly for authorized testing only.</em></p>
 
-      <h2>Summary / Conclusion</h2>
-      <p><strong>CWE-35 Path Traversal</strong> enables attackers to break directory boundaries and access unintended filesystem resources.</p>
-      <p>Mitigation centers on <strong>strict input allowlisting, path normalization + verification, least privilege, and environment isolation</strong>.</p>
-      <p>Regular testing with vetted tools and secure coding practices reduce the risk and impact of traversal vulnerabilities.</p>
-
+      <h2 data-aos="fade-up">Final Word</h2>
+      <p data-aos="fade-up">
+        Path Traversal isn’t loud. It doesn’t crash servers.<br>
+        It just <strong>quietly walks past your defenses</strong> and reads everything you tried to hide.
+      </p>
+      <p data-aos="fade-up" style="text-align:center;font-weight:700;color:#c4b5fd;">
+        Validate. Normalize. Contain.<br>
+        Or the filesystem becomes public.
+      </p>
     </article>
   </div>
+
+  <script>
+    AOS.init({
+      duration: 1100,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 80
+    });
+
+    setTimeout(() => {
+      document.querySelector('.back').style.opacity = '1';
+    }, 500);
+  </script>
 </body>
 </html>
