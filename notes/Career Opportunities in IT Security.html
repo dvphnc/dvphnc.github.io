@@ -6,263 +6,126 @@
   <title>Career Opportunities in IT Security • dvphnc SyberVault</title>
   <meta name="description" content="Red Team, Blue Team, Purple Team — your future in cybersecurity starts here">
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
   <style>
     :root {
+      /* Your exact colors: #2c6cbc → #71c3f7 → #f6f6f6 */
       --grad: linear-gradient(120deg, #2c6cbc, #3a7bd5, #5ba0f2, #71c3f7, #a0d8f7, #f6f6f6, #71c3f7, #2c6cbc);
       --accent: #71c3f7;
-      --text: #e8f4ff;
-      --light: #d0e8ff;
-      --bg: #000;
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family: 'SF Pro Display', -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      background: #000;
+      color: #e8f4ff;
       line-height: 1.9;
       font-size: 1.25rem;
       overflow-x: hidden;
     }
-    .container {
-      max-width: 920px;
-      margin: 0 auto;
-      padding: 2rem 1.5rem;
-      position: relative;
-      z-index: 2;
-    }
+    .container { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem; }
 
-    /* Back Button */
     .back {
-      position: fixed;
-      top: 1.8rem;
-      left: 1.8rem;
-      z-index: 1000;
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1.1rem;
-      background: rgba(113,195,247,0.15);
-      padding: 0.75rem 1.5rem;
-      border-radius: 20px;
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(113,195,247,0.3);
-      opacity: 0;
-      transition: all 0.4s;
+      position: fixed; top: 2.5rem; left: 2.5rem; z-index: 1000;
+      color: var(--accent); text-decoration: none; font-weight: 600; font-size: 1.15rem;
+      background: rgba(113,195,247,0.15); padding: 0.8rem 1.6rem; border-radius: 20px;
+      backdrop-filter: blur(12px); border: 1px solid rgba(113,195,247,0.3);
+      opacity: 0; transition: all 0.4s;
     }
     .back:hover { background: rgba(113,195,247,0.28); transform: translateY(-4px); }
 
-    header { text-align: center; padding: 7rem 0 3rem; }
+    header { text-align: center; padding: 8rem 0 4rem; }
     h1 {
-      font-size: clamp(3.8rem, 12vw, 7.2rem);
-      font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: -0.06em;
-      background: var(--grad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      opacity: 0;
-      transform: translateY(60px);
+      font-size: 7.2rem; font-weight: 900; line-height: 1.1; letter-spacing: -3px;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
-    .subtitle {
-      font-size: clamp(1.4rem, 5vw, 2.1rem);
-      color: #a0d8f7;
-      margin-top: 1.2rem;
-      font-weight: 600;
-      opacity: 0;
-      transform: translateY(40px);
-    }
+    .subtitle { font-size: 2.1rem; color: #a0d8f7; margin-top: 1rem; font-weight: 600; }
 
     .cover {
-      max-width: 820px;
-      margin: 3.5rem auto;
-      border-radius: 36px;
-      overflow: hidden;
+      max-width: 820px; margin: 4rem auto;
+      border-radius: 42px; overflow: hidden;
       box-shadow: 0 80px 180px rgba(44,108,188,0.5);
       border: 2px solid rgba(113,195,247,0.35);
-      opacity: 0;
-      transform: scale(0.96);
-      transition: transform 0.6s ease;
     }
-    .cover:hover { transform: scale(1.02); }
-    .cover img {
-      width: 100%;
-      display: block;
-      transition: transform 12s ease;
-    }
-    .cover:hover img { transform: scale(1.08); }
+    .cover img { width: 100%; display: block; transition: transform 1.2s ease; }
+    .cover:hover img { transform: scale(1.06); }
 
     h2 {
-      font-size: clamp(2.6rem, 8vw, 4.2rem);
-      font-weight: 800;
-      text-align: center;
-      background: var(--grad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      font-size: 4.2rem; font-weight: 800; text-align: center;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       margin: 5rem 0 2rem;
-      opacity: 0;
-      transform: translateY(50px);
     }
     p {
       margin: 1.4rem 0;
-      color: var(--light);
-      font-size: clamp(1.1rem, 3.8vw, 1.3rem);
-      opacity: 0;
-      transform: translateY(30px);
+      color: #d0e8ff; font-size: 1.3rem;
     }
     strong { color: #ffffff; font-weight: 700; }
 
     table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 3rem 0;
-      background: rgba(20,35,60,0.8);
-      border-radius: 20px;
-      overflow: hidden;
+      width: 100%; border-collapse: collapse; margin: 2.5rem 0;
+      background: rgba(20,35,60,0.8); border-radius: 20px; overflow: hidden;
       box-shadow: 0 20px 60px rgba(44,108,188,0.4);
-      opacity: 0;
-      transform: translateY(40px);
-      font-size: clamp(0.95rem, 3.5vw, 1.1rem);
     }
-    th, td {
-      padding: clamp(1rem, 3vw, 1.4rem) clamp(1rem, 3vw, 1.8rem);
-      text-align: left;
-      border-bottom: 1px solid rgba(113,195,247,0.15);
-    }
-    th {
-      background: rgba(44,108,188,0.7);
-      color: #f6f6f6;
-      font-weight: 700;
-    }
-    td { color: var(--light); }
+    th, td { padding: 1.4rem 1.8rem; text-align: left; border-bottom: 1px solid rgba(113,195,247,0.15); }
+    th { background: rgba(44,108,188,0.7); color: #f6f6f6; font-weight: 700; }
+    td { color: #d0e8ff; vertical-align: top; }
 
-    ul {
-      padding-left: 2.4rem;
-      margin: 2rem 0;
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    li {
-      margin: 1rem 0;
-      font-size: clamp(1.1rem, 3.8vw, 1.32rem);
-      color: var(--light);
-      opacity: 0;
-      transform: translateY(20px);
-      position: relative;
-      padding-left: 0.4rem;
-    }
+    ul { padding-left: 2.8rem; margin: 2rem 0; }
+    li { margin: 1rem 0; font-size: 1.32rem; color: #d0e8ff; }
     li::marker { color: var(--accent); font-size: 1.4em; }
 
     .cinematic-quote {
-      margin: 9rem auto;
-      padding: clamp(4rem, 10vw, 6rem) clamp(2rem, 6vw, 3rem);
-      max-width: 960px;
-      text-align: center;
-      position: relative;
+      margin: 10rem auto;
+      padding: 6rem 3rem;
+      max-width: 960px; text-align: center; position: relative;
       background: radial-gradient(circle at center, rgba(113,195,247,.18) 0%, transparent 70%);
-      border-radius: 40px;
-      overflow: hidden;
-      border: 1px solid rgba(113,195,247,0.25);
-      backdrop-filter: blur(20px);
-      opacity: 0;
-      transform: translateY(60px);
+      border-radius: 40px; overflow: hidden;
+      border: 1px solid rgba(113,195,247,0.25); backdrop-filter: blur(20px);
     }
     .cinematic-quote::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--grad);
-      opacity: .16;
-      filter: blur(140px);
+      content: ''; position: absolute; inset: 0;
+      background: var(--grad); opacity: .16; filter: blur(140px);
     }
     .quote-text {
-      position: relative;
-      font-size: clamp(2.4rem, 9vw, 4.2rem);
-      font-weight: 900;
-      line-height: 1.4;
-      background: var(--grad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      position: relative; font-size: 4.2rem; font-weight: 900; line-height: 1.4;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       text-shadow: 0 0 100px rgba(113,195,247,.9);
     }
     .quote-marks {
-      font-size: clamp(8rem, 20vw, 16rem);
-      font-weight: 100;
-      opacity: .09;
-      position: absolute;
-      pointer-events: none;
+      font-size: 16rem; font-weight: 100; opacity: .09; position: absolute; pointer-events: none;
       color: #71c3f7;
     }
-    .quote-marks.left { top: -3rem; left: -1.5rem; }
-    .quote-marks.right { bottom: -4rem; right: -1.5rem; transform: scaleX(-1); }
-
-    .cursor {
-      position: fixed;
-      width: 20px;
-      height: 20px;
-      border: 2px solid var(--accent);
-      border-radius: 50%;
-      pointer-events: none;
-      transform: translate(-50%,-50%);
-      z-index: 9999;
-      transition: all 0.2s ease;
-      mix-blend-mode: difference;
-    }
-    .cursor.follow {
-      width: 52px;
-      height: 52px;
-      background: var(--accent);
-      opacity: 0.25;
-      border: none;
-    }
-
-    @media (max-width: 768px) {
-      .container { padding: 1.5rem 1.2rem; }
-      header { padding: 6rem 0 2rem; }
-      .cover { margin: 3rem auto; border-radius: 28px; }
-      h2 { margin: 4rem 0 1.8rem; }
-      .cinematic-quote { margin: 7rem auto; }
-      table { font-size: 0.95rem; }
-      th, td { padding: 1rem; }
-    }
-
-    @media (max-width: 480px) {
-      .back {
-        top: 1.2rem;
-        left: 1.2rem;
-        padding: 0.6rem 1.2rem;
-        font-size: 1rem;
-      }
-      header { padding: 5rem 0 1.5rem; }
-      .cover { border-radius: 24px; }
-      .cinematic-quote { padding: 3.5rem 1.8rem; border-radius: 32px; }
-    }
+    .quote-marks.left { top: -4rem; left: -2rem; }
+    .quote-marks.right { bottom: -5rem; right: -2rem; transform: scaleX(-1); }
   </style>
 </head>
 <body>
 
-  <div class="cursor"></div>
-
-  <a href="../index.html" class="back">Vault</a>
+  <a href="../index.html" class="back" data-aos="fade-down">Vault</a>
 
   <div class="container">
-    <header>
-      <h1>Career in<br>Cybersecurity</h1>
-      <p class="subtitle">Red Team • Blue Team • Purple Team — Choose your side</p>
+    <header data-aos="fade-up">
+      <h1 data-aos="fade-up" data-aos-delay="200">
+        Career in<br>Cybersecurity
+      </h1>
+      <p class="subtitle" data-aos="fade-up" data-aos-delay="400">
+        Red Team • Blue Team • Purple Team — Choose your side
+      </p>
     </header>
 
-    <div class="cover">
+    <div class="cover" data-aos="zoom-in" data-aos-delay="500">
       <img src="../covers/career.png" alt="Cybersecurity Careers">
     </div>
 
     <article>
-      <h2>What is Cybersecurity?</h2>
-      <p><strong>Cybersecurity</strong> is the practice of protecting systems, networks, and data from theft, damage, or unauthorized access — using <strong>people</strong>, <strong>processes</strong>, and <strong>technology</strong> together.</p>
+      <h2 data-aos="fade-up">What is Cybersecurity?</h2>
+      <p data-aos="fade-up">
+        <strong>Cybersecurity</strong> is the practice of protecting systems, networks, and data from theft, damage, or unauthorized access — using <strong>people</strong>, <strong>processes</strong>, and <strong>technology</strong> together.
+      </p>
 
-      <h2>Red vs Blue Teams</h2>
-      <table>
+      <h2 data-aos="fade-up">Red vs Blue Teams</h2>
+      <table data-aos="fade-up">
         <tr><th>Aspect</th><th>Red Team (Offensive)</th><th>Blue Team (Defensive)</th></tr>
         <tr><td><strong>Goal</strong></td><td>Simulate real attacks</td><td>Detect & respond</td></tr>
         <tr><td><strong>Focus</strong></td><td>Exploit, social engineering</td><td>Monitoring, hardening</td></tr>
@@ -270,8 +133,8 @@
         <tr><td><strong>Outcome</strong></td><td>Break in and prove risk</td><td>Stop the breach</td></tr>
       </table>
 
-      <h2>Expanded Roles in IT Security</h2>
-      <ul>
+      <h2 data-aos="fade-up">Expanded Roles in IT Security</h2>
+      <ul data-aos="fade-up">
         <li><strong>Vulnerability Assessor</strong> — Finds and prioritizes weaknesses</li>
         <li><strong>Penetration Tester</strong> — Simulates real attacks</li>
         <li><strong>Web App Pentester</strong> — OWASP Top 10, logic flaws, APIs</li>
@@ -284,27 +147,29 @@
         <li><strong>Security Researcher</strong> — Discovers zero-days and publishes</li>
       </ul>
 
-      <h2>What’s a SOC?</h2>
-      <p>A <strong>Security Operations Center</strong> is the nerve center of defense — a team (and often a physical room) that watches, detects, analyzes, and responds to threats 24/7 using SIEM, EDR, and playbooks.</p>
+      <h2 data-aos="fade-up">What’s a SOC?</h2>
+      <p data-aos="fade-up">
+        A <strong>Security Operations Center</strong> is the nerve center of defense — a team (and often a physical room) that watches, detects, analyzes, and responds to threats 24/7 using SIEM, EDR, and playbooks.
+      </p>
 
-      <h2>Three Pillars of Cybersecurity</h2>
-      <ul>
+      <h2 data-aos="fade-up">Three Pillars of Cybersecurity</h2>
+      <ul data-aos="fade-up">
         <li><strong>People</strong> — The humans who think, decide, and act</li>
         <li><strong>Processes</strong> — Playbooks, policies, incident response flows</li>
         <li><strong>Technology</strong> — Tools that detect, block, and alert</li>
       </ul>
-      <p><em>All three must be strong. One weak pillar and the whole structure falls.</em></p>
+      <p data-aos="fade-up"><em>All three must be strong. One weak pillar and the whole structure falls.</em></p>
 
-      <h2>Vulnerability Scanning vs Penetration Testing</h2>
-      <table>
+      <h2 data-aos="fade-up">Vulnerability Scanning vs Penetration Testing</h2>
+      <table data-aos="fade-up">
         <tr><th></th><th>Vulnerability Scanning</th><th>Penetration Testing</th></tr>
         <tr><td><strong>Type</strong></td><td>Automated</td><td>Manual + Automated</td></tr>
         <tr><td><strong>Goal</strong></td><td>Find known issues</td><td>Prove real-world impact</td></tr>
         <tr><td><strong>Output</strong></td><td>List of CVEs</td><td>Exploitation proof + remediation</td></tr>
       </table>
 
-      <h2>Penetration Testing Life Cycle</h2>
-      <table>
+      <h2 data-aos="fade-up">Penetration Testing Life Cycle</h2>
+      <table data-aos="fade-up">
         <tr><th>Stage</th><th>Objective</th><th>Activities</th></tr>
         <tr><td><strong>Recon</strong></td><td>Gather intel</td><td>OSINT, footprinting</td></tr>
         <tr><td><strong>Scanning</strong></td><td>Map attack surface</td><td>Nmap, web crawlers</td></tr>
@@ -314,8 +179,8 @@
         <tr><td><strong>Reporting</strong></td><td>Deliver value</td><td>Executive + technical report</td></tr>
       </table>
 
-      <h2>Quick Recommendations</h2>
-      <ul>
+      <h2 data-aos="fade-up">Quick Recommendations</h2>
+      <ul data-aos="fade-up">
         <li>Build labs (TryHackMe, HackTheBox, DVWA)</li>
         <li>Master tools: Burp, Metasploit, Wireshark, Splunk</li>
         <li>Learn Linux, networking, web tech</li>
@@ -323,7 +188,7 @@
         <li>Certifications: OSCP, PNPT, CompTIA Security+, eJPT</li>
       </ul>
 
-      <div class="cinematic-quote">
+      <div class="cinematic-quote" data-aos="fade-up">
         <div class="quote-marks left">“</div>
         <div class="quote-marks right">”</div>
         <div class="quote-text">
@@ -337,48 +202,16 @@
   </div>
 
   <script>
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.to(".back", { opacity: 1, duration: 1, delay: 0.6 });
-
-    gsap.utils.toArray("h1, .subtitle, .cover, h2, p, table, ul, .cinematic-quote").forEach(el => {
-      gsap.to(el, {
-        opacity: 1,
-        y: 0,
-        duration: 1.4,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 86%",
-          toggleActions: "play none none reverse"
-        }
-      });
+    AOS.init({
+      duration: 1100,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 80
     });
 
-    document.querySelectorAll("ul").forEach(ul => {
-      gsap.to(ul.querySelectorAll("li"), {
-        opacity: 1,
-        y: 0,
-        duration: 0.9,
-        stagger: 0.12,
-        ease: "power2.out",
-        scrollTrigger: { trigger: ul, start: "top 86%" }
-      });
-    });
-
-    // === Custom Cursor ===
-    const cursor = document.querySelector('.cursor');
-    document.addEventListener('mousemove', e => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-    });
-    document.querySelectorAll('a, button, .cover').forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('follow'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('follow'));
-    });
-    }
+    setTimeout(() => {
+      document.querySelector('.back').style.opacity = '1';
+    }, 500);
   </script>
-
-  
 </body>
 </html>
