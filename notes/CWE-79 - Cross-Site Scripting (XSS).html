@@ -11,15 +11,15 @@
 
   <style>
     :root {
-      /* #1a2766 → #ae1b1e → #fc9f32 — midnight navy → blood red → molten gold */
-      --grad: linear-gradient(120deg, #1a2766, #2e3b88, #ae1b1e, #d63d3d, #fc9f32, #ffb84d, #fc9f32);
+      /* Pure two-tone: #1a2766 → #fc9f32 */
+      --grad: linear-gradient(120deg, #1a2766, #2c3e8c, #4a67b3, #fc9f32, #ffb84d, #fc9f32);
       --accent: #fc9f32;
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family: 'SF Pro Display', -apple-system, sans-serif;
       background: #000;
-      color: #ffd7b0;
+      color: #ffecb3;
       line-height: 1.9;
       font-size: 1.25rem;
       overflow-x: hidden;
@@ -58,21 +58,21 @@
     }
     p {
       margin: 1.4rem 0;
-      color: #ffcc99; font-size: 1.3rem;
+      color: #ffe0b3; font-size: 1.3rem;
     }
-    strong { color: #ffaa66; font-weight: 700; }
+    strong { color: #ffffff; font-weight: 700; }
 
     table {
       width: 100%; border-collapse: collapse; margin: 2.5rem 0;
       background: rgba(26,39,102,0.7); border-radius: 20px; overflow: hidden;
-      box-shadow: 0 20px 60px rgba(174,27,30,0.5);
+      box-shadow: 0 20px 60px rgba(252,159,50,0.45);
     }
-    th, td { padding: 1.4rem 1.8rem; text-align: left; border-bottom: 1px solid rgba(255,159,50,0.15); }
-    th { background: rgba(174,27,30,0.7); color: #fc9f32; font-weight: 700; }
-    td { color: #ffcc99; vertical-align: top; }
+    th, td { padding: 1.4rem 1.8rem; text-align: left; border-bottom: 1px solid rgba(252,159,50,0.15); }
+    th { background: rgba(252,159,50,0.2); color: #fc9f32; font-weight: 700; }
+    td { color: #ffe0b3; vertical-align: top; }
 
     ul { padding-left: 2.8rem; margin: 2rem 0; }
-    li { margin: 1rem 0; font-size: 1.32rem; color: #ffcc99; }
+    li { margin: 1rem 0; font-size: 1.32rem; color: #ffe0b3; }
     li::marker { color: var(--accent); font-size: 1.4em; }
 
     .cinematic-quote {
@@ -88,9 +88,9 @@
       background: var(--grad); opacity: .18; filter: blur(140px);
     }
     .quote-text {
-      position: relative; font-size: 3.6rem; font-weight: 900; line-height: 1.4;
+      position: relative; font-size: 3.8rem; font-weight: 900; line-height: 1.4;
       background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 90px rgba(252,159,50,.9);
+      text-shadow: 0 0 100px rgba(252,159,50,.9);
     }
     .quote-marks {
       font-size: 14rem; font-weight: 100; opacity: .09; position: absolute; pointer-events: none;
