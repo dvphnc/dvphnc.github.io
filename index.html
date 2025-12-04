@@ -167,90 +167,126 @@
       letter-spacing:0.8px; text-transform:uppercase; margin-top:0.4rem;
     }
     
-        /* ——— NEW GORGEOUS CONTACT CARD ——— */
-    .contact-card {
-      max-width: 720px;
-      margin: 0 auto;
-      background: rgba(28,28,30,0.92);
-      backdrop-filter: blur(32px);
-      border-radius: 36px;
-      padding: 4.5rem 3rem;
-      border: 1px solid rgba(255,255,255,0.11);
-      box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+        /* ——— CINEMATIC CONTACT MASTERPIECE ——— */
+    .contact-masterpiece {
+      max-width: 960px;
+      margin: 6rem auto 4rem;
+      padding: 7rem 4rem;
       position: relative;
+      border-radius: 48px;
       overflow: hidden;
+      background: rgba(28,28,30,0.94);
+      backdrop-filter: blur(32px);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 60px 160px rgba(0,0,0,0.7);
     }
-    .contact-card::before {
-      content: '';
+    .contact-glow {
       position: absolute;
-      inset: 0;
+      inset: -40%;
       background: var(--apple);
-      opacity: 0.08;
-      filter: blur(120px);
+      opacity: 0.18;
+      filter: blur(180px);
+      animation: contactPulse 10s infinite alternate;
     }
-    .contact-content { position: relative; z-index: 2; text-align: center; }
-    .contact-card h3 {
-      font-size: 2.6rem;
-      font-weight: 800;
+    @keyframes contactPulse {
+      from { opacity: 0.18; transform: scale(0.9); }
+      to   { opacity: 0.32; transform: scale(1.1); }
+    }
+    .contact-title {
+      font-size: 5.2rem;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -2px;
+      text-align: center;
       background: var(--apple);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 1rem;
+      margin-bottom: 1.6rem;
     }
-    .contact-card p {
-      font-size: 1.45rem;
+    .contact-subtitle {
+      font-size: 1.6rem;
       color: #ccc;
-      margin: 1.2rem 0;
+      text-align: center;
+      margin: 2rem 0 3rem;
+      opacity: 0.9;
     }
-    .email-btn {
-      display: inline-block;
-      margin: 2rem 0;
-      padding: 1rem 2.6rem;
+    .contact-email {
+      display: block;
+      max-width: 420px;
+      margin: 3rem auto;
+      padding: 1.4rem 2.8rem;
       background: var(--apple);
       color: #000;
+      font-size: 1.7rem;
       font-weight: 700;
-      font-size: 1.35rem;
-      border-radius: 20px;
+      text-align: center;
+      border-radius: 28px;
       text-decoration: none;
-      transition: all 0.4s;
-      box-shadow: 0 12px 40px rgba(0,122,255,0.35);
+      box-shadow: 0 20px 50px rgba(0,122,255,0.4);
+      transition: all 0.5s ease;
     }
-    .email-btn:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 24px 60px rgba(0,122,255,0.5);
+    .contact-email:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 32px 80px rgba(0,122,255,0.6);
     }
-    .social-links {
+    .contact-social {
       display: flex;
       justify-content: center;
-      gap: 2.4rem;
-      margin-top: 2.8rem;
+      gap: 2.8rem;
+      margin: 4rem 0;
       flex-wrap: wrap;
     }
-    .social-links a {
-      width: 68px;
-      height: 68px;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.08);
-      backdrop-filter: blur(12px);
+    .social-btn {
+      position: relative;
+      width: 88px;
+      height: 88px;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.09);
+      backdrop-filter: blur(16px);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.9rem;
+      font-size: 2.2rem;
       color: #fff;
       text-decoration: none;
-      transition: all 0.5s;
-      border: 1px solid rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.16);
+      overflow: hidden;
+      transition: all 0.6s cubic-bezier(0.22,1,0.36,1);
     }
-    .social-links a:hover {
-      transform: translateY(-10px);
-      background: rgba(255,255,255,0.18);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    .social-btn::before {
+      content: attr(data-label);
+      position: absolute;
+      bottom: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #aaa;
+      white-space: nowrap;
+      opacity: 0;
+      transition: all 0.4s;
+    }
+    .social-btn:hover {
+      transform: translateY(-16px);
+      background: rgba(255,255,255,0.2);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    }
+    .social-btn:hover::before {
+      bottom: 100px;
+      opacity: 1;
+    }
+    .contact-footer {
+      margin-top: 5rem;
+      font-size: 1.35rem;
+      color: #999;
+      text-align: center;
+      opacity: 0.85;
     }
 
     @media (max-width: 768px) {
-      .contact-card { padding: 3.5rem 2rem; margin: 0 1.5rem; }
-      .contact-card h3 { font-size: 2.2rem; }
-      .social-links a { width: 58px; height: 58px; font-size: 1.6rem; }
+      .contact-masterpiece { padding: 5rem 2rem; margin: 4rem 1.5rem; }
+      .contact-title { font-size: 4rem; }
+      .social-btn { width: 72px; height: 72px; font-size: 1.9rem; }
     }
 
     /* SyberVault Intro Text */
@@ -363,32 +399,45 @@
     <div class="albums-grid" id="grid"></div>
   </section>
 
-    <!-- ONLY THE CONTACT SECTION IS REPLACED BELOW -->
+  <!-- UPGRADED CONTACT SECTION – ONLY THIS PART CHANGED -->
   <section id="contact" data-aos="fade-up">
     <h2 data-aos="fade-up">Contact</h2>
 
-    <div class="contact-card" data-aos="zoom-in" data-aos-delay="300">
+    <div class="contact-masterpiece" data-aos="zoom-in" data-aos-delay="300">
+      <div class="contact-glow"></div>
+
       <div class="contact-content">
-        <h3>Let's Build Something Secure</h3>
-        <p>Available for Web Development & UI/UX projects</p>
-        <a href="mailto:jdsoffcl@gmail.com" class="email-btn">
+        <h3 class="contact-title">
+          Let's Build<br>
+          <span style="font-size:0.68em; opacity:0.92;">Something Unbreakable</span>
+        </h3>
+
+        <p class="contact-subtitle">
+          Available for Web Development • UI/UX Design • Cybersecurity Projects
+        </p>
+
+        <a href="mailto:jdsoffcl@gmail.com" class="contact-email">
           jdsoffcl@gmail.com
         </a>
 
-        <div class="social-links">
-          <a href="https://github.com/yourusername" target="_blank" aria-label="GitHub">
+        <div class="contact-social">
+          <a href="https://github.com/dvphnc" target="_blank" class="social-btn" data-label="GitHub">
             GitHub
           </a>
-          <a href="https://linkedin.com/in/yourusername" target="_blank" aria-label="LinkedIn">
+          <a href="https://linkedin.com/in/dvphnc" target="_blank" class="social-btn" data-label="LinkedIn">
             LinkedIn
           </a>
-          <a href="https://tryhackme.com/p/yourusername" target="_blank" aria-label="TryHackMe">
+          <a href="https://tryhackme.com/p/joanadaphne.sy" target="_blank" class="social-btn" data-label="TryHackMe">
             TryHackMe
           </a>
-          <a href="https://hackthebox.com/profile/yourid" target="_blank" aria-label="HackTheBox">
+          <a href="https://hackthebox.com/profile/dvphnc" target="_blank" class="social-btn" data-label="HackTheBox">
             HackTheBox
           </a>
         </div>
+
+        <p class="contact-footer">
+          Part of <strong>dvphnc SyberVault</strong> • Running silent, running deep
+        </p>
       </div>
     </div>
   </section>
