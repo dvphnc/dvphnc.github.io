@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mastering Network Traffic Analysis • dvphnc SyberVault</title>
+  <meta name="description" content="Capture. Filter. Analyze. Dominate the wire.">
+
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <style>
+    :root {
+      /* Pure red alert gradient — NTA war-room energy */
+      --grad: linear-gradient(120deg,
+        #8B0000 0%,
+        #A60000 15%,
+        #CC0000 30%,
+        #FF1A1A 50%,
+        #FF4500 70%,
+        #FF6347 85%,
+        #FF1A1A 100%
+      );
+      --accent: #FF4500;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'SF Pro Display', -apple-system, sans-serif;
+      background: #000;
+      color: #ffd0d0;
+      line-height: 1.9;
+      font-size: 1.25rem;
+      overflow-x: hidden;
+    }
+    .container { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    .back {
+      position: fixed; top: 2.5rem; left: 2.5rem; z-index: 1000;
+      color: var(--accent); text-decoration: none; font-weight: 600; font-size: 1.15rem;
+      background: rgba(255,69,0,0.16); padding: 0.8rem 1.6rem; border-radius: 20px;
+      backdrop-filter: blur(12px); border: 1px solid rgba(255,69,0,0.3);
+      opacity: 0; transition: all 0.4s;
+    }
+    .back:hover { background: rgba(255,69,0,0.32); transform: translateY(-4px); }
+
+    header { text-align: center; padding: 8rem 0 4rem; }
+    h1 {
+      font-size: 7.2rem; font-weight: 900; line-height: 1.1; letter-spacing: -3px;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .subtitle { font-size: 2.1rem; color: #ff6b6b; margin-top: 1rem; font-weight: 500; }
+
+    .cover {
+      max-width: 820px; margin: 4rem auto;
+      border-radius: 42px; overflow: hidden;
+      box-shadow: 0 80px 180px rgba(255,26,26,0.6);
+      border: 2px solid rgba(255,69,0,0.4);
+    }
+    .cover img { width: 100%; display: block; transition: transform 1.2s ease; }
+    .cover:hover img { transform: scale(1.06); }
+
+    h2, h3 {
+      font-size: 4.2rem; font-weight: 800; text-align: center;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin: 5rem 0 2rem;
+    }
+    h3 { font-size: 3.4rem; }
+
+    p, li {
+      margin: 1.4rem 0;
+      color: #ffd0d0; font-size: 1.3rem;
+    }
+    strong { color: #ffffff; font-weight: 700; }
+
+    ul, ol {
+      padding-left: 2.8rem; margin: 2rem 0;
+    }
+    li {
+      margin: 1rem 0; font-size: 1.32rem; color: #ffd0d0;
+    }
+    li::marker { color: var(--accent); font-size: 1.4em; }
+
+    .cinematic-quote {
+      margin: 10rem auto;
+      padding: 6rem 3rem;
+      max-width: 960px; text-align: center; position: relative;
+      background: radial-gradient(circle at center, rgba(255,69,0,.28) 0%, transparent 70%);
+      border-radius: 40px; overflow: hidden;
+      border: 1px solid rgba(255,69,0,0.3); backdrop-filter: blur(20px);
+    }
+    .cinematic-quote::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--grad); opacity: .22; filter: blur(150px);
+    }
+    .quote-text {
+      position: relative; font-size: 4.1rem; font-weight: 900; line-height: 1.4;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 110px rgba(255,69,0,.95);
+    }
+    .quote-marks {
+      font-size: 15rem; font-weight: 100; opacity: .09; position: absolute; pointer-events: none;
+      color: #FF4500;
+    }
+    .quote-marks.left { top: -3.5rem; left: -2rem; }
+    .quote-marks.right { bottom: -4.5rem; right: -2rem; transform: scaleX(-1); }
+  </style>
+</head>
+<body>
+
+  <a href="../index.html" class="back" data-aos="fade-down">Vault</a>
+
+  <div class="container">
+    <header data-aos="fade-up">
+      <h1 data-aos="fade-up" data-aos-delay="200">
+        Mastering<br>Network Traffic<br>Analysis
+      </h1>
+      <p class="subtitle" data-aos="fade-up" data-aos-delay="400">
+        Capture. Filter. Analyze. Dominate the wire.
+      </p>
+    </header>
+
+    <div class="cover" data-aos="zoom-in" data-aos-delay="500">
+      <img src="../covers/nt,packets,wireshark.jpg" alt="Network Traffic Analysis">
+    </div>
+
+    <article>
+      <p data-aos="fade-up">
+        <strong>Network Traffic Analysis (NTA)</strong> is the act of capturing, inspecting, and analyzing network data flow to characterize ports and protocols, establish a performance baseline, and monitor/respond to security threats.
+      </p>
+
+      <h2 data-aos="fade-up">The NTA Process in 4 Steps</h2>
+      <ol data-aos="fade-up">
+        <li><strong>Ingest Traffic:</strong> Capture network data, utilizing capture filters as needed.</li>
+        <li><strong>Reduce Noise by Filtering:</strong> Filter out unnecessary or benign traffic for cleaner analysis.</li>
+        <li><strong>Analyze and Explore:</strong> Carve out data relevant to the current issue.</li>
+        <li><strong>Detect and Alert:</strong> Look for errors and use analysis to determine if traffic is malicious, leveraging tools like Intrusion Detection Systems (IDS).</li>
+      </ol>
+
+      <h2 data-aos="fade-up">NTA Analysis Approaches</h2>
+      <ul data-aos="fade-up">
+        <li><strong>Descriptive:</strong> Describes a data set based on existing characteristics.</li>
+        <li><strong>Diagnostic:</strong> Clarifies the causes and effects of network conditions.</li>
+        <li><strong>Predictive:</strong> Creates models to forecast future probabilities (e.g., future traffic load).</li>
+        <li><strong>Prescriptive:</strong> Aims to narrow down actions to take to prevent or eliminate a future problem.</li>
+      </ul>
+
+      <h2 data-aos="fade-up">Essential NTA Tools</h2>
+      <ul data-aos="fade-up">
+        <li><strong>Wireshark:</strong> A free and open-source graphical network traffic analyzer. Used for <strong>deep packet inspection</strong>, capturing and decoding frames to inspect protocols layer-by-layer (based on the OSI Model).</li>
+        <li><strong>tcpdump / Tshark:</strong> Command-line network packet analyzers.</li>
+        <li><strong>Network Taps / Span Ports:</strong> Methods (hardware or switch features) used to copy network traffic for external analysis.</li>
+      </ul>
+
+      <h2 data-aos="fade-up">Wireshark Filters</h2>
+      <ul data-aos="fade-up">
+        <li><strong>Capture Filters</strong> (e.g., <code>tcp port 80</code>): Used to filter packets <em>before</em> they are captured, reducing the data volume.</li>
+        <li><strong>Display Filters</strong> (e.g., <code>ip.addr == x.x.x.x</code>): Used to filter or refine the view of packets <em>after</em> they have already been captured.</li>
+      </ul>
+
+      <div class="cinematic-quote" data-aos="fade-up">
+        <div class="quote-marks left">“</div>
+        <div class="quote-marks right">”</div>
+        <div class="quote-text">
+          Every packet<br>
+          tells a story.<br><br>
+          Learn to read it<br>
+          before it reads you.
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <script>
+    AOS.init({
+      duration: 1100,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 80
+    });
+
+    setTimeout(() => {
+      document.querySelector('.back').style.opacity = '1';
+    }, 500);
+  </script>
+</body>
+</html>
