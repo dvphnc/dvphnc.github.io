@@ -166,8 +166,92 @@
       font-size:0.98rem; color:#888; font-weight:600;
       letter-spacing:0.8px; text-transform:uppercase; margin-top:0.4rem;
     }
-    .contact { font-size:1.4rem; color:#ccc; line-height:2; }
-    .contact a { color:#007AFF; text-decoration:none; }
+    
+        /* ——— NEW GORGEOUS CONTACT CARD ——— */
+    .contact-card {
+      max-width: 720px;
+      margin: 0 auto;
+      background: rgba(28,28,30,0.92);
+      backdrop-filter: blur(32px);
+      border-radius: 36px;
+      padding: 4.5rem 3rem;
+      border: 1px solid rgba(255,255,255,0.11);
+      box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--apple);
+      opacity: 0.08;
+      filter: blur(120px);
+    }
+    .contact-content { position: relative; z-index: 2; text-align: center; }
+    .contact-card h3 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      background: var(--apple);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    .contact-card p {
+      font-size: 1.45rem;
+      color: #ccc;
+      margin: 1.2rem 0;
+    }
+    .email-btn {
+      display: inline-block;
+      margin: 2rem 0;
+      padding: 1rem 2.6rem;
+      background: var(--apple);
+      color: #000;
+      font-weight: 700;
+      font-size: 1.35rem;
+      border-radius: 20px;
+      text-decoration: none;
+      transition: all 0.4s;
+      box-shadow: 0 12px 40px rgba(0,122,255,0.35);
+    }
+    .email-btn:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(0,122,255,0.5);
+    }
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 2.4rem;
+      margin-top: 2.8rem;
+      flex-wrap: wrap;
+    }
+    .social-links a {
+      width: 68px;
+      height: 68px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.9rem;
+      color: #fff;
+      text-decoration: none;
+      transition: all 0.5s;
+      border: 1px solid rgba(255,255,255,0.14);
+    }
+    .social-links a:hover {
+      transform: translateY(-10px);
+      background: rgba(255,255,255,0.18);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    @media (max-width: 768px) {
+      .contact-card { padding: 3.5rem 2rem; margin: 0 1.5rem; }
+      .contact-card h3 { font-size: 2.2rem; }
+      .social-links a { width: 58px; height: 58px; font-size: 1.6rem; }
+    }
 
     /* SyberVault Intro Text */
     .vault-intro {
@@ -269,11 +353,36 @@
     <div class="albums-grid" id="grid"></div>
   </section>
 
+    <!-- ONLY THE CONTACT SECTION IS REPLACED BELOW -->
   <section id="contact" data-aos="fade-up">
     <h2 data-aos="fade-up">Contact</h2>
-    <div class="contact" data-aos="fade-up" data-aos-delay="200">
-      <p>Available for freelance pentesting & consulting</p>
-      <p><a href="mailto:your@email.com">your@email.com</a> • GitHub • LinkedIn</p>
+
+    <div class="contact-card" data-aos="zoom-in" data-aos-delay="300">
+      <div class="contact-content">
+        <h3>Let's Build Something Secure</h3>
+        <p>Available for freelance pentesting, web development & UI/UX projects</p>
+        <a href="mailto:joanadaphnesy@gmail.com" class="email-btn">
+          joanadaphnesy@gmail.com
+        </a>
+
+        <div class="social-links">
+          <a href="https://github.com/yourusername" target="_blank" aria-label="GitHub">
+            GitHub
+          </a>
+          <a href="https://linkedin.com/in/yourusername" target="_blank" aria-label="LinkedIn">
+            LinkedIn
+          </a>
+          <a href="https://twitter.com/yourusername" target="_blank" aria-label="Twitter">
+            Twitter
+          </a>
+          <a href="https://tryhackme.com/p/yourusername" target="_blank" aria-label="TryHackMe">
+            TryHackMe
+          </a>
+          <a href="https://hackthebox.com/profile/yourid" target="_blank" aria-label="HackTheBox">
+            HackTheBox
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
