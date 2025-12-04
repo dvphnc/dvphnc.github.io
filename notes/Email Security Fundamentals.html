@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Security Fundamentals • dvphnc SyberVault</title>
+  <meta name="description" content="A quick guide to keeping your inbox safe">
+
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <style>
+    :root {
+      --grad: linear-gradient(120deg,
+        #1a2766 0%,
+        #243595 18%,
+        #3a55b8 35%,
+        #6b82d4 50%,
+        #fc9f32 68%,
+        #ffaf4d 82%,
+        #fc9f32 100%
+      );
+      --accent: #fc9f32;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'SF Pro Display', -apple-system, sans-serif;
+      background: #000;
+      color: #ffe8c2;
+      line-height: 1.9;
+      font-size: 1.25rem;
+      overflow-x: hidden;
+    }
+    .container { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    .back {
+      position: fixed; top: 2.5rem; left: 2.5rem; z-index: 1000;
+      color: var(--accent); text-decoration: none; font-weight: 600; font-size: 1.15rem;
+      background: rgba(252,159,50,0.15); padding: 0.8rem 1.6rem; border-radius: 20px;
+      backdrop-filter: blur(12px); border: 1px solid rgba(252,159,50,0.3);
+      opacity: 0; transition: all 0.4s;
+    }
+    .back:hover { background: rgba(252,159,50,0.28); transform: translateY(-4px); }
+
+    header { text-align: center; padding: 8rem 0 4rem; }
+    h1 {
+      font-size: 7.2rem; font-weight: 900; line-height: 1.1; letter-spacing: -3px;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .subtitle { font-size: 2.1rem; color: #ffbf66; margin-top: 1rem; font-weight: 500; }
+
+    .cover {
+      max-width: 820px; margin: 4rem auto;
+      border-radius: 42px; overflow: hidden;
+      box-shadow: 0 80px 180px rgba(252,159,50,0.6);
+      border: 2px solid rgba(252,159,50,0.35);
+    }
+    .cover img { width: 100%; display: block; transition: transform 1.2s ease; }
+    .cover:hover img { transform: scale(1.06); }
+
+    h2, h3 {
+      font-size: 4.2rem; font-weight: 800; text-align: center;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin: 5rem 0 2rem;
+    }
+    h3 { font-size: 3.4rem; margin: 4rem 0 1.8rem; }
+
+    p, li {
+      margin: 1.4rem 0;
+      color: #ffe8c2; font-size: 1.3rem;
+    }
+    strong { color: #ffffff; font-weight: 700; }
+
+    ul { padding-left: 2.8rem; margin: 2rem 0; }
+    li { margin: 1rem 0; font-size: 1.32rem; color: #ffe8c2; }
+    li::marker { color: var(--accent); font-size: 1.4em; }
+
+    .cinematic-quote {
+      margin: 10rem auto;
+      padding: 6rem 3rem;
+      max-width: 960px; text-align: center; position: relative;
+      background: radial-gradient(circle at center, rgba(252,159,50,.25) 0%, transparent 70%);
+      border-radius: 40px; overflow: hidden;
+      border: 1px solid rgba(252,159,50,0.28); backdrop-filter: blur(20px);
+    }
+    .cinematic-quote::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--grad); opacity: .2; filter: blur(150px);
+    }
+    .quote-text {
+      position: relative; font-size: 4rem; font-weight: 900; line-height: 1.4;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 110px rgba(252,159,50,.95);
+    }
+    .quote-marks {
+      font-size: 15rem; font-weight: 100; opacity: .09; position: absolute; pointer-events: none;
+      color: #fc9f32;
+    }
+    .quote-marks.left { top: -3.5rem; left: -2rem; }
+    .quote-marks.right { bottom: -4.5rem; right: -2rem; transform: scaleX(-1); }
+  </style>
+</head>
+<body>
+
+  <a href="../index.html" class="back" data-aos="fade-down">Vault</a>
+
+  <div class="container">
+    <header data-aos="fade-up">
+      <h1 data-aos="fade-up" data-aos-delay="200">
+        Email Security<br>Fundamentals
+      </h1>
+      <p class="subtitle" data-aos="fade-up" data-aos-delay="400">
+        A quick guide to keeping your inbox safe
+      </p>
+    </header>
+
+    <div class="cover" data-aos="zoom-in" data-aos-delay="500">
+      <img src="../covers/email-security.jpg" alt="Email Security">
+    </div>
+
+    <article>
+      <h2 data-aos="fade-up">Key Pillars of Email Security</h2>
+      <ul data-aos="fade-up">
+        <li><strong>Confidentiality:</strong> Ensures that only authorized users can access the email content.</li>
+        <li><strong>Integrity:</strong> Protects email messages from unauthorized modification or tampering.</li>
+        <li><strong>Authentication:</strong> Verifies the true identity of the sender.</li>
+        <li><strong>Non-repudiation:</strong> Prevents a sender from denying they sent an email.</li>
+      </ul>
+
+      <h2 data-aos="fade-up">Protecting Data with Encryption</h2>
+      <p data-aos="fade-up">
+        Email encryption scrambles the content, ensuring only the intended recipient can read it — preventing unauthorized access to sensitive information (PII, financial data, etc.).
+      </p>
+
+      <h3 data-aos="fade-up">Major Encryption Standards</h3>
+      <ul data-aos="fade-up">
+        <li><strong>S/MIME (Secure/Multipurpose Internet Mail Extensions):</strong> A widely used standard, especially in enterprise environments, that uses digital certificates from trusted Certificate Authorities (CAs) for encryption and digital signatures.</li>
+        <li><strong>OpenPGP (Pretty Good Privacy):</strong> An open-source standard for email security. It uses public-key cryptography and is often preferred by individuals and privacy-focused users due to its "Web of Trust" model.</li>
+      </ul>
+
+      <h2 data-aos="fade-up">Common Email Threats</h2>
+      <ul data-aos="fade-up">
+        <li><strong>Phishing:</strong> Deceptive emails designed to trick users into providing sensitive information.</li>
+        <li><strong>Spear Phishing:</strong> A targeted phishing attack using personalized information to deceive a specific individual.</li>
+        <li><strong>Email Spoofing:</strong> Forging email headers to make the message appear as if it came from a trusted source.</li>
+        <li><strong>Business Email Compromise (BEC):</strong> Compromising or impersonating email accounts to initiate fraud.</li>
+      </ul>
+
+      <h2 data-aos="fade-up">Analyzing Email Authenticity</h2>
+      <p data-aos="fade-up">
+        To detect spoofing and phishing, analysts examine email headers for authentication results:
+      </p>
+      <ul data-aos="fade-up">
+        <li><strong>SPF (Sender Policy Framework):</strong> Verifies the sender's IP address against the domain's authorized list.</li>
+        <li><strong>DKIM (DomainKeys Identified Mail):</strong> Uses a cryptographic signature to verify the message's authenticity and ensure it hasn't been tampered with.</li>
+        <li><strong>DMARC (Domain-based Message Authentication, Reporting, and Conformance):</strong> Provides policy for receiving servers on how to handle emails that fail SPF or DKIM checks.</li>
+      </ul>
+
+      <div class="cinematic-quote" data-aos="fade-up">
+        <div class="quote-marks left">“</div>
+        <div class="quote-marks right">”</div>
+        <div class="quote-text">
+          Your inbox<br>
+          is the front door<br>
+          to your digital life.<br><br>
+          Lock it<br>
+          or lose everything.
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <script>
+    AOS.init({
+      duration: 1100,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 80
+    });
+
+    setTimeout(() => {
+      document.querySelector('.back').style.opacity = '1';
+    }, 500);
+  </script>
+</body>
+</html>
