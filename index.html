@@ -677,7 +677,7 @@ const VAULT_NOTES=[
   {id:"007",title:"Email Security Fundamentals",link:"notes/Email Security Fundamentals.html",tags:"Encryption · Email",threat:"info",
    glitch:["[INFO] DKIM lookup...", "SPF records validated", "Mail server: HARDENED"]},
   {id:"008",title:"Cross-Site Scripting — CWE-79",link:"notes/CWE-79 - Cross-Site Scripting (XSS).html",tags:"OWASP Top 10",threat:"crit",
-   glitch:["[CRIT] <script>alert(1)</script>", "DOM injection SUCCESSFUL", "Severity: CRITICAL ☠"]},
+   glitch:["[CRIT] \x3Cscript\x3Ealert(1)\x3C/script\x3E", "DOM injection SUCCESSFUL", "Severity: CRITICAL \u2620"]},
   {id:"009",title:"Encryption Fundamentals",link:"notes/Encryption Fundamentals.html",tags:"Cryptography · Core",threat:"info",
    glitch:["[INFO] key exchange init...", "AES-256 handshake OK", "Encryption: ACTIVE 🔐"]},
   {id:"010",title:"Web App Security — Intro",link:"notes/Introduction to Web Application Security.html",tags:"OWASP · Fundamentals",threat:"med",
@@ -767,3 +767,14 @@ function observeCerts(){
         cio.unobserve(e.target);
       }
     });
+   });
+  certs.forEach(c=>cio.observe(c));
+}
+observeCerts();
+
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('sc',scrollY>50);
+},{passive:true});
+</script>
+</body>
+</html>
