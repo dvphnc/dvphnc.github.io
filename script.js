@@ -238,13 +238,22 @@ function buildContact() {
 buildContact();
 
 /* ══ LOADER EXIT ══ */
-window.addEventListener('DOMContentLoaded', () => {
+(function initLoader() {
   const loader = document.getElementById('loader');
   if (!loader) return;
+
+  /* Hard failsafe — if something goes wrong, force-dismiss after 5s */
+  const failsafe = setTimeout(() => {
+    loader.style.display = 'none';
+    const nav = document.getElementById('nav');
+    if (nav) nav.classList.add('vis');
+    typeWriter();
+  }, 5000);
 
   setTimeout(() => {
     loader.classList.add('exit');
     setTimeout(() => {
+      clearTimeout(failsafe);
       loader.style.display = 'none';
 
       const nav = document.getElementById('nav');
@@ -266,7 +275,7 @@ window.addEventListener('DOMContentLoaded', () => {
       setTimeout(typeWriter, 200);
     }, 600);
   }, 2400);
-});
+})();
 
 /* ══ SCROLL REVEAL — looped ══ */
 const io = new IntersectionObserver(entries => {
