@@ -5,254 +5,288 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>dvphnc — Joana Daphne Sy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- CURSOR -->
 <div id="cur"></div>
 <div id="cur-r"></div>
-
-<!-- BACKGROUND WAVE -->
 <canvas id="wave-canvas"></canvas>
 
-<!-- ══ LOADER ══ -->
+<!-- LOADER -->
 <div id="loader">
-  <div class="ld-ey">// initializing system</div>
-  <div class="ld-brand">
-    <span class="ld-c" style="animation-delay:.10s">d</span>
-    <span class="ld-c" style="animation-delay:.20s">v</span>
-    <span class="ld-c" style="animation-delay:.30s">p</span>
-    <span class="ld-c" style="animation-delay:.40s">h</span>
-    <span class="ld-c" style="animation-delay:.50s">n</span>
-    <span class="ld-c" style="animation-delay:.60s">c</span>
+  <div class="ld-tag">// initializing</div>
+  <div class="ld-name">
+    <span class="ld-c" style="animation-delay:.08s">d</span>
+    <span class="ld-c" style="animation-delay:.16s">v</span>
+    <span class="ld-c" style="animation-delay:.24s">p</span>
+    <span class="ld-c" style="animation-delay:.32s">h</span>
+    <span class="ld-c" style="animation-delay:.40s">n</span>
+    <span class="ld-c" style="animation-delay:.48s">c</span>
   </div>
   <div class="ld-sub">Joana Daphne Sy · Security + Web Dev</div>
   <div class="ld-log">
-    <span class="ld-ll">&gt; boot portfolio.sys .................. OK</span>
-    <span class="ld-ll">&gt; load frontend modules ............... OK</span>
-    <span class="ld-ll">&gt; mount SyberVault .................... OK</span>
-    <span class="ld-ll">&gt; sync certifications ................. OK</span>
-    <span class="ld-ll">&gt; render interface .................... ██</span>
+    <span class="ld-ll">&gt; boot portfolio.sys .............. OK</span>
+    <span class="ld-ll">&gt; load frontend stack ............. OK</span>
+    <span class="ld-ll">&gt; mount SyberVault ................ OK</span>
+    <span class="ld-ll">&gt; render interface ................ ██</span>
   </div>
-  <div class="ld-bar-w"><div class="ld-bar"></div></div>
-  <div class="ld-pct">dvphnc.sys · v2025</div>
+  <div class="ld-bar-wrap"><div class="ld-bar"></div></div>
+  <div class="ld-ver">dvphnc.sys · v2025</div>
 </div>
 
-<!-- ══ NAV ══ -->
-<nav id="nav">
-  <div class="nav-brand"><div class="nav-dot"></div>dvphnc</div>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Stack</a></li>
-    <li><a href="#certs">Certs</a></li>
-    <li><a href="#vault">Vault</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <div class="nav-r">
-    <span class="nav-status"></span>
-    <span id="clock">--:--:--</span>
-  </div>
-</nav>
+<!-- APP SHELL: sidebar + content -->
+<div id="app">
 
-<!-- ══ HERO ══ -->
-<section id="hero">
-  <div class="hero-ey" id="hero-ey">// system entry · dvphnc.sys</div>
-
-  <h1 class="hero-h1">
-    <span id="tw-line">
-      <span id="tw-text"></span><span class="tw-cur"></span>
-    </span>
-    <span class="hw-name">
-      <span class="hw-name-inner" id="hw-fixed">I'm Daphne.</span>
-    </span>
-  </h1>
-
-  <div class="hero-foot" id="hero-foot">
-    <p class="hero-blurb">
-      I build interfaces that <strong>feel precise</strong> — then spend the rest of my
-      time figuring out how to <strong>break them open.</strong> That tension between
-      making and unmaking is where I live.
-    </p>
-    <div class="hero-ctas">
-      <a href="#vault" class="btn btn-solid">SyberVault ↗</a>
-      <a href="#contact" class="btn btn-ghost">Contact</a>
-    </div>
-  </div>
-
-  <div class="hero-stats" id="hero-stats">
-    <div><span class="hst-n">12</span><span class="hst-l">Vault entries</span></div>
-    <div><span class="hst-n">6+</span><span class="hst-l">Certifications</span></div>
-    <div><span class="hst-n">3rd</span><span class="hst-l">Year IT</span></div>
-    <div><span class="hst-n">∞</span><span class="hst-l">Late nights</span></div>
-  </div>
-
-  <div id="scroll-pill" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
-    <div class="sp-dot"></div>
-  </div>
-</section>
-
-<hr class="sec-divider">
-
-<!-- ══ ABOUT ══ -->
-<section class="sec-full" id="about">
-  <div class="sec-eyebrow sr">// about</div>
-  <div class="about-wrap">
-    <div>
-      <h2 class="about-pull sr d1">
-        I like knowing<br>how things work.<br>
-        <span class="ghost">Especially the parts<br>that break.</span>
-      </h2>
-      <div class="about-body sr d2">
-        <p>I'm <strong>Joana Daphne Sy</strong>, going by <strong>dvphnc</strong> online — a 3rd-year IT student in Quezon City obsessed with the overlap between building and breaking.</p>
-        <p>Half my time goes into <strong>full-stack web development</strong> with Laravel and React. The other half goes into <strong>security research</strong>: running CTFs, documenting exploits, and grinding the ISC2 CC curriculum for a June 2026 exam.</p>
-        <p>I document everything in <strong>SyberVault</strong> — my public knowledge base for vulnerability research and security concepts I want to actually remember.</p>
+  <!-- SIDEBAR -->
+  <aside id="sidebar">
+    <div class="sb-top">
+      <div class="sb-logo">
+        <div class="sb-logo-dot"></div>
+        <span>dvphnc</span>
       </div>
+      <div class="sb-tagline">Joana Daphne Sy</div>
+      <div class="sb-role">Frontend Dev &amp; Security Researcher</div>
     </div>
-    <div class="sr d3">
-      <div class="term">
-        <div class="term-bar">
-          <div class="td t1"></div><div class="td t2"></div><div class="td t3"></div>
-          <div class="term-title">dvphnc@machine ~ whoami</div>
-        </div>
-        <div class="term-body">
-          <span class="tp">→ </span><span class="tc">cat identity.json</span><br>
-          <span class="to">{</span><br>
-          &nbsp;&nbsp;<span class="tk">"name"</span><span class="to">:&nbsp;</span><span class="tv">"Joana Daphne Sy"</span><span class="to">,</span><br>
-          &nbsp;&nbsp;<span class="tk">"handle"</span><span class="to">:&nbsp;</span><span class="tv">"dvphnc"</span><span class="to">,</span><br>
-          &nbsp;&nbsp;<span class="tk">"roles"</span><span class="to">:&nbsp;[</span><span class="tv">"Frontend Dev"</span><span class="to">,&nbsp;</span><span class="tv">"Security Researcher"</span><span class="to">],</span><br>
-          &nbsp;&nbsp;<span class="tk">"stack"</span><span class="to">:&nbsp;</span><span class="tv">"React · Laravel · MySQL"</span><span class="to">,</span><br>
-          &nbsp;&nbsp;<span class="tk">"tools"</span><span class="to">:&nbsp;</span><span class="tv">"Burp Suite · Wireshark · Git"</span><span class="to">,</span><br>
-          &nbsp;&nbsp;<span class="tk">"location"</span><span class="to">:&nbsp;</span><span class="tv">"Quezon City, PH"</span><span class="to">,</span><br>
-          &nbsp;&nbsp;<span class="tk">"status"</span><span class="to">:&nbsp;</span><span class="tv">"open to work"</span><span class="to">,</span><br>
-          &nbsp;&nbsp;<span class="tk">"exam"</span><span class="to">:&nbsp;</span><span class="tv">"ISC2 CC · June 2026"</span><br>
-          <span class="to">}</span><br>
-          <span class="tp">→ </span><span class="tcur"></span>
-        </div>
+
+    <nav class="sb-nav">
+      <a href="#home"    class="sb-link active" data-s="home">
+        <span class="sb-num">00</span><span class="sb-txt">Home</span>
+      </a>
+      <a href="#about"   class="sb-link" data-s="about">
+        <span class="sb-num">01</span><span class="sb-txt">About</span>
+      </a>
+      <a href="#stack"   class="sb-link" data-s="stack">
+        <span class="sb-num">02</span><span class="sb-txt">Stack</span>
+      </a>
+      <a href="#certs"   class="sb-link" data-s="certs">
+        <span class="sb-num">03</span><span class="sb-txt">Certifications</span>
+      </a>
+      <a href="#vault"   class="sb-link" data-s="vault">
+        <span class="sb-num">04</span><span class="sb-txt">SyberVault</span>
+      </a>
+      <a href="#contact" class="sb-link" data-s="contact">
+        <span class="sb-num">05</span><span class="sb-txt">Contact</span>
+      </a>
+    </nav>
+
+    <div class="sb-bottom">
+      <div class="sb-status">
+        <span class="sb-status-dot"></span>Available for work
       </div>
+      <div class="sb-clock" id="clock">--:--:--</div>
     </div>
-  </div>
-</section>
+  </aside>
 
-<hr class="sec-divider">
+  <!-- MAIN CONTENT -->
+  <main id="content">
 
-<!-- ══ STACK ══ -->
-<section class="sec-full" id="skills">
-  <div class="sec-eyebrow sr">// stack · tools</div>
-  <div class="stack-scroll-wrap sr d1">
-    <div class="stack-track" id="stack-track"></div>
-  </div>
-</section>
-
-<hr class="sec-divider">
-
-<!-- ══ CERTIFICATIONS ══ -->
-<section class="sec-full" id="certs">
-  <div class="sec-eyebrow sr">// certifications</div>
-  <div class="cert-list">
-    <a class="cr" href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=C40D337A86BE52AE8C02A90C0BC838A9226F3044D11CF05F86A518AAFDF7103F" target="_blank">
-      <div class="cr-org">☁️</div>
-      <div><div class="cr-name">Oracle Cloud Infrastructure 2024 — AI Foundations Associate</div><div class="cr-meta">Oracle · 2024–2026</div></div>
-      <span class="cr-badge ba">Active</span><span class="cr-arr">↗</span>
-    </a>
-    <a class="cr" href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=D43A8C93FE30161F5AF6077AE49AB9FE797A13EA6EB10947B7E30B9B0DFD2DC1" target="_blank">
-      <div class="cr-org">☁️</div>
-      <div><div class="cr-name">Oracle Cloud Infrastructure 2024 — Foundations Associate</div><div class="cr-meta">Oracle · 2024–2026</div></div>
-      <span class="cr-badge ba">Active</span><span class="cr-arr">↗</span>
-    </a>
-    <a class="cr" href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=D43A8C93FE30161F5AF6077AE49AB9FE612D8698DFBD1116CC92691601BF4C03" target="_blank">
-      <div class="cr-org">☁️</div>
-      <div><div class="cr-name">Oracle Cloud Infrastructure 2024 — Data Foundations Associate</div><div class="cr-meta">Oracle · 2024–2026</div></div>
-      <span class="cr-badge ba">Active</span><span class="cr-arr">↗</span>
-    </a>
-    <a class="cr" href="https://www.linkedin.com/learning/certificates/f41501f6eb854424385a648f7e826349e9b04b92a62885f6f95aca9b3bdb5e67" target="_blank">
-      <div class="cr-org">🎨</div>
-      <div><div class="cr-name">Essential Skills in Generative AI for Creatives</div><div class="cr-meta">Adobe · LinkedIn Learning</div></div>
-      <span class="cr-badge ba">Active</span><span class="cr-arr">↗</span>
-    </a>
-    <a class="cr" href="https://www.coursera.org/account/accomplishments/specialization/Y05IYRFJA1MY" target="_blank">
-      <div class="cr-org">🔐</div>
-      <div><div class="cr-name">Certified in Cybersecurity (CC) — Specialization</div><div class="cr-meta">ISC2 · Coursera</div></div>
-      <span class="cr-badge ba">Active</span><span class="cr-arr">↗</span>
-    </a>
-    <div class="cr dim">
-      <div class="cr-org" style="opacity:.3">🏆</div>
-      <div><div class="cr-name">ISC2 Certified in Cybersecurity — Official Proctored Exam</div><div class="cr-meta">Target: June 2026 · In Preparation</div></div>
-      <span class="cr-badge bs">Upcoming</span><span></span>
-    </div>
-  </div>
-</section>
-
-<hr class="sec-divider">
-
-<!-- ══ VAULT ══ -->
-<section class="sec-full" id="vault">
-  <div class="sec-eyebrow sr">// sybervault</div>
-  <div class="vault-header">
-    <h2 class="vault-h sr d1">
-      Everything I've<br>learned by<br>
-      <span class="ghost">breaking things.</span>
-    </h2>
-    <p class="vault-blurb sr d2">
-      My running documentation of security concepts, CTF solutions, and vulnerability
-      research. Hover any card to trigger a <strong>fake vulnerability scan</strong>.
-      Written for myself — readable by anyone.
-    </p>
-  </div>
-  <div class="vault-grid sr d2" id="vault-grid"></div>
-</section>
-
-<hr class="sec-divider">
-
-<!-- ══ CONTACT ══ -->
-<section class="sec-full" id="contact">
-  <div class="sec-eyebrow sr">// contact</div>
-  <div class="scroll-hint sr">
-    <span class="sh-arrow">→</span> scroll to explore
-  </div>
-  <div class="contact-scroll-wrap sr d1">
-    <div class="contact-track" id="contact-track">
-
-      <!-- Headline card -->
-      <div class="contact-hero-card">
-        <div class="ch-avail"><span class="avail-dot"></span>Available for work</div>
-        <div class="ch-headline">
-          Got a project<br>or a system<br>
-          <span class="ghost">that needs fixing?</span>
+    <!-- HOME -->
+    <section id="home" class="section">
+      <div class="home-inner">
+        <div class="home-tag sr" id="home-tag">// system entry · dvphnc.sys</div>
+        <h1 class="home-h1">
+          <span class="h1-tw"><span id="tw-text"></span><span class="tw-cur"></span></span>
+          <span class="h1-name"><span class="h1-name-in" id="hw-name">I'm Daphne.</span></span>
+        </h1>
+        <p class="home-blurb sr" id="home-blurb">
+          I build interfaces that <strong>feel precise</strong> — then spend the rest of my time figuring out how to <strong>break them open.</strong> That tension between making and unmaking is where I live.
+        </p>
+        <div class="home-ctas sr" id="home-ctas">
+          <a href="#vault" class="btn btn-primary">SyberVault ↗</a>
+          <a href="#contact" class="btn btn-outline">Get in touch</a>
         </div>
-        <p class="ch-txt">Open to web dev contracts, UI work, freelance security reviews,
-        and anything at the intersection of both.</p>
-        <a href="mailto:jdsoffcl@gmail.com" class="ch-email">jdsoffcl@gmail.com</a>
-      </div>
 
-      <!-- Social cards injected by script.js -->
-
-      <!-- Metrics card -->
-      <div class="metrics-card">
-        <div class="mc-head">// numbers</div>
-        <div class="mc-grid">
-          <div class="mc-cell"><span class="mc-n">12</span><span class="mc-l">Vault entries</span></div>
-          <div class="mc-cell"><span class="mc-n">6+</span><span class="mc-l">Certifications</span></div>
-          <div class="mc-cell"><span class="mc-n">3rd</span><span class="mc-l">Year IT</span></div>
-          <div class="mc-cell"><span class="mc-n">5</span><span class="mc-l">Exploit types</span></div>
-          <div class="mc-cell"><span class="mc-n">2</span><span class="mc-l">Frameworks</span></div>
-          <div class="mc-cell">
-            <span class="mc-n" style="font-size:1.2rem;line-height:1.3">June<br>2026</span>
-            <span class="mc-l">ISC2 CC exam</span>
+        <!-- bento row -->
+        <div class="home-bento sr" id="home-bento">
+          <div class="bc bc-stat">
+            <span class="bs-n">12</span><span class="bs-l">Vault Entries</span>
+          </div>
+          <div class="bc bc-stat">
+            <span class="bs-n">6+</span><span class="bs-l">Certifications</span>
+          </div>
+          <div class="bc bc-stat">
+            <span class="bs-n">3rd</span><span class="bs-l">Year IT</span>
+          </div>
+          <div class="bc bc-stat">
+            <span class="bs-n">∞</span><span class="bs-l">Late nights</span>
+          </div>
+          <div class="bc bc-wide">
+            <div class="bw-eyebrow">// currently studying</div>
+            <div class="bw-title">ISC2 Certified in Cybersecurity</div>
+            <div class="bw-sub">Exam target: June 2026</div>
+            <div class="bw-bar-bg"><div class="bw-bar-fill"></div></div>
+            <div class="bw-pct">~70% prep complete</div>
+          </div>
+          <div class="bc bc-loc">
+            <span class="bl-pin">📍</span>
+            <div>
+              <div class="bl-city">Quezon City</div>
+              <div class="bl-ctry">Philippines</div>
+            </div>
           </div>
         </div>
       </div>
 
-    </div>
-  </div>
-</section>
+      <div id="scroll-pill" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+        <div class="sp-dot"></div>
+      </div>
+    </section>
 
-<!-- ══ FOOTER ══ -->
-<footer>
-  <div class="ft-l"><span>dvphnc</span> · Joana Daphne Sy</div>
-  <div class="ft-r">© 2025 · SyberVault · QC, PH</div>
-</footer>
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="sec-head sr">
+        <span class="sec-n">01</span>
+        <h2 class="sec-t">About</h2>
+      </div>
+      <div class="about-grid">
+        <div>
+          <p class="about-pull sr">I like knowing how things work.<br><span class="text-dim">Especially the parts that break.</span></p>
+          <div class="about-body sr d1">
+            <p>I'm <strong>Joana Daphne Sy</strong>, going by <strong>dvphnc</strong> online — a 3rd-year IT student in Quezon City obsessed with the overlap between building and breaking.</p>
+            <p>Half my time goes into <strong>full-stack web development</strong> with Laravel and React. The other half goes into <strong>security research</strong>: running CTFs, documenting exploits, and grinding the ISC2 CC curriculum.</p>
+            <p>I document everything in <strong>SyberVault</strong> — my public knowledge base for vulnerability research and concepts I want to actually remember.</p>
+          </div>
+        </div>
+        <div class="sr d2">
+          <div class="term">
+            <div class="term-bar">
+              <div class="td t1"></div><div class="td t2"></div><div class="td t3"></div>
+              <div class="term-title">dvphnc@machine ~ whoami</div>
+            </div>
+            <div class="term-body">
+              <span class="tp">→ </span><span class="tc">cat identity.json</span><br>
+              <span class="to">{</span><br>
+              &nbsp;&nbsp;<span class="tk">"name"</span><span class="to">: </span><span class="tv">"Joana Daphne Sy"</span><span class="to">,</span><br>
+              &nbsp;&nbsp;<span class="tk">"handle"</span><span class="to">: </span><span class="tv">"dvphnc"</span><span class="to">,</span><br>
+              &nbsp;&nbsp;<span class="tk">"roles"</span><span class="to">: [</span><span class="tv">"Frontend Dev"</span><span class="to">, </span><span class="tv">"Security Researcher"</span><span class="to">],</span><br>
+              &nbsp;&nbsp;<span class="tk">"stack"</span><span class="to">: </span><span class="tv">"React · Laravel · MySQL"</span><span class="to">,</span><br>
+              &nbsp;&nbsp;<span class="tk">"tools"</span><span class="to">: </span><span class="tv">"Burp · Wireshark · Git"</span><span class="to">,</span><br>
+              &nbsp;&nbsp;<span class="tk">"location"</span><span class="to">: </span><span class="tv">"Quezon City, PH"</span><span class="to">,</span><br>
+              &nbsp;&nbsp;<span class="tk">"status"</span><span class="to">: </span><span class="tv">"open to work"</span><span class="to">,</span><br>
+              &nbsp;&nbsp;<span class="tk">"exam"</span><span class="to">: </span><span class="tv">"ISC2 CC · June 2026"</span><br>
+              <span class="to">}</span><br>
+              <span class="tp">→ </span><span class="tcur"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STACK -->
+    <section id="stack" class="section">
+      <div class="sec-head sr">
+        <span class="sec-n">02</span>
+        <h2 class="sec-t">Stack</h2>
+      </div>
+      <div class="stack-strip-wrap sr d1">
+        <div class="stack-track" id="stack-track"></div>
+      </div>
+      <div class="skill-grid sr d2" id="skill-grid"></div>
+    </section>
+
+    <!-- CERTS -->
+    <section id="certs" class="section">
+      <div class="sec-head sr">
+        <span class="sec-n">03</span>
+        <h2 class="sec-t">Certifications</h2>
+      </div>
+      <div class="cert-list">
+        <a class="cert-row" href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=C40D337A86BE52AE8C02A90C0BC838A9226F3044D11CF05F86A518AAFDF7103F" target="_blank">
+          <div class="ci">☁️</div>
+          <div class="ci-info"><div class="ci-name">Oracle Cloud Infrastructure 2024 — AI Foundations Associate</div><div class="ci-meta">Oracle · 2024–2026</div></div>
+          <span class="ci-badge active">Active</span><span class="ci-arr">↗</span>
+        </a>
+        <a class="cert-row" href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=D43A8C93FE30161F5AF6077AE49AB9FE797A13EA6EB10947B7E30B9B0DFD2DC1" target="_blank">
+          <div class="ci">☁️</div>
+          <div class="ci-info"><div class="ci-name">Oracle Cloud Infrastructure 2024 — Foundations Associate</div><div class="ci-meta">Oracle · 2024–2026</div></div>
+          <span class="ci-badge active">Active</span><span class="ci-arr">↗</span>
+        </a>
+        <a class="cert-row" href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=D43A8C93FE30161F5AF6077AE49AB9FE612D8698DFBD1116CC92691601BF4C03" target="_blank">
+          <div class="ci">☁️</div>
+          <div class="ci-info"><div class="ci-name">Oracle Cloud Infrastructure 2024 — Data Foundations Associate</div><div class="ci-meta">Oracle · 2024–2026</div></div>
+          <span class="ci-badge active">Active</span><span class="ci-arr">↗</span>
+        </a>
+        <a class="cert-row" href="https://www.linkedin.com/learning/certificates/f41501f6eb854424385a648f7e826349e9b04b92a62885f6f95aca9b3bdb5e67" target="_blank">
+          <div class="ci">🎨</div>
+          <div class="ci-info"><div class="ci-name">Essential Skills in Generative AI for Creatives</div><div class="ci-meta">Adobe · LinkedIn Learning</div></div>
+          <span class="ci-badge active">Active</span><span class="ci-arr">↗</span>
+        </a>
+        <a class="cert-row" href="https://www.coursera.org/account/accomplishments/specialization/Y05IYRFJA1MY" target="_blank">
+          <div class="ci">🔐</div>
+          <div class="ci-info"><div class="ci-name">Certified in Cybersecurity (CC) — Specialization</div><div class="ci-meta">ISC2 · Coursera</div></div>
+          <span class="ci-badge active">Active</span><span class="ci-arr">↗</span>
+        </a>
+        <div class="cert-row dim">
+          <div class="ci" style="opacity:.35">🏆</div>
+          <div class="ci-info"><div class="ci-name">ISC2 Certified in Cybersecurity — Official Proctored Exam</div><div class="ci-meta">Target: June 2026 · In Preparation</div></div>
+          <span class="ci-badge soon">Upcoming</span><span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- VAULT -->
+    <section id="vault" class="section">
+      <div class="sec-head sr">
+        <span class="sec-n">04</span>
+        <h2 class="sec-t">SyberVault</h2>
+      </div>
+      <p class="vault-intro sr">
+        Running documentation of security concepts, CTF solutions &amp; vulnerability research.<br>
+        <span class="text-dim">Hover any card to trigger a fake vulnerability scan.</span>
+      </p>
+      <div class="vault-grid" id="vault-grid"></div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="sec-head sr">
+        <span class="sec-n">05</span>
+        <h2 class="sec-t">Contact</h2>
+      </div>
+      <div class="contact-grid">
+        <div class="sr">
+          <div class="c-avail"><span class="c-avail-dot"></span>Available for work</div>
+          <h3 class="c-headline">Got a project<br>or a system<br><span class="text-dim">that needs fixing?</span></h3>
+          <p class="c-txt">Open to web dev contracts, UI work, freelance security reviews, and anything at the intersection of both.</p>
+          <a href="mailto:jdsoffcl@gmail.com" class="c-email">jdsoffcl@gmail.com</a>
+        </div>
+        <div class="contact-right sr d1">
+          <div class="soc-list">
+            <a href="https://github.com/dvphnc" target="_blank" class="soc-row">
+              <div class="sr-ico">🐙</div>
+              <div><div class="sr-name">GitHub</div><div class="sr-handle">@dvphnc</div></div>
+              <span class="sr-arr">↗</span>
+            </a>
+            <a href="https://linkedin.com/in/dvphnc" target="_blank" class="soc-row">
+              <div class="sr-ico">💼</div>
+              <div><div class="sr-name">LinkedIn</div><div class="sr-handle">dvphnc</div></div>
+              <span class="sr-arr">↗</span>
+            </a>
+            <a href="https://tryhackme.com/p/joanadaphne.sy" target="_blank" class="soc-row">
+              <div class="sr-ico">🏴</div>
+              <div><div class="sr-name">TryHackMe</div><div class="sr-handle">joanadaphne.sy</div></div>
+              <span class="sr-arr">↗</span>
+            </a>
+            <a href="https://account.hackthebox.com/HTB-350C996E4F" target="_blank" class="soc-row">
+              <div class="sr-ico">📦</div>
+              <div><div class="sr-name">HackTheBox</div><div class="sr-handle">Profile</div></div>
+              <span class="sr-arr">↗</span>
+            </a>
+          </div>
+          <div class="metrics-grid">
+            <div class="mg-c"><span class="mg-n">12</span><span class="mg-l">Vault entries</span></div>
+            <div class="mg-c"><span class="mg-n">6+</span><span class="mg-l">Certifications</span></div>
+            <div class="mg-c"><span class="mg-n">5</span><span class="mg-l">Exploit types</span></div>
+            <div class="mg-c"><span class="mg-n">Jun '26</span><span class="mg-l">ISC2 CC exam</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
 
 <script src="script.js"></script>
 </body>
