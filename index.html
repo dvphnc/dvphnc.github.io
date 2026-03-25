@@ -57,8 +57,8 @@ a{text-decoration:none;color:inherit;}
 @keyframes bFill{to{width:100%;}}
 .ld-pct{font-family:var(--mono);font-size:.5rem;color:var(--muted);letter-spacing:.14em;opacity:0;animation:fUp .3s ease forwards 1.1s;}
 @keyframes fUp{from{opacity:0;transform:translateY(7px);}to{opacity:1;transform:none;}}
-#loader.exit{animation:ldOut .75s var(--ease) forwards;}
-@keyframes ldOut{to{clip-path:inset(0 0 100% 0);}}
+#loader.exit{animation:ldOut .6s ease forwards;pointer-events:none;}
+@keyframes ldOut{to{opacity:0;transform:translateY(-24px);}}
 
 /* ══ NAV ══ */
 nav{position:fixed;top:0;left:0;right:0;z-index:500;height:58px;padding:0 2.8rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid transparent;background:rgba(0,0,0,.75);backdrop-filter:blur(22px);opacity:0;transition:opacity .6s ease,border-color .3s;}
@@ -523,7 +523,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--rim2);padding:1.8r
         <div class="ch-avail"><span class="avail-dot"></span>Available for work</div>
         <div class="ch-headline">Got a project<br>or a system<br><span class="ghost">that needs fixing?</span></div>
         <p class="ch-txt">Open to web dev contracts, UI work, freelance security reviews, and anything at the intersection of both.</p>
-        <a href="mailto:jdsoffcl@gmail.com" class="ch-email">jdsoffcl@gmail.com</a>
+        <a href="/cdn-cgi/l/email-protection#7d17190e121b1b1e113d1a101c1411531e1210" class="ch-email"><span class="__cf_email__" data-cfemail="8ae0eef9e5ecece9e6caede7ebe3e6a4e9e5e7">[email&#160;protected]</span></a>
       </div>
       <!-- social cards — built by JS -->
       <!-- metrics card -->
@@ -547,7 +547,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--rim2);padding:1.8r
   <div class="ft-r">© 2025 · SyberVault · QC, PH</div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ══ CURSOR ══ */
 const cur=document.getElementById('cur'),curR=document.getElementById('cur-r');
 let mx=-200,my=-200,rx=-200,ry=-200;
@@ -730,6 +730,7 @@ buildContact();
 
 /* ══ LOADER EXIT ══ */
 const loader=document.getElementById('loader');
+// Total boot log ends ~2.1s after page load. Exit at 2.6s.
 setTimeout(()=>{
   loader.classList.add('exit');
   setTimeout(()=>{
@@ -744,8 +745,8 @@ setTimeout(()=>{
     ];
     seq.forEach(([el,cls,d])=>setTimeout(()=>el&&el.classList.add(cls),d));
     setTimeout(typeWriter,180);
-  },750);
-},3200);
+  },650);
+},2600);
 
 /* ══ SCROLL REVEAL — looped ══ */
 const io=new IntersectionObserver(entries=>{
@@ -766,15 +767,3 @@ function observeCerts(){
         cio.unobserve(e.target);
       }
     });
-  },{threshold:0.1});
-  certs.forEach(c=>cio.observe(c));
-}
-observeCerts();
-
-window.addEventListener('scroll',()=>{
-  const n=document.getElementById('nav');
-  n.classList.toggle('sc',scrollY>50);
-},{passive:true});
-</script>
-</body>
-</html>
