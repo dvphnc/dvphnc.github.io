@@ -1,6 +1,4 @@
-/* ═══════════════════════════════
-   CURSOR
-═══════════════════════════════ */
+/* ══ CURSOR ══ */
 const cur  = document.getElementById('cur');
 const curR = document.getElementById('cur-r');
 let mx = -200, my = -200, rx = -200, ry = -200;
@@ -17,9 +15,7 @@ document.addEventListener('mousemove', e => {
   requestAnimationFrame(tick);
 })();
 
-/* ═══════════════════════════════
-   CLOCK
-═══════════════════════════════ */
+/* ══ CLOCK ══ */
 function tickClock() {
   const d = new Date();
   const el = document.getElementById('clock');
@@ -31,9 +27,7 @@ function tickClock() {
 setInterval(tickClock, 1000);
 tickClock();
 
-/* ═══════════════════════════════
-   WAVE CANVAS — Edwin Le style
-=══════════════════════════════ */
+/* ══ WAVE CANVAS — Edwin Le style ══ */
 (function () {
   const cv = document.getElementById('wave-canvas');
   if (!cv) return;
@@ -50,13 +44,13 @@ tickClock();
     cx.clearRect(0, 0, W, H);
     cx.fillStyle = '#000';
     cx.fillRect(0, 0, W, H);
-    const N = 52;
+    const N = 55;
     for (let i = 0; i < N; i++) {
       const p    = i / (N - 1);
       const bell = Math.sin(p * Math.PI);
-      const op   = 0.018 + 0.06 * bell;
+      const op   = 0.022 + 0.065 * bell;
       const yB   = H * (0.15 + p * 0.75);
-      const amp  = H * (0.05 + 0.11 * bell);
+      const amp  = H * (0.055 + 0.12 * bell);
       const ph   = t * 0.55 + p * 5.2;
       cx.beginPath();
       for (let px = 0; px <= W; px += 2) {
@@ -66,7 +60,7 @@ tickClock();
         const y  = yB + w * amp - nx * H * 0.28;
         px === 0 ? cx.moveTo(px, y) : cx.lineTo(px, y);
       }
-      cx.strokeStyle = `rgba(188,193,208,${op})`;
+      cx.strokeStyle = `rgba(190,195,210,${op})`;
       cx.lineWidth   = 0.4;
       cx.stroke();
     }
@@ -75,9 +69,7 @@ tickClock();
   draw();
 })();
 
-/* ═══════════════════════════════
-   TYPEWRITER — multilingual
-═══════════════════════════════ */
+/* ══ TYPEWRITER — multilingual full phrases ══ */
 const PHRASES = [
   "Hi, I'm Daphne.",
   "Hola, soy Daphne.",
@@ -122,9 +114,7 @@ async function typeWriter() {
   }
 }
 
-/* ═══════════════════════════════
-   STACK STRIP
-═══════════════════════════════ */
+/* ══ STACK STRIP ══ */
 const STACK_ITEMS = [
   { icon: '⚛️',  name: 'React',         cat: 'Frontend' },
   { icon: '🌀',  name: 'TailwindCSS',   cat: 'Styling' },
@@ -143,7 +133,6 @@ const STACK_ITEMS = [
   { icon: '🕸️',  name: 'HTML / CSS',    cat: 'Web' },
   { icon: '🐧',  name: 'Linux CLI',     cat: 'System' },
 ];
-
 function buildStack() {
   const track = document.getElementById('stack-track');
   if (!track) return;
@@ -159,9 +148,7 @@ function buildStack() {
 }
 buildStack();
 
-/* ═══════════════════════════════
-   SKILL BENTO GRID
-═══════════════════════════════ */
+/* ══ SKILL GRID ══ */
 const SKILLS = [
   { n:'01', ico:'⚛️', name:'Front-end',       list:'React · JavaScript\nHTML · CSS\nTailwindCSS' },
   { n:'02', ico:'🐘', name:'Back-end',         list:'PHP · Laravel\nMySQL · REST API\nMVC Architecture' },
@@ -187,22 +174,20 @@ function buildSkills() {
 }
 buildSkills();
 
-/* ═══════════════════════════════
-   VAULT
-═══════════════════════════════ */
+/* ══ VAULT ══ */
 const VAULT = [
-  { id:'001', title:'Importance of Cyber Security',  link:'notes/Importance of Cyber Security.html',              tags:'CIA Triad · Fundamentals',  threat:'info',  g:['[INFO] scanning target...','No critical CVEs found','Status: SECURE \u2713'] },
-  { id:'002', title:'Career in IT Security',          link:'notes/Career Opportunities in IT Security.html',      tags:'Red Team · Blue Team',       threat:'info',  g:['[INFO] profiling roles...','Red / blue team loaded','Threat model: ACTIVE'] },
-  { id:'003', title:'Cloud & Virtualization',         link:'notes/Cloud and Virtualization Fundamentals.html',    tags:'Infrastructure · Cloud',     threat:'info',  g:['[INFO] probing cloud infra...','Virtual surfaces mapped','Attack surface: MEDIUM'] },
-  { id:'004', title:'Path Traversal \u2014 CWE-35',  link:'notes/CWE-35 - Path Traversal.html',                  tags:'File System · Web',          threat:'high',  g:['[WARN] ../../etc/passwd','Directory traversal DETECTED','Severity: HIGH \u26a0'] },
-  { id:'005', title:'SQL Injection \u2014 CWE-89',   link:'notes/CWE-89 - SQL Injection.html',                   tags:'Injection · Critical',       threat:'crit',  g:["[CRIT] ' OR 1=1--",'Database COMPROMISED','Severity: CRITICAL \u2620'] },
-  { id:'006', title:'Burp Suite Fundamentals',        link:'notes/Burp Suite Introduction.html',                  tags:'Tools · Pentesting',         threat:'med',   g:['[INFO] proxy intercepting...','HTTP traffic captured','Burp Suite: RUNNING'] },
-  { id:'007', title:'Email Security Fundamentals',    link:'notes/Email Security Fundamentals.html',              tags:'Encryption · Email',         threat:'info',  g:['[INFO] DKIM lookup...','SPF records validated','Mail server: HARDENED'] },
-  { id:'008', title:'Cross-Site Scripting \u2014 CWE-79', link:'notes/CWE-79 - Cross-Site Scripting (XSS).html', tags:'OWASP Top 10',               threat:'crit',  g:['[CRIT] XSS payload injected','DOM injection SUCCESSFUL','Severity: CRITICAL \u2620'] },
-  { id:'009', title:'Encryption Fundamentals',        link:'notes/Encryption Fundamentals.html',                  tags:'Cryptography · Core',        threat:'info',  g:['[INFO] key exchange init...','AES-256 handshake OK','Encryption: ACTIVE \uD83D\uDD10'] },
-  { id:'010', title:'Web App Security \u2014 Intro', link:'notes/Introduction to Web Application Security.html', tags:'OWASP · Fundamentals',       threat:'med',   g:['[SCAN] OWASP Top 10 check...','3 findings detected','Risk level: MEDIUM \u26a0'] },
-  { id:'011', title:'OS Command Injection \u2014 CWE-78', link:'notes/CWE-78 - OS Command Injection.html',       tags:'RCE · Dangerous',            threat:'crit',  g:['[CRIT] ; cat /etc/shadow','Remote code EXECUTING','Severity: CRITICAL \u2620'] },
-  { id:'012', title:'Network Traffic Analysis',       link:'notes/Network Traffic Analysis.html',                 tags:'Security · Network',         threat:'high',  g:['[WARN] anomaly detected...','Suspicious packets: 1,447','Alert: FLAGGED \u26a0'] },
+  { id:'001', title:'Importance of Cyber Security',       link:'notes/Importance of Cyber Security.html',              tags:'CIA Triad · Fundamentals',  threat:'info',  g:['[INFO] scanning target...','No critical CVEs found','Status: SECURE \u2713'] },
+  { id:'002', title:'Career in IT Security',              link:'notes/Career Opportunities in IT Security.html',       tags:'Red Team · Blue Team',       threat:'info',  g:['[INFO] profiling roles...','Red / blue team loaded','Threat model: ACTIVE'] },
+  { id:'003', title:'Cloud & Virtualization',             link:'notes/Cloud and Virtualization Fundamentals.html',     tags:'Infrastructure · Cloud',     threat:'info',  g:['[INFO] probing cloud infra...','Virtual surfaces mapped','Attack surface: MEDIUM'] },
+  { id:'004', title:'Path Traversal \u2014 CWE-35',       link:'notes/CWE-35 - Path Traversal.html',                   tags:'File System · Web',          threat:'high',  g:['[WARN] ../../etc/passwd','Directory traversal DETECTED','Severity: HIGH \u26a0'] },
+  { id:'005', title:'SQL Injection \u2014 CWE-89',        link:'notes/CWE-89 - SQL Injection.html',                    tags:'Injection · Critical',       threat:'crit',  g:["[CRIT] ' OR 1=1--",'Database COMPROMISED','Severity: CRITICAL \u2620'] },
+  { id:'006', title:'Burp Suite Fundamentals',            link:'notes/Burp Suite Introduction.html',                   tags:'Tools · Pentesting',         threat:'med',   g:['[INFO] proxy intercepting...','HTTP traffic captured','Burp Suite: RUNNING'] },
+  { id:'007', title:'Email Security Fundamentals',        link:'notes/Email Security Fundamentals.html',               tags:'Encryption · Email',         threat:'info',  g:['[INFO] DKIM lookup...','SPF records validated','Mail server: HARDENED'] },
+  { id:'008', title:'Cross-Site Scripting \u2014 CWE-79', link:'notes/CWE-79 - Cross-Site Scripting (XSS).html',      tags:'OWASP Top 10',               threat:'crit',  g:['[CRIT] XSS payload injected','DOM injection SUCCESSFUL','Severity: CRITICAL \u2620'] },
+  { id:'009', title:'Encryption Fundamentals',            link:'notes/Encryption Fundamentals.html',                   tags:'Cryptography · Core',        threat:'info',  g:['[INFO] key exchange init...','AES-256 handshake OK','Encryption: ACTIVE \uD83D\uDD10'] },
+  { id:'010', title:'Web App Security \u2014 Intro',      link:'notes/Introduction to Web Application Security.html',  tags:'OWASP · Fundamentals',       threat:'med',   g:['[SCAN] OWASP Top 10 check...','3 findings detected','Risk level: MEDIUM \u26a0'] },
+  { id:'011', title:'OS Command Injection \u2014 CWE-78', link:'notes/CWE-78 - OS Command Injection.html',             tags:'RCE · Dangerous',            threat:'crit',  g:['[CRIT] ; cat /etc/shadow','Remote code EXECUTING','Severity: CRITICAL \u2620'] },
+  { id:'012', title:'Network Traffic Analysis',           link:'notes/Network Traffic Analysis.html',                  tags:'Security · Network',         threat:'high',  g:['[WARN] anomaly detected...','Suspicious packets: 1,447','Alert: FLAGGED \u26a0'] },
 ];
 function buildVault() {
   const vg = document.getElementById('vault-grid');
@@ -225,31 +210,52 @@ function buildVault() {
 }
 buildVault();
 
-/* ═══════════════════════════════
-   LOADER EXIT
-═══════════════════════════════ */
+/* ══ CONTACT SOCIAL CARDS ══ */
+const SOCIALS = [
+  { icon:'🐙', name:'GitHub',    handle:'@dvphnc',        url:'https://github.com/dvphnc' },
+  { icon:'💼', name:'LinkedIn',  handle:'dvphnc',          url:'https://linkedin.com/in/dvphnc' },
+  { icon:'🏴', name:'TryHackMe', handle:'joanadaphne.sy', url:'https://tryhackme.com/p/joanadaphne.sy' },
+  { icon:'📦', name:'HackTheBox',handle:'Profile',         url:'https://account.hackthebox.com/HTB-350C996E4F' },
+];
+function buildContact() {
+  const track = document.getElementById('contact-track');
+  if (!track) return;
+  const metricsCard = track.querySelector('.metrics-card');
+  SOCIALS.forEach(s => {
+    const a = document.createElement('a');
+    a.href      = s.url;
+    a.target    = '_blank';
+    a.className = 'soc-card';
+    a.innerHTML = `<span class="soc-icon">${s.icon}</span>
+                   <div>
+                     <div class="soc-name">${s.name}</div>
+                     <div class="soc-handle">${s.handle}</div>
+                   </div>
+                   <span class="soc-arr">↗</span>`;
+    track.insertBefore(a, metricsCard);
+  });
+}
+buildContact();
+
+/* ══ LOADER EXIT ══ */
 window.addEventListener('DOMContentLoaded', () => {
   const loader = document.getElementById('loader');
   if (!loader) return;
 
   setTimeout(() => {
     loader.classList.add('exit');
-
     setTimeout(() => {
       loader.style.display = 'none';
 
-      // reveal sidebar
-      const sb = document.getElementById('sidebar');
-      if (sb) sb.classList.add('vis');
+      const nav = document.getElementById('nav');
+      if (nav) nav.classList.add('vis');
 
-      // hero cascade
       const steps = [
-        ['home-tag',   'in',   0],
-        ['hw-name',    'in',  100],
-        ['home-blurb', 'in',  380],
-        ['home-ctas',  'in',  520],
-        ['home-bento', 'in',  680],
-        ['scroll-pill','in',  860],
+        ['hero-ey',    'in',   0],
+        ['hw-fixed',   'in',  100],
+        ['hero-foot',  'in',  420],
+        ['hero-stats', 'in',  600],
+        ['scroll-pill','in',  800],
       ];
       steps.forEach(([id, cls, delay]) =>
         setTimeout(() => {
@@ -260,24 +266,21 @@ window.addEventListener('DOMContentLoaded', () => {
 
       setTimeout(typeWriter, 200);
     }, 600);
-
-  }, 2400); // boot log ends ~1.75s, exit at 2.4s
+  }, 2400);
 });
 
-/* ═══════════════════════════════
-   SCROLL REVEAL (looped)
-═══════════════════════════════ */
+/* ══ SCROLL REVEAL — looped ══ */
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) e.target.classList.add('in');
     else                  e.target.classList.remove('in');
   });
-}, { threshold: 0.06, rootMargin: '0px 0px -24px 0px' });
+}, { threshold: 0.06, rootMargin: '0px 0px -28px 0px' });
 document.querySelectorAll('.sr').forEach(el => io.observe(el));
 
-/* cert stagger-in */
+/* cert stagger */
 function observeCerts() {
-  const rows = document.querySelectorAll('.cert-row:not(.dim)');
+  const rows = document.querySelectorAll('.cr:not(.dim)');
   const cio  = new IntersectionObserver(entries => {
     entries.forEach((e, i) => {
       if (e.isIntersecting) {
@@ -290,21 +293,7 @@ function observeCerts() {
 }
 observeCerts();
 
-/* ═══════════════════════════════
-   SIDEBAR ACTIVE LINK
-   (tracks scroll position)
-═══════════════════════════════ */
-const sections  = document.querySelectorAll('.section');
-const navLinks  = document.querySelectorAll('.sb-link');
-
-const sio = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      const id = e.target.id;
-      navLinks.forEach(l => {
-        l.classList.toggle('active', l.dataset.s === id);
-      });
-    }
-  });
-}, { threshold: 0.4 });
-sections.forEach(s => sio.observe(s));
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('nav');
+  if (nav) nav.classList.toggle('sc', window.scrollY > 50);
+}, { passive: true });
