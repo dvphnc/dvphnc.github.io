@@ -81,7 +81,7 @@ const PHRASES = [
   "Merhaba, ben Daphne.",
   "Olá, sou a Daphne.",
   "Hallo, ich bin Daphne.",
-  "你好，我是 Daphne。",
+  "你好，我是达芙妮。",
 ];
 let twRunning = false;
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -252,10 +252,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
       const steps = [
         ['hero-ey',    'in',   0],
-        ['hw-fixed',   'in',  100],
-        ['hero-foot',  'in',  420],
-        ['hero-stats', 'in',  600],
-        ['scroll-pill','in',  800],
+        ['hero-foot',  'in',  300],
+        ['hero-stats', 'in',  480],
+        ['scroll-pill','in',  660],
       ];
       steps.forEach(([id, cls, delay]) =>
         setTimeout(() => {
