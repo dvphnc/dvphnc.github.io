@@ -1,5 +1,7 @@
-/* ══ CURSOR ══ */
-const cur = document.getElementById('cur');
+/* ═══════════════════════════════
+   CURSOR
+═══════════════════════════════ */
+const cur  = document.getElementById('cur');
 const curR = document.getElementById('cur-r');
 let mx = -200, my = -200, rx = -200, ry = -200;
 document.addEventListener('mousemove', e => {
@@ -15,7 +17,9 @@ document.addEventListener('mousemove', e => {
   requestAnimationFrame(tick);
 })();
 
-/* ══ CLOCK ══ */
+/* ═══════════════════════════════
+   CLOCK
+═══════════════════════════════ */
 function tickClock() {
   const d = new Date();
   const el = document.getElementById('clock');
@@ -27,8 +31,10 @@ function tickClock() {
 setInterval(tickClock, 1000);
 tickClock();
 
-/* ══ WAVE CANVAS — Edwin Le style ══ */
-(function() {
+/* ═══════════════════════════════
+   WAVE CANVAS — Edwin Le style
+=══════════════════════════════ */
+(function () {
   const cv = document.getElementById('wave-canvas');
   if (!cv) return;
   const cx = cv.getContext('2d');
@@ -44,23 +50,23 @@ tickClock();
     cx.clearRect(0, 0, W, H);
     cx.fillStyle = '#000';
     cx.fillRect(0, 0, W, H);
-    const N = 55;
+    const N = 52;
     for (let i = 0; i < N; i++) {
       const p    = i / (N - 1);
       const bell = Math.sin(p * Math.PI);
-      const op   = 0.022 + 0.065 * bell;
-      const yBase  = H * (0.15 + p * 0.75);
-      const amp    = H * (0.055 + 0.12 * bell);
-      const phase  = t * 0.55 + p * 5.2;
+      const op   = 0.018 + 0.06 * bell;
+      const yB   = H * (0.15 + p * 0.75);
+      const amp  = H * (0.05 + 0.11 * bell);
+      const ph   = t * 0.55 + p * 5.2;
       cx.beginPath();
       for (let px = 0; px <= W; px += 2) {
-        const nx   = px / W;
-        const wave = Math.sin(nx * Math.PI * 2.5 + phase) * .58
-                   + Math.sin(nx * Math.PI * 1.1 + phase * .5) * .42;
-        const y    = yBase + wave * amp - nx * H * 0.28;
+        const nx = px / W;
+        const w  = Math.sin(nx * Math.PI * 2.5 + ph) * .58
+                 + Math.sin(nx * Math.PI * 1.1 + ph * .5) * .42;
+        const y  = yB + w * amp - nx * H * 0.28;
         px === 0 ? cx.moveTo(px, y) : cx.lineTo(px, y);
       }
-      cx.strokeStyle = `rgba(190,195,210,${op})`;
+      cx.strokeStyle = `rgba(188,193,208,${op})`;
       cx.lineWidth   = 0.4;
       cx.stroke();
     }
@@ -69,7 +75,9 @@ tickClock();
   draw();
 })();
 
-/* ══ TYPEWRITER — full multilingual phrases ══ */
+/* ═══════════════════════════════
+   TYPEWRITER — multilingual
+═══════════════════════════════ */
 const PHRASES = [
   "Hi, I'm Daphne.",
   "Hola, soy Daphne.",
@@ -83,9 +91,8 @@ const PHRASES = [
   "Hallo, ich bin Daphne.",
   "你好，我是 Daphne。",
 ];
-
 let twRunning = false;
-function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 async function typeWriter() {
   const el = document.getElementById('tw-text');
@@ -98,123 +105,117 @@ async function typeWriter() {
       if (!twRunning) return;
       el.textContent = phrase.slice(0, i);
       const ch = phrase[i];
-      const d = (ch === '.' || ch === '。') ? 180
-              : ch === ',' ? 110
-              : ch === ' ' ? 55
-              : 50 + Math.random() * 30;
+      const d  = (ch === '.' || ch === '。') ? 180
+               : ch === ',' ? 110
+               : ch === ' ' ? 55
+               : 50 + Math.random() * 30;
       await sleep(d);
     }
     await sleep(2000);
     for (let i = phrase.length; i >= 0; i--) {
       if (!twRunning) return;
       el.textContent = phrase.slice(0, i);
-      await sleep(28 + Math.random() * 18);
+      await sleep(26 + Math.random() * 18);
     }
-    await sleep(350);
+    await sleep(340);
     pi = (pi + 1) % PHRASES.length;
   }
 }
 
-/* ══ STACK — horizontal scroll cards ══ */
-const STACK = [
-  { icon: '⚛️', name: 'React',        cat: 'Frontend' },
-  { icon: '🌀', name: 'TailwindCSS',  cat: 'Styling' },
-  { icon: '🐘', name: 'PHP / Laravel',cat: 'Backend' },
-  { icon: '🗄️', name: 'MySQL',         cat: 'Database' },
-  { icon: '🎯', name: 'Burp Suite',   cat: 'Security' },
-  { icon: '🌐', name: 'Wireshark',    cat: 'Networking' },
-  { icon: '🐙', name: 'Git / GitHub', cat: 'Version Control' },
-  { icon: '📬', name: 'Postman',      cat: 'API Testing' },
-  { icon: '🔒', name: 'ISC2 CC',      cat: 'Certification' },
-  { icon: '🏴', name: 'TryHackMe',   cat: 'CTF Platform' },
-  { icon: '📦', name: 'HackTheBox',  cat: 'CTF Platform' },
-  { icon: '☁️', name: 'Oracle OCI',  cat: 'Cloud' },
-  { icon: '💻', name: 'VS Code',      cat: 'Editor' },
-  { icon: '🔑', name: 'Cryptography',cat: 'Security' },
-  { icon: '🕸️', name: 'HTML / CSS',   cat: 'Web' },
-  { icon: '🐧', name: 'Linux CLI',    cat: 'System' },
+/* ═══════════════════════════════
+   STACK STRIP
+═══════════════════════════════ */
+const STACK_ITEMS = [
+  { icon: '⚛️',  name: 'React',         cat: 'Frontend' },
+  { icon: '🌀',  name: 'TailwindCSS',   cat: 'Styling' },
+  { icon: '🐘',  name: 'PHP / Laravel', cat: 'Backend' },
+  { icon: '🗄️',  name: 'MySQL',          cat: 'Database' },
+  { icon: '🎯',  name: 'Burp Suite',    cat: 'Security' },
+  { icon: '🌐',  name: 'Wireshark',     cat: 'Networking' },
+  { icon: '🐙',  name: 'Git / GitHub',  cat: 'Version Control' },
+  { icon: '📬',  name: 'Postman',       cat: 'API Testing' },
+  { icon: '🔒',  name: 'ISC2 CC',       cat: 'Certification' },
+  { icon: '🏴',  name: 'TryHackMe',    cat: 'CTF Platform' },
+  { icon: '📦',  name: 'HackTheBox',   cat: 'CTF Platform' },
+  { icon: '☁️',  name: 'Oracle OCI',   cat: 'Cloud' },
+  { icon: '💻',  name: 'VS Code',       cat: 'Editor' },
+  { icon: '🔑',  name: 'Cryptography', cat: 'Security' },
+  { icon: '🕸️',  name: 'HTML / CSS',    cat: 'Web' },
+  { icon: '🐧',  name: 'Linux CLI',     cat: 'System' },
 ];
 
 function buildStack() {
   const track = document.getElementById('stack-track');
   if (!track) return;
-  const all = [...STACK, ...STACK]; // duplicate for seamless loop
+  const all = [...STACK_ITEMS, ...STACK_ITEMS];
   all.forEach(s => {
     const d = document.createElement('div');
-    d.className = 'stack-card';
-    d.innerHTML = `<div class="sc-img">${s.icon}</div>
-                   <div><div class="sc-name">${s.name}</div>
-                   <div class="sc-cat">${s.cat}</div></div>`;
+    d.className = 'sk-card';
+    d.innerHTML = `<div class="sk-ico">${s.icon}</div>
+                   <div><div class="sk-name">${s.name}</div>
+                   <div class="sk-cat">${s.cat}</div></div>`;
     track.appendChild(d);
   });
 }
 buildStack();
 
-/* ══ VAULT DATA ══ */
-const VAULT_NOTES = [
-  { id:"001", title:"Importance of Cyber Security",
-    link:"notes/Importance of Cyber Security.html",
-    tags:"CIA Triad · Fundamentals", threat:"info",
-    glitch:["[INFO] scanning target...", "No critical CVEs found", "Status: SECURE ✓"] },
-  { id:"002", title:"Career in IT Security",
-    link:"notes/Career Opportunities in IT Security.html",
-    tags:"Red Team · Blue Team", threat:"info",
-    glitch:["[INFO] profiling roles...", "Red team vs blue team loaded", "Threat model: ACTIVE"] },
-  { id:"003", title:"Cloud & Virtualization",
-    link:"notes/Cloud and Virtualization Fundamentals.html",
-    tags:"Infrastructure · Cloud", threat:"info",
-    glitch:["[INFO] probing cloud infra...", "Virtual surfaces mapped", "Attack surface: MEDIUM"] },
-  { id:"004", title:"Path Traversal — CWE-35",
-    link:"notes/CWE-35 - Path Traversal.html",
-    tags:"File System · Web", threat:"high",
-    glitch:["[WARN] ../../etc/passwd", "Directory traversal DETECTED", "Severity: HIGH ⚠"] },
-  { id:"005", title:"SQL Injection — CWE-89",
-    link:"notes/CWE-89 - SQL Injection.html",
-    tags:"Injection · Critical", threat:"crit",
-    glitch:["[CRIT] ' OR 1=1--", "Database COMPROMISED", "Severity: CRITICAL \u2620"] },
-  { id:"006", title:"Burp Suite Fundamentals",
-    link:"notes/Burp Suite Introduction.html",
-    tags:"Tools · Pentesting", threat:"med",
-    glitch:["[INFO] proxy intercepting...", "HTTP traffic captured", "Burp Suite: RUNNING"] },
-  { id:"007", title:"Email Security Fundamentals",
-    link:"notes/Email Security Fundamentals.html",
-    tags:"Encryption · Email", threat:"info",
-    glitch:["[INFO] DKIM lookup...", "SPF records validated", "Mail server: HARDENED"] },
-  { id:"008", title:"Cross-Site Scripting — CWE-79",
-    link:"notes/CWE-79 - Cross-Site Scripting (XSS).html",
-    tags:"OWASP Top 10", threat:"crit",
-    glitch:["[CRIT] XSS payload injected", "DOM injection SUCCESSFUL", "Severity: CRITICAL \u2620"] },
-  { id:"009", title:"Encryption Fundamentals",
-    link:"notes/Encryption Fundamentals.html",
-    tags:"Cryptography · Core", threat:"info",
-    glitch:["[INFO] key exchange init...", "AES-256 handshake OK", "Encryption: ACTIVE \uD83D\uDD10"] },
-  { id:"010", title:"Web App Security — Intro",
-    link:"notes/Introduction to Web Application Security.html",
-    tags:"OWASP · Fundamentals", threat:"med",
-    glitch:["[SCAN] OWASP Top 10 check...", "3 findings detected", "Risk level: MEDIUM ⚠"] },
-  { id:"011", title:"OS Command Injection — CWE-78",
-    link:"notes/CWE-78 - OS Command Injection.html",
-    tags:"RCE · Dangerous", threat:"crit",
-    glitch:["[CRIT] ; cat /etc/shadow", "Remote code EXECUTING", "Severity: CRITICAL \u2620"] },
-  { id:"012", title:"Network Traffic Analysis",
-    link:"notes/Network Traffic Analysis.html",
-    tags:"Security · Network", threat:"high",
-    glitch:["[WARN] anomaly detected...", "Suspicious packets: 1,447", "Alert: FLAGGED ⚠"] },
+/* ═══════════════════════════════
+   SKILL BENTO GRID
+═══════════════════════════════ */
+const SKILLS = [
+  { n:'01', ico:'⚛️', name:'Front-end',       list:'React · JavaScript\nHTML · CSS\nTailwindCSS' },
+  { n:'02', ico:'🐘', name:'Back-end',         list:'PHP · Laravel\nMySQL · REST API\nMVC Architecture' },
+  { n:'03', ico:'🎯', name:'Pentesting',       list:'Burp Suite\nXSS · SQLi\nPath Traversal · RCE' },
+  { n:'04', ico:'📡', name:'Networking',       list:'Wireshark\nTraffic Analysis\nEmail Security' },
+  { n:'05', ico:'☁️', name:'Cloud',            list:'Oracle Cloud OCI\nVirtualization\nAI Foundations' },
+  { n:'06', ico:'🔐', name:'Cryptography',     list:'Encryption Fundamentals\nSymmetric · Asymmetric\nHashing · PKI' },
+  { n:'07', ico:'🏴', name:'CTF & Research',  list:'TryHackMe\nHackTheBox\nExploit Writeups' },
+  { n:'08', ico:'🔧', name:'Dev Tools',        list:'Git · VS Code\nPostman\nChrome DevTools' },
 ];
+function buildSkills() {
+  const grid = document.getElementById('skill-grid');
+  if (!grid) return;
+  SKILLS.forEach(s => {
+    const d = document.createElement('div');
+    d.className = 'sg-cell';
+    d.innerHTML = `<span class="sg-num">${s.n}</span>
+                   <span class="sg-ico">${s.ico}</span>
+                   <div class="sg-name">${s.name}</div>
+                   <div class="sg-list">${s.list.replace(/\n/g,'<br>')}</div>`;
+    grid.appendChild(d);
+  });
+}
+buildSkills();
 
+/* ═══════════════════════════════
+   VAULT
+═══════════════════════════════ */
+const VAULT = [
+  { id:'001', title:'Importance of Cyber Security',  link:'notes/Importance of Cyber Security.html',              tags:'CIA Triad · Fundamentals',  threat:'info',  g:['[INFO] scanning target...','No critical CVEs found','Status: SECURE \u2713'] },
+  { id:'002', title:'Career in IT Security',          link:'notes/Career Opportunities in IT Security.html',      tags:'Red Team · Blue Team',       threat:'info',  g:['[INFO] profiling roles...','Red / blue team loaded','Threat model: ACTIVE'] },
+  { id:'003', title:'Cloud & Virtualization',         link:'notes/Cloud and Virtualization Fundamentals.html',    tags:'Infrastructure · Cloud',     threat:'info',  g:['[INFO] probing cloud infra...','Virtual surfaces mapped','Attack surface: MEDIUM'] },
+  { id:'004', title:'Path Traversal \u2014 CWE-35',  link:'notes/CWE-35 - Path Traversal.html',                  tags:'File System · Web',          threat:'high',  g:['[WARN] ../../etc/passwd','Directory traversal DETECTED','Severity: HIGH \u26a0'] },
+  { id:'005', title:'SQL Injection \u2014 CWE-89',   link:'notes/CWE-89 - SQL Injection.html',                   tags:'Injection · Critical',       threat:'crit',  g:["[CRIT] ' OR 1=1--",'Database COMPROMISED','Severity: CRITICAL \u2620'] },
+  { id:'006', title:'Burp Suite Fundamentals',        link:'notes/Burp Suite Introduction.html',                  tags:'Tools · Pentesting',         threat:'med',   g:['[INFO] proxy intercepting...','HTTP traffic captured','Burp Suite: RUNNING'] },
+  { id:'007', title:'Email Security Fundamentals',    link:'notes/Email Security Fundamentals.html',              tags:'Encryption · Email',         threat:'info',  g:['[INFO] DKIM lookup...','SPF records validated','Mail server: HARDENED'] },
+  { id:'008', title:'Cross-Site Scripting \u2014 CWE-79', link:'notes/CWE-79 - Cross-Site Scripting (XSS).html', tags:'OWASP Top 10',               threat:'crit',  g:['[CRIT] XSS payload injected','DOM injection SUCCESSFUL','Severity: CRITICAL \u2620'] },
+  { id:'009', title:'Encryption Fundamentals',        link:'notes/Encryption Fundamentals.html',                  tags:'Cryptography · Core',        threat:'info',  g:['[INFO] key exchange init...','AES-256 handshake OK','Encryption: ACTIVE \uD83D\uDD10'] },
+  { id:'010', title:'Web App Security \u2014 Intro', link:'notes/Introduction to Web Application Security.html', tags:'OWASP · Fundamentals',       threat:'med',   g:['[SCAN] OWASP Top 10 check...','3 findings detected','Risk level: MEDIUM \u26a0'] },
+  { id:'011', title:'OS Command Injection \u2014 CWE-78', link:'notes/CWE-78 - OS Command Injection.html',       tags:'RCE · Dangerous',            threat:'crit',  g:['[CRIT] ; cat /etc/shadow','Remote code EXECUTING','Severity: CRITICAL \u2620'] },
+  { id:'012', title:'Network Traffic Analysis',       link:'notes/Network Traffic Analysis.html',                 tags:'Security · Network',         threat:'high',  g:['[WARN] anomaly detected...','Suspicious packets: 1,447','Alert: FLAGGED \u26a0'] },
+];
 function buildVault() {
   const vg = document.getElementById('vault-grid');
   if (!vg) return;
-  VAULT_NOTES.forEach(n => {
+  VAULT.forEach(n => {
     const a = document.createElement('a');
     a.href      = n.link;
     a.className = 'vc ' + n.threat;
     a.target    = '_blank';
-    a.innerHTML = `
-      <div class="vc-glitch">
-        <span class="glitch-line">${n.glitch[0]}</span>
-        <span class="glitch-line g2">${n.glitch[1]}</span>
-        <span class="glitch-line g3">${n.glitch[2]}</span>
+    a.innerHTML = `<div class="vc-glitch">
+        <span class="glitch-line">${n.g[0]}</span>
+        <span class="glitch-line g2">${n.g[1]}</span>
+        <span class="glitch-line g3">${n.g[2]}</span>
       </div>
       <div class="vc-id">${n.id}</div>
       <div class="vc-title">${n.title}</div>
@@ -224,80 +225,60 @@ function buildVault() {
 }
 buildVault();
 
-/* ══ CONTACT SOCIAL CARDS ══ */
-const SOCIALS = [
-  { icon:'🐙', name:'GitHub',    handle:'@dvphnc',        url:'https://github.com/dvphnc' },
-  { icon:'💼', name:'LinkedIn',  handle:'dvphnc',          url:'https://linkedin.com/in/dvphnc' },
-  { icon:'🏴', name:'TryHackMe', handle:'joanadaphne.sy', url:'https://tryhackme.com/p/joanadaphne.sy' },
-  { icon:'📦', name:'HackTheBox',handle:'Profile',         url:'https://account.hackthebox.com/HTB-350C996E4F' },
-];
-
-function buildContact() {
-  const track = document.getElementById('contact-track');
-  if (!track) return;
-  const metricsCard = track.querySelector('.metrics-card');
-  SOCIALS.forEach(s => {
-    const a = document.createElement('a');
-    a.href      = s.url;
-    a.target    = '_blank';
-    a.className = 'soc-card';
-    a.innerHTML = `<span class="soc-icon">${s.icon}</span>
-                   <div>
-                     <div class="soc-name">${s.name}</div>
-                     <div class="soc-handle">${s.handle}</div>
-                   </div>
-                   <span class="soc-arr">↗</span>`;
-    track.insertBefore(a, metricsCard);
-  });
-}
-buildContact();
-
-/* ══ LOADER EXIT ══ */
+/* ═══════════════════════════════
+   LOADER EXIT
+═══════════════════════════════ */
 window.addEventListener('DOMContentLoaded', () => {
   const loader = document.getElementById('loader');
   if (!loader) return;
 
   setTimeout(() => {
     loader.classList.add('exit');
+
     setTimeout(() => {
       loader.style.display = 'none';
 
-      const nav = document.getElementById('nav');
-      if (nav) nav.classList.add('vis');
+      // reveal sidebar
+      const sb = document.getElementById('sidebar');
+      if (sb) sb.classList.add('vis');
 
-      const seq = [
-        ['hero-ey',      'in',  0],
-        ['hw-fixed',     'in',  100],
-        ['hero-foot',    'in',  420],
-        ['hero-stats',   'in',  600],
-        ['scroll-pill',  'in',  800],
+      // hero cascade
+      const steps = [
+        ['home-tag',   'in',   0],
+        ['hw-name',    'in',  100],
+        ['home-blurb', 'in',  380],
+        ['home-ctas',  'in',  520],
+        ['home-bento', 'in',  680],
+        ['scroll-pill','in',  860],
       ];
-      seq.forEach(([id, cls, delay]) => {
+      steps.forEach(([id, cls, delay]) =>
         setTimeout(() => {
           const el = document.getElementById(id);
           if (el) el.classList.add(cls);
-        }, delay);
-      });
+        }, delay)
+      );
 
       setTimeout(typeWriter, 200);
-    }, 650);
-  }, 2600);
+    }, 600);
+
+  }, 2400); // boot log ends ~1.75s, exit at 2.4s
 });
 
-/* ══ SCROLL REVEAL — loops in & out ══ */
+/* ═══════════════════════════════
+   SCROLL REVEAL (looped)
+═══════════════════════════════ */
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) e.target.classList.add('in');
     else                  e.target.classList.remove('in');
   });
-}, { threshold: 0.06, rootMargin: '0px 0px -28px 0px' });
-
+}, { threshold: 0.06, rootMargin: '0px 0px -24px 0px' });
 document.querySelectorAll('.sr').forEach(el => io.observe(el));
 
-/* cert row stagger */
+/* cert stagger-in */
 function observeCerts() {
-  const certs = document.querySelectorAll('.cr:not(.dim)');
-  const cio = new IntersectionObserver(entries => {
+  const rows = document.querySelectorAll('.cert-row:not(.dim)');
+  const cio  = new IntersectionObserver(entries => {
     entries.forEach((e, i) => {
       if (e.isIntersecting) {
         setTimeout(() => e.target.classList.add('in'), i * 80);
@@ -305,12 +286,25 @@ function observeCerts() {
       }
     });
   }, { threshold: 0.1 });
-  certs.forEach(c => cio.observe(c));
+  rows.forEach(r => cio.observe(r));
 }
 observeCerts();
 
-/* nav scroll border */
-window.addEventListener('scroll', () => {
-  const nav = document.getElementById('nav');
-  if (nav) nav.classList.toggle('sc', window.scrollY > 50);
-}, { passive: true });
+/* ═══════════════════════════════
+   SIDEBAR ACTIVE LINK
+   (tracks scroll position)
+═══════════════════════════════ */
+const sections  = document.querySelectorAll('.section');
+const navLinks  = document.querySelectorAll('.sb-link');
+
+const sio = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      navLinks.forEach(l => {
+        l.classList.toggle('active', l.dataset.s === id);
+      });
+    }
+  });
+}, { threshold: 0.4 });
+sections.forEach(s => sio.observe(s));
