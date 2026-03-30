@@ -1,0 +1,13 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "export": "node scripts/export.js"
+    },
+    "devDependencies": {
+        "laravel-vite-plugin": "^1.0.0",
+        "vite": "^5.0.0"
+    }
+}
