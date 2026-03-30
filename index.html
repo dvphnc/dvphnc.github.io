@@ -33,23 +33,23 @@
       --mesh-1: rgba(94,92,230,0.13);
       --mesh-2: rgba(0,113,227,0.10);
       --mesh-3: rgba(199,70,52,0.04);
-      --sv-bg: #0a0a0f;
-      --sv-note-bg: rgba(255,255,255,0.04);
-      --sv-note-border: rgba(255,255,255,0.07);
-      --sv-note-hover: rgba(255,255,255,0.07);
-      --sv-note-open: rgba(255,255,255,0.09);
-      --sv-text: rgba(255,255,255,0.9);
-      --sv-text-dim: rgba(255,255,255,0.32);
-      --sv-text-body: rgba(255,255,255,0.55);
-      --sv-text-li: rgba(255,255,255,0.45);
-      --sv-body-border: rgba(255,255,255,0.07);
-      --sv-cat-border: rgba(255,255,255,0.06);
-      --sv-cat-name: rgba(255,255,255,0.8);
-      --sv-cat-count: rgba(255,255,255,0.25);
-      --sv-arrow: rgba(255,255,255,0.2);
-      --sv-eyebrow: rgba(255,255,255,0.3);
-      --sv-sub: rgba(255,255,255,0.3);
-      --sv-grid-line: rgba(255,255,255,0.015);
+      --sv-bg: #e8e8ed;
+      --sv-note-bg: rgba(255,255,255,0.7);
+      --sv-note-border: rgba(0,0,0,0.07);
+      --sv-note-hover: rgba(255,255,255,0.9);
+      --sv-note-open: rgba(255,255,255,1);
+      --sv-text: #1d1d1f;
+      --sv-text-dim: #6e6e73;
+      --sv-text-body: #3d3d3f;
+      --sv-text-li: #4a4a4f;
+      --sv-body-border: rgba(0,0,0,0.08);
+      --sv-cat-border: rgba(0,0,0,0.08);
+      --sv-cat-name: #1d1d1f;
+      --sv-cat-count: #aeaeb2;
+      --sv-arrow: #aeaeb2;
+      --sv-eyebrow: #6e6e73;
+      --sv-sub: #6e6e73;
+      --sv-grid-line: rgba(0,0,0,0.04);
       --mono: 'JetBrains Mono', monospace;
       --sans: 'Inter', -apple-system, sans-serif;
       --radius: 18px;
@@ -262,6 +262,15 @@
         radial-gradient(ellipse 60% 50% at 10% 30%, rgba(255,45,85,0.08) 0%, transparent 60%),
         radial-gradient(ellipse 50% 60% at 90% 70%, rgba(94,92,230,0.10) 0%, transparent 60%),
         radial-gradient(ellipse 40% 40% at 50% 50%, rgba(57,255,20,0.04) 0%, transparent 70%);
+      transition: background 0.4s;
+    }
+
+    /* Light mode SyberVault glow — softer, visible on light bg */
+    html:not(.dark) #sybervault::before {
+      background:
+        radial-gradient(ellipse 60% 50% at 10% 30%, rgba(255,45,85,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 90% 70%, rgba(94,92,230,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 50% 50%, rgba(0,113,227,0.04) 0%, transparent 70%);
     }
     #sybervault::after {
       content: ''; position: absolute; inset: 0; pointer-events: none;
@@ -299,12 +308,12 @@
     .sv-note.t::after { background:linear-gradient(90deg,#4a00e0,#b026ff); }
     .sv-note.k::after { background:linear-gradient(90deg,#ff2d55,#ff6b38); }
     .sv-note.e::after { background:linear-gradient(90deg,#00b4d8,#48cae4); }
-    .sv-note:hover { background:var(--sv-note-hover); border-color:rgba(255,255,255,0.12); transform:translateY(-2px); box-shadow:0 12px 32px rgba(0,0,0,0.35); }
+    .sv-note:hover { background:var(--sv-note-hover); border-color:var(--sv-note-border); transform:translateY(-2px); box-shadow:0 12px 32px rgba(0,0,0,0.12); }
     .sv-note:hover::after { opacity:1; }
-    .sv-note.open { background:var(--sv-note-open); border-color:rgba(255,255,255,0.16); box-shadow:0 20px 50px rgba(0,0,0,0.4); }
+    .sv-note.open { background:var(--sv-note-open); border-color:var(--sv-note-border); box-shadow:0 20px 50px rgba(0,0,0,0.15); }
     .sv-note.open::after { opacity:1; }
     .sv-note-arrow { position:absolute; top:18px; right:18px; font-size:13px; color:var(--sv-arrow); transition:transform 0.3s ease, color 0.2s; line-height:1; }
-    .sv-note.open .sv-note-arrow { transform:rotate(45deg); color:rgba(255,255,255,0.5); }
+    .sv-note.open .sv-note-arrow { transform:rotate(45deg); color:var(--text-secondary); }
     .sv-note-label { font-family:var(--mono); font-size:9px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:8px; }
     .sv-note-label.f { color:#71c3f7; } .sv-note-label.t { color:#b026ff; } .sv-note-label.k { color:#ff6b38; } .sv-note-label.e { color:#48cae4; }
     .sv-note-title { font-size:14px; font-weight:600; color:var(--sv-text); letter-spacing:-0.02em; line-height:1.3; margin-bottom:8px; transition:color 0.4s; }
@@ -323,6 +332,7 @@
     .sv-note-body strong { color:var(--sv-text); font-weight:600; transition:color 0.4s; }
     .sv-note-body ul { padding-left:18px; margin:8px 0; }
     .sv-note-body li { font-size:12px; line-height:1.65; color:var(--sv-text-li); margin-bottom:4px; list-style:disc; transition:color 0.4s; }
+    .sv-hint { color: var(--sv-arrow); font-style: italic; transition: color 0.4s; }
 
     /* ── CONTACT ── */
     #contact { padding-bottom: 160px; }
@@ -476,7 +486,7 @@
 
       <p class="sv-eyebrow reveal">Personal Knowledge System</p>
       <h2 class="sv-heading reveal reveal-delay-1"><span class="s">Syber</span><span class="v">Vault</span></h2>
-      <p class="sv-sub reveal reveal-delay-2">// a living archive of what I study, discover, and break &nbsp;·&nbsp; 11 notes &nbsp;·&nbsp; 4 categories &nbsp;·&nbsp; <em style="color:rgba(255,255,255,0.2)">click any card to read</em></p>
+      <p class="sv-sub reveal reveal-delay-2">// a living archive of what I study, discover, and break &nbsp;·&nbsp; 11 notes &nbsp;·&nbsp; 4 categories &nbsp;·&nbsp; <em class="sv-hint">click any card to read</em></p>
 
       <!-- FUNDAMENTALS -->
       <div class="sv-category reveal reveal-delay-2">
