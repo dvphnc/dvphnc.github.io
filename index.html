@@ -164,7 +164,7 @@
     .mobile-link:hover { background: var(--ghost-bg); }
 
     /* ── LAYOUT ── */
-    section { position: relative; z-index: 1; max-width: 980px; margin: 0 auto; padding: 120px 44px; }
+    section { position: relative; z-index: 1; max-width: 100%; margin: 0; padding: 120px 44px; }
     section#sybervault { max-width: 100%; margin: 0; padding: 120px 44px; }
     .divider { width: 100%; height: 1px; background: var(--border); position: relative; z-index: 1; transition: background 0.4s; }
 
@@ -255,7 +255,12 @@
     .hero-badge-dot.blue   { background: #0071e3; }
     .hero-badge-dot.purple { background: #5e5ce6; }
     .hero-badge-dot.green  { background: #25a244; }
-    .hero-inner { max-width: 600px; }
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .hero-inner { max-width: 680px; }
     .hero-tag { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 22px; opacity: 0; transform: translateY(12px); animation: fadeUp 0.6s 0.1s ease forwards; }
     /* ── Typewriter hero ── */
     .hero-name {
@@ -517,7 +522,7 @@
     .contact-link-name { font-size:14px; font-weight:600; letter-spacing:-0.01em; color:var(--text-primary); transition:color 0.2s; }
     .contact-link-handle { font-family:var(--mono); font-size:11px; color:var(--text-tertiary); margin-top:2px; transition:color 0.4s; }
 
-    footer { position:relative; z-index:1; text-align:center; padding:32px 44px; border-top:1px solid var(--border); font-family:var(--mono); font-size:11px; color:var(--text-tertiary); letter-spacing:0.04em; transition:border-color 0.4s, color 0.4s; }
+    footer { position:relative; z-index:1; text-align:center; padding:32px 44px; width:100%; max-width:100%; border-top:1px solid var(--border); font-family:var(--mono); font-size:11px; color:var(--text-tertiary); letter-spacing:0.04em; transition:border-color 0.4s, color 0.4s; }
 
     @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
     ::-webkit-scrollbar { width: 6px; }
@@ -529,6 +534,7 @@
       .nav-links { display: none; }
       .nav-menu-btn { display: flex; }
       section { padding: 80px 20px; }
+      .section-inner { padding: 0; }
       section#sybervault { padding: 80px 20px; }
       .sv-inner { padding: 0; }
       .hero-scroll-hint { left: 20px; }
@@ -601,6 +607,7 @@
 
   <!-- CERTIFICATIONS -->
   <section id="certifications">
+    <div class="section-inner">
     <p class="sec-label reveal">Certifications</p>
     <h2 class="sec-title reveal reveal-delay-1">Oracle Cloud Certified</h2>
     <div class="cert-grid">
@@ -632,12 +639,14 @@
         <span class="cert-year">2024</span>
       </div>
     </div>
+    </div>
   </section>
 
   <div class="divider"></div>
 
   <!-- STACKS -->
   <section id="stacks">
+    <div class="section-inner">
     <p class="sec-label reveal">Tech Stacks</p>
     <h2 class="sec-title reveal reveal-delay-1">Tools &amp; Technologies</h2>
     <div class="stack-groups">
@@ -648,12 +657,14 @@
       <div class="card reveal reveal-delay-5"><p class="stack-group-title">VA &amp; Productivity</p><div class="stack-pills"><span class="pill">Google Workspace</span><span class="pill">Notion</span><span class="pill">Trello</span><span class="pill">Canva</span><span class="pill">Figma</span></div></div>
       <div class="card reveal reveal-delay-6"><p class="stack-group-title">Currently Learning</p><div class="stack-pills"><span class="pill learning">Python</span><span class="pill learning">Docker</span><span class="pill learning">Next.js</span></div></div>
     </div>
+    </div>
   </section>
 
   <div class="divider"></div>
 
   <!-- CTF VAULT -->
   <section id="vault">
+    <div class="section-inner">
     <p class="sec-label reveal">CTF Writeups</p>
     <h2 class="sec-title reveal reveal-delay-1">Rooms &amp; Machines</h2>
     <div class="vault-grid">
@@ -663,6 +674,7 @@
       <div class="card vault-card reveal reveal-delay-4"><div class="vault-header"><span class="vault-platform-badge htb">HackTheBox</span><span class="vault-diff diff-easy">Easy</span></div><h3 class="vault-title">Meow</h3><p class="vault-desc">Telnet misconfiguration with unauthenticated root login — Nmap scan, service enumeration, direct flag retrieval.</p><div class="vault-footer"><div class="vault-tags"><span class="tag">Telnet</span><span class="tag">Recon</span><span class="tag">Nmap</span></div></div></div>
       <div class="card vault-card reveal reveal-delay-5"><div class="vault-header"><span class="vault-platform-badge htb">HackTheBox</span><span class="vault-diff diff-easy">Easy</span></div><h3 class="vault-title">Fawn</h3><p class="vault-desc">Anonymous FTP login vulnerability. Enumerated FTP with Nmap, connected with default anonymous credentials.</p><div class="vault-footer"><div class="vault-tags"><span class="tag">FTP</span><span class="tag">Anonymous</span><span class="tag">Nmap</span></div></div></div>
       <div class="card vault-card reveal reveal-delay-6"><div class="vault-header"><span class="vault-platform-badge htb">HackTheBox</span><span class="vault-diff diff-easy">Easy</span></div><h3 class="vault-title">Dancing</h3><p class="vault-desc">SMB share enumeration without credentials. Used smbclient to access a misconfigured guest-readable share.</p><div class="vault-footer"><div class="vault-tags"><span class="tag">SMB</span><span class="tag">smbclient</span><span class="tag">Enum</span></div></div></div>
+    </div>
     </div>
   </section>
 
@@ -1033,6 +1045,7 @@
 
   <!-- CONTACT -->
   <section id="contact">
+    <div class="section-inner">
     <p class="sec-label reveal">Contact</p>
     <h2 class="sec-title reveal reveal-delay-1">Let's Connect</h2>
     <div class="reveal reveal-delay-2">
@@ -1058,6 +1071,7 @@
         <div class="contact-icon"><svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M11.996 0L2 5.836V17.51L12 23.346l10-5.836V5.836zm0 1.734l8.275 4.83v2.352l-8.275 4.503-8.27-4.503V6.564zm-8.27 8.56l8.27 4.498 8.275-4.498v2.55l-8.276 4.83-8.27-4.83z"/></svg></div>
         <div><p class="contact-link-name">HackTheBox</p><p class="contact-link-handle">app.hackthebox.com/dvphnc</p></div>
       </a>
+    </div>
     </div>
   </section>
 
