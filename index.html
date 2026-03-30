@@ -172,50 +172,68 @@
     #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 52px; position: relative; }
     .hero-inner { max-width: 600px; }
     .hero-tag { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 22px; opacity: 0; transform: translateY(12px); animation: fadeUp 0.6s 0.1s ease forwards; }
-    /* Multilingual hero greeting */
+    /* ── Typewriter hero ── */
     .hero-name {
       font-weight: 700;
       letter-spacing: -0.03em;
-      line-height: 1.15;
-      background: linear-gradient(140deg, #1d1d1f 0%, #3d3d3f 35%, #5e5ce6 80%, #0071e3 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      line-height: 1.2;
       margin-bottom: 14px;
       opacity: 0;
       transform: translateY(18px);
       animation: fadeUp 0.7s 0.2s ease forwards;
-      min-height: 2.4em;
       display: block;
+      /* Reserve fixed height so page doesn't jump */
+      min-height: 3.6em;
     }
-    html.dark .hero-name { background: linear-gradient(140deg, #f5f5f7 0%, #c0c0c8 35%, #7b79ff 80%, #60aaff 100%); -webkit-background-clip: text; background-clip: text; }
 
     .hero-greeting {
       display: block;
-      font-size: clamp(14px, 2vw, 22px);
+      font-size: clamp(13px, 1.8vw, 19px);
       font-weight: 400;
       letter-spacing: 0.01em;
-      opacity: 0.7;
-      margin-bottom: 4px;
-      font-family: var(--sans);
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      font-family: var(--mono);
+      min-height: 1.4em;
+      /* No gradient clip — plain text so it reads clearly */
+      background: none;
+      -webkit-text-fill-color: var(--text-secondary);
     }
 
     .hero-fullname {
       display: block;
-      font-size: clamp(48px, 7vw, 82px);
-      letter-spacing: -0.045em;
-      line-height: 1.0;
+      font-size: clamp(42px, 6.5vw, 80px);
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      background: linear-gradient(140deg, #1d1d1f 0%, #3d3d3f 35%, #5e5ce6 80%, #0071e3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      /* Allow wrapping so long names never clip */
+      word-break: break-word;
+      overflow-wrap: break-word;
+      white-space: normal;
+    }
+    html.dark .hero-fullname {
+      background: linear-gradient(140deg, #f5f5f7 0%, #c0c0c8 35%, #7b79ff 80%, #60aaff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
     }
 
-    /* Fade transition for language switch */
-    .hero-name.lang-switching {
-      animation: langFade 0.4s ease forwards;
+    /* Blinking cursor */
+    .hero-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 0.85em;
+      background: var(--accent-2);
+      margin-left: 2px;
+      vertical-align: middle;
+      border-radius: 1px;
+      animation: cursorBlink 0.75s step-end infinite;
     }
-    @keyframes langFade {
-      0%   { opacity: 1; transform: translateY(0); }
-      40%  { opacity: 0; transform: translateY(-8px); }
-      60%  { opacity: 0; transform: translateY(8px); }
-      100% { opacity: 1; transform: translateY(0); }
+    @keyframes cursorBlink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
     }
     .hero-handle { font-family: var(--mono); font-size: clamp(13px,1.8vw,17px); font-weight: 300; color: var(--text-tertiary); letter-spacing: 0.05em; margin-bottom: 38px; opacity: 0; transform: translateY(12px); animation: fadeUp 0.6s 0.35s ease forwards; }
     .hero-handle span { color: var(--accent-2); }
@@ -440,7 +458,10 @@
   <section id="hero">
     <div class="hero-inner">
       <p class="hero-tag">Aspiring Tech Virtual Assistant · BS Information Technology · 3rd Year</p>
-      <h1 class="hero-name" id="heroName"><span class="hero-greeting" id="heroGreeting">Hi, I'm</span><span class="hero-fullname" id="heroFullname">Joana Daphne Sy</span></h1>
+      <h1 class="hero-name" id="heroName">
+        <span class="hero-greeting" id="heroGreeting"></span>
+        <span class="hero-fullname" id="heroFullname"><span class="hero-cursor" id="heroCursor"></span></span>
+      </h1>
       <p class="hero-handle">@<span>dvphnc</span></p>
       <p class="hero-desc">Building at the crossroads of <strong>web development, cloud, and cybersecurity</strong>. Oracle-certified, CTF-curious, and learning every day — one room at a time.</p>
       <div class="hero-cta">
@@ -883,7 +904,7 @@
     <div class="reveal reveal-delay-2">
       <div class="email-block">
         <p class="email-label">Email</p>
-        <p class="email-addr">jdsoffcl@gmail.com</p>
+        <p class="email-addr"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5d37392e323b3b3e311d3a303c3431733e3230">[email&#160;protected]</a></p>
       </div>
     </div>
     <div class="contact-links">
@@ -910,55 +931,100 @@
     <p>© 2025 Joana Daphne Sy · dvphnc · BSIT 3rd Year · SyberVault</p>
   </footer>
 
-  <script>
-    // ── Multilingual hero animation ──
-    const languages = [
-      { greeting: "Hi, I'm",          name: "Joana Daphne Sy",       font: "Inter, sans-serif",                        size: "clamp(48px,7vw,82px)" },
-      { greeting: "Hola, soy",        name: "Joana Daphne Sy",       font: "Inter, sans-serif",                        size: "clamp(44px,6.5vw,78px)" },
-      { greeting: "Bonjour, je suis", name: "Joana Daphne Sy",       font: "Inter, sans-serif",                        size: "clamp(38px,5.5vw,68px)" },
-      { greeting: "Ciao, sono",       name: "Joana Daphne Sy",       font: "Inter, sans-serif",                        size: "clamp(44px,6.5vw,78px)" },
-      { greeting: "Hallo, ich bin",   name: "Joana Daphne Sy",       font: "Inter, sans-serif",                        size: "clamp(40px,6vw,72px)" },
-      { greeting: "안녕하세요, 저는",       name: "호아나 다프네 시",             font: "'Noto Sans KR', sans-serif",              size: "clamp(44px,6.5vw,76px)" },
-      { greeting: "こんにちは、私は",        name: "ホアナ ダフネ シー",            font: "'Noto Sans JP', sans-serif",              size: "clamp(42px,6vw,72px)" },
-      { greeting: "你好，我是",            name: "胡安娜·达芙妮·施",             font: "'Noto Sans SC', sans-serif",              size: "clamp(44px,6.5vw,76px)" },
-      { greeting: "Olá, eu sou",      name: "Joana Daphne Sy",       font: "Inter, sans-serif",                        size: "clamp(44px,6.5vw,78px)" },
-      { greeting: "Merhaba, ben",     name: "Joana Daphne Sy",       font: "Inter, sans-serif",                        size: "clamp(42px,6vw,74px)" },
-      { greeting: "Kamusta, ako si",  name: "Joana Daphne Sy",       font: "Inter, sans-serif",                        size: "clamp(38px,5.5vw,66px)" },
-    ];
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // ── Typewriter multilingual hero ──
+    (function() {
+      // Load CJK fonts early
+      const flink = document.createElement('link');
+      flink.rel = 'stylesheet';
+      flink.href = 'https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+SC:wght@400;700&display=swap';
+      document.head.appendChild(flink);
 
-    // Preload Google Fonts for CJK languages
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = 'https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&family=Noto+Sans+JP:wght@700&family=Noto+Sans+SC:wght@700&display=swap';
-    document.head.appendChild(link);
+      const langs = [
+        { greet: "Hi, I'm",           name: "Joana Daphne Sy",    mono: true  },
+        { greet: "Hola, soy",           name: "Joana Daphne Sy",    mono: true  },
+        { greet: "Bonjour, je suis",    name: "Joana Daphne Sy",    mono: true  },
+        { greet: "Ciao, sono",          name: "Joana Daphne Sy",    mono: true  },
+        { greet: "Kamusta, ako si",     name: "Joana Daphne Sy",    mono: true  },
+        { greet: "Olá, eu sou",         name: "Joana Daphne Sy",    mono: true  },
+        { greet: "Hallo, ich bin",      name: "Joana Daphne Sy",    mono: true  },
+        { greet: "Merhaba, ben",        name: "Joana Daphne Sy",    mono: true  },
+        { greet: "안녕하세요, 저는",         name: "호아나 다프네 시",       font: "'Noto Sans KR', sans-serif" },
+        { greet: "こんにちは、私は",          name: "ホアナ ダフネ シー",      font: "'Noto Sans JP', sans-serif" },
+        { greet: "你好，我是",              name: "胡安娜·达芙妮·施",      font: "'Noto Sans SC', sans-serif" },
+      ];
 
-    const heroGreeting = document.getElementById('heroGreeting');
-    const heroFullname = document.getElementById('heroFullname');
-    const heroName    = document.getElementById('heroName');
+      const elGreet  = document.getElementById('heroGreeting');
+      const elName   = document.getElementById('heroFullname');
+      const elCursor = document.getElementById('heroCursor');
 
-    let langIndex = 0;
-    let heroReady = false;
+      let li = 0;          // current language index
+      let typing = false;  // lock during animation
 
-    function switchLanguage() {
-      if (!heroReady) return;
-      langIndex = (langIndex + 1) % languages.length;
-      const lang = languages[langIndex];
+      // Speed config (ms per character)
+      const TYPE_SPEED   = 55;
+      const ERASE_SPEED  = 30;
+      const PAUSE_FULL   = 2200; // hold after fully typed
+      const PAUSE_EMPTY  = 300;  // pause between erase and next type
 
-      heroName.classList.add('lang-switching');
-      setTimeout(() => {
-        heroGreeting.textContent = lang.greeting;
-        heroFullname.textContent = lang.name;
-        heroFullname.style.fontFamily = lang.font;
-        heroFullname.style.fontSize   = lang.size;
-        heroName.classList.remove('lang-switching');
-      }, 200);
-    }
+      function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-    // Wait for hero fadeUp animation to finish before starting rotation
-    setTimeout(() => {
-      heroReady = true;
-      setInterval(switchLanguage, 2800);
-    }, 1400);
+      async function typeText(el, text, speed) {
+        el.textContent = '';
+        for (let i = 0; i < text.length; i++) {
+          el.textContent += text[i];
+          // Move cursor after content
+          if (elCursor.parentNode === el) {
+            el.appendChild(elCursor);
+          }
+          await sleep(speed + (Math.random() * 20 - 10)); // slight jitter
+        }
+      }
+
+      async function eraseText(el, speed) {
+        while (el.textContent.length > 0) {
+          el.textContent = el.textContent.slice(0, -1);
+          await sleep(speed);
+        }
+      }
+
+      async function runTypewriter() {
+        // Initial: type first entry on load
+        await sleep(1200); // wait for fadeUp
+
+        while (true) {
+          const lang = langs[li];
+
+          // Set font for name
+          elName.style.fontFamily = lang.font || 'Inter, -apple-system, sans-serif';
+
+          // Type greeting line
+          elGreet.textContent = '';
+          await typeText(elGreet, lang.greet, TYPE_SPEED);
+
+          // Move cursor to name line, type name
+          elName.textContent = '';
+          elName.appendChild(elCursor);
+          await typeText(elName, lang.name, TYPE_SPEED - 5);
+
+          // Hold
+          await sleep(PAUSE_FULL);
+
+          // Erase name first, then greeting
+          await eraseText(elName, ERASE_SPEED);
+          await sleep(80);
+          // Move cursor back to greeting
+          elGreet.appendChild(elCursor);
+          await eraseText(elGreet, ERASE_SPEED);
+          await sleep(PAUSE_EMPTY);
+
+          // Advance language
+          li = (li + 1) % langs.length;
+        }
+      }
+
+      runTypewriter();
+    })();
 
     // ── Scroll reveal ──
     const obs = new IntersectionObserver(e => e.forEach(x => {
@@ -991,11 +1057,4 @@
     // ── SyberVault expand/collapse ──
     document.querySelectorAll('.sv-note').forEach(note => {
       note.addEventListener('click', () => {
-        const isOpen = note.classList.contains('open');
-        note.closest('.sv-grid').querySelectorAll('.sv-note').forEach(n => n.classList.remove('open'));
-        if (!isOpen) note.classList.add('open');
-      });
-    });
-  </script>
-</body>
-</html>
+        const isOpen = no
