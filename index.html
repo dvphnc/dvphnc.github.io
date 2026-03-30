@@ -172,8 +172,51 @@
     #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 52px; position: relative; }
     .hero-inner { max-width: 600px; }
     .hero-tag { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 22px; opacity: 0; transform: translateY(12px); animation: fadeUp 0.6s 0.1s ease forwards; }
-    .hero-name { font-size: clamp(52px,7.5vw,86px); font-weight: 700; letter-spacing: -0.045em; line-height: 1.0; background: linear-gradient(140deg, #1d1d1f 0%, #3d3d3f 35%, #5e5ce6 80%, #0071e3 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 14px; opacity: 0; transform: translateY(18px); animation: fadeUp 0.7s 0.2s ease forwards; }
+    /* Multilingual hero greeting */
+    .hero-name {
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      background: linear-gradient(140deg, #1d1d1f 0%, #3d3d3f 35%, #5e5ce6 80%, #0071e3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 14px;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeUp 0.7s 0.2s ease forwards;
+      min-height: 2.4em;
+      display: block;
+    }
     html.dark .hero-name { background: linear-gradient(140deg, #f5f5f7 0%, #c0c0c8 35%, #7b79ff 80%, #60aaff 100%); -webkit-background-clip: text; background-clip: text; }
+
+    .hero-greeting {
+      display: block;
+      font-size: clamp(14px, 2vw, 22px);
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      opacity: 0.7;
+      margin-bottom: 4px;
+      font-family: var(--sans);
+    }
+
+    .hero-fullname {
+      display: block;
+      font-size: clamp(48px, 7vw, 82px);
+      letter-spacing: -0.045em;
+      line-height: 1.0;
+    }
+
+    /* Fade transition for language switch */
+    .hero-name.lang-switching {
+      animation: langFade 0.4s ease forwards;
+    }
+    @keyframes langFade {
+      0%   { opacity: 1; transform: translateY(0); }
+      40%  { opacity: 0; transform: translateY(-8px); }
+      60%  { opacity: 0; transform: translateY(8px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
     .hero-handle { font-family: var(--mono); font-size: clamp(13px,1.8vw,17px); font-weight: 300; color: var(--text-tertiary); letter-spacing: 0.05em; margin-bottom: 38px; opacity: 0; transform: translateY(12px); animation: fadeUp 0.6s 0.35s ease forwards; }
     .hero-handle span { color: var(--accent-2); }
     .hero-desc { font-size: 18px; font-weight: 400; line-height: 1.72; color: var(--text-secondary); letter-spacing: -0.012em; opacity: 0; transform: translateY(12px); animation: fadeUp 0.6s 0.45s ease forwards; }
@@ -397,7 +440,7 @@
   <section id="hero">
     <div class="hero-inner">
       <p class="hero-tag">Aspiring Tech Virtual Assistant · BS Information Technology · 3rd Year</p>
-      <h1 class="hero-name">Joana<br>Daphne Sy</h1>
+      <h1 class="hero-name" id="heroName"><span class="hero-greeting" id="heroGreeting">Hi, I'm</span><span class="hero-fullname" id="heroFullname">Joana Daphne Sy</span></h1>
       <p class="hero-handle">@<span>dvphnc</span></p>
       <p class="hero-desc">Building at the crossroads of <strong>web development, cloud, and cybersecurity</strong>. Oracle-certified, CTF-curious, and learning every day — one room at a time.</p>
       <div class="hero-cta">
@@ -840,7 +883,7 @@
     <div class="reveal reveal-delay-2">
       <div class="email-block">
         <p class="email-label">Email</p>
-        <p class="email-addr"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="305a5f515e51545140585e55434970575d51595c1e535f5d">[email&#160;protected]</a></p>
+        <p class="email-addr">jdsoffcl@gmail.com</p>
       </div>
     </div>
     <div class="contact-links">
@@ -868,6 +911,55 @@
   </footer>
 
   <script>
+    // ── Multilingual hero animation ──
+    const languages = [
+      { greeting: "Hi, I'm",          name: "Joana Daphne Sy",       font: "Inter, sans-serif",                        size: "clamp(48px,7vw,82px)" },
+      { greeting: "Hola, soy",        name: "Joana Daphne Sy",       font: "Inter, sans-serif",                        size: "clamp(44px,6.5vw,78px)" },
+      { greeting: "Bonjour, je suis", name: "Joana Daphne Sy",       font: "Inter, sans-serif",                        size: "clamp(38px,5.5vw,68px)" },
+      { greeting: "Ciao, sono",       name: "Joana Daphne Sy",       font: "Inter, sans-serif",                        size: "clamp(44px,6.5vw,78px)" },
+      { greeting: "Hallo, ich bin",   name: "Joana Daphne Sy",       font: "Inter, sans-serif",                        size: "clamp(40px,6vw,72px)" },
+      { greeting: "안녕하세요, 저는",       name: "호아나 다프네 시",             font: "'Noto Sans KR', sans-serif",              size: "clamp(44px,6.5vw,76px)" },
+      { greeting: "こんにちは、私は",        name: "ホアナ ダフネ シー",            font: "'Noto Sans JP', sans-serif",              size: "clamp(42px,6vw,72px)" },
+      { greeting: "你好，我是",            name: "胡安娜·达芙妮·施",             font: "'Noto Sans SC', sans-serif",              size: "clamp(44px,6.5vw,76px)" },
+      { greeting: "Olá, eu sou",      name: "Joana Daphne Sy",       font: "Inter, sans-serif",                        size: "clamp(44px,6.5vw,78px)" },
+      { greeting: "Merhaba, ben",     name: "Joana Daphne Sy",       font: "Inter, sans-serif",                        size: "clamp(42px,6vw,74px)" },
+      { greeting: "Kamusta, ako si",  name: "Joana Daphne Sy",       font: "Inter, sans-serif",                        size: "clamp(38px,5.5vw,66px)" },
+    ];
+
+    // Preload Google Fonts for CJK languages
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&family=Noto+Sans+JP:wght@700&family=Noto+Sans+SC:wght@700&display=swap';
+    document.head.appendChild(link);
+
+    const heroGreeting = document.getElementById('heroGreeting');
+    const heroFullname = document.getElementById('heroFullname');
+    const heroName    = document.getElementById('heroName');
+
+    let langIndex = 0;
+    let heroReady = false;
+
+    function switchLanguage() {
+      if (!heroReady) return;
+      langIndex = (langIndex + 1) % languages.length;
+      const lang = languages[langIndex];
+
+      heroName.classList.add('lang-switching');
+      setTimeout(() => {
+        heroGreeting.textContent = lang.greeting;
+        heroFullname.textContent = lang.name;
+        heroFullname.style.fontFamily = lang.font;
+        heroFullname.style.fontSize   = lang.size;
+        heroName.classList.remove('lang-switching');
+      }, 200);
+    }
+
+    // Wait for hero fadeUp animation to finish before starting rotation
+    setTimeout(() => {
+      heroReady = true;
+      setInterval(switchLanguage, 2800);
+    }, 1400);
+
     // ── Scroll reveal ──
     const obs = new IntersectionObserver(e => e.forEach(x => {
       if (x.isIntersecting) x.target.classList.add('visible');
