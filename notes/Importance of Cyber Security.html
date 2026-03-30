@@ -3,188 +3,273 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Importance of Cyber Security • dvphnc SyberVault</title>
-  <meta name="description" content="Why cybersecurity is the foundation of the modern world">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <title>Importance of Cyber Security &bull; dvphnc SyberVault</title>
+  <meta name="description" content="The invisible shield of the digital age">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --grad:linear-gradient(120deg,#2c6cbc,#3a7bd5,#5ba0f2,#71c3f7,#a0d8f7,#f6f6f6,#71c3f7,#2c6cbc);
-      --bg:#000;
-      --text:#e8f4ff;
-      --accent:#71c3f7;
-      --light-text:#ffffff;
-    }
-    body{
-      margin:0;background:var(--bg);color:var(--text);
-      font-family:-apple-system,'SF Pro Display',sans-serif;
-      line-height:1.9;font-size:1.25rem;overflow-x:hidden;
-    }
-    .container{max-width:920px;margin:0 auto;padding:2rem 1.5rem;position:relative;z-index:2;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#0d0d0f;--s:rgba(255,255,255,.04);--s2:rgba(255,255,255,.07);--b:rgba(255,255,255,.08);--t:#f5f5f7;--t2:rgba(255,255,255,.65);--t3:rgba(255,255,255,.35);--accent:#71c3f7;--grad:linear-gradient(135deg,#2c6cbc,#71c3f7,#a0d8f7);--grad2:linear-gradient(120deg,#2c6cbc,#a0d8f7);--mono:'JetBrains Mono',monospace;--sans:'Inter',-apple-system,sans-serif}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--sans);background:var(--bg);color:var(--t);line-height:1.8;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 70% 50% at 10% 5%,#2c6cbc18 0%,transparent 55%),radial-gradient(ellipse 50% 60% at 90% 90%,#a0d8f712 0%,transparent 55%)}
 
-    /* Exact same back button as Career page */
-    .back{
-      position:fixed;top:2.5rem;left:2.5rem;z-index:1000;
-      color:var(--accent);text-decoration:none;font-weight:600;font-size:1.15rem;
-      background:rgba(113,195,247,0.15);padding:0.8rem 1.6rem;border-radius:20px;
-      backdrop-filter:blur(12px);border:1px solid rgba(113,195,247,0.3);
-      opacity:0;transition:all .4s;box-shadow:0 8px 25px rgba(0,0,0,0.3);
-    }
-    .back:hover{background:rgba(113,195,247,0.28);transform:translateY(-4px);}
+    /* PROGRESS */
+    #prog{position:fixed;top:0;left:0;z-index:300;height:2px;width:0;background:var(--grad);transition:width .08s linear}
 
-    header{text-align:center;padding:8rem 0 4rem;}
-    h1{
-      font-size:7.2rem;font-weight:900;line-height:1.1;letter-spacing:-3px;
-      background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
-      opacity:0;transform:translateY(60px);
-    }
-    .subtitle{
-      font-size:2.1rem;color:#a0d8f7;margin-top:1rem;font-weight:600;
-      opacity:0;transform:translateY(40px);
-    }
+    /* BACK */
+    .back{position:fixed;top:20px;left:20px;z-index:200;display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:980px;background:rgba(255,255,255,.08);border:1px solid var(--b);backdrop-filter:blur(20px);color:var(--t);text-decoration:none;font-size:13px;font-weight:500;transition:all .2s;opacity:0;animation:fi .5s .3s forwards}
+    .back:hover{background:rgba(255,255,255,.13);transform:translateX(-2px)}
 
-    .cover{
-      max-width:820px;margin:4rem auto;border-radius:42px;overflow:hidden;
-      box-shadow:0 80px 180px rgba(44,108,188,0.5);
-      border:2px solid rgba(113,195,247,0.35);
-      opacity:0;transform:scale(0.96);
-    }
-    .cover img{width:100%;display:block;transition:transform 1.2s ease;}
-    .cover:hover img{transform:scale(1.06);}
+    /* LAYOUT */
+    .layout{position:relative;z-index:1;display:grid;grid-template-columns:260px 1fr;min-height:100vh;max-width:1160px;margin:0 auto;padding:0 24px}
 
-    h2{
-      font-size:4.2rem;font-weight:800;text-align:center;margin:5rem 0 2rem;
-      background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
-      opacity:0;transform:translateY(50px);
-    }
-    h3{
-      font-size:2.1rem;margin:3.5rem 0 1.8rem;color:#a0d8f7;
-      opacity:0;transform:translateY(30px);
-    }
-    p{margin:1.6rem 0;color:#d0e8ff;font-size:1.3rem;opacity:0;transform:translateY(30px);}
-    strong{color:var(--light-text);font-weight:700;}
+    /* SIDEBAR */
+    .sidebar{position:sticky;top:0;height:100vh;overflow-y:auto;padding:96px 20px 40px 0;display:flex;flex-direction:column}
+    .sidebar::-webkit-scrollbar{width:0}
+    .toc-lbl{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--t3);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--b)}
+    .toc-item{display:block;font-size:12px;color:var(--t3);text-decoration:none;padding:6px 10px;border-radius:8px;border-left:2px solid transparent;transition:all .18s;letter-spacing:-.01em;line-height:1.4}
+    .toc-item:hover{color:var(--t);background:var(--s)}
+    .toc-item.active{color:var(--accent);background:rgba(255,255,255,.04);border-left-color:var(--accent)}
+    .sb-cat{margin-top:auto;padding-top:20px;border-top:1px solid var(--b)}
+    .sb-cat-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:4px}
+    .sb-cat-name{font-size:12px;font-weight:600;color:var(--accent)}
 
-    ul{padding-left:2.8rem;margin:2.4rem 0;opacity:0;transform:translateY(30px);}
-    li{margin:1.2rem 0;font-size:1.32rem;position:relative;padding-left:0.4rem;}
-    li::marker{color:var(--accent);font-size:1.4em;}
+    /* MAIN */
+    .main{padding:96px 0 120px 44px;border-left:1px solid var(--b);min-width:0}
 
-    .cinematic-quote{
-      margin:10rem auto;padding:6rem 3rem;max-width:960px;text-align:center;position:relative;
-      background:radial-gradient(circle at center,rgba(113,195,247,.18) 0%,transparent 70%);
-      border-radius:40px;overflow:hidden;
-      border:1px solid rgba(113,195,247,0.25);backdrop-filter:blur(20px);
-      opacity:0;transform:translateY(60px);
-    }
-    .cinematic-quote::before{
-      content:'';position:absolute;inset:0;background:var(--grad);opacity:.16;filter:blur(140px);
-    }
-    .quote-text{
-      position:relative;font-size:4.2rem;font-weight:900;line-height:1.4;
-      background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
-      text-shadow:0 0 100px rgba(113,195,247,.9);
-    }
-    .quote-marks{
-      font-size:16rem;font-weight:100;opacity:.09;position:absolute;pointer-events:none;color:#71c3f7;
-    }
-    .quote-marks.left{top:-4rem;left:-2rem;}
-    .quote-marks.right{bottom:-5rem;right:-2rem;transform:scaleX(-1);}
+    /* COVER */
+    .cover-wrap{border-radius:18px;overflow:hidden;margin-bottom:44px;border:1px solid var(--b);position:relative}
+    .cover-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,var(--bg) 0%,transparent 40%);pointer-events:none}
+    .cover-img{width:100%;height:300px;object-fit:cover;display:block;transition:transform .8s ease}
+    .cover-wrap:hover .cover-img{transform:scale(1.04)}
 
-    @media (max-width:640px){
-      h1{font-size:4.8rem;letter-spacing:-2px;}
-      .subtitle{font-size:1.7rem;}
-      .back{top:1.6rem;left:1.6rem;padding:0.7rem 1.4rem;font-size:1.1rem;}
+    /* HEADER */
+    .eyebrow{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);padding:4px 12px;border-radius:980px;margin-bottom:18px}
+    .edot{width:5px;height:5px;border-radius:50%;background:var(--accent)}
+    .note-title{font-size:clamp(26px,4vw,44px);font-weight:800;letter-spacing:-.04em;line-height:1.1;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px}
+    .note-sub{font-size:15px;color:var(--t3);margin-bottom:28px;letter-spacing:-.01em}
+    .meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:36px;padding-bottom:28px;border-bottom:1px solid var(--b)}
+    .meta-tag{font-family:var(--mono);font-size:10px;padding:3px 10px;border-radius:6px;background:var(--s2);color:var(--t3);letter-spacing:.06em}
+    .actions{display:flex;gap:8px;margin-left:auto}
+    .abtn{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:980px;background:var(--s);border:1px solid var(--b);color:var(--t3);font-size:12px;font-family:var(--mono);cursor:pointer;transition:all .2s;letter-spacing:.04em;user-select:none}
+    .abtn:hover{background:var(--s2);color:var(--t)}
+    .abtn.liked{color:var(--accent);border-color:var(--accent)}
+
+    /* ARTICLE */
+    article h2{font-size:clamp(17px,2.4vw,23px);font-weight:700;letter-spacing:-.03em;line-height:1.25;background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:48px 0 12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.06);scroll-margin-top:40px}
+    article h3{font-size:14.5px;font-weight:600;color:var(--accent);letter-spacing:-.01em;margin:22px 0 8px}
+    article p{font-size:15px;line-height:1.85;color:var(--t2);margin-bottom:13px;letter-spacing:-.005em}
+    article strong{color:var(--t);font-weight:600}
+    article em{color:var(--t3);font-style:italic}
+    article code{font-family:var(--mono);font-size:12px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);padding:2px 6px;border-radius:5px;color:var(--accent)}
+    article pre{background:rgba(0,0,0,.45);border:1px solid var(--b);border-radius:14px;padding:18px 20px;margin:18px 0;overflow-x:auto;position:relative}
+    article pre code{background:none;border:none;padding:0;font-size:13px;line-height:1.7;color:#a0ff7a}
+    .cpybtn{position:absolute;top:10px;right:10px;padding:3px 9px;border-radius:5px;background:rgba(255,255,255,.07);border:1px solid var(--b);color:var(--t3);font-size:10px;font-family:var(--mono);cursor:pointer;transition:all .2s}
+    .cpybtn:hover{background:var(--s2);color:var(--t)}
+    .cpybtn.ok{color:var(--accent);border-color:var(--accent)}
+
+    /* LISTS */
+    article ul,article ol{padding-left:0;margin:12px 0 20px;list-style:none}
+    article li{font-size:14.5px;line-height:1.75;color:var(--t2);padding:9px 14px 9px 38px;border-radius:10px;background:var(--s);border:1px solid rgba(255,255,255,.05);margin-bottom:5px;position:relative;transition:background .15s,border-color .15s,transform .15s}
+    article li:hover{background:var(--s2);border-color:rgba(255,255,255,.09);transform:translateX(3px)}
+    article ul li::before{content:'';position:absolute;left:13px;top:50%;transform:translateY(-50%);width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.8}
+    article ol{counter-reset:lc}
+    article ol li{counter-increment:lc}
+    article ol li::before{content:counter(lc);position:absolute;left:10px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9px;font-weight:700;color:var(--accent);background:rgba(255,255,255,.07);width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+
+    /* TABLES */
+    .tbl-wrap{overflow-x:auto;margin:18px 0;border-radius:14px;border:1px solid var(--b)}
+    table{width:100%;border-collapse:collapse;min-width:380px}
+    th{background:rgba(255,255,255,.05);color:var(--t);font-size:10.5px;font-weight:600;font-family:var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:11px 14px;text-align:left;border-bottom:1px solid var(--b)}
+    td{padding:11px 14px;font-size:14px;color:var(--t2);border-bottom:1px solid rgba(255,255,255,.04);vertical-align:top;line-height:1.6}
+    tr:last-child td{border-bottom:none}
+    tr:hover td{background:rgba(255,255,255,.02)}
+
+    /* QUOTE */
+    .quote-block{margin:48px 0;padding:32px 28px;border-radius:16px;background:var(--s);border:1px solid var(--b);border-left:3px solid var(--accent);position:relative;overflow:hidden}
+    .quote-block::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 0% 50%,#2c6cbc12 0%,transparent 60%);pointer-events:none}
+    .quote-icon{font-size:52px;line-height:.8;color:var(--accent);opacity:.22;display:block;margin-bottom:12px;font-family:Georgia,serif}
+    .quote-text{position:relative;font-size:clamp(14px,1.9vw,19px);font-weight:600;line-height:1.65;letter-spacing:-.02em;background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+    /* FLASHCARDS */
+    .fc-section{margin:48px 0}
+    .section-lbl{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--t3);margin-bottom:14px}
+    .fc{background:var(--s);border:1px solid var(--b);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .18s;margin-bottom:6px}
+    .fc:hover{background:var(--s2);border-color:rgba(255,255,255,.11);transform:translateY(-1px)}
+    .fc-q{padding:13px 16px;font-size:13.5px;font-weight:600;color:var(--t);display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .fc-chev{font-size:10px;color:var(--t3);transition:transform .25s;flex-shrink:0}
+    .fc.open .fc-chev{transform:rotate(180deg)}
+    .fc-a{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.16,1,.3,1),opacity .28s;opacity:0}
+    .fc.open .fc-a{max-height:260px;opacity:1}
+    .fc-ai{padding:0 16px 13px;font-size:13px;line-height:1.7;color:var(--t2);border-top:1px solid var(--b);padding-top:11px}
+
+    /* GLOSSARY */
+    .glossary{margin:48px 0}
+    .gl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+    .gl-item{background:var(--s);border:1px solid var(--b);border-radius:10px;padding:12px 14px;transition:all .18s;cursor:default}
+    .gl-item:hover{background:var(--s2);border-color:rgba(255,255,255,.1);transform:translateY(-2px)}
+    .gl-term{font-family:var(--mono);font-size:10.5px;font-weight:600;color:var(--accent);letter-spacing:.04em;margin-bottom:4px}
+    .gl-def{font-size:12px;line-height:1.55;color:var(--t2)}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(14px);transition:opacity .52s cubic-bezier(.16,1,.3,1),transform .52s cubic-bezier(.16,1,.3,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    @keyframes fi{to{opacity:1}}
+
+    @media(max-width:768px){
+      .layout{grid-template-columns:1fr;padding:0 16px}
+      .sidebar{display:none}
+      .main{padding:76px 0 100px;border-left:none}
+      .cover-img{height:200px}
     }
   </style>
 </head>
 <body>
 
-  <a href="../index.html" class="back" aria-label="Back to SyberVault">Vault</a>
+<div id="prog"></div>
+<a href="../index.html" class="back"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> SyberVault</a>
 
-  <div class="container">
-    <header>
-      <h1>Importance of<br>Cyber Security</h1>
-      <p class="subtitle">The invisible shield of the digital age</p>
-    </header>
+<div class="layout">
+  <aside class="sidebar">
+    <p class="toc-lbl">On this page</p>
+    <a href="#sec-the-cia-triad" class="toc-item">The CIA Triad</a>
+<a href="#sec-violations-of-security-principles" class="toc-item">Violations of Security Principles</a>
 
-    <div class="cover">
-      <img src="../covers/cyber-importance.png" alt="The critical importance of cybersecurity">
+    <div class="sb-cat">
+      <p class="sb-cat-lbl">Category</p>
+      <p class="sb-cat-name">Fundamentals</p>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="cover-wrap reveal">
+      <img class="cover-img" src="../covers/cyber-importance.png" alt="Importance of Cyber Security" loading="lazy">
     </div>
 
-    <article>
-      <p>Cybersecurity is essential because our lives are increasingly lived through data. Every message, transaction, or stored photo represents personal identity and activity. When that data is exposed or exploited, the consequences extend beyond technology — they affect individuals, organizations, and society.</p>
-   
-      <p>It safeguards the systems that drive economies and institutions — keeping hospitals functional, banks operational, and communication networks reliable. Without cybersecurity, the digital age would be unstable and vulnerable to disruption.</p>
-
-      <h2>The CIA Triad</h2>
-      <p>The <strong>CIA Triad</strong> defines the three fundamental principles of cybersecurity that guide all protection mechanisms:</p>
-
-      <h3>Confidentiality</h3>
-      <p>Ensures that information is accessible only to authorized users.</p>
-      <p><em>Examples:</em></p>
-      <ul>
-        <li>Patient records protected in <strong>healthcare systems</strong></li>
-        <li>Secured payment data in <strong>online shopping</strong> and <strong>bank transactions</strong></li>
-        <li>Private files stored safely in <strong>cloud services</strong></li>
-      </ul>
-
-      <h3>Integrity</h3>
-      <p>Maintains the accuracy and consistency of data throughout its lifecycle.</p>
-      <p><em>Examples:</em></p>
-      <ul>
-        <li>Preventing data tampering in <strong>document editing platforms</strong></li>
-        <li>Ensuring authentic product information in <strong>online reviews</strong></li>
-        <li>Maintaining unaltered records in <strong>database management systems</strong></li>
-      </ul>
-
-      <h3>Availability</h3>
-      <p>Guarantees that systems and data are accessible when needed.</p>
-      <p><em>Examples:</em></p>
-      <ul>
-        <li>Keeping <strong>hospital systems</strong> and <strong>emergency networks</strong> operational</li>
-        <li>Maintaining uptime for <strong>cloud-based services</strong></li>
-        <li>Preventing downtime in <strong>banking systems</strong> and <strong>e-commerce websites</strong></li>
-      </ul>
-
-      <h2>Violations of Security Principles</h2>
-      <p>A violation of any CIA Triad component weakens cybersecurity:</p>
-      <ul>
-        <li>Unauthorized access to personal or financial data breaches <strong>confidentiality</strong>.</li>
-        <li>Data corruption or tampering compromises <strong>integrity</strong>.</li>
-        <li>Service disruptions or outages affect <strong>availability</strong>.</li>
-      </ul>
-
-      <div class="cinematic-quote">
-        <div class="quote-marks left">“</div>
-        <div class="quote-marks right">”</div>
-        <div class="quote-text">
-          Cybersecurity is more than technology —<br>
-          it’s about protecting trust.<br><br>
-          By ensuring confidentiality, integrity,<br>
-          and availability,<br>
-          we maintain stability, privacy,<br>
-          and confidence in the digital world.
+    <div class="reveal" style="transition-delay:.05s">
+      <span class="eyebrow"><span class="edot"></span>Fundamentals</span>
+      <h1 class="note-title">Importance of Cyber Security</h1>
+      <p class="note-sub">The invisible shield of the digital age</p>
+      <div class="meta">
+        <span class="meta-tag" id="rtt">&#8987; reading...</span>
+        <span class="meta-tag">dvphnc</span>
+        <div class="actions">
+          <button class="abtn" id="likeBtn" onclick="doLike()">&#9825; <span id="lc">0</span></button>
+          <button class="abtn" onclick="doFont()">Aa</button>
         </div>
       </div>
-    </article>
-  </div>
+    </div>
 
-  <script>
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.to(".back", {opacity:1, duration:1, delay:0.6});
+    <div id="ab" class="reveal" style="transition-delay:.1s"><article>
+<p>Cybersecurity is essential because our lives are increasingly lived through data. Every message, transaction, or stored photo represents personal identity and activity. When that data is exposed or exploited, the consequences extend beyond technology — they affect individuals, organizations, and society.</p>
+<p>It safeguards the systems that drive economies and institutions — keeping hospitals functional, banks operational, and communication networks reliable. Without cybersecurity, the digital age would be unstable and vulnerable to disruption.</p>
+<h2 id="sec-the-cia-triad">The CIA Triad</h2>
+<p>The <strong>CIA Triad</strong> defines the three fundamental principles of cybersecurity that guide all protection mechanisms:</p>
+<h3>Confidentiality</h3>
+<p>Ensures that information is accessible only to authorized users.</p>
+<p><em>Examples:</em></p>
+<ul>
+<li>Patient records protected in <strong>healthcare systems</strong></li>
+<li>Secured payment data in <strong>online shopping</strong> and <strong>bank transactions</strong></li>
+<li>Private files stored safely in <strong>cloud services</strong></li>
+</ul>
+<h3>Integrity</h3>
+<p>Maintains the accuracy and consistency of data throughout its lifecycle.</p>
+<p><em>Examples:</em></p>
+<ul>
+<li>Preventing data tampering in <strong>document editing platforms</strong></li>
+<li>Ensuring authentic product information in <strong>online reviews</strong></li>
+<li>Maintaining unaltered records in <strong>database management systems</strong></li>
+</ul>
+<h3>Availability</h3>
+<p>Guarantees that systems and data are accessible when needed.</p>
+<p><em>Examples:</em></p>
+<ul>
+<li>Keeping <strong>hospital systems</strong> and <strong>emergency networks</strong> operational</li>
+<li>Maintaining uptime for <strong>cloud-based services</strong></li>
+<li>Preventing downtime in <strong>banking systems</strong> and <strong>e-commerce websites</strong></li>
+</ul>
+<h2 id="sec-violations-of-security-principles">Violations of Security Principles</h2>
+<p>A violation of any CIA Triad component weakens cybersecurity:</p>
+<ul>
+<li>Unauthorized access to personal or financial data breaches <strong>confidentiality</strong>.</li>
+<li>Data corruption or tampering compromises <strong>integrity</strong>.</li>
+<li>Service disruptions or outages affect <strong>availability</strong>.</li>
+</ul>
 
-    gsap.utils.toArray("h1, .subtitle, .cover, h2, h3, p, ul, .cinematic-quote").forEach(el => {
-      gsap.to(el, {
-        opacity:1, y:0, duration:1.4, ease:"power3.out",
-        scrollTrigger:{trigger:el, start:"top 84%", toggleActions:"play none none reverse"}
-      });
-    });
+</article></div>
 
-    document.querySelectorAll("ul").forEach(ul => {
-      gsap.to(ul.querySelectorAll("li"), {
-        opacity:1, y:0, duration:0.8, stagger:0.14, ease:"power2.out",
-        scrollTrigger:{trigger:ul, start:"top 84%"}
-      });
-    });
-  </script>
+    <div class="quote-block reveal"><span class="quote-icon">&ldquo;</span><div class="quote-text">Cybersecurity is more than technology —<br/>
+          it’s about protecting trust.<br/><br/>
+          By ensuring confidentiality, integrity,<br/>
+          and availability,<br/>
+          we maintain stability, privacy,<br/>
+          and confidence in the digital world.</div></div>
+
+    <div class="fc-section reveal" style="transition-delay:.13s">
+      <p class="section-lbl">&#127183; Quick Review &mdash; click to reveal</p>
+      <div id="fcs"></div>
+    </div>
+
+    <div class="glossary reveal" style="transition-delay:.15s">
+      <p class="section-lbl">&#128218; Key Terms</p>
+      <div class="gl-grid" id="glg"></div>
+    </div>
+  </main>
+</div>
+
+<script>
+// Progress
+const prog=document.getElementById('prog');
+window.addEventListener('scroll',()=>{const h=document.documentElement;prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'});
+
+// Reveal
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')},{threshold:.07,rootMargin:'0px 0px -20px 0px'}));
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+document.querySelectorAll('#ab > *').forEach((el,i)=>{el.classList.add('reveal');el.style.transitionDelay=(i*.03)+'s';obs.observe(el)});
+
+// TOC
+const tlinks=document.querySelectorAll('.toc-item');
+new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){tlinks.forEach(l=>l.classList.remove('active'));const a=document.querySelector('.toc-item[href="#'+x.target.id+'"]');if(a)a.classList.add('active')}},{rootMargin:'-20% 0px -70% 0px'})).observe||0;
+document.querySelectorAll('h2[id]').forEach(h=>{new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){tlinks.forEach(l=>l.classList.remove('active'));const a=document.querySelector('.toc-item[href="#'+x.target.id+'"]');if(a)a.classList.add('active')}},{rootMargin:'-20% 0px -70% 0px'})).observe(h)});
+
+// Reading time
+const wc=document.getElementById('ab').innerText.split(/\s+/).length;
+document.getElementById('rtt').textContent='&#8987; '+Math.max(1,Math.ceil(wc/200))+' min read';
+
+// Like
+const lk='Importance_of_Cyber_Security.html_like';let liked=localStorage.getItem(lk)==='1',lcount=parseInt(localStorage.getItem(lk+'_n')||0);
+function doLike(){liked=!liked;lcount=liked?lcount+1:Math.max(0,lcount-1);localStorage.setItem(lk,liked?'1':'0');localStorage.setItem(lk+'_n',lcount);renderLike()}
+function renderLike(){const b=document.getElementById('likeBtn');b.innerHTML=(liked?'&#9829;':'&#9825;')+' <span id="lc">'+lcount+'</span>';b.classList.toggle('liked',liked)}
+renderLike();
+
+// Font toggle
+let big=false;function doFont(){big=!big;document.getElementById('ab').style.fontSize=big?'17.5px':''}
+
+// Copy buttons
+document.querySelectorAll('pre').forEach(pre=>{const b=document.createElement('button');b.className='cpybtn';b.textContent='copy';b.onclick=()=>{navigator.clipboard.writeText(pre.querySelector('code')?.innerText||pre.innerText);b.textContent='copied!';b.classList.add('ok');setTimeout(()=>{b.textContent='copy';b.classList.remove('ok')},1800)};pre.appendChild(b)});
+
+// Wrap tables
+document.querySelectorAll('#ab table').forEach(t=>{const w=document.createElement('div');w.className='tbl-wrap';t.parentNode.insertBefore(w,t);w.appendChild(t)});
+
+// Flashcards
+const fcData=[{q:'What does the CIA Triad stand for?',a:'Confidentiality, Integrity, Availability — the three core pillars of cybersecurity.'},
+{q:'What does Confidentiality mean?',a:'Ensuring information is accessible only to authorized users.'},
+{q:'Give an example of an Availability failure.',a:"A hospital's systems going offline due to a DDoS attack."},
+{q:'What is a violation of Integrity?',a:'Tampering with data so it no longer reflects the truth.'}];
+const fcs=document.getElementById('fcs');
+fcData.forEach(c=>{const d=document.createElement('div');d.className='fc';d.innerHTML='<div class="fc-q"><span>'+c.q+'</span><span class="fc-chev">&#9660;</span></div><div class="fc-a"><div class="fc-ai">'+c.a+'</div></div>';d.onclick=()=>d.classList.toggle('open');fcs.appendChild(d)});
+
+// Glossary
+const glData=[{t:'CIA Triad',d:'Confidentiality, Integrity, Availability'},
+{t:'Confidentiality',d:'Restricting data to authorized users'},
+{t:'Integrity',d:'Data is accurate and unaltered'},
+{t:'Availability',d:'Systems accessible when needed'},
+{t:'Cybersecurity',d:'Protecting systems, networks and data'},
+{t:'Data Breach',d:'Unauthorized access to sensitive info'}];
+const glg=document.getElementById('glg');
+glData.forEach(g=>{const i=document.createElement('div');i.className='gl-item reveal';i.innerHTML='<div class="gl-term">'+g.t+'</div><div class="gl-def">'+g.d+'</div>';glg.appendChild(i);obs.observe(i)});
+</script>
 </body>
 </html>
