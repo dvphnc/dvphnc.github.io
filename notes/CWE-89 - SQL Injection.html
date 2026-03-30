@@ -17,9 +17,13 @@
     /* PROGRESS */
     #prog{position:fixed;top:0;left:0;z-index:300;height:2px;width:0;background:var(--grad);transition:width .08s linear}
 
-    /* BACK */
-    .back{position:fixed;top:20px;left:20px;z-index:200;display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:980px;background:rgba(255,255,255,.08);border:1px solid var(--b);backdrop-filter:blur(20px);color:var(--t);text-decoration:none;font-size:13px;font-weight:500;transition:all .2s;opacity:0;animation:fi .5s .3s forwards}
-    .back:hover{background:rgba(255,255,255,.13);transform:translateX(-2px)}
+    /* BACK — lives at top of sidebar */
+    .back{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border-radius:980px;background:rgba(255,255,255,.06);border:1px solid var(--b);color:var(--t);text-decoration:none;font-size:12px;font-weight:500;transition:all .2s;margin-bottom:24px;align-self:flex-start}
+    .back:hover{background:rgba(255,255,255,.11);transform:translateX(-2px)}
+    /* hide the old fixed back on mobile — sidebar hidden so we show a top bar instead */
+    .back-mobile{display:none;position:fixed;top:16px;left:16px;z-index:200;align-items:center;gap:6px;padding:7px 14px;border-radius:980px;background:rgba(13,13,15,.85);border:1px solid var(--b);backdrop-filter:blur(20px);color:var(--t);text-decoration:none;font-size:12px;font-weight:500;transition:all .2s}
+    .back-mobile:hover{background:rgba(255,255,255,.1)}
+    @media(max-width:768px){.back-mobile{display:inline-flex}.back{display:none}}
 
     /* LAYOUT */
     .layout{position:relative;z-index:1;display:grid;grid-template-columns:260px 1fr;min-height:100vh;max-width:1160px;margin:0 auto;padding:0 24px}
@@ -128,10 +132,11 @@
 <body>
 
 <div id="prog"></div>
-<a href="../index.html" class="back"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> SyberVault</a>
+<a href="../index.html" class="back-mobile"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> SyberVault</a>
 
 <div class="layout">
   <aside class="sidebar">
+    <a href="../index.html" class="back"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> SyberVault</a>
     <p class="toc-lbl">On this page</p>
     <a href="#sec-what-is-sql" class="toc-item">What Is SQL?</a>
 <a href="#sec-how-sql-injection-happens" class="toc-item">How SQL Injection Happens</a>
