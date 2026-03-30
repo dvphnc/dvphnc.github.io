@@ -254,6 +254,77 @@
       transition: all 0.22s ease;
       position: relative;
       overflow: hidden;
+      cursor: pointer;
+    }
+
+    .sv-note.open {
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(255,255,255,0.16);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    }
+
+    .sv-note.open::after { opacity: 1; }
+
+    /* Expand icon */
+    .sv-note-arrow {
+      position: absolute;
+      top: 18px; right: 18px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.2);
+      transition: transform 0.3s ease, color 0.2s;
+      line-height: 1;
+    }
+
+    .sv-note.open .sv-note-arrow {
+      transform: rotate(45deg);
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* Expandable body — hidden by default */
+    .sv-note-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease, margin 0.3s;
+      opacity: 0;
+      margin-top: 0;
+    }
+
+    .sv-note.open .sv-note-body {
+      max-height: 600px;
+      opacity: 1;
+      margin-top: 14px;
+    }
+
+    .sv-note-body-inner {
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .sv-note-body p {
+      font-size: 12.5px;
+      line-height: 1.72;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 8px;
+    }
+
+    .sv-note-body p:last-child { margin-bottom: 0; }
+
+    .sv-note-body strong {
+      color: rgba(255,255,255,0.8);
+      font-weight: 600;
+    }
+
+    .sv-note-body ul {
+      padding-left: 18px;
+      margin: 8px 0;
+    }
+
+    .sv-note-body li {
+      font-size: 12px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 4px;
+      list-style: disc;
     }
 
     .sv-note::after {
@@ -477,7 +548,7 @@
 
       <p class="sv-eyebrow reveal">Personal Knowledge System</p>
       <h2 class="sv-heading reveal reveal-delay-1"><span class="s">Syber</span><span class="v">Vault</span></h2>
-      <p class="sv-sub reveal reveal-delay-2">// a living archive of what I study, discover, and break &nbsp;·&nbsp; 11 notes &nbsp;·&nbsp; 4 categories</p>
+      <p class="sv-sub reveal reveal-delay-2">// a living archive of what I study, discover, and break &nbsp;·&nbsp; 11 notes &nbsp;·&nbsp; 4 categories &nbsp;·&nbsp; <em style="color:rgba(255,255,255,0.2)">click any card to read</em></p>
 
       <!-- FUNDAMENTALS -->
       <div class="sv-category reveal reveal-delay-2">
@@ -487,30 +558,94 @@
           <span class="sv-cat-count">4 notes</span>
         </div>
         <div class="sv-grid">
+
           <div class="sv-note f">
+            <span class="sv-note-arrow">+</span>
             <p class="sv-note-label f">Fundamentals</p>
             <p class="sv-note-title">Importance of Cyber Security</p>
-            <p class="sv-note-desc">CIA Triad — Confidentiality, Integrity, Availability. Why cybersecurity is the invisible shield of the digital age and what happens when each pillar is violated.</p>
+            <p class="sv-note-desc">CIA Triad — Confidentiality, Integrity, Availability. The invisible shield of the digital age.</p>
             <div class="sv-note-tags"><span class="sv-tag f">CIA Triad</span><span class="sv-tag f">InfoSec</span></div>
+            <div class="sv-note-body">
+              <div class="sv-note-body-inner">
+                <p><strong>Cybersecurity</strong> is essential because our lives are increasingly lived through data. It safeguards systems that drive economies and institutions — keeping hospitals functional, banks operational, and communication networks reliable.</p>
+                <p><strong>The CIA Triad</strong> defines the three fundamental principles:</p>
+                <ul>
+                  <li><strong>Confidentiality</strong> — Only authorized eyes see sensitive data (patient records, payment data, cloud files)</li>
+                  <li><strong>Integrity</strong> — Data remains untampered (document platforms, database records, online reviews)</li>
+                  <li><strong>Availability</strong> — Systems stay online (hospital networks, cloud services, banking systems)</li>
+                </ul>
+                <p>A violation of any pillar weakens the whole structure — unauthorized access breaches confidentiality, data corruption compromises integrity, and outages kill availability.</p>
+              </div>
+            </div>
           </div>
+
           <div class="sv-note f">
+            <span class="sv-note-arrow">+</span>
             <p class="sv-note-label f">Fundamentals</p>
             <p class="sv-note-title">Introduction to Web Application Security</p>
-            <p class="sv-note-desc">Evolution from ARPANET to the modern web. OWASP Top 10, URL anatomy, BlackCat ransomware case study, and proactive defense checklist.</p>
+            <p class="sv-note-desc">Evolution from ARPANET to the modern web. OWASP Top 10, URL anatomy, defense checklists.</p>
             <div class="sv-note-tags"><span class="sv-tag f">OWASP</span><span class="sv-tag f">Web</span><span class="sv-tag f">Defense</span></div>
+            <div class="sv-note-body">
+              <div class="sv-note-body-inner">
+                <p><strong>Web Application Security</strong> protects websites and online platforms from unauthorized access, misuse, or disruption.</p>
+                <p><strong>Web Evolution:</strong> ARPANET (1969, research-only) → Old Web (1990s, static pages) → Modern Web (dynamic, cloud-powered, primary attack target).</p>
+                <p><strong>Proactive Defense Checklist:</strong></p>
+                <ul>
+                  <li>Enforce MFA everywhere</li>
+                  <li>Regular penetration testing + vuln scans</li>
+                  <li>Patch everything, always</li>
+                  <li>Network segmentation</li>
+                  <li>Test your incident response plan</li>
+                </ul>
+                <p><strong>Case Study — BlackCat (ALPHV):</strong> Feb 2024 detection → Mar 2024 data exfiltration confirmed → Jan 2025: 190M records exposed.</p>
+                <p>The <strong>OWASP Top 10</strong> is the universal benchmark for web app risks — regularly updated with real-world breach data.</p>
+              </div>
+            </div>
           </div>
+
           <div class="sv-note f">
+            <span class="sv-note-arrow">+</span>
             <p class="sv-note-label f">Fundamentals</p>
             <p class="sv-note-title">Encryption Fundamentals</p>
-            <p class="sv-note-desc">Hash functions, ciphers, key exchange algorithms. End-to-end vs transport encryption. Certificate Authorities, X.509, and building digital trust.</p>
+            <p class="sv-note-desc">Hash functions, ciphers, key exchange. Certificate Authorities, X.509, and digital trust.</p>
             <div class="sv-note-tags"><span class="sv-tag f">Crypto</span><span class="sv-tag f">PKI</span><span class="sv-tag f">TLS</span></div>
+            <div class="sv-note-body">
+              <div class="sv-note-body-inner">
+                <p><strong>Encryption</strong> converts readable information into ciphertext, accessible only with the correct key. It ensures confidentiality, integrity, and trust across digital communications.</p>
+                <p><strong>Core components:</strong></p>
+                <ul>
+                  <li><strong>Hash functions</strong> — generate unique fingerprints of data for verification</li>
+                  <li><strong>Ciphers</strong> — encrypt and decrypt using mathematical operations</li>
+                  <li><strong>Key exchange algorithms</strong> — securely share encryption keys between parties</li>
+                </ul>
+                <p><strong>End-to-end encryption</strong> — only communicating parties can read messages.<br>
+                <strong>Transport encryption</strong> — secures data only during transmission.</p>
+                <p><strong>Certificate Authorities (CAs)</strong>, Trusted Root-CAs, and X.509 Certificates create the chain of trust that lets you verify legitimate websites and services.</p>
+              </div>
+            </div>
           </div>
+
           <div class="sv-note f">
+            <span class="sv-note-arrow">+</span>
             <p class="sv-note-label f">Fundamentals</p>
             <p class="sv-note-title">Cloud &amp; Virtualization Fundamentals</p>
-            <p class="sv-note-desc">Public, private, and hybrid cloud. Hypervisors, VMs, CASB. How cloud storage works and what a CASB does to enforce security policies at scale.</p>
+            <p class="sv-note-desc">Public, private, hybrid cloud. Hypervisors, VMs, CASB. The invisible foundation of the internet.</p>
             <div class="sv-note-tags"><span class="sv-tag f">Cloud</span><span class="sv-tag f">VMs</span><span class="sv-tag f">CASB</span></div>
+            <div class="sv-note-body">
+              <div class="sv-note-body-inner">
+                <p><strong>Cloud</strong> — a network of servers providing storage, software, and computing over the internet. Instead of owning hardware, you rent resources, gaining flexibility while reducing infrastructure costs.</p>
+                <p><strong>Virtualization</strong> — enables multiple OS instances on a single physical machine via a hypervisor. Each VM gets isolated CPU, memory, and storage allocations.</p>
+                <p><strong>Deployment models:</strong></p>
+                <ul>
+                  <li><strong>Public Cloud</strong> — shared resources (AWS, Azure, Google Cloud)</li>
+                  <li><strong>Private Cloud</strong> — dedicated infrastructure, greater control</li>
+                  <li><strong>Hybrid Cloud</strong> — balanced mix of both</li>
+                </ul>
+                <p><strong>CASB (Cloud Access Security Broker)</strong> — sits between users and cloud services to monitor data movement, enforce policies, detect threats, and ensure compliance.</p>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
 
@@ -522,30 +657,98 @@
           <span class="sv-cat-count">4 notes · CWE research</span>
         </div>
         <div class="sv-grid">
+
           <div class="sv-note t">
+            <span class="sv-note-arrow">+</span>
             <p class="sv-note-label t">CWE-78</p>
             <p class="sv-note-title">OS Command Injection</p>
-            <p class="sv-note-desc">When a web form becomes a root shell. Semicolons, pipes, and $() break out of intended commands. If the app runs as root — game over.</p>
+            <p class="sv-note-desc">When a web form becomes a root shell. Semicolons, pipes, and $() hand the server to the attacker.</p>
             <div class="sv-note-tags"><span class="sv-tag t">RCE</span><span class="sv-tag t">Shell</span><span class="sv-tag t">Injection</span></div>
+            <div class="sv-note-body">
+              <div class="sv-note-body-inner">
+                <p><strong>OS Command Injection</strong> allows an attacker to execute arbitrary OS commands via a vulnerable web application — giving full control over the server.</p>
+                <p>It happens when user input is directly inserted into system commands without sanitization. Characters like <strong>; | &amp;&amp; $()</strong> break out of the intended command context.</p>
+                <p><strong>Example attack:</strong><br>
+                App runs: <code style="font-size:11px;color:#39ff14;background:rgba(57,255,20,0.1);padding:2px 6px;border-radius:4px">cat report.txt</code><br>
+                Attacker inputs: <code style="font-size:11px;color:#39ff14;background:rgba(57,255,20,0.1);padding:2px 6px;border-radius:4px">report.txt; rm -rf /</code></p>
+                <p><strong>Why it's devastating:</strong> works without direct server access. If the app runs as root — game over.</p>
+                <p><strong>Prevention:</strong> never pass raw user input to system shells. Use parameterized APIs, input allowlisting, and principle of least privilege.</p>
+              </div>
+            </div>
           </div>
+
           <div class="sv-note t">
+            <span class="sv-note-arrow">+</span>
             <p class="sv-note-label t">CWE-89</p>
             <p class="sv-note-title">SQL Injection</p>
-            <p class="sv-note-desc">The crown jewel of web vulns. OR 1=1 login bypass, data theft, full DB compromise. Mitigated by prepared statements, parameterized queries, least privilege.</p>
+            <p class="sv-note-desc">The crown jewel of web vulns. OR 1=1 login bypass, data theft, full DB compromise.</p>
             <div class="sv-note-tags"><span class="sv-tag t">SQLi</span><span class="sv-tag t">Auth Bypass</span><span class="sv-tag t">DB</span></div>
+            <div class="sv-note-body">
+              <div class="sv-note-body-inner">
+                <p><strong>SQL Injection</strong> occurs when a web application builds a database query using unvalidated user input, allowing attackers to manipulate SQL commands.</p>
+                <p><strong>Classic login bypass:</strong> Enter <code style="font-size:11px;color:#d946ef;background:rgba(176,38,255,0.1);padding:2px 6px;border-radius:4px">' OR '1'='1</code> as the username — the WHERE clause becomes always-true, granting access without a real password.</p>
+                <p><strong>Impact:</strong></p>
+                <ul>
+                  <li>Data breach — steal credentials, PII, payment info</li>
+                  <li>Data loss — modify or delete records</li>
+                  <li>Full server compromise via DB in extreme cases</li>
+                </ul>
+                <p><strong>Prevention:</strong></p>
+                <ul>
+                  <li>Use <strong>prepared statements</strong> / parameterized queries</li>
+                  <li>Whitelist allowed characters on input</li>
+                  <li>Never run the database as root/admin</li>
+                  <li>Hide real error messages from users</li>
+                </ul>
+              </div>
+            </div>
           </div>
+
           <div class="sv-note t">
+            <span class="sv-note-arrow">+</span>
             <p class="sv-note-label t">CWE-79</p>
             <p class="sv-note-title">Cross-Site Scripting (XSS)</p>
-            <p class="sv-note-desc">Reflected, Stored, DOM-based, uXSS, and Self-XSS. Session hijacking, account takeover. Prevent with output encoding, CSP, and HTTPOnly cookies.</p>
+            <p class="sv-note-desc">Reflected, Stored, DOM-based, uXSS. Session hijacking and account takeover via the browser.</p>
             <div class="sv-note-tags"><span class="sv-tag t">XSS</span><span class="sv-tag t">CSP</span><span class="sv-tag t">Sessions</span></div>
+            <div class="sv-note-body">
+              <div class="sv-note-body-inner">
+                <p><strong>XSS</strong> lets attackers inject malicious scripts that execute in victims' browsers. The browser trusts the script because it appears to come from the legitimate site.</p>
+                <p><strong>Types:</strong></p>
+                <ul>
+                  <li><strong>Reflected (Type 1)</strong> — script reflected immediately via crafted link</li>
+                  <li><strong>Stored (Type 2)</strong> — script saved in DB, runs for every visitor</li>
+                  <li><strong>DOM-Based (Type 0)</strong> — attack is entirely client-side</li>
+                  <li><strong>uXSS</strong> — exploits browser/plugin vulnerabilities</li>
+                </ul>
+                <p><strong>Consequences:</strong> session hijacking, data theft, account takeover, malware distribution, website defacement.</p>
+                <p><strong>Prevention:</strong> output encoding (context-aware), input validation, <strong>Content Security Policy (CSP)</strong>, HTTPOnly cookies.</p>
+              </div>
+            </div>
           </div>
+
           <div class="sv-note t">
+            <span class="sv-note-arrow">+</span>
             <p class="sv-note-label t">CWE-35</p>
             <p class="sv-note-title">Path Traversal</p>
-            <p class="sv-note-desc">Walking outside the web root with ../ — URL encoding, double encoding, null bytes, Unicode tricks. Stop it with allowlists, path normalization, and realpath().</p>
+            <p class="sv-note-desc">Walking outside the web root with ../ — encoding tricks, null bytes, and allowlist defenses.</p>
             <div class="sv-note-tags"><span class="sv-tag t">../</span><span class="sv-tag t">File Access</span><span class="sv-tag t">Bypass</span></div>
+            <div class="sv-note-body">
+              <div class="sv-note-body-inner">
+                <p><strong>Path Traversal</strong> allows attackers to access files and directories outside the intended application directory by manipulating file path input.</p>
+                <p><strong>Common techniques:</strong></p>
+                <ul>
+                  <li><strong>../</strong> — basic upward traversal</li>
+                  <li><strong>%2e%2e%2f</strong> — URL-encoded traversal</li>
+                  <li><strong>%252e%252e%252f</strong> — double-encoded bypass</li>
+                  <li><strong>%00</strong> — null byte injection (legacy APIs)</li>
+                  <li><strong>....//</strong> — mangled path normalization tricks</li>
+                </ul>
+                <p><strong>Consequences:</strong> read /etc/passwd, database credentials, source code — or modify/delete critical files.</p>
+                <p><strong>Prevention:</strong> allowlist valid filenames, use realpath() / Path.resolve() then verify result is inside allowed directory, run app with least privilege, isolate with containers/chroot.</p>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
 
@@ -557,18 +760,61 @@
           <span class="sv-cat-count">2 notes</span>
         </div>
         <div class="sv-grid">
+
           <div class="sv-note k">
+            <span class="sv-note-arrow">+</span>
             <p class="sv-note-label k">Tools</p>
             <p class="sv-note-title">Burp Suite Fundamentals</p>
-            <p class="sv-note-desc">Proxy, Repeater, Intruder, Scanner, Sequencer. Sniper vs Battering Ram vs Cluster Bomb attack types. DVWA as the perfect legal lab pairing.</p>
+            <p class="sv-note-desc">Proxy, Repeater, Intruder, Scanner. Sniper vs Cluster Bomb. DVWA as the perfect legal lab.</p>
             <div class="sv-note-tags"><span class="sv-tag k">Burp</span><span class="sv-tag k">Proxy</span><span class="sv-tag k">DVWA</span></div>
+            <div class="sv-note-body">
+              <div class="sv-note-body-inner">
+                <p><strong>Burp Suite</strong> is the gold-standard platform for web application security testing — used by pentesters, bug bounty hunters, and red teams worldwide.</p>
+                <p><strong>Core tools:</strong></p>
+                <ul>
+                  <li><strong>Proxy</strong> — intercept &amp; modify HTTP/S traffic in real time</li>
+                  <li><strong>Repeater</strong> — manually edit and resend individual requests</li>
+                  <li><strong>Intruder</strong> — automate brute-force, fuzzing, and payload attacks</li>
+                  <li><strong>Scanner</strong> — automated vulnerability detection (Pro only)</li>
+                  <li><strong>Sequencer</strong> — analyze randomness of tokens &amp; session IDs</li>
+                </ul>
+                <p><strong>Intruder attack types:</strong></p>
+                <ul>
+                  <li><strong>Sniper</strong> — fuzz one parameter at a time</li>
+                  <li><strong>Battering Ram</strong> — same payload in multiple positions</li>
+                  <li><strong>Pitchfork</strong> — different payloads per position</li>
+                  <li><strong>Cluster Bomb</strong> — all combinations (full brute force)</li>
+                </ul>
+                <p><strong>Quick setup:</strong> set browser proxy to 127.0.0.1:8080, install Burp CA certificate, toggle Intercept ON. Pair with DVWA for a safe, legal practice environment.</p>
+              </div>
+            </div>
           </div>
+
           <div class="sv-note k">
+            <span class="sv-note-arrow">+</span>
             <p class="sv-note-label k">Career</p>
             <p class="sv-note-title">Career Opportunities in IT Security</p>
-            <p class="sv-note-desc">Red vs Blue team roles. SOC Analyst, Threat Hunter, DFIR, Malware RE, Pentester. Full penetration testing lifecycle from recon to reporting.</p>
+            <p class="sv-note-desc">Red vs Blue team, SOC Analyst, Pentester, DFIR. The full pentest lifecycle from recon to report.</p>
             <div class="sv-note-tags"><span class="sv-tag k">Red Team</span><span class="sv-tag k">Blue Team</span><span class="sv-tag k">SOC</span></div>
+            <div class="sv-note-body">
+              <div class="sv-note-body-inner">
+                <p><strong>Red Team (Offensive)</strong> — simulate real attacks, exploit, social engineering. Tools: Metasploit, Cobalt Strike.</p>
+                <p><strong>Blue Team (Defensive)</strong> — detect, monitor, respond, harden. Tools: SIEM, EDR, firewalls.</p>
+                <p><strong>Expanded roles:</strong></p>
+                <ul>
+                  <li><strong>Penetration Tester</strong> — simulates real attacks with proof of impact</li>
+                  <li><strong>SOC Analyst</strong> — 24/7 monitoring and triage</li>
+                  <li><strong>Threat Hunter</strong> — hunts evil before detection triggers</li>
+                  <li><strong>DFIR Analyst</strong> — investigates breaches, preserves evidence</li>
+                  <li><strong>Malware Reverse Engineer</strong> — tears apart malicious code</li>
+                  <li><strong>Security Researcher</strong> — discovers zero-days, publishes CVEs</li>
+                </ul>
+                <p><strong>Pentest lifecycle:</strong> Recon → Scanning → Gaining Access → Maintaining Access → Covering Tracks → Reporting.</p>
+                <p><strong>Recommended certs:</strong> OSCP, PNPT, CompTIA Security+, eJPT.</p>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
 
@@ -580,18 +826,67 @@
           <span class="sv-cat-count">2 notes</span>
         </div>
         <div class="sv-grid">
+
           <div class="sv-note e">
+            <span class="sv-note-arrow">+</span>
             <p class="sv-note-label e">Security</p>
             <p class="sv-note-title">Email Security Fundamentals</p>
-            <p class="sv-note-desc">S/MIME, OpenPGP. SPF, DKIM, and DMARC for authentication. Phishing, spear phishing, BEC, and email spoofing — your inbox is the front door.</p>
+            <p class="sv-note-desc">S/MIME, OpenPGP, SPF, DKIM, DMARC. Phishing, BEC, spoofing — your inbox is the front door.</p>
             <div class="sv-note-tags"><span class="sv-tag e">DMARC</span><span class="sv-tag e">Phishing</span><span class="sv-tag e">BEC</span></div>
+            <div class="sv-note-body">
+              <div class="sv-note-body-inner">
+                <p><strong>Four pillars of email security:</strong> Confidentiality, Integrity, Authentication, Non-repudiation.</p>
+                <p><strong>Encryption standards:</strong></p>
+                <ul>
+                  <li><strong>S/MIME</strong> — enterprise standard, uses certificates from trusted CAs</li>
+                  <li><strong>OpenPGP</strong> — open-source, Web of Trust model, privacy-focused</li>
+                </ul>
+                <p><strong>Common threats:</strong></p>
+                <ul>
+                  <li><strong>Phishing</strong> — deceptive emails fishing for credentials</li>
+                  <li><strong>Spear Phishing</strong> — targeted, personalized phishing</li>
+                  <li><strong>Email Spoofing</strong> — forged headers to impersonate trusted senders</li>
+                  <li><strong>BEC (Business Email Compromise)</strong> — impersonating executives to initiate fraud</li>
+                </ul>
+                <p><strong>Authentication protocols:</strong></p>
+                <ul>
+                  <li><strong>SPF</strong> — verifies sender IP against domain's authorized list</li>
+                  <li><strong>DKIM</strong> — cryptographic signature verifies message authenticity</li>
+                  <li><strong>DMARC</strong> — policy for handling SPF/DKIM failures</li>
+                </ul>
+              </div>
+            </div>
           </div>
+
           <div class="sv-note e">
+            <span class="sv-note-arrow">+</span>
             <p class="sv-note-label e">Networking</p>
             <p class="sv-note-title">Network Traffic Analysis</p>
-            <p class="sv-note-desc">Wireshark, tcpdump, Tshark. Capture vs display filters. 4-step NTA process: ingest, filter noise, analyze, detect. Every packet tells a story.</p>
+            <p class="sv-note-desc">Wireshark, tcpdump, Tshark. Capture vs display filters. Every packet tells a story.</p>
             <div class="sv-note-tags"><span class="sv-tag e">Wireshark</span><span class="sv-tag e">NTA</span><span class="sv-tag e">Packets</span></div>
+            <div class="sv-note-body">
+              <div class="sv-note-body-inner">
+                <p><strong>Network Traffic Analysis (NTA)</strong> — capturing, inspecting, and analyzing network data to characterize ports/protocols, establish baselines, and respond to threats.</p>
+                <p><strong>The 4-step NTA process:</strong></p>
+                <ul>
+                  <li><strong>Ingest Traffic</strong> — capture with filters to reduce volume</li>
+                  <li><strong>Reduce Noise</strong> — filter benign/irrelevant traffic</li>
+                  <li><strong>Analyze &amp; Explore</strong> — carve out data relevant to the issue</li>
+                  <li><strong>Detect &amp; Alert</strong> — identify malicious patterns, use IDS</li>
+                </ul>
+                <p><strong>Essential tools:</strong></p>
+                <ul>
+                  <li><strong>Wireshark</strong> — graphical deep packet inspection, layer-by-layer decoding</li>
+                  <li><strong>tcpdump / Tshark</strong> — command-line packet analyzers</li>
+                  <li><strong>Network Taps / SPAN ports</strong> — copy traffic for external analysis</li>
+                </ul>
+                <p><strong>Wireshark filter types:</strong><br>
+                <strong>Capture filters</strong> (e.g. <code style="font-size:11px;color:#48cae4;background:rgba(72,202,228,0.1);padding:2px 5px;border-radius:4px">tcp port 80</code>) — applied before capture.<br>
+                <strong>Display filters</strong> (e.g. <code style="font-size:11px;color:#48cae4;background:rgba(72,202,228,0.1);padding:2px 5px;border-radius:4px">ip.addr == x.x.x.x</code>) — applied after capture.</p>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
 
@@ -607,7 +902,7 @@
     <div class="reveal reveal-delay-2">
       <div class="email-block">
         <p class="email-label">Email</p>
-        <p class="email-addr">joanadaphnesy@gmail.com</p>
+        <p class="email-addr"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="305a5f515e51545140585e55434970575d51595c1e535f5d">[email&#160;protected]</a></p>
       </div>
     </div>
     <div class="contact-links">
@@ -634,7 +929,7 @@
     <p>© 2025 Joana Daphne Sy · dvphnc · BSIT 3rd Year · SyberVault</p>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>  <script>
     const obs = new IntersectionObserver(e => e.forEach(x => {
       if (x.isIntersecting) x.target.classList.add('visible');
     }), { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
@@ -647,6 +942,15 @@
     const mobileMenu = document.getElementById('mobileMenu');
     menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('open'));
     document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+    // SyberVault — click any card to expand/collapse
+    document.querySelectorAll('.sv-note').forEach(note => {
+      note.addEventListener('click', () => {
+        const isOpen = note.classList.contains('open');
+        note.closest('.sv-grid').querySelectorAll('.sv-note').forEach(n => n.classList.remove('open'));
+        if (!isOpen) note.classList.add('open');
+      });
+    });
   </script>
 </body>
 </html>
