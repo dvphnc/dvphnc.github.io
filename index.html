@@ -169,7 +169,92 @@
     .divider { width: 100%; height: 1px; background: var(--border); position: relative; z-index: 1; transition: background 0.4s; }
 
     /* ── HERO ── */
-    #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 52px; position: relative; }
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 52px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Floating orbs */
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      animation: orbFloat 8s ease-in-out infinite;
+    }
+    .hero-orb-1 {
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(94,92,230,0.18) 0%, transparent 70%);
+      top: -80px; right: -60px;
+      animation-delay: 0s;
+    }
+    .hero-orb-2 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(0,113,227,0.14) 0%, transparent 70%);
+      bottom: 60px; right: 120px;
+      animation-delay: -3s;
+    }
+    .hero-orb-3 {
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(255,45,85,0.08) 0%, transparent 70%);
+      top: 40%; left: -40px;
+      animation-delay: -5s;
+    }
+    html.dark .hero-orb-1 { background: radial-gradient(circle, rgba(94,92,230,0.28) 0%, transparent 70%); }
+    html.dark .hero-orb-2 { background: radial-gradient(circle, rgba(0,113,227,0.22) 0%, transparent 70%); }
+    html.dark .hero-orb-3 { background: radial-gradient(circle, rgba(255,45,85,0.14) 0%, transparent 70%); }
+
+    @keyframes orbFloat {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      33%       { transform: translateY(-24px) scale(1.04); }
+      66%       { transform: translateY(12px) scale(0.97); }
+    }
+
+    /* Floating pill badges */
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 32px;
+      opacity: 0;
+      transform: translateY(12px);
+      animation: fadeUp 0.6s 0.65s ease forwards;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 980px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-secondary);
+      backdrop-filter: blur(12px);
+      transition: all 0.2s ease, background 0.4s, border-color 0.4s, color 0.4s;
+    }
+    .hero-badge:hover {
+      background: var(--surface-hover);
+      color: var(--text-primary);
+      transform: translateY(-1px);
+    }
+    .hero-badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .hero-badge-dot.oracle { background: #C74634; }
+    .hero-badge-dot.blue   { background: #0071e3; }
+    .hero-badge-dot.purple { background: #5e5ce6; }
+    .hero-badge-dot.green  { background: #25a244; }
     .hero-inner { max-width: 600px; }
     .hero-tag { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 22px; opacity: 0; transform: translateY(12px); animation: fadeUp 0.6s 0.1s ease forwards; }
     /* ── Typewriter hero ── */
@@ -385,6 +470,30 @@
     .sv-tag.t { background:rgba(176,38,255,0.1); color:#b026ff; }
     .sv-tag.k { background:rgba(255,107,56,0.1); color:#ff6b38; }
     .sv-tag.e { background:rgba(72,202,228,0.1); color:#48cae4; }
+
+    .sv-note-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 14px;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      opacity: 0;
+      transition: opacity 0.25s, gap 0.2s;
+      padding: 5px 10px;
+      border-radius: 6px;
+      border: 1px solid;
+    }
+    .sv-note-link.f { color: #71c3f7; border-color: rgba(113,195,247,0.25); background: rgba(113,195,247,0.07); }
+    .sv-note-link.t { color: #b026ff; border-color: rgba(176,38,255,0.25); background: rgba(176,38,255,0.07); }
+    .sv-note-link.k { color: #ff6b38; border-color: rgba(255,107,56,0.25); background: rgba(255,107,56,0.07); }
+    .sv-note-link.e { color: #48cae4; border-color: rgba(72,202,228,0.25); background: rgba(72,202,228,0.07); }
+    .sv-note-link:hover { gap: 8px; }
+    .sv-note.open .sv-note-link { opacity: 1; }
     .sv-note-body { max-height:0; overflow:hidden; transition:max-height 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease, margin 0.3s; opacity:0; margin-top:0; }
     .sv-note.open .sv-note-body { max-height:600px; opacity:1; margin-top:14px; }
     .sv-note-body-inner { padding-top:14px; border-top:1px solid var(--sv-body-border); transition:border-color 0.4s; }
@@ -455,6 +564,11 @@
 
   <!-- HERO -->
   <section id="hero">
+    <!-- Floating orbs -->
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+
     <div class="hero-inner">
       <p class="hero-tag">Aspiring Tech Virtual Assistant · BS Information Technology · 3rd Year</p>
       <h1 class="hero-name" id="heroName">
@@ -463,7 +577,16 @@
       </h1>
       <p class="hero-handle">@<span>dvphnc</span></p>
       <p class="hero-desc">Building at the crossroads of <strong>web development, cloud, and cybersecurity</strong>. Oracle-certified, CTF-curious, and learning every day — one room at a time.</p>
-      <div class="hero-cta">
+
+      <!-- Credential badges -->
+      <div class="hero-badges">
+        <span class="hero-badge"><span class="hero-badge-dot oracle"></span>Oracle Cloud Certified</span>
+        <span class="hero-badge"><span class="hero-badge-dot blue"></span>Laravel · React</span>
+        <span class="hero-badge"><span class="hero-badge-dot purple"></span>CTF · TryHackMe · HTB</span>
+        <span class="hero-badge"><span class="hero-badge-dot green"></span>Aspiring Tech VA</span>
+      </div>
+
+      <div class="hero-cta" style="margin-top: 28px;">
         <a href="#vault" class="btn btn-primary">View my vault →</a>
         <a href="#contact" class="btn btn-ghost">Get in touch</a>
       </div>
@@ -566,6 +689,7 @@
             <p class="sv-note-title">Importance of Cyber Security</p>
             <p class="sv-note-desc">CIA Triad — Confidentiality, Integrity, Availability. The invisible shield of the digital age.</p>
             <div class="sv-note-tags"><span class="sv-tag f">CIA Triad</span><span class="sv-tag f">InfoSec</span></div>
+            <a href="notes/Importance of Cyber Security.html" target="_blank" rel="noopener" class="sv-note-link f" onclick="event.stopPropagation()">Open note →</a>
             <div class="sv-note-body">
               <div class="sv-note-body-inner">
                 <p><strong>Cybersecurity</strong> is essential because our lives are increasingly lived through data. It safeguards systems that drive economies and institutions — keeping hospitals functional, banks operational, and communication networks reliable.</p>
@@ -586,6 +710,7 @@
             <p class="sv-note-title">Introduction to Web Application Security</p>
             <p class="sv-note-desc">Evolution from ARPANET to the modern web. OWASP Top 10, URL anatomy, defense checklists.</p>
             <div class="sv-note-tags"><span class="sv-tag f">OWASP</span><span class="sv-tag f">Web</span><span class="sv-tag f">Defense</span></div>
+            <a href="notes/Introduction to Web Application Security.html" target="_blank" rel="noopener" class="sv-note-link f" onclick="event.stopPropagation()">Open note →</a>
             <div class="sv-note-body">
               <div class="sv-note-body-inner">
                 <p><strong>Web Application Security</strong> protects websites and online platforms from unauthorized access, misuse, or disruption.</p>
@@ -610,6 +735,7 @@
             <p class="sv-note-title">Encryption Fundamentals</p>
             <p class="sv-note-desc">Hash functions, ciphers, key exchange. Certificate Authorities, X.509, and digital trust.</p>
             <div class="sv-note-tags"><span class="sv-tag f">Crypto</span><span class="sv-tag f">PKI</span><span class="sv-tag f">TLS</span></div>
+            <a href="notes/Encryption Fundamentals.html" target="_blank" rel="noopener" class="sv-note-link f" onclick="event.stopPropagation()">Open note →</a>
             <div class="sv-note-body">
               <div class="sv-note-body-inner">
                 <p><strong>Encryption</strong> converts readable information into ciphertext, accessible only with the correct key. It ensures confidentiality, integrity, and trust across digital communications.</p>
@@ -632,6 +758,7 @@
             <p class="sv-note-title">Cloud &amp; Virtualization Fundamentals</p>
             <p class="sv-note-desc">Public, private, hybrid cloud. Hypervisors, VMs, CASB. The invisible foundation of the internet.</p>
             <div class="sv-note-tags"><span class="sv-tag f">Cloud</span><span class="sv-tag f">VMs</span><span class="sv-tag f">CASB</span></div>
+            <a href="notes/Cloud and Virtualization Fundamentals.html" target="_blank" rel="noopener" class="sv-note-link f" onclick="event.stopPropagation()">Open note →</a>
             <div class="sv-note-body">
               <div class="sv-note-body-inner">
                 <p><strong>Cloud</strong> — a network of servers providing storage, software, and computing over the internet. Instead of owning hardware, you rent resources, gaining flexibility while reducing infrastructure costs.</p>
@@ -665,6 +792,7 @@
             <p class="sv-note-title">OS Command Injection</p>
             <p class="sv-note-desc">When a web form becomes a root shell. Semicolons, pipes, and $() hand the server to the attacker.</p>
             <div class="sv-note-tags"><span class="sv-tag t">RCE</span><span class="sv-tag t">Shell</span><span class="sv-tag t">Injection</span></div>
+            <a href="notes/CWE-78 - OS Command Injection.html" target="_blank" rel="noopener" class="sv-note-link t" onclick="event.stopPropagation()">Open note →</a>
             <div class="sv-note-body">
               <div class="sv-note-body-inner">
                 <p><strong>OS Command Injection</strong> allows an attacker to execute arbitrary OS commands via a vulnerable web application — giving full control over the server.</p>
@@ -684,6 +812,7 @@
             <p class="sv-note-title">SQL Injection</p>
             <p class="sv-note-desc">The crown jewel of web vulns. OR 1=1 login bypass, data theft, full DB compromise.</p>
             <div class="sv-note-tags"><span class="sv-tag t">SQLi</span><span class="sv-tag t">Auth Bypass</span><span class="sv-tag t">DB</span></div>
+            <a href="notes/CWE-89 - SQL Injection.html" target="_blank" rel="noopener" class="sv-note-link t" onclick="event.stopPropagation()">Open note →</a>
             <div class="sv-note-body">
               <div class="sv-note-body-inner">
                 <p><strong>SQL Injection</strong> occurs when a web application builds a database query using unvalidated user input, allowing attackers to manipulate SQL commands.</p>
@@ -711,6 +840,7 @@
             <p class="sv-note-title">Cross-Site Scripting (XSS)</p>
             <p class="sv-note-desc">Reflected, Stored, DOM-based, uXSS. Session hijacking and account takeover via the browser.</p>
             <div class="sv-note-tags"><span class="sv-tag t">XSS</span><span class="sv-tag t">CSP</span><span class="sv-tag t">Sessions</span></div>
+            <a href="notes/CWE-79 - Cross-Site Scripting (XSS).html" target="_blank" rel="noopener" class="sv-note-link t" onclick="event.stopPropagation()">Open note →</a>
             <div class="sv-note-body">
               <div class="sv-note-body-inner">
                 <p><strong>XSS</strong> lets attackers inject malicious scripts that execute in victims' browsers. The browser trusts the script because it appears to come from the legitimate site.</p>
@@ -733,6 +863,7 @@
             <p class="sv-note-title">Path Traversal</p>
             <p class="sv-note-desc">Walking outside the web root with ../ — encoding tricks, null bytes, and allowlist defenses.</p>
             <div class="sv-note-tags"><span class="sv-tag t">../</span><span class="sv-tag t">File Access</span><span class="sv-tag t">Bypass</span></div>
+            <a href="notes/CWE-35 - Path Traversal.html" target="_blank" rel="noopener" class="sv-note-link t" onclick="event.stopPropagation()">Open note →</a>
             <div class="sv-note-body">
               <div class="sv-note-body-inner">
                 <p><strong>Path Traversal</strong> allows attackers to access files and directories outside the intended application directory by manipulating file path input.</p>
@@ -768,6 +899,7 @@
             <p class="sv-note-title">Burp Suite Fundamentals</p>
             <p class="sv-note-desc">Proxy, Repeater, Intruder, Scanner. Sniper vs Cluster Bomb. DVWA as the perfect legal lab.</p>
             <div class="sv-note-tags"><span class="sv-tag k">Burp</span><span class="sv-tag k">Proxy</span><span class="sv-tag k">DVWA</span></div>
+            <a href="notes/Burp Suite Introduction.html" target="_blank" rel="noopener" class="sv-note-link k" onclick="event.stopPropagation()">Open note →</a>
             <div class="sv-note-body">
               <div class="sv-note-body-inner">
                 <p><strong>Burp Suite</strong> is the gold-standard platform for web application security testing — used by pentesters, bug bounty hunters, and red teams worldwide.</p>
@@ -797,6 +929,7 @@
             <p class="sv-note-title">Career Opportunities in IT Security</p>
             <p class="sv-note-desc">Red vs Blue team, SOC Analyst, Pentester, DFIR. The full pentest lifecycle from recon to report.</p>
             <div class="sv-note-tags"><span class="sv-tag k">Red Team</span><span class="sv-tag k">Blue Team</span><span class="sv-tag k">SOC</span></div>
+            <a href="notes/Career Opportunities in IT Security.html" target="_blank" rel="noopener" class="sv-note-link k" onclick="event.stopPropagation()">Open note →</a>
             <div class="sv-note-body">
               <div class="sv-note-body-inner">
                 <p><strong>Red Team (Offensive)</strong> — simulate real attacks, exploit, social engineering. Tools: Metasploit, Cobalt Strike.</p>
@@ -834,6 +967,7 @@
             <p class="sv-note-title">Email Security Fundamentals</p>
             <p class="sv-note-desc">S/MIME, OpenPGP, SPF, DKIM, DMARC. Phishing, BEC, spoofing — your inbox is the front door.</p>
             <div class="sv-note-tags"><span class="sv-tag e">DMARC</span><span class="sv-tag e">Phishing</span><span class="sv-tag e">BEC</span></div>
+            <a href="notes/Email Security Fundamentals.html" target="_blank" rel="noopener" class="sv-note-link e" onclick="event.stopPropagation()">Open note →</a>
             <div class="sv-note-body">
               <div class="sv-note-body-inner">
                 <p><strong>Four pillars of email security:</strong> Confidentiality, Integrity, Authentication, Non-repudiation.</p>
@@ -865,6 +999,7 @@
             <p class="sv-note-title">Network Traffic Analysis</p>
             <p class="sv-note-desc">Wireshark, tcpdump, Tshark. Capture vs display filters. Every packet tells a story.</p>
             <div class="sv-note-tags"><span class="sv-tag e">Wireshark</span><span class="sv-tag e">NTA</span><span class="sv-tag e">Packets</span></div>
+            <a href="notes/Network Traffic Analysis.html" target="_blank" rel="noopener" class="sv-note-link e" onclick="event.stopPropagation()">Open note →</a>
             <div class="sv-note-body">
               <div class="sv-note-body-inner">
                 <p><strong>Network Traffic Analysis (NTA)</strong> — capturing, inspecting, and analyzing network data to characterize ports/protocols, establish baselines, and respond to threats.</p>
