@@ -26,10 +26,10 @@
     @media(max-width:768px){.back-mobile{display:inline-flex}.back{display:none}}
 
     /* LAYOUT */
-    .layout{position:relative;z-index:1;display:grid;grid-template-columns:260px 1fr;min-height:100vh;max-width:1160px;margin:0 auto;padding:0 24px}
+    .layout{position:relative;z-index:1;display:flex;min-height:100vh}
 
     /* SIDEBAR */
-    .sidebar{position:sticky;top:28px;max-height:calc(100vh - 56px);overflow-y:auto;padding:0 20px 0 0;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start}
+    .sidebar{position:fixed;top:0;left:0;width:260px;height:100vh;overflow-y:auto;padding:32px 24px;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;border-right:1px solid var(--b);background:rgba(13,13,15,0.92);backdrop-filter:blur(20px);z-index:50}
     .sidebar::-webkit-scrollbar{width:0}
     .toc-lbl{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--t3);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--b)}
     .toc-item{display:block;font-size:12px;color:var(--t3);text-decoration:none;padding:6px 10px;border-radius:8px;border-left:2px solid transparent;transition:all .18s;letter-spacing:-.01em;line-height:1.4}
@@ -40,7 +40,7 @@
     .sb-cat-name{font-size:12px;font-weight:600;color:var(--accent)}
 
     /* MAIN */
-    .main{padding:28px 0 120px 44px;border-left:1px solid var(--b);min-width:0}
+    .main{margin-left:260px;flex:1;padding:48px 0 120px;min-width:0}.main-inner{max-width:780px;margin:0 auto;padding:0 48px}
 
     /* COVER */
     .cover-wrap{border-radius:18px;overflow:hidden;margin-bottom:44px;border:1px solid var(--b);position:relative}
@@ -150,7 +150,7 @@
     </div>
   </aside>
 
-  <main class="main">
+  <main class="main"><div class="main-inner">
     <div class="cover-wrap reveal">
       <img class="cover-img" src="../covers/sqli.jpeg" alt="CWE-89: SQL Injection" loading="lazy">
     </div>
@@ -240,7 +240,7 @@ cursor.execute(query)</code></pre>
       <p class="section-lbl">📖 Key Terms</p>
       <div class="gl-grid" id="glg"></div>
     </div>
-  </main>
+  </div></main>
 </div>
 
 <script>
