@@ -61,7 +61,7 @@
     .abtn.liked{color:var(--accent);border-color:var(--accent)}
 
     /* ARTICLE */
-    article h2{font-size:clamp(17px,2.4vw,23px);font-weight:700;letter-spacing:-.03em;line-height:1.25;background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:48px 0 12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.06);scroll-margin-top:40px}
+    article h2{font-size:clamp(17px,2.4vw,23px);font-weight:700;letter-spacing:-.03em;line-height:1.25;background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:48px 0 12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.06);scroll-margin-top:24px}
     article h3{font-size:14.5px;font-weight:600;color:var(--accent);letter-spacing:-.01em;margin:22px 0 8px}
     article p{font-size:15px;line-height:1.85;color:var(--t2);margin-bottom:13px;letter-spacing:-.005em}
     article strong{color:var(--t);font-weight:600}
@@ -253,10 +253,33 @@ const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 document.querySelectorAll('#ab > *').forEach((el,i)=>{el.classList.add('reveal');el.style.transitionDelay=(i*.03)+'s';obs.observe(el)});
 
-// TOC
+// TOC — smooth scroll + active highlight
 const tlinks=document.querySelectorAll('.toc-item');
-new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){tlinks.forEach(l=>l.classList.remove('active'));const a=document.querySelector('.toc-item[href="#'+x.target.id+'"]');if(a)a.classList.add('active')}},{rootMargin:'-20% 0px -70% 0px'})).observe||0;
-document.querySelectorAll('h2[id]').forEach(h=>{new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){tlinks.forEach(l=>l.classList.remove('active'));const a=document.querySelector('.toc-item[href="#'+x.target.id+'"]');if(a)a.classList.add('active')}},{rootMargin:'-20% 0px -70% 0px'})).observe(h)});
+
+// Smooth scroll on click (bypasses any sticky context issues)
+tlinks.forEach(link=>{
+  link.addEventListener('click',function(e){
+    e.preventDefault();
+    const id=this.getAttribute('href').slice(1);
+    const target=document.getElementById(id);
+    if(target){
+      const offset=target.getBoundingClientRect().top+window.scrollY-24;
+      window.scrollTo({top:offset,behavior:'smooth'});
+    }
+  });
+});
+
+// Active highlight as you scroll
+const secObserver=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      tlinks.forEach(l=>l.classList.remove('active'));
+      const active=document.querySelector('.toc-item[href="#'+entry.target.id+'"]');
+      if(active)active.classList.add('active');
+    }
+  });
+},{rootMargin:'-10% 0px -80% 0px'});
+document.querySelectorAll('h2[id]').forEach(h=>secObserver.observe(h));
 
 // Reading time
 const wc=document.getElementById('ab').innerText.split(/\s+/).length;
