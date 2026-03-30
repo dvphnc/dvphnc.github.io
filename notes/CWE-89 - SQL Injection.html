@@ -155,10 +155,10 @@
       <h1 class="note-title">CWE-89: SQL Injection</h1>
       <p class="note-sub">The crown jewel of web vulnerabilities</p>
       <div class="meta">
-        <span class="meta-tag" id="rtt">&#8987; reading...</span>
+        <span class="meta-tag" id="rtt">⏱ reading...</span>
         <span class="meta-tag">dvphnc</span>
         <div class="actions">
-          <button class="abtn" id="likeBtn" onclick="doLike()">&#9825; <span id="lc">0</span></button>
+          <button class="abtn" id="likeBtn" onclick="doLike()">♡ <span id="lc">0</span></button>
           <button class="abtn" onclick="doFont()">Aa</button>
         </div>
       </div>
@@ -227,12 +227,12 @@ cursor.execute(query)</code></pre>
           and never trust user input.</div></div>
 
     <div class="fc-section reveal" style="transition-delay:.13s">
-      <p class="section-lbl">&#127183; Quick Review &mdash; click to reveal</p>
+      <p class="section-lbl">🃏 Quick Review — click to reveal</p>
       <div id="fcs"></div>
     </div>
 
     <div class="glossary reveal" style="transition-delay:.15s">
-      <p class="section-lbl">&#128218; Key Terms</p>
+      <p class="section-lbl">📖 Key Terms</p>
       <div class="gl-grid" id="glg"></div>
     </div>
   </main>
@@ -255,12 +255,12 @@ document.querySelectorAll('h2[id]').forEach(h=>{new IntersectionObserver(e=>e.fo
 
 // Reading time
 const wc=document.getElementById('ab').innerText.split(/\s+/).length;
-document.getElementById('rtt').textContent='&#8987; '+Math.max(1,Math.ceil(wc/200))+' min read';
+document.getElementById('rtt').textContent='⏱ '+Math.max(1,Math.ceil(wc/200))+' min read';
 
 // Like
 const lk='CWE-89_-_SQL_Injection.html_like';let liked=localStorage.getItem(lk)==='1',lcount=parseInt(localStorage.getItem(lk+'_n')||0);
 function doLike(){liked=!liked;lcount=liked?lcount+1:Math.max(0,lcount-1);localStorage.setItem(lk,liked?'1':'0');localStorage.setItem(lk+'_n',lcount);renderLike()}
-function renderLike(){const b=document.getElementById('likeBtn');b.innerHTML=(liked?'&#9829;':'&#9825;')+' <span id="lc">'+lcount+'</span>';b.classList.toggle('liked',liked)}
+function renderLike(){const b=document.getElementById('likeBtn');b.innerHTML=(liked?'♥':'♡')+' <span id="lc">'+lcount+'</span>';b.classList.toggle('liked',liked)}
 renderLike();
 
 // Font toggle
@@ -278,7 +278,7 @@ const fcData=[{q:'What is SQL Injection?',a:'Inserting malicious SQL via unvalid
 {q:'Best prevention for SQLi?',a:'Prepared statements — input is treated as data, never as executable SQL.'},
 {q:'What else can SQLi lead to?',a:'RCE via database features like xp_cmdshell; full server compromise.'}];
 const fcs=document.getElementById('fcs');
-fcData.forEach(c=>{const d=document.createElement('div');d.className='fc';d.innerHTML='<div class="fc-q"><span>'+c.q+'</span><span class="fc-chev">&#9660;</span></div><div class="fc-a"><div class="fc-ai">'+c.a+'</div></div>';d.onclick=()=>d.classList.toggle('open');fcs.appendChild(d)});
+fcData.forEach(c=>{const d=document.createElement('div');d.className='fc';d.innerHTML='<div class="fc-q"><span>'+c.q+'</span><span class="fc-chev">▾</span></div><div class="fc-a"><div class="fc-ai">'+c.a+'</div></div>';d.onclick=()=>d.classList.toggle('open');fcs.appendChild(d)});
 
 // Glossary
 const glData=[{t:'CWE-89',d:'SQL Injection weakness'},
