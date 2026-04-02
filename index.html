@@ -231,18 +231,28 @@
     /* Liquid glass text effect — gradient with depth */
     .hero-name-greeting {
       display: block;
-      font-size: clamp(14px,1.8vw,18px); font-weight: 500;
+      font-size: clamp(13px,1.5vw,16px); font-weight: 400;
       color: var(--text3); letter-spacing: 0.02em;
-      font-family: var(--mono); margin-bottom: 6px;
+      font-family: var(--mono); margin-bottom: 4px;
+      min-height: 1.4em;
     }
     .hero-name-full {
       display: block;
+      font-size: clamp(44px,6.5vw,82px);
+      font-weight: 800;
+      letter-spacing: -0.045em;
+      line-height: 1.0;
       background: linear-gradient(140deg, var(--text) 0%, rgba(94,92,230,1) 55%, rgba(0,122,255,1) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
     html.dark .hero-name-full {
-      background: linear-gradient(140deg, #fff 0%, #7b79ff 55%, #60aaff 100%);
-      -webkit-background-clip: text; background-clip: text;
+      display: block;
+      font-size: clamp(44px,6.5vw,82px);
+      font-weight: 800;
+      letter-spacing: -0.045em;
+      line-height: 1.0;
+      background: linear-gradient(140deg, var(--text) 0%, rgba(94,92,230,1) 55%, rgba(0,122,255,1) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
     /* Blinking cursor */
     .hero-cursor {
@@ -807,84 +817,9 @@
        APPLE-INSPIRED UI COMPONENTS
     ══════════════════════════════════════ */
 
-    /* APP STORE STYLE — Featured card in certifications */
-    .cert-featured {
-      grid-column: 1 / -1;
-      display: flex; gap: 0; overflow: hidden;
-      border-radius: var(--r-lg);
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      box-shadow: var(--glass-shadow-lg);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      position: relative; min-height: 140px;
-      transition: transform 0.26s ease, box-shadow 0.26s;
-    }
-    .cert-featured::before { content:''; position:absolute; inset:0; background:var(--specular); pointer-events:none; border-radius:var(--r-lg); }
-    .cert-featured:hover { transform: translateY(-3px) scale(1.005); box-shadow: var(--glass-shadow-lg), 0 0 0 1px var(--glass-border); }
-    .cert-featured-bg {
-      position: absolute; inset: 0; border-radius: var(--r-lg); overflow: hidden;
-    }
-    .cert-featured-bg::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(199,70,52,0.18) 0%, rgba(244,116,59,0.12) 50%, transparent 100%);
-    }
-    .cert-featured-content {
-      position: relative; z-index: 2; padding: 28px 32px;
-      display: flex; align-items: center; gap: 20px; width: 100%;
-    }
-    .cert-featured-icon {
-      width: 64px; height: 64px; border-radius: 18px; flex-shrink: 0;
-      background: linear-gradient(135deg, #C74634, #f4743b);
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 8px 24px rgba(199,70,52,0.4), 0 1px 0 rgba(255,255,255,0.25) inset;
-      position: relative; overflow: hidden;
-    }
-    .cert-featured-icon::before { content:''; position:absolute; inset:0; background:var(--specular); pointer-events:none; border-radius:18px; }
-    .cert-featured-info { flex: 1; }
-    .cert-featured-eyebrow { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--orange); margin-bottom: 4px; }
-    .cert-featured-name { font-size: 18px; font-weight: 800; letter-spacing: -0.03em; color: var(--text); margin-bottom: 4px; }
-    .cert-featured-sub { font-size: 13px; color: var(--text3); }
-    .cert-featured-badge {
-      padding: 8px 18px; border-radius: 980px; font-size: 13px; font-weight: 700;
-      background: var(--oracle); color: #fff; flex-shrink: 0;
-      box-shadow: 0 4px 14px rgba(199,70,52,0.4), 0 1px 0 rgba(255,255,255,0.2) inset;
-      position: relative; overflow: hidden; letter-spacing: -0.01em;
-    }
-    .cert-featured-badge::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,0.2) 0%,transparent 60%); border-radius:980px; }
+    
 
-    /* APPLE MUSIC STYLE — Now Playing widget in hero */
-    .now-playing {
-      display: inline-flex; align-items: center; gap: 12px;
-      padding: 10px 16px 10px 10px;
-      border-radius: 16px;
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      box-shadow: var(--glass-shadow);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      margin-bottom: 28px; position: relative; overflow: hidden;
-      cursor: default;
-      opacity: 0; transform: translateY(12px); animation: fadeUp 0.6s 0.08s ease forwards;
-    }
-    .now-playing::before { content:''; position:absolute; inset:0; background:var(--specular); pointer-events:none; border-radius:16px; }
-    .np-art {
-      width: 36px; height: 36px; border-radius: 9px; flex-shrink: 0;
-      background: linear-gradient(135deg, #ff2d55, #ff6b38, #5e5ce6);
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-      position: relative;
-    }
-    .np-bars {
-      display: flex; align-items: flex-end; gap: 2px; height: 14px;
-    }
-    .np-bar {
-      width: 3px; border-radius: 2px; background: #fff;
-      animation: npBar 1.2s ease-in-out infinite;
-    }
-    .np-bar:nth-child(1){ height:60%; animation-delay:0s; }
-    .np-bar:nth-child(2){ height:100%; animation-delay:0.15s; }
-    .np-bar:nth-child(3){ height:45%; animation-delay:0.3s; }
-    .np-bar:nth-child(4){ height:80%; animation-delay:0.1s; }
-    @keyframes npBar { 0%,100%{transform:scaleY(0.4)} 50%{transform:scaleY(1)} }
+    
     .np-info { display: flex; flex-direction: column; gap: 1px; }
     .np-label { font-family: var(--mono); font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
     .np-track { font-size: 13px; font-weight: 600; color: var(--text); letter-spacing: -0.01em; }
@@ -995,17 +930,6 @@
     <div class="hero-orb hero-orb-3"></div>
 
     <div class="hero-inner">
-      <div class="now-playing">
-        <div class="np-art">
-          <div class="np-bars">
-            <div class="np-bar"></div><div class="np-bar"></div><div class="np-bar"></div><div class="np-bar"></div>
-          </div>
-        </div>
-        <div class="np-info">
-          <span class="np-label">Now Building</span>
-          <span class="np-track">dvphnc.github.io</span>
-        </div>
-      </div>
       <p class="hero-tag">Aspiring Tech Virtual Assistant · BS Information Technology · 3rd Year</p>
       <h1 class="hero-name" id="heroName">
         <span class="hero-greeting" id="heroGreeting"></span>
@@ -1589,37 +1513,61 @@
       const greetEl=document.getElementById('heroGreeting');
       const nameEl=document.getElementById('heroFullname');
       const cursor=document.getElementById('heroCursor');
-      const greetTxt=document.createTextNode('');
-      const nameTxt=document.createTextNode('');
-      greetEl.innerHTML=''; nameEl.innerHTML='';
+      // Set up text nodes — greeting (small mono) + name (big gradient)
+      const greetTxt = document.createTextNode('');
+      const nameTxt  = document.createTextNode('');
+      greetEl.innerHTML = '';
+      nameEl.innerHTML  = '';
       greetEl.appendChild(greetTxt);
       nameEl.appendChild(nameTxt);
       nameEl.appendChild(cursor);
 
-      const TSPD=60,ESPD=28,HOLD=2400,GAP=340;
-      const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-      async function type(node,str,spd){let buf='';for(const ch of str){buf+=ch;node.nodeValue=buf;await sleep(spd+Math.random()*16-8)}}
-      async function erase(node,spd){let buf=node.nodeValue;while(buf.length>0){buf=buf.slice(0,-1);node.nodeValue=buf;await sleep(spd)}}
+      const TSPD=58, ESPD=26, HOLD=2600, GAP=380;
+      const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-      async function run(){
-        await sleep(1200);
-        let i=0;
-        while(true){
-          const lang=langs[i];
-          nameEl.style.fontFamily=lang.nameFont||"'Inter',-apple-system,sans-serif";
-          nameEl.style.fontSize=lang.nameFont?'clamp(36px,5vw,60px)':'';
-          await type(greetTxt,lang.greet,TSPD);
-          await sleep(100);
-          await type(nameTxt,lang.name,TSPD-10);
-          await sleep(HOLD);
-          await erase(nameTxt,ESPD);
-          await sleep(90);
-          await erase(greetTxt,ESPD);
-          await sleep(GAP);
-          i=(i+1)%langs.length;
+      async function type(node, str, spd) {
+        let buf = '';
+        for (const ch of str) {
+          buf += ch;
+          node.nodeValue = buf;
+          await sleep(spd + Math.random()*16 - 8);
         }
       }
-      run().catch(()=>{greetTxt.nodeValue="Hi, I'm";nameTxt.nodeValue="Joana Daphne Sy"});
+      async function erase(node, spd) {
+        let buf = node.nodeValue;
+        while (buf.length > 0) {
+          buf = buf.slice(0, -1);
+          node.nodeValue = buf;
+          await sleep(spd);
+        }
+      }
+
+      async function run() {
+        await sleep(1200);
+        let i = 0;
+        while (true) {
+          const lang = langs[i];
+          // Apply CJK font only to name element
+          nameEl.style.fontFamily = lang.nameFont || "'Inter',-apple-system,sans-serif";
+          // CJK names get slightly smaller size
+          nameEl.style.fontSize = lang.nameFont ? 'clamp(36px,5.5vw,68px)' : '';
+
+          // Type greeting first (small line)
+          await type(greetTxt, lang.greet, TSPD);
+          await sleep(120);
+          // Type name (big line)
+          await type(nameTxt, lang.name, TSPD - 10);
+          // Hold so viewer can read
+          await sleep(HOLD);
+          // Erase name first, then greeting
+          await erase(nameTxt, ESPD);
+          await sleep(80);
+          await erase(greetTxt, ESPD);
+          await sleep(GAP);
+          i = (i + 1) % langs.length;
+        }
+      }
+      run().catch(() => { greetTxt.nodeValue = "Hi, I'm"; nameTxt.nodeValue = "Joana Daphne Sy"; });
     })();
 
     // Dynamic Island
