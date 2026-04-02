@@ -782,9 +782,326 @@
     }
     .theme-toggle:hover { background: var(--accent); color: #fff; border-color: var(--accent); transform: scale(1.08); }
 
+  
+    /* ══════════════════════════════════════════
+       BOOT SEQUENCE OVERLAY
+    ══════════════════════════════════════════ */
+    #boot-screen {
+      position: fixed; inset: 0; z-index: 9999;
+      background: #000;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      font-family: var(--mono);
+      transition: opacity 0.6s ease;
+    }
+    #boot-screen.fade-out { opacity: 0; pointer-events: none; }
+    .boot-logo {
+      font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+      color: rgba(255,255,255,0.3); margin-bottom: 48px;
+    }
+    .boot-lines { width: 480px; max-width: 90vw; }
+    .boot-line {
+      font-size: 12px; line-height: 1.8; color: rgba(255,255,255,0.0);
+      transition: color 0.3s;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .boot-line.show { color: rgba(255,255,255,0.7); }
+    .boot-line .bl-status { margin-left: auto; font-size: 11px; }
+    .boot-line .bl-ok { color: #34c759; }
+    .boot-line .bl-warn { color: #ff9500; }
+    .boot-bar-wrap {
+      width: 480px; max-width: 90vw; margin-top: 32px;
+      height: 2px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden;
+    }
+    .boot-bar-fill {
+      height: 100%; width: 0%; background: linear-gradient(90deg, #0071e3, #5e5ce6);
+      border-radius: 2px; transition: width 0.4s ease;
+    }
+    .boot-skip {
+      position: absolute; bottom: 32px; right: 32px;
+      font-size: 11px; color: rgba(255,255,255,0.25); cursor: pointer;
+      letter-spacing: 0.08em; transition: color 0.2s;
+    }
+    .boot-skip:hover { color: rgba(255,255,255,0.6); }
+
+    /* ══════════════════════════════════════════
+       THREAT INTEL CARD
+    ══════════════════════════════════════════ */
+    .threat-card {
+      background: rgba(255,0,0,0.04);
+      border: 1px solid rgba(255,59,48,0.2);
+      border-radius: var(--r-lg);
+      padding: 24px 28px;
+      position: relative; overflow: hidden;
+      margin-bottom: 24px;
+      font-family: var(--mono);
+    }
+    .threat-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, #ff3b30, #ff9500, #ff3b30);
+      animation: threatScan 3s linear infinite;
+    }
+    @keyframes threatScan {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .threat-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 20px; padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,59,48,0.15);
+    }
+    .threat-classification {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.2em;
+      color: #ff3b30; text-transform: uppercase;
+      background: rgba(255,59,48,0.1); border: 1px solid rgba(255,59,48,0.25);
+      padding: 3px 10px; border-radius: 4px;
+    }
+    .threat-id { font-size: 10px; color: rgba(255,255,255,0.25); }
+    .threat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .threat-field { }
+    .threat-label { font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 3px; }
+    .threat-value { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.85); }
+    .threat-value.highlight { color: #ff9500; }
+    .threat-value.green { color: #34c759; }
+    .threat-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(255,59,48,0.1); }
+    .threat-tag { font-size: 9px; padding: 2px 8px; border-radius: 4px; background: rgba(255,59,48,0.08); color: #ff6b6b; border: 1px solid rgba(255,59,48,0.18); letter-spacing: 0.06em; }
+    .threat-level { display: flex; align-items: center; gap: 6px; }
+    .threat-pip { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.1); }
+    .threat-pip.active { background: #ff3b30; box-shadow: 0 0 6px #ff3b30; }
+    .threat-pip.active.orange { background: #ff9500; box-shadow: 0 0 6px #ff9500; }
+
+    /* ══════════════════════════════════════════
+       TERMINAL PANEL
+    ══════════════════════════════════════════ */
+    #terminal-section { padding: 0 44px 100px; position: relative; z-index: 1; }
+    .terminal-wrap {
+      max-width: 1100px; margin: 0 auto;
+    }
+    .terminal-window {
+      background: rgba(0,0,0,0.85);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px; overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+      font-family: var(--mono);
+    }
+    .terminal-titlebar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .tbar-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .tbar-dot.r { background: #ff5f57; }
+    .tbar-dot.a { background: #febc2e; }
+    .tbar-dot.g { background: #28c840; }
+    .tbar-title { font-size: 12px; color: rgba(255,255,255,0.35); margin-left: 8px; letter-spacing: 0.04em; }
+    .terminal-body {
+      padding: 20px 24px; min-height: 320px; max-height: 420px;
+      overflow-y: auto; font-size: 13px; line-height: 1.8;
+    }
+    .terminal-body::-webkit-scrollbar { width: 4px; }
+    .terminal-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+    .t-line { display: flex; gap: 8px; margin-bottom: 2px; }
+    .t-prompt { color: #34c759; flex-shrink: 0; }
+    .t-user { color: #0071e3; }
+    .t-at { color: rgba(255,255,255,0.3); }
+    .t-host { color: #5e5ce6; }
+    .t-cmd { color: #f5f5f7; }
+    .t-output { color: rgba(255,255,255,0.55); padding-left: 0; }
+    .t-output.green { color: #34c759; }
+    .t-output.blue { color: #5ac8fa; }
+    .t-output.red { color: #ff6b6b; }
+    .t-output.yellow { color: #ffd60a; }
+    .t-output.purple { color: #bf5af2; }
+    .t-output.dim { color: rgba(255,255,255,0.25); }
+    .terminal-input-row {
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 24px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      background: rgba(255,255,255,0.02);
+    }
+    .t-input-prompt { color: #34c759; font-family: var(--mono); font-size: 13px; flex-shrink: 0; }
+    .t-input {
+      flex: 1; background: none; border: none; outline: none;
+      color: #f5f5f7; font-family: var(--mono); font-size: 13px;
+      caret-color: #34c759;
+    }
+    .t-input::placeholder { color: rgba(255,255,255,0.2); }
+
+    /* ══════════════════════════════════════════
+       ATTACK MAP
+    ══════════════════════════════════════════ */
+    #map-section { padding: 100px 44px; position: relative; z-index: 1; }
+    .map-wrap { max-width: 1100px; margin: 0 auto; }
+    .attack-map {
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--r-lg);
+      overflow: hidden; position: relative;
+      height: 420px;
+    }
+    .map-svg { width: 100%; height: 100%; }
+    .map-node {
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .map-node circle { transition: r 0.2s, filter 0.2s; }
+    .map-node:hover circle { filter: brightness(1.4); }
+    .map-pulse {
+      animation: mapPulse 2.5s ease-out infinite;
+      transform-origin: center;
+    }
+    @keyframes mapPulse {
+      0% { opacity: 0.8; transform: scale(1); }
+      100% { opacity: 0; transform: scale(3.5); }
+    }
+    .map-connection {
+      stroke-dasharray: 6 4;
+      animation: dashMove 2s linear infinite;
+    }
+    @keyframes dashMove { to { stroke-dashoffset: -20; } }
+    .map-tooltip {
+      position: absolute; pointer-events: none;
+      background: rgba(0,0,0,0.88); border: 1px solid rgba(255,255,255,0.12);
+      padding: 8px 14px; border-radius: 10px;
+      font-family: var(--mono); font-size: 11px; color: #f5f5f7;
+      white-space: nowrap; opacity: 0; transition: opacity 0.15s;
+      backdrop-filter: blur(12px);
+    }
+    .map-tooltip.show { opacity: 1; }
+    .map-legend {
+      position: absolute; bottom: 16px; left: 16px;
+      display: flex; gap: 16px; flex-wrap: wrap;
+    }
+    .map-legend-item { display: flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,0.4); }
+    .map-legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+    /* ══════════════════════════════════════════
+       RPG CHARACTER SHEET
+    ══════════════════════════════════════════ */
+    #rpg-section { padding: 100px 44px; position: relative; z-index: 1; }
+    .rpg-wrap { max-width: 1100px; margin: 0 auto; }
+    .rpg-sheet {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--r-lg);
+      box-shadow: var(--glass-shadow-lg);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      overflow: hidden; position: relative;
+    }
+    .rpg-sheet::before { content:''; position:absolute; inset:0; background:var(--specular); pointer-events:none; }
+    .rpg-header {
+      padding: 28px 32px 20px;
+      border-bottom: 1px solid var(--glass-border-subtle);
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 24px;
+    }
+    .rpg-name-block { }
+    .rpg-class { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+    .rpg-name { font-size: 28px; font-weight: 800; letter-spacing: -0.035em; color: var(--text); margin-bottom: 4px; }
+    .rpg-title { font-size: 13px; color: var(--text3); font-family: var(--mono); }
+    .rpg-level-block { text-align: right; flex-shrink: 0; }
+    .rpg-level-num { font-size: 42px; font-weight: 900; letter-spacing: -0.05em; background: linear-gradient(135deg,var(--accent2),var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:1; }
+    .rpg-level-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text4); }
+    /* XP bar */
+    .rpg-xp { padding: 0 32px 20px; }
+    .rpg-xp-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text4); margin-bottom: 6px; display: flex; justify-content: space-between; }
+    .rpg-xp-bar { height: 6px; background: var(--glass-border-subtle); border-radius: 3px; overflow: hidden; }
+    .rpg-xp-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg,var(--accent2),var(--accent)); width: 0%; transition: width 1.2s cubic-bezier(0.16,1,0.3,1) 0.3s; }
+    /* Stats grid */
+    .rpg-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; border-top: 1px solid var(--glass-border-subtle); }
+    .rpg-stat { padding: 20px 24px; border-right: 1px solid var(--glass-border-subtle); border-bottom: 1px solid var(--glass-border-subtle); }
+    .rpg-stat:nth-child(3n) { border-right: none; }
+    .rpg-stat-abbr { font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text4); margin-bottom: 4px; }
+    .rpg-stat-name { font-size: 11px; color: var(--text4); margin-bottom: 10px; }
+    .rpg-stat-score { font-size: 32px; font-weight: 900; letter-spacing: -0.04em; line-height: 1; color: var(--text); margin-bottom: 8px; }
+    .rpg-stat-bar { height: 3px; background: var(--glass-border-subtle); border-radius: 2px; overflow: hidden; }
+    .rpg-stat-fill { height: 100%; border-radius: 2px; width: 0%; transition: width 1s cubic-bezier(0.16,1,0.3,1); }
+    /* Skills */
+    .rpg-skills { padding: 20px 32px 28px; border-top: 1px solid var(--glass-border-subtle); }
+    .rpg-skills-title { font-family: var(--mono); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text4); margin-bottom: 16px; }
+    .rpg-skill-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .rpg-skill-name { font-size: 13px; color: var(--text2); min-width: 160px; }
+    .rpg-skill-bar-wrap { flex: 1; height: 4px; background: var(--glass-border-subtle); border-radius: 2px; overflow: hidden; }
+    .rpg-skill-bar-fill { height: 100%; border-radius: 2px; width: 0%; transition: width 1.1s cubic-bezier(0.16,1,0.3,1); }
+    .rpg-skill-val { font-family: var(--mono); font-size: 11px; color: var(--text4); min-width: 32px; text-align: right; }
+
+    /* ══════════════════════════════════════════
+       CTF MINI GAME — FLAG HUNT
+    ══════════════════════════════════════════ */
+    .flag-modal {
+      position: fixed; inset: 0; z-index: 8888;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.7); backdrop-filter: blur(20px);
+      opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    }
+    .flag-modal.show { opacity: 1; pointer-events: all; }
+    .flag-box {
+      background: #000; border: 1px solid #34c759;
+      border-radius: 20px; padding: 40px 48px; text-align: center;
+      font-family: var(--mono); max-width: 480px; width: 90%;
+      box-shadow: 0 0 60px rgba(52,199,89,0.3);
+      animation: flagAppear 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    @keyframes flagAppear { from{transform:scale(0.8);opacity:0} to{transform:scale(1);opacity:1} }
+    .flag-icon { font-size: 48px; margin-bottom: 16px; }
+    .flag-title { font-size: 18px; font-weight: 700; color: #34c759; margin-bottom: 8px; letter-spacing: -0.02em; }
+    .flag-subtitle { font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 24px; }
+    .flag-value { font-size: 14px; color: #ffd60a; background: rgba(255,214,10,0.1); border: 1px solid rgba(255,214,10,0.3); padding: 10px 20px; border-radius: 8px; letter-spacing: 0.04em; margin-bottom: 24px; word-break: break-all; }
+    .flag-close { font-size: 11px; color: rgba(255,255,255,0.3); cursor: pointer; letter-spacing: 0.08em; text-transform: uppercase; }
+    .flag-close:hover { color: rgba(255,255,255,0.7); }
+
+    /* Scroll progress bar */
+    #scroll-progress { position: fixed; top: 0; left: 0; z-index: 9000; height: 2px; width: 0%; background: linear-gradient(90deg,#0071e3,#5e5ce6,#ff2d55); transition: width 0.1s linear; }
+
+    /* Toast */
+    .toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(20px); z-index: 8000; background: rgba(28,28,30,0.92); border: 1px solid rgba(255,255,255,0.12); border-radius: 980px; padding: 10px 20px; font-family: var(--mono); font-size: 12px; color: #f5f5f7; backdrop-filter: blur(20px); opacity: 0; transition: all 0.3s; pointer-events:none; white-space:nowrap; }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* Cursor trail */
+    .cursor-dot { position: fixed; border-radius: 50%; pointer-events: none; z-index: 7000; transition: opacity 0.5s; }
+
+    /* Availability pill */
+    .availability-pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 6px 14px; border-radius: 980px;
+      background: rgba(52,199,89,0.1);
+      border: 1px solid rgba(52,199,89,0.25);
+      font-family: var(--mono); font-size: 11px; font-weight: 600;
+      color: #34c759; letter-spacing: 0.04em;
+      margin-bottom: 20px;
+      opacity: 0; transform: translateY(12px); animation: fadeUp 0.6s 0.05s ease forwards;
+    }
+    .avail-dot { width: 7px; height: 7px; border-radius: 50%; background: #34c759; box-shadow: 0 0 0 0 rgba(52,199,89,0.4); animation: availPulse 2s infinite; }
+    @keyframes availPulse { 0%{box-shadow:0 0 0 0 rgba(52,199,89,0.5)} 70%{box-shadow:0 0 0 8px rgba(52,199,89,0)} 100%{box-shadow:0 0 0 0 rgba(52,199,89,0)} }
+
   </style>
 </head>
 <body>
+  <!-- SCROLL PROGRESS -->
+  <div id="scroll-progress"></div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <!-- FLAG MODAL -->
+  <div class="flag-modal" id="flagModal">
+    <div class="flag-box">
+      <div class="flag-icon">🚩</div>
+      <div class="flag-title">Flag Captured!</div>
+      <div class="flag-subtitle">You found the hidden flag. Nice recon skills, hacker.</div>
+      <div class="flag-value" id="flagValue">dvphnc{y0u_f0und_m3_g00d_r3c0n}</div>
+      <div class="flag-close" onclick="document.getElementById('flagModal').classList.remove('show')">[ close ]</div>
+    </div>
+  </div>
+
+  <!-- BOOT SCREEN -->
+  <div id="boot-screen">
+    <div class="boot-logo">dvphnc OS v1.0</div>
+    <div class="boot-lines" id="bootLines"></div>
+    <div class="boot-bar-wrap"><div class="boot-bar-fill" id="bootBar"></div></div>
+    <div class="boot-skip" onclick="skipBoot()">skip →</div>
+  </div>
+
 <!-- NAV -->
   <nav id="navbar">
     <div class="dynamic-island-hint"></div>
@@ -794,7 +1111,7 @@
       <li><a href="#stacks">Stacks</a></li>
       <li><a href="#vault">CTF</a></li>
       <li><a href="#sybervault">SyberVault</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#terminal-section">Terminal</a></li><li><a href="#rpg-section">Stats</a></li><li><a href="#contact">Contact</a></li>
     </ul>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><svg class="icon-sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
     <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">
@@ -807,6 +1124,8 @@
     <a href="#stacks" class="mobile-link">Stacks</a>
     <a href="#vault" class="mobile-link">CTF</a>
     <a href="#sybervault" class="mobile-link">SyberVault</a>
+    <a href="#terminal-section" class="mobile-link">Terminal</a>
+    <a href="#rpg-section" class="mobile-link">Stats</a>
     <a href="#contact" class="mobile-link">Contact</a>
   </div>
 
@@ -1339,6 +1658,131 @@
     </div>
   </section>
 
+
+  <div class="divider"></div>
+
+  <!-- ══ THREAT INTEL CARD — injected into hero ══ -->
+  <!-- (injected via JS into hero section) -->
+
+  <!-- ══ TERMINAL SECTION ══ -->
+  <section id="terminal-section">
+    <div class="terminal-wrap">
+      <p class="sec-label reveal">Live Recon</p>
+      <h2 class="sec-title reveal reveal-delay-1" style="color:var(--text)">Terminal</h2>
+      <div class="terminal-window reveal reveal-delay-2">
+        <div class="terminal-titlebar">
+          <div class="tbar-dot r"></div>
+          <div class="tbar-dot a"></div>
+          <div class="tbar-dot g"></div>
+          <span class="tbar-title">dvphnc@sybervault — zsh</span>
+        </div>
+        <div class="terminal-body" id="termBody"></div>
+        <div class="terminal-input-row">
+          <span class="t-input-prompt">dvphnc@sybervault:~$</span>
+          <input class="t-input" id="termInput" type="text" placeholder="type a command..." autocomplete="off" spellcheck="false"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══ ATTACK MAP SECTION ══ -->
+  <section id="map-section">
+    <div class="map-wrap">
+      <p class="sec-label reveal">Threat Intelligence</p>
+      <h2 class="sec-title reveal reveal-delay-1" style="color:var(--text)">Attack Map</h2>
+      <div class="attack-map reveal reveal-delay-2" id="attackMap">
+        <svg class="map-svg" id="mapSvg" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet"></svg>
+        <div class="map-tooltip" id="mapTooltip"></div>
+        <div class="map-legend">
+          <div class="map-legend-item"><div class="map-legend-dot" style="background:#34c759"></div>Origin</div>
+          <div class="map-legend-item"><div class="map-legend-dot" style="background:#0071e3"></div>Platform</div>
+          <div class="map-legend-item"><div class="map-legend-dot" style="background:#ff9500"></div>Cert</div>
+          <div class="map-legend-item"><div class="map-legend-dot" style="background:#ff3b30"></div>Target</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══ RPG CHARACTER SHEET SECTION ══ -->
+  <section id="rpg-section">
+    <div class="rpg-wrap">
+      <p class="sec-label reveal">Character Profile</p>
+      <h2 class="sec-title reveal reveal-delay-1" style="color:var(--text)">Skill Sheet</h2>
+      <div class="rpg-sheet reveal reveal-delay-2">
+        <div class="rpg-header">
+          <div class="rpg-name-block">
+            <div class="rpg-class">Aspiring Tech VA · Cybersecurity Enthusiast</div>
+            <div class="rpg-name">Joana Daphne Sy</div>
+            <div class="rpg-title">// dvphnc · BSIT 3rd Year · Oracle Certified</div>
+          </div>
+          <div class="rpg-level-block">
+            <div class="rpg-level-num">07</div>
+            <div class="rpg-level-label">Level</div>
+          </div>
+        </div>
+        <div class="rpg-xp">
+          <div class="rpg-xp-label">
+            <span>XP Progress → Senior Developer</span>
+            <span>3,240 / 5,000 XP</span>
+          </div>
+          <div class="rpg-xp-bar"><div class="rpg-xp-fill" data-width="64%"></div></div>
+        </div>
+        <div class="rpg-stats">
+          <div class="rpg-stat">
+            <div class="rpg-stat-abbr">INT</div>
+            <div class="rpg-stat-name">Intelligence</div>
+            <div class="rpg-stat-score">18</div>
+            <div class="rpg-stat-bar"><div class="rpg-stat-fill" data-width="90%" style="background:linear-gradient(90deg,#0071e3,#5e5ce6)"></div></div>
+          </div>
+          <div class="rpg-stat">
+            <div class="rpg-stat-abbr">DEX</div>
+            <div class="rpg-stat-name">Dexterity</div>
+            <div class="rpg-stat-score">15</div>
+            <div class="rpg-stat-bar"><div class="rpg-stat-fill" data-width="75%" style="background:linear-gradient(90deg,#34c759,#5ac8fa)"></div></div>
+          </div>
+          <div class="rpg-stat">
+            <div class="rpg-stat-abbr">WIS</div>
+            <div class="rpg-stat-name">Wisdom</div>
+            <div class="rpg-stat-score">16</div>
+            <div class="rpg-stat-bar"><div class="rpg-stat-fill" data-width="80%" style="background:linear-gradient(90deg,#ff9500,#ff2d55)"></div></div>
+          </div>
+          <div class="rpg-stat">
+            <div class="rpg-stat-abbr">STR</div>
+            <div class="rpg-stat-name">Strength</div>
+            <div class="rpg-stat-score">12</div>
+            <div class="rpg-stat-bar"><div class="rpg-stat-fill" data-width="60%" style="background:linear-gradient(90deg,#ff3b30,#ff9500)"></div></div>
+          </div>
+          <div class="rpg-stat">
+            <div class="rpg-stat-abbr">CHA</div>
+            <div class="rpg-stat-name">Charisma</div>
+            <div class="rpg-stat-score">17</div>
+            <div class="rpg-stat-bar"><div class="rpg-stat-fill" data-width="85%" style="background:linear-gradient(90deg,#bf5af2,#ff2d55)"></div></div>
+          </div>
+          <div class="rpg-stat">
+            <div class="rpg-stat-abbr">CON</div>
+            <div class="rpg-stat-name">Constitution</div>
+            <div class="rpg-stat-score">14</div>
+            <div class="rpg-stat-bar"><div class="rpg-stat-fill" data-width="70%" style="background:linear-gradient(90deg,#5ac8fa,#5e5ce6)"></div></div>
+          </div>
+        </div>
+        <div class="rpg-skills">
+          <div class="rpg-skills-title">Proficiencies</div>
+          <div class="rpg-skill-row"><span class="rpg-skill-name">Web Development</span><div class="rpg-skill-bar-wrap"><div class="rpg-skill-bar-fill" data-width="82%" style="background:linear-gradient(90deg,#0071e3,#5e5ce6)"></div></div><span class="rpg-skill-val">82</span></div>
+          <div class="rpg-skill-row"><span class="rpg-skill-name">Laravel / PHP</span><div class="rpg-skill-bar-wrap"><div class="rpg-skill-bar-fill" data-width="75%" style="background:linear-gradient(90deg,#ff3b30,#ff9500)"></div></div><span class="rpg-skill-val">75</span></div>
+          <div class="rpg-skill-row"><span class="rpg-skill-name">Cloud (OCI)</span><div class="rpg-skill-bar-wrap"><div class="rpg-skill-bar-fill" data-width="70%" style="background:linear-gradient(90deg,#ff9500,#ffd60a)"></div></div><span class="rpg-skill-val">70</span></div>
+          <div class="rpg-skill-row"><span class="rpg-skill-name">Cybersecurity / CTF</span><div class="rpg-skill-bar-wrap"><div class="rpg-skill-bar-fill" data-width="65%" style="background:linear-gradient(90deg,#34c759,#5ac8fa)"></div></div><span class="rpg-skill-val">65</span></div>
+          <div class="rpg-skill-row"><span class="rpg-skill-name">Virtual Assistance</span><div class="rpg-skill-bar-wrap"><div class="rpg-skill-bar-fill" data-width="88%" style="background:linear-gradient(90deg,#bf5af2,#5e5ce6)"></div></div><span class="rpg-skill-val">88</span></div>
+          <div class="rpg-skill-row"><span class="rpg-skill-name">UI/UX Design</span><div class="rpg-skill-bar-wrap"><div class="rpg-skill-bar-fill" data-width="60%" style="background:linear-gradient(90deg,#ff2d55,#bf5af2)"></div></div><span class="rpg-skill-val">60</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
   <div class="divider"></div>
 
   <!-- CONTACT -->
@@ -1545,6 +1989,379 @@
       document.getElementById('musicArtwork').textContent=t.icon;
       progress=0;
     }
+  
+    // ── SCROLL PROGRESS ──
+    const scrollProg = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement;
+      scrollProg.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+    });
+
+    // ── TOAST ──
+    function showToast(msg, duration=2200) {
+      const t = document.getElementById('toast');
+      t.textContent = msg; t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), duration);
+    }
+
+    // ── CURSOR TRAIL ──
+    const dots = [];
+    const DOT_COUNT = 10;
+    for (let i = 0; i < DOT_COUNT; i++) {
+      const d = document.createElement('div');
+      d.className = 'cursor-dot';
+      const size = 6 - i * 0.4;
+      d.style.cssText = `width:${size}px;height:${size}px;background:rgba(0,113,227,${0.6 - i*0.05});`;
+      document.body.appendChild(d);
+      dots.push({ el: d, x: 0, y: 0 });
+    }
+    let mx = 0, my = 0;
+    window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    (function animateDots() {
+      let lx = mx, ly = my;
+      dots.forEach((dot, i) => {
+        dot.x += (lx - dot.x) * (0.35 - i * 0.025);
+        dot.y += (ly - dot.y) * (0.35 - i * 0.025);
+        dot.el.style.left = dot.x - 3 + 'px';
+        dot.el.style.top = dot.y - 3 + 'px';
+        lx = dot.x; ly = dot.y;
+      });
+      requestAnimationFrame(animateDots);
+    })();
+
+    // ── BOOT SEQUENCE ──
+    const bootData = [
+      { text: 'Initializing dvphnc.sys', status: 'OK', color: 'bl-ok', delay: 0 },
+      { text: 'Loading Oracle Cloud modules', status: 'OK', color: 'bl-ok', delay: 300 },
+      { text: 'Mounting SyberVault [/notes]', status: 'OK', color: 'bl-ok', delay: 550 },
+      { text: 'Scanning CTF repositories', status: 'OK', color: 'bl-ok', delay: 750 },
+      { text: 'Starting Laravel runtime', status: 'OK', color: 'bl-ok', delay: 950 },
+      { text: 'Checking network interfaces', status: 'OK', color: 'bl-ok', delay: 1100 },
+      { text: 'Loading React components', status: 'OK', color: 'bl-ok', delay: 1250 },
+      { text: 'Verifying OCI credentials', status: 'CERTIFIED', color: 'bl-ok', delay: 1400 },
+      { text: 'Looking for hidden flags', status: '...', color: 'bl-warn', delay: 1600 },
+      { text: 'Booting portfolio interface', status: 'DONE', color: 'bl-ok', delay: 1850 },
+    ];
+    const bootLines = document.getElementById('bootLines');
+    const bootBar = document.getElementById('bootBar');
+    let bootDone = false;
+
+    function skipBoot() {
+      if (bootDone) return;
+      bootDone = true;
+      const bs = document.getElementById('boot-screen');
+      bs.classList.add('fade-out');
+      setTimeout(() => { bs.style.display = 'none'; document.body.style.overflow = ''; }, 600);
+    }
+
+    document.body.style.overflow = 'hidden';
+    bootData.forEach((item, i) => {
+      setTimeout(() => {
+        const line = document.createElement('div');
+        line.className = 'boot-line';
+        line.innerHTML = `<span>${item.text}</span><span class="bl-status ${item.color}">${item.status}</span>`;
+        bootLines.appendChild(line);
+        requestAnimationFrame(() => line.classList.add('show'));
+        bootBar.style.width = ((i + 1) / bootData.length * 100) + '%';
+        if (i === bootData.length - 1) {
+          setTimeout(() => { if (!bootDone) skipBoot(); }, 600);
+        }
+      }, item.delay);
+    });
+    setTimeout(() => { if (!bootDone) skipBoot(); }, 3200);
+
+    // ── AVAILABILITY PILL — inject into hero ──
+    const heroInner = document.querySelector('.hero-inner');
+    if (heroInner) {
+      const pill = document.createElement('div');
+      pill.className = 'availability-pill';
+      pill.innerHTML = '<div class="avail-dot"></div>Open to opportunities · GMT+8';
+      heroInner.insertBefore(pill, heroInner.firstChild);
+    }
+
+    // ── THREAT INTEL CARD — inject after hero badges ──
+    const heroBadges = document.querySelector('.hero-badges');
+    if (heroBadges) {
+      const now = new Date();
+      const dateStr = now.toISOString().split('T')[0];
+      const threat = document.createElement('div');
+      threat.className = 'threat-card reveal';
+      threat.style.marginTop = '28px';
+      threat.innerHTML = `
+        <div class="threat-header">
+          <span class="threat-classification">Subject Intel Report</span>
+          <span class="threat-id">REF: DVPHNC-2025-001 · ${dateStr}</span>
+        </div>
+        <div class="threat-grid">
+          <div class="threat-field"><div class="threat-label">Subject</div><div class="threat-value">Joana Daphne Sy</div></div>
+          <div class="threat-field"><div class="threat-label">Alias</div><div class="threat-value highlight">dvphnc</div></div>
+          <div class="threat-field"><div class="threat-label">Status</div><div class="threat-value green">● Active · Seeking VA Roles</div></div>
+          <div class="threat-field"><div class="threat-label">Location</div><div class="threat-value">Philippines · GMT+8</div></div>
+          <div class="threat-field"><div class="threat-label">Threat Level</div>
+            <div class="threat-level">
+              <div class="threat-pip active"></div>
+              <div class="threat-pip active orange"></div>
+              <div class="threat-pip active orange"></div>
+              <div class="threat-pip"></div>
+              <div class="threat-pip"></div>
+              <span style="font-size:11px;color:rgba(255,255,255,0.4);margin-left:4px;">Aspiring</span>
+            </div>
+          </div>
+          <div class="threat-field"><div class="threat-label">Last Seen</div><div class="threat-value" id="lastSeen"></div></div>
+        </div>
+        <div class="threat-tags">
+          <span class="threat-tag">BSIT-3RD-YEAR</span>
+          <span class="threat-tag">ORACLE-CERTIFIED</span>
+          <span class="threat-tag">CTF-ACTIVE</span>
+          <span class="threat-tag">LARAVEL</span>
+          <span class="threat-tag">REACT</span>
+          <span class="threat-tag">SYBERVAULT</span>
+        </div>`;
+      heroBadges.insertAdjacentElement('afterend', threat);
+      document.getElementById('lastSeen').textContent = now.toLocaleString('en-PH', {timeZone:'Asia/Manila',dateStyle:'medium',timeStyle:'short'});
+    }
+
+    // ── TERMINAL ──
+    const termBody = document.getElementById('termBody');
+    const termInput = document.getElementById('termInput');
+
+    const FLAG = 'dvphnc{y0u_f0und_m3_g00d_r3c0n}';
+    // Hidden flag in page source comment — real CTF style
+    document.body.insertAdjacentHTML('beforeend', '<!-- CTF FLAG: ' + FLAG + ' -->');
+
+    function tPrint(html, cls='t-output') {
+      const line = document.createElement('div');
+      line.className = 't-line';
+      const span = document.createElement('span');
+      span.className = cls;
+      span.innerHTML = html;
+      line.appendChild(span);
+      termBody.appendChild(line);
+      termBody.scrollTop = termBody.scrollHeight;
+    }
+
+    function tCommand(cmd) {
+      const line = document.createElement('div');
+      line.className = 't-line';
+      line.innerHTML = `<span class="t-prompt">dvphnc@sybervault</span><span class="t-at">:</span><span class="t-host">~</span><span class="t-prompt">$</span>&nbsp;<span class="t-cmd">${cmd}</span>`;
+      termBody.appendChild(line);
+      termBody.scrollTop = termBody.scrollHeight;
+    }
+
+    const termCommands = {
+      help: () => {
+        tPrint('Available commands:', 't-output blue');
+        tPrint('  whoami        — display subject identity');
+        tPrint('  nmap          — scan dvphnc.github.io');
+        tPrint('  skills        — list technical proficiencies');
+        tPrint('  certs         — show certifications');
+        tPrint('  ctf           — CTF statistics');
+        tPrint('  cat flag.txt  — ...');
+        tPrint('  clear         — clear terminal');
+      },
+      whoami: () => {
+        tPrint('joana-daphne-sy', 't-output green');
+        tPrint('uid=1337(dvphnc) gid=1337(sybervault) groups=1337(sybervault),0(oracle),42(ctf)');
+      },
+      nmap: () => {
+        tPrint('Starting Nmap 7.94 ( https://nmap.org )', 't-output dim');
+        tPrint('Scanning dvphnc.github.io (185.199.108.153) ...', 't-output dim');
+        setTimeout(() => tPrint('PORT      STATE  SERVICE     VERSION'), 400);
+        setTimeout(() => tPrint('80/tcp    open   http        GitHub Pages'), 700);
+        setTimeout(() => tPrint('443/tcp   open   https       TLS 1.3'), 900);
+        setTimeout(() => { tPrint(''); tPrint('Host script results:', 't-output blue'); }, 1100);
+        setTimeout(() => tPrint('| oracle-certs: OCI AI, OCI Foundations, OCI Data [2024]'), 1300);
+        setTimeout(() => tPrint('| ctf-history: TryHackMe (3), HackTheBox (3)'), 1500);
+        setTimeout(() => tPrint('| open-ports: portfolio, sybervault, contact'), 1700);
+        setTimeout(() => tPrint('| tech-stack: Laravel, React, PHP, MySQL'), 1900);
+        setTimeout(() => { tPrint(''); tPrint('Nmap done: 1 IP address (1 host up) scanned', 't-output green'); }, 2100);
+      },
+      skills: () => {
+        tPrint('Technical Proficiencies:', 't-output blue');
+        tPrint('  [██████████░░] 82%  Web Development (HTML/CSS/JS)');
+        tPrint('  [█████████░░░] 75%  Laravel / PHP');
+        tPrint('  [████████░░░░] 70%  Oracle Cloud (OCI)');
+        tPrint('  [████████░░░░] 65%  Cybersecurity / CTF');
+        tPrint('  [███████████░] 88%  Virtual Assistance');
+        tPrint('  [███████░░░░░] 60%  UI/UX Design');
+      },
+      certs: () => {
+        tPrint('Oracle Certifications:', 't-output blue');
+        tPrint('  ✓ OCI AI Foundations Associate [2024]', 't-output green');
+        tPrint('  ✓ OCI Foundations Associate [2024]', 't-output green');
+        tPrint('  ✓ OCI Data Foundations Associate [2024]', 't-output green');
+        tPrint('  Issuer: Oracle University', 't-output dim');
+      },
+      ctf: () => {
+        tPrint('CTF Statistics:', 't-output blue');
+        tPrint('  Platform    Rooms   Flags');
+        tPrint('  ---------   -----   -----');
+        tPrint('  TryHackMe     3       9  ', 't-output green');
+        tPrint('  HackTheBox    3       3  ', 't-output yellow');
+        tPrint('  Total         6      12  ');
+        tPrint('');
+        tPrint('  Notable: Pickle Rick, Mr Robot, Dancing, Meow', 't-output dim');
+      },
+      'cat flag.txt': () => {
+        tPrint('Hmm... permission denied.', 't-output red');
+        setTimeout(() => tPrint('Hint: Try looking in the page source. 👀', 't-output yellow'), 600);
+      },
+      clear: () => { termBody.innerHTML = ''; },
+    };
+
+    // Boot terminal
+    setTimeout(() => {
+      tPrint('SyberVault Terminal v2.0 — type <span style="color:#ffd60a">help</span> to begin', 't-output dim');
+      tPrint('');
+    }, 100);
+
+    termInput.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter') return;
+      const cmd = termInput.value.trim().toLowerCase();
+      termInput.value = '';
+      if (!cmd) return;
+      tCommand(cmd);
+      if (termCommands[cmd]) {
+        termCommands[cmd]();
+      } else {
+        tPrint(`zsh: command not found: ${cmd}`, 't-output red');
+        tPrint('Type <span style="color:#ffd60a">help</span> for available commands.', 't-output dim');
+      }
+    });
+
+    // Copy email
+    const emailAddr = document.querySelector('.email-addr');
+    if (emailAddr) {
+      emailAddr.style.cursor = 'pointer';
+      emailAddr.title = 'Click to copy';
+      emailAddr.addEventListener('click', () => {
+        navigator.clipboard.writeText('jdsoffcl@gmail.com');
+        showToast('✓ Email copied to clipboard');
+      });
+    }
+
+    // ── ATTACK MAP ──
+    const mapSvg = document.getElementById('mapSvg');
+    const mapTooltip = document.getElementById('mapTooltip');
+
+    const mapNodes = [
+      { id:'ph',   x:800, y:260, r:10, color:'#34c759', label:'Philippines',    sub:'Origin · Quezon City', type:'origin' },
+      { id:'thm',  x:420, y:180, r:8,  color:'#0071e3', label:'TryHackMe',      sub:'Platform · UK · 3 Rooms', type:'platform' },
+      { id:'htb',  x:470, y:170, r:8,  color:'#5ac8fa', label:'HackTheBox',     sub:'Platform · EU · 3 Rooms', type:'platform' },
+      { id:'oci',  x:580, y:310, r:8,  color:'#ff9500', label:'Oracle Cloud',   sub:'OCI · 3 Certifications', type:'cert' },
+      { id:'gh',   x:150, y:200, r:7,  color:'#0071e3', label:'GitHub',         sub:'github.com/dvphnc', type:'platform' },
+      { id:'mr',   x:350, y:400, r:6,  color:'#ff3b30', label:'Mr Robot CTF',   sub:'TryHackMe · Medium', type:'target' },
+      { id:'pr',   x:390, y:195, r:6,  color:'#ff3b30', label:'Pickle Rick',    sub:'TryHackMe · Easy', type:'target' },
+      { id:'htb1', x:500, y:160, r:6,  color:'#ff3b30', label:'Meow / Fawn',    sub:'HackTheBox · Easy', type:'target' },
+    ];
+
+    const mapEdges = [
+      { from:'ph', to:'thm', color:'rgba(52,199,89,0.4)' },
+      { from:'ph', to:'htb', color:'rgba(52,199,89,0.4)' },
+      { from:'ph', to:'oci', color:'rgba(255,149,0,0.4)' },
+      { from:'ph', to:'gh',  color:'rgba(0,113,227,0.35)' },
+      { from:'thm', to:'mr', color:'rgba(255,59,48,0.35)' },
+      { from:'thm', to:'pr', color:'rgba(255,59,48,0.35)' },
+      { from:'htb', to:'htb1', color:'rgba(255,59,48,0.35)' },
+    ];
+
+    // Draw edges
+    mapEdges.forEach(e => {
+      const from = mapNodes.find(n => n.id === e.from);
+      const to   = mapNodes.find(n => n.id === e.to);
+      const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+      line.setAttribute('x1', from.x); line.setAttribute('y1', from.y);
+      line.setAttribute('x2', to.x);   line.setAttribute('y2', to.y);
+      line.setAttribute('stroke', e.color); line.setAttribute('stroke-width','1.5');
+      line.classList.add('map-connection');
+      mapSvg.appendChild(line);
+    });
+
+    // Draw nodes
+    mapNodes.forEach(n => {
+      const g = document.createElementNS('http://www.w3.org/2000/svg','g');
+      g.classList.add('map-node');
+
+      // Pulse ring
+      const pulse = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      pulse.setAttribute('cx', n.x); pulse.setAttribute('cy', n.y); pulse.setAttribute('r', n.r + 4);
+      pulse.setAttribute('fill', 'none'); pulse.setAttribute('stroke', n.color); pulse.setAttribute('stroke-width', '1');
+      pulse.classList.add('map-pulse');
+      pulse.style.animationDelay = (Math.random() * 2) + 's';
+
+      const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      circle.setAttribute('cx', n.x); circle.setAttribute('cy', n.y); circle.setAttribute('r', n.r);
+      circle.setAttribute('fill', n.color); circle.setAttribute('filter', `drop-shadow(0 0 6px ${n.color})`);
+
+      const text = document.createElementNS('http://www.w3.org/2000/svg','text');
+      text.setAttribute('x', n.x); text.setAttribute('y', n.y + n.r + 14);
+      text.setAttribute('text-anchor', 'middle'); text.setAttribute('fill', 'rgba(255,255,255,0.55)');
+      text.setAttribute('font-size', '10'); text.setAttribute('font-family', 'JetBrains Mono, monospace');
+      text.textContent = n.label;
+
+      g.appendChild(pulse); g.appendChild(circle); g.appendChild(text);
+      mapSvg.appendChild(g);
+
+      g.addEventListener('mouseenter', (e) => {
+        const rect = document.getElementById('attackMap').getBoundingClientRect();
+        mapTooltip.innerHTML = `<strong>${n.label}</strong><br>${n.sub}`;
+        mapTooltip.style.left = (n.x / 1000 * rect.width - 60) + 'px';
+        mapTooltip.style.top  = (n.y / 500 * rect.height - 56) + 'px';
+        mapTooltip.classList.add('show');
+      });
+      g.addEventListener('mouseleave', () => mapTooltip.classList.remove('show'));
+    });
+
+    // ── RPG BARS ANIMATION ──
+    const rpgObs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.querySelectorAll('[data-width]').forEach(bar => {
+          setTimeout(() => { bar.style.width = bar.dataset.width; }, 100);
+        });
+        rpgObs.unobserve(entry.target);
+      });
+    }, { threshold: 0.3 });
+    const rpgSheet = document.querySelector('.rpg-sheet');
+    if (rpgSheet) rpgObs.observe(rpgSheet);
+
+    // ── HIDDEN CTF FLAG ── 
+    // Flag is hidden in page source as an HTML comment
+    // Users who view-source and find it get the modal
+    // Also: konami code triggers it
+    let konamiSeq = [];
+    const KONAMI = [38,38,40,40,37,39,37,39,66,65];
+    document.addEventListener('keydown', e => {
+      konamiSeq.push(e.keyCode);
+      konamiSeq = konamiSeq.slice(-10);
+      if (konamiSeq.join(',') === KONAMI.join(',')) {
+        document.getElementById('flagModal').classList.add('show');
+      }
+      // Keyboard nav: 1-5 jump to sections
+      const sectionMap = {'1':'hero','2':'certifications','3':'stacks','4':'vault','5':'sybervault'};
+      if (sectionMap[e.key]) {
+        const el = document.getElementById(sectionMap[e.key]);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+
+    // ── ALSO: clicking the nav logo 3x fast reveals flag ──
+    let logoClicks = 0;
+    let logoTimer;
+    const navLogo = document.querySelector('.nav-logo');
+    if (navLogo) {
+      navLogo.style.cursor = 'pointer';
+      navLogo.addEventListener('click', () => {
+        logoClicks++;
+        clearTimeout(logoTimer);
+        logoTimer = setTimeout(() => logoClicks = 0, 800);
+        if (logoClicks >= 3) {
+          logoClicks = 0;
+          document.getElementById('flagModal').classList.add('show');
+        }
+      });
+    }
+
   </script>
 </body>
 </html>
