@@ -3,176 +3,316 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cloud & Virtualization Fundamentals • dvphnc SyberVault</title>
-  <meta name="description" content="The invisible foundation of the modern internet">
-
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
+  <title>Cloud & Virtualization Fundamentals &bull; dvphnc SyberVault</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --grad: linear-gradient(120deg, #00d2d3, #00b4d8, #48cae4, #0077b6, #023e8a);
-      --accent: #48cae4;
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#000;
+      --s:rgba(255,255,255,.04);
+      --s2:rgba(255,255,255,.08);
+      --b:rgba(255,255,255,.08);
+      --t:#f5f5f7;
+      --t2:rgba(255,255,255,.7);
+      --t3:rgba(255,255,255,.35);
+      --accent:#71c3f7;
+      --grad:linear-gradient(135deg,#00d2d3,#48cae4,#0077b6);
+      --grad2:linear-gradient(120deg,#00d2d3,#0077b6);
+      --mono:'JetBrains Mono',monospace;
+      --sans:'Inter',-apple-system,sans-serif;
+      --sw:260px;
     }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family: 'SF Pro Display', -apple-system, sans-serif;
-      background: #000;
-      color: #f0f8ff;
-      line-height: 1.9;
-      font-size: 1.25rem;
-      overflow-x: hidden;
-    }
-    .container { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem; }
+    html{scroll-behavior:smooth}
+    body{font-family:var(--sans);background:var(--bg);color:var(--t);line-height:1.8;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+      background:radial-gradient(ellipse 70% 50% at 15% 10%,#00d2d320 0%,transparent 55%),
+                 radial-gradient(ellipse 50% 60% at 85% 85%,#0077b614 0%,transparent 55%)}
 
-    .back {
-      position: fixed; top: 2.5rem; left: 2.5rem; z-index: 1000;
-      color: var(--accent); text-decoration: none; font-weight: 600; font-size: 1.15rem;
-      background: rgba(0,210,211,0.15); padding: 0.8rem 1.6rem; border-radius: 20px;
-      backdrop-filter: blur(12px); border: 1px solid rgba(72,202,228,0.3);
-      opacity: 0; transition: all 0.4s;
-    }
-    .back:hover { background: rgba(72,202,228,0.25); transform: translateY(-4px); }
+    /* PROGRESS */
+    #prog{position:fixed;top:0;left:0;z-index:300;height:2px;width:0;background:var(--grad);transition:width .08s linear}
 
-    header { text-align: center; padding: 8rem 0 4rem; } /* reduced */
-    h1 {
-      font-size: 7.2rem; font-weight: 900; line-height: 1.1; letter-spacing: -3px;
-      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    /* ── SIDEBAR ── */
+    .sidebar{
+      position:fixed;top:0;left:0;
+      width:var(--sw);height:100vh;
+      overflow-y:auto;
+      padding:36px 24px 40px;
+      display:flex;flex-direction:column;gap:0;
+      border-right:1px solid var(--b);
+      background:rgba(0,0,0,0.7);
+      backdrop-filter:blur(24px);
+      -webkit-backdrop-filter:blur(24px);
+      z-index:100;
     }
-    .subtitle { font-size: 2.1rem; color: #90e0ef; margin-top: 1rem; font-weight: 500; }
+    .sidebar::-webkit-scrollbar{width:0}
 
-    .cover {
-      max-width: 820px; margin: 4rem auto; /* reduced from 8rem */
-      border-radius: 42px; overflow: hidden;
-      box-shadow: 0 80px 180px rgba(0,210,211,0.4);
-      border: 2px solid rgba(72,202,228,0.25);
+    /* back button */
+    .back{
+      display:inline-flex;align-items:center;gap:7px;
+      padding:7px 14px;border-radius:980px;
+      background:var(--s);border:1px solid var(--b);
+      color:var(--t);text-decoration:none;
+      font-size:12px;font-weight:500;
+      transition:all .2s;margin-bottom:32px;
+      align-self:flex-start;
     }
-    .cover img { width: 100%; display: block; transition: transform 1.2s ease; }
-    .cover:hover img { transform: scale(1.06); }
+    .back:hover{background:var(--s2);transform:translateX(-2px)}
 
-    h2 {
-      font-size: 4.2rem; font-weight: 800; text-align: center;
-      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      margin: 5rem 0 2rem; /* heavily reduced */
-    }
-    p {
-      margin: 1.4rem 0; /* reduced */
-      color: #d0e8f2; font-size: 1.3rem;
-    }
-    strong { color: #a0f7f8; font-weight: 700; }
+    .toc-lbl{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--t3);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--b)}
+    .toc-item{display:block;font-size:12px;color:var(--t3);text-decoration:none;padding:7px 10px;border-radius:8px;border-left:2px solid transparent;transition:all .18s;line-height:1.4;margin-bottom:2px}
+    .toc-item:hover{color:var(--t);background:var(--s)}
+    .toc-item.active{color:var(--accent);background:rgba(255,255,255,.04);border-left-color:var(--accent)}
 
-    ul { padding-left: 2.8rem; margin: 2rem 0; } /* reduced */
-    li {
-      margin: 1rem 0; /* reduced */
-      font-size: 1.32rem; color: #c5e8f5;
-    }
-    li::marker { color: var(--accent); font-size: 1.4em; }
+    .sb-cat{margin-top:auto;padding-top:20px;border-top:1px solid var(--b)}
+    .sb-cat-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:4px}
+    .sb-cat-name{font-size:13px;font-weight:600;color:var(--accent)}
 
-    /* Cinematic quote – spacing tightened but still dramatic */
-    .cinematic-quote {
-      margin: 10rem auto; /* reduced from 20rem */
-      padding: 6rem 3rem; /* reduced */
-      max-width: 960px; text-align: center; position: relative;
-      background: radial-gradient(circle at center, rgba(0,210,211,.18) 0%, transparent 70%);
-      border-radius: 40px; overflow: hidden;
-      border: 1px solid rgba(72,202,228,0.2); backdrop-filter: blur(20px);
+    /* ── MAIN ── */
+    .main{margin-left:var(--sw);position:relative;z-index:1}
+    .main-inner{max-width:820px;margin:0 auto;padding:60px 48px 140px}
+
+    /* COVER */
+    .cover-wrap{border-radius:20px;overflow:hidden;margin-bottom:52px;border:1px solid var(--b);position:relative}
+    .cover-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,var(--bg) 0%,transparent 45%);pointer-events:none}
+    .cover-img{width:100%;height:340px;object-fit:cover;display:block;transition:transform .9s ease}
+    .cover-wrap:hover .cover-img{transform:scale(1.04)}
+
+    /* HEADER */
+    .eyebrow{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);padding:4px 12px;border-radius:980px;margin-bottom:20px}
+    .edot{width:5px;height:5px;border-radius:50%;background:var(--accent)}
+    .note-title{font-size:clamp(32px,5vw,56px);font-weight:800;letter-spacing:-.045em;line-height:1.05;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px}
+    .note-sub{font-size:16px;color:var(--t3);margin-bottom:30px;letter-spacing:-.01em}
+    .meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:40px;padding-bottom:28px;border-bottom:1px solid var(--b)}
+    .meta-tag{font-family:var(--mono);font-size:10px;padding:3px 10px;border-radius:6px;background:var(--s);border:1px solid var(--b);color:var(--t3);letter-spacing:.06em}
+    .actions{display:flex;gap:8px;margin-left:auto}
+    .abtn{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:980px;background:var(--s);border:1px solid var(--b);color:var(--t3);font-size:12px;font-family:var(--mono);cursor:pointer;transition:all .2s;user-select:none}
+    .abtn:hover{background:var(--s2);color:var(--t)}
+    .abtn.liked{color:var(--accent);border-color:var(--accent)}
+
+    /* ARTICLE */
+    article h2{font-size:clamp(20px,2.8vw,28px);font-weight:800;letter-spacing:-.035em;line-height:1.2;background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:56px 0 14px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.07);scroll-margin-top:28px}
+    article h3{font-size:15px;font-weight:600;color:var(--accent);letter-spacing:-.01em;margin:24px 0 8px}
+    article p{font-size:15.5px;line-height:1.85;color:var(--t2);margin-bottom:14px}
+    article strong{color:var(--t);font-weight:600}
+    article em{color:var(--t3);font-style:italic}
+    article code{font-family:var(--mono);font-size:12.5px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);padding:2px 7px;border-radius:5px;color:var(--accent)}
+    article pre{background:rgba(0,0,0,.6);border:1px solid var(--b);border-radius:14px;padding:20px 24px;margin:18px 0;overflow-x:auto;position:relative}
+    article pre code{background:none;border:none;padding:0;font-size:13px;line-height:1.7;color:#a0ff7a}
+    .cpybtn{position:absolute;top:10px;right:10px;padding:3px 9px;border-radius:5px;background:rgba(255,255,255,.07);border:1px solid var(--b);color:var(--t3);font-size:10px;font-family:var(--mono);cursor:pointer;transition:all .2s}
+    .cpybtn:hover{background:var(--s2);color:var(--t)}
+    .cpybtn.ok{color:var(--accent);border-color:var(--accent)}
+
+    /* LISTS */
+    article ul,article ol{padding-left:0;margin:12px 0 22px;list-style:none}
+    article li{font-size:15px;line-height:1.75;color:var(--t2);padding:10px 14px 10px 40px;border-radius:10px;background:var(--s);border:1px solid rgba(255,255,255,.05);margin-bottom:5px;position:relative;transition:background .15s,border-color .15s,transform .15s}
+    article li:hover{background:var(--s2);border-color:rgba(255,255,255,.1);transform:translateX(3px)}
+    article ul li::before{content:'';position:absolute;left:14px;top:50%;transform:translateY(-50%);width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.8}
+    article ol{counter-reset:lc}
+    article ol li{counter-increment:lc}
+    article ol li::before{content:counter(lc);position:absolute;left:11px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9px;font-weight:700;color:var(--accent);background:rgba(255,255,255,.07);width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+
+    /* TABLES */
+    .tbl-wrap{overflow-x:auto;margin:20px 0;border-radius:14px;border:1px solid var(--b)}
+    table{width:100%;border-collapse:collapse;min-width:400px}
+    th{background:rgba(255,255,255,.05);color:var(--t);font-size:10.5px;font-weight:600;font-family:var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:12px 16px;text-align:left;border-bottom:1px solid var(--b)}
+    td{padding:12px 16px;font-size:14px;color:var(--t2);border-bottom:1px solid rgba(255,255,255,.04);vertical-align:top;line-height:1.6}
+    tr:last-child td{border-bottom:none}
+    tr:hover td{background:rgba(255,255,255,.02)}
+
+    /* QUOTE */
+    .quote-block{margin:52px 0;padding:36px 32px;border-radius:18px;background:var(--s);border:1px solid var(--b);border-left:3px solid var(--accent);position:relative;overflow:hidden}
+    .quote-block::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 0% 50%,#00d2d314 0%,transparent 60%);pointer-events:none}
+    .quote-icon{font-size:52px;line-height:.8;color:var(--accent);opacity:.22;display:block;margin-bottom:14px;font-family:Georgia,serif}
+    .quote-text{position:relative;font-size:clamp(16px,2vw,22px);font-weight:700;line-height:1.6;letter-spacing:-.02em;background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+    /* FLASHCARDS */
+    .fc-section{margin:52px 0}
+    .sec-lbl{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--t3);margin-bottom:14px}
+    .fc{background:var(--s);border:1px solid var(--b);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .18s;margin-bottom:6px}
+    .fc:hover{background:var(--s2);border-color:rgba(255,255,255,.12);transform:translateY(-1px)}
+    .fc-q{padding:14px 16px;font-size:13.5px;font-weight:600;color:var(--t);display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .fc-chev{font-size:10px;color:var(--t3);transition:transform .25s;flex-shrink:0}
+    .fc.open .fc-chev{transform:rotate(180deg)}
+    .fc-a{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.16,1,.3,1),opacity .28s;opacity:0}
+    .fc.open .fc-a{max-height:260px;opacity:1}
+    .fc-ai{padding:12px 16px 14px;font-size:13px;line-height:1.7;color:var(--t2);border-top:1px solid var(--b)}
+
+    /* GLOSSARY */
+    .glossary{margin:52px 0}
+    .gl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+    .gl-item{background:var(--s);border:1px solid var(--b);border-radius:10px;padding:13px 15px;transition:all .18s;cursor:default}
+    .gl-item:hover{background:var(--s2);border-color:rgba(255,255,255,.12);transform:translateY(-2px)}
+    .gl-term{font-family:var(--mono);font-size:10.5px;font-weight:600;color:var(--accent);letter-spacing:.04em;margin-bottom:4px}
+    .gl-def{font-size:12px;line-height:1.55;color:var(--t2)}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(14px);transition:opacity .52s cubic-bezier(.16,1,.3,1),transform .52s cubic-bezier(.16,1,.3,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+
+    /* MOBILE */
+    @media(max-width:768px){
+      .sidebar{display:none}
+      .back-mobile{display:inline-flex}
+      .main{margin-left:0}
+      .main-inner{padding:60px 20px 120px}
+      .cover-img{height:220px}
     }
-    .cinematic-quote::before {
-      content: ''; position: absolute; inset: 0;
-      background: var(--grad); opacity: .15; filter: blur(140px);
-    }
-    .quote-text {
-      position: relative; font-size: 3.1rem; font-weight: 700; line-height: 1.6;
-      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 80px rgba(0,210,211,.7);
-    }
-    .quote-marks {
-      font-size: 14rem; font-weight: 100; opacity: .09; position: absolute; pointer-events: none;
-      color: #48cae4;
-    }
-    .quote-marks.left { top: -3rem; left: -1.5rem; }
-    .quote-marks.right { bottom: -4rem; right: -1.5rem; transform: scaleX(-1); }
+    .back-mobile{display:none;position:fixed;top:16px;left:16px;z-index:200;align-items:center;gap:6px;padding:7px 14px;border-radius:980px;background:rgba(0,0,0,.85);border:1px solid var(--b);backdrop-filter:blur(20px);color:var(--t);text-decoration:none;font-size:12px;font-weight:500;transition:all .2s}
+    .back-mobile:hover{background:var(--s2)}
   </style>
 </head>
 <body>
 
-  <a href="../index.html" class="back" data-aos="fade-down">Vault</a>
+<div id="prog"></div>
+<a href="../index.html" class="back-mobile"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> SyberVault</a>
 
-  <div class="container">
-    <header data-aos="fade-up">
-      <h1 data-aos="fade-up" data-aos-delay="200">
-        Cloud &<br>Virtualization<br>Fundamentals
-      </h1>
-      <p class="subtitle" data-aos="fade-up" data-aos-delay="400">
-        The invisible foundation of the modern internet
-      </p>
-    </header>
+<aside class="sidebar">
+  <a href="../index.html" class="back"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> SyberVault</a>
+  <p class="toc-lbl">On this page</p>
+  <a href="#sec-virtualization" class="toc-item">Virtualization</a>
+<a href="#sec-cloud-storage" class="toc-item">Cloud Storage</a>
+<a href="#sec-deployment-models" class="toc-item">Deployment Models</a>
+<a href="#sec-cloud-access-security-broker-casb" class="toc-item">Cloud Access Security Broker (CASB)</a>
 
-    <div class="cover" data-aos="zoom-in" data-aos-delay="500">
-      <img src="../covers/cloudstorage.jpg" alt="Cloud & Virtualization">
+  <div class="sb-cat">
+    <p class="sb-cat-lbl">Category</p>
+    <p class="sb-cat-name">Fundamentals</p>
+  </div>
+</aside>
+
+<div class="main">
+  <div class="main-inner">
+
+    <div class="cover-wrap reveal">
+      <img class="cover-img" src="../covers/cloudstorage.jpg" alt="Cloud & Virtualization Fundamentals" loading="lazy">
     </div>
 
-    <article>
-      <p data-aos="fade-up">
+    <div class="reveal" style="transition-delay:.05s">
+      <span class="eyebrow"><span class="edot"></span>Fundamentals</span>
+      <h1 class="note-title">Cloud & Virtualization Fundamentals</h1>
+      <p class="note-sub">The invisible foundation of the modern internet</p>
+      <div class="meta">
+        <span class="meta-tag" id="rtt">&#8987; reading...</span>
+        <span class="meta-tag">dvphnc</span>
+        <div class="actions">
+          <button class="abtn" id="likeBtn" onclick="doLike()">&#9825; <span id="lc">0</span></button>
+          <button class="abtn" onclick="doFont()">Aa</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="ab" class="reveal" style="transition-delay:.1s"><article>
+<p data-aos="fade-up">
         The <strong>cloud</strong> refers to a network of servers that provide storage, software, and computing resources over the internet. Instead of owning hardware, users rent computing resources, gaining flexibility and scalability while reducing infrastructure costs.
       </p>
-
-      <h2 data-aos="fade-up">Virtualization</h2>
-      <p data-aos="fade-up">
-        <strong>Virtualization</strong> enables multiple operating systems to run on a single physical machine using a <em>hypervisor</em>. The hypervisor allocates CPU, memory, and storage resources to each <em>virtual machine (VM)</em>, creating isolated environments that operate independently. This improves resource efficiency and system management.
+<h2 data-aos="fade-up" id="sec-virtualization">Virtualization</h2>
+<p data-aos="fade-up">
+<strong>Virtualization</strong> enables multiple operating systems to run on a single physical machine using a <em>hypervisor</em>. The hypervisor allocates CPU, memory, and storage resources to each <em>virtual machine (VM)</em>, creating isolated environments that operate independently. This improves resource efficiency and system management.
       </p>
-
-      <h2 data-aos="fade-up">Cloud Storage</h2>
-      <p data-aos="fade-up">
-        <strong>Cloud Storage</strong> allows data to be stored and accessed remotely through the internet. It supports documents, backups, and system images, ensuring availability and reducing reliance on local storage devices.
+<h2 data-aos="fade-up" id="sec-cloud-storage">Cloud Storage</h2>
+<p data-aos="fade-up">
+<strong>Cloud Storage</strong> allows data to be stored and accessed remotely through the internet. It supports documents, backups, and system images, ensuring availability and reducing reliance on local storage devices.
       </p>
-
-      <h2 data-aos="fade-up">Deployment Models</h2>
-      <ul data-aos="fade-up">
-        <li><strong>Public Cloud:</strong> Shared resources available to multiple users (e.g., AWS, Azure, Google Cloud).</li>
-        <li><strong>Private Cloud:</strong> Dedicated infrastructure for a single organization with greater control and privacy.</li>
-        <li><strong>Hybrid Cloud:</strong> Combines public and private clouds for balanced flexibility, control, and cost efficiency.</li>
-      </ul>
-
-      <h2 data-aos="fade-up">Cloud Access Security Broker (CASB)</h2>
-      <p data-aos="fade-up">
+<h2 data-aos="fade-up" id="sec-deployment-models">Deployment Models</h2>
+<ul data-aos="fade-up">
+<li><strong>Public Cloud:</strong> Shared resources available to multiple users (e.g., AWS, Azure, Google Cloud).</li>
+<li><strong>Private Cloud:</strong> Dedicated infrastructure for a single organization with greater control and privacy.</li>
+<li><strong>Hybrid Cloud:</strong> Combines public and private clouds for balanced flexibility, control, and cost efficiency.</li>
+</ul>
+<h2 data-aos="fade-up" id="sec-cloud-access-security-broker-casb">Cloud Access Security Broker (CASB)</h2>
+<p data-aos="fade-up">
         A CASB operates between users and cloud services to:
       </p>
-      <ul data-aos="fade-up">
-        <li>Monitor data movement</li>
-        <li>Enforce security policies</li>
-        <li>Detect and mitigate threats</li>
-        <li>Ensure compliance with standards</li>
-      </ul>
-      <p data-aos="fade-up">
+<ul data-aos="fade-up">
+<li>Monitor data movement</li>
+<li>Enforce security policies</li>
+<li>Detect and mitigate threats</li>
+<li>Ensure compliance with standards</li>
+</ul>
+<p data-aos="fade-up">
         It strengthens cloud environments by providing visibility and control over data usage.
       </p>
 
-      <div class="cinematic-quote" data-aos="fade-up">
-        <div class="quote-marks left">“</div>
-        <div class="quote-marks right">”</div>
-        <div class="quote-text">
-          Though the term “cloud” sounds abstract,<br>
-          it represents complex infrastructures powered by virtualization<br>
-          and secured by layered defenses.<br><br>
-          Together, they make modern computing<br>
-          flexible, efficient, and secure.
-        </div>
-      </div>
-    </article>
+</article></div>
+
+    <div class="quote-block reveal"><span class="quote-icon">&ldquo;</span><div class="quote-text">Though the term “cloud” sounds abstract,<br/>
+          it represents complex infrastructures powered by virtualization<br/>
+          and secured by layered defenses.<br/><br/>
+          Together, they make modern computing<br/>
+          flexible, efficient, and secure.</div></div>
+
+    <div class="fc-section reveal" style="transition-delay:.13s">
+      <p class="sec-lbl">&#x1F0CF; Quick Review &mdash; click to reveal</p>
+      <div id="fcs"></div>
+    </div>
+
+    <div class="glossary reveal" style="transition-delay:.15s">
+      <p class="sec-lbl">&#x1F4D6; Key Terms</p>
+      <div class="gl-grid" id="glg"></div>
+    </div>
+
   </div>
+</div>
 
-  <script>
-    AOS.init({
-      duration: 1100,
-      easing: 'ease-out-cubic',
-      once: true,
-      offset: 80
-    });
+<script>
+// Progress
+const prog=document.getElementById('prog');
+window.addEventListener('scroll',()=>{const h=document.documentElement;prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'});
 
-    setTimeout(() => {
-      document.querySelector('.back').style.opacity = '1';
-    }, 500);
-  </script>
+// Reveal
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')},{threshold:.07,rootMargin:'0px 0px -20px 0px'}));
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+document.querySelectorAll('#ab > *').forEach((el,i)=>{el.classList.add('reveal');el.style.transitionDelay=(i*.03)+'s';obs.observe(el)});
+
+// TOC smooth scroll + active
+const tlinks=document.querySelectorAll('.toc-item');
+tlinks.forEach(link=>{
+  link.addEventListener('click',function(e){
+    e.preventDefault();
+    const target=document.getElementById(this.getAttribute('href').slice(1));
+    if(target)window.scrollTo({top:target.getBoundingClientRect().top+window.scrollY-28,behavior:'smooth'});
+  });
+});
+const secObs=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      tlinks.forEach(l=>l.classList.remove('active'));
+      const a=document.querySelector('.toc-item[href="#'+entry.target.id+'"]');
+      if(a)a.classList.add('active');
+    }
+  });
+},{rootMargin:'-10% 0px -80% 0px'});
+document.querySelectorAll('h2[id]').forEach(h=>secObs.observe(h));
+
+// Reading time
+const wc=document.getElementById('ab').innerText.split(/\s+/).length;
+document.getElementById('rtt').textContent='⏱ '+Math.max(1,Math.ceil(wc/200))+' min read';
+
+// Like
+const lk='Cloud_and_Virtualization_Fundamentals.html_like';let liked=localStorage.getItem(lk)==='1',lcount=parseInt(localStorage.getItem(lk+'_n')||0);
+function doLike(){liked=!liked;lcount=liked?lcount+1:Math.max(0,lcount-1);localStorage.setItem(lk,liked?'1':'0');localStorage.setItem(lk+'_n',lcount);renderLike()}
+function renderLike(){const b=document.getElementById('likeBtn');b.innerHTML=(liked?'♥':'♡')+' <span id="lc">'+lcount+'</span>';b.classList.toggle('liked',liked)}
+renderLike();
+
+// Font toggle
+let big=false;function doFont(){big=!big;document.getElementById('ab').style.fontSize=big?'17.5px':''}
+
+// Copy buttons
+document.querySelectorAll('pre').forEach(pre=>{const b=document.createElement('button');b.className='cpybtn';b.textContent='copy';b.onclick=()=>{navigator.clipboard.writeText(pre.querySelector('code')?.innerText||pre.innerText);b.textContent='copied!';b.classList.add('ok');setTimeout(()=>{b.textContent='copy';b.classList.remove('ok')},1800)};pre.appendChild(b)});
+
+// Wrap tables
+document.querySelectorAll('#ab table').forEach(t=>{const w=document.createElement('div');w.className='tbl-wrap';t.parentNode.insertBefore(w,t);w.appendChild(t)});
+
+// Flashcards
+const fcData=[{q:'What is a hypervisor?',a:'Software enabling multiple OS instances on one physical machine.'},{q:'Name the 3 cloud deployment models.',a:'Public Cloud (shared), Private Cloud (dedicated), Hybrid Cloud (both).'},{q:'What is a CASB?',a:'Cloud Access Security Broker — enforces policies between users and cloud services.'},{q:'What is cloud storage?',a:'Remote data storage accessed over the internet.'}];
+const fcs=document.getElementById('fcs');
+fcData.forEach(c=>{const d=document.createElement('div');d.className='fc';d.innerHTML='<div class="fc-q"><span>'+c.q+'</span><span class="fc-chev">▾</span></div><div class="fc-a"><div class="fc-ai">'+c.a+'</div></div>';d.onclick=()=>d.classList.toggle('open');fcs.appendChild(d)});
+
+// Glossary
+const glData=[{t:'Hypervisor',d:'Creates and manages virtual machines'},{t:'VM',d:'Virtual Machine — isolated OS instance'},{t:'CASB',d:'Cloud Access Security Broker'},{t:'Public Cloud',d:'Shared resources: AWS, Azure, GCP'},{t:'Private Cloud',d:'Dedicated cloud for one org'},{t:'Hybrid Cloud',d:'Mix of public and private cloud'}];
+const glg=document.getElementById('glg');
+glData.forEach(g=>{const i=document.createElement('div');i.className='gl-item reveal';i.innerHTML='<div class="gl-term">'+g.t+'</div><div class="gl-def">'+g.d+'</div>';glg.appendChild(i);obs.observe(i)});
+</script>
 </body>
 </html>

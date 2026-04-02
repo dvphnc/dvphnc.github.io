@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CWE-79: Cross-Site Scripting (XSS) &bull; dvphnc SyberVault</title>
+  <title>Network Traffic Analysis &bull; dvphnc SyberVault</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
@@ -16,9 +16,9 @@
       --t:#f5f5f7;
       --t2:rgba(255,255,255,.7);
       --t3:rgba(255,255,255,.35);
-      --accent:#b026ff;
-      --grad:linear-gradient(135deg,#1a2766,#fc9f32,#3a55b8);
-      --grad2:linear-gradient(120deg,#1a2766,#3a55b8);
+      --accent:#48cae4;
+      --grad:linear-gradient(135deg,#8B0000,#FF1A1A,#FF4500);
+      --grad2:linear-gradient(120deg,#8B0000,#FF4500);
       --mono:'JetBrains Mono',monospace;
       --sans:'Inter',-apple-system,sans-serif;
       --sw:260px;
@@ -26,8 +26,8 @@
     html{scroll-behavior:smooth}
     body{font-family:var(--sans);background:var(--bg);color:var(--t);line-height:1.8;overflow-x:hidden;-webkit-font-smoothing:antialiased}
     body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-      background:radial-gradient(ellipse 70% 50% at 15% 10%,#1a276620 0%,transparent 55%),
-                 radial-gradient(ellipse 50% 60% at 85% 85%,#3a55b814 0%,transparent 55%)}
+      background:radial-gradient(ellipse 70% 50% at 15% 10%,#8B000020 0%,transparent 55%),
+                 radial-gradient(ellipse 50% 60% at 85% 85%,#FF450014 0%,transparent 55%)}
 
     /* PROGRESS */
     #prog{position:fixed;top:0;left:0;z-index:300;height:2px;width:0;background:var(--grad);transition:width .08s linear}
@@ -122,7 +122,7 @@
 
     /* QUOTE */
     .quote-block{margin:52px 0;padding:36px 32px;border-radius:18px;background:var(--s);border:1px solid var(--b);border-left:3px solid var(--accent);position:relative;overflow:hidden}
-    .quote-block::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 0% 50%,#1a276614 0%,transparent 60%);pointer-events:none}
+    .quote-block::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 0% 50%,#8B000014 0%,transparent 60%);pointer-events:none}
     .quote-icon{font-size:52px;line-height:.8;color:var(--accent);opacity:.22;display:block;margin-bottom:14px;font-family:Georgia,serif}
     .quote-text{position:relative;font-size:clamp(16px,2vw,22px);font-weight:700;line-height:1.6;letter-spacing:-.02em;background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
@@ -170,15 +170,14 @@
 <aside class="sidebar">
   <a href="../index.html" class="back"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> SyberVault</a>
   <p class="toc-lbl">On this page</p>
-  <a href="#sec-how-does-xss-work" class="toc-item">How Does XSS Work?</a>
-<a href="#sec-types-of-xss-attacks" class="toc-item">Types of XSS Attacks</a>
-<a href="#sec-xss-attack-consequences" class="toc-item">XSS Attack Consequences</a>
-<a href="#sec-xss-prevention-techniques" class="toc-item">XSS Prevention Techniques</a>
-<a href="#sec-summary" class="toc-item">Summary</a>
+  <a href="#sec-the-nta-process-in-4-steps" class="toc-item">The NTA Process in 4 Steps</a>
+<a href="#sec-nta-analysis-approaches" class="toc-item">NTA Analysis Approaches</a>
+<a href="#sec-essential-nta-tools" class="toc-item">Essential NTA Tools</a>
+<a href="#sec-wireshark-filters" class="toc-item">Wireshark Filters</a>
 
   <div class="sb-cat">
     <p class="sb-cat-lbl">Category</p>
-    <p class="sb-cat-name">Threats & Attacks</p>
+    <p class="sb-cat-name">Extra Topics</p>
   </div>
 </aside>
 
@@ -186,13 +185,13 @@
   <div class="main-inner">
 
     <div class="cover-wrap reveal">
-      <img class="cover-img" src="../covers/xss.jpeg" alt="CWE-79: Cross-Site Scripting (XSS)" loading="lazy">
+      <img class="cover-img" src="../covers/net.jpeg" alt="Network Traffic Analysis" loading="lazy">
     </div>
 
     <div class="reveal" style="transition-delay:.05s">
-      <span class="eyebrow"><span class="edot"></span>Threats & Attacks</span>
-      <h1 class="note-title">CWE-79: Cross-Site Scripting (XSS)</h1>
-      <p class="note-sub">The most common and dangerous web vulnerability</p>
+      <span class="eyebrow"><span class="edot"></span>Extra Topics</span>
+      <h1 class="note-title">Network Traffic Analysis</h1>
+      <p class="note-sub">Capture. Filter. Analyze. Dominate the wire.</p>
       <div class="meta">
         <span class="meta-tag" id="rtt">&#8987; reading...</span>
         <span class="meta-tag">dvphnc</span>
@@ -205,58 +204,40 @@
 
     <div id="ab" class="reveal" style="transition-delay:.1s"><article>
 <p data-aos="fade-up">
-<strong>Improper Neutralization of Input During Web Page Generation</strong> (aka Cross-site Scripting) is a web security vulnerability that allows an attacker to <strong>compromise user interactions</strong> with a vulnerable web application.<br/>
-        It happens due to <strong>improper neutralization of user input</strong> that gets rendered in a web page.
+<strong>Network Traffic Analysis (NTA)</strong> is the act of capturing, inspecting, and analyzing network data flow to characterize ports and protocols, establish a performance baseline, and monitor/respond to security threats.
       </p>
-<h2 data-aos="fade-up" id="sec-how-does-xss-work">How Does XSS Work?</h2>
-<p data-aos="fade-up">XSS occurs when:</p>
+<h2 data-aos="fade-up" id="sec-the-nta-process-in-4-steps">The NTA Process in 4 Steps</h2>
+<ol data-aos="fade-up">
+<li><strong>Ingest Traffic:</strong> Capture network data, utilizing capture filters as needed.</li>
+<li><strong>Reduce Noise by Filtering:</strong> Filter out unnecessary or benign traffic for cleaner analysis.</li>
+<li><strong>Analyze and Explore:</strong> Carve out data relevant to the current issue.</li>
+<li><strong>Detect and Alert:</strong> Look for errors and use analysis to determine if traffic is malicious, leveraging tools like Intrusion Detection Systems (IDS).</li>
+</ol>
+<h2 data-aos="fade-up" id="sec-nta-analysis-approaches">NTA Analysis Approaches</h2>
 <ul data-aos="fade-up">
-<li>User input is included in web pages <strong>without proper validation or encoding</strong>.</li>
-<li>Attackers inject <strong>malicious scripts (usually JavaScript)</strong> that execute in the victim’s browser.</li>
-<li>The browser <strong>trusts</strong> the script because it appears to come from the legitimate site.</li>
+<li><strong>Descriptive:</strong> Describes a data set based on existing characteristics.</li>
+<li><strong>Diagnostic:</strong> Clarifies the causes and effects of network conditions.</li>
+<li><strong>Predictive:</strong> Creates models to forecast future probabilities (e.g., future traffic load).</li>
+<li><strong>Prescriptive:</strong> Aims to narrow down actions to take to prevent or eliminate a future problem.</li>
 </ul>
-<h2 data-aos="fade-up" id="sec-types-of-xss-attacks">Types of XSS Attacks</h2>
-<table data-aos="fade-up">
-<tr><th>Type</th><th>Description</th></tr>
-<tr><td><strong>Reflected XSS (Type 1 / Non-Persistent)</strong></td><td>The malicious script is <strong>immediately reflected</strong> off the web server, typically via a crafted link or form submission.</td></tr>
-<tr><td><strong>Stored XSS (Type 2 / Persistent)</strong></td><td>The injected script is <strong>stored on the server</strong> (e.g., in a database, forum post, or comment) and runs when users view that content.</td></tr>
-<tr><td><strong>DOM-Based XSS (Type 0)</strong></td><td>The attack happens <strong>entirely on the client side</strong> when JavaScript modifies the DOM without sanitizing user input.</td></tr>
-<tr><td><strong>uXSS (Universal XSS)</strong></td><td>Exploits <strong>vulnerabilities in browsers or plugins</strong> rather than the web app itself.</td></tr>
-<tr><td><strong>Self-XSS</strong></td><td>Tricks the user into <strong>executing malicious scripts</strong> in their own browser console or input field.</td></tr>
-</table>
-<h2 data-aos="fade-up" id="sec-xss-attack-consequences">XSS Attack Consequences</h2>
+<h2 data-aos="fade-up" id="sec-essential-nta-tools">Essential NTA Tools</h2>
 <ul data-aos="fade-up">
-<li><strong>Session Hijacking</strong> — Steal cookies or session tokens.</li>
-<li><strong>Data Theft</strong> — Access sensitive user data.</li>
-<li><strong>Website Defacement</strong> — Modify or vandalize site content.</li>
-<li><strong>Malware Distribution</strong> — Inject malicious code to infect visitors.</li>
-<li><strong>Account Takeover</strong> — Gain control of user accounts.</li>
-<li><strong>Unauthorized Actions</strong> — Perform actions as the victim.</li>
-<li><strong>Further Attacks</strong> — Launch phishing or lateral attacks.</li>
+<li><strong>Wireshark:</strong> A free and open-source graphical network traffic analyzer. Used for <strong>deep packet inspection</strong>, capturing and decoding frames to inspect protocols layer-by-layer (based on the OSI Model).</li>
+<li><strong>tcpdump / Tshark:</strong> Command-line network packet analyzers.</li>
+<li><strong>Network Taps / Span Ports:</strong> Methods (hardware or switch features) used to copy network traffic for external analysis.</li>
 </ul>
-<h2 data-aos="fade-up" id="sec-xss-prevention-techniques">XSS Prevention Techniques</h2>
-<table data-aos="fade-up">
-<tr><th>Method</th><th>Description</th></tr>
-<tr><td><strong>Input Validation</strong></td><td>Check and restrict input to expected patterns, length, and type.</td></tr>
-<tr><td><strong>Contextual Output Encoding/Escaping</strong></td><td>Encode data based on where it appears (HTML, JS, URL, etc.) to prevent script execution.</td></tr>
-<tr><td><strong>Sanitization</strong></td><td>Remove or modify harmful input before rendering.</td></tr>
-<tr><td><strong>HTTPOnly Cookies</strong></td><td>Prevent JavaScript from accessing sensitive cookies.</td></tr>
-<tr><td><strong>Content Security Policy (CSP)</strong></td><td>A browser-level defense restricting which scripts can execute on the page.</td></tr>
-</table>
-<h2 data-aos="fade-up" id="sec-summary">Summary</h2>
+<h2 data-aos="fade-up" id="sec-wireshark-filters">Wireshark Filters</h2>
 <ul data-aos="fade-up">
-<li><strong>XSS</strong> lets attackers execute malicious scripts in users’ browsers.</li>
-<li>It exploits <strong>trust between browser and site</strong>.</li>
-<li>Prevent by <strong>validating, encoding, sanitizing</strong>, and enforcing <strong>CSP</strong>.</li>
+<li><strong>Capture Filters</strong> (e.g., <code>tcp port 80</code>): Used to filter packets <em>before</em> they are captured, reducing the data volume.</li>
+<li><strong>Display Filters</strong> (e.g., <code>ip.addr == x.x.x.x</code>): Used to filter or refine the view of packets <em>after</em> they have already been captured.</li>
 </ul>
 
 </article></div>
 
-    <div class="quote-block reveal"><span class="quote-icon">&ldquo;</span><div class="quote-text">Never trust<br/>
-          what the user sends.<br/><br/>
-          Because one day,<br/>
-          the user<br/>
-          will be you.</div></div>
+    <div class="quote-block reveal"><span class="quote-icon">&ldquo;</span><div class="quote-text">Every packet<br/>
+          tells a story.<br/><br/>
+          Learn to read it<br/>
+          before it reads you.</div></div>
 
     <div class="fc-section reveal" style="transition-delay:.13s">
       <p class="sec-lbl">&#x1F0CF; Quick Review &mdash; click to reveal</p>
@@ -306,7 +287,7 @@ const wc=document.getElementById('ab').innerText.split(/\s+/).length;
 document.getElementById('rtt').textContent='⏱ '+Math.max(1,Math.ceil(wc/200))+' min read';
 
 // Like
-const lk='CWE-79_-_Cross-Site_Scripting__XSS_.html_like';let liked=localStorage.getItem(lk)==='1',lcount=parseInt(localStorage.getItem(lk+'_n')||0);
+const lk='Network_Traffic_Analysis.html_like';let liked=localStorage.getItem(lk)==='1',lcount=parseInt(localStorage.getItem(lk+'_n')||0);
 function doLike(){liked=!liked;lcount=liked?lcount+1:Math.max(0,lcount-1);localStorage.setItem(lk,liked?'1':'0');localStorage.setItem(lk+'_n',lcount);renderLike()}
 function renderLike(){const b=document.getElementById('likeBtn');b.innerHTML=(liked?'♥':'♡')+' <span id="lc">'+lcount+'</span>';b.classList.toggle('liked',liked)}
 renderLike();
@@ -321,12 +302,12 @@ document.querySelectorAll('pre').forEach(pre=>{const b=document.createElement('b
 document.querySelectorAll('#ab table').forEach(t=>{const w=document.createElement('div');w.className='tbl-wrap';t.parentNode.insertBefore(w,t);w.appendChild(t)});
 
 // Flashcards
-const fcData=[{q:'What is Reflected XSS?',a:'Script immediately reflected off the server via a crafted link.'},{q:'What is Stored XSS?',a:'Injected script stored on server, runs for every visitor of that content.'},{q:'What is DOM-Based XSS?',a:'Attack happens entirely client-side via unsafe JavaScript DOM manipulation.'},{q:'How does CSP prevent XSS?',a:'Restricts which scripts can execute on a page at the browser level.'}];
+const fcData=[{q:'What are capture filters?',a:"Applied before capture to limit what's recorded (e.g. tcp port 80)."},{q:'What are display filters?',a:'Applied after capture to refine the view (e.g. ip.addr == x.x.x.x).'},{q:'Name the 4 NTA analysis types.',a:'Descriptive, Diagnostic, Predictive, Prescriptive.'},{q:'What is deep packet inspection?',a:'Examining packet contents layer-by-layer using the OSI model.'}];
 const fcs=document.getElementById('fcs');
 fcData.forEach(c=>{const d=document.createElement('div');d.className='fc';d.innerHTML='<div class="fc-q"><span>'+c.q+'</span><span class="fc-chev">▾</span></div><div class="fc-a"><div class="fc-ai">'+c.a+'</div></div>';d.onclick=()=>d.classList.toggle('open');fcs.appendChild(d)});
 
 // Glossary
-const glData=[{t:'CWE-79',d:'Cross-Site Scripting weakness'},{t:'XSS',d:'Script injection into web pages'},{t:'DOM',d:"Browser's HTML representation"},{t:'CSP',d:'Content Security Policy'},{t:'HTTPOnly',d:'Cookie flag blocking JS access'},{t:'Session Hijack',d:'Stealing tokens to impersonate users'}];
+const glData=[{t:'NTA',d:'Network Traffic Analysis'},{t:'Wireshark',d:'Graphical packet analyzer'},{t:'Capture Filter',d:'Limits packets before recording'},{t:'Display Filter',d:'Refines captured packet view'},{t:'SPAN Port',d:'Switch traffic copy feature'},{t:'IDS',d:'Intrusion Detection System'}];
 const glg=document.getElementById('glg');
 glData.forEach(g=>{const i=document.createElement('div');i.className='gl-item reveal';i.innerHTML='<div class="gl-term">'+g.t+'</div><div class="gl-def">'+g.d+'</div>';glg.appendChild(i);obs.observe(i)});
 </script>
