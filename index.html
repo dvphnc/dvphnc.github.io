@@ -199,9 +199,9 @@
     #hero {
       min-height: 100vh;
       display: flex; flex-direction: column;
-      align-items: center; justify-content: flex-start;
+      align-items: center; justify-content: center;
       text-align: center;
-      padding: 130px 44px 100px; position: relative; overflow: hidden;
+      padding: 100px 44px 80px; position: relative; overflow: hidden;
     }
 
     /* Floating orbs */
@@ -1037,6 +1037,7 @@
     <div class="hero-orb hero-orb-3"></div>
 
     <div class="hero-inner">
+      <div class="availability-pill"><div class="avail-dot"></div>Open to opportunities · GMT+8</div>
       <p class="hero-tag">Aspiring Tech Virtual Assistant · BS Information Technology · 3rd Year</p>
       <h1 class="hero-name" id="heroName">
         <span class="hero-greeting" id="heroGreeting"></span>
@@ -1061,6 +1062,31 @@
     <div class="hero-scroll-hint">
       <span class="scroll-line"></span>
       <span class="scroll-label">scroll</span>
+    </div>
+  </section>
+
+  <!-- THREAT INTEL -->
+  <section id="threat-section" style="padding:0 44px 60px;position:relative;z-index:1;">
+    <div class="section-inner">
+      <div class="threat-card reveal" id="threatCard">
+        <div class="threat-header">
+          <span class="threat-classification">Subject Intel Report</span>
+          <span class="threat-id" id="threatRef">REF: DVPHNC-2025-001</span>
+        </div>
+        <div class="threat-grid">
+          <div class="threat-field"><div class="threat-label">Subject</div><div class="threat-value">Joana Daphne Sy</div></div>
+          <div class="threat-field"><div class="threat-label">Alias</div><div class="threat-value highlight">dvphnc</div></div>
+          <div class="threat-field"><div class="threat-label">Status</div><div class="threat-value green">● Active · Seeking VA Roles</div></div>
+          <div class="threat-field"><div class="threat-label">Location</div><div class="threat-value">Philippines · GMT+8</div></div>
+        </div>
+        <div class="threat-tags">
+          <span class="threat-tag">BSIT-3RD-YEAR</span>
+          <span class="threat-tag">ORACLE-CERTIFIED</span>
+          <span class="threat-tag">CTF-ACTIVE</span>
+          <span class="threat-tag">LARAVEL</span>
+          <span class="threat-tag">REACT</span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1854,10 +1880,10 @@
       bootDone = true;
       const bs = document.getElementById('boot-screen');
       bs.classList.add('fade-out');
-      setTimeout(() => { bs.style.display = 'none'; document.body.style.overflow = ''; }, 600);
+      setTimeout(() => { bs.style.display = 'none';  }, 600);
     }
 
-    document.body.style.overflow = 'hidden';
+    // body overflow intentionally not locked
     bootData.forEach((item, i) => {
       setTimeout(() => {
         const line = document.createElement('div');
@@ -1873,43 +1899,11 @@
     });
     setTimeout(() => { if (!bootDone) skipBoot(); }, 3200);
 
-    // ── AVAILABILITY PILL — inject into hero ──
-    const heroInner = document.querySelector('.hero-inner');
-    if (heroInner) {
-      const pill = document.createElement('div');
-      pill.className = 'availability-pill';
-      pill.innerHTML = '<div class="avail-dot"></div>Open to opportunities · GMT+8';
-      heroInner.insertBefore(pill, heroInner.firstChild);
-    }
+    // availability pill is in HTML directly
 
-    // ── THREAT INTEL CARD — inject after hero badges ──
-    const heroBadges = document.querySelector('.hero-badges');
-    if (heroBadges) {
-      const now = new Date();
-      const dateStr = now.toISOString().split('T')[0];
-      const threat = document.createElement('div');
-      threat.className = 'threat-card reveal';
-      threat.style.cssText = 'margin-top:24px;max-width:580px;width:100%;text-align:left;';
-      threat.innerHTML = `
-        <div class="threat-header">
-          <span class="threat-classification">Subject Intel Report</span>
-          <span class="threat-id">REF: DVPHNC-2025-001 · ${dateStr}</span>
-        </div>
-        <div class="threat-grid">
-          <div class="threat-field"><div class="threat-label">Subject</div><div class="threat-value">Joana Daphne Sy</div></div>
-          <div class="threat-field"><div class="threat-label">Alias</div><div class="threat-value highlight">dvphnc</div></div>
-          <div class="threat-field"><div class="threat-label">Status</div><div class="threat-value green">● Active · Seeking VA Roles</div></div>
-          <div class="threat-field"><div class="threat-label">Location</div><div class="threat-value">Philippines · GMT+8</div></div>
-        </div>
-        <div class="threat-tags">
-          <span class="threat-tag">BSIT-3RD-YEAR</span>
-          <span class="threat-tag">ORACLE-CERTIFIED</span>
-          <span class="threat-tag">CTF-ACTIVE</span>
-          <span class="threat-tag">LARAVEL</span>
-          <span class="threat-tag">REACT</span>
-        </div>`;
-      heroBadges.insertAdjacentElement('afterend', threat);
-    }
+    // Update threat card date
+    const tref = document.getElementById('threatRef');
+    if (tref) tref.textContent = 'REF: DVPHNC-2025-001 · ' + new Date().toISOString().split('T')[0];
 
     // ── TERMINAL ──
     const termBody = document.getElementById('termBody');
