@@ -198,7 +198,9 @@
     ═══════════════════════════════ */
     #hero {
       min-height: 100vh;
-      display: flex; flex-direction: column; justify-content: center;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
       padding-top: 100px; position: relative; overflow: hidden;
     }
 
@@ -211,7 +213,7 @@
     html.dark .hero-orb-2 { background: radial-gradient(circle, rgba(0,122,255,0.28) 0%, transparent 70%); }
     @keyframes orbFloat { 0%,100%{transform:translateY(0) scale(1)} 33%{transform:translateY(-28px) scale(1.05)} 66%{transform:translateY(14px) scale(0.97)} }
 
-    .hero-inner { max-width: 680px; position: relative; z-index: 2; }
+    .hero-inner { max-width: 740px; position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; }
 
     .hero-tag {
       font-family: var(--mono); font-size: 11px; font-weight: 500;
@@ -259,7 +261,7 @@
 
     .hero-desc {
       font-size: 17px; font-weight: 400; line-height: 1.72;
-      color: var(--text3); letter-spacing: -0.01em; max-width: 520px;
+      color: var(--text3); letter-spacing: -0.01em; max-width: 520px; text-align: center;
       opacity: 0; transform: translateY(12px); animation: fadeUp 0.6s 0.45s ease forwards;
     }
     .hero-desc strong { color: var(--text); font-weight: 600; }
@@ -313,7 +315,7 @@
     .btn-ghost::before { content:''; position:absolute; inset:0; background:var(--specular); border-radius:980px; }
     .btn-ghost:hover { transform: scale(1.03); box-shadow: var(--glass-shadow-lg); }
 
-    .hero-scroll-hint { position: absolute; bottom: 40px; left: 44px; display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0; animation: fadeUp 0.6s 1.3s ease forwards; }
+    .hero-scroll-hint { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0; animation: fadeUp 0.6s 1.3s ease forwards; }
     .scroll-line { width: 1px; height: 36px; background: linear-gradient(to bottom, transparent, var(--text4)); animation: scrollPulse 2.2s 1.5s ease-in-out infinite; }
     .scroll-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text4); }
     @keyframes scrollPulse { 0%,100%{opacity:.4} 50%{opacity:1} }
@@ -541,11 +543,428 @@
       .hero-scroll-hint{left:20px}
       .contact-links{grid-template-columns:1fr}
     }
+
+    /* ══════════════════════════════════════════
+       DYNAMIC ISLAND — top notification
+    ══════════════════════════════════════════ */
+    .dynamic-island {
+      position: fixed;
+      top: 14px; left: 50%; transform: translateX(-50%) scaleX(0.4);
+      z-index: 300;
+      background: #000;
+      border-radius: 40px;
+      height: 36px; width: 126px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px;
+      transition: all 0.5s cubic-bezier(0.34,1.56,0.64,1);
+      cursor: pointer;
+      overflow: hidden;
+      opacity: 0;
+    }
+    .dynamic-island.visible {
+      opacity: 1; transform: translateX(-50%) scaleX(1);
+    }
+    .dynamic-island.expanded {
+      width: 320px; height: 56px; border-radius: 28px;
+      transform: translateX(-50%) scaleX(1);
+    }
+    .di-dot { width: 8px; height: 8px; border-radius: 50%; background: #1db954; flex-shrink: 0; animation: diPulse 1.5s ease-in-out infinite; }
+    .di-text { font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.9); letter-spacing: 0.04em; white-space: nowrap; overflow: hidden; max-width: 0; transition: max-width 0.4s 0.1s; }
+    .dynamic-island.expanded .di-text { max-width: 260px; }
+    @keyframes diPulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.6;transform:scale(0.85)} }
+
+    /* ══════════════════════════════════════════
+       APP STORE — cert cards
+    ══════════════════════════════════════════ */
+    .appstore-shelf {
+      margin-bottom: 32px;
+    }
+    .appstore-shelf-header {
+      display: flex; align-items: baseline; justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .appstore-shelf-title {
+      font-size: 20px; font-weight: 700; letter-spacing: -0.03em; color: var(--text);
+      transition: color 0.4s;
+    }
+    .appstore-see-all {
+      font-size: 15px; font-weight: 500; color: var(--accent);
+      text-decoration: none; letter-spacing: -0.01em;
+      transition: opacity 0.2s;
+    }
+    .appstore-see-all:hover { opacity: 0.7; }
+
+    /* Horizontal scroll row */
+    .appstore-row {
+      display: flex; gap: 14px;
+      overflow-x: auto; padding-bottom: 8px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .appstore-row::-webkit-scrollbar { display: none; }
+
+    .appstore-card {
+      flex-shrink: 0;
+      width: 280px;
+      scroll-snap-align: start;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.28s cubic-bezier(0.16,1,0.3,1), box-shadow 0.28s;
+      background: var(--glass);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+    }
+    .appstore-card::before { content:''; position:absolute; inset:0; background:var(--specular); pointer-events:none; z-index:2; }
+    .appstore-card:hover { transform: scale(1.02) translateY(-3px); box-shadow: var(--glass-shadow-lg); }
+    .appstore-card:active { transform: scale(0.98); }
+
+    .appstore-card-bg {
+      height: 140px; width: 100%;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .appstore-card-bg-gradient {
+      position: absolute; inset: 0;
+    }
+    .appstore-card-icon {
+      width: 64px; height: 64px; border-radius: 16px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px;
+      position: relative; z-index: 1;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2), 0 1px 0 rgba(255,255,255,0.3) inset;
+      backdrop-filter: blur(10px);
+    }
+    .appstore-card-body {
+      padding: 14px 16px 16px;
+    }
+    .appstore-card-tag {
+      font-family: var(--mono); font-size: 9px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text4); margin-bottom: 4px;
+      transition: color 0.4s;
+    }
+    .appstore-card-name {
+      font-size: 14px; font-weight: 700; letter-spacing: -0.025em;
+      color: var(--text); line-height: 1.3; margin-bottom: 6px;
+      transition: color 0.4s;
+    }
+    .appstore-card-sub {
+      font-size: 12px; color: var(--text3); margin-bottom: 12px;
+      transition: color 0.4s;
+    }
+    .appstore-get-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 5px 16px; border-radius: 980px;
+      background: var(--pill-bg); border: 1px solid var(--pill-border);
+      font-size: 13px; font-weight: 600; color: var(--accent);
+      letter-spacing: -0.01em; cursor: default;
+      transition: all 0.2s;
+    }
+    .appstore-card:hover .appstore-get-btn {
+      background: var(--accent); color: #fff; border-color: transparent;
+    }
+
+    /* ══════════════════════════════════════════
+       APPLE MUSIC — SyberVault header player
+    ══════════════════════════════════════════ */
+    .music-player {
+      display: flex; align-items: center; gap: 14px;
+      padding: 14px 18px; border-radius: 18px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(20px);
+      margin-bottom: 48px;
+      max-width: 420px;
+      position: relative; overflow: hidden;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .music-player::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,0.08) 0%,transparent 60%); pointer-events:none; }
+    .music-player:hover { background: rgba(255,255,255,0.09); transform: translateY(-1px); }
+
+    .music-artwork {
+      width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
+      background: linear-gradient(135deg, #ff2d55, #ff6b38);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      position: relative; overflow: hidden;
+      animation: vinylSpin 4s linear infinite paused;
+    }
+    .music-player.playing .music-artwork { animation-play-state: running; }
+    @keyframes vinylSpin { to { transform: rotate(360deg); } }
+
+    .music-info { flex: 1; min-width: 0; }
+    .music-title { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.9); letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .music-artist { font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+
+    .music-controls { display: flex; align-items: center; gap: 8px; }
+    .music-btn {
+      width: 32px; height: 32px; border-radius: 50%; border: none; cursor: pointer;
+      background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; transition: all 0.18s;
+    }
+    .music-btn:hover { background: rgba(255,255,255,0.2); color: #fff; transform: scale(1.1); }
+    .music-btn.play-btn { width: 36px; height: 36px; background: rgba(255,255,255,0.15); font-size: 15px; }
+    .music-progress {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+      background: rgba(255,255,255,0.08);
+    }
+    .music-progress-fill {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, #ff2d55, #ff6b38);
+      transition: width 0.5s linear;
+    }
+
+    /* ══════════════════════════════════════════
+       APPLE NOTES — CTF writeup cards
+    ══════════════════════════════════════════ */
+    .notes-card {
+      background: var(--glass);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--r-lg);
+      box-shadow: var(--glass-shadow);
+      padding: 0; overflow: hidden;
+      position: relative;
+      transition: transform 0.26s, box-shadow 0.26s, background 0.4s;
+    }
+    .notes-card::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.8),transparent); pointer-events:none; }
+    .notes-card:hover { transform: translateY(-4px) scale(1.005); box-shadow: var(--glass-shadow-lg); }
+
+    .notes-card-header {
+      padding: 14px 16px 10px;
+      border-bottom: 1px solid var(--glass-border-subtle);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .notes-card-platform { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.06em; padding: 3px 9px; border-radius: 6px; }
+    .notes-card-platform.thm { background: rgba(52,199,89,0.12); color: var(--green); border: 1px solid rgba(52,199,89,0.2); }
+    .notes-card-platform.htb { background: rgba(90,200,250,0.12); color: var(--teal); border: 1px solid rgba(90,200,250,0.2); }
+    .notes-card-diff { font-family: var(--mono); font-size: 10px; font-weight: 600; padding: 3px 9px; border-radius: 6px; }
+    .diff-easy { background: rgba(52,199,89,0.1); color: var(--green); border: 1px solid rgba(52,199,89,0.2); }
+    .diff-medium { background: rgba(255,149,0,0.1); color: var(--orange); border: 1px solid rgba(255,149,0,0.2); }
+
+    .notes-card-body { padding: 12px 16px 16px; }
+    /* Yellow notes line */
+    .notes-card-body::before {
+      content: ''; position: absolute;
+      left: 52px; top: 0; bottom: 0; width: 1px;
+      background: rgba(255,204,0,0.25);
+      pointer-events: none;
+    }
+    .notes-title { font-size: 15px; font-weight: 700; letter-spacing: -0.025em; color: var(--text); margin-bottom: 6px; transition: color 0.4s; }
+    .notes-desc { font-size: 13px; line-height: 1.6; color: var(--text3); transition: color 0.4s; }
+    .notes-footer { display: flex; gap: 6px; flex-wrap: wrap; padding: 10px 16px 14px; border-top: 1px solid var(--glass-border-subtle); }
+    .notes-tag { font-family: var(--mono); font-size: 10px; padding: 2px 8px; border-radius: 6px; background: rgba(88,86,214,0.1); color: var(--accent2); border: 1px solid rgba(88,86,214,0.2); }
+
+    /* ══════════════════════════════════════════
+       STACK CARDS — iPhone app icon grid style
+    ══════════════════════════════════════════ */
+    .stack-card {
+      background: var(--glass);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--r-lg);
+      box-shadow: var(--glass-shadow);
+      padding: 20px;
+      position: relative; overflow: hidden;
+      transition: transform 0.26s, box-shadow 0.26s, background 0.4s;
+    }
+    .stack-card::before { content:''; position:absolute; inset:0; background:var(--specular); pointer-events:none; }
+    .stack-card:hover { transform: translateY(-3px) scale(1.005); box-shadow: var(--glass-shadow-lg); }
+
+    /* Contact section — iMessage style */
+    .imessage-block {
+      background: var(--glass);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--r-lg);
+      box-shadow: var(--glass-shadow);
+      padding: 20px 24px; margin-bottom: 14px;
+      position: relative; overflow: hidden;
+    }
+    .imessage-block::before { content:''; position:absolute; inset:0; background:var(--specular); pointer-events:none; }
+    .imessage-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .imessage-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--accent2), var(--accent)); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #fff; flex-shrink: 0; }
+    .imessage-name { font-size: 13px; font-weight: 600; color: var(--text); transition: color 0.4s; }
+    .imessage-status { font-size: 11px; color: var(--green); font-family: var(--mono); }
+    .imessage-bubble {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff; font-size: 15px; font-weight: 500;
+      padding: 10px 16px; border-radius: 18px 18px 4px 18px;
+      box-shadow: 0 2px 8px rgba(0,122,255,0.35);
+      letter-spacing: -0.01em;
+    }
+  
+    /* ══════════════════════════════════════
+       APPLE-INSPIRED UI COMPONENTS
+    ══════════════════════════════════════ */
+
+    /* APP STORE STYLE — Featured card in certifications */
+    .cert-featured {
+      grid-column: 1 / -1;
+      display: flex; gap: 0; overflow: hidden;
+      border-radius: var(--r-lg);
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow-lg);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      position: relative; min-height: 140px;
+      transition: transform 0.26s ease, box-shadow 0.26s;
+    }
+    .cert-featured::before { content:''; position:absolute; inset:0; background:var(--specular); pointer-events:none; border-radius:var(--r-lg); }
+    .cert-featured:hover { transform: translateY(-3px) scale(1.005); box-shadow: var(--glass-shadow-lg), 0 0 0 1px var(--glass-border); }
+    .cert-featured-bg {
+      position: absolute; inset: 0; border-radius: var(--r-lg); overflow: hidden;
+    }
+    .cert-featured-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(199,70,52,0.18) 0%, rgba(244,116,59,0.12) 50%, transparent 100%);
+    }
+    .cert-featured-content {
+      position: relative; z-index: 2; padding: 28px 32px;
+      display: flex; align-items: center; gap: 20px; width: 100%;
+    }
+    .cert-featured-icon {
+      width: 64px; height: 64px; border-radius: 18px; flex-shrink: 0;
+      background: linear-gradient(135deg, #C74634, #f4743b);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 24px rgba(199,70,52,0.4), 0 1px 0 rgba(255,255,255,0.25) inset;
+      position: relative; overflow: hidden;
+    }
+    .cert-featured-icon::before { content:''; position:absolute; inset:0; background:var(--specular); pointer-events:none; border-radius:18px; }
+    .cert-featured-info { flex: 1; }
+    .cert-featured-eyebrow { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--orange); margin-bottom: 4px; }
+    .cert-featured-name { font-size: 18px; font-weight: 800; letter-spacing: -0.03em; color: var(--text); margin-bottom: 4px; }
+    .cert-featured-sub { font-size: 13px; color: var(--text3); }
+    .cert-featured-badge {
+      padding: 8px 18px; border-radius: 980px; font-size: 13px; font-weight: 700;
+      background: var(--oracle); color: #fff; flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(199,70,52,0.4), 0 1px 0 rgba(255,255,255,0.2) inset;
+      position: relative; overflow: hidden; letter-spacing: -0.01em;
+    }
+    .cert-featured-badge::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,0.2) 0%,transparent 60%); border-radius:980px; }
+
+    /* APPLE MUSIC STYLE — Now Playing widget in hero */
+    .now-playing {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 10px 16px 10px 10px;
+      border-radius: 16px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      margin-bottom: 28px; position: relative; overflow: hidden;
+      cursor: default;
+      opacity: 0; transform: translateY(12px); animation: fadeUp 0.6s 0.08s ease forwards;
+    }
+    .now-playing::before { content:''; position:absolute; inset:0; background:var(--specular); pointer-events:none; border-radius:16px; }
+    .np-art {
+      width: 36px; height: 36px; border-radius: 9px; flex-shrink: 0;
+      background: linear-gradient(135deg, #ff2d55, #ff6b38, #5e5ce6);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      position: relative;
+    }
+    .np-bars {
+      display: flex; align-items: flex-end; gap: 2px; height: 14px;
+    }
+    .np-bar {
+      width: 3px; border-radius: 2px; background: #fff;
+      animation: npBar 1.2s ease-in-out infinite;
+    }
+    .np-bar:nth-child(1){ height:60%; animation-delay:0s; }
+    .np-bar:nth-child(2){ height:100%; animation-delay:0.15s; }
+    .np-bar:nth-child(3){ height:45%; animation-delay:0.3s; }
+    .np-bar:nth-child(4){ height:80%; animation-delay:0.1s; }
+    @keyframes npBar { 0%,100%{transform:scaleY(0.4)} 50%{transform:scaleY(1)} }
+    .np-info { display: flex; flex-direction: column; gap: 1px; }
+    .np-label { font-family: var(--mono); font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+    .np-track { font-size: 13px; font-weight: 600; color: var(--text); letter-spacing: -0.01em; }
+
+    /* NOTES APP STYLE — for SyberVault header */
+    .notes-toolbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 20px;
+      background: var(--glass);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px 14px 0 0;
+      margin-bottom: 0;
+      position: relative; overflow: hidden;
+    }
+    .notes-toolbar::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,0.08) 0%,transparent 60%); pointer-events:none; }
+    .notes-toolbar-left { display: flex; align-items: center; gap: 8px; }
+    .notes-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .notes-dot.red   { background: #ff5f57; box-shadow: 0 0 0 1px rgba(255,95,87,0.4); }
+    .notes-dot.amber { background: #febc2e; box-shadow: 0 0 0 1px rgba(254,188,46,0.4); }
+    .notes-dot.green { background: #28c840; box-shadow: 0 0 0 1px rgba(40,200,64,0.4); }
+    .notes-toolbar-title { font-family: var(--mono); font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.5); letter-spacing: 0.04em; }
+    .notes-toolbar-count { font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.25); }
+
+    /* LOCK SCREEN STYLE — stat widgets in hero */
+    .hero-stats {
+      display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+      margin-top: 28px;
+      opacity: 0; transform: translateY(12px); animation: fadeUp 0.6s 0.72s ease forwards;
+    }
+    .stat-widget {
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      padding: 14px 20px; border-radius: 18px; min-width: 90px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      position: relative; overflow: hidden;
+      transition: all 0.2s ease;
+    }
+    .stat-widget::before { content:''; position:absolute; inset:0; background:var(--specular); pointer-events:none; border-radius:18px; }
+    .stat-widget:hover { transform: translateY(-3px) scale(1.04); box-shadow: var(--glass-shadow-lg); }
+    .stat-num { font-size: 24px; font-weight: 800; letter-spacing: -0.04em; color: var(--text); line-height: 1; }
+    .stat-label { font-family: var(--mono); font-size: 9px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text4); }
+
+    /* APP STORE GET BUTTON style */
+    .get-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 5px 16px; border-radius: 980px; font-size: 13px; font-weight: 700;
+      background: var(--pill-bg); color: var(--accent);
+      border: none; cursor: pointer; letter-spacing: -0.01em;
+      transition: all 0.15s; flex-shrink: 0;
+    }
+    .get-btn:hover { background: rgba(0,122,255,0.15); transform: scale(1.04); }
+
+    /* DYNAMIC ISLAND style — top notch for nav */
+    .dynamic-island-hint {
+      position: absolute; top: -6px; left: 50%; transform: translateX(-50%);
+      width: 80px; height: 6px; border-radius: 0 0 6px 6px;
+      background: rgba(0,0,0,0.15);
+      pointer-events: none;
+    }
+    html.dark .dynamic-island-hint { background: rgba(255,255,255,0.06); }
+
+    /* CONTROL CENTER toggle style for dark mode */
+    .theme-toggle {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--pill-bg);
+      border: 1px solid var(--glass-border);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      color: var(--text3); transition: all 0.2s;
+      backdrop-filter: blur(10px);
+    }
+    .theme-toggle:hover { background: var(--accent); color: #fff; border-color: var(--accent); transform: scale(1.08); }
+
   </style>
 </head>
 <body>
 <!-- NAV -->
   <nav id="navbar">
+    <div class="dynamic-island-hint"></div>
     <span class="nav-logo">dvphnc_</span>
     <ul class="nav-links">
       <li><a href="#certifications">Certs</a></li>
@@ -576,6 +995,17 @@
     <div class="hero-orb hero-orb-3"></div>
 
     <div class="hero-inner">
+      <div class="now-playing">
+        <div class="np-art">
+          <div class="np-bars">
+            <div class="np-bar"></div><div class="np-bar"></div><div class="np-bar"></div><div class="np-bar"></div>
+          </div>
+        </div>
+        <div class="np-info">
+          <span class="np-label">Now Building</span>
+          <span class="np-track">dvphnc.github.io</span>
+        </div>
+      </div>
       <p class="hero-tag">Aspiring Tech Virtual Assistant · BS Information Technology · 3rd Year</p>
       <h1 class="hero-name" id="heroName">
         <span class="hero-greeting" id="heroGreeting"></span>
@@ -608,35 +1038,22 @@
   <!-- CERTIFICATIONS -->
   <section id="certifications">
     <div class="section-inner">
-    <p class="sec-label reveal">Certifications</p>
-    <h2 class="sec-title reveal reveal-delay-1">Oracle Cloud Certified</h2>
-    <div class="cert-grid">
-      <div class="card cert-card reveal reveal-delay-1">
-        <div class="cert-icon oracle"><svg viewBox="0 0 24 24" fill="white" width="22" height="22"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-8v4h4l-5 8z"/></svg></div>
-        <div class="cert-info">
-          <p class="cert-name">OCI AI Foundations Associate</p>
-          <p class="cert-sub">Oracle Cloud Infrastructure</p>
-          <p class="cert-issuer">Oracle University</p>
-        </div>
-        <span class="cert-year">2024</span>
+    <div class="appstore-shelf-header reveal">
+        <span class="appstore-shelf-title">Oracle Cloud Certified</span>
+        <span class="sec-label" style="margin:0">2024</span>
       </div>
-      <div class="card cert-card reveal reveal-delay-2">
-        <div class="cert-icon oracle"><svg viewBox="0 0 24 24" fill="white" width="22" height="22"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg></div>
-        <div class="cert-info">
-          <p class="cert-name">OCI Foundations Associate</p>
-          <p class="cert-sub">Oracle Cloud Infrastructure</p>
-          <p class="cert-issuer">Oracle University</p>
-        </div>
-        <span class="cert-year">2024</span>
+      <div class="appstore-row">
+      <div class="appstore-card">
+        <div class="appstore-card-bg"><div class="appstore-card-bg-gradient" style="background:linear-gradient(135deg,#C74634,#f4743b);opacity:0.9"></div><div class="appstore-card-icon">⚡</div></div>
+        <div class="appstore-card-body"><div class="appstore-card-tag">Oracle University · 2024</div><div class="appstore-card-name">OCI AI Foundations</div><div class="appstore-card-sub">Oracle Cloud Infrastructure</div><span class="appstore-get-btn">Certified ✓</span></div>
       </div>
-      <div class="card cert-card reveal reveal-delay-3">
-        <div class="cert-icon oracle"><svg viewBox="0 0 24 24" fill="white" width="22" height="22"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg></div>
-        <div class="cert-info">
-          <p class="cert-name">OCI Data Foundations Associate</p>
-          <p class="cert-sub">Oracle Cloud Data</p>
-          <p class="cert-issuer">Oracle University</p>
-        </div>
-        <span class="cert-year">2024</span>
+      <div class="appstore-card">
+        <div class="appstore-card-bg"><div class="appstore-card-bg-gradient" style="background:linear-gradient(135deg,#ff6b00,#C74634);opacity:0.9"></div><div class="appstore-card-icon">🏛️</div></div>
+        <div class="appstore-card-body"><div class="appstore-card-tag">Oracle University · 2024</div><div class="appstore-card-name">OCI Foundations</div><div class="appstore-card-sub">Oracle Cloud Infrastructure</div><span class="appstore-get-btn">Certified ✓</span></div>
+      </div>
+      <div class="appstore-card">
+        <div class="appstore-card-bg"><div class="appstore-card-bg-gradient" style="background:linear-gradient(135deg,#d62828,#f4743b);opacity:0.9"></div><div class="appstore-card-icon">📊</div></div>
+        <div class="appstore-card-body"><div class="appstore-card-tag">Oracle University · 2024</div><div class="appstore-card-name">OCI Data Foundations</div><div class="appstore-card-sub">Oracle Cloud Data</div><span class="appstore-get-btn">Certified ✓</span></div>
       </div>
     </div>
     </div>
@@ -650,12 +1067,12 @@
     <p class="sec-label reveal">Tech Stacks</p>
     <h2 class="sec-title reveal reveal-delay-1">Tools &amp; Technologies</h2>
     <div class="stack-groups">
-      <div class="card reveal reveal-delay-1"><p class="stack-group-title">Frontend</p><div class="stack-pills"><span class="pill">HTML5</span><span class="pill">CSS3</span><span class="pill">JavaScript</span><span class="pill">React</span><span class="pill">Tailwind CSS</span></div></div>
-      <div class="card reveal reveal-delay-2"><p class="stack-group-title">Backend</p><div class="stack-pills"><span class="pill">Laravel</span><span class="pill">PHP</span><span class="pill">MySQL</span><span class="pill">REST APIs</span><span class="pill">Blade</span></div></div>
-      <div class="card reveal reveal-delay-3"><p class="stack-group-title">Cloud &amp; Platform</p><div class="stack-pills"><span class="pill">Oracle Cloud</span><span class="pill">Git &amp; GitHub</span><span class="pill">Linux</span><span class="pill">VS Code</span></div></div>
-      <div class="card reveal reveal-delay-4"><p class="stack-group-title">Security &amp; CTF</p><div class="stack-pills"><span class="pill">TryHackMe</span><span class="pill">HackTheBox</span><span class="pill">Burp Suite</span><span class="pill">Nmap</span><span class="pill">Gobuster</span></div></div>
-      <div class="card reveal reveal-delay-5"><p class="stack-group-title">VA &amp; Productivity</p><div class="stack-pills"><span class="pill">Google Workspace</span><span class="pill">Notion</span><span class="pill">Trello</span><span class="pill">Canva</span><span class="pill">Figma</span></div></div>
-      <div class="card reveal reveal-delay-6"><p class="stack-group-title">Currently Learning</p><div class="stack-pills"><span class="pill learning">Python</span><span class="pill learning">Docker</span><span class="pill learning">Next.js</span></div></div>
+      <div class="stack-card reveal reveal-delay-1"><p class="stack-group-title">Frontend</p><div class="stack-pills"><span class="pill">HTML5</span><span class="pill">CSS3</span><span class="pill">JavaScript</span><span class="pill">React</span><span class="pill">Tailwind CSS</span></div></div>
+      <div class="stack-card reveal reveal-delay-2"><p class="stack-group-title">Backend</p><div class="stack-pills"><span class="pill">Laravel</span><span class="pill">PHP</span><span class="pill">MySQL</span><span class="pill">REST APIs</span><span class="pill">Blade</span></div></div>
+      <div class="stack-card reveal reveal-delay-3"><p class="stack-group-title">Cloud &amp; Platform</p><div class="stack-pills"><span class="pill">Oracle Cloud</span><span class="pill">Git &amp; GitHub</span><span class="pill">Linux</span><span class="pill">VS Code</span></div></div>
+      <div class="stack-card reveal reveal-delay-4"><p class="stack-group-title">Security &amp; CTF</p><div class="stack-pills"><span class="pill">TryHackMe</span><span class="pill">HackTheBox</span><span class="pill">Burp Suite</span><span class="pill">Nmap</span><span class="pill">Gobuster</span></div></div>
+      <div class="stack-card reveal reveal-delay-5"><p class="stack-group-title">VA &amp; Productivity</p><div class="stack-pills"><span class="pill">Google Workspace</span><span class="pill">Notion</span><span class="pill">Trello</span><span class="pill">Canva</span><span class="pill">Figma</span></div></div>
+      <div class="stack-card reveal reveal-delay-6"><p class="stack-group-title">Currently Learning</p><div class="stack-pills"><span class="pill learning">Python</span><span class="pill learning">Docker</span><span class="pill learning">Next.js</span></div></div>
     </div>
     </div>
   </section>
@@ -668,12 +1085,24 @@
     <p class="sec-label reveal">CTF Writeups</p>
     <h2 class="sec-title reveal reveal-delay-1">Rooms &amp; Machines</h2>
     <div class="vault-grid">
-      <div class="card vault-card reveal reveal-delay-1"><div class="vault-header"><span class="vault-platform-badge thm">TryHackMe</span><span class="vault-diff diff-easy">Easy</span></div><h3 class="vault-title">Pickle Rick</h3><p class="vault-desc">Web enumeration, directory brute-forcing, and RCE to retrieve flags. Used Gobuster and crafted a reverse shell via the web command panel.</p><div class="vault-footer"><div class="vault-tags"><span class="tag">RCE</span><span class="tag">Gobuster</span><span class="tag">PrivEsc</span></div></div></div>
-      <div class="card vault-card reveal reveal-delay-2"><div class="vault-header"><span class="vault-platform-badge thm">TryHackMe</span><span class="vault-diff diff-easy">Easy</span></div><h3 class="vault-title">Basic Pentesting</h3><p class="vault-desc">SMB enumeration, hash cracking, and SSH key exploitation. Cracked a password hash using John the Ripper.</p><div class="vault-footer"><div class="vault-tags"><span class="tag">SMB</span><span class="tag">John</span><span class="tag">SSH</span></div></div></div>
-      <div class="card vault-card reveal reveal-delay-3"><div class="vault-header"><span class="vault-platform-badge thm">TryHackMe</span><span class="vault-diff diff-medium">Medium</span></div><h3 class="vault-title">Mr Robot CTF</h3><p class="vault-desc">Three-flag challenge. WordPress exploitation, hidden wordlist, WPScan brute-force, SUID binary abuse for root.</p><div class="vault-footer"><div class="vault-tags"><span class="tag">WordPress</span><span class="tag">SUID</span><span class="tag">WPScan</span></div></div></div>
-      <div class="card vault-card reveal reveal-delay-4"><div class="vault-header"><span class="vault-platform-badge htb">HackTheBox</span><span class="vault-diff diff-easy">Easy</span></div><h3 class="vault-title">Meow</h3><p class="vault-desc">Telnet misconfiguration with unauthenticated root login — Nmap scan, service enumeration, direct flag retrieval.</p><div class="vault-footer"><div class="vault-tags"><span class="tag">Telnet</span><span class="tag">Recon</span><span class="tag">Nmap</span></div></div></div>
-      <div class="card vault-card reveal reveal-delay-5"><div class="vault-header"><span class="vault-platform-badge htb">HackTheBox</span><span class="vault-diff diff-easy">Easy</span></div><h3 class="vault-title">Fawn</h3><p class="vault-desc">Anonymous FTP login vulnerability. Enumerated FTP with Nmap, connected with default anonymous credentials.</p><div class="vault-footer"><div class="vault-tags"><span class="tag">FTP</span><span class="tag">Anonymous</span><span class="tag">Nmap</span></div></div></div>
-      <div class="card vault-card reveal reveal-delay-6"><div class="vault-header"><span class="vault-platform-badge htb">HackTheBox</span><span class="vault-diff diff-easy">Easy</span></div><h3 class="vault-title">Dancing</h3><p class="vault-desc">SMB share enumeration without credentials. Used smbclient to access a misconfigured guest-readable share.</p><div class="vault-footer"><div class="vault-tags"><span class="tag">SMB</span><span class="tag">smbclient</span><span class="tag">Enum</span></div></div></div>
+      <div class="notes-card reveal reveal-delay-1"><div class="notes-card-header"><span class="notes-card-platform thm">TryHackMe</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body">
+      <h3 class="notes-title">Pickle Rick</h3><p class="notes-desc">Web enumeration, directory brute-forcing, and RCE to retrieve flags. Used Gobuster and crafted a reverse shell via the web command panel.</div>
+      </p><div class="notes-footer"><div class="vault-tags"><span class="notes-tag">RCE</span><span class="notes-tag">Gobuster</span><span class="notes-tag">PrivEsc</span></div></div></div>
+      <div class="notes-card reveal reveal-delay-2"><div class="notes-card-header"><span class="notes-card-platform thm">TryHackMe</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body">
+      <h3 class="notes-title">Basic Pentesting</h3><p class="notes-desc">SMB enumeration, hash cracking, and SSH key exploitation. Cracked a password hash using John the Ripper.</div>
+      </p><div class="notes-footer"><div class="vault-tags"><span class="notes-tag">SMB</span><span class="notes-tag">John</span><span class="notes-tag">SSH</span></div></div></div>
+      <div class="notes-card reveal reveal-delay-3"><div class="notes-card-header"><span class="notes-card-platform thm">TryHackMe</span><span class="notes-card-diff diff-medium">Medium</span></div><div class="notes-card-body">
+      <h3 class="notes-title">Mr Robot CTF</h3><p class="notes-desc">Three-flag challenge. WordPress exploitation, hidden wordlist, WPScan brute-force, SUID binary abuse for root.</div>
+      </p><div class="notes-footer"><div class="vault-tags"><span class="notes-tag">WordPress</span><span class="notes-tag">SUID</span><span class="notes-tag">WPScan</span></div></div></div>
+      <div class="notes-card reveal reveal-delay-4"><div class="notes-card-header"><span class="notes-card-platform htb">HackTheBox</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body">
+      <h3 class="notes-title">Meow</h3><p class="notes-desc">Telnet misconfiguration with unauthenticated root login — Nmap scan, service enumeration, direct flag retrieval.</div>
+      </p><div class="notes-footer"><div class="vault-tags"><span class="notes-tag">Telnet</span><span class="notes-tag">Recon</span><span class="notes-tag">Nmap</span></div></div></div>
+      <div class="notes-card reveal reveal-delay-5"><div class="notes-card-header"><span class="notes-card-platform htb">HackTheBox</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body">
+      <h3 class="notes-title">Fawn</h3><p class="notes-desc">Anonymous FTP login vulnerability. Enumerated FTP with Nmap, connected with default anonymous credentials.</div>
+      </p><div class="notes-footer"><div class="vault-tags"><span class="notes-tag">FTP</span><span class="notes-tag">Anonymous</span><span class="notes-tag">Nmap</span></div></div></div>
+      <div class="notes-card reveal reveal-delay-6"><div class="notes-card-header"><span class="notes-card-platform htb">HackTheBox</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body">
+      <h3 class="notes-title">Dancing</h3><p class="notes-desc">SMB share enumeration without credentials. Used smbclient to access a misconfigured guest-readable share.</div>
+      </p><div class="notes-footer"><div class="vault-tags"><span class="notes-tag">SMB</span><span class="notes-tag">smbclient</span><span class="notes-tag">Enum</span></div></div></div>
     </div>
     </div>
   </section>
@@ -682,8 +1111,30 @@
   <section id="sybervault">
     <div class="sv-inner">
 
-      <p class="sv-eyebrow reveal">Personal Knowledge System</p>
+      <div class="notes-toolbar reveal">
+        <div class="notes-toolbar-left">
+          <div class="notes-dot red"></div>
+          <div class="notes-dot amber"></div>
+          <div class="notes-dot green"></div>
+        </div>
+        <span class="notes-toolbar-title">SyberVault.notes</span>
+        <span class="notes-toolbar-count">11 notes</span>
+      </div>
+      <p class="sv-eyebrow reveal" style="margin-top:20px">Personal Knowledge System</p>
       <h2 class="sv-heading reveal reveal-delay-1"><span class="s">Syber</span><span class="v">Vault</span></h2>
+      <div class="music-player reveal reveal-delay-2" id="musicPlayer" onclick="toggleMusic()">
+        <div class="music-artwork" id="musicArtwork">🔐</div>
+        <div class="music-info">
+          <div class="music-title">SyberVault — Study Session</div>
+          <div class="music-artist">dvphnc · 11 notes</div>
+        </div>
+        <div class="music-controls">
+          <button class="music-btn" onclick="event.stopPropagation();prevTrack()">⏮</button>
+          <button class="music-btn play-btn" id="playBtn">▶</button>
+          <button class="music-btn" onclick="event.stopPropagation();nextTrack()">⏭</button>
+        </div>
+        <div class="music-progress"><div class="music-progress-fill" id="musicProgress"></div></div>
+      </div>
       <p class="sv-sub reveal reveal-delay-2">// a living archive of what I study, discover, and break &nbsp;·&nbsp; 11 notes &nbsp;·&nbsp; 4 categories &nbsp;·&nbsp; <em class="sv-hint">click any card to read</em></p>
 
       <!-- FUNDAMENTALS -->
@@ -1132,7 +1583,7 @@
         {greet:"Merhaba, ben",     name:"Joana Daphne Sy"},
         {greet:"안녕하세요, 저는",      name:"호아나 다프네 시",  nameFont:"'Noto Sans KR',sans-serif"},
         {greet:"こんにちは、私は",       name:"ホアナ ダフネ シー", nameFont:"'Noto Sans JP',sans-serif"},
-        {greet:"你好，我是",           name:"胡安娜·达芙妮·施",  nameFont:"'Noto Sans SC',sans-serif"},
+        {greet:"你好，我是",           name:"胡安娜达芙妮施",  nameFont:"'Noto Sans SC',sans-serif"},
       ];
 
       const greetEl=document.getElementById('heroGreeting');
@@ -1170,6 +1621,59 @@
       }
       run().catch(()=>{greetTxt.nodeValue="Hi, I'm";nameTxt.nodeValue="Joana Daphne Sy"});
     })();
+
+    // Dynamic Island
+    setTimeout(()=>{
+      const di=document.getElementById('dynamicIsland');
+      di.classList.add('visible');
+      setTimeout(()=>{
+        di.classList.add('expanded');
+        setTimeout(()=>{
+          di.classList.remove('expanded');
+        },3000);
+      },600);
+    },2000);
+    function dismissIsland(){
+      document.getElementById('dynamicIsland').classList.remove('visible','expanded');
+    }
+
+    // Apple Music player simulation
+    let musicPlaying=false, musicTimer=null, progress=0;
+    const tracks=[
+      {title:'SyberVault — Study Session',artist:'dvphnc · 11 notes',icon:'🔐'},
+      {title:'CTF Mode On',artist:'TryHackMe · HackTheBox',icon:'🕷️'},
+      {title:'Oracle Certified',artist:'Cloud Foundations',icon:'☁️'},
+      {title:'Fundamentals Playlist',artist:'CIA Triad & Beyond',icon:'📘'},
+    ];
+    let trackIdx=0;
+    function toggleMusic(){
+      musicPlaying=!musicPlaying;
+      document.getElementById('playBtn').textContent=musicPlaying?'⏸':'▶';
+      document.getElementById('musicPlayer').classList.toggle('playing',musicPlaying);
+      if(musicPlaying){
+        musicTimer=setInterval(()=>{
+          progress=(progress+0.5)%100;
+          document.getElementById('musicProgress').style.width=progress+'%';
+        },100);
+      } else {
+        clearInterval(musicTimer);
+      }
+    }
+    function nextTrack(){
+      trackIdx=(trackIdx+1)%tracks.length;
+      updateTrack();
+    }
+    function prevTrack(){
+      trackIdx=(trackIdx-1+tracks.length)%tracks.length;
+      updateTrack();
+    }
+    function updateTrack(){
+      const t=tracks[trackIdx];
+      document.querySelector('.music-title').textContent=t.title;
+      document.querySelector('.music-artist').textContent=t.artist;
+      document.getElementById('musicArtwork').textContent=t.icon;
+      progress=0;
+    }
   </script>
 </body>
 </html>
