@@ -229,30 +229,34 @@
       opacity: 0; transform: translateY(18px); animation: fadeUp 0.7s 0.2s ease forwards;
     }
     /* Liquid glass text effect — gradient with depth */
-    .hero-name-greeting {
+    .hero-greeting {
       display: block;
-      font-size: clamp(13px,1.5vw,16px); font-weight: 400;
-      color: var(--text3); letter-spacing: 0.02em;
-      font-family: var(--mono); margin-bottom: 4px;
+      font-size: clamp(13px, 1.5vw, 16px);
+      font-weight: 400;
+      color: var(--text3);
+      letter-spacing: 0.04em;
+      font-family: var(--mono);
+      margin-bottom: 6px;
       min-height: 1.4em;
+      -webkit-text-fill-color: var(--text3);
+      background: none;
     }
-    .hero-name-full {
+    .hero-fullname {
       display: block;
-      font-size: clamp(44px,6.5vw,82px);
+      font-size: clamp(44px, 6.5vw, 82px);
       font-weight: 800;
       letter-spacing: -0.045em;
       line-height: 1.0;
       background: linear-gradient(140deg, var(--text) 0%, rgba(94,92,230,1) 55%, rgba(0,122,255,1) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      word-break: break-word;
     }
-    html.dark .hero-name-full {
-      display: block;
-      font-size: clamp(44px,6.5vw,82px);
-      font-weight: 800;
-      letter-spacing: -0.045em;
-      line-height: 1.0;
-      background: linear-gradient(140deg, var(--text) 0%, rgba(94,92,230,1) 55%, rgba(0,122,255,1) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    html.dark .hero-fullname {
+      background: linear-gradient(140deg, #fff 0%, #7b79ff 55%, #60aaff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
     }
     /* Blinking cursor */
     .hero-cursor {
