@@ -199,9 +199,9 @@
     #hero {
       min-height: 100vh;
       display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
+      align-items: center; justify-content: flex-start;
       text-align: center;
-      padding: 120px 44px 80px; position: relative; overflow: hidden;
+      padding: 130px 44px 100px; position: relative; overflow: hidden;
     }
 
     /* Floating orbs */
@@ -1889,7 +1889,7 @@
       const dateStr = now.toISOString().split('T')[0];
       const threat = document.createElement('div');
       threat.className = 'threat-card reveal';
-      threat.style.marginTop = '28px';
+      threat.style.cssText = 'margin-top:24px;max-width:580px;width:100%;text-align:left;';
       threat.innerHTML = `
         <div class="threat-header">
           <span class="threat-classification">Subject Intel Report</span>
@@ -1900,17 +1900,6 @@
           <div class="threat-field"><div class="threat-label">Alias</div><div class="threat-value highlight">dvphnc</div></div>
           <div class="threat-field"><div class="threat-label">Status</div><div class="threat-value green">● Active · Seeking VA Roles</div></div>
           <div class="threat-field"><div class="threat-label">Location</div><div class="threat-value">Philippines · GMT+8</div></div>
-          <div class="threat-field"><div class="threat-label">Threat Level</div>
-            <div class="threat-level">
-              <div class="threat-pip active"></div>
-              <div class="threat-pip active orange"></div>
-              <div class="threat-pip active orange"></div>
-              <div class="threat-pip"></div>
-              <div class="threat-pip"></div>
-              <span style="font-size:11px;color:rgba(255,255,255,0.4);margin-left:4px;">Aspiring</span>
-            </div>
-          </div>
-          <div class="threat-field"><div class="threat-label">Last Seen</div><div class="threat-value" id="lastSeen"></div></div>
         </div>
         <div class="threat-tags">
           <span class="threat-tag">BSIT-3RD-YEAR</span>
@@ -1918,10 +1907,8 @@
           <span class="threat-tag">CTF-ACTIVE</span>
           <span class="threat-tag">LARAVEL</span>
           <span class="threat-tag">REACT</span>
-          <span class="threat-tag">SYBERVAULT</span>
         </div>`;
       heroBadges.insertAdjacentElement('afterend', threat);
-      document.getElementById('lastSeen').textContent = now.toLocaleString('en-PH', {timeZone:'Asia/Manila',dateStyle:'medium',timeStyle:'short'});
     }
 
     // ── TERMINAL ──
