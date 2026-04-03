@@ -6,58 +6,45 @@
   <meta name="description" content="Joana Daphne Sy — Aspiring Tech VA, BSIT 3rd Year, Oracle Certified, CTF enthusiast."/>
   <title>dvphnc — Joana Daphne Sy</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@700&family=Noto+Sans+JP:wght@700&family=Noto+Sans+SC:wght@700&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       DESIGN TOKENS — Navy / Dark Red Film
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
     :root {
-      /* iOS 26 Liquid Glass — Light */
-      --bg: #f2f2f7;
-      --bg2: #ffffff;
-      --glass: rgba(255,255,255,0.55);
-      --glass-heavy: rgba(255,255,255,0.82);
-      --glass-border: rgba(255,255,255,0.7);
-      --glass-border-subtle: rgba(0,0,0,0.06);
-      --glass-shadow: 0 8px 32px rgba(0,0,0,0.08), 0 1px 0 rgba(255,255,255,0.8) inset;
-      --glass-shadow-lg: 0 20px 60px rgba(0,0,0,0.1), 0 1px 0 rgba(255,255,255,0.9) inset;
-      --specular: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.3) 100%);
-      --text: #1c1c1e;
-      --text2: #3c3c43;
-      --text3: rgba(60,60,67,0.6);
-      --text4: rgba(60,60,67,0.35);
-      --accent: #007aff;
-      --accent2: #5856d6;
-      --red: #ff3b30;
-      --green: #34c759;
-      --orange: #ff9500;
-      --teal: #5ac8fa;
-      --oracle: #c74634;
-      --nav-bg: rgba(242,242,247,0.72);
-      --pill-bg: rgba(118,118,128,0.12);
-      --pill-border: rgba(118,118,128,0.2);
+      --bg:          #0a0d18;
+      --bg2:         #0e1220;
+      --surface:     rgba(255,255,255,0.04);
+      --surface2:    rgba(255,255,255,0.07);
+      --glass:       rgba(14,18,38,0.65);
+      --glass-heavy: rgba(10,13,28,0.88);
+      --glass-border:        rgba(180,160,220,0.14);
+      --glass-border-subtle: rgba(180,160,220,0.07);
+      --glass-shadow:    0 8px 32px rgba(0,0,0,0.5), 0 1px 0 rgba(180,160,255,0.07) inset;
+      --glass-shadow-lg: 0 24px 64px rgba(0,0,0,0.6), 0 1px 0 rgba(180,160,255,0.09) inset;
+      --specular: linear-gradient(135deg,rgba(200,180,255,0.08) 0%,rgba(200,180,255,0.01) 55%,rgba(200,180,255,0.04) 100%);
+      --text:  #e8e0f0;
+      --text2: rgba(232,224,240,0.78);
+      --text3: rgba(200,190,220,0.5);
+      --text4: rgba(180,170,200,0.3);
+      --accent:  #7b8cde;      /* muted navy blue */
+      --accent2: #9b6b8a;      /* dusty rose/mauve */
+      --red:     #8b2020;      /* dark red */
+      --red2:    #c04040;      /* lighter red */
+      --navy:    #1a2456;
+      --navy2:   #2a3a7a;
+      --green:   #4a7a5a;
+      --orange:  #b87040;
+      --teal:    #3a6a7a;
+      --oracle:  #c74634;
+      --pill-bg:     rgba(123,140,222,0.1);
+      --pill-border: rgba(123,140,222,0.2);
       --mono: 'JetBrains Mono',monospace;
       --sans: 'Inter',-apple-system,sans-serif;
-      --r: 20px;
-      --r-lg: 28px;
-    }
-
-    html.dark {
-      --bg: #000000;
-      --bg2: #1c1c1e;
-      --glass: rgba(28,28,30,0.72);
-      --glass-heavy: rgba(44,44,46,0.88);
-      --glass-border: rgba(255,255,255,0.12);
-      --glass-border-subtle: rgba(255,255,255,0.08);
-      --glass-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.06) inset;
-      --glass-shadow-lg: 0 20px 60px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.08) inset;
-      --specular: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.02) 50%, rgba(255,255,255,0.06) 100%);
-      --text: #ffffff;
-      --text2: rgba(255,255,255,0.85);
-      --text3: rgba(235,235,245,0.6);
-      --text4: rgba(235,235,245,0.3);
-      --nav-bg: rgba(28,28,30,0.72);
-      --pill-bg: rgba(118,118,128,0.2);
-      --pill-border: rgba(118,118,128,0.3);
+      --r:    16px;
+      --r-lg: 22px;
     }
 
     html { scroll-behavior: smooth; }
@@ -67,935 +54,487 @@
       color: var(--text);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
-      transition: background 0.4s, color 0.4s;
     }
 
-    /* ── WALLPAPER GRADIENT ── */
-    body::before {
-      content: '';
-      position: fixed; inset: 0; z-index: 0; pointer-events: none;
-      background:
-        radial-gradient(ellipse 90% 60% at 20% -10%, rgba(94,92,230,0.18) 0%, transparent 55%),
-        radial-gradient(ellipse 70% 50% at 85% 15%, rgba(0,122,255,0.14) 0%, transparent 55%),
-        radial-gradient(ellipse 60% 70% at 10% 85%, rgba(52,199,89,0.08) 0%, transparent 55%),
-        radial-gradient(ellipse 50% 50% at 90% 90%, rgba(255,45,85,0.08) 0%, transparent 55%);
-      transition: opacity 0.4s;
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       FILM LAYERS — orbs + grain + leaks + vignette
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+    /* Ambient orbs — fixed, full page */
+    .film-orb {
+      position: fixed; border-radius: 50%;
+      filter: blur(100px); pointer-events: none;
+      z-index: 0; will-change: transform;
     }
-    html.dark body::before {
-      background:
-        radial-gradient(ellipse 90% 60% at 20% -10%, rgba(94,92,230,0.28) 0%, transparent 55%),
-        radial-gradient(ellipse 70% 50% at 85% 15%, rgba(0,122,255,0.22) 0%, transparent 55%),
-        radial-gradient(ellipse 60% 70% at 10% 85%, rgba(52,199,89,0.12) 0%, transparent 55%),
-        radial-gradient(ellipse 50% 50% at 90% 90%, rgba(255,45,85,0.12) 0%, transparent 55%);
+    /* Navy blue — top left */
+    .film-orb-1 {
+      width: 72vw; height: 72vw;
+      max-width: 900px; max-height: 900px;
+      background: #1a2456; opacity: 0.85;
+      top: -25%; left: -20%;
+      animation: fo1 3.2s ease-in-out infinite alternate;
+    }
+    /* Dark red — top right */
+    .film-orb-2 {
+      width: 58vw; height: 58vw;
+      max-width: 720px; max-height: 720px;
+      background: #6b1515; opacity: 0.7;
+      top: -10%; right: -20%;
+      animation: fo2 4.0s ease-in-out infinite alternate;
+    }
+    /* Deep navy — bottom center */
+    .film-orb-3 {
+      width: 60vw; height: 60vw;
+      max-width: 760px; max-height: 760px;
+      background: #0e1840; opacity: 0.8;
+      bottom: -20%; left: 15%;
+      animation: fo3 3.7s ease-in-out infinite alternate;
+    }
+    /* Crimson accent — bottom right */
+    .film-orb-4 {
+      width: 42vw; height: 42vw;
+      max-width: 520px; max-height: 520px;
+      background: #4a0e0e; opacity: 0.55;
+      bottom: 5%; right: -10%;
+      animation: fo4 2.8s ease-in-out infinite alternate;
     }
 
-    /* ═══════════════════════════════
-       LIQUID GLASS NAV — iOS 26 style
-       floats above content, shrinks on scroll
-    ═══════════════════════════════ */
+    @keyframes fo1 { to { transform: translate(7%,13%) scale(1.15); } }
+    @keyframes fo2 { to { transform: translate(-11%,9%) scale(0.92); } }
+    @keyframes fo3 { to { transform: translate(5%,-11%) scale(1.2); } }
+    @keyframes fo4 { to { transform: translate(-6%,7%) scale(1.14); } }
+
+    /* Film grain */
+    .film-grain {
+      position: fixed; inset: 0; z-index: 9000;
+      pointer-events: none; opacity: 0.09;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
+      mix-blend-mode: screen;
+      animation: grainShift 0.12s steps(1) infinite;
+    }
+    @keyframes grainShift {
+      0%  { background-position: 0 0; }
+      25% { background-position: -60px 40px; }
+      50% { background-position: 40px -60px; }
+      75% { background-position: -40px -40px; }
+    }
+
+    /* Light leaks */
+    .film-leak {
+      position: fixed; pointer-events: none; z-index: 8999;
+      border-radius: 50%; filter: blur(60px); opacity: 0;
+    }
+    .film-leak-1 {
+      width: 30vw; height: 60vh;
+      background: radial-gradient(ellipse, rgba(100,40,40,0.35) 0%, transparent 70%);
+      top: -10%; left: -5%;
+      animation: leak1 8s ease-in-out infinite;
+    }
+    .film-leak-2 {
+      width: 25vw; height: 50vh;
+      background: radial-gradient(ellipse, rgba(30,50,100,0.3) 0%, transparent 70%);
+      bottom: -5%; right: -5%;
+      animation: leak2 11s ease-in-out infinite;
+    }
+    .film-leak-3 {
+      width: 40vw; height: 20vh;
+      background: radial-gradient(ellipse, rgba(120,60,20,0.2) 0%, transparent 70%);
+      top: 40%; right: 0;
+      animation: leak3 14s ease-in-out infinite;
+    }
+    @keyframes leak1 { 0%,100%{opacity:0;transform:scaleY(1)} 30%{opacity:1;transform:scaleY(1.2)} 60%{opacity:0.6;transform:scaleY(0.9)} }
+    @keyframes leak2 { 0%,100%{opacity:0;transform:scale(1)} 40%{opacity:0.9;transform:scale(1.15)} 70%{opacity:0.4} }
+    @keyframes leak3 { 0%,100%{opacity:0} 50%{opacity:0.7;transform:translateX(-5%)} }
+
+    /* Vignette */
+    .film-vignette {
+      position: fixed; inset: 0; z-index: 8998; pointer-events: none;
+      background: radial-gradient(ellipse 88% 82% at 50% 50%, transparent 38%, rgba(0,0,0,0.65) 100%);
+    }
+
+    /* Scroll progress */
+    #scroll-progress {
+      position: fixed; top: 0; left: 0; z-index: 9100;
+      height: 2px; width: 0%;
+      background: linear-gradient(90deg, #1a2456, #7b8cde, #8b2020, #c04040);
+      transition: width 0.08s linear;
+    }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       NAV
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
     nav {
       position: fixed; top: 16px; left: 50%;
       transform: translateX(-50%);
-      z-index: 200;
+      z-index: 500;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 20px;
-      height: 52px;
-      width: calc(100% - 48px);
-      max-width: 960px;
+      padding: 0 20px; height: 52px;
+      width: calc(100% - 48px); max-width: 960px;
       border-radius: 980px;
-      background: var(--glass);
-      backdrop-filter: saturate(200%) blur(40px);
-      -webkit-backdrop-filter: saturate(200%) blur(40px);
+      background: rgba(10,13,28,0.72);
+      backdrop-filter: saturate(180%) blur(40px);
+      -webkit-backdrop-filter: saturate(180%) blur(40px);
       border: 1px solid var(--glass-border);
-      box-shadow: var(--glass-shadow);
+      box-shadow: var(--glass-shadow), 0 0 0 1px rgba(100,40,40,0.1);
       transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
     }
-    /* Specular highlight on nav */
     nav::before {
-      content: '';
-      position: absolute; inset: 0; border-radius: 980px;
-      background: var(--specular);
-      pointer-events: none;
+      content:''; position:absolute; inset:0; border-radius:980px;
+      background: linear-gradient(135deg,rgba(123,140,222,0.06) 0%,transparent 60%,rgba(139,32,32,0.04) 100%);
+      pointer-events:none;
     }
-    /* Shrink on scroll — iOS 26 tab bar collapse */
-    nav.scrolled {
-      height: 44px;
-      padding: 0 16px;
-      top: 12px;
-      background: var(--glass-heavy);
-      box-shadow: var(--glass-shadow-lg);
-    }
-
-    .nav-logo {
-      font-family: var(--mono);
-      font-size: 13px; font-weight: 600;
-      color: var(--text); letter-spacing: -0.01em;
-      position: relative; z-index: 1;
-    }
-
-    .nav-links { display: flex; gap: 4px; list-style: none; position: relative; z-index: 1; }
-    .nav-links a {
-      font-size: 13px; font-weight: 500;
-      color: var(--text3);
-      text-decoration: none;
-      padding: 5px 12px; border-radius: 980px;
-      transition: all 0.18s ease;
-    }
-    .nav-links a:hover {
-      color: var(--text);
-      background: var(--pill-bg);
-    }
-
-    .nav-right { display: flex; align-items: center; gap: 8px; position: relative; z-index: 1; }
-
-    /* Theme toggle — liquid glass pill */
-    .theme-toggle {
-      width: 32px; height: 32px; border-radius: 50%;
-      background: var(--pill-bg);
-      border: 1px solid var(--glass-border);
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      color: var(--text3); transition: all 0.2s;
-    }
-    .theme-toggle:hover { background: var(--pill-border); color: var(--text); }
-    html:not(.dark) .icon-moon { display: none; }
-    html.dark .icon-sun { display: none; }
-
-    .nav-menu-btn { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 4px; }
-    .nav-menu-btn span { display: block; width: 18px; height: 1.5px; background: var(--text); border-radius: 2px; transition: background 0.3s; }
-
+    nav.scrolled { height:44px; top:10px; background:rgba(8,10,22,0.88); box-shadow:var(--glass-shadow-lg); }
+    .nav-logo { font-family:var(--mono); font-size:13px; font-weight:600; color:var(--text); letter-spacing:-0.01em; position:relative; z-index:1; cursor:pointer; }
+    .nav-links { display:flex; gap:4px; list-style:none; position:relative; z-index:1; }
+    .nav-links a { font-size:13px; font-weight:500; color:var(--text3); text-decoration:none; padding:5px 12px; border-radius:980px; transition:all 0.18s; }
+    .nav-links a:hover { color:var(--text); background:var(--pill-bg); }
+    .nav-right { display:flex; align-items:center; gap:8px; position:relative; z-index:1; }
+    .theme-toggle { width:32px; height:32px; border-radius:50%; background:var(--pill-bg); border:1px solid var(--glass-border); cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--text3); transition:all 0.2s; }
+    .theme-toggle:hover { background:rgba(139,32,32,0.2); color:var(--text); border-color:rgba(139,32,32,0.4); }
+    html:not(.dark) .icon-moon { display:none; }
+    html.dark .icon-sun { display:none; }
+    .nav-menu-btn { display:none; flex-direction:column; gap:4px; background:none; border:none; cursor:pointer; padding:4px; }
+    .nav-menu-btn span { display:block; width:18px; height:1.5px; background:var(--text); border-radius:2px; }
     .mobile-menu {
-      display: none; position: fixed; top: 80px; left: 24px; right: 24px; z-index: 199;
-      background: var(--glass-heavy);
-      backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--r-lg);
-      box-shadow: var(--glass-shadow-lg);
-      flex-direction: column; overflow: hidden;
+      display:none; position:fixed; top:80px; left:16px; right:16px; z-index:499;
+      background:rgba(8,10,22,0.95); backdrop-filter:blur(40px);
+      border:1px solid var(--glass-border); border-radius:var(--r-lg);
+      box-shadow:var(--glass-shadow-lg); flex-direction:column; overflow:hidden;
     }
-    .mobile-menu.open { display: flex; }
-    .mobile-link {
-      padding: 14px 20px; font-size: 15px; font-weight: 500;
-      color: var(--text); text-decoration: none;
-      border-bottom: 1px solid var(--glass-border-subtle);
-      transition: background 0.15s;
-    }
-    .mobile-link:last-child { border-bottom: none; }
-    .mobile-link:hover { background: var(--pill-bg); }
+    .mobile-menu.open { display:flex; }
+    .mobile-link { padding:15px 20px; font-size:15px; font-weight:500; color:var(--text); text-decoration:none; border-bottom:1px solid var(--glass-border-subtle); transition:background 0.15s; }
+    .mobile-link:last-child { border-bottom:none; }
+    .mobile-link:hover { background:var(--surface2); }
 
-    /* ═══════════════════════════════
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        LAYOUT
-    ═══════════════════════════════ */
-    section {
-      position: relative; z-index: 1;
-      max-width: 100%; margin: 0;
-      padding: 100px 44px;
-    }
-    .section-inner { max-width: 1100px; margin: 0 auto; }
-    .divider { width: 100%; height: 1px; background: var(--glass-border-subtle); position: relative; z-index: 1; }
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    section { position:relative; z-index:10; padding:100px 44px; }
+    .section-inner { max-width:1100px; margin:0 auto; }
+    .divider { height:1px; background:var(--glass-border-subtle); position:relative; z-index:10; margin:0 44px; }
 
-    /* ═══════════════════════════════
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       REVEAL
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .reveal { opacity:0; transform:translateY(20px); transition:opacity 0.65s cubic-bezier(0.16,1,0.3,1),transform 0.65s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .rd1{transition-delay:.07s} .rd2{transition-delay:.14s} .rd3{transition-delay:.21s}
+    .rd4{transition-delay:.28s} .rd5{transition-delay:.35s} .rd6{transition-delay:.42s}
+    @keyframes fadeUp { to{opacity:1;transform:translateY(0)} }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        HERO
-    ═══════════════════════════════ */
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
     #hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center;
-      padding: 100px 44px 80px; position: relative; overflow: hidden;
+      min-height:100vh; display:flex; flex-direction:column;
+      align-items:center; justify-content:center; text-align:center;
+      padding:120px 44px 80px; overflow:hidden;
     }
+    .hero-inner { max-width:720px; position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; }
 
-    /* Floating orbs */
-    .hero-orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; animation: orbFloat 9s ease-in-out infinite; }
-    .hero-orb-1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(94,92,230,0.2) 0%, transparent 70%); top: -100px; right: -80px; animation-delay: 0s; }
-    .hero-orb-2 { width: 350px; height: 350px; background: radial-gradient(circle, rgba(0,122,255,0.16) 0%, transparent 70%); bottom: 80px; right: 160px; animation-delay: -4s; }
-    .hero-orb-3 { width: 250px; height: 250px; background: radial-gradient(circle, rgba(255,45,85,0.1) 0%, transparent 70%); top: 45%; left: -60px; animation-delay: -7s; }
-    html.dark .hero-orb-1 { background: radial-gradient(circle, rgba(94,92,230,0.35) 0%, transparent 70%); }
-    html.dark .hero-orb-2 { background: radial-gradient(circle, rgba(0,122,255,0.28) 0%, transparent 70%); }
-    @keyframes orbFloat { 0%,100%{transform:translateY(0) scale(1)} 33%{transform:translateY(-28px) scale(1.05)} 66%{transform:translateY(14px) scale(0.97)} }
+    .availability-pill {
+      display:inline-flex; align-items:center; gap:7px;
+      padding:5px 14px; border-radius:980px;
+      background:rgba(74,122,90,0.12); border:1px solid rgba(74,122,90,0.28);
+      font-family:var(--mono); font-size:11px; font-weight:600; color:#5a9a6a;
+      letter-spacing:0.04em; margin-bottom:20px;
+      opacity:0; transform:translateY(12px); animation:fadeUp 0.6s 0.05s ease forwards;
+    }
+    .avail-dot { width:6px; height:6px; border-radius:50%; background:#5a9a6a; box-shadow:0 0 0 0 rgba(90,154,106,0.4); animation:availPulse 2s infinite; }
+    @keyframes availPulse { 0%{box-shadow:0 0 0 0 rgba(90,154,106,0.5)} 70%{box-shadow:0 0 0 7px rgba(90,154,106,0)} 100%{box-shadow:0 0 0 0 rgba(90,154,106,0)} }
 
-    .hero-inner { max-width: 740px; position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .hero-tag { font-family:var(--mono); font-size:11px; font-weight:500; color:var(--accent); letter-spacing:0.16em; text-transform:uppercase; margin-bottom:20px; opacity:0; transform:translateY(12px); animation:fadeUp 0.6s 0.1s ease forwards; }
 
-    .hero-tag {
-      font-family: var(--mono); font-size: 11px; font-weight: 500;
-      color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase;
-      margin-bottom: 20px;
-      opacity: 0; transform: translateY(12px); animation: fadeUp 0.6s 0.1s ease forwards;
-    }
-
-    .hero-name {
-      font-weight: 800;
-      letter-spacing: -0.05em; line-height: 1.0;
-      margin-bottom: 12px;
-      opacity: 0; transform: translateY(18px); animation: fadeUp 0.7s 0.2s ease forwards;
-    }
-    /* Liquid glass text effect — gradient with depth */
-    .hero-greeting {
-      display: block;
-      font-size: clamp(13px, 1.5vw, 16px);
-      font-weight: 400;
-      color: var(--text3);
-      letter-spacing: 0.04em;
-      font-family: var(--mono);
-      margin-bottom: 6px;
-      min-height: 1.4em;
-      -webkit-text-fill-color: var(--text3);
-      background: none;
-    }
-    .hero-fullname {
-      display: block;
-      font-size: clamp(44px, 6.5vw, 82px);
-      font-weight: 800;
-      letter-spacing: -0.045em;
-      line-height: 1.0;
-      background: linear-gradient(140deg, var(--text) 0%, rgba(94,92,230,1) 55%, rgba(0,122,255,1) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      word-break: break-word;
-    }
-    html.dark .hero-fullname {
-      background: linear-gradient(140deg, #fff 0%, #7b79ff 55%, #60aaff 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-    }
-    /* Blinking cursor */
-    .hero-cursor {
-      display: inline-block; width: 2.5px; height: 0.82em;
-      background: var(--accent2); margin-left: 3px; vertical-align: middle;
-      border-radius: 2px; animation: cursorBlink 0.75s step-end infinite;
-    }
+    .hero-name { font-weight:800; line-height:1.0; margin-bottom:14px; opacity:0; transform:translateY(18px); animation:fadeUp 0.7s 0.2s ease forwards; }
+    .hero-greeting { display:block; font-size:clamp(12px,1.4vw,15px); font-weight:400; color:var(--text3); letter-spacing:0.18em; text-transform:uppercase; font-family:var(--mono); margin-bottom:8px; min-height:1.4em; }
+    .hero-fullname { display:block; font-size:clamp(44px,6.5vw,82px); font-weight:800; letter-spacing:-0.045em; line-height:1.0; background:linear-gradient(140deg,#c8d4ff 0%,#7b8cde 40%,#9b6b8a 75%,#c04040 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; word-break:break-word; }
+    .hero-cursor { display:inline-block; width:2.5px; height:0.82em; background:var(--accent2); margin-left:3px; vertical-align:middle; border-radius:2px; animation:cursorBlink 0.75s step-end infinite; }
     @keyframes cursorBlink { 0%,100%{opacity:1} 50%{opacity:0} }
 
-    .hero-handle {
-      font-family: var(--mono); font-size: clamp(13px,1.6vw,16px); font-weight: 300;
-      color: var(--text4); letter-spacing: 0.05em; margin-bottom: 32px;
-      opacity: 0; transform: translateY(12px); animation: fadeUp 0.6s 0.35s ease forwards;
-    }
-    .hero-handle span { color: var(--accent2); }
+    .hero-handle { font-family:var(--mono); font-size:clamp(13px,1.6vw,16px); font-weight:300; color:var(--text4); letter-spacing:0.05em; margin-bottom:28px; opacity:0; transform:translateY(12px); animation:fadeUp 0.6s 0.35s ease forwards; }
+    .hero-handle span { color:var(--accent2); }
 
-    .hero-desc {
-      font-size: 17px; font-weight: 400; line-height: 1.72;
-      color: var(--text3); letter-spacing: -0.01em; max-width: 520px; text-align: center;
-      opacity: 0; transform: translateY(12px); animation: fadeUp 0.6s 0.45s ease forwards;
-    }
-    .hero-desc strong { color: var(--text); font-weight: 600; }
+    .hero-desc { font-size:17px; font-weight:400; line-height:1.75; color:var(--text3); max-width:520px; letter-spacing:-0.01em; opacity:0; transform:translateY(12px); animation:fadeUp 0.6s 0.45s ease forwards; }
+    .hero-desc strong { color:var(--text); font-weight:600; }
 
-    /* iOS 26 style badge chips */
-    .hero-badges {
-      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px;
-      opacity: 0; transform: translateY(12px); animation: fadeUp 0.6s 0.55s ease forwards;
-    }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 6px 14px; border-radius: 980px;
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      box-shadow: var(--glass-shadow);
-      color: var(--text2); font-size: 12px; font-weight: 500;
-      font-family: var(--mono); letter-spacing: 0.02em;
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      transition: all 0.2s ease;
-      position: relative; overflow: hidden;
-    }
-    .hero-badge::before { content:''; position:absolute; inset:0; background:var(--specular); pointer-events:none; border-radius:980px; }
-    .hero-badge:hover { transform: translateY(-2px) scale(1.02); box-shadow: var(--glass-shadow-lg); }
-    .badge-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .hero-badges { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:28px; opacity:0; transform:translateY(12px); animation:fadeUp 0.6s 0.55s ease forwards; }
+    .hero-badge { display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:980px; background:var(--glass); border:1px solid var(--glass-border); color:var(--text2); font-size:12px; font-weight:500; font-family:var(--mono); backdrop-filter:blur(20px); transition:all 0.2s; }
+    .hero-badge:hover { transform:translateY(-2px); box-shadow:var(--glass-shadow); }
+    .badge-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
 
-    .hero-cta {
-      display: flex; gap: 10px; margin-top: 36px;
-      opacity: 0; transform: translateY(12px); animation: fadeUp 0.6s 0.65s ease forwards;
-    }
+    .hero-cta { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:32px; opacity:0; transform:translateY(12px); animation:fadeUp 0.6s 0.65s ease forwards; }
+    .btn { display:inline-flex; align-items:center; gap:6px; padding:12px 24px; border-radius:980px; font-size:15px; font-weight:600; letter-spacing:-0.01em; text-decoration:none; transition:all 0.22s; cursor:pointer; border:none; position:relative; overflow:hidden; }
+    .btn-primary { background:linear-gradient(135deg,#1a2456,#7b8cde); color:#fff; box-shadow:0 4px 20px rgba(26,36,86,0.5),0 1px 0 rgba(255,255,255,0.12) inset; }
+    .btn-primary:hover { transform:scale(1.04); box-shadow:0 8px 30px rgba(123,140,222,0.4); }
+    .btn-ghost { background:var(--glass); color:var(--text); border:1px solid var(--glass-border); backdrop-filter:blur(20px); }
+    .btn-ghost:hover { transform:scale(1.04); background:var(--surface2); }
 
-    /* iOS 26 buttons — liquid glass */
-    .btn {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 12px 24px; border-radius: 980px;
-      font-size: 15px; font-weight: 600; letter-spacing: -0.01em;
-      text-decoration: none; transition: all 0.22s ease;
-      cursor: pointer; border: none; position: relative; overflow: hidden;
-    }
-    .btn-primary {
-      background: var(--accent); color: #fff;
-      box-shadow: 0 4px 20px rgba(0,122,255,0.4), 0 1px 0 rgba(255,255,255,0.2) inset;
-    }
-    .btn-primary::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,0.2) 0%,transparent 60%); border-radius:980px; }
-    .btn-primary:hover { transform: scale(1.03); box-shadow: 0 8px 30px rgba(0,122,255,0.5); }
-    .btn-ghost {
-      background: var(--glass); color: var(--text);
-      border: 1px solid var(--glass-border);
-      box-shadow: var(--glass-shadow);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    }
-    .btn-ghost::before { content:''; position:absolute; inset:0; background:var(--specular); border-radius:980px; }
-    .btn-ghost:hover { transform: scale(1.03); box-shadow: var(--glass-shadow-lg); }
-
-    .hero-scroll-hint { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0; animation: fadeUp 0.6s 1.3s ease forwards; }
-    .scroll-line { width: 1px; height: 36px; background: linear-gradient(to bottom, transparent, var(--text4)); animation: scrollPulse 2.2s 1.5s ease-in-out infinite; }
-    .scroll-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text4); }
+    .hero-scroll-hint { position:absolute; bottom:36px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:8px; opacity:0; animation:fadeUp 0.6s 1.3s ease forwards; }
+    .scroll-line { width:1px; height:36px; background:linear-gradient(to bottom,transparent,var(--text4)); animation:scrollPulse 2.2s 1.5s ease-in-out infinite; }
+    .scroll-label { font-family:var(--mono); font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:var(--text4); }
     @keyframes scrollPulse { 0%,100%{opacity:.4} 50%{opacity:1} }
 
-    /* ═══════════════════════════════
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        SECTION LABELS
-    ═══════════════════════════════ */
-    .sec-label { font-family: var(--mono); font-size: 10px; font-weight: 600; color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 10px; }
-    .sec-title { font-size: clamp(28px,4vw,40px); font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; color: var(--text); margin-bottom: 40px; transition: color 0.4s; }
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .sec-label { font-family:var(--mono); font-size:10px; font-weight:600; color:var(--accent); letter-spacing:0.2em; text-transform:uppercase; margin-bottom:10px; }
+    .sec-title { font-size:clamp(26px,3.8vw,40px); font-weight:800; letter-spacing:-0.04em; line-height:1.1; color:var(--text); margin-bottom:40px; }
 
-    /* ═══════════════════════════════
-       SCROLL REVEAL
-    ═══════════════════════════════ */
-    .reveal { opacity:0; transform:translateY(24px); transition:opacity 0.65s cubic-bezier(0.16,1,0.3,1),transform 0.65s cubic-bezier(0.16,1,0.3,1); }
-    .reveal.visible { opacity:1; transform:translateY(0); }
-    .reveal-delay-1{transition-delay:.07s} .reveal-delay-2{transition-delay:.14s} .reveal-delay-3{transition-delay:.21s}
-    .reveal-delay-4{transition-delay:.28s} .reveal-delay-5{transition-delay:.35s} .reveal-delay-6{transition-delay:.42s}
-
-    /* ═══════════════════════════════
-       LIQUID GLASS CARD — core component
-    ═══════════════════════════════ */
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       GLASS CARD
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
     .card {
-      background: var(--glass);
-      backdrop-filter: saturate(180%) blur(20px);
-      -webkit-backdrop-filter: saturate(180%) blur(20px);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--r-lg);
-      box-shadow: var(--glass-shadow);
-      padding: 24px;
-      position: relative; overflow: hidden;
-      transition: transform 0.26s ease, box-shadow 0.26s ease, background 0.4s;
+      background:var(--glass); backdrop-filter:saturate(160%) blur(20px); -webkit-backdrop-filter:saturate(160%) blur(20px);
+      border:1px solid var(--glass-border); border-radius:var(--r-lg);
+      box-shadow:var(--glass-shadow); padding:24px; position:relative; overflow:hidden;
+      transition:transform 0.26s,box-shadow 0.26s;
     }
-    /* Specular top highlight */
-    .card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
-      pointer-events: none;
-    }
-    .card:hover {
-      transform: translateY(-4px) scale(1.005);
-      box-shadow: var(--glass-shadow-lg);
-    }
+    .card::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(180,160,255,0.18),transparent); pointer-events:none; }
+    .card:hover { transform:translateY(-3px); box-shadow:var(--glass-shadow-lg); }
 
-    /* ═══════════════════════════════
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        CERTIFICATIONS
-    ═══════════════════════════════ */
-    /* Accent line on hover */
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .cert-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px; }
+    .notes-card { background:var(--glass); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid var(--glass-border); border-radius:var(--r-lg); box-shadow:var(--glass-shadow); overflow:hidden; position:relative; transition:transform 0.26s,box-shadow 0.26s; }
+    .notes-card::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(180,160,255,0.18),transparent); pointer-events:none; }
+    .notes-card:hover { transform:translateY(-3px); box-shadow:var(--glass-shadow-lg); }
+    .notes-card-header { padding:14px 16px 10px; border-bottom:1px solid var(--glass-border-subtle); display:flex; align-items:center; justify-content:space-between; }
+    .notes-card-platform { font-family:var(--mono); font-size:10px; font-weight:600; letter-spacing:0.06em; padding:3px 9px; border-radius:6px; }
+    .notes-card-platform.thm { background:rgba(74,122,90,0.15); color:#5a9a6a; border:1px solid rgba(74,122,90,0.25); }
+    .notes-card-platform.htb { background:rgba(58,106,122,0.15); color:#5a9aaa; border:1px solid rgba(58,106,122,0.25); }
+    .notes-card-diff { font-family:var(--mono); font-size:10px; font-weight:600; padding:3px 9px; border-radius:6px; }
+    .diff-easy   { background:rgba(74,122,90,0.12); color:#5a9a6a; border:1px solid rgba(74,122,90,0.2); }
+    .diff-medium { background:rgba(184,112,64,0.12); color:#c88040; border:1px solid rgba(184,112,64,0.2); }
+    .notes-card-body { padding:14px 16px 16px; }
+    .notes-title { font-size:15px; font-weight:700; letter-spacing:-0.025em; color:var(--text); margin-bottom:6px; }
+    .notes-desc { font-size:13px; line-height:1.62; color:var(--text3); }
+    .notes-footer { display:flex; gap:6px; flex-wrap:wrap; padding:10px 16px 14px; border-top:1px solid var(--glass-border-subtle); }
+    .notes-tag { font-family:var(--mono); font-size:10px; padding:2px 8px; border-radius:6px; background:rgba(123,140,222,0.1); color:var(--accent); border:1px solid rgba(123,140,222,0.2); }
+    .vault-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px; }
 
-    /* ═══════════════════════════════
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        STACKS
-    ═══════════════════════════════ */
-    .stack-groups { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 14px; }
-    .stack-group-title { font-family: var(--mono); font-size: 10px; font-weight: 600; color: var(--text4); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 14px; transition: color 0.4s; }
-    .stack-pills { display: flex; flex-wrap: wrap; gap: 7px; }
-    .pill {
-      display: inline-flex; align-items: center; padding: 5px 12px; border-radius: 980px;
-      font-family: var(--mono); font-size: 12px;
-      background: var(--pill-bg); color: var(--text3);
-      border: 1px solid var(--pill-border);
-      transition: all 0.18s; cursor: default;
-    }
-    .pill:hover { background: rgba(0,122,255,0.1); border-color: rgba(0,122,255,0.3); color: var(--accent); }
-    .pill.learning { background: rgba(88,86,214,0.1); border-color: rgba(88,86,214,0.25); color: var(--accent2); }
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .stack-groups { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:14px; }
+    .stack-card { background:var(--glass); backdrop-filter:blur(20px); border:1px solid var(--glass-border); border-radius:var(--r-lg); padding:20px 22px; transition:all 0.22s; }
+    .stack-card:hover { transform:translateY(-2px); box-shadow:var(--glass-shadow); }
+    .stack-group-title { font-family:var(--mono); font-size:10px; font-weight:600; color:var(--text4); letter-spacing:0.14em; text-transform:uppercase; margin-bottom:14px; }
+    .stack-pills { display:flex; flex-wrap:wrap; gap:7px; }
+    .pill { display:inline-flex; align-items:center; padding:5px 12px; border-radius:980px; font-family:var(--mono); font-size:12px; background:var(--pill-bg); color:var(--text3); border:1px solid var(--pill-border); transition:all 0.18s; cursor:default; }
+    .pill:hover { background:rgba(139,32,32,0.15); border-color:rgba(192,64,64,0.3); color:var(--red2); }
+    .pill.learning { background:rgba(155,107,138,0.12); border-color:rgba(155,107,138,0.25); color:var(--accent2); }
 
-    /* ═══════════════════════════════
-       CTF VAULT
-    ═══════════════════════════════ */
-    .vault-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 14px; }
-    .vault-card { }
-    /* Accent top bar */
-    .vault-card::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--accent2),var(--accent)); opacity:0; transition:opacity 0.25s; border-radius:var(--r-lg) var(--r-lg) 0 0; }
-    .vault-card:hover::after { opacity:1; }
-    .vault-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
-    .vault-platform-badge { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.06em; padding: 3px 9px; border-radius: 6px; }
-    .vault-platform-badge.thm { background: rgba(52,199,89,0.12); color: var(--green); border: 1px solid rgba(52,199,89,0.2); }
-    .vault-platform-badge.htb { background: rgba(90,200,250,0.12); color: var(--teal); border: 1px solid rgba(90,200,250,0.2); }
-    .vault-diff { font-family: var(--mono); font-size: 10px; font-weight: 600; padding: 3px 9px; border-radius: 6px; }
-    .diff-easy { background: rgba(52,199,89,0.1); color: var(--green); border: 1px solid rgba(52,199,89,0.2); }
-    .diff-medium { background: rgba(255,149,0,0.1); color: var(--orange); border: 1px solid rgba(255,149,0,0.2); }
-    .vault-title { font-size: 16px; font-weight: 700; letter-spacing: -0.025em; color: var(--text); margin-bottom: 7px; transition: color 0.4s; }
-    .vault-desc { font-size: 13px; line-height: 1.62; color: var(--text3); transition: color 0.4s; }
-    .vault-footer { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--glass-border-subtle); }
-    .tag { font-family: var(--mono); font-size: 10px; padding: 2px 8px; border-radius: 6px; background: rgba(88,86,214,0.1); color: var(--accent2); border: 1px solid rgba(88,86,214,0.2); }
-
-    /* ═══════════════════════════════
-       SYBERVAULT — dark island
-    ═══════════════════════════════ */
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       SYBERVAULT
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
     #sybervault {
-      background: #000; padding: 100px 44px;
-      max-width: 100%; margin: 0; position: relative; overflow: hidden;
+      background: #020408;
+      padding:100px 0; position:relative; overflow:hidden; z-index:10;
     }
     #sybervault::before {
       content:''; position:absolute; inset:0; pointer-events:none;
       background:
-        radial-gradient(ellipse 60% 50% at 10% 30%, rgba(255,45,85,0.1) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 60% at 90% 70%, rgba(94,92,230,0.12) 0%, transparent 60%);
+        radial-gradient(ellipse 55% 60% at 5% 30%, rgba(139,32,32,0.2) 0%,transparent 60%),
+        radial-gradient(ellipse 45% 55% at 95% 70%, rgba(26,36,86,0.35) 0%,transparent 60%),
+        radial-gradient(ellipse 40% 40% at 50% 100%, rgba(26,36,86,0.15) 0%,transparent 60%);
     }
+    /* Fine grid */
     #sybervault::after {
       content:''; position:absolute; inset:0; pointer-events:none;
-      background-image: linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
-      background-size: 48px 48px;
+      background-image:linear-gradient(rgba(123,140,222,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(123,140,222,0.04) 1px,transparent 1px);
+      background-size:52px 52px;
     }
-    html.dark #sybervault { background: #050507; }
-    .sv-inner { max-width: 100%; margin: 0; position: relative; z-index: 2; padding: 0 44px; }
-    .sv-eyebrow { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 12px; }
-    .sv-heading { font-size: clamp(40px,6vw,72px); font-weight: 900; letter-spacing: -0.04em; line-height: 1.0; margin-bottom: 16px; }
-    .sv-heading .s { background: linear-gradient(120deg,#ff2d55,#ff6b38); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-    .sv-heading .v { background: linear-gradient(120deg,#5e5ce6,#0071e3,#00d2d3); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-    .sv-sub { font-family: var(--mono); font-size: 13px; color: rgba(255,255,255,0.3); letter-spacing: 0.02em; margin-bottom: 56px; }
-    .sv-hint { color: rgba(255,255,255,0.18); font-style: italic; }
-    .sv-category { margin-bottom: 40px; }
-    .sv-category + .sv-category { margin-top: 60px; }
-    .sv-cat-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.06); }
-    .sv-cat-icon { font-size: 15px; width: 32px; height: 32px; border-radius: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .sv-cat-icon.f { background: rgba(113,195,247,0.12); }
-    .sv-cat-icon.t { background: rgba(176,38,255,0.12); }
-    .sv-cat-icon.k { background: rgba(255,107,56,0.12); }
-    .sv-cat-icon.e { background: rgba(72,202,228,0.12); }
-    .sv-cat-name { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.8); }
-    .sv-cat-count { font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,0.25); margin-left: auto; }
-    .sv-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
-    @media(max-width:1100px){.sv-grid{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:640px){.sv-grid{grid-template-columns:1fr}}
-    .sv-note {
-      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 14px; padding: 18px 20px;
-      transition: all 0.22s ease; position: relative; overflow: hidden; cursor: pointer;
+    /* Extra film grain on sybervault */
+    #sybervault .sv-grain {
+      position:absolute; inset:0; pointer-events:none; z-index:1; opacity:0.07;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+      background-size:180px 180px; mix-blend-mode:screen;
     }
-    .sv-note::after { content:''; position:absolute; top:0; left:0; right:0; height:1px; opacity:0; transition:opacity 0.25s; }
-    .sv-note.f::after{background:linear-gradient(90deg,#2c6cbc,#71c3f7)}
-    .sv-note.t::after{background:linear-gradient(90deg,#4a00e0,#b026ff)}
-    .sv-note.k::after{background:linear-gradient(90deg,#ff2d55,#ff6b38)}
-    .sv-note.e::after{background:linear-gradient(90deg,#00b4d8,#48cae4)}
-    .sv-note:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.4); }
+    .sv-inner { max-width:1100px; margin:0 auto; padding:0 44px; position:relative; z-index:2; }
+    .notes-toolbar { display:flex; align-items:center; justify-content:space-between; padding:12px 18px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px 12px 0 0; }
+    .notes-toolbar-left { display:flex; align-items:center; gap:7px; }
+    .notes-dot { width:11px; height:11px; border-radius:50%; }
+    .notes-dot.red   { background:#ff5f57; box-shadow:0 0 0 1px rgba(255,95,87,0.35); }
+    .notes-dot.amber { background:#febc2e; box-shadow:0 0 0 1px rgba(254,188,46,0.35); }
+    .notes-dot.green { background:#28c840; box-shadow:0 0 0 1px rgba(40,200,64,0.35); }
+    .notes-toolbar-title { font-family:var(--mono); font-size:12px; font-weight:600; color:rgba(255,255,255,0.35); }
+    .notes-toolbar-count { font-family:var(--mono); font-size:11px; color:rgba(255,255,255,0.2); }
+    .sv-eyebrow { font-family:var(--mono); font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.25); margin-bottom:12px; }
+    .sv-heading { font-size:clamp(38px,5.5vw,68px); font-weight:900; letter-spacing:-0.04em; line-height:1.0; margin-bottom:14px; }
+    .sv-heading .s { background:linear-gradient(120deg,#c04040,#e06060); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .sv-heading .v { background:linear-gradient(120deg,#4a5fb8,#7b8cde,#9eb0f0); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .sv-sub { font-family:var(--mono); font-size:13px; color:rgba(255,255,255,0.25); margin-bottom:52px; }
+    .sv-category { margin-bottom:44px; }
+    .sv-cat-header { display:flex; align-items:center; gap:10px; margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.05); }
+    .sv-cat-icon { font-size:14px; width:30px; height:30px; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .sv-cat-icon.f { background:rgba(74,122,90,0.15); }
+    .sv-cat-icon.t { background:rgba(139,32,32,0.2); }
+    .sv-cat-icon.k { background:rgba(184,112,64,0.15); }
+    .sv-cat-icon.e { background:rgba(58,106,122,0.15); }
+    .sv-cat-name { font-size:13px; font-weight:600; color:rgba(255,255,255,0.7); }
+    .sv-cat-count { font-family:var(--mono); font-size:10px; color:rgba(255,255,255,0.2); margin-left:auto; }
+    .sv-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+    .sv-note { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:12px; padding:16px 18px; transition:all 0.22s; position:relative; overflow:hidden; cursor:pointer; }
+    .sv-note::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; opacity:0; transition:opacity 0.25s; }
+    .sv-note.f::after{background:linear-gradient(90deg,#2a5a3a,#5a9a6a)} .sv-note.t::after{background:linear-gradient(90deg,#6b1515,#c04040)} .sv-note.k::after{background:linear-gradient(90deg,#6a4020,#c08040)} .sv-note.e::after{background:linear-gradient(90deg,#1a3a5a,#4a8aaa)}
+    .sv-note:hover { background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.11); transform:translateY(-2px); box-shadow:0 10px 30px rgba(0,0,0,0.4); }
     .sv-note:hover::after { opacity:1; }
-    .sv-note.open { background: rgba(255,255,255,0.09); border-color: rgba(255,255,255,0.15); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+    .sv-note.open { background:rgba(255,255,255,0.07); border-color:rgba(255,255,255,0.13); }
     .sv-note.open::after { opacity:1; }
-    .sv-note-arrow { position:absolute; top:18px; right:18px; font-size:12px; color:rgba(255,255,255,0.22); transition:transform 0.28s,color 0.2s; }
+    .sv-note-arrow { position:absolute; top:16px; right:16px; font-size:11px; color:rgba(255,255,255,0.2); transition:transform 0.28s,color 0.2s; }
     .sv-note.open .sv-note-arrow { transform:rotate(45deg); color:rgba(255,255,255,0.5); }
-    .sv-note-label { font-family:var(--mono); font-size:9px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:8px; }
-    .sv-note-label.f{color:#71c3f7} .sv-note-label.t{color:#b026ff} .sv-note-label.k{color:#ff6b38} .sv-note-label.e{color:#48cae4}
-    .sv-note-title { font-size:14px; font-weight:600; color:rgba(255,255,255,0.9); letter-spacing:-0.02em; line-height:1.3; margin-bottom:7px; }
-    .sv-note-desc { font-size:12px; line-height:1.6; color:rgba(255,255,255,0.32); }
-    .sv-note-tags { display:flex; flex-wrap:wrap; gap:5px; margin-top:11px; }
+    .sv-note-label { font-family:var(--mono); font-size:9px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:7px; }
+    .sv-note-label.f{color:#5a9a6a} .sv-note-label.t{color:#c04040} .sv-note-label.k{color:#c08040} .sv-note-label.e{color:#5a9aaa}
+    .sv-note-title { font-size:13.5px; font-weight:600; color:rgba(255,255,255,0.88); letter-spacing:-0.02em; line-height:1.3; margin-bottom:6px; }
+    .sv-note-desc { font-size:11.5px; line-height:1.6; color:rgba(255,255,255,0.3); }
+    .sv-note-tags { display:flex; flex-wrap:wrap; gap:5px; margin-top:10px; }
     .sv-tag { font-family:var(--mono); font-size:9px; padding:2px 7px; border-radius:5px; letter-spacing:0.04em; }
-    .sv-tag.f{background:rgba(113,195,247,0.1);color:#71c3f7} .sv-tag.t{background:rgba(176,38,255,0.1);color:#b026ff}
-    .sv-tag.k{background:rgba(255,107,56,0.1);color:#ff6b38} .sv-tag.e{background:rgba(72,202,228,0.1);color:#48cae4}
-    .sv-note-body { max-height:0; overflow:hidden; transition:max-height 0.4s cubic-bezier(0.16,1,0.3,1),opacity 0.3s; opacity:0; margin-top:0; }
-    .sv-note.open .sv-note-body { max-height:600px; opacity:1; margin-top:14px; }
-    .sv-note-body-inner { padding-top:13px; border-top:1px solid rgba(255,255,255,0.07); }
-    .sv-note-body p { font-size:12.5px; line-height:1.72; color:rgba(255,255,255,0.55); margin-bottom:8px; }
-    .sv-note-body strong { color:rgba(255,255,255,0.85); font-weight:600; }
-    .sv-note-body ul { padding-left:18px; margin:8px 0; }
-    .sv-note-body li { font-size:12px; line-height:1.65; color:rgba(255,255,255,0.45); margin-bottom:4px; list-style:disc; }
-    .sv-note-link { display:inline-flex; align-items:center; gap:5px; margin-top:13px; font-family:var(--mono); font-size:10px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; opacity:1; transition:gap 0.2s,background 0.2s,box-shadow 0.2s; padding:5px 12px; border-radius:8px; border:1px solid; }
-    .sv-note-link.f{color:#71c3f7;border-color:rgba(113,195,247,0.25);background:rgba(113,195,247,0.07)}
-    .sv-note-link.t{color:#b026ff;border-color:rgba(176,38,255,0.25);background:rgba(176,38,255,0.07)}
-    .sv-note-link.k{color:#ff6b38;border-color:rgba(255,107,56,0.25);background:rgba(255,107,56,0.07)}
-    .sv-note-link.e{color:#48cae4;border-color:rgba(72,202,228,0.25);background:rgba(72,202,228,0.07)}
+    .sv-tag.f{background:rgba(74,122,90,0.12);color:#5a9a6a} .sv-tag.t{background:rgba(139,32,32,0.12);color:#c04040} .sv-tag.k{background:rgba(184,112,64,0.12);color:#c08040} .sv-tag.e{background:rgba(58,106,122,0.12);color:#5a9aaa}
+    .sv-note-link { display:inline-flex; align-items:center; gap:5px; margin-top:12px; font-family:var(--mono); font-size:10px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; opacity:1; transition:gap 0.2s,background 0.2s; padding:5px 12px; border-radius:8px; border:1px solid; }
+    .sv-note-link.f{color:#5a9a6a;border-color:rgba(74,122,90,0.3);background:rgba(74,122,90,0.08)} .sv-note-link.t{color:#c04040;border-color:rgba(139,32,32,0.3);background:rgba(139,32,32,0.08)} .sv-note-link.k{color:#c08040;border-color:rgba(184,112,64,0.3);background:rgba(184,112,64,0.08)} .sv-note-link.e{color:#5a9aaa;border-color:rgba(58,106,122,0.3);background:rgba(58,106,122,0.08)}
     .sv-note-link:hover{gap:8px}
-    .sv-note-link:hover{gap:10px;opacity:0.9}
+    .sv-note-body { max-height:0; overflow:hidden; transition:max-height 0.4s cubic-bezier(0.16,1,0.3,1),opacity 0.3s; opacity:0; }
+    .sv-note.open .sv-note-body { max-height:600px; opacity:1; margin-top:12px; }
+    .sv-note-body-inner { padding-top:12px; border-top:1px solid rgba(255,255,255,0.06); }
+    .sv-note-body p { font-size:12px; line-height:1.7; color:rgba(255,255,255,0.45); margin-bottom:7px; }
+    .sv-note-body strong { color:rgba(255,255,255,0.8); font-weight:600; }
+    .sv-note-body ul { padding-left:16px; margin:6px 0; }
+    .sv-note-body li { font-size:11.5px; line-height:1.65; color:rgba(255,255,255,0.4); margin-bottom:3px; }
 
-    /* ═══════════════════════════════
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       TERMINAL
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .terminal-window { background:rgba(2,4,8,0.9); border:1px solid var(--glass-border); border-radius:var(--r-lg); overflow:hidden; box-shadow:0 32px 80px rgba(0,0,0,0.6); }
+    .terminal-titlebar { display:flex; align-items:center; gap:8px; padding:12px 16px; background:rgba(255,255,255,0.03); border-bottom:1px solid rgba(255,255,255,0.06); }
+    .tbar-dot { width:11px; height:11px; border-radius:50%; }
+    .tbar-dot.r{background:#ff5f57} .tbar-dot.a{background:#febc2e} .tbar-dot.g{background:#28c840}
+    .tbar-title { font-size:12px; color:rgba(255,255,255,0.3); margin-left:8px; font-family:var(--mono); }
+    .terminal-body { padding:20px 24px; min-height:280px; max-height:380px; overflow-y:auto; font-size:13px; line-height:1.8; }
+    .terminal-body::-webkit-scrollbar{width:3px} .terminal-body::-webkit-scrollbar-thumb{background:rgba(123,140,222,0.2);border-radius:2px}
+    .t-line { display:flex; gap:8px; margin-bottom:2px; }
+    .t-prompt{color:#5a9a6a;flex-shrink:0} .t-user{color:#7b8cde} .t-at{color:var(--text4)} .t-host{color:var(--accent2)} .t-cmd{color:var(--text)}
+    .t-output{color:var(--text3)} .t-output.green{color:#5a9a6a} .t-output.blue{color:#7b8cde} .t-output.red{color:#c04040} .t-output.yellow{color:#c08040} .t-output.purple{color:var(--accent2)} .t-output.dim{color:var(--text4)}
+    .terminal-input-row { display:flex; align-items:center; gap:8px; padding:12px 24px; border-top:1px solid rgba(255,255,255,0.06); background:rgba(255,255,255,0.02); }
+    .t-input-prompt{color:#5a9a6a;font-family:var(--mono);font-size:13px;flex-shrink:0}
+    .t-input { flex:1; background:none; border:none; outline:none; color:var(--text); font-family:var(--mono); font-size:13px; caret-color:#5a9a6a; }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        CONTACT
-    ═══════════════════════════════ */
-    #contact { padding-bottom: 140px; }
-    .email-block {
-      padding: 24px 28px; border-radius: var(--r-lg);
-      background: var(--glass); border: 1px solid var(--glass-border);
-      box-shadow: var(--glass-shadow);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      margin-bottom: 14px; position: relative; overflow: hidden;
-      transition: background 0.4s;
-    }
-    .email-block::before { content:''; position:absolute; inset:0; background:var(--specular); pointer-events:none; }
-    .email-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
-    .email-addr { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; color: var(--text); transition: color 0.4s; }
-    .contact-links { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
-    .contact-link { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; }
-    .contact-link:hover .contact-link-name { color: var(--accent); }
-    .contact-link:hover .contact-icon { border-color: rgba(0,122,255,0.3); background: rgba(0,122,255,0.08); }
-    .contact-icon {
-      width: 48px; height: 48px; border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; border: 1px solid var(--glass-border);
-      background: var(--glass); backdrop-filter: blur(20px);
-      box-shadow: var(--glass-shadow); transition: all 0.2s; position: relative; overflow: hidden;
-    }
-    .contact-icon::before { content:''; position:absolute; inset:0; background:var(--specular); pointer-events:none; border-radius:13px; }
-    .contact-link-name { font-size: 14px; font-weight: 600; color: var(--text); transition: color 0.2s; }
-    .contact-link-handle { font-family: var(--mono); font-size: 11px; color: var(--text4); margin-top: 2px; transition: color 0.4s; }
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .email-block { padding:24px 28px; border-radius:var(--r-lg); background:var(--glass); border:1px solid var(--glass-border); box-shadow:var(--glass-shadow); backdrop-filter:blur(20px); margin-bottom:14px; position:relative; overflow:hidden; cursor:pointer; transition:all 0.2s; }
+    .email-block:hover { transform:translateY(-2px); box-shadow:var(--glass-shadow-lg); }
+    .email-block::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(139,32,32,0.06) 0%,transparent 60%); pointer-events:none; }
+    .email-label { font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--red2); margin-bottom:6px; }
+    .email-addr { font-size:20px; font-weight:700; letter-spacing:-0.025em; color:var(--text); }
+    .contact-links { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+    .contact-link { display:flex; align-items:center; gap:14px; text-decoration:none; color:inherit; }
+    .contact-link:hover .contact-link-name { color:var(--accent); }
+    .contact-link:hover .contact-icon { border-color:rgba(123,140,222,0.3); background:rgba(123,140,222,0.08); }
+    .contact-icon { width:46px; height:46px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; border:1px solid var(--glass-border); background:var(--glass); backdrop-filter:blur(20px); transition:all 0.2s; }
+    .contact-link-name { font-size:14px; font-weight:600; color:var(--text); transition:color 0.2s; }
+    .contact-link-handle { font-family:var(--mono); font-size:11px; color:var(--text4); margin-top:2px; }
 
-    footer {
-      position: relative; z-index: 1; text-align: center; padding: 28px 44px;
-      border-top: 1px solid var(--glass-border-subtle);
-      font-family: var(--mono); font-size: 11px; color: var(--text4);
-      letter-spacing: 0.04em; transition: border-color 0.4s, color 0.4s;
-    }
+    footer { position:relative; z-index:10; text-align:center; padding:28px 44px; border-top:1px solid var(--glass-border-subtle); font-family:var(--mono); font-size:11px; color:var(--text4); letter-spacing:0.04em; }
 
-    @keyframes fadeUp { to{opacity:1;transform:translateY(0)} }
-    ::-webkit-scrollbar{width:5px} ::-webkit-scrollbar-track{background:transparent} ::-webkit-scrollbar-thumb{background:rgba(128,128,128,0.2);border-radius:3px}
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       BOOT SCREEN
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    #boot-screen { position:fixed; inset:0; z-index:99999; background:#000; display:flex; flex-direction:column; align-items:center; justify-content:center; font-family:var(--mono); transition:opacity 0.6s ease; }
+    #boot-screen.fade-out { opacity:0; pointer-events:none; }
+    .boot-logo { font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:rgba(255,255,255,0.25); margin-bottom:48px; }
+    .boot-lines { width:480px; max-width:90vw; }
+    .boot-line { font-size:12px; line-height:1.9; color:rgba(255,255,255,0); transition:color 0.3s; display:flex; align-items:center; gap:12px; }
+    .boot-line.show { color:rgba(255,255,255,0.65); }
+    .boot-line .bl-status { margin-left:auto; font-size:11px; }
+    .bl-ok { color:#5a9a6a; } .bl-warn { color:#c08040; }
+    .boot-bar-wrap { width:480px; max-width:90vw; margin-top:28px; height:2px; background:rgba(255,255,255,0.06); border-radius:2px; overflow:hidden; }
+    .boot-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,#1a2456,#7b8cde,#8b2020); border-radius:2px; transition:width 0.4s ease; }
+    .boot-skip { position:absolute; bottom:28px; right:28px; font-size:11px; color:rgba(255,255,255,0.2); cursor:pointer; letter-spacing:0.08em; }
+    .boot-skip:hover { color:rgba(255,255,255,0.6); }
 
-    @media(max-width:640px){
-      nav{width:calc(100% - 32px);top:12px}
-      .nav-links{display:none} .nav-menu-btn{display:flex}
-      section{padding:80px 20px}
-      #sybervault{padding:80px 20px} .sv-inner{padding:0}
-      .hero-scroll-hint{left:20px}
-      .contact-links{grid-template-columns:1fr}
-    }
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       FLAG MODAL
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .flag-modal { position:fixed; inset:0; z-index:9999; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.75); backdrop-filter:blur(20px); opacity:0; pointer-events:none; transition:opacity 0.3s; }
+    .flag-modal.show { opacity:1; pointer-events:all; }
+    .flag-box { background:#020408; border:1px solid rgba(192,64,64,0.4); border-radius:20px; padding:40px 48px; text-align:center; font-family:var(--mono); max-width:460px; width:90%; box-shadow:0 0 60px rgba(192,64,64,0.25); animation:flagAppear 0.4s cubic-bezier(0.16,1,0.3,1); }
+    @keyframes flagAppear { from{transform:scale(0.85);opacity:0} to{transform:scale(1);opacity:1} }
+    .flag-icon { font-size:44px; margin-bottom:14px; }
+    .flag-title { font-size:17px; font-weight:700; color:#c04040; margin-bottom:7px; }
+    .flag-subtitle { font-size:11px; color:rgba(255,255,255,0.35); margin-bottom:22px; }
+    .flag-value { font-size:13px; color:#c08040; background:rgba(192,128,64,0.08); border:1px solid rgba(192,128,64,0.25); padding:10px 18px; border-radius:8px; letter-spacing:0.04em; margin-bottom:22px; word-break:break-all; }
+    .flag-close { font-size:11px; color:rgba(255,255,255,0.25); cursor:pointer; letter-spacing:0.08em; text-transform:uppercase; }
+    .flag-close:hover { color:rgba(255,255,255,0.6); }
 
-    /* ══════════════════════════════════════════
-       DYNAMIC ISLAND — top notification
-    ══════════════════════════════════════════ */
-    .dynamic-island {
-      position: fixed;
-      top: 14px; left: 50%; transform: translateX(-50%) scaleX(0.4);
-      z-index: 300;
-      background: #000;
-      border-radius: 40px;
-      height: 36px; width: 126px;
-      display: flex; align-items: center; justify-content: center;
-      gap: 8px;
-      transition: all 0.5s cubic-bezier(0.34,1.56,0.64,1);
-      cursor: pointer;
-      overflow: hidden;
-      opacity: 0;
-    }
-    .dynamic-island.visible {
-      opacity: 1; transform: translateX(-50%) scaleX(1);
-    }
-    .dynamic-island.expanded {
-      width: 320px; height: 56px; border-radius: 28px;
-      transform: translateX(-50%) scaleX(1);
-    }
-    .di-dot { width: 8px; height: 8px; border-radius: 50%; background: #1db954; flex-shrink: 0; animation: diPulse 1.5s ease-in-out infinite; }
-    .di-text { font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.9); letter-spacing: 0.04em; white-space: nowrap; overflow: hidden; max-width: 0; transition: max-width 0.4s 0.1s; }
-    .dynamic-island.expanded .di-text { max-width: 260px; }
-    @keyframes diPulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.6;transform:scale(0.85)} }
+    /* TOAST */
+    .toast { position:fixed; bottom:28px; left:50%; transform:translateX(-50%) translateY(16px); z-index:9998; background:rgba(10,13,28,0.95); border:1px solid var(--glass-border); border-radius:980px; padding:10px 20px; font-family:var(--mono); font-size:12px; color:var(--text); backdrop-filter:blur(20px); opacity:0; transition:all 0.3s; pointer-events:none; white-space:nowrap; }
+    .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
 
-    /* ══════════════════════════════════════════
-       APP STORE — cert cards
-    ══════════════════════════════════════════ */
+    /* CURSOR */
+    .cursor-dot { position:fixed; border-radius:50%; pointer-events:none; z-index:9500; }
 
-    /* Horizontal scroll row */
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       RESPONSIVE
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    @media(max-width:1100px) { .sv-grid{grid-template-columns:repeat(2,1fr)} }
 
-    /* ══════════════════════════════════════════
-       APPLE MUSIC — SyberVault header player
-    ══════════════════════════════════════════ */
-    .music-player {
-      display: flex; align-items: center; gap: 14px;
-      padding: 14px 18px; border-radius: 18px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      backdrop-filter: blur(20px);
-      margin-bottom: 48px;
-      max-width: 420px;
-      position: relative; overflow: hidden;
-      cursor: pointer;
-      transition: all 0.25s;
-    }
-    .music-player::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,0.08) 0%,transparent 60%); pointer-events:none; }
-    .music-player:hover { background: rgba(255,255,255,0.09); transform: translateY(-1px); }
-
-    .music-artwork {
-      width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
-      background: linear-gradient(135deg, #ff2d55, #ff6b38);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      position: relative; overflow: hidden;
-      animation: vinylSpin 4s linear infinite paused;
-    }
-    .music-player.playing .music-artwork { animation-play-state: running; }
-    @keyframes vinylSpin { to { transform: rotate(360deg); } }
-
-    .music-info { flex: 1; min-width: 0; }
-    .music-title { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.9); letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .music-artist { font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 2px; }
-
-    .music-controls { display: flex; align-items: center; gap: 8px; }
-    .music-btn {
-      width: 32px; height: 32px; border-radius: 50%; border: none; cursor: pointer;
-      background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 13px; transition: all 0.18s;
-    }
-    .music-btn:hover { background: rgba(255,255,255,0.2); color: #fff; transform: scale(1.1); }
-    .music-btn.play-btn { width: 36px; height: 36px; background: rgba(255,255,255,0.15); font-size: 15px; }
-    .music-progress {
-      position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-      background: rgba(255,255,255,0.08);
-    }
-    .music-progress-fill {
-      height: 100%; width: 0%;
-      background: linear-gradient(90deg, #ff2d55, #ff6b38);
-      transition: width 0.5s linear;
+    @media(max-width:768px) {
+      section { padding:72px 20px; }
+      .divider { margin:0 20px; }
+      #hero { padding:100px 20px 72px; }
+      nav { width:calc(100% - 24px); top:10px; }
+      .nav-links { display:none; }
+      .nav-menu-btn { display:flex; }
+      .stack-groups { grid-template-columns:1fr; }
+      .cert-grid, .vault-grid { grid-template-columns:1fr; }
+      .contact-links { grid-template-columns:1fr; }
+      .sv-inner { padding:0 20px; }
+      #sybervault { padding:72px 0; }
+      .sv-grid { grid-template-columns:1fr; }
+      .hero-desc { font-size:15px; }
+      footer { padding:24px 20px; }
     }
 
-    /* ══════════════════════════════════════════
-       APPLE NOTES — CTF writeup cards
-    ══════════════════════════════════════════ */
-    .notes-card {
-      background: var(--glass);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--r-lg);
-      box-shadow: var(--glass-shadow);
-      padding: 0; overflow: hidden;
-      position: relative;
-      transition: transform 0.26s, box-shadow 0.26s, background 0.4s;
+    @media(max-width:480px) {
+      .hero-fullname { font-size:clamp(38px,10vw,60px); }
+      .sec-title { font-size:clamp(22px,6vw,32px); }
+      .sv-heading { font-size:clamp(32px,8vw,52px); }
+      .hero-badges { gap:6px; }
+      .hero-badge { font-size:11px; padding:5px 11px; }
+      .hero-cta { flex-direction:column; align-items:center; }
+      .btn { width:100%; justify-content:center; }
     }
-    .notes-card::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.8),transparent); pointer-events:none; }
-    .notes-card:hover { transform: translateY(-4px) scale(1.005); box-shadow: var(--glass-shadow-lg); }
-
-    .notes-card-header {
-      padding: 14px 16px 10px;
-      border-bottom: 1px solid var(--glass-border-subtle);
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .notes-card-platform { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.06em; padding: 3px 9px; border-radius: 6px; }
-    .notes-card-platform.thm { background: rgba(52,199,89,0.12); color: var(--green); border: 1px solid rgba(52,199,89,0.2); }
-    .notes-card-platform.htb { background: rgba(90,200,250,0.12); color: var(--teal); border: 1px solid rgba(90,200,250,0.2); }
-    .notes-card-diff { font-family: var(--mono); font-size: 10px; font-weight: 600; padding: 3px 9px; border-radius: 6px; }
-    .diff-easy { background: rgba(52,199,89,0.1); color: var(--green); border: 1px solid rgba(52,199,89,0.2); }
-    .diff-medium { background: rgba(255,149,0,0.1); color: var(--orange); border: 1px solid rgba(255,149,0,0.2); }
-
-    .notes-card-body { padding: 12px 16px 16px; }
-    .notes-title { font-size: 15px; font-weight: 700; letter-spacing: -0.025em; color: var(--text); margin-bottom: 6px; transition: color 0.4s; }
-    .notes-desc { font-size: 13px; line-height: 1.6; color: var(--text3); transition: color 0.4s; }
-    .notes-footer { display: flex; gap: 6px; flex-wrap: wrap; padding: 10px 16px 14px; border-top: 1px solid var(--glass-border-subtle); }
-    .notes-tag { font-family: var(--mono); font-size: 10px; padding: 2px 8px; border-radius: 6px; background: rgba(88,86,214,0.1); color: var(--accent2); border: 1px solid rgba(88,86,214,0.2); }
-
-    /* ══════════════════════════════════════════
-       STACK CARDS — iPhone app icon grid style
-    ══════════════════════════════════════════ */
-    .stack-card {
-      background: var(--glass);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--r-lg);
-      box-shadow: var(--glass-shadow);
-      padding: 20px;
-      position: relative; overflow: hidden;
-      transition: transform 0.26s, box-shadow 0.26s, background 0.4s;
-    }
-    .stack-card::before { content:''; position:absolute; inset:0; background:var(--specular); pointer-events:none; }
-    .stack-card:hover { transform: translateY(-3px) scale(1.005); box-shadow: var(--glass-shadow-lg); }
-
-    /* Contact section — iMessage style */
-    .imessage-block {
-      background: var(--glass);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--r-lg);
-      box-shadow: var(--glass-shadow);
-      padding: 20px 24px; margin-bottom: 14px;
-      position: relative; overflow: hidden;
-    }
-    .imessage-block::before { content:''; position:absolute; inset:0; background:var(--specular); pointer-events:none; }
-    .imessage-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-    .imessage-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--accent2), var(--accent)); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #fff; flex-shrink: 0; }
-    .imessage-name { font-size: 13px; font-weight: 600; color: var(--text); transition: color 0.4s; }
-    .imessage-status { font-size: 11px; color: var(--green); font-family: var(--mono); }
-    .imessage-bubble {
-      display: inline-block;
-      background: var(--accent);
-      color: #fff; font-size: 15px; font-weight: 500;
-      padding: 10px 16px; border-radius: 18px 18px 4px 18px;
-      box-shadow: 0 2px 8px rgba(0,122,255,0.35);
-      letter-spacing: -0.01em;
-    }
-  
-    /* ══════════════════════════════════════
-       APPLE-INSPIRED UI COMPONENTS
-    ══════════════════════════════════════ */
-
-    
-
-    
-    .np-info { display: flex; flex-direction: column; gap: 1px; }
-    .np-label { font-family: var(--mono); font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
-    .np-track { font-size: 13px; font-weight: 600; color: var(--text); letter-spacing: -0.01em; }
-
-    /* NOTES APP STYLE — for SyberVault header */
-    .notes-toolbar {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 20px;
-      background: var(--glass);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 14px 14px 0 0;
-      margin-bottom: 0;
-      position: relative; overflow: hidden;
-    }
-    .notes-toolbar::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,0.08) 0%,transparent 60%); pointer-events:none; }
-    .notes-toolbar-left { display: flex; align-items: center; gap: 8px; }
-    .notes-dot { width: 12px; height: 12px; border-radius: 50%; }
-    .notes-dot.red   { background: #ff5f57; box-shadow: 0 0 0 1px rgba(255,95,87,0.4); }
-    .notes-dot.amber { background: #febc2e; box-shadow: 0 0 0 1px rgba(254,188,46,0.4); }
-    .notes-dot.green { background: #28c840; box-shadow: 0 0 0 1px rgba(40,200,64,0.4); }
-    .notes-toolbar-title { font-family: var(--mono); font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.5); letter-spacing: 0.04em; }
-    .notes-toolbar-count { font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.25); }
-
-    /* LOCK SCREEN STYLE — stat widgets in hero */
-    .hero-stats {
-      display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
-      margin-top: 28px;
-      opacity: 0; transform: translateY(12px); animation: fadeUp 0.6s 0.72s ease forwards;
-    }
-    .stat-widget {
-      display: flex; flex-direction: column; align-items: center; gap: 2px;
-      padding: 14px 20px; border-radius: 18px; min-width: 90px;
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      box-shadow: var(--glass-shadow);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      position: relative; overflow: hidden;
-      transition: all 0.2s ease;
-    }
-    .stat-widget::before { content:''; position:absolute; inset:0; background:var(--specular); pointer-events:none; border-radius:18px; }
-    .stat-widget:hover { transform: translateY(-3px) scale(1.04); box-shadow: var(--glass-shadow-lg); }
-    .stat-num { font-size: 24px; font-weight: 800; letter-spacing: -0.04em; color: var(--text); line-height: 1; }
-    .stat-label { font-family: var(--mono); font-size: 9px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text4); }
-    .get-btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      padding: 5px 16px; border-radius: 980px; font-size: 13px; font-weight: 700;
-      background: var(--pill-bg); color: var(--accent);
-      border: none; cursor: pointer; letter-spacing: -0.01em;
-      transition: all 0.15s; flex-shrink: 0;
-    }
-    .get-btn:hover { background: rgba(0,122,255,0.15); transform: scale(1.04); }
-
-    /* DYNAMIC ISLAND style — top notch for nav */
-    .dynamic-island-hint {
-      position: absolute; top: -6px; left: 50%; transform: translateX(-50%);
-      width: 80px; height: 6px; border-radius: 0 0 6px 6px;
-      background: rgba(0,0,0,0.15);
-      pointer-events: none;
-    }
-    html.dark .dynamic-island-hint { background: rgba(255,255,255,0.06); }
-
-    /* CONTROL CENTER toggle style for dark mode */
-    .theme-toggle {
-      width: 32px; height: 32px; border-radius: 50%;
-      background: var(--pill-bg);
-      border: 1px solid var(--glass-border);
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      color: var(--text3); transition: all 0.2s;
-      backdrop-filter: blur(10px);
-    }
-    .theme-toggle:hover { background: var(--accent); color: #fff; border-color: var(--accent); transform: scale(1.08); }
-
-  
-    /* ══════════════════════════════════════════
-       BOOT SEQUENCE OVERLAY
-    ══════════════════════════════════════════ */
-    #boot-screen {
-      position: fixed; inset: 0; z-index: 9999;
-      background: #000;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      font-family: var(--mono);
-      transition: opacity 0.6s ease;
-    }
-    #boot-screen.fade-out { opacity: 0; pointer-events: none; }
-    .boot-logo {
-      font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
-      color: rgba(255,255,255,0.3); margin-bottom: 48px;
-    }
-    .boot-lines { width: 480px; max-width: 90vw; }
-    .boot-line {
-      font-size: 12px; line-height: 1.8; color: rgba(255,255,255,0.0);
-      transition: color 0.3s;
-      display: flex; align-items: center; gap: 12px;
-    }
-    .boot-line.show { color: rgba(255,255,255,0.7); }
-    .boot-line .bl-status { margin-left: auto; font-size: 11px; }
-    .boot-line .bl-ok { color: #34c759; }
-    .boot-line .bl-warn { color: #ff9500; }
-    .boot-bar-wrap {
-      width: 480px; max-width: 90vw; margin-top: 32px;
-      height: 2px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden;
-    }
-    .boot-bar-fill {
-      height: 100%; width: 0%; background: linear-gradient(90deg, #0071e3, #5e5ce6);
-      border-radius: 2px; transition: width 0.4s ease;
-    }
-    .boot-skip {
-      position: absolute; bottom: 32px; right: 32px;
-      font-size: 11px; color: rgba(255,255,255,0.25); cursor: pointer;
-      letter-spacing: 0.08em; transition: color 0.2s;
-    }
-    .boot-skip:hover { color: rgba(255,255,255,0.6); }
-
-    /* ══════════════════════════════════════════
-       THREAT INTEL CARD
-    ══════════════════════════════════════════ */
-    .threat-card {
-      background: rgba(255,0,0,0.04);
-      border: 1px solid rgba(255,59,48,0.2);
-      border-radius: var(--r-lg);
-      padding: 24px 28px;
-      position: relative; overflow: hidden;
-      margin-bottom: 24px;
-      font-family: var(--mono);
-    }
-    .threat-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, #ff3b30, #ff9500, #ff3b30);
-      animation: threatScan 3s linear infinite;
-    }
-    @keyframes threatScan {
-      0% { background-position: -200% 0; }
-      100% { background-position: 200% 0; }
-    }
-    .threat-header {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 20px; padding-bottom: 14px;
-      border-bottom: 1px solid rgba(255,59,48,0.15);
-    }
-    .threat-classification {
-      font-size: 9px; font-weight: 700; letter-spacing: 0.2em;
-      color: #ff3b30; text-transform: uppercase;
-      background: rgba(255,59,48,0.1); border: 1px solid rgba(255,59,48,0.25);
-      padding: 3px 10px; border-radius: 4px;
-    }
-    .threat-id { font-size: 10px; color: rgba(255,255,255,0.25); }
-    .threat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .threat-field { }
-    .threat-label { font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 3px; }
-    .threat-value { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.85); }
-    .threat-value.highlight { color: #ff9500; }
-    .threat-value.green { color: #34c759; }
-    .threat-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(255,59,48,0.1); }
-    .threat-tag { font-size: 9px; padding: 2px 8px; border-radius: 4px; background: rgba(255,59,48,0.08); color: #ff6b6b; border: 1px solid rgba(255,59,48,0.18); letter-spacing: 0.06em; }
-    .threat-level { display: flex; align-items: center; gap: 6px; }
-    .threat-pip { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.1); }
-    .threat-pip.active { background: #ff3b30; box-shadow: 0 0 6px #ff3b30; }
-    .threat-pip.active.orange { background: #ff9500; box-shadow: 0 0 6px #ff9500; }
-
-    /* ══════════════════════════════════════════
-       TERMINAL PANEL
-    ══════════════════════════════════════════ */
-    #terminal-section { padding: 100px 44px; position: relative; z-index: 1; }
-    .terminal-wrap { max-width: 1100px; margin: 0 auto; }
-    .terminal-window {
-      background: rgba(0,0,0,0.85);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 16px; overflow: hidden;
-      box-shadow: 0 32px 80px rgba(0,0,0,0.5);
-      font-family: var(--mono);
-    }
-    .terminal-titlebar {
-      display: flex; align-items: center; gap: 8px;
-      padding: 12px 16px;
-      background: rgba(255,255,255,0.04);
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-    }
-    .tbar-dot { width: 12px; height: 12px; border-radius: 50%; }
-    .tbar-dot.r { background: #ff5f57; }
-    .tbar-dot.a { background: #febc2e; }
-    .tbar-dot.g { background: #28c840; }
-    .tbar-title { font-size: 12px; color: rgba(255,255,255,0.35); margin-left: 8px; letter-spacing: 0.04em; }
-    .terminal-body {
-      padding: 20px 24px; min-height: 320px; max-height: 420px;
-      overflow-y: auto; font-size: 13px; line-height: 1.8;
-    }
-    .terminal-body::-webkit-scrollbar { width: 4px; }
-    .terminal-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
-    .t-line { display: flex; gap: 8px; margin-bottom: 2px; }
-    .t-prompt { color: #34c759; flex-shrink: 0; }
-    .t-user { color: #0071e3; }
-    .t-at { color: rgba(255,255,255,0.3); }
-    .t-host { color: #5e5ce6; }
-    .t-cmd { color: #f5f5f7; }
-    .t-output { color: rgba(255,255,255,0.55); padding-left: 0; }
-    .t-output.green { color: #34c759; }
-    .t-output.blue { color: #5ac8fa; }
-    .t-output.red { color: #ff6b6b; }
-    .t-output.yellow { color: #ffd60a; }
-    .t-output.purple { color: #bf5af2; }
-    .t-output.dim { color: rgba(255,255,255,0.25); }
-    .terminal-input-row {
-      display: flex; align-items: center; gap: 8px;
-      padding: 12px 24px;
-      border-top: 1px solid rgba(255,255,255,0.07);
-      background: rgba(255,255,255,0.02);
-    }
-    .t-input-prompt { color: #34c759; font-family: var(--mono); font-size: 13px; flex-shrink: 0; }
-    .t-input {
-      flex: 1; background: none; border: none; outline: none;
-      color: #f5f5f7; font-family: var(--mono); font-size: 13px;
-      caret-color: #34c759;
-    }
-    .t-input::placeholder { color: rgba(255,255,255,0.2); }
-
-    /* ══════════════════════════════════════════
-       CTF MINI GAME — FLAG HUNT
-    ══════════════════════════════════════════ */
-    .flag-modal {
-      position: fixed; inset: 0; z-index: 8888;
-      display: flex; align-items: center; justify-content: center;
-      background: rgba(0,0,0,0.7); backdrop-filter: blur(20px);
-      opacity: 0; pointer-events: none; transition: opacity 0.3s;
-    }
-    .flag-modal.show { opacity: 1; pointer-events: all; }
-    .flag-box {
-      background: #000; border: 1px solid #34c759;
-      border-radius: 20px; padding: 40px 48px; text-align: center;
-      font-family: var(--mono); max-width: 480px; width: 90%;
-      box-shadow: 0 0 60px rgba(52,199,89,0.3);
-      animation: flagAppear 0.4s cubic-bezier(0.16,1,0.3,1);
-    }
-    @keyframes flagAppear { from{transform:scale(0.8);opacity:0} to{transform:scale(1);opacity:1} }
-    .flag-icon { font-size: 48px; margin-bottom: 16px; }
-    .flag-title { font-size: 18px; font-weight: 700; color: #34c759; margin-bottom: 8px; letter-spacing: -0.02em; }
-    .flag-subtitle { font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 24px; }
-    .flag-value { font-size: 14px; color: #ffd60a; background: rgba(255,214,10,0.1); border: 1px solid rgba(255,214,10,0.3); padding: 10px 20px; border-radius: 8px; letter-spacing: 0.04em; margin-bottom: 24px; word-break: break-all; }
-    .flag-close { font-size: 11px; color: rgba(255,255,255,0.3); cursor: pointer; letter-spacing: 0.08em; text-transform: uppercase; }
-    .flag-close:hover { color: rgba(255,255,255,0.7); }
-
-    /* Scroll progress bar */
-    #scroll-progress { position: fixed; top: 0; left: 0; z-index: 9000; height: 2px; width: 0%; background: linear-gradient(90deg,#0071e3,#5e5ce6,#ff2d55); transition: width 0.1s linear; }
-
-    /* Toast */
-    .toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(20px); z-index: 8000; background: rgba(28,28,30,0.92); border: 1px solid rgba(255,255,255,0.12); border-radius: 980px; padding: 10px 20px; font-family: var(--mono); font-size: 12px; color: #f5f5f7; backdrop-filter: blur(20px); opacity: 0; transition: all 0.3s; pointer-events:none; white-space:nowrap; }
-    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-    /* Cursor trail */
-    .cursor-dot { position: fixed; border-radius: 50%; pointer-events: none; z-index: 7000; transition: opacity 0.5s; }
-
-    /* Availability pill */
-    .availability-pill {
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 6px 14px; border-radius: 980px;
-      background: rgba(52,199,89,0.1);
-      border: 1px solid rgba(52,199,89,0.25);
-      font-family: var(--mono); font-size: 11px; font-weight: 600;
-      color: #34c759; letter-spacing: 0.04em;
-      margin-bottom: 20px;
-      opacity: 0; transform: translateY(12px); animation: fadeUp 0.6s 0.05s ease forwards;
-    }
-    .avail-dot { width: 7px; height: 7px; border-radius: 50%; background: #34c759; box-shadow: 0 0 0 0 rgba(52,199,89,0.4); animation: availPulse 2s infinite; }
-    @keyframes availPulse { 0%{box-shadow:0 0 0 0 rgba(52,199,89,0.5)} 70%{box-shadow:0 0 0 8px rgba(52,199,89,0)} 100%{box-shadow:0 0 0 0 rgba(52,199,89,0)} }
-
   </style>
 </head>
 <body>
-  <!-- SCROLL PROGRESS -->
-  <div id="scroll-progress"></div>
 
-  <!-- TOAST -->
+  <!-- Film layers -->
+  <div class="film-orb film-orb-1"></div>
+  <div class="film-orb film-orb-2"></div>
+  <div class="film-orb film-orb-3"></div>
+  <div class="film-orb film-orb-4"></div>
+  <div class="film-grain"></div>
+  <div class="film-leak film-leak-1"></div>
+  <div class="film-leak film-leak-2"></div>
+  <div class="film-leak film-leak-3"></div>
+  <div class="film-vignette"></div>
+  <div id="scroll-progress"></div>
   <div class="toast" id="toast"></div>
 
-  <!-- FLAG MODAL -->
+  <!-- Flag modal -->
   <div class="flag-modal" id="flagModal">
     <div class="flag-box">
       <div class="flag-icon">🚩</div>
       <div class="flag-title">Flag Captured!</div>
-      <div class="flag-subtitle">You found the hidden flag. Nice recon skills, hacker.</div>
+      <div class="flag-subtitle">Nice recon skills, hacker.</div>
       <div class="flag-value" id="flagValue">dvphnc{y0u_f0und_m3_g00d_r3c0n}</div>
       <div class="flag-close" onclick="document.getElementById('flagModal').classList.remove('show')">[ close ]</div>
     </div>
   </div>
 
-  <!-- BOOT SCREEN -->
+  <!-- Boot screen -->
   <div id="boot-screen">
     <div class="boot-logo">dvphnc OS v1.0</div>
     <div class="boot-lines" id="bootLines"></div>
@@ -1003,21 +542,26 @@
     <div class="boot-skip" onclick="skipBoot()">skip →</div>
   </div>
 
-<!-- NAV -->
+  <!-- NAV -->
   <nav id="navbar">
-    <div class="dynamic-island-hint"></div>
     <span class="nav-logo">dvphnc_</span>
     <ul class="nav-links">
       <li><a href="#certifications">Certs</a></li>
       <li><a href="#stacks">Stacks</a></li>
       <li><a href="#vault">CTF</a></li>
       <li><a href="#sybervault">SyberVault</a></li>
-      <li><a href="#terminal-section">Terminal</a></li><li><a href="#contact">Contact</a></li>
+      <li><a href="#terminal-section">Terminal</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><svg class="icon-sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><svg class="icon-moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
-    <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
 
   <div class="mobile-menu" id="mobileMenu">
@@ -1031,11 +575,6 @@
 
   <!-- HERO -->
   <section id="hero">
-    <!-- Floating orbs -->
-    <div class="hero-orb hero-orb-1"></div>
-    <div class="hero-orb hero-orb-2"></div>
-    <div class="hero-orb hero-orb-3"></div>
-
     <div class="hero-inner">
       <div class="availability-pill"><div class="avail-dot"></div>Open to opportunities · GMT+8</div>
       <p class="hero-tag">Aspiring Tech Virtual Assistant · BS Information Technology · 3rd Year</p>
@@ -1045,16 +584,13 @@
       </h1>
       <p class="hero-handle">@<span>dvphnc</span></p>
       <p class="hero-desc">Building at the crossroads of <strong>web development, cloud, and cybersecurity</strong>. Oracle-certified, CTF-curious, and learning every day — one room at a time.</p>
-
-      <!-- Credential badges -->
       <div class="hero-badges">
-        <span class="hero-badge"><span class="hero-badge-dot oracle"></span>Oracle Cloud Certified</span>
-        <span class="hero-badge"><span class="hero-badge-dot blue"></span>Laravel · React</span>
-        <span class="hero-badge"><span class="hero-badge-dot purple"></span>CTF · TryHackMe · HTB</span>
-        <span class="hero-badge"><span class="hero-badge-dot green"></span>Aspiring Tech VA</span>
+        <span class="hero-badge"><span class="badge-dot" style="background:#c74634"></span>Oracle Cloud Certified</span>
+        <span class="hero-badge"><span class="badge-dot" style="background:#7b8cde"></span>Laravel · React</span>
+        <span class="hero-badge"><span class="badge-dot" style="background:#9b6b8a"></span>CTF · TryHackMe · HTB</span>
+        <span class="hero-badge"><span class="badge-dot" style="background:#5a9a6a"></span>Aspiring Tech VA</span>
       </div>
-
-      <div class="hero-cta" style="margin-top: 28px;">
+      <div class="hero-cta">
         <a href="#vault" class="btn btn-primary">View my vault →</a>
         <a href="#contact" class="btn btn-ghost">Get in touch</a>
       </div>
@@ -1065,88 +601,47 @@
     </div>
   </section>
 
-  <!-- THREAT INTEL -->
-  <section id="threat-section" style="padding:0 44px 60px;position:relative;z-index:1;">
-    <div class="section-inner">
-      <div class="threat-card reveal" id="threatCard">
-        <div class="threat-header">
-          <span class="threat-classification">Subject Intel Report</span>
-          <span class="threat-id" id="threatRef">REF: DVPHNC-2025-001</span>
-        </div>
-        <div class="threat-grid">
-          <div class="threat-field"><div class="threat-label">Subject</div><div class="threat-value">Joana Daphne Sy</div></div>
-          <div class="threat-field"><div class="threat-label">Alias</div><div class="threat-value highlight">dvphnc</div></div>
-          <div class="threat-field"><div class="threat-label">Status</div><div class="threat-value green">● Active · Seeking VA Roles</div></div>
-          <div class="threat-field"><div class="threat-label">Location</div><div class="threat-value">Philippines · GMT+8</div></div>
-        </div>
-        <div class="threat-tags">
-          <span class="threat-tag">BSIT-3RD-YEAR</span>
-          <span class="threat-tag">ORACLE-CERTIFIED</span>
-          <span class="threat-tag">CTF-ACTIVE</span>
-          <span class="threat-tag">LARAVEL</span>
-          <span class="threat-tag">REACT</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <div class="divider"></div>
 
   <!-- CERTIFICATIONS -->
   <section id="certifications">
     <div class="section-inner">
       <p class="sec-label reveal">Certifications</p>
-      <h2 class="sec-title reveal reveal-delay-1">Oracle Cloud Certified</h2>
-      <div class="vault-grid">
-
-        <div class="notes-card reveal reveal-delay-1">
+      <h2 class="sec-title reveal rd1">Oracle Cloud Certified</h2>
+      <div class="cert-grid">
+        <div class="notes-card reveal rd1">
           <div class="notes-card-header">
             <span class="notes-card-platform" style="background:rgba(199,70,52,0.12);color:#c74634;border:1px solid rgba(199,70,52,0.22);">Oracle University</span>
-            <span class="notes-card-diff" style="background:rgba(255,149,0,0.1);color:var(--orange);border:1px solid rgba(255,149,0,0.22);">2024</span>
+            <span class="notes-card-diff" style="background:rgba(184,112,64,0.1);color:#c08040;border:1px solid rgba(184,112,64,0.2);">2024</span>
           </div>
           <div class="notes-card-body">
             <h3 class="notes-title">OCI AI Foundations Associate</h3>
             <p class="notes-desc">Oracle Cloud Infrastructure · AI and Machine Learning fundamentals, generative AI, and cloud-native services.</p>
           </div>
-          <div class="notes-footer">
-            <div class="vault-tags">
-              <span class="notes-tag">AI</span><span class="notes-tag">OCI</span><span class="notes-tag">Cloud</span>
-            </div>
-          </div>
+          <div class="notes-footer"><span class="notes-tag">AI</span><span class="notes-tag">OCI</span><span class="notes-tag">Cloud</span></div>
         </div>
-
-        <div class="notes-card reveal reveal-delay-2">
+        <div class="notes-card reveal rd2">
           <div class="notes-card-header">
             <span class="notes-card-platform" style="background:rgba(199,70,52,0.12);color:#c74634;border:1px solid rgba(199,70,52,0.22);">Oracle University</span>
-            <span class="notes-card-diff" style="background:rgba(255,149,0,0.1);color:var(--orange);border:1px solid rgba(255,149,0,0.22);">2024</span>
+            <span class="notes-card-diff" style="background:rgba(184,112,64,0.1);color:#c08040;border:1px solid rgba(184,112,64,0.2);">2024</span>
           </div>
           <div class="notes-card-body">
             <h3 class="notes-title">OCI Foundations Associate</h3>
             <p class="notes-desc">Oracle Cloud Infrastructure · Core cloud services, architecture, security, and pricing fundamentals.</p>
           </div>
-          <div class="notes-footer">
-            <div class="vault-tags">
-              <span class="notes-tag">Infrastructure</span><span class="notes-tag">OCI</span><span class="notes-tag">Cloud</span>
-            </div>
-          </div>
+          <div class="notes-footer"><span class="notes-tag">Infrastructure</span><span class="notes-tag">OCI</span><span class="notes-tag">Cloud</span></div>
         </div>
-
-        <div class="notes-card reveal reveal-delay-3">
+        <div class="notes-card reveal rd3">
           <div class="notes-card-header">
             <span class="notes-card-platform" style="background:rgba(199,70,52,0.12);color:#c74634;border:1px solid rgba(199,70,52,0.22);">Oracle University</span>
-            <span class="notes-card-diff" style="background:rgba(255,149,0,0.1);color:var(--orange);border:1px solid rgba(255,149,0,0.22);">2024</span>
+            <span class="notes-card-diff" style="background:rgba(184,112,64,0.1);color:#c08040;border:1px solid rgba(184,112,64,0.2);">2024</span>
           </div>
           <div class="notes-card-body">
             <h3 class="notes-title">OCI Data Foundations Associate</h3>
-            <p class="notes-desc">Oracle Cloud Data · Data management, analytics, Autonomous Database, and data lake services on OCI.</p>
+            <p class="notes-desc">Oracle Cloud Data · Data management, analytics, Autonomous Database, and data lake services.</p>
           </div>
-          <div class="notes-footer">
-            <div class="vault-tags">
-              <span class="notes-tag">Data</span><span class="notes-tag">Analytics</span><span class="notes-tag">OCI</span>
-            </div>
-          </div>
+          <div class="notes-footer"><span class="notes-tag">Data</span><span class="notes-tag">Analytics</span><span class="notes-tag">OCI</span></div>
         </div>
-
       </div>
     </div>
   </section>
@@ -1156,16 +651,16 @@
   <!-- STACKS -->
   <section id="stacks">
     <div class="section-inner">
-    <p class="sec-label reveal">Tech Stacks</p>
-    <h2 class="sec-title reveal reveal-delay-1">Tools &amp; Technologies</h2>
-    <div class="stack-groups">
-      <div class="stack-card reveal reveal-delay-1"><p class="stack-group-title">Frontend</p><div class="stack-pills"><span class="pill">HTML5</span><span class="pill">CSS3</span><span class="pill">JavaScript</span><span class="pill">React</span><span class="pill">Tailwind CSS</span></div></div>
-      <div class="stack-card reveal reveal-delay-2"><p class="stack-group-title">Backend</p><div class="stack-pills"><span class="pill">Laravel</span><span class="pill">PHP</span><span class="pill">MySQL</span><span class="pill">REST APIs</span><span class="pill">Blade</span></div></div>
-      <div class="stack-card reveal reveal-delay-3"><p class="stack-group-title">Cloud &amp; Platform</p><div class="stack-pills"><span class="pill">Oracle Cloud</span><span class="pill">Git &amp; GitHub</span><span class="pill">Linux</span><span class="pill">VS Code</span></div></div>
-      <div class="stack-card reveal reveal-delay-4"><p class="stack-group-title">Security &amp; CTF</p><div class="stack-pills"><span class="pill">TryHackMe</span><span class="pill">HackTheBox</span><span class="pill">Burp Suite</span><span class="pill">Nmap</span><span class="pill">Gobuster</span></div></div>
-      <div class="stack-card reveal reveal-delay-5"><p class="stack-group-title">VA &amp; Productivity</p><div class="stack-pills"><span class="pill">Google Workspace</span><span class="pill">Notion</span><span class="pill">Trello</span><span class="pill">Canva</span><span class="pill">Figma</span></div></div>
-      <div class="stack-card reveal reveal-delay-6"><p class="stack-group-title">Currently Learning</p><div class="stack-pills"><span class="pill learning">Python</span><span class="pill learning">Docker</span><span class="pill learning">Next.js</span></div></div>
-    </div>
+      <p class="sec-label reveal">Tech Stacks</p>
+      <h2 class="sec-title reveal rd1">Tools &amp; Technologies</h2>
+      <div class="stack-groups">
+        <div class="stack-card reveal rd1"><p class="stack-group-title">Frontend</p><div class="stack-pills"><span class="pill">HTML5</span><span class="pill">CSS3</span><span class="pill">JavaScript</span><span class="pill">React</span><span class="pill">Tailwind CSS</span></div></div>
+        <div class="stack-card reveal rd2"><p class="stack-group-title">Backend</p><div class="stack-pills"><span class="pill">Laravel</span><span class="pill">PHP</span><span class="pill">MySQL</span><span class="pill">REST APIs</span><span class="pill">Blade</span></div></div>
+        <div class="stack-card reveal rd3"><p class="stack-group-title">Cloud &amp; Platform</p><div class="stack-pills"><span class="pill">Oracle Cloud</span><span class="pill">Git &amp; GitHub</span><span class="pill">Linux</span><span class="pill">VS Code</span></div></div>
+        <div class="stack-card reveal rd4"><p class="stack-group-title">Security &amp; CTF</p><div class="stack-pills"><span class="pill">TryHackMe</span><span class="pill">HackTheBox</span><span class="pill">Burp Suite</span><span class="pill">Nmap</span><span class="pill">Gobuster</span></div></div>
+        <div class="stack-card reveal rd5"><p class="stack-group-title">VA &amp; Productivity</p><div class="stack-pills"><span class="pill">Google Workspace</span><span class="pill">Notion</span><span class="pill">Trello</span><span class="pill">Canva</span><span class="pill">Figma</span></div></div>
+        <div class="stack-card reveal rd6"><p class="stack-group-title">Currently Learning</p><div class="stack-pills"><span class="pill learning">Python</span><span class="pill learning">Docker</span><span class="pill learning">Next.js</span></div></div>
+      </div>
     </div>
   </section>
 
@@ -1174,432 +669,86 @@
   <!-- CTF VAULT -->
   <section id="vault">
     <div class="section-inner">
-    <p class="sec-label reveal">CTF Writeups</p>
-    <h2 class="sec-title reveal reveal-delay-1">Rooms &amp; Machines</h2>
-    <div class="vault-grid">
-      <div class="notes-card reveal reveal-delay-1"><div class="notes-card-header"><span class="notes-card-platform thm">TryHackMe</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body">
-      <h3 class="notes-title">Pickle Rick</h3><p class="notes-desc">Web enumeration, directory brute-forcing, and RCE to retrieve flags. Used Gobuster and crafted a reverse shell via the web command panel.</div>
-      </p><div class="notes-footer"><div class="vault-tags"><span class="notes-tag">RCE</span><span class="notes-tag">Gobuster</span><span class="notes-tag">PrivEsc</span></div></div></div>
-      <div class="notes-card reveal reveal-delay-2"><div class="notes-card-header"><span class="notes-card-platform thm">TryHackMe</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body">
-      <h3 class="notes-title">Basic Pentesting</h3><p class="notes-desc">SMB enumeration, hash cracking, and SSH key exploitation. Cracked a password hash using John the Ripper.</div>
-      </p><div class="notes-footer"><div class="vault-tags"><span class="notes-tag">SMB</span><span class="notes-tag">John</span><span class="notes-tag">SSH</span></div></div></div>
-      <div class="notes-card reveal reveal-delay-3"><div class="notes-card-header"><span class="notes-card-platform thm">TryHackMe</span><span class="notes-card-diff diff-medium">Medium</span></div><div class="notes-card-body">
-      <h3 class="notes-title">Mr Robot CTF</h3><p class="notes-desc">Three-flag challenge. WordPress exploitation, hidden wordlist, WPScan brute-force, SUID binary abuse for root.</div>
-      </p><div class="notes-footer"><div class="vault-tags"><span class="notes-tag">WordPress</span><span class="notes-tag">SUID</span><span class="notes-tag">WPScan</span></div></div></div>
-      <div class="notes-card reveal reveal-delay-4"><div class="notes-card-header"><span class="notes-card-platform htb">HackTheBox</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body">
-      <h3 class="notes-title">Meow</h3><p class="notes-desc">Telnet misconfiguration with unauthenticated root login — Nmap scan, service enumeration, direct flag retrieval.</div>
-      </p><div class="notes-footer"><div class="vault-tags"><span class="notes-tag">Telnet</span><span class="notes-tag">Recon</span><span class="notes-tag">Nmap</span></div></div></div>
-      <div class="notes-card reveal reveal-delay-5"><div class="notes-card-header"><span class="notes-card-platform htb">HackTheBox</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body">
-      <h3 class="notes-title">Fawn</h3><p class="notes-desc">Anonymous FTP login vulnerability. Enumerated FTP with Nmap, connected with default anonymous credentials.</div>
-      </p><div class="notes-footer"><div class="vault-tags"><span class="notes-tag">FTP</span><span class="notes-tag">Anonymous</span><span class="notes-tag">Nmap</span></div></div></div>
-      <div class="notes-card reveal reveal-delay-6"><div class="notes-card-header"><span class="notes-card-platform htb">HackTheBox</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body">
-      <h3 class="notes-title">Dancing</h3><p class="notes-desc">SMB share enumeration without credentials. Used smbclient to access a misconfigured guest-readable share.</div>
-      </p><div class="notes-footer"><div class="vault-tags"><span class="notes-tag">SMB</span><span class="notes-tag">smbclient</span><span class="notes-tag">Enum</span></div></div></div>
-    </div>
+      <p class="sec-label reveal">CTF Writeups</p>
+      <h2 class="sec-title reveal rd1">Rooms &amp; Machines</h2>
+      <div class="vault-grid">
+        <div class="notes-card reveal rd1"><div class="notes-card-header"><span class="notes-card-platform thm">TryHackMe</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body"><h3 class="notes-title">Pickle Rick</h3><p class="notes-desc">Web enumeration, directory brute-forcing, and RCE to retrieve flags. Used Gobuster and crafted a reverse shell via the web command panel.</p></div><div class="notes-footer"><span class="notes-tag">RCE</span><span class="notes-tag">Gobuster</span><span class="notes-tag">PrivEsc</span></div></div>
+        <div class="notes-card reveal rd2"><div class="notes-card-header"><span class="notes-card-platform thm">TryHackMe</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body"><h3 class="notes-title">Basic Pentesting</h3><p class="notes-desc">SMB enumeration, hash cracking, and SSH key exploitation. Cracked a password hash using John the Ripper.</p></div><div class="notes-footer"><span class="notes-tag">SMB</span><span class="notes-tag">John</span><span class="notes-tag">SSH</span></div></div>
+        <div class="notes-card reveal rd3"><div class="notes-card-header"><span class="notes-card-platform thm">TryHackMe</span><span class="notes-card-diff diff-medium">Medium</span></div><div class="notes-card-body"><h3 class="notes-title">Mr Robot CTF</h3><p class="notes-desc">Three-flag challenge. WordPress exploitation, hidden wordlist, WPScan brute-force, SUID binary abuse for root.</p></div><div class="notes-footer"><span class="notes-tag">WordPress</span><span class="notes-tag">SUID</span><span class="notes-tag">WPScan</span></div></div>
+        <div class="notes-card reveal rd4"><div class="notes-card-header"><span class="notes-card-platform htb">HackTheBox</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body"><h3 class="notes-title">Meow</h3><p class="notes-desc">Telnet misconfiguration with unauthenticated root login — Nmap scan, service enumeration, direct flag retrieval.</p></div><div class="notes-footer"><span class="notes-tag">Telnet</span><span class="notes-tag">Recon</span><span class="notes-tag">Nmap</span></div></div>
+        <div class="notes-card reveal rd5"><div class="notes-card-header"><span class="notes-card-platform htb">HackTheBox</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body"><h3 class="notes-title">Fawn</h3><p class="notes-desc">Anonymous FTP login vulnerability. Enumerated FTP with Nmap, connected with default anonymous credentials.</p></div><div class="notes-footer"><span class="notes-tag">FTP</span><span class="notes-tag">Anonymous</span><span class="notes-tag">Nmap</span></div></div>
+        <div class="notes-card reveal rd6"><div class="notes-card-header"><span class="notes-card-platform htb">HackTheBox</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body"><h3 class="notes-title">Dancing</h3><p class="notes-desc">SMB share enumeration without credentials. Used smbclient to access a misconfigured guest-readable share.</p></div><div class="notes-footer"><span class="notes-tag">SMB</span><span class="notes-tag">smbclient</span><span class="notes-tag">Enum</span></div></div>
+      </div>
     </div>
   </section>
 
   <!-- SYBERVAULT -->
   <section id="sybervault">
+    <div class="sv-grain"></div>
     <div class="sv-inner">
-
       <div class="notes-toolbar reveal">
         <div class="notes-toolbar-left">
-          <div class="notes-dot red"></div>
-          <div class="notes-dot amber"></div>
-          <div class="notes-dot green"></div>
+          <div class="notes-dot red"></div><div class="notes-dot amber"></div><div class="notes-dot green"></div>
         </div>
         <span class="notes-toolbar-title">SyberVault.notes</span>
         <span class="notes-toolbar-count">11 notes</span>
       </div>
       <p class="sv-eyebrow reveal" style="margin-top:20px">Personal Knowledge System</p>
-      <h2 class="sv-heading reveal reveal-delay-1"><span class="s">Syber</span><span class="v">Vault</span></h2>
-      <div class="music-player reveal reveal-delay-2" id="musicPlayer" onclick="toggleMusic()">
-        <div class="music-artwork" id="musicArtwork">🔐</div>
-        <div class="music-info">
-          <div class="music-title">SyberVault — Study Session</div>
-          <div class="music-artist">dvphnc · 11 notes</div>
-        </div>
-        <div class="music-controls">
-          <button class="music-btn" onclick="event.stopPropagation();prevTrack()">⏮</button>
-          <button class="music-btn play-btn" id="playBtn">▶</button>
-          <button class="music-btn" onclick="event.stopPropagation();nextTrack()">⏭</button>
-        </div>
-        <div class="music-progress"><div class="music-progress-fill" id="musicProgress"></div></div>
-      </div>
-      <p class="sv-sub reveal reveal-delay-2">// a living archive of what I study, discover, and break &nbsp;·&nbsp; 11 notes &nbsp;·&nbsp; 4 categories &nbsp;·&nbsp; <em class="sv-hint">click any card to read</em></p>
+      <h2 class="sv-heading reveal rd1"><span class="s">Syber</span><span class="v">Vault</span></h2>
+      <p class="sv-sub reveal rd2">Click any note to expand · <span class="sv-hint">Open note opens the full page</span></p>
 
-      <!-- FUNDAMENTALS -->
-      <div class="sv-category reveal reveal-delay-2">
-        <div class="sv-cat-header">
-          <div class="sv-cat-icon f">📘</div>
-          <span class="sv-cat-name">Fundamentals</span>
-          <span class="sv-cat-count">4 notes</span>
-        </div>
+      <!-- Fundamentals -->
+      <div class="sv-category reveal">
+        <div class="sv-cat-header"><div class="sv-cat-icon f">📚</div><span class="sv-cat-name">Fundamentals</span><span class="sv-cat-count">4 notes</span></div>
         <div class="sv-grid">
-
-          <div class="sv-note f">
-            <span class="sv-note-arrow">+</span>
-            <p class="sv-note-label f">Fundamentals</p>
-            <p class="sv-note-title">Importance of Cyber Security</p>
-            <p class="sv-note-desc">CIA Triad — Confidentiality, Integrity, Availability. The invisible shield of the digital age.</p>
-            <div class="sv-note-tags"><span class="sv-tag f">CIA Triad</span><span class="sv-tag f">InfoSec</span></div>
-            <a href="notes/Importance of Cyber Security.html" target="_blank" rel="noopener" class="sv-note-link f" onclick="event.stopPropagation()">Open note →</a>
-            <div class="sv-note-body">
-              <div class="sv-note-body-inner">
-                <p><strong>Cybersecurity</strong> is essential because our lives are increasingly lived through data. It safeguards systems that drive economies and institutions — keeping hospitals functional, banks operational, and communication networks reliable.</p>
-                <p><strong>The CIA Triad</strong> defines the three fundamental principles:</p>
-                <ul>
-                  <li><strong>Confidentiality</strong> — Only authorized eyes see sensitive data (patient records, payment data, cloud files)</li>
-                  <li><strong>Integrity</strong> — Data remains untampered (document platforms, database records, online reviews)</li>
-                  <li><strong>Availability</strong> — Systems stay online (hospital networks, cloud services, banking systems)</li>
-                </ul>
-                <p>A violation of any pillar weakens the whole structure — unauthorized access breaches confidentiality, data corruption compromises integrity, and outages kill availability.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="sv-note f">
-            <span class="sv-note-arrow">+</span>
-            <p class="sv-note-label f">Fundamentals</p>
-            <p class="sv-note-title">Introduction to Web Application Security</p>
-            <p class="sv-note-desc">Evolution from ARPANET to the modern web. OWASP Top 10, URL anatomy, defense checklists.</p>
-            <div class="sv-note-tags"><span class="sv-tag f">OWASP</span><span class="sv-tag f">Web</span><span class="sv-tag f">Defense</span></div>
-            <a href="notes/Introduction to Web Application Security.html" target="_blank" rel="noopener" class="sv-note-link f" onclick="event.stopPropagation()">Open note →</a>
-            <div class="sv-note-body">
-              <div class="sv-note-body-inner">
-                <p><strong>Web Application Security</strong> protects websites and online platforms from unauthorized access, misuse, or disruption.</p>
-                <p><strong>Web Evolution:</strong> ARPANET (1969, research-only) → Old Web (1990s, static pages) → Modern Web (dynamic, cloud-powered, primary attack target).</p>
-                <p><strong>Proactive Defense Checklist:</strong></p>
-                <ul>
-                  <li>Enforce MFA everywhere</li>
-                  <li>Regular penetration testing + vuln scans</li>
-                  <li>Patch everything, always</li>
-                  <li>Network segmentation</li>
-                  <li>Test your incident response plan</li>
-                </ul>
-                <p><strong>Case Study — BlackCat (ALPHV):</strong> Feb 2024 detection → Mar 2024 data exfiltration confirmed → Jan 2025: 190M records exposed.</p>
-                <p>The <strong>OWASP Top 10</strong> is the universal benchmark for web app risks — regularly updated with real-world breach data.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="sv-note f">
-            <span class="sv-note-arrow">+</span>
-            <p class="sv-note-label f">Fundamentals</p>
-            <p class="sv-note-title">Encryption Fundamentals</p>
-            <p class="sv-note-desc">Hash functions, ciphers, key exchange. Certificate Authorities, X.509, and digital trust.</p>
-            <div class="sv-note-tags"><span class="sv-tag f">Crypto</span><span class="sv-tag f">PKI</span><span class="sv-tag f">TLS</span></div>
-            <a href="notes/Encryption Fundamentals.html" target="_blank" rel="noopener" class="sv-note-link f" onclick="event.stopPropagation()">Open note →</a>
-            <div class="sv-note-body">
-              <div class="sv-note-body-inner">
-                <p><strong>Encryption</strong> converts readable information into ciphertext, accessible only with the correct key. It ensures confidentiality, integrity, and trust across digital communications.</p>
-                <p><strong>Core components:</strong></p>
-                <ul>
-                  <li><strong>Hash functions</strong> — generate unique fingerprints of data for verification</li>
-                  <li><strong>Ciphers</strong> — encrypt and decrypt using mathematical operations</li>
-                  <li><strong>Key exchange algorithms</strong> — securely share encryption keys between parties</li>
-                </ul>
-                <p><strong>End-to-end encryption</strong> — only communicating parties can read messages.<br>
-                <strong>Transport encryption</strong> — secures data only during transmission.</p>
-                <p><strong>Certificate Authorities (CAs)</strong>, Trusted Root-CAs, and X.509 Certificates create the chain of trust that lets you verify legitimate websites and services.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="sv-note f">
-            <span class="sv-note-arrow">+</span>
-            <p class="sv-note-label f">Fundamentals</p>
-            <p class="sv-note-title">Cloud &amp; Virtualization Fundamentals</p>
-            <p class="sv-note-desc">Public, private, hybrid cloud. Hypervisors, VMs, CASB. The invisible foundation of the internet.</p>
-            <div class="sv-note-tags"><span class="sv-tag f">Cloud</span><span class="sv-tag f">VMs</span><span class="sv-tag f">CASB</span></div>
-            <a href="notes/Cloud and Virtualization Fundamentals.html" target="_blank" rel="noopener" class="sv-note-link f" onclick="event.stopPropagation()">Open note →</a>
-            <div class="sv-note-body">
-              <div class="sv-note-body-inner">
-                <p><strong>Cloud</strong> — a network of servers providing storage, software, and computing over the internet. Instead of owning hardware, you rent resources, gaining flexibility while reducing infrastructure costs.</p>
-                <p><strong>Virtualization</strong> — enables multiple OS instances on a single physical machine via a hypervisor. Each VM gets isolated CPU, memory, and storage allocations.</p>
-                <p><strong>Deployment models:</strong></p>
-                <ul>
-                  <li><strong>Public Cloud</strong> — shared resources (AWS, Azure, Google Cloud)</li>
-                  <li><strong>Private Cloud</strong> — dedicated infrastructure, greater control</li>
-                  <li><strong>Hybrid Cloud</strong> — balanced mix of both</li>
-                </ul>
-                <p><strong>CASB (Cloud Access Security Broker)</strong> — sits between users and cloud services to monitor data movement, enforce policies, detect threats, and ensure compliance.</p>
-              </div>
-            </div>
-          </div>
-
+          <div class="sv-note f"><span class="sv-note-arrow">+</span><p class="sv-note-label f">Fundamentals</p><p class="sv-note-title">Importance of Cyber Security</p><p class="sv-note-desc">CIA Triad, core principles and real-world impact.</p><div class="sv-note-tags"><span class="sv-tag f">CIA Triad</span><span class="sv-tag f">InfoSec</span></div><a href="notes/Importance of Cyber Security.html" target="_blank" rel="noopener" class="sv-note-link f" onclick="event.stopPropagation()">Open note →</a><div class="sv-note-body"><div class="sv-note-body-inner"><p>Covers why cybersecurity matters — protecting data confidentiality, integrity and availability across systems, organisations and individuals.</p></div></div></div>
+          <div class="sv-note f"><span class="sv-note-arrow">+</span><p class="sv-note-label f">Fundamentals</p><p class="sv-note-title">Introduction to Web Application Security</p><p class="sv-note-desc">OWASP Top 10, modern web threats and defences.</p><div class="sv-note-tags"><span class="sv-tag f">OWASP</span><span class="sv-tag f">Web</span></div><a href="notes/Introduction to Web Application Security.html" target="_blank" rel="noopener" class="sv-note-link f" onclick="event.stopPropagation()">Open note →</a><div class="sv-note-body"><div class="sv-note-body-inner"><p>Explores the evolution of web applications, common attack vectors, and the OWASP Top 10 framework for building secure web apps.</p></div></div></div>
+          <div class="sv-note f"><span class="sv-note-arrow">+</span><p class="sv-note-label f">Fundamentals</p><p class="sv-note-title">Encryption Fundamentals</p><p class="sv-note-desc">Symmetric, asymmetric, hashing and PKI.</p><div class="sv-note-tags"><span class="sv-tag f">TLS</span><span class="sv-tag f">PKI</span></div><a href="notes/Encryption Fundamentals.html" target="_blank" rel="noopener" class="sv-note-link f" onclick="event.stopPropagation()">Open note →</a><div class="sv-note-body"><div class="sv-note-body-inner"><p>Deep dive into how encryption works — from Caesar ciphers to modern TLS, including symmetric, asymmetric and hash functions.</p></div></div></div>
+          <div class="sv-note f"><span class="sv-note-arrow">+</span><p class="sv-note-label f">Fundamentals</p><p class="sv-note-title">Cloud &amp; Virtualization Fundamentals</p><p class="sv-note-desc">Hypervisors, cloud models, CASB security.</p><div class="sv-note-tags"><span class="sv-tag f">Cloud</span><span class="sv-tag f">VM</span></div><a href="notes/Cloud and Virtualization Fundamentals.html" target="_blank" rel="noopener" class="sv-note-link f" onclick="event.stopPropagation()">Open note →</a><div class="sv-note-body"><div class="sv-note-body-inner"><p>Covers virtual machines, hypervisors, public/private/hybrid clouds, and security considerations for cloud-native environments.</p></div></div></div>
         </div>
       </div>
 
-      <!-- THREATS & ATTACKS -->
-      <div class="sv-category reveal reveal-delay-3">
-        <div class="sv-cat-header">
-          <div class="sv-cat-icon t">🕷️</div>
-          <span class="sv-cat-name">Threats &amp; Attacks</span>
-          <span class="sv-cat-count">4 notes · CWE research</span>
-        </div>
+      <!-- Threats -->
+      <div class="sv-category reveal">
+        <div class="sv-cat-header"><div class="sv-cat-icon t">⚠️</div><span class="sv-cat-name">Threats &amp; Attacks</span><span class="sv-cat-count">4 notes</span></div>
         <div class="sv-grid">
-
-          <div class="sv-note t">
-            <span class="sv-note-arrow">+</span>
-            <p class="sv-note-label t">CWE-78</p>
-            <p class="sv-note-title">OS Command Injection</p>
-            <p class="sv-note-desc">When a web form becomes a root shell. Semicolons, pipes, and $() hand the server to the attacker.</p>
-            <div class="sv-note-tags"><span class="sv-tag t">RCE</span><span class="sv-tag t">Shell</span><span class="sv-tag t">Injection</span></div>
-            <a href="notes/CWE-78 - OS Command Injection.html" target="_blank" rel="noopener" class="sv-note-link t" onclick="event.stopPropagation()">Open note →</a>
-            <div class="sv-note-body">
-              <div class="sv-note-body-inner">
-                <p><strong>OS Command Injection</strong> allows an attacker to execute arbitrary OS commands via a vulnerable web application — giving full control over the server.</p>
-                <p>It happens when user input is directly inserted into system commands without sanitization. Characters like <strong>; | &amp;&amp; $()</strong> break out of the intended command context.</p>
-                <p><strong>Example attack:</strong><br>
-                App runs: <code style="font-size:11px;color:#39ff14;background:rgba(57,255,20,0.1);padding:2px 6px;border-radius:4px">cat report.txt</code><br>
-                Attacker inputs: <code style="font-size:11px;color:#39ff14;background:rgba(57,255,20,0.1);padding:2px 6px;border-radius:4px">report.txt; rm -rf /</code></p>
-                <p><strong>Why it's devastating:</strong> works without direct server access. If the app runs as root — game over.</p>
-                <p><strong>Prevention:</strong> never pass raw user input to system shells. Use parameterized APIs, input allowlisting, and principle of least privilege.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="sv-note t">
-            <span class="sv-note-arrow">+</span>
-            <p class="sv-note-label t">CWE-89</p>
-            <p class="sv-note-title">SQL Injection</p>
-            <p class="sv-note-desc">The crown jewel of web vulns. OR 1=1 login bypass, data theft, full DB compromise.</p>
-            <div class="sv-note-tags"><span class="sv-tag t">SQLi</span><span class="sv-tag t">Auth Bypass</span><span class="sv-tag t">DB</span></div>
-            <a href="notes/CWE-89 - SQL Injection.html" target="_blank" rel="noopener" class="sv-note-link t" onclick="event.stopPropagation()">Open note →</a>
-            <div class="sv-note-body">
-              <div class="sv-note-body-inner">
-                <p><strong>SQL Injection</strong> occurs when a web application builds a database query using unvalidated user input, allowing attackers to manipulate SQL commands.</p>
-                <p><strong>Classic login bypass:</strong> Enter <code style="font-size:11px;color:#d946ef;background:rgba(176,38,255,0.1);padding:2px 6px;border-radius:4px">' OR '1'='1</code> as the username — the WHERE clause becomes always-true, granting access without a real password.</p>
-                <p><strong>Impact:</strong></p>
-                <ul>
-                  <li>Data breach — steal credentials, PII, payment info</li>
-                  <li>Data loss — modify or delete records</li>
-                  <li>Full server compromise via DB in extreme cases</li>
-                </ul>
-                <p><strong>Prevention:</strong></p>
-                <ul>
-                  <li>Use <strong>prepared statements</strong> / parameterized queries</li>
-                  <li>Whitelist allowed characters on input</li>
-                  <li>Never run the database as root/admin</li>
-                  <li>Hide real error messages from users</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div class="sv-note t">
-            <span class="sv-note-arrow">+</span>
-            <p class="sv-note-label t">CWE-79</p>
-            <p class="sv-note-title">Cross-Site Scripting (XSS)</p>
-            <p class="sv-note-desc">Reflected, Stored, DOM-based, uXSS. Session hijacking and account takeover via the browser.</p>
-            <div class="sv-note-tags"><span class="sv-tag t">XSS</span><span class="sv-tag t">CSP</span><span class="sv-tag t">Sessions</span></div>
-            <a href="notes/CWE-79 - Cross-Site Scripting (XSS).html" target="_blank" rel="noopener" class="sv-note-link t" onclick="event.stopPropagation()">Open note →</a>
-            <div class="sv-note-body">
-              <div class="sv-note-body-inner">
-                <p><strong>XSS</strong> lets attackers inject malicious scripts that execute in victims' browsers. The browser trusts the script because it appears to come from the legitimate site.</p>
-                <p><strong>Types:</strong></p>
-                <ul>
-                  <li><strong>Reflected (Type 1)</strong> — script reflected immediately via crafted link</li>
-                  <li><strong>Stored (Type 2)</strong> — script saved in DB, runs for every visitor</li>
-                  <li><strong>DOM-Based (Type 0)</strong> — attack is entirely client-side</li>
-                  <li><strong>uXSS</strong> — exploits browser/plugin vulnerabilities</li>
-                </ul>
-                <p><strong>Consequences:</strong> session hijacking, data theft, account takeover, malware distribution, website defacement.</p>
-                <p><strong>Prevention:</strong> output encoding (context-aware), input validation, <strong>Content Security Policy (CSP)</strong>, HTTPOnly cookies.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="sv-note t">
-            <span class="sv-note-arrow">+</span>
-            <p class="sv-note-label t">CWE-35</p>
-            <p class="sv-note-title">Path Traversal</p>
-            <p class="sv-note-desc">Walking outside the web root with ../ — encoding tricks, null bytes, and allowlist defenses.</p>
-            <div class="sv-note-tags"><span class="sv-tag t">../</span><span class="sv-tag t">File Access</span><span class="sv-tag t">Bypass</span></div>
-            <a href="notes/CWE-35 - Path Traversal.html" target="_blank" rel="noopener" class="sv-note-link t" onclick="event.stopPropagation()">Open note →</a>
-            <div class="sv-note-body">
-              <div class="sv-note-body-inner">
-                <p><strong>Path Traversal</strong> allows attackers to access files and directories outside the intended application directory by manipulating file path input.</p>
-                <p><strong>Common techniques:</strong></p>
-                <ul>
-                  <li><strong>../</strong> — basic upward traversal</li>
-                  <li><strong>%2e%2e%2f</strong> — URL-encoded traversal</li>
-                  <li><strong>%252e%252e%252f</strong> — double-encoded bypass</li>
-                  <li><strong>%00</strong> — null byte injection (legacy APIs)</li>
-                  <li><strong>....//</strong> — mangled path normalization tricks</li>
-                </ul>
-                <p><strong>Consequences:</strong> read /etc/passwd, database credentials, source code — or modify/delete critical files.</p>
-                <p><strong>Prevention:</strong> allowlist valid filenames, use realpath() / Path.resolve() then verify result is inside allowed directory, run app with least privilege, isolate with containers/chroot.</p>
-              </div>
-            </div>
-          </div>
-
+          <div class="sv-note t"><span class="sv-note-arrow">+</span><p class="sv-note-label t">Threats</p><p class="sv-note-title">OS Command Injection</p><p class="sv-note-desc">CWE-78 — shell escape via unsanitized input.</p><div class="sv-note-tags"><span class="sv-tag t">CWE-78</span><span class="sv-tag t">RCE</span></div><a href="notes/CWE-78 - OS Command Injection.html" target="_blank" rel="noopener" class="sv-note-link t" onclick="event.stopPropagation()">Open note →</a><div class="sv-note-body"><div class="sv-note-body-inner"><p>How attackers inject OS commands through web inputs using ; | && $() — and why proper sanitization and allowlists are essential.</p></div></div></div>
+          <div class="sv-note t"><span class="sv-note-arrow">+</span><p class="sv-note-label t">Threats</p><p class="sv-note-title">SQL Injection</p><p class="sv-note-desc">CWE-89 — manipulating database queries.</p><div class="sv-note-tags"><span class="sv-tag t">CWE-89</span><span class="sv-tag t">SQLi</span></div><a href="notes/CWE-89 - SQL Injection.html" target="_blank" rel="noopener" class="sv-note-link t" onclick="event.stopPropagation()">Open note →</a><div class="sv-note-body"><div class="sv-note-body-inner"><p>The crown jewel of web vulnerabilities — how injecting malicious SQL through unvalidated input can lead to full database compromise.</p></div></div></div>
+          <div class="sv-note t"><span class="sv-note-arrow">+</span><p class="sv-note-label t">Threats</p><p class="sv-note-title">Cross-Site Scripting (XSS)</p><p class="sv-note-desc">CWE-79 — reflected, stored and DOM-based.</p><div class="sv-note-tags"><span class="sv-tag t">CWE-79</span><span class="sv-tag t">XSS</span></div><a href="notes/CWE-79 - Cross-Site Scripting (XSS).html" target="_blank" rel="noopener" class="sv-note-link t" onclick="event.stopPropagation()">Open note →</a><div class="sv-note-body"><div class="sv-note-body-inner"><p>How attackers inject scripts into web pages viewed by other users — covering reflected, stored, and DOM-based XSS with mitigation strategies.</p></div></div></div>
+          <div class="sv-note t"><span class="sv-note-arrow">+</span><p class="sv-note-label t">Threats</p><p class="sv-note-title">Path Traversal</p><p class="sv-note-desc">CWE-35 — walking outside the web root.</p><div class="sv-note-tags"><span class="sv-tag t">CWE-35</span><span class="sv-tag t">../</span></div><a href="notes/CWE-35 - Path Traversal.html" target="_blank" rel="noopener" class="sv-note-link t" onclick="event.stopPropagation()">Open note →</a><div class="sv-note-body"><div class="sv-note-body-inner"><p>Using ../ sequences to access restricted files outside the intended directory — including double encoding and null byte injection techniques.</p></div></div></div>
         </div>
       </div>
 
-      <!-- TOOLS & CAREER -->
-      <div class="sv-category reveal reveal-delay-4">
-        <div class="sv-cat-header">
-          <div class="sv-cat-icon k">🧰</div>
-          <span class="sv-cat-name">Tools &amp; Career</span>
-          <span class="sv-cat-count">2 notes</span>
-        </div>
+      <!-- Tools & Career -->
+      <div class="sv-category reveal">
+        <div class="sv-cat-header"><div class="sv-cat-icon k">🛠️</div><span class="sv-cat-name">Tools &amp; Career</span><span class="sv-cat-count">2 notes</span></div>
         <div class="sv-grid">
-
-          <div class="sv-note k">
-            <span class="sv-note-arrow">+</span>
-            <p class="sv-note-label k">Tools</p>
-            <p class="sv-note-title">Burp Suite Fundamentals</p>
-            <p class="sv-note-desc">Proxy, Repeater, Intruder, Scanner. Sniper vs Cluster Bomb. DVWA as the perfect legal lab.</p>
-            <div class="sv-note-tags"><span class="sv-tag k">Burp</span><span class="sv-tag k">Proxy</span><span class="sv-tag k">DVWA</span></div>
-            <a href="notes/Burp Suite Introduction.html" target="_blank" rel="noopener" class="sv-note-link k" onclick="event.stopPropagation()">Open note →</a>
-            <div class="sv-note-body">
-              <div class="sv-note-body-inner">
-                <p><strong>Burp Suite</strong> is the gold-standard platform for web application security testing — used by pentesters, bug bounty hunters, and red teams worldwide.</p>
-                <p><strong>Core tools:</strong></p>
-                <ul>
-                  <li><strong>Proxy</strong> — intercept &amp; modify HTTP/S traffic in real time</li>
-                  <li><strong>Repeater</strong> — manually edit and resend individual requests</li>
-                  <li><strong>Intruder</strong> — automate brute-force, fuzzing, and payload attacks</li>
-                  <li><strong>Scanner</strong> — automated vulnerability detection (Pro only)</li>
-                  <li><strong>Sequencer</strong> — analyze randomness of tokens &amp; session IDs</li>
-                </ul>
-                <p><strong>Intruder attack types:</strong></p>
-                <ul>
-                  <li><strong>Sniper</strong> — fuzz one parameter at a time</li>
-                  <li><strong>Battering Ram</strong> — same payload in multiple positions</li>
-                  <li><strong>Pitchfork</strong> — different payloads per position</li>
-                  <li><strong>Cluster Bomb</strong> — all combinations (full brute force)</li>
-                </ul>
-                <p><strong>Quick setup:</strong> set browser proxy to 127.0.0.1:8080, install Burp CA certificate, toggle Intercept ON. Pair with DVWA for a safe, legal practice environment.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="sv-note k">
-            <span class="sv-note-arrow">+</span>
-            <p class="sv-note-label k">Career</p>
-            <p class="sv-note-title">Career Opportunities in IT Security</p>
-            <p class="sv-note-desc">Red vs Blue team, SOC Analyst, Pentester, DFIR. The full pentest lifecycle from recon to report.</p>
-            <div class="sv-note-tags"><span class="sv-tag k">Red Team</span><span class="sv-tag k">Blue Team</span><span class="sv-tag k">SOC</span></div>
-            <a href="notes/Career Opportunities in IT Security.html" target="_blank" rel="noopener" class="sv-note-link k" onclick="event.stopPropagation()">Open note →</a>
-            <div class="sv-note-body">
-              <div class="sv-note-body-inner">
-                <p><strong>Red Team (Offensive)</strong> — simulate real attacks, exploit, social engineering. Tools: Metasploit, Cobalt Strike.</p>
-                <p><strong>Blue Team (Defensive)</strong> — detect, monitor, respond, harden. Tools: SIEM, EDR, firewalls.</p>
-                <p><strong>Expanded roles:</strong></p>
-                <ul>
-                  <li><strong>Penetration Tester</strong> — simulates real attacks with proof of impact</li>
-                  <li><strong>SOC Analyst</strong> — 24/7 monitoring and triage</li>
-                  <li><strong>Threat Hunter</strong> — hunts evil before detection triggers</li>
-                  <li><strong>DFIR Analyst</strong> — investigates breaches, preserves evidence</li>
-                  <li><strong>Malware Reverse Engineer</strong> — tears apart malicious code</li>
-                  <li><strong>Security Researcher</strong> — discovers zero-days, publishes CVEs</li>
-                </ul>
-                <p><strong>Pentest lifecycle:</strong> Recon → Scanning → Gaining Access → Maintaining Access → Covering Tracks → Reporting.</p>
-                <p><strong>Recommended certs:</strong> OSCP, PNPT, CompTIA Security+, eJPT.</p>
-              </div>
-            </div>
-          </div>
-
+          <div class="sv-note k"><span class="sv-note-arrow">+</span><p class="sv-note-label k">Tools</p><p class="sv-note-title">Burp Suite Fundamentals</p><p class="sv-note-desc">Proxy, Intruder, Repeater and DVWA practice.</p><div class="sv-note-tags"><span class="sv-tag k">Burp</span><span class="sv-tag k">Proxy</span></div><a href="notes/Burp Suite Introduction.html" target="_blank" rel="noopener" class="sv-note-link k" onclick="event.stopPropagation()">Open note →</a><div class="sv-note-body"><div class="sv-note-body-inner"><p>The platform that redefined web security testing — covers intercepting traffic, fuzzing with Intruder, and manual testing with Repeater.</p></div></div></div>
+          <div class="sv-note k"><span class="sv-note-arrow">+</span><p class="sv-note-label k">Career</p><p class="sv-note-title">Career in Cybersecurity</p><p class="sv-note-desc">Red Team vs Blue Team, SOC, DFIR, pentest paths.</p><div class="sv-note-tags"><span class="sv-tag k">SOC</span><span class="sv-tag k">Red Team</span></div><a href="notes/Career Opportunities in IT Security.html" target="_blank" rel="noopener" class="sv-note-link k" onclick="event.stopPropagation()">Open note →</a><div class="sv-note-body"><div class="sv-note-body-inner"><p>An overview of cybersecurity career paths — from SOC analysts to penetration testers, with certification roadmaps and skill requirements.</p></div></div></div>
         </div>
       </div>
 
-      <!-- EXTRA -->
-      <div class="sv-category reveal reveal-delay-5">
-        <div class="sv-cat-header">
-          <div class="sv-cat-icon e">🌊</div>
-          <span class="sv-cat-name">Extra Topics</span>
-          <span class="sv-cat-count">2 notes</span>
-        </div>
+      <!-- Extra -->
+      <div class="sv-category reveal">
+        <div class="sv-cat-header"><div class="sv-cat-icon e">💡</div><span class="sv-cat-name">Extra Topics</span><span class="sv-cat-count">2 notes</span></div>
         <div class="sv-grid">
-
-          <div class="sv-note e">
-            <span class="sv-note-arrow">+</span>
-            <p class="sv-note-label e">Security</p>
-            <p class="sv-note-title">Email Security Fundamentals</p>
-            <p class="sv-note-desc">S/MIME, OpenPGP, SPF, DKIM, DMARC. Phishing, BEC, spoofing — your inbox is the front door.</p>
-            <div class="sv-note-tags"><span class="sv-tag e">DMARC</span><span class="sv-tag e">Phishing</span><span class="sv-tag e">BEC</span></div>
-            <a href="notes/Email Security Fundamentals.html" target="_blank" rel="noopener" class="sv-note-link e" onclick="event.stopPropagation()">Open note →</a>
-            <div class="sv-note-body">
-              <div class="sv-note-body-inner">
-                <p><strong>Four pillars of email security:</strong> Confidentiality, Integrity, Authentication, Non-repudiation.</p>
-                <p><strong>Encryption standards:</strong></p>
-                <ul>
-                  <li><strong>S/MIME</strong> — enterprise standard, uses certificates from trusted CAs</li>
-                  <li><strong>OpenPGP</strong> — open-source, Web of Trust model, privacy-focused</li>
-                </ul>
-                <p><strong>Common threats:</strong></p>
-                <ul>
-                  <li><strong>Phishing</strong> — deceptive emails fishing for credentials</li>
-                  <li><strong>Spear Phishing</strong> — targeted, personalized phishing</li>
-                  <li><strong>Email Spoofing</strong> — forged headers to impersonate trusted senders</li>
-                  <li><strong>BEC (Business Email Compromise)</strong> — impersonating executives to initiate fraud</li>
-                </ul>
-                <p><strong>Authentication protocols:</strong></p>
-                <ul>
-                  <li><strong>SPF</strong> — verifies sender IP against domain's authorized list</li>
-                  <li><strong>DKIM</strong> — cryptographic signature verifies message authenticity</li>
-                  <li><strong>DMARC</strong> — policy for handling SPF/DKIM failures</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div class="sv-note e">
-            <span class="sv-note-arrow">+</span>
-            <p class="sv-note-label e">Networking</p>
-            <p class="sv-note-title">Network Traffic Analysis</p>
-            <p class="sv-note-desc">Wireshark, tcpdump, Tshark. Capture vs display filters. Every packet tells a story.</p>
-            <div class="sv-note-tags"><span class="sv-tag e">Wireshark</span><span class="sv-tag e">NTA</span><span class="sv-tag e">Packets</span></div>
-            <a href="notes/Network Traffic Analysis.html" target="_blank" rel="noopener" class="sv-note-link e" onclick="event.stopPropagation()">Open note →</a>
-            <div class="sv-note-body">
-              <div class="sv-note-body-inner">
-                <p><strong>Network Traffic Analysis (NTA)</strong> — capturing, inspecting, and analyzing network data to characterize ports/protocols, establish baselines, and respond to threats.</p>
-                <p><strong>The 4-step NTA process:</strong></p>
-                <ul>
-                  <li><strong>Ingest Traffic</strong> — capture with filters to reduce volume</li>
-                  <li><strong>Reduce Noise</strong> — filter benign/irrelevant traffic</li>
-                  <li><strong>Analyze &amp; Explore</strong> — carve out data relevant to the issue</li>
-                  <li><strong>Detect &amp; Alert</strong> — identify malicious patterns, use IDS</li>
-                </ul>
-                <p><strong>Essential tools:</strong></p>
-                <ul>
-                  <li><strong>Wireshark</strong> — graphical deep packet inspection, layer-by-layer decoding</li>
-                  <li><strong>tcpdump / Tshark</strong> — command-line packet analyzers</li>
-                  <li><strong>Network Taps / SPAN ports</strong> — copy traffic for external analysis</li>
-                </ul>
-                <p><strong>Wireshark filter types:</strong><br>
-                <strong>Capture filters</strong> (e.g. <code style="font-size:11px;color:#48cae4;background:rgba(72,202,228,0.1);padding:2px 5px;border-radius:4px">tcp port 80</code>) — applied before capture.<br>
-                <strong>Display filters</strong> (e.g. <code style="font-size:11px;color:#48cae4;background:rgba(72,202,228,0.1);padding:2px 5px;border-radius:4px">ip.addr == x.x.x.x</code>) — applied after capture.</p>
-              </div>
-            </div>
-          </div>
-
+          <div class="sv-note e"><span class="sv-note-arrow">+</span><p class="sv-note-label e">Extra</p><p class="sv-note-title">Email Security Fundamentals</p><p class="sv-note-desc">SPF, DKIM, DMARC and phishing defences.</p><div class="sv-note-tags"><span class="sv-tag e">SPF</span><span class="sv-tag e">DKIM</span></div><a href="notes/Email Security Fundamentals.html" target="_blank" rel="noopener" class="sv-note-link e" onclick="event.stopPropagation()">Open note →</a><div class="sv-note-body"><div class="sv-note-body-inner"><p>How email authentication protocols work together to prevent spoofing, phishing, and business email compromise attacks.</p></div></div></div>
+          <div class="sv-note e"><span class="sv-note-arrow">+</span><p class="sv-note-label e">Extra</p><p class="sv-note-title">Network Traffic Analysis</p><p class="sv-note-desc">Wireshark, capture filters, deep packet inspection.</p><div class="sv-note-tags"><span class="sv-tag e">Wireshark</span><span class="sv-tag e">NTA</span></div><a href="notes/Network Traffic Analysis.html" target="_blank" rel="noopener" class="sv-note-link e" onclick="event.stopPropagation()">Open note →</a><div class="sv-note-body"><div class="sv-note-body-inner"><p>Capture, filter, analyze — using Wireshark and other tools to detect anomalies, reconstruct sessions, and identify threats on the wire.</p></div></div></div>
         </div>
       </div>
-
     </div>
   </section>
 
-
   <div class="divider"></div>
 
-  <!-- ══ THREAT INTEL CARD — injected into hero ══ -->
-  <!-- (injected via JS into hero section) -->
-
-  <!-- ══ TERMINAL SECTION ══ -->
+  <!-- TERMINAL -->
   <section id="terminal-section">
     <div class="section-inner">
       <p class="sec-label reveal">Live Recon</p>
-      <h2 class="sec-title reveal reveal-delay-1">Terminal</h2>
-      <div class="terminal-window reveal reveal-delay-2">
+      <h2 class="sec-title reveal rd1">Terminal</h2>
+      <div class="terminal-window reveal rd2">
         <div class="terminal-titlebar">
-          <div class="tbar-dot r"></div>
-          <div class="tbar-dot a"></div>
-          <div class="tbar-dot g"></div>
+          <div class="tbar-dot r"></div><div class="tbar-dot a"></div><div class="tbar-dot g"></div>
           <span class="tbar-title">dvphnc@sybervault — zsh</span>
         </div>
         <div class="terminal-body" id="termBody"></div>
@@ -1613,68 +762,68 @@
 
   <div class="divider"></div>
 
-
   <!-- CONTACT -->
   <section id="contact">
     <div class="section-inner">
-    <p class="sec-label reveal">Contact</p>
-    <h2 class="sec-title reveal reveal-delay-1">Let's Connect</h2>
-    <div class="reveal reveal-delay-2">
-      <div class="email-block">
-        <p class="email-label">Email</p>
-        <p class="email-addr"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5d37392e323b3b3e311d3a303c3431733e3230">[email&#160;protected]</a></p>
+      <p class="sec-label reveal">Contact</p>
+      <h2 class="sec-title reveal rd1">Let's Connect</h2>
+      <div class="reveal rd2">
+        <div class="email-block" onclick="copyEmail()">
+          <p class="email-label">Email — click to copy</p>
+          <p class="email-addr">jdsoffcl@gmail.com</p>
+        </div>
+        <div class="contact-links">
+          <a href="https://github.com/dvphnc" target="_blank" class="contact-link card reveal rd1">
+            <div class="contact-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg></div>
+            <div><p class="contact-link-name">GitHub</p><p class="contact-link-handle">@dvphnc</p></div>
+          </a>
+          <a href="https://linkedin.com/in/dvphnc" target="_blank" class="contact-link card reveal rd2">
+            <div class="contact-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
+            <div><p class="contact-link-name">LinkedIn</p><p class="contact-link-handle">@dvphnc</p></div>
+          </a>
+          <a href="https://tryhackme.com/p/dvphnc" target="_blank" class="contact-link card reveal rd3">
+            <div class="contact-icon" style=""><svg viewBox="0 0 24 24" width="20" height="20" fill="#88d228"><path d="M10.705 0C7.54 0 4.902 2.235 4.313 5.233a4.393 4.393 0 0 0-.673-.051C1.636 5.182 0 6.818 0 8.822s1.636 3.64 3.64 3.64h7.065V0zm1.59 0v12.462h7.065c2.004 0 3.64-1.636 3.64-3.64S22.364 5.182 20.36 5.182c-.228 0-.452.018-.673.051C19.098 2.235 16.46 0 13.295 0zM3.64 13.538C1.636 13.538 0 15.174 0 17.178s1.636 3.64 3.64 3.64h7.065v-7.28zm9.655 0v7.28h7.065c2.004 0 3.64-1.636 3.64-3.64s-1.636-3.64-3.64-3.64z"/></svg></div>
+            <div><p class="contact-link-name">TryHackMe</p><p class="contact-link-handle">@dvphnc</p></div>
+          </a>
+          <a href="https://app.hackthebox.com/profile/dvphnc" target="_blank" class="contact-link card reveal rd4">
+            <div class="contact-icon" style=""><svg viewBox="0 0 100 100" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><polygon points="50,5 88,27 88,73 50,95 12,73 12,27" stroke="#9fef00" stroke-width="5" fill="none"/><polygon points="50,22 74,36 74,64 50,78 26,64 26,36" stroke="#9fef00" stroke-width="3" fill="none" opacity="0.45"/><line x1="50" y1="22" x2="50" y2="50" stroke="#9fef00" stroke-width="3"/><line x1="50" y1="50" x2="74" y2="36" stroke="#9fef00" stroke-width="3"/><line x1="50" y1="50" x2="26" y2="36" stroke="#9fef00" stroke-width="3"/><line x1="50" y1="50" x2="50" y2="78" stroke="#9fef00" stroke-width="2" opacity="0.5"/><line x1="50" y1="50" x2="74" y2="64" stroke="#9fef00" stroke-width="2" opacity="0.5"/><line x1="50" y1="50" x2="26" y2="64" stroke="#9fef00" stroke-width="2" opacity="0.5"/></svg></div>
+            <div><p class="contact-link-name">HackTheBox</p><p class="contact-link-handle">@dvphnc</p></div>
+          </a>
+        </div>
       </div>
-    </div>
-    <div class="contact-links">
-      <a href="https://github.com/dvphnc" target="_blank" rel="noopener" class="card contact-link reveal reveal-delay-2">
-        <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div>
-        <div><p class="contact-link-name">GitHub</p><p class="contact-link-handle">github.com/dvphnc</p></div>
-      </a>
-      <a href="https://linkedin.com/in/dvphnc" target="_blank" rel="noopener" class="card contact-link reveal reveal-delay-3">
-        <div class="contact-icon"><svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
-        <div><p class="contact-link-name">LinkedIn</p><p class="contact-link-handle">linkedin.com/in/dvphnc</p></div>
-      </a>
-      <a href="https://tryhackme.com/p/dvphnc" target="_blank" rel="noopener" class="card contact-link reveal reveal-delay-4">
-        <div class="contact-icon"><svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M10.705 0C7.54 0 4.902 2.235 4.313 5.233a4.393 4.393 0 0 0-.673-.051C1.636 5.182 0 6.818 0 8.822s1.636 3.64 3.64 3.64h7.065V0zm1.59 0v12.462h7.065c2.004 0 3.64-1.636 3.64-3.64S22.364 5.182 20.36 5.182c-.228 0-.452.018-.673.051C19.098 2.235 16.46 0 13.295 0zM3.64 13.538C1.636 13.538 0 15.174 0 17.178s1.636 3.64 3.64 3.64h7.065v-7.28zm9.655 0v7.28h7.065c2.004 0 3.64-1.636 3.64-3.64s-1.636-3.64-3.64-3.64z"/></svg></div>
-        <div><p class="contact-link-name">TryHackMe</p><p class="contact-link-handle">tryhackme.com/p/dvphnc</p></div>
-      </a>
-      <a href="https://app.hackthebox.com/profile/dvphnc" target="_blank" rel="noopener" class="card contact-link reveal reveal-delay-5">
-        <div class="contact-icon"><svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M11.996 0L2 5.836V17.51L12 23.346l10-5.836V5.836zm0 1.734l8.275 4.83v2.352l-8.275 4.503-8.27-4.503V6.564zm-8.27 8.56l8.27 4.498 8.275-4.498v2.55l-8.276 4.83-8.27-4.83z"/></svg></div>
-        <div><p class="contact-link-name">HackTheBox</p><p class="contact-link-handle">app.hackthebox.com/dvphnc</p></div>
-      </a>
-    </div>
     </div>
   </section>
 
   <footer>
     <p>© 2025 Joana Daphne Sy · dvphnc · BSIT 3rd Year · SyberVault</p>
   </footer>
+
   <script>
-    // Scroll reveal
-    const obs = new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:0.06,rootMargin:'0px 0px -30px 0px'});
+    // Hidden flag
+    document.body.insertAdjacentHTML('beforeend','<!-- CTF FLAG: dvphnc{y0u_f0und_m3_g00d_r3c0n} -->');
+
+    // Scroll progress
+    const sp=document.getElementById('scroll-progress');
+    window.addEventListener('scroll',()=>{const h=document.documentElement;sp.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'});
+
+    // Reveal
+    const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:0.06,rootMargin:'0px 0px -20px 0px'});
     document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-    // Nav shrink on scroll — iOS 26 tab bar collapse
-    const nav = document.getElementById('navbar');
-    window.addEventListener('scroll',()=>{
-      nav.classList.toggle('scrolled', window.scrollY > 60);
-    });
+    // Nav shrink
+    const navEl=document.getElementById('navbar');
+    window.addEventListener('scroll',()=>navEl.classList.toggle('scrolled',window.scrollY>60));
 
     // Mobile menu
-    const menuBtn = document.getElementById('menuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
+    const menuBtn=document.getElementById('menuBtn'),mobileMenu=document.getElementById('mobileMenu');
     menuBtn.addEventListener('click',()=>mobileMenu.classList.toggle('open'));
     document.querySelectorAll('.mobile-link').forEach(l=>l.addEventListener('click',()=>mobileMenu.classList.remove('open')));
 
     // Dark mode
-    const themeToggle = document.getElementById('themeToggle');
-    const htmlEl = document.documentElement;
-    const saved = localStorage.getItem('theme');
-    if(saved==='dark'||(!saved&&window.matchMedia('(prefers-color-scheme: dark)').matches)) htmlEl.classList.add('dark');
-    themeToggle.addEventListener('click',()=>{
-      htmlEl.classList.toggle('dark');
-      localStorage.setItem('theme', htmlEl.classList.contains('dark')?'dark':'light');
-    });
+    const themeToggle=document.getElementById('themeToggle'),htmlEl=document.documentElement;
+    const saved=localStorage.getItem('theme');
+    if(saved==='dark'||(!saved&&window.matchMedia('(prefers-color-scheme: dark)').matches))htmlEl.classList.add('dark');
+    themeToggle.addEventListener('click',()=>{htmlEl.classList.toggle('dark');localStorage.setItem('theme',htmlEl.classList.contains('dark')?'dark':'light')});
 
     // SyberVault expand
     document.querySelectorAll('.sv-note').forEach(note=>{
@@ -1685,384 +834,126 @@
       });
     });
 
-    // Typewriter multilingual hero
+    // Toast
+    function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
+    function copyEmail(){navigator.clipboard.writeText('jdsoffcl@gmail.com');showToast('✓ Email copied')}
+
+    // Cursor trail
+    const dots=[];
+    for(let i=0;i<10;i++){const d=document.createElement('div');d.className='cursor-dot';const s=5.5-i*0.38;d.style.cssText=`width:${s}px;height:${s}px;background:rgba(123,140,222,${0.55-i*0.04});position:fixed;border-radius:50%;pointer-events:none;z-index:9500;`;document.body.appendChild(d);dots.push({el:d,x:0,y:0})}
+    let mx=0,my=0;
+    window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+    (function animDots(){let lx=mx,ly=my;dots.forEach((dot,i)=>{dot.x+=(lx-dot.x)*(0.35-i*0.025);dot.y+=(ly-dot.y)*(0.35-i*0.025);dot.el.style.left=dot.x-2.5+'px';dot.el.style.top=dot.y-2.5+'px';lx=dot.x;ly=dot.y});requestAnimationFrame(animDots)})();
+
+    // Boot sequence
+    const bootData=[
+      {text:'Initializing dvphnc.sys',status:'OK',c:'bl-ok',d:0},
+      {text:'Loading Oracle Cloud modules',status:'OK',c:'bl-ok',d:280},
+      {text:'Mounting SyberVault [/notes]',status:'OK',c:'bl-ok',d:520},
+      {text:'Scanning CTF repositories',status:'OK',c:'bl-ok',d:720},
+      {text:'Starting Laravel runtime',status:'OK',c:'bl-ok',d:900},
+      {text:'Verifying OCI credentials',status:'CERTIFIED',c:'bl-ok',d:1080},
+      {text:'Looking for hidden flags',status:'...',c:'bl-warn',d:1260},
+      {text:'Booting portfolio interface',status:'DONE',c:'bl-ok',d:1480},
+    ];
+    let bootDone=false;
+    function skipBoot(){if(bootDone)return;bootDone=true;const bs=document.getElementById('boot-screen');bs.classList.add('fade-out');setTimeout(()=>{bs.style.display='none'},600)}
+    const bootLines=document.getElementById('bootLines'),bootBar=document.getElementById('bootBar');
+    bootData.forEach((item,i)=>{
+      setTimeout(()=>{
+        const line=document.createElement('div');line.className='boot-line';
+        line.innerHTML=`<span>${item.text}</span><span class="bl-status ${item.c}">${item.status}</span>`;
+        bootLines.appendChild(line);requestAnimationFrame(()=>line.classList.add('show'));
+        bootBar.style.width=((i+1)/bootData.length*100)+'%';
+        if(i===bootData.length-1)setTimeout(()=>{if(!bootDone)skipBoot()},500);
+      },item.d);
+    });
+    setTimeout(()=>{if(!bootDone)skipBoot()},3000);
+
+    // Typewriter
     (function(){
-      const flink=document.createElement('link');
-      flink.rel='stylesheet';
+      const flink=document.createElement('link');flink.rel='stylesheet';
       flink.href='https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&family=Noto+Sans+JP:wght@700&family=Noto+Sans+SC:wght@700&display=swap';
       document.head.appendChild(flink);
-
       const langs=[
-        {greet:"Hi, I'm",         name:"Joana Daphne Sy"},
-        {greet:"Hola, soy",        name:"Joana Daphne Sy"},
-        {greet:"Bonjour, je suis", name:"Joana Daphne Sy"},
-        {greet:"Ciao, sono",       name:"Joana Daphne Sy"},
-        {greet:"Kamusta, ako si",  name:"Joana Daphne Sy"},
-        {greet:"Olá, eu sou",      name:"Joana Daphne Sy"},
-        {greet:"Hallo, ich bin",   name:"Joana Daphne Sy"},
-        {greet:"Merhaba, ben",     name:"Joana Daphne Sy"},
-        {greet:"안녕하세요, 저는",      name:"호아나 다프네 시",  nameFont:"'Noto Sans KR',sans-serif"},
-        {greet:"こんにちは、私は",       name:"ホアナ ダフネ シー", nameFont:"'Noto Sans JP',sans-serif"},
-        {greet:"你好，我是",           name:"胡安娜达芙妮施",  nameFont:"'Noto Sans SC',sans-serif"},
+        {greet:"Hi, I'm",name:"Joana Daphne Sy"},
+        {greet:"Hola, soy",name:"Joana Daphne Sy"},
+        {greet:"Bonjour, je suis",name:"Joana Daphne Sy"},
+        {greet:"Ciao, sono",name:"Joana Daphne Sy"},
+        {greet:"Kamusta, ako si",name:"Joana Daphne Sy"},
+        {greet:"Olá, eu sou",name:"Joana Daphne Sy"},
+        {greet:"Hallo, ich bin",name:"Joana Daphne Sy"},
+        {greet:"Merhaba, ben",name:"Joana Daphne Sy"},
+        {greet:"안녕하세요, 저는",name:"호아나 다프네 시",nameFont:"'Noto Sans KR',sans-serif"},
+        {greet:"こんにちは、私は",name:"ホアナ ダフネ シー",nameFont:"'Noto Sans JP',sans-serif"},
+        {greet:"你好，我是",name:"胡安娜达芙妮施",nameFont:"'Noto Sans SC',sans-serif"},
       ];
-
-      const greetEl=document.getElementById('heroGreeting');
-      const nameEl=document.getElementById('heroFullname');
-      const cursor=document.getElementById('heroCursor');
-      // Set up text nodes — greeting (small mono) + name (big gradient)
-      const greetTxt = document.createTextNode('');
-      const nameTxt  = document.createTextNode('');
-      greetEl.innerHTML = '';
-      nameEl.innerHTML  = '';
-      greetEl.appendChild(greetTxt);
-      nameEl.appendChild(nameTxt);
-      nameEl.appendChild(cursor);
-
-      const TSPD=58, ESPD=26, HOLD=2600, GAP=380;
-      const sleep = ms => new Promise(r => setTimeout(r, ms));
-
-      async function type(node, str, spd) {
-        let buf = '';
-        for (const ch of str) {
-          buf += ch;
-          node.nodeValue = buf;
-          await sleep(spd + Math.random()*16 - 8);
+      const greetEl=document.getElementById('heroGreeting'),nameEl=document.getElementById('heroFullname'),cursor=document.getElementById('heroCursor');
+      const gt=document.createTextNode(''),nt=document.createTextNode('');
+      greetEl.innerHTML='';nameEl.innerHTML='';
+      greetEl.appendChild(gt);nameEl.appendChild(nt);nameEl.appendChild(cursor);
+      const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+      async function type(node,str,spd){let b='';for(const ch of str){b+=ch;node.nodeValue=b;await sleep(spd+Math.random()*14-7)}}
+      async function erase(node,spd){let b=node.nodeValue;while(b.length>0){b=b.slice(0,-1);node.nodeValue=b;await sleep(spd)}}
+      async function run(){
+        await sleep(1200);let i=0;
+        while(true){
+          const lang=langs[i];
+          nameEl.style.fontFamily=lang.nameFont||"'Inter',-apple-system,sans-serif";
+          nameEl.style.fontSize=lang.nameFont?'clamp(36px,5.5vw,68px)':'';
+          await type(gt,lang.greet,58);await sleep(110);
+          await type(nt,lang.name,50);await sleep(2500);
+          await erase(nt,26);await sleep(80);await erase(gt,26);
+          await sleep(360);i=(i+1)%langs.length;
         }
       }
-      async function erase(node, spd) {
-        let buf = node.nodeValue;
-        while (buf.length > 0) {
-          buf = buf.slice(0, -1);
-          node.nodeValue = buf;
-          await sleep(spd);
-        }
-      }
-
-      async function run() {
-        await sleep(1200);
-        let i = 0;
-        while (true) {
-          const lang = langs[i];
-          // Apply CJK font only to name element
-          nameEl.style.fontFamily = lang.nameFont || "'Inter',-apple-system,sans-serif";
-          // CJK names get slightly smaller size
-          nameEl.style.fontSize = lang.nameFont ? 'clamp(36px,5.5vw,68px)' : '';
-
-          // Type greeting first (small line)
-          await type(greetTxt, lang.greet, TSPD);
-          await sleep(120);
-          // Type name (big line)
-          await type(nameTxt, lang.name, TSPD - 10);
-          // Hold so viewer can read
-          await sleep(HOLD);
-          // Erase name first, then greeting
-          await erase(nameTxt, ESPD);
-          await sleep(80);
-          await erase(greetTxt, ESPD);
-          await sleep(GAP);
-          i = (i + 1) % langs.length;
-        }
-      }
-      run().catch(() => { greetTxt.nodeValue = "Hi, I'm"; nameTxt.nodeValue = "Joana Daphne Sy"; });
+      run().catch(()=>{gt.nodeValue="Hi, I'm";nt.nodeValue="Joana Daphne Sy"});
     })();
 
-    // Dynamic Island
-    setTimeout(()=>{
-      const di=document.getElementById('dynamicIsland');
-      di.classList.add('visible');
-      setTimeout(()=>{
-        di.classList.add('expanded');
-        setTimeout(()=>{
-          di.classList.remove('expanded');
-        },3000);
-      },600);
-    },2000);
-    function dismissIsland(){
-      document.getElementById('dynamicIsland').classList.remove('visible','expanded');
-    }
-
-    // Apple Music player simulation
-    let musicPlaying=false, musicTimer=null, progress=0;
-    const tracks=[
-      {title:'SyberVault — Study Session',artist:'dvphnc · 11 notes',icon:'🔐'},
-      {title:'CTF Mode On',artist:'TryHackMe · HackTheBox',icon:'🕷️'},
-      {title:'Oracle Certified',artist:'Cloud Foundations',icon:'☁️'},
-      {title:'Fundamentals Playlist',artist:'CIA Triad & Beyond',icon:'📘'},
-    ];
-    let trackIdx=0;
-    function toggleMusic(){
-      musicPlaying=!musicPlaying;
-      document.getElementById('playBtn').textContent=musicPlaying?'⏸':'▶';
-      document.getElementById('musicPlayer').classList.toggle('playing',musicPlaying);
-      if(musicPlaying){
-        musicTimer=setInterval(()=>{
-          progress=(progress+0.5)%100;
-          document.getElementById('musicProgress').style.width=progress+'%';
-        },100);
-      } else {
-        clearInterval(musicTimer);
-      }
-    }
-    function nextTrack(){
-      trackIdx=(trackIdx+1)%tracks.length;
-      updateTrack();
-    }
-    function prevTrack(){
-      trackIdx=(trackIdx-1+tracks.length)%tracks.length;
-      updateTrack();
-    }
-    function updateTrack(){
-      const t=tracks[trackIdx];
-      document.querySelector('.music-title').textContent=t.title;
-      document.querySelector('.music-artist').textContent=t.artist;
-      document.getElementById('musicArtwork').textContent=t.icon;
-      progress=0;
-    }
-  
-    // ── SCROLL PROGRESS ──
-    const scrollProg = document.getElementById('scroll-progress');
-    window.addEventListener('scroll', () => {
-      const h = document.documentElement;
-      scrollProg.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
-    });
-
-    // ── TOAST ──
-    function showToast(msg, duration=2200) {
-      const t = document.getElementById('toast');
-      t.textContent = msg; t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), duration);
-    }
-
-    // ── CURSOR TRAIL ──
-    const dots = [];
-    const DOT_COUNT = 10;
-    for (let i = 0; i < DOT_COUNT; i++) {
-      const d = document.createElement('div');
-      d.className = 'cursor-dot';
-      const size = 6 - i * 0.4;
-      d.style.cssText = `width:${size}px;height:${size}px;background:rgba(0,113,227,${0.6 - i*0.05});`;
-      document.body.appendChild(d);
-      dots.push({ el: d, x: 0, y: 0 });
-    }
-    let mx = 0, my = 0;
-    window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-    (function animateDots() {
-      let lx = mx, ly = my;
-      dots.forEach((dot, i) => {
-        dot.x += (lx - dot.x) * (0.35 - i * 0.025);
-        dot.y += (ly - dot.y) * (0.35 - i * 0.025);
-        dot.el.style.left = dot.x - 3 + 'px';
-        dot.el.style.top = dot.y - 3 + 'px';
-        lx = dot.x; ly = dot.y;
-      });
-      requestAnimationFrame(animateDots);
-    })();
-
-    // ── BOOT SEQUENCE ──
-    const bootData = [
-      { text: 'Initializing dvphnc.sys', status: 'OK', color: 'bl-ok', delay: 0 },
-      { text: 'Loading Oracle Cloud modules', status: 'OK', color: 'bl-ok', delay: 300 },
-      { text: 'Mounting SyberVault [/notes]', status: 'OK', color: 'bl-ok', delay: 550 },
-      { text: 'Scanning CTF repositories', status: 'OK', color: 'bl-ok', delay: 750 },
-      { text: 'Starting Laravel runtime', status: 'OK', color: 'bl-ok', delay: 950 },
-      { text: 'Checking network interfaces', status: 'OK', color: 'bl-ok', delay: 1100 },
-      { text: 'Loading React components', status: 'OK', color: 'bl-ok', delay: 1250 },
-      { text: 'Verifying OCI credentials', status: 'CERTIFIED', color: 'bl-ok', delay: 1400 },
-      { text: 'Looking for hidden flags', status: '...', color: 'bl-warn', delay: 1600 },
-      { text: 'Booting portfolio interface', status: 'DONE', color: 'bl-ok', delay: 1850 },
-    ];
-    const bootLines = document.getElementById('bootLines');
-    const bootBar = document.getElementById('bootBar');
-    let bootDone = false;
-
-    function skipBoot() {
-      if (bootDone) return;
-      bootDone = true;
-      const bs = document.getElementById('boot-screen');
-      bs.classList.add('fade-out');
-      setTimeout(() => { bs.style.display = 'none';  }, 600);
-    }
-
-    // body overflow intentionally not locked
-    bootData.forEach((item, i) => {
-      setTimeout(() => {
-        const line = document.createElement('div');
-        line.className = 'boot-line';
-        line.innerHTML = `<span>${item.text}</span><span class="bl-status ${item.color}">${item.status}</span>`;
-        bootLines.appendChild(line);
-        requestAnimationFrame(() => line.classList.add('show'));
-        bootBar.style.width = ((i + 1) / bootData.length * 100) + '%';
-        if (i === bootData.length - 1) {
-          setTimeout(() => { if (!bootDone) skipBoot(); }, 600);
-        }
-      }, item.delay);
-    });
-    setTimeout(() => { if (!bootDone) skipBoot(); }, 3200);
-
-    // availability pill is in HTML directly
-
-    // Update threat card date
-    const tref = document.getElementById('threatRef');
-    if (tref) tref.textContent = 'REF: DVPHNC-2025-001 · ' + new Date().toISOString().split('T')[0];
-
-    // ── TERMINAL ──
-    const termBody = document.getElementById('termBody');
-    const termInput = document.getElementById('termInput');
-
-    const FLAG = 'dvphnc{y0u_f0und_m3_g00d_r3c0n}';
-    // Hidden flag in page source comment — real CTF style
-    document.body.insertAdjacentHTML('beforeend', '<!-- CTF FLAG: ' + FLAG + ' -->');
-
-    function tPrint(html, cls='t-output') {
-      const line = document.createElement('div');
-      line.className = 't-line';
-      const span = document.createElement('span');
-      span.className = cls;
-      span.innerHTML = html;
-      line.appendChild(span);
-      termBody.appendChild(line);
-      termBody.scrollTop = termBody.scrollHeight;
-    }
-
-    function tCommand(cmd) {
-      const line = document.createElement('div');
-      line.className = 't-line';
-      line.innerHTML = `<span class="t-prompt">dvphnc@sybervault</span><span class="t-at">:</span><span class="t-host">~</span><span class="t-prompt">$</span>&nbsp;<span class="t-cmd">${cmd}</span>`;
-      termBody.appendChild(line);
-      termBody.scrollTop = termBody.scrollHeight;
-    }
-
-    const termCommands = {
-      help: () => {
-        tPrint('Available commands:', 't-output blue');
-        tPrint('  whoami        — display subject identity');
-        tPrint('  nmap          — scan dvphnc.github.io');
-        tPrint('  skills        — list technical proficiencies');
-        tPrint('  certs         — show certifications');
-        tPrint('  ctf           — CTF statistics');
-        tPrint('  cat flag.txt  — ...');
-        tPrint('  clear         — clear terminal');
+    // Terminal
+    const termBody=document.getElementById('termBody'),termInput=document.getElementById('termInput');
+    function tPrint(html,cls='t-output'){const l=document.createElement('div');l.className='t-line';const s=document.createElement('span');s.className=cls;s.innerHTML=html;l.appendChild(s);termBody.appendChild(l);termBody.scrollTop=termBody.scrollHeight}
+    function tCmd(cmd){const l=document.createElement('div');l.className='t-line';l.innerHTML=`<span class="t-prompt">dvphnc@sybervault</span><span class="t-at">:</span><span class="t-host">~</span><span class="t-prompt">$</span>&nbsp;<span class="t-cmd">${cmd}</span>`;termBody.appendChild(l);termBody.scrollTop=termBody.scrollHeight}
+    const cmds={
+      help:()=>{tPrint('Available commands:','t-output blue');['whoami','nmap','skills','certs','ctf','cat flag.txt','clear'].forEach(c=>tPrint('  '+c))},
+      whoami:()=>{tPrint('joana-daphne-sy','t-output green');tPrint('uid=1337(dvphnc) gid=1337(sybervault) groups=1337(sybervault),0(oracle),42(ctf)')},
+      nmap:()=>{
+        tPrint('Starting Nmap 7.94 — scanning dvphnc.github.io...','t-output dim');
+        setTimeout(()=>tPrint('PORT     STATE  SERVICE'),400);
+        setTimeout(()=>tPrint('80/tcp   open   http — GitHub Pages'),700);
+        setTimeout(()=>tPrint('443/tcp  open   https — TLS 1.3'),900);
+        setTimeout(()=>{tPrint('');tPrint('Host results:','t-output blue')},1100);
+        setTimeout(()=>tPrint('| oracle-certs: OCI AI · OCI Foundations · OCI Data [2024]'),1300);
+        setTimeout(()=>tPrint('| ctf-rooms: TryHackMe (3) · HackTheBox (3)'),1500);
+        setTimeout(()=>tPrint('| tech-stack: Laravel · React · PHP · MySQL'),1700);
+        setTimeout(()=>{tPrint('');tPrint('Nmap done. 1 host up.','t-output green')},1900);
       },
-      whoami: () => {
-        tPrint('joana-daphne-sy', 't-output green');
-        tPrint('uid=1337(dvphnc) gid=1337(sybervault) groups=1337(sybervault),0(oracle),42(ctf)');
-      },
-      nmap: () => {
-        tPrint('Starting Nmap 7.94 ( https://nmap.org )', 't-output dim');
-        tPrint('Scanning dvphnc.github.io (185.199.108.153) ...', 't-output dim');
-        setTimeout(() => tPrint('PORT      STATE  SERVICE     VERSION'), 400);
-        setTimeout(() => tPrint('80/tcp    open   http        GitHub Pages'), 700);
-        setTimeout(() => tPrint('443/tcp   open   https       TLS 1.3'), 900);
-        setTimeout(() => { tPrint(''); tPrint('Host script results:', 't-output blue'); }, 1100);
-        setTimeout(() => tPrint('| oracle-certs: OCI AI, OCI Foundations, OCI Data [2024]'), 1300);
-        setTimeout(() => tPrint('| ctf-history: TryHackMe (3), HackTheBox (3)'), 1500);
-        setTimeout(() => tPrint('| open-ports: portfolio, sybervault, contact'), 1700);
-        setTimeout(() => tPrint('| tech-stack: Laravel, React, PHP, MySQL'), 1900);
-        setTimeout(() => { tPrint(''); tPrint('Nmap done: 1 IP address (1 host up) scanned', 't-output green'); }, 2100);
-      },
-      skills: () => {
-        tPrint('Technical Proficiencies:', 't-output blue');
-        tPrint('  [██████████░░] 82%  Web Development (HTML/CSS/JS)');
-        tPrint('  [█████████░░░] 75%  Laravel / PHP');
-        tPrint('  [████████░░░░] 70%  Oracle Cloud (OCI)');
-        tPrint('  [████████░░░░] 65%  Cybersecurity / CTF');
-        tPrint('  [███████████░] 88%  Virtual Assistance');
-        tPrint('  [███████░░░░░] 60%  UI/UX Design');
-      },
-      certs: () => {
-        tPrint('Oracle Certifications:', 't-output blue');
-        tPrint('  ✓ OCI AI Foundations Associate [2024]', 't-output green');
-        tPrint('  ✓ OCI Foundations Associate [2024]', 't-output green');
-        tPrint('  ✓ OCI Data Foundations Associate [2024]', 't-output green');
-        tPrint('  Issuer: Oracle University', 't-output dim');
-      },
-      ctf: () => {
-        tPrint('CTF Statistics:', 't-output blue');
-        tPrint('  Platform    Rooms   Flags');
-        tPrint('  ---------   -----   -----');
-        tPrint('  TryHackMe     3       9  ', 't-output green');
-        tPrint('  HackTheBox    3       3  ', 't-output yellow');
-        tPrint('  Total         6      12  ');
-        tPrint('');
-        tPrint('  Notable: Pickle Rick, Mr Robot, Dancing, Meow', 't-output dim');
-      },
-      'cat flag.txt': () => {
-        tPrint('Hmm... permission denied.', 't-output red');
-        setTimeout(() => tPrint('Hint: Try looking in the page source. 👀', 't-output yellow'), 600);
-      },
-      clear: () => { termBody.innerHTML = ''; },
+      skills:()=>{tPrint('Proficiencies:','t-output blue');[['Web Development','██████████░░ 82%'],['Laravel / PHP','█████████░░░ 75%'],['OCI Cloud','████████░░░░ 70%'],['Cybersecurity','████████░░░░ 65%'],['Virtual Assistance','███████████░ 88%']].forEach(([k,v])=>tPrint(`  [${v}]  ${k}`))},
+      certs:()=>{tPrint('Oracle Certifications:','t-output blue');['OCI AI Foundations Associate [2024]','OCI Foundations Associate [2024]','OCI Data Foundations Associate [2024]'].forEach(c=>tPrint('  ✓ '+c,'t-output green'))},
+      ctf:()=>{tPrint('CTF Stats:','t-output blue');tPrint('  TryHackMe: 3 rooms · Pickle Rick, Basic Pentesting, Mr Robot');tPrint('  HackTheBox: 3 machines · Meow, Fawn, Dancing','t-output yellow')},
+      'cat flag.txt':()=>{tPrint('Permission denied.','t-output red');setTimeout(()=>tPrint('Hint: check the page source. 👀','t-output yellow'),600)},
+      clear:()=>{termBody.innerHTML=''},
     };
-
-    // Boot terminal
-    setTimeout(() => {
-      tPrint('SyberVault Terminal v2.0 — type <span style="color:#ffd60a">help</span> to begin', 't-output dim');
-      tPrint('');
-    }, 100);
-
-    termInput.addEventListener('keydown', (e) => {
-      if (e.key !== 'Enter') return;
-      const cmd = termInput.value.trim().toLowerCase();
-      termInput.value = '';
-      if (!cmd) return;
-      tCommand(cmd);
-      if (termCommands[cmd]) {
-        termCommands[cmd]();
-      } else {
-        tPrint(`zsh: command not found: ${cmd}`, 't-output red');
-        tPrint('Type <span style="color:#ffd60a">help</span> for available commands.', 't-output dim');
-      }
+    setTimeout(()=>tPrint('SyberVault Terminal — type <span style="color:#c08040">help</span> to begin','t-output dim'),200);
+    termInput.addEventListener('keydown',e=>{
+      if(e.key!=='Enter')return;
+      const cmd=termInput.value.trim().toLowerCase();termInput.value='';
+      if(!cmd)return;tCmd(cmd);
+      if(cmds[cmd])cmds[cmd]();
+      else{tPrint(`zsh: command not found: ${cmd}`,'t-output red');tPrint('Type <span style="color:#c08040">help</span> for commands.','t-output dim')}
     });
 
-    // Copy email
-    const emailAddr = document.querySelector('.email-addr');
-    if (emailAddr) {
-      emailAddr.style.cursor = 'pointer';
-      emailAddr.title = 'Click to copy';
-      emailAddr.addEventListener('click', () => {
-        navigator.clipboard.writeText('jdsoffcl@gmail.com');
-        showToast('✓ Email copied to clipboard');
-      });
-    }
-
-    
-
-    // ── HIDDEN CTF FLAG ── 
-    // Flag is hidden in page source as an HTML comment
-    // Users who view-source and find it get the modal
-    // Also: konami code triggers it
-    let konamiSeq = [];
-    const KONAMI = [38,38,40,40,37,39,37,39,66,65];
-    document.addEventListener('keydown', e => {
-      konamiSeq.push(e.keyCode);
-      konamiSeq = konamiSeq.slice(-10);
-      if (konamiSeq.join(',') === KONAMI.join(',')) {
-        document.getElementById('flagModal').classList.add('show');
-      }
-      // Keyboard nav: 1-5 jump to sections
-      const sectionMap = {'1':'hero','2':'certifications','3':'stacks','4':'vault','5':'sybervault'};
-      if (sectionMap[e.key]) {
-        const el = document.getElementById(sectionMap[e.key]);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }
+    // Konami + triple-click flag
+    let ks=[];const K=[38,38,40,40,37,39,37,39,66,65];
+    document.addEventListener('keydown',e=>{
+      ks.push(e.keyCode);ks=ks.slice(-10);
+      if(ks.join(',')===K.join(','))document.getElementById('flagModal').classList.add('show');
+      const sm={'1':'hero','2':'certifications','3':'stacks','4':'vault','5':'sybervault'};
+      if(sm[e.key]){const el=document.getElementById(sm[e.key]);if(el)el.scrollIntoView({behavior:'smooth'})}
     });
-
-    // ── ALSO: clicking the nav logo 3x fast reveals flag ──
-    let logoClicks = 0;
-    let logoTimer;
-    const navLogo = document.querySelector('.nav-logo');
-    if (navLogo) {
-      navLogo.style.cursor = 'pointer';
-      navLogo.addEventListener('click', () => {
-        logoClicks++;
-        clearTimeout(logoTimer);
-        logoTimer = setTimeout(() => logoClicks = 0, 800);
-        if (logoClicks >= 3) {
-          logoClicks = 0;
-          document.getElementById('flagModal').classList.add('show');
-        }
-      });
-    }
-
+    let lc=0,lt;
+    const nl=document.querySelector('.nav-logo');
+    if(nl){nl.style.cursor='pointer';nl.addEventListener('click',()=>{lc++;clearTimeout(lt);lt=setTimeout(()=>lc=0,800);if(lc>=3){lc=0;document.getElementById('flagModal').classList.add('show')}})}
   </script>
 </body>
 </html>
