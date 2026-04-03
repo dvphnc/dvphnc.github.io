@@ -917,49 +917,111 @@
         c:[[0,1,1],[1,0,0],[1,0,0],[1,0,0],[0,1,1]],
       };
       const NAME=['d','v','p','h','n','c'],LW=3,GAP=1,NR=5,DR=2;
-      const GC=NAME.length*(LW+GAP)-GAP,GR=DR+NR;
+      const GC=NAME.length*(LW+GAP)-GAP,GR=DR+NR; // 23 cols, 7 rows
+
+      // Build column→rows map
       const CF={};
-      NAME.forEach((l,li)=>{const sc=li*(LW+GAP);for(let c=0;c<LW;c++){const col=sc+c;CF[col]=[];for(let r=0;r<NR;r++)if(FONT[l][r][c])CF[col].push(r);}});
+      NAME.forEach((l,li)=>{
+        const sc=li*(LW+GAP);
+        for(let c=0;c<LW;c++){
+          const col=sc+c; CF[col]=[];
+          for(let r=0;r<NR;r++) if(FONT[l][r][c]) CF[col].push(r);
+        }
+      });
+
       const FC=['filled','filled-alt','filled-deep','filled','filled-alt'];
       const board=document.getElementById('tetris-board');
       const cells=[];
-      for(let r=0;r<GR;r++){cells[r]=[];for(let c=0;c<GC;c++){const el=document.createElement('div');el.className='t-cell';board.appendChild(el);cells[r][c]=el;}}
-      let bootDone=false;
-      function skipBoot(){if(bootDone)return;bootDone=true;const bs=document.getElementById('boot-screen');bs.classList.add('fade-out');setTimeout(()=>bs.style.display='none',700);}
-      window.skipBoot=skipBoot;
-      function dropBlock(col,nr,fc,cb){
-        if(bootDone){cb();return;}
-        const tr=DR+nr;let cur=0;
-        cells[cur][col].classList.add('drop-ghost');
-        const iv=setInterval(()=>{
-          if(bootDone){clearInterval(iv);cb();return;}
-          cells[cur][col].classList.remove('drop-ghost');
-          cur++;
-          if(cur<=tr)cells[cur][col].classList.add('drop-ghost');
-          if(cur>tr){
-            clearInterval(iv);
-            const cell=cells[tr][col];
-            cell.classList.add('land-flash');
-            setTimeout(()=>{cell.classList.remove('land-flash');cell.classList.add('filled',fc);cb();},70);
-          }
-        },50);
-      }
-      const seq=[];let ci=0;
-      for(let col=0;col<GC;col++){(CF[col]||[]).forEach(r=>seq.push({col,nr:r,fc:FC[ci++%FC.length]}));}
-      let idx=0;
-      function runNext(){
-        if(bootDone)return;
-        if(idx>=seq.length){
-          setTimeout(()=>{document.getElementById('boot-tagline').classList.add('show');setTimeout(()=>{if(!bootDone)skipBoot();},1400);},300);
-          return;
+      for(let r=0;r<GR;r++){
+        cells[r]=[];
+        for(let c=0;c<GC;c++){
+          const el=document.createElement('div');
+          el.className='t-cell';
+          board.appendChild(el);
+          cells[r][c]=el;
         }
-        const item=seq[idx],next=seq[idx+1];idx++;
-        dropBlock(item.col,item.nr,item.fc,()=>{
-          setTimeout(runNext,(!next||next.col!==item.col)?230:16);
+      }
+
+      let bootDone=false;
+      function skipBoot(){
+        if(bootDone)return; bootDone=true;
+        document.getElementById('boot-screen').classList.add('fade-out');
+        setTimeout(()=>document.getElementById('boot-screen').style.display='none',700);
+      }
+      window.skipBoot=skipBoot;
+
+      // Drop a single block in `col` to target row `tr`
+      // Returns a promise that resolves when block lands
+      function dropBlock(col,tr,fc){
+        return new Promise(res=>{
+          if(bootDone){res();return;}
+          let cur=0;
+          cells[cur][col].classList.add('drop-ghost');
+          const iv=setInterval(()=>{
+            cells[cur][col].classList.remove('drop-ghost');
+            cur++;
+            if(cur<=tr) cells[cur][col].classList.add('drop-ghost');
+            if(cur>tr){
+              clearInterval(iv);
+              const cell=cells[tr][col];
+              cell.classList.add('land-flash');
+              setTimeout(()=>{
+                cell.classList.remove('land-flash');
+                cell.classList.add('filled',fc);
+                res();
+              },60);
+            }
+          },22); // ~22ms per row step = fast drop
         });
       }
-      setTimeout(runNext,400);
-      setTimeout(()=>{if(!bootDone)skipBoot();},14000);
+
+      // Strategy: drop all columns in a letter simultaneously,
+      // letter by letter with a small stagger between letters.
+      // Within a letter's column, blocks drop top-to-bottom sequentially.
+      async function runAnimation(){
+        let ci=0;
+        const LETTER_GAP=120; // ms between letters starting
+
+        const letterPromises=NAME.map((letter,li)=>{
+          return new Promise(async res=>{
+            await new Promise(r=>setTimeout(r, li*LETTER_GAP));
+            if(bootDone){res();return;}
+            const sc=li*(LW+GAP);
+            // All 3 columns of this letter drop in parallel
+            const colPromises=[];
+            for(let c=0;c<LW;c++){
+              const col=sc+c;
+              const rows=CF[col]||[];
+              if(rows.length===0) continue;
+              // Each column: drop blocks top-to-bottom sequentially
+              colPromises.push((async()=>{
+                for(const nr of rows){
+                  if(bootDone) return;
+                  const fc=FC[ci++%FC.length];
+                  await dropBlock(col, DR+nr, fc);
+                  // tiny gap between blocks in same column
+                  await new Promise(r=>setTimeout(r,30));
+                }
+              })());
+            }
+            await Promise.all(colPromises);
+            res();
+          });
+        });
+
+        await Promise.all(letterPromises);
+
+        // All done
+        if(!bootDone){
+          setTimeout(()=>{
+            document.getElementById('boot-tagline').classList.add('show');
+            setTimeout(()=>{if(!bootDone)skipBoot();},1200);
+          },200);
+        }
+      }
+
+      setTimeout(runAnimation,300);
+      setTimeout(()=>{if(!bootDone)skipBoot();},8000);
     })();
 
     // Typewriter
