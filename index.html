@@ -490,7 +490,18 @@
         radial-gradient(ellipse 60% 60% at 80% 80%, rgba(0,31,107,0.8) 0%,transparent 65%),
         radial-gradient(ellipse 50% 50% at 50% 50%, rgba(0,68,204,0.3) 0%,transparent 70%);
     }
-    #boot-screen.fade-out { opacity:0; pointer-events:none; }
+    #boot-screen.fade-out { pointer-events:none; }
+    @keyframes rowClear {
+      0%   { transform:scaleY(1); opacity:1; }
+      40%  { transform:scaleY(0.06); opacity:1; background:#4d9fff; }
+      100% { transform:scaleY(0); opacity:0; }
+    }
+    .boot-row-exit {
+      position:absolute; left:0; right:0; height:calc(100%/7);
+      background:#ffffff;
+      transform-origin:center;
+      animation:rowClear 0.28s cubic-bezier(0.4,0,1,1) forwards;
+    }
     #tetris-wrap { position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; gap:18px; }
     #tetris-board {
       display:grid;
@@ -945,8 +956,23 @@
       let bootDone=false;
       function skipBoot(){
         if(bootDone)return; bootDone=true;
-        document.getElementById('boot-screen').classList.add('fade-out');
-        setTimeout(()=>document.getElementById('boot-screen').style.display='none',700);
+        const bs=document.getElementById('boot-screen');
+        bs.classList.add('fade-out');
+        // Tetris clear: flash all filled cells white, then wipe rows bottom-up
+        const allFilled=bs.querySelectorAll('.t-cell.filled,.t-cell.filled-alt,.t-cell.filled-deep');
+        allFilled.forEach(el=>{el.classList.add('land-flash');});
+        setTimeout(()=>{
+          // Wipe rows bottom to top like Tetris line clear
+          const TOTAL_ROWS=7;
+          for(let i=0;i<TOTAL_ROWS;i++){
+            const strip=document.createElement('div');
+            strip.className='boot-row-exit';
+            strip.style.bottom=(i*(100/TOTAL_ROWS))+'%';
+            strip.style.animationDelay=(i*55)+'ms';
+            bs.appendChild(strip);
+          }
+          setTimeout(()=>bs.style.display='none', 55*TOTAL_ROWS+320);
+        },120);
       }
       window.skipBoot=skipBoot;
 
