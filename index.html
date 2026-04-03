@@ -491,16 +491,9 @@
         radial-gradient(ellipse 50% 50% at 50% 50%, rgba(0,68,204,0.3) 0%,transparent 70%);
     }
     #boot-screen.fade-out { pointer-events:none; }
-    @keyframes rowClear {
-      0%   { transform:scaleY(1); opacity:1; }
-      40%  { transform:scaleY(0.06); opacity:1; background:#4d9fff; }
-      100% { transform:scaleY(0); opacity:0; }
-    }
-    .boot-row-exit {
-      position:absolute; left:0; right:0; height:calc(100%/7);
-      background:#ffffff;
-      transform-origin:center;
-      animation:rowClear 0.28s cubic-bezier(0.4,0,1,1) forwards;
+    @keyframes blockFall {
+      0%   { transform:translateY(0) rotate(0deg); opacity:1; }
+      100% { transform:translateY(120vh) rotate(var(--spin,0deg)); opacity:0; }
     }
     #tetris-wrap { position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; gap:18px; }
     #tetris-board {
@@ -958,21 +951,25 @@
         if(bootDone)return; bootDone=true;
         const bs=document.getElementById('boot-screen');
         bs.classList.add('fade-out');
-        // Tetris clear: flash all filled cells white, then wipe rows bottom-up
-        const allFilled=bs.querySelectorAll('.t-cell.filled,.t-cell.filled-alt,.t-cell.filled-deep');
-        allFilled.forEach(el=>{el.classList.add('land-flash');});
+        // Get all filled cells and make them fall down with gravity stagger
+        const filled=[...bs.querySelectorAll('.t-cell.filled,.t-cell.filled-alt,.t-cell.filled-deep')];
+        // Sort bottom-row first so bottom falls first (more natural)
+        // Each cell gets a random slight spin and delay based on its column
+        filled.forEach(el=>{
+          const rect=el.getBoundingClientRect();
+          const col=Math.round(rect.left/25); // rough col index
+          const row=Math.round(rect.top/25);  // rough row index
+          const delay=row*18+col*6+Math.random()*40; // bottom rows fall first
+          const spin=(Math.random()-0.5)*25;
+          el.style.setProperty('--spin', spin+'deg');
+          el.style.animation=`blockFall ${0.45+Math.random()*0.2}s ${delay}ms cubic-bezier(0.55,0,1,1) forwards`;
+        });
+        // Fade the bg out after blocks have fallen
         setTimeout(()=>{
-          // Wipe rows bottom to top like Tetris line clear
-          const TOTAL_ROWS=7;
-          for(let i=0;i<TOTAL_ROWS;i++){
-            const strip=document.createElement('div');
-            strip.className='boot-row-exit';
-            strip.style.bottom=(i*(100/TOTAL_ROWS))+'%';
-            strip.style.animationDelay=(i*55)+'ms';
-            bs.appendChild(strip);
-          }
-          setTimeout(()=>bs.style.display='none', 55*TOTAL_ROWS+320);
-        },120);
+          bs.style.transition='opacity 0.25s';
+          bs.style.opacity='0';
+          setTimeout(()=>bs.style.display='none', 280);
+        }, 380);
       }
       window.skipBoot=skipBoot;
 
