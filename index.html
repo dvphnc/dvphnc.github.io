@@ -29,11 +29,11 @@
       --text2: rgba(255,255,255,0.82);
       --text3: rgba(200,215,255,0.58);
       --text4: rgba(180,200,255,0.32);
-      --accent:  #4d9fff;   /* bright sky blue */
-      --accent2: #80c0ff;   /* light blue */
-      --red:     #cc0000;   /* TH red accent */
-      --red2:    #ff3333;   /* bright red */
-      --navy:    #003087;   /* TH flag navy */
+      --accent:  #4d9fff;
+      --accent2: #80c0ff;
+      --red:     #cc0000;
+      --red2:    #ff3333;
+      --navy:    #003087;
       --navy2:   #0044aa;
       --green:   #4a7a5a;
       --orange:  #b87040;
@@ -195,9 +195,7 @@
     html:not(.dark) .icon-moon { display:none; }
     html.dark .icon-sun { display:none; }
 
-    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       LIGHT MODE — white + Tommy Hilfiger navy
-    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    /* LIGHT MODE — white + Tommy Hilfiger navy */
     html:not(.dark){--bg:#fff;--text:#003087;--text2:rgba(0,48,135,0.85);--text3:rgba(0,48,135,0.55);--text4:rgba(0,48,135,0.33);--accent:#003087;--accent2:#0044cc;--glass:rgba(255,255,255,0.9);--glass-border:rgba(0,48,135,0.12);--glass-border-subtle:rgba(0,48,135,0.07);--glass-shadow:0 4px 20px rgba(0,48,135,0.07);--glass-shadow-lg:0 16px 48px rgba(0,48,135,0.11);--pill-bg:rgba(0,48,135,0.07);--pill-border:rgba(0,48,135,0.16);}
     html:not(.dark) body{background:#fff;color:#003087;}
     html:not(.dark) .film-orb-1{background:#c8daff;opacity:0.6;filter:blur(90px);}
@@ -206,9 +204,7 @@
     html:not(.dark) .film-orb-4{background:#c0d4ff;opacity:0.35;filter:blur(90px);}
     html:not(.dark) .film-grain{opacity:0.02;}
     html:not(.dark) .film-vignette{background:radial-gradient(ellipse 88% 82% at 50% 50%,transparent 55%,rgba(0,48,135,0.05) 100%);}
-    html:not(.dark) .film-leak-1{opacity:0!important;}
-    html:not(.dark) .film-leak-2{opacity:0!important;}
-    html:not(.dark) .film-leak-3{opacity:0!important;}
+    html:not(.dark) .film-leak-1,html:not(.dark) .film-leak-2,html:not(.dark) .film-leak-3{opacity:0!important;}
     html:not(.dark) #scroll-progress{background:linear-gradient(90deg,#003087,#0044cc,#4d9fff);}
     html:not(.dark) nav{background:rgba(255,255,255,0.92);border-color:rgba(0,48,135,0.1);box-shadow:0 1px 0 rgba(0,48,135,0.07);}
     html:not(.dark) nav.scrolled{background:rgba(255,255,255,0.98);box-shadow:0 4px 24px rgba(0,48,135,0.08);}
@@ -539,18 +535,87 @@
     /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        BOOT SCREEN
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-    #boot-screen { position:fixed; inset:0; z-index:99999; background:#000; display:flex; flex-direction:column; align-items:center; justify-content:center; font-family:var(--mono); transition:opacity 0.6s ease; }
+    #boot-screen {
+      position:fixed; inset:0; z-index:99999;
+      background:#001a5e;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      font-family:var(--mono); transition:opacity 0.7s ease; overflow:hidden;
+    }
+    #boot-screen::before {
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background:
+        radial-gradient(ellipse 70% 70% at 20% 20%, rgba(0,48,135,0.9) 0%,transparent 65%),
+        radial-gradient(ellipse 60% 60% at 80% 80%, rgba(0,31,107,0.8) 0%,transparent 65%),
+        radial-gradient(ellipse 50% 50% at 50% 50%, rgba(0,68,204,0.3) 0%,transparent 70%);
+    }
     #boot-screen.fade-out { opacity:0; pointer-events:none; }
-    .boot-logo { font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:rgba(255,255,255,0.25); margin-bottom:48px; }
-    .boot-lines { width:480px; max-width:90vw; }
-    .boot-line { font-size:12px; line-height:1.9; color:rgba(255,255,255,0); transition:color 0.3s; display:flex; align-items:center; gap:12px; }
-    .boot-line.show { color:rgba(255,255,255,0.65); }
-    .boot-line .bl-status { margin-left:auto; font-size:11px; }
-    .bl-ok { color:#5a9a6a; } .bl-warn { color:#c08040; }
-    .boot-bar-wrap { width:480px; max-width:90vw; margin-top:28px; height:2px; background:rgba(255,255,255,0.06); border-radius:2px; overflow:hidden; }
-    .boot-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,#1a2456,#7b8cde,#8b2020); border-radius:2px; transition:width 0.4s ease; }
-    .boot-skip { position:absolute; bottom:28px; right:28px; font-size:11px; color:rgba(255,255,255,0.2); cursor:pointer; letter-spacing:0.08em; }
-    .boot-skip:hover { color:rgba(255,255,255,0.6); }
+
+    /* Tetris board */
+    #tetris-wrap {
+      position:relative; z-index:1;
+      display:flex; flex-direction:column; align-items:center; gap:20px;
+    }
+    #tetris-board {
+      display:grid;
+      grid-template-columns:repeat(10, 28px);
+      grid-template-rows:repeat(8, 28px);
+      gap:2px;
+    }
+    .t-cell {
+      width:28px; height:28px; border-radius:4px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.04);
+      transition:background 0.15s, border-color 0.15s, box-shadow 0.15s;
+    }
+    .t-cell.filled {
+      border-color:rgba(255,255,255,0.18);
+    }
+    .t-cell.flash {
+      background:#ffffff !important;
+      border-color:#ffffff !important;
+      box-shadow:0 0 16px rgba(255,255,255,0.8) !important;
+    }
+    /* Tetris piece colors — all navy-to-sky shades */
+    .t-I { background:#4d9fff; box-shadow:0 0 8px rgba(77,159,255,0.5); }
+    .t-O { background:#80c0ff; box-shadow:0 0 8px rgba(128,192,255,0.5); }
+    .t-T { background:#003087; box-shadow:0 0 8px rgba(0,48,135,0.8); border-color:rgba(77,159,255,0.3) !important; }
+    .t-S { background:#0044cc; box-shadow:0 0 8px rgba(0,68,204,0.6); }
+    .t-Z { background:#1a6fff; box-shadow:0 0 8px rgba(26,111,255,0.6); }
+    .t-J { background:#b0d4ff; box-shadow:0 0 8px rgba(176,212,255,0.5); }
+    .t-L { background:#2255dd; box-shadow:0 0 8px rgba(34,85,221,0.6); }
+
+    /* Falling piece */
+    #t-piece {
+      position:absolute; pointer-events:none; z-index:2;
+      display:grid; gap:2px;
+    }
+    .t-piece-cell {
+      width:28px; height:28px; border-radius:4px;
+    }
+
+    #boot-name {
+      font-size:clamp(28px,5vw,42px); font-weight:900;
+      letter-spacing:-0.03em; color:#fff;
+      opacity:0; transform:translateY(6px);
+      transition:opacity 0.5s, transform 0.5s;
+    }
+    #boot-name span { color:rgba(255,255,255,0.3); }
+    #boot-name.show { opacity:1; transform:translateY(0); }
+
+    #boot-sub {
+      font-size:10px; letter-spacing:0.22em; text-transform:uppercase;
+      color:rgba(255,255,255,0.3); margin-top:4px;
+      opacity:0; transition:opacity 0.5s 0.2s;
+    }
+    #boot-sub.show { opacity:1; }
+
+    .boot-skip {
+      position:absolute; bottom:28px; right:28px; z-index:10;
+      font-size:11px; color:rgba(255,255,255,0.2);
+      cursor:pointer; letter-spacing:0.1em; text-transform:uppercase;
+      transition:color 0.2s;
+    }
+    .boot-skip:hover { color:rgba(255,255,255,0.55); }
 
     /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        FLAG MODAL
@@ -634,9 +699,11 @@
 
   <!-- Boot screen -->
   <div id="boot-screen">
-    <div class="boot-logo">dvphnc OS v1.0</div>
-    <div class="boot-lines" id="bootLines"></div>
-    <div class="boot-bar-wrap"><div class="boot-bar-fill" id="bootBar"></div></div>
+    <div id="tetris-wrap">
+      <div id="tetris-board"></div>
+      <div id="boot-name">dv<span>phnc</span></div>
+      <div id="boot-sub">Joana Daphne Sy · Portfolio</div>
+    </div>
     <div class="boot-skip" onclick="skipBoot()">skip →</div>
   </div>
 
@@ -944,29 +1011,156 @@
     (function animDots(){let lx=mx,ly=my;dots.forEach((dot,i)=>{dot.x+=(lx-dot.x)*(0.35-i*0.025);dot.y+=(ly-dot.y)*(0.35-i*0.025);dot.el.style.left=dot.x-2.5+'px';dot.el.style.top=dot.y-2.5+'px';lx=dot.x;ly=dot.y});requestAnimationFrame(animDots)})();
 
     // Boot sequence
-    const bootData=[
-      {text:'Initializing dvphnc.sys',status:'OK',c:'bl-ok',d:0},
-      {text:'Loading Oracle Cloud modules',status:'OK',c:'bl-ok',d:280},
-      {text:'Mounting SyberVault [/notes]',status:'OK',c:'bl-ok',d:520},
-      {text:'Scanning CTF repositories',status:'OK',c:'bl-ok',d:720},
-      {text:'Starting Laravel runtime',status:'OK',c:'bl-ok',d:900},
-      {text:'Verifying OCI credentials',status:'CERTIFIED',c:'bl-ok',d:1080},
-      {text:'Looking for hidden flags',status:'...',c:'bl-warn',d:1260},
-      {text:'Booting portfolio interface',status:'DONE',c:'bl-ok',d:1480},
-    ];
-    let bootDone=false;
-    function skipBoot(){if(bootDone)return;bootDone=true;const bs=document.getElementById('boot-screen');bs.classList.add('fade-out');setTimeout(()=>{bs.style.display='none'},600)}
-    const bootLines=document.getElementById('bootLines'),bootBar=document.getElementById('bootBar');
-    bootData.forEach((item,i)=>{
-      setTimeout(()=>{
-        const line=document.createElement('div');line.className='boot-line';
-        line.innerHTML=`<span>${item.text}</span><span class="bl-status ${item.c}">${item.status}</span>`;
-        bootLines.appendChild(line);requestAnimationFrame(()=>line.classList.add('show'));
-        bootBar.style.width=((i+1)/bootData.length*100)+'%';
-        if(i===bootData.length-1)setTimeout(()=>{if(!bootDone)skipBoot()},500);
-      },item.d);
-    });
-    setTimeout(()=>{if(!bootDone)skipBoot()},3000);
+    // ── TETRIS BOOT ──────────────────────────────────────────────
+    (function(){
+      const COLS=10, ROWS=8;
+      const COLORS = ['t-I','t-O','t-T','t-S','t-Z','t-J','t-L'];
+
+      // All Tetris pieces as [row,col] offsets from pivot
+      const PIECES = {
+        I: [[0,0],[0,1],[0,2],[0,3]],
+        O: [[0,0],[0,1],[1,0],[1,1]],
+        T: [[0,0],[0,1],[0,2],[1,1]],
+        S: [[0,1],[0,2],[1,0],[1,1]],
+        Z: [[0,0],[0,1],[1,1],[1,2]],
+        J: [[0,0],[1,0],[1,1],[1,2]],
+        L: [[0,2],[1,0],[1,1],[1,2]],
+      };
+      const PIECE_KEYS = Object.keys(PIECES);
+
+      // Build grid
+      const board = document.getElementById('tetris-board');
+      const cells = [];
+      for(let r=0;r<ROWS;r++){
+        cells[r]=[];
+        for(let c=0;c<COLS;c++){
+          const d=document.createElement('div');
+          d.className='t-cell';
+          board.appendChild(d);
+          cells[r][c]=d;
+        }
+      }
+
+      // Grid state
+      const grid = Array.from({length:ROWS},()=>Array(COLS).fill(null));
+
+      // Sequence of pieces that will fill the board bottom-up
+      // Pre-plan: drop pieces row by row filling all 10 cols
+      // Each "wave" drops pieces that complete a row
+      const pieceTypes = PIECE_KEYS;
+      let colorIdx = 0;
+
+      // Queue: each entry is {cells:[[r,c],...], color}
+      const dropQueue = [];
+
+      // Fill rows 7 down to 0 with horizontal I-pieces (10 cols = 2x I + 2x I + I)
+      // Actually we'll place pieces smartly to fill row by row
+      // Strategy: fill each row with a mix of pieces
+      function planRow(row){
+        // Fill 10 cols with 2 x O(2wide) + 2 x O = nope
+        // Use I(4), I(4), O(2) = 10 ✓
+        const color1 = COLORS[colorIdx % COLORS.length]; colorIdx++;
+        const color2 = COLORS[colorIdx % COLORS.length]; colorIdx++;
+        const color3 = COLORS[colorIdx % COLORS.length]; colorIdx++;
+        // For 2-row pieces like O, we span two rows — but let's keep it to 1-row tall
+        // Use flat I-pieces (horizontal 4-wide) and flat 2-wide pieces
+        // Row: [I4 at 0][I4 at 4][OO at 8] but O is 2-row
+        // Simpler: just drop columns individually as 1×1 blocks with colors
+        // But that's not Tetris-like. Let's do flat horizontal pieces:
+        // [4-wide I][4-wide I][2-wide == top of O] for each row
+        return [
+          {cells:[[row,0],[row,1],[row,2],[row,3]], color:color1},
+          {cells:[[row,4],[row,5],[row,6],[row,7]], color:color2},
+          {cells:[[row,8],[row,9]],                 color:color3},
+        ];
+      }
+
+      // Queue pieces from bottom to top
+      for(let r=ROWS-1;r>=0;r--){
+        const pieces = planRow(r);
+        pieces.forEach(p=>dropQueue.push(p));
+      }
+
+      let qIdx = 0;
+      let bootDone = false;
+
+      function skipBoot(){
+        if(bootDone)return;
+        bootDone=true;
+        const bs=document.getElementById('boot-screen');
+        bs.classList.add('fade-out');
+        setTimeout(()=>{bs.style.display='none'},700);
+      }
+      window.skipBoot = skipBoot;
+
+      // Animate a single piece dropping into its target row
+      function dropPiece(pieceData, onDone){
+        if(bootDone){onDone();return;}
+        const targetCells = pieceData.cells; // [[r,c],...]
+        const color = pieceData.color;
+        const targetRow = targetCells[0][0];
+        const cols = targetCells.map(([,c])=>c);
+
+        // Animate: flash cells one by one sliding down
+        let animRow = 0;
+        const interval = setInterval(()=>{
+          // Briefly show falling indicator on current row if in range
+          if(animRow < targetRow){
+            cols.forEach(c=>{
+              if(animRow>0) cells[animRow-1][c].className='t-cell'; // clear prev
+              if(animRow < ROWS) cells[animRow][c].style.background='rgba(255,255,255,0.18)';
+            });
+            animRow++;
+          } else {
+            // Clear any temp highlights
+            cols.forEach(c=>{
+              if(animRow>0 && animRow-1 < ROWS) cells[animRow-1][c].style.background='';
+            });
+            clearInterval(interval);
+            // Place piece
+            targetCells.forEach(([r,c])=>{
+              cells[r][c].className=`t-cell filled ${color}`;
+              grid[r][c]=color;
+            });
+            // Check if a full row is done
+            const rowsFilled = [...new Set(targetCells.map(([r])=>r))];
+            rowsFilled.forEach(r=>{
+              const rowFull = grid[r].every(v=>v!==null);
+              if(rowFull){
+                // Flash the row
+                for(let c=0;c<COLS;c++) cells[r][c].classList.add('flash');
+                setTimeout(()=>{
+                  for(let c=0;c<COLS;c++) cells[r][c].classList.remove('flash');
+                },350);
+              }
+            });
+            onDone();
+          }
+        }, 28);
+      }
+
+      function runQueue(){
+        if(bootDone)return;
+        if(qIdx >= dropQueue.length){
+          // All filled — show name
+          setTimeout(()=>{
+            document.getElementById('boot-name').classList.add('show');
+            document.getElementById('boot-sub').classList.add('show');
+            setTimeout(()=>{ if(!bootDone) skipBoot(); }, 1200);
+          }, 200);
+          return;
+        }
+        dropPiece(dropQueue[qIdx++], ()=>{
+          setTimeout(runQueue, 40);
+        });
+      }
+
+      // Start after a brief pause
+      setTimeout(runQueue, 300);
+
+      // Hard timeout
+      setTimeout(()=>{ if(!bootDone) skipBoot(); }, 7000);
+    })();
 
     // Typewriter
     (function(){
