@@ -603,8 +603,20 @@
 
     /* ── Pixel Logo ── */
     .dvphnc-logo { display:block; color:currentColor; }
-    .dvphnc-logo .pxl-on  { fill:currentColor; opacity:1; }
     .dvphnc-logo .pxl-off { fill:currentColor; opacity:0.12; }
+    /* animated pixels start invisible, drop in via JS */
+    .dvphnc-logo .pxl-on  { fill:currentColor; opacity:0; }
+    .dvphnc-logo.logo-done .pxl-on { opacity:1; }
+    @keyframes pxlDrop {
+      0%   { opacity:0; transform:translateY(-14px); }
+      60%  { opacity:1; transform:translateY(1px); }
+      80%  { transform:translateY(-2px); }
+      100% { opacity:1; transform:translateY(0); }
+    }
+    @keyframes pxlFlash {
+      0%,100% { opacity:1; }
+      50%     { opacity:0.15; fill:#ffffff; }
+    }
     /* Nav logo */
     .nav-logo { display:flex; align-items:center; gap:10px; color:var(--text); cursor:pointer; text-decoration:none; }
     .nav-logo .dvphnc-logo { height:22px; width:auto; transition:opacity 0.2s; }
@@ -1017,6 +1029,61 @@
       setTimeout(runAnimation,300);setTimeout(function(){if(!bootDone)skipBoot();},8000);
     })();
 
+
+    // ── Logo pixel animation ──
+    function animateLogo(svg, delay) {
+      var onPixels = svg.querySelectorAll('.pxl-on');
+      // Group by column (x attribute) — drop col by col left to right
+      var cols = {};
+      onPixels.forEach(function(px) {
+        var x = px.getAttribute('x');
+        if (!cols[x]) cols[x] = [];
+        cols[x].push(px);
+      });
+      var colKeys = Object.keys(cols).map(Number).sort(function(a,b){return a-b;});
+      colKeys.forEach(function(x, ci) {
+        var pixels = cols[x];
+        // Sort by y so top drops first
+        pixels.sort(function(a,b){ return +a.getAttribute('y') - +b.getAttribute('y'); });
+        pixels.forEach(function(px, pi) {
+          var t = delay + ci * 55 + pi * 18;
+          setTimeout(function() {
+            px.style.animation = 'pxlDrop 0.28s cubic-bezier(0.2,0,0.4,1) forwards';
+          }, t);
+        });
+      });
+      // Mark done after all animations finish
+      var total = delay + colKeys.length * 55 + 5 * 18 + 300;
+      setTimeout(function() { svg.classList.add('logo-done'); }, total);
+    }
+
+    // Run nav logo animation after boot screen exits
+    var _origSkipBoot = window.skipBoot;
+    window.skipBoot = function() {
+      _origSkipBoot && _origSkipBoot();
+      setTimeout(function() {
+        document.querySelectorAll('.dvphnc-logo').forEach(function(svg, i) {
+          animateLogo(svg, i === 0 ? 600 : 800);
+        });
+      }, 200);
+    };
+
+    // Contact logo: animate when scrolled into view
+    (function() {
+      var contactLogo = document.querySelector('.contact-logo-wrap .dvphnc-logo');
+      if (!contactLogo) return;
+      var done = false;
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting && !done) {
+            done = true;
+            animateLogo(contactLogo, 100);
+            obs.disconnect();
+          }
+        });
+      }, { threshold: 0.3 });
+      obs.observe(contactLogo);
+    })();
     // Typewriter
     (function(){
       const flink=document.createElement('link');flink.rel='stylesheet';
