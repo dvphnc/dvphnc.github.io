@@ -254,54 +254,35 @@
     /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        REVEAL
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-    /* ── Scroll Reveal Variants ── */
-    .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1),transform 0.7s cubic-bezier(0.16,1,0.3,1); }
-    .reveal.visible { opacity:1; transform:translateY(0); }
-    .reveal-left  { opacity:0; transform:translateX(-40px); transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1),transform 0.7s cubic-bezier(0.16,1,0.3,1); }
-    .reveal-left.visible  { opacity:1; transform:translateX(0); }
-    .reveal-right { opacity:0; transform:translateX(40px);  transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1),transform 0.7s cubic-bezier(0.16,1,0.3,1); }
-    .reveal-right.visible { opacity:1; transform:translateX(0); }
-    .reveal-scale { opacity:0; transform:scale(0.88); transition:opacity 0.65s cubic-bezier(0.16,1,0.3,1),transform 0.65s cubic-bezier(0.16,1,0.3,1); }
-    .reveal-scale.visible { opacity:1; transform:scale(1); }
-    .reveal-flip  { opacity:0; transform:perspective(600px) rotateX(18deg); transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1),transform 0.7s cubic-bezier(0.16,1,0.3,1); }
-    .reveal-flip.visible  { opacity:1; transform:perspective(600px) rotateX(0deg); }
-
-    /* Card tilt on hover */
-    .tilt-card { transform-style:preserve-3d; transition:transform 0.18s ease, box-shadow 0.18s ease; will-change:transform; }
-
-    /* Section active glow */
-    .section-active-line {
-      position:fixed; left:0; top:50%; transform:translateY(-50%);
-      width:3px; border-radius:2px;
-      background:linear-gradient(to bottom, transparent, #4d9fff, transparent);
-      opacity:0; transition:opacity 0.4s, height 0.4s;
-      pointer-events:none; z-index:100;
-      height:0;
+    /* ── Scroll Reveal — GSAP-style smooth ── */
+    .reveal,.reveal-left,.reveal-right,.reveal-scale,.reveal-flip {
+      opacity:0;
+      will-change:opacity,transform;
+      transition:
+        opacity 0.9s cubic-bezier(0.22,1,0.36,1),
+        transform 0.9s cubic-bezier(0.22,1,0.36,1);
     }
-    .section-active-line.show { opacity:0.7; height:80px; }
-
-    /* Floating particles on scroll */
-    @keyframes floatUp {
-      0%   { transform:translateY(0) scale(1);   opacity:0.6; }
-      100% { transform:translateY(-80px) scale(0); opacity:0; }
-    }
-    .scroll-particle {
-      position:fixed; pointer-events:none; z-index:9998;
-      width:4px; height:4px; border-radius:50%;
-      background:#4d9fff;
-      animation:floatUp 1s ease-out forwards;
-    }
-
-    /* Highlight shimmer on section titles when entering view */
-    @keyframes titleShimmer {
-      0%   { background-position: -200% center; }
-      100% { background-position:  200% center; }
-    }
-    .sec-title.shimmer {
-      background: linear-gradient(90deg, var(--text) 0%, #4d9fff 40%, #80c0ff 50%, var(--text) 60%);
-      background-size: 200% auto;
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      animation: titleShimmer 1.2s ease forwards;
+    .reveal       { transform:translateY(50px); }
+    .reveal-left  { transform:translateX(-60px) translateY(20px); }
+    .reveal-right { transform:translateX(60px) translateY(20px); }
+    .reveal-scale { transform:scale(0.85) translateY(30px); }
+    .reveal-flip  { transform:perspective(800px) rotateX(20deg) translateY(30px); }
+    .reveal.visible      { opacity:1; transform:translateY(0); }
+    .reveal-left.visible { opacity:1; transform:translateX(0) translateY(0); }
+    .reveal-right.visible{ opacity:1; transform:translateX(0) translateY(0); }
+    .reveal-scale.visible{ opacity:1; transform:scale(1) translateY(0); }
+    .reveal-flip.visible { opacity:1; transform:perspective(800px) rotateX(0deg) translateY(0); }
+    /* Stagger delays */
+    .rd1{transition-delay:0s}
+    .rd2{transition-delay:0.1s}
+    .rd3{transition-delay:0.2s}
+    .rd4{transition-delay:0.3s}
+    .rd5{transition-delay:0.4s}
+    .rd6{transition-delay:0.5s}
+    /* Card tilt */
+    .tilt-card {
+      will-change:transform;
+      transition:transform 0.25s cubic-bezier(0.22,1,0.36,1), box-shadow 0.25s ease;
     }
     .rd1{transition-delay:.07s} .rd2{transition-delay:.14s} .rd3{transition-delay:.21s}
     .rd4{transition-delay:.28s} .rd5{transition-delay:.35s} .rd6{transition-delay:.42s}
@@ -975,19 +956,90 @@
     window.addEventListener('scroll',()=>{const h=document.documentElement;sp.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'});
 
     // Reveal
-    // ── Enhanced scroll observer ──
-    const revealClasses=['reveal','reveal-left','reveal-right','reveal-scale','reveal-flip'];
-    const obs=new IntersectionObserver(e=>e.forEach(x=>{
-      if(x.isIntersecting){
-        x.target.classList.add('visible');
-        // Shimmer on section titles
-        if(x.target.classList.contains('sec-title')){
-          x.target.classList.add('shimmer');
-          setTimeout(()=>x.target.classList.remove('shimmer'),1400);
-        }
+    // ── Scroll animation engine ──
+    (function(){
+      var revealClasses=['reveal','reveal-left','reveal-right','reveal-scale','reveal-flip'];
+      var elements=[];
+
+      // Collect all animatable elements
+      revealClasses.forEach(function(cls){
+        document.querySelectorAll('.'+cls).forEach(function(el){
+          elements.push(el);
+        });
+      });
+
+      // IntersectionObserver for triggering — once element is 12% in view, play
+      var obs=new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            entry.target.classList.add('visible');
+            // Don't unobserve — allow re-trigger logic below if needed
+          }
+        });
+      },{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+
+      elements.forEach(function(el){ obs.observe(el); });
+
+      // ── Tilt cards on mouse move ──
+      document.querySelectorAll('.tilt-card').forEach(function(card){
+        card.addEventListener('mousemove',function(e){
+          var r=card.getBoundingClientRect();
+          var nx=(e.clientX-r.left)/r.width-0.5;   // -0.5 to 0.5
+          var ny=(e.clientY-r.top)/r.height-0.5;
+          var tiltX=ny*-10, tiltY=nx*12;
+          card.style.transform=
+            'perspective(700px) rotateX('+tiltX+'deg) rotateY('+tiltY+'deg) translateY(-4px) scale(1.02)';
+          card.style.boxShadow=
+            '0 24px 48px rgba(0,0,0,0.25), '+
+            (nx*16)+'px '+(ny*16)+'px 32px rgba(77,159,255,0.18)';
+        });
+        card.addEventListener('mouseleave',function(){
+          card.style.transform='';
+          card.style.boxShadow='';
+        });
+      });
+
+      // ── Parallax on background orbs ──
+      var orbs=[
+        {el:document.querySelector('.film-orb-1'),speed:0.06,dir:1},
+        {el:document.querySelector('.film-orb-2'),speed:0.04,dir:-1},
+        {el:document.querySelector('.film-orb-3'),speed:0.05,dir:1},
+        {el:document.querySelector('.film-orb-4'),speed:0.03,dir:-1},
+      ];
+
+      // ── Section active nav highlight ──
+      var navLinks=document.querySelectorAll('.nav-links a');
+      var sectionIds=['certifications','stacks','vault','sybervault','terminal-section','contact'];
+      var secObs=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){
+            var id=e.target.id;
+            navLinks.forEach(function(a){
+              var match=a.getAttribute('href')==='#'+id;
+              a.style.opacity=match?'1':'';
+              a.style.fontWeight=match?'700':'';
+            });
+          }
+        });
+      },{threshold:0.35});
+      sectionIds.forEach(function(id){
+        var s=document.getElementById(id);
+        if(s)secObs.observe(s);
+      });
+
+      // ── rAF scroll loop for parallax ──
+      var scrollY=0,targetScrollY=0,rafRunning=false;
+      function onScroll(){targetScrollY=window.scrollY; if(!rafRunning){rafRunning=true;rafLoop();}}
+      function rafLoop(){
+        scrollY+=(targetScrollY-scrollY)*0.08; // lerp — smooth lag
+        orbs.forEach(function(o){
+          if(o.el) o.el.style.transform='translateY('+(scrollY*o.speed*o.dir)+'px)';
+        });
+        if(Math.abs(scrollY-targetScrollY)>0.5){requestAnimationFrame(rafLoop);}
+        else{rafRunning=false;}
       }
-    }),{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
-    revealClasses.forEach(cls=>document.querySelectorAll('.'+cls).forEach(el=>obs.observe(el)));
+      window.addEventListener('scroll',onScroll,{passive:true});
+    })();
 
     // Nav shrink
     const navEl=document.getElementById('navbar');
@@ -1259,86 +1311,6 @@
       if(cmds[cmd])cmds[cmd]();
       else{tPrint(`zsh: command not found: ${cmd}`,'t-output red');tPrint('Type <span style="color:#c08040">help</span> for commands.','t-output dim')}
     });
-
-    // ── Scroll interactions ──
-    (function(){
-      // Card tilt effect
-      document.querySelectorAll('.tilt-card').forEach(function(card){
-        card.addEventListener('mousemove',function(e){
-          var r=card.getBoundingClientRect();
-          var x=(e.clientX-r.left)/r.width-0.5;
-          var y=(e.clientY-r.top)/r.height-0.5;
-          card.style.transform='perspective(600px) rotateY('+(x*10)+'deg) rotateX('+(-y*8)+'deg) translateY(-3px)';
-          card.style.boxShadow='0 20px 40px rgba(0,0,0,0.3), '+(x*20)+'px '+(y*20)+'px 30px rgba(77,159,255,0.15)';
-        });
-        card.addEventListener('mouseleave',function(){
-          card.style.transform='';
-          card.style.boxShadow='';
-        });
-      });
-
-      // Scroll progress particles
-      var lastScrollY=0, ticking=false;
-      var particleCount=0;
-      window.addEventListener('scroll',function(){
-        var sy=window.scrollY;
-        var delta=Math.abs(sy-lastScrollY);
-        if(delta>30 && particleCount<3){
-          particleCount++;
-          var p=document.createElement('div');
-          p.className='scroll-particle';
-          p.style.left=Math.random()*window.innerWidth+'px';
-          p.style.top=(window.innerHeight*0.3+Math.random()*window.innerHeight*0.4)+'px';
-          p.style.background=Math.random()>0.5?'#4d9fff':'#80c0ff';
-          p.style.width=p.style.height=(2+Math.random()*4)+'px';
-          document.body.appendChild(p);
-          setTimeout(function(){ p.remove(); particleCount=Math.max(0,particleCount-1); },1000);
-        }
-        lastScrollY=sy;
-
-        // Parallax on film orbs
-        var orbs=document.querySelectorAll('.film-orb-1,.film-orb-2,.film-orb-3,.film-orb-4');
-        orbs.forEach(function(o,i){
-          var speed=[0.08,0.05,0.06,0.04][i]||0.05;
-          o.style.transform='translateY('+(sy*speed*(i%2===0?1:-1))+'px)';
-        });
-      },{passive:true});
-
-      // Section highlight — active nav link on scroll
-      var sections=['certifications','stacks','vault','sybervault','terminal-section','contact'];
-      var navLinks=document.querySelectorAll('.nav-links a');
-      var sectionObs=new IntersectionObserver(function(entries){
-        entries.forEach(function(e){
-          if(e.isIntersecting){
-            var id=e.target.id;
-            navLinks.forEach(function(a){
-              var href=a.getAttribute('href');
-              a.style.color=href&&href.slice(1)===id?'var(--text)':'';
-              a.style.opacity=href&&href.slice(1)===id?'1':'';
-            });
-          }
-        });
-      },{threshold:0.4});
-      sections.forEach(function(id){
-        var el=document.getElementById(id);
-        if(el) sectionObs.observe(el);
-      });
-
-      // Stagger children of sections as they enter
-      var childObs=new IntersectionObserver(function(entries){
-        entries.forEach(function(e){
-          if(e.isIntersecting){
-            var children=e.target.querySelectorAll('.cert-card,.notes-card,.contact-link,.pill');
-            children.forEach(function(c,i){
-              if(!c.classList.contains('visible')){
-                setTimeout(function(){c.classList.add('visible');},i*60);
-              }
-            });
-          }
-        });
-      },{threshold:0.1});
-      document.querySelectorAll('section').forEach(function(s){ childObs.observe(s); });
-    })();
 
     // ── Konami + triple-click flag
     let ks=[];const K=[38,38,40,40,37,39,37,39,66,65];
