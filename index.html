@@ -980,7 +980,10 @@
         if(bootDone)return;bootDone=true;
         var bs=document.getElementById('boot-screen');
         bs.classList.add('fade-out');
-        setTimeout(function(){bs.style.display='none';},650);
+        setTimeout(function(){
+          bs.style.display='none';
+          document.dispatchEvent(new Event('bootDone'));
+        },650);
       }
       window.skipBoot=skipBoot;
       function dropBlock(col,nr,fc){return new Promise(function(res){if(bootDone){res();return;}const tr=DR+nr;let cur=0;cells[cur][col].classList.add('drop-ghost');const iv=setInterval(function(){cells[cur][col].classList.remove('drop-ghost');cur++;if(cur<=tr)cells[cur][col].classList.add('drop-ghost');if(cur>tr){clearInterval(iv);const cell=cells[tr][col];cell.classList.add('land-flash');setTimeout(function(){cell.classList.remove('land-flash');cell.classList.add('filled',fc);res();},60);}},22);});}
@@ -1066,6 +1069,7 @@
 
       // Run one full animation cycle: drop all columns letter by letter, then pause, then reset and repeat
       function runCycle(grid, isNav){
+        grid._started = true;
         resetGrid(grid);
         var ci=0;
         // Drop letters in parallel with 120ms stagger between letters (same as boot)
@@ -1114,17 +1118,16 @@
       var navGrid=buildLogo(document.getElementById('logo-nav'), 3, 2);
       var contactGrid=buildLogo(document.getElementById('logo-contact'), 8, 3);
 
-      // Nav: start after boot exits
-      (function patch(){
-        var orig=window.skipBoot;
-        if(!orig){setTimeout(patch,30);return;}
-        window.skipBoot=function(){
-          orig();
-          setTimeout(function(){ if(navGrid) runCycle(navGrid, true); }, 800);
-        };
-      })();
+      // Nav: listen for the custom event that skipBoot dispatches, fallback to timeout
+      document.addEventListener('bootDone', function(){
+        setTimeout(function(){ if(navGrid) runCycle(navGrid, true); }, 400);
+      });
+      // Fallback: if boot is skipped before this runs, start after 5s max
+      setTimeout(function(){
+        if(navGrid && !navGrid._started) runCycle(navGrid, true);
+      }, 5000);
 
-      // Contact: start when scrolled into view, then keep looping
+      // Contact: start when scrolled into view
       if(contactGrid){
         var started=false;
         var io=new IntersectionObserver(function(entries){
@@ -1132,7 +1135,7 @@
             started=true;
             runCycle(contactGrid, false);
           }
-        },{threshold:0.25});
+        },{threshold:0.1});
         io.observe(document.getElementById('logo-contact'));
       }
     })();
