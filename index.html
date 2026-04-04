@@ -496,7 +496,6 @@
        BOOT SCREEN
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
     #boot-screen { position:fixed; inset:0; z-index:99999; background:#000; display:flex; flex-direction:column; align-items:center; justify-content:center; font-family:var(--mono); transition:opacity 0.6s ease; }
-    #boot-screen.fade-out { opacity:0; pointer-events:none; }
     .boot-logo { font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:rgba(255,255,255,0.25); margin-bottom:48px; }
     .boot-lines { width:480px; max-width:90vw; }
     .boot-line { font-size:12px; line-height:1.9; color:rgba(255,255,255,0); transition:color 0.3s; display:flex; align-items:center; gap:12px; }
@@ -564,16 +563,9 @@
     /* Boot */
     #boot-screen { position:fixed; inset:0; z-index:99999; background:#001a5e; display:flex; flex-direction:column; align-items:center; justify-content:center; font-family:var(--mono); overflow:hidden; }
     #boot-screen::before { content:''; position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse 70% 70% at 20% 20%,rgba(0,48,135,0.9) 0%,transparent 65%),radial-gradient(ellipse 60% 60% at 80% 80%,rgba(0,31,107,0.8) 0%,transparent 65%); }
-    #boot-screen.fade-out { pointer-events:none; }
-    @keyframes pixelScatter {
-      0%   { transform:translate(0,0) scale(1) rotate(0deg); opacity:1; }
-      60%  { opacity:1; }
-      100% { transform:translate(var(--bx),var(--by)) scale(0.1) rotate(var(--br)); opacity:0; }
-    }
-    @keyframes curtainUp {
-      0%   { transform:translateY(0); opacity:1; }
-      100% { transform:translateY(-105vh); opacity:0; }
-    }
+    #boot-screen { transition:opacity 0.6s ease; }
+    #boot-screen.fade-out { opacity:0; pointer-events:none; }
+
     #tetris-wrap { position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; gap:18px; }
     #tetris-board { display:grid; grid-template-columns:repeat(23,22px); grid-template-rows:repeat(7,22px); gap:3px; }
     @media(max-width:580px){ #tetris-board { grid-template-columns:repeat(23,13px); grid-template-rows:repeat(7,13px); gap:2px; } }
@@ -994,29 +986,7 @@
         if(bootDone)return;bootDone=true;
         var bs=document.getElementById('boot-screen');
         bs.classList.add('fade-out');
-        // Phase 1: pixels scatter outward with stagger by distance from center
-        var filled=[].slice.call(bs.querySelectorAll('.t-cell.filled,.t-cell.filled-alt,.t-cell.filled-deep'));
-        var br=board.getBoundingClientRect();
-        var cx=br.left+br.width/2,cy=br.top+br.height/2;
-        filled.forEach(function(el){
-          var r=el.getBoundingClientRect();
-          var dx=(r.left+r.width/2)-cx,dy=(r.top+r.height/2)-cy;
-          var dist=Math.sqrt(dx*dx+dy*dy)||1;
-          var power=180+Math.random()*220;
-          var angle=Math.atan2(dy,dx)+(Math.random()-0.5)*0.8;
-          var bx=Math.cos(angle)*power; var by=Math.sin(angle)*power;
-          var delay=dist*0.4+Math.random()*50;
-          var rot=(Math.random()-0.5)*180;
-          el.style.setProperty('--bx',bx+'px');
-          el.style.setProperty('--by',by+'px');
-          el.style.setProperty('--br',rot+'deg');
-          el.style.animation='pixelScatter '+(0.38+Math.random()*0.15)+'s '+delay+'ms cubic-bezier(0.3,0,0.7,1) forwards';
-        });
-        // Phase 2: whole screen slides up like a curtain after pixels are gone
-        setTimeout(function(){
-          bs.style.animation='curtainUp 0.55s cubic-bezier(0.7,0,1,1) forwards';
-          setTimeout(function(){bs.style.display='none';},580);
-        },420);
+        setTimeout(function(){bs.style.display='none';},650);
       }
       window.skipBoot=skipBoot;
       function dropBlock(col,nr,fc){return new Promise(function(res){if(bootDone){res();return;}const tr=DR+nr;let cur=0;cells[cur][col].classList.add('drop-ghost');const iv=setInterval(function(){cells[cur][col].classList.remove('drop-ghost');cur++;if(cur<=tr)cells[cur][col].classList.add('drop-ghost');if(cur>tr){clearInterval(iv);const cell=cells[tr][col];cell.classList.add('land-flash');setTimeout(function(){cell.classList.remove('land-flash');cell.classList.add('filled',fc);res();},60);}},22);});}
