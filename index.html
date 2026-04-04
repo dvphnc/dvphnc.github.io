@@ -346,6 +346,12 @@
     .cert-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:2px; }
     .cert-credly .cert-badge-wrap { min-height:290px; padding:10px; }
     .cert-credly:hover { border-color:rgba(77,159,255,0.35); }
+    .isc2-wrap { display:flex; justify-content:flex-start; }
+    .isc2-card { max-width:360px; flex-direction:row; align-items:center; gap:0; }
+    .isc2-card .cert-badge-wrap { min-height:auto; padding:20px; border-bottom:none; border-right:1px solid var(--glass-border-subtle); flex-shrink:0; width:140px; }
+    .isc2-card .cert-card-body { padding:20px 22px; }
+    .isc2-card:hover { border-color:rgba(0,179,136,0.35)!important; }
+    @media(max-width:600px){ .isc2-card{flex-direction:column;max-width:100%;} .isc2-card .cert-badge-wrap{border-right:none;border-bottom:1px solid var(--glass-border-subtle);} }
     html:not(.dark) .cert-card { background:rgba(255,255,255,0.92); border-color:rgba(0,48,135,0.1); }
     html:not(.dark) .cert-card:hover { border-color:rgba(199,70,52,0.35); box-shadow:0 8px 32px rgba(0,48,135,0.1); }
     html:not(.dark) .cert-badge-wrap { background:rgba(0,48,135,0.02); border-color:rgba(0,48,135,0.06); }
@@ -692,9 +698,11 @@
   <section id="certifications">
     <div class="section-inner">
       <p class="sec-label reveal">Certifications</p>
-      <h2 class="sec-title reveal rd1">Oracle Cloud Certified</h2>
-      <div class="cert-grid">
-        <a class="cert-card reveal rd1" href="https://images.credly.com/images/e30ee47b-8ca4-43b5-85a7-6b3075c937c1/OCI24AICFA_cached_image_20260404-33-ad4s94.png" target="_blank" rel="noopener">
+
+      <!-- Oracle -->
+      <h2 class="sec-title reveal rd1" style="margin-bottom:20px;">Oracle Cloud Certified</h2>
+      <div class="cert-grid" style="margin-bottom:48px;">
+        <a class="cert-card reveal rd1" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=C40D337A86BE52AE8C02A90C0BC838A9226F3044D11CF05F86A518AAFDF7103F" target="_blank" rel="noopener">
           <div class="cert-badge-wrap">
             <img src="https://images.credly.com/images/e30ee47b-8ca4-43b5-85a7-6b3075c937c1/OCI24AICFA_cached_image_20260404-33-ad4s94.png" alt="OCI AI Foundations Associate badge" class="cert-badge-img"/>
           </div>
@@ -705,7 +713,7 @@
             <div class="cert-tags"><span class="notes-tag">AI</span><span class="notes-tag">OCI</span><span class="notes-tag">2024</span></div>
           </div>
         </a>
-        <a class="cert-card reveal rd2" href="https://images.credly.com/images/38273805-7c52-4a63-8776-af6bcd738b75/OCI2024FNDCFA_cached_image_20260404-31-kcldvz.png" target="_blank" rel="noopener">
+        <a class="cert-card reveal rd2" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=D43A8C93FE30161F5AF6077AE49AB9FE797A13EA6EB10947B7E30B9B0DFD2DC1" target="_blank" rel="noopener">
           <div class="cert-badge-wrap">
             <img src="https://images.credly.com/images/38273805-7c52-4a63-8776-af6bcd738b75/OCI2024FNDCFA_cached_image_20260404-31-kcldvz.png" alt="OCI Foundations Associate badge" class="cert-badge-img"/>
           </div>
@@ -716,7 +724,7 @@
             <div class="cert-tags"><span class="notes-tag">Infrastructure</span><span class="notes-tag">OCI</span><span class="notes-tag">2024</span></div>
           </div>
         </a>
-        <a class="cert-card reveal rd3" href="https://images.credly.com/images/21a3c458-5a88-4327-9e6a-066ae0ee8b5f/OCI2024DCFA_cached_image_20260404-33-aeswth.png" target="_blank" rel="noopener">
+        <a class="cert-card reveal rd3" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=D43A8C93FE30161F5AF6077AE49AB9FE612D8698DFBD1116CC92691601BF4C03" target="_blank" rel="noopener">
           <div class="cert-badge-wrap">
             <img src="https://images.credly.com/images/21a3c458-5a88-4327-9e6a-066ae0ee8b5f/OCI2024DCFA_cached_image_20260404-33-aeswth.png" alt="OCI Data Foundations Associate badge" class="cert-badge-img"/>
           </div>
@@ -727,21 +735,26 @@
             <div class="cert-tags"><span class="notes-tag">Data</span><span class="notes-tag">Analytics</span><span class="notes-tag">2024</span></div>
           </div>
         </a>
-        <div class="cert-card cert-credly reveal rd4">
+      </div>
+
+      <!-- ISC2 -->
+      <p class="sec-label reveal" style="margin-bottom:10px;">ISC2</p>
+      <h2 class="sec-title reveal rd1" style="margin-bottom:20px;">Certified in Cybersecurity</h2>
+      <div class="isc2-wrap reveal rd2">
+        <a class="cert-card isc2-card" href="https://www.credly.com/badges/7a7ef255-2b1a-4832-8a8d-5d4a397603e4" target="_blank" rel="noopener">
           <div class="cert-badge-wrap">
-            <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="7a7ef255-2b1a-4832-8a8d-5d4a397603e4" data-share-badge-host="https://www.credly.com"></div>
+            <img src="https://images.credly.com/images/9180921d-4a13-429e-9357-6f9706a554f0/image.png" alt="ISC2 Certified in Cybersecurity badge" class="cert-badge-img"/>
           </div>
           <div class="cert-card-body">
-            <span class="cert-issuer">Credly</span>
-            <h3 class="cert-name">Verified Credential</h3>
-            <p class="cert-desc">Click the badge to verify this credential on Credly.</p>
-            <div class="cert-tags"><span class="notes-tag">Verified</span><span class="notes-tag">Oracle</span></div>
+            <span class="cert-issuer" style="color:#00b388;">ISC2</span>
+            <h3 class="cert-name">Certified in Cybersecurity (CC)</h3>
+            <p class="cert-desc">Security principles, business continuity, access controls, network security, and security operations.</p>
+            <div class="cert-tags"><span class="notes-tag">Security</span><span class="notes-tag">ISC2</span><span class="notes-tag">2024</span></div>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </section>
-  <script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
 
   <div class="divider"></div>
 
