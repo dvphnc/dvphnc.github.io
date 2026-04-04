@@ -601,28 +601,27 @@
     .skill-icon.behind { opacity:0.12!important; filter:blur(1.5px) brightness(0) invert(1)!important; pointer-events:none; }
     @media(max-width:600px){ #globe-container{width:340px;height:340px;} .skill-icon .icon-badge{width:36px;height:36px;} .skill-icon .icon-badge svg{width:26px;height:26px;} }
 
-    /* ── Pixel Logo ── */
-    .dvphnc-logo { display:block; color:currentColor; }
-    .dvphnc-logo .pxl-off { fill:currentColor; opacity:0.12; }
-    /* animated pixels start invisible, drop in via JS */
-    .dvphnc-logo .pxl-on  { fill:currentColor; opacity:0; }
-    .dvphnc-logo.logo-done .pxl-on { opacity:1; }
-    @keyframes pxlDrop {
-      0%   { opacity:0; transform:translateY(-10px) scale(0.8); }
-      55%  { opacity:1; transform:translateY(2px) scale(1.05); }
-      80%  { transform:translateY(-1px) scale(0.98); }
-      100% { opacity:1; transform:translateY(0) scale(1); }
+    /* ── Pixel Grid Logo ── */
+    .px-logo { display:grid; gap:3px; line-height:0; }
+    .px-logo .px { border-radius:2px; background:currentColor; opacity:0.12; }
+    .px-logo .px.on { opacity:0; transition:none; }
+    @keyframes pxDrop {
+      0%   { opacity:0; transform:translateY(-8px); }
+      60%  { opacity:1; transform:translateY(1.5px); }
+      80%  { transform:translateY(-0.5px); }
+      100% { opacity:1; transform:translateY(0); }
     }
     /* Nav logo */
-    .nav-logo { display:flex; align-items:center; gap:10px; color:var(--text); cursor:pointer; text-decoration:none; }
-    .nav-logo .dvphnc-logo { height:22px; width:auto; transition:opacity 0.2s; }
-    .nav-logo:hover .dvphnc-logo { opacity:0.75; }
-    html:not(.dark) .nav-logo { color:#003087; }
+    .nav-logo { display:flex; align-items:center; cursor:pointer; }
+    .nav-logo .px-logo { color:#ffffff; }
+    .nav-logo .px-logo .px { width:4px; height:4px; border-radius:1px; }
+    html:not(.dark) .nav-logo .px-logo { color:#003087; }
     /* Contact logo */
     .contact-logo-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; margin-bottom:40px; }
-    .contact-logo-wrap .dvphnc-logo { height:36px; width:auto; color:#4d9fff; }
+    .contact-logo-wrap .px-logo { color:#4d9fff; }
+    .contact-logo-wrap .px-logo .px { width:10px; height:10px; border-radius:3px; }
     .contact-logo-sub { font-family:var(--mono); font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--text4); }
-    html:not(.dark) .contact-logo-wrap .dvphnc-logo { color:#003087; }
+    html:not(.dark) .contact-logo-wrap .px-logo { color:#003087; }
   </style>
 </head>
 <body>
@@ -662,7 +661,7 @@
 
   <!-- NAV -->
   <nav id="navbar">
-    <span class="nav-logo"><svg viewBox="0 0 228 48" xmlns="http://www.w3.org/2000/svg" class="dvphnc-logo" aria-label="dvphnc"><rect x="0" y="0" width="8" height="8" rx="2" class="pxl-on"/><rect x="10" y="0" width="8" height="8" rx="2" class="pxl-on"/><rect x="20" y="0" width="8" height="8" rx="2" class="pxl-off"/><rect x="0" y="10" width="8" height="8" rx="2" class="pxl-on"/><rect x="10" y="10" width="8" height="8" rx="2" class="pxl-off"/><rect x="20" y="10" width="8" height="8" rx="2" class="pxl-on"/><rect x="0" y="20" width="8" height="8" rx="2" class="pxl-on"/><rect x="10" y="20" width="8" height="8" rx="2" class="pxl-off"/><rect x="20" y="20" width="8" height="8" rx="2" class="pxl-on"/><rect x="0" y="30" width="8" height="8" rx="2" class="pxl-on"/><rect x="10" y="30" width="8" height="8" rx="2" class="pxl-off"/><rect x="20" y="30" width="8" height="8" rx="2" class="pxl-on"/><rect x="0" y="40" width="8" height="8" rx="2" class="pxl-on"/><rect x="10" y="40" width="8" height="8" rx="2" class="pxl-on"/><rect x="20" y="40" width="8" height="8" rx="2" class="pxl-off"/><rect x="40" y="0" width="8" height="8" rx="2" class="pxl-on"/><rect x="50" y="0" width="8" height="8" rx="2" class="pxl-off"/><rect x="60" y="0" width="8" height="8" rx="2" class="pxl-on"/><rect x="40" y="10" width="8" height="8" rx="2" class="pxl-on"/><rect x="50" y="10" width="8" height="8" rx="2" class="pxl-off"/><rect x="60" y="10" width="8" height="8" rx="2" class="pxl-on"/><rect x="40" y="20" width="8" height="8" rx="2" class="pxl-on"/><rect x="50" y="20" width="8" height="8" rx="2" class="pxl-off"/><rect x="60" y="20" width="8" height="8" rx="2" class="pxl-on"/><rect x="40" y="30" width="8" height="8" rx="2" class="pxl-off"/><rect x="50" y="30" width="8" height="8" rx="2" class="pxl-on"/><rect x="60" y="30" width="8" height="8" rx="2" class="pxl-off"/><rect x="40" y="40" width="8" height="8" rx="2" class="pxl-off"/><rect x="50" y="40" width="8" height="8" rx="2" class="pxl-on"/><rect x="60" y="40" width="8" height="8" rx="2" class="pxl-off"/><rect x="80" y="0" width="8" height="8" rx="2" class="pxl-on"/><rect x="90" y="0" width="8" height="8" rx="2" class="pxl-on"/><rect x="100" y="0" width="8" height="8" rx="2" class="pxl-off"/><rect x="80" y="10" width="8" height="8" rx="2" class="pxl-on"/><rect x="90" y="10" width="8" height="8" rx="2" class="pxl-off"/><rect x="100" y="10" width="8" height="8" rx="2" class="pxl-on"/><rect x="80" y="20" width="8" height="8" rx="2" class="pxl-on"/><rect x="90" y="20" width="8" height="8" rx="2" class="pxl-on"/><rect x="100" y="20" width="8" height="8" rx="2" class="pxl-off"/><rect x="80" y="30" width="8" height="8" rx="2" class="pxl-on"/><rect x="90" y="30" width="8" height="8" rx="2" class="pxl-off"/><rect x="100" y="30" width="8" height="8" rx="2" class="pxl-off"/><rect x="80" y="40" width="8" height="8" rx="2" class="pxl-on"/><rect x="90" y="40" width="8" height="8" rx="2" class="pxl-off"/><rect x="100" y="40" width="8" height="8" rx="2" class="pxl-off"/><rect x="120" y="0" width="8" height="8" rx="2" class="pxl-on"/><rect x="130" y="0" width="8" height="8" rx="2" class="pxl-off"/><rect x="140" y="0" width="8" height="8" rx="2" class="pxl-on"/><rect x="120" y="10" width="8" height="8" rx="2" class="pxl-on"/><rect x="130" y="10" width="8" height="8" rx="2" class="pxl-off"/><rect x="140" y="10" width="8" height="8" rx="2" class="pxl-on"/><rect x="120" y="20" width="8" height="8" rx="2" class="pxl-on"/><rect x="130" y="20" width="8" height="8" rx="2" class="pxl-on"/><rect x="140" y="20" width="8" height="8" rx="2" class="pxl-on"/><rect x="120" y="30" width="8" height="8" rx="2" class="pxl-on"/><rect x="130" y="30" width="8" height="8" rx="2" class="pxl-off"/><rect x="140" y="30" width="8" height="8" rx="2" class="pxl-on"/><rect x="120" y="40" width="8" height="8" rx="2" class="pxl-on"/><rect x="130" y="40" width="8" height="8" rx="2" class="pxl-off"/><rect x="140" y="40" width="8" height="8" rx="2" class="pxl-on"/><rect x="160" y="0" width="8" height="8" rx="2" class="pxl-on"/><rect x="170" y="0" width="8" height="8" rx="2" class="pxl-off"/><rect x="180" y="0" width="8" height="8" rx="2" class="pxl-on"/><rect x="160" y="10" width="8" height="8" rx="2" class="pxl-on"/><rect x="170" y="10" width="8" height="8" rx="2" class="pxl-on"/><rect x="180" y="10" width="8" height="8" rx="2" class="pxl-on"/><rect x="160" y="20" width="8" height="8" rx="2" class="pxl-on"/><rect x="170" y="20" width="8" height="8" rx="2" class="pxl-off"/><rect x="180" y="20" width="8" height="8" rx="2" class="pxl-on"/><rect x="160" y="30" width="8" height="8" rx="2" class="pxl-on"/><rect x="170" y="30" width="8" height="8" rx="2" class="pxl-off"/><rect x="180" y="30" width="8" height="8" rx="2" class="pxl-on"/><rect x="160" y="40" width="8" height="8" rx="2" class="pxl-on"/><rect x="170" y="40" width="8" height="8" rx="2" class="pxl-off"/><rect x="180" y="40" width="8" height="8" rx="2" class="pxl-on"/><rect x="200" y="0" width="8" height="8" rx="2" class="pxl-off"/><rect x="210" y="0" width="8" height="8" rx="2" class="pxl-on"/><rect x="220" y="0" width="8" height="8" rx="2" class="pxl-on"/><rect x="200" y="10" width="8" height="8" rx="2" class="pxl-on"/><rect x="210" y="10" width="8" height="8" rx="2" class="pxl-off"/><rect x="220" y="10" width="8" height="8" rx="2" class="pxl-off"/><rect x="200" y="20" width="8" height="8" rx="2" class="pxl-on"/><rect x="210" y="20" width="8" height="8" rx="2" class="pxl-off"/><rect x="220" y="20" width="8" height="8" rx="2" class="pxl-off"/><rect x="200" y="30" width="8" height="8" rx="2" class="pxl-on"/><rect x="210" y="30" width="8" height="8" rx="2" class="pxl-off"/><rect x="220" y="30" width="8" height="8" rx="2" class="pxl-off"/><rect x="200" y="40" width="8" height="8" rx="2" class="pxl-off"/><rect x="210" y="40" width="8" height="8" rx="2" class="pxl-on"/><rect x="220" y="40" width="8" height="8" rx="2" class="pxl-on"/></svg></span>
+    <span class="nav-logo"><div id="logo-nav" class="px-logo"></div></span>
     <ul class="nav-links">
       <li><a href="#certifications">Certs</a></li>
       <li><a href="#stacks">Stacks</a></li>
@@ -902,7 +901,7 @@
     <div class="section-inner">
       <p class="sec-label reveal">Contact</p>
       <h2 class="sec-title reveal rd1">Let's Connect</h2>
-      <div class="contact-logo-wrap reveal rd1"><svg viewBox="0 0 228 48" xmlns="http://www.w3.org/2000/svg" class="dvphnc-logo" aria-label="dvphnc"><rect x="0" y="0" width="8" height="8" rx="2" class="pxl-on"/><rect x="10" y="0" width="8" height="8" rx="2" class="pxl-on"/><rect x="20" y="0" width="8" height="8" rx="2" class="pxl-off"/><rect x="0" y="10" width="8" height="8" rx="2" class="pxl-on"/><rect x="10" y="10" width="8" height="8" rx="2" class="pxl-off"/><rect x="20" y="10" width="8" height="8" rx="2" class="pxl-on"/><rect x="0" y="20" width="8" height="8" rx="2" class="pxl-on"/><rect x="10" y="20" width="8" height="8" rx="2" class="pxl-off"/><rect x="20" y="20" width="8" height="8" rx="2" class="pxl-on"/><rect x="0" y="30" width="8" height="8" rx="2" class="pxl-on"/><rect x="10" y="30" width="8" height="8" rx="2" class="pxl-off"/><rect x="20" y="30" width="8" height="8" rx="2" class="pxl-on"/><rect x="0" y="40" width="8" height="8" rx="2" class="pxl-on"/><rect x="10" y="40" width="8" height="8" rx="2" class="pxl-on"/><rect x="20" y="40" width="8" height="8" rx="2" class="pxl-off"/><rect x="40" y="0" width="8" height="8" rx="2" class="pxl-on"/><rect x="50" y="0" width="8" height="8" rx="2" class="pxl-off"/><rect x="60" y="0" width="8" height="8" rx="2" class="pxl-on"/><rect x="40" y="10" width="8" height="8" rx="2" class="pxl-on"/><rect x="50" y="10" width="8" height="8" rx="2" class="pxl-off"/><rect x="60" y="10" width="8" height="8" rx="2" class="pxl-on"/><rect x="40" y="20" width="8" height="8" rx="2" class="pxl-on"/><rect x="50" y="20" width="8" height="8" rx="2" class="pxl-off"/><rect x="60" y="20" width="8" height="8" rx="2" class="pxl-on"/><rect x="40" y="30" width="8" height="8" rx="2" class="pxl-off"/><rect x="50" y="30" width="8" height="8" rx="2" class="pxl-on"/><rect x="60" y="30" width="8" height="8" rx="2" class="pxl-off"/><rect x="40" y="40" width="8" height="8" rx="2" class="pxl-off"/><rect x="50" y="40" width="8" height="8" rx="2" class="pxl-on"/><rect x="60" y="40" width="8" height="8" rx="2" class="pxl-off"/><rect x="80" y="0" width="8" height="8" rx="2" class="pxl-on"/><rect x="90" y="0" width="8" height="8" rx="2" class="pxl-on"/><rect x="100" y="0" width="8" height="8" rx="2" class="pxl-off"/><rect x="80" y="10" width="8" height="8" rx="2" class="pxl-on"/><rect x="90" y="10" width="8" height="8" rx="2" class="pxl-off"/><rect x="100" y="10" width="8" height="8" rx="2" class="pxl-on"/><rect x="80" y="20" width="8" height="8" rx="2" class="pxl-on"/><rect x="90" y="20" width="8" height="8" rx="2" class="pxl-on"/><rect x="100" y="20" width="8" height="8" rx="2" class="pxl-off"/><rect x="80" y="30" width="8" height="8" rx="2" class="pxl-on"/><rect x="90" y="30" width="8" height="8" rx="2" class="pxl-off"/><rect x="100" y="30" width="8" height="8" rx="2" class="pxl-off"/><rect x="80" y="40" width="8" height="8" rx="2" class="pxl-on"/><rect x="90" y="40" width="8" height="8" rx="2" class="pxl-off"/><rect x="100" y="40" width="8" height="8" rx="2" class="pxl-off"/><rect x="120" y="0" width="8" height="8" rx="2" class="pxl-on"/><rect x="130" y="0" width="8" height="8" rx="2" class="pxl-off"/><rect x="140" y="0" width="8" height="8" rx="2" class="pxl-on"/><rect x="120" y="10" width="8" height="8" rx="2" class="pxl-on"/><rect x="130" y="10" width="8" height="8" rx="2" class="pxl-off"/><rect x="140" y="10" width="8" height="8" rx="2" class="pxl-on"/><rect x="120" y="20" width="8" height="8" rx="2" class="pxl-on"/><rect x="130" y="20" width="8" height="8" rx="2" class="pxl-on"/><rect x="140" y="20" width="8" height="8" rx="2" class="pxl-on"/><rect x="120" y="30" width="8" height="8" rx="2" class="pxl-on"/><rect x="130" y="30" width="8" height="8" rx="2" class="pxl-off"/><rect x="140" y="30" width="8" height="8" rx="2" class="pxl-on"/><rect x="120" y="40" width="8" height="8" rx="2" class="pxl-on"/><rect x="130" y="40" width="8" height="8" rx="2" class="pxl-off"/><rect x="140" y="40" width="8" height="8" rx="2" class="pxl-on"/><rect x="160" y="0" width="8" height="8" rx="2" class="pxl-on"/><rect x="170" y="0" width="8" height="8" rx="2" class="pxl-off"/><rect x="180" y="0" width="8" height="8" rx="2" class="pxl-on"/><rect x="160" y="10" width="8" height="8" rx="2" class="pxl-on"/><rect x="170" y="10" width="8" height="8" rx="2" class="pxl-on"/><rect x="180" y="10" width="8" height="8" rx="2" class="pxl-on"/><rect x="160" y="20" width="8" height="8" rx="2" class="pxl-on"/><rect x="170" y="20" width="8" height="8" rx="2" class="pxl-off"/><rect x="180" y="20" width="8" height="8" rx="2" class="pxl-on"/><rect x="160" y="30" width="8" height="8" rx="2" class="pxl-on"/><rect x="170" y="30" width="8" height="8" rx="2" class="pxl-off"/><rect x="180" y="30" width="8" height="8" rx="2" class="pxl-on"/><rect x="160" y="40" width="8" height="8" rx="2" class="pxl-on"/><rect x="170" y="40" width="8" height="8" rx="2" class="pxl-off"/><rect x="180" y="40" width="8" height="8" rx="2" class="pxl-on"/><rect x="200" y="0" width="8" height="8" rx="2" class="pxl-off"/><rect x="210" y="0" width="8" height="8" rx="2" class="pxl-on"/><rect x="220" y="0" width="8" height="8" rx="2" class="pxl-on"/><rect x="200" y="10" width="8" height="8" rx="2" class="pxl-on"/><rect x="210" y="10" width="8" height="8" rx="2" class="pxl-off"/><rect x="220" y="10" width="8" height="8" rx="2" class="pxl-off"/><rect x="200" y="20" width="8" height="8" rx="2" class="pxl-on"/><rect x="210" y="20" width="8" height="8" rx="2" class="pxl-off"/><rect x="220" y="20" width="8" height="8" rx="2" class="pxl-off"/><rect x="200" y="30" width="8" height="8" rx="2" class="pxl-on"/><rect x="210" y="30" width="8" height="8" rx="2" class="pxl-off"/><rect x="220" y="30" width="8" height="8" rx="2" class="pxl-off"/><rect x="200" y="40" width="8" height="8" rx="2" class="pxl-off"/><rect x="210" y="40" width="8" height="8" rx="2" class="pxl-on"/><rect x="220" y="40" width="8" height="8" rx="2" class="pxl-on"/></svg><span class="contact-logo-sub">Joana Daphne Sy</span></div>
+      <div class="contact-logo-wrap reveal rd1"><div id="logo-contact" class="px-logo"></div><span class="contact-logo-sub">Joana Daphne Sy</span></div>
       <div class="reveal rd2">
         <div class="email-block" onclick="copyEmail()">
           <p class="email-label">Email — click to copy</p>
@@ -1027,60 +1026,87 @@
 
 
     // ── Logo pixel animation ──
-    // ── Logo pixel drop animation ──
-    function animateLogo(svg, startDelay) {
-      if (!svg || svg.dataset.animated) return;
-      svg.dataset.animated = '1';
-      // Collect only the "on" pixels (the letter shapes)
-      var cols = {};
-      svg.querySelectorAll('.pxl-on').forEach(function(px) {
-        var x = px.getAttribute('x');
-        if (!cols[x]) cols[x] = [];
-        cols[x].push(px);
-      });
-      var colKeys = Object.keys(cols).map(Number).sort(function(a,b){return a-b;});
-      colKeys.forEach(function(x, ci) {
-        // within each column, sort top→bottom and drop sequentially
-        cols[x].sort(function(a,b){ return +a.getAttribute('y') - +b.getAttribute('y'); });
-        cols[x].forEach(function(px, pi) {
-          var t = (startDelay||0) + ci * 50 + pi * 22;
-          setTimeout(function() {
-            px.style.animation = 'none';
-            px.style.opacity = '0';
-            // force reflow
-            px.getBoundingClientRect();
-            px.style.animation = 'pxlDrop 0.3s cubic-bezier(0.22,1,0.36,1) forwards';
-          }, t);
-        });
-      });
-    }
+    // ── Pixel Grid Logo — build + animate ──
+    (function(){
+      var FONT={d:[[1,1,0],[1,0,1],[1,0,1],[1,0,1],[1,1,0]],v:[[1,0,1],[1,0,1],[1,0,1],[0,1,0],[0,1,0]],p:[[1,1,0],[1,0,1],[1,1,0],[1,0,0],[1,0,0]],h:[[1,0,1],[1,0,1],[1,1,1],[1,0,1],[1,0,1]],n:[[1,0,1],[1,1,1],[1,0,1],[1,0,1],[1,0,1]],c:[[0,1,1],[1,0,0],[1,0,0],[1,0,0],[0,1,1]]};
+      var NAME=['d','v','p','h','n','c'],LW=3,GAP=1,ROWS=5;
+      var GCOLS=NAME.length*(LW+GAP)-GAP; // 23 cols
 
-    // Hook into skipBoot — the inner IIFE exposes window.skipBoot
-    // We patch it here AFTER the boot IIFE has run
-    (function patchSkipBoot() {
-      var orig = window.skipBoot;
-      if (!orig) { setTimeout(patchSkipBoot, 50); return; }
-      window.skipBoot = function() {
-        orig();
-        // Animate nav logo shortly after boot exits
-        setTimeout(function() {
-          var navLogo = document.querySelector('.nav-logo .dvphnc-logo');
-          if (navLogo) animateLogo(navLogo, 0);
-        }, 900);
-      };
-    })();
-
-    // Contact logo — fires when scrolled into view (independent of boot)
-    (function() {
-      var el = document.querySelector('.contact-logo-wrap .dvphnc-logo');
-      if (!el) return;
-      var io = new IntersectionObserver(function(entries) {
-        if (entries[0].isIntersecting) {
-          animateLogo(el, 80);
-          io.disconnect();
+      // Build a pixel grid logo into a container div
+      // cellSize = px size of each cell (without gap)
+      function buildLogo(el){
+        if(!el)return;
+        el.style.gridTemplateColumns='repeat('+GCOLS+',1fr)';
+        el.style.gridTemplateRows='repeat('+ROWS+',1fr)';
+        var grid=[]; // grid[row][col] = div
+        for(var r=0;r<ROWS;r++){
+          grid[r]=[];
+          for(var c=0;c<GCOLS;c++){
+            var d=document.createElement('div');
+            d.className='px';
+            el.appendChild(d);
+            grid[r][c]=d;
+          }
         }
-      }, { threshold: 0.2 });
-      io.observe(el);
+        // Mark filled cells
+        NAME.forEach(function(letter,li){
+          var sc=li*(LW+GAP);
+          for(var c=0;c<LW;c++){
+            for(var r=0;r<ROWS;r++){
+              if(FONT[letter][r][c]){
+                grid[r][sc+c].classList.add('on');
+              }
+            }
+          }
+        });
+        return grid;
+      }
+
+      // Animate: drop pixels in col by col, top to bottom within each col
+      function animateGrid(grid, startDelay){
+        var GCOLS_=grid[0].length, ROWS_=grid.length;
+        for(var col=0;col<GCOLS_;col++){
+          var colPixels=[];
+          for(var row=0;row<ROWS_;row++){
+            if(grid[row][col].classList.contains('on')) colPixels.push(grid[row][col]);
+          }
+          colPixels.forEach(function(px,pi){
+            var delay=startDelay + col*55 + pi*22;
+            (function(p,d){
+              setTimeout(function(){
+                p.style.animation='pxDrop 0.28s cubic-bezier(0.2,0,0.4,1) forwards';
+              }, d);
+            })(px, delay);
+          });
+        }
+      }
+
+      // Build both logos
+      var navGrid=buildLogo(document.getElementById('logo-nav'));
+      var contactGrid=buildLogo(document.getElementById('logo-contact'));
+
+      // Nav: animate after boot exits (hook into skipBoot)
+      (function patch(){
+        var orig=window.skipBoot;
+        if(!orig){setTimeout(patch,30);return;}
+        window.skipBoot=function(){
+          orig();
+          setTimeout(function(){ if(navGrid) animateGrid(navGrid, 0); }, 800);
+        };
+      })();
+
+      // Contact: animate on scroll into view
+      if(contactGrid){
+        var done=false;
+        var io=new IntersectionObserver(function(entries){
+          if(entries[0].isIntersecting && !done){
+            done=true;
+            animateGrid(contactGrid, 0);
+            io.disconnect();
+          }
+        },{threshold:0.25});
+        io.observe(document.getElementById('logo-contact'));
+      }
     })();
     // Typewriter
     (function(){
