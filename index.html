@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Joana Daphne Sy — Aspiring Tech VA, BSIT 3rd Year, Oracle Certified, CTF enthusiast."/>
-  <title>Joana Daphne Sy | Tech VA</title>
+  <title>dvphnc — Joana Daphne Sy</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@700&family=Noto+Sans+JP:wght@700&family=Noto+Sans+SC:wght@700&display=swap" rel="stylesheet">
   <style>
@@ -998,16 +998,23 @@
       // Colours cycling per letter — same palette as boot screen
       var FC=['filled','filled-alt','filled-deep'];
 
-      function buildLogo(el){
+      function buildLogo(el, cellPx, gapPx){
         if(!el)return null;
-        el.style.gridTemplateColumns='repeat('+GCOLS+',1fr)';
-        el.style.gridTemplateRows='repeat('+ROWS+',1fr)';
+        el.style.display='grid';
+        el.style.gap=gapPx+'px';
+        el.style.gridTemplateColumns='repeat('+GCOLS+','+cellPx+'px)';
+        el.style.gridTemplateRows='repeat('+ROWS+','+cellPx+'px)';
+        el.style.width=(GCOLS*cellPx+(GCOLS-1)*gapPx)+'px';
+        el.style.height=(ROWS*cellPx+(ROWS-1)*gapPx)+'px';
         var grid=[];
         for(var r=0;r<ROWS;r++){
           grid[r]=[];
           for(var c=0;c<GCOLS;c++){
             var d=document.createElement('div');
             d.className='px';
+            d.style.width=cellPx+'px';
+            d.style.height=cellPx+'px';
+            d.style.borderRadius=Math.max(1,Math.floor(cellPx/4))+'px';
             el.appendChild(d);
             grid[r][c]=d;
           }
@@ -1104,8 +1111,8 @@
       }
 
       // Build both logos
-      var navGrid=buildLogo(document.getElementById('logo-nav'));
-      var contactGrid=buildLogo(document.getElementById('logo-contact'));
+      var navGrid=buildLogo(document.getElementById('logo-nav'), 3, 2);
+      var contactGrid=buildLogo(document.getElementById('logo-contact'), 8, 3);
 
       // Nav: start after boot exits
       (function patch(){
