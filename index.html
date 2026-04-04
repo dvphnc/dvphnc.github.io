@@ -1038,16 +1038,19 @@
         return cells;
       }
 
-      function dropBlock(cells, col, tr, cb){
-        if(tr===0){
-          cells[0][col].style.opacity='1';
+      function dropBlock(cells, col, startRow, tr, cb){
+        // startRow = first empty row to begin ghost from (skip already-landed cells)
+        if(tr<=startRow){
+          cells[tr][col].style.opacity='1';
           setTimeout(cb,60);
           return;
         }
-        var cur=0;
-        cells[0][col].style.opacity='0.4';
+        var cur=startRow;
+        cells[cur][col].style.opacity='0.4';
         var iv=setInterval(function(){
-          cells[cur][col].style.opacity='0.1';
+          // Only dim if not already landed (opacity===1 means already placed)
+          if(cells[cur][col].style.opacity!=='1')
+            cells[cur][col].style.opacity='0.1';
           cur++;
           if(cur<tr){
             cells[cur][col].style.opacity='0.4';
@@ -1081,7 +1084,7 @@
             var colsFinished=0;
             activeCols.forEach(function(col){
               var rows=colFills[col];
-              var ri=0;
+              var ri=0, lastLanded=-1;
               function nextRow(){
                 if(ri>=rows.length){
                   colsFinished++;
@@ -1091,7 +1094,11 @@
                   }
                   return;
                 }
-                dropBlock(cells, col, rows[ri++], function(){ setTimeout(nextRow,20); });
+                var tr=rows[ri++];
+                // Start ghost from just below last landed block (or row 0)
+                var startRow=lastLanded+1;
+                lastLanded=tr;
+                dropBlock(cells, col, startRow, tr, function(){ setTimeout(nextRow,20); });
               }
               nextRow();
             });
