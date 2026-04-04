@@ -608,14 +608,10 @@
     .dvphnc-logo .pxl-on  { fill:currentColor; opacity:0; }
     .dvphnc-logo.logo-done .pxl-on { opacity:1; }
     @keyframes pxlDrop {
-      0%   { opacity:0; transform:translateY(-14px); }
-      60%  { opacity:1; transform:translateY(1px); }
-      80%  { transform:translateY(-2px); }
-      100% { opacity:1; transform:translateY(0); }
-    }
-    @keyframes pxlFlash {
-      0%,100% { opacity:1; }
-      50%     { opacity:0.15; fill:#ffffff; }
+      0%   { opacity:0; transform:translateY(-10px) scale(0.8); }
+      55%  { opacity:1; transform:translateY(2px) scale(1.05); }
+      80%  { transform:translateY(-1px) scale(0.98); }
+      100% { opacity:1; transform:translateY(0) scale(1); }
     }
     /* Nav logo */
     .nav-logo { display:flex; align-items:center; gap:10px; color:var(--text); cursor:pointer; text-decoration:none; }
@@ -1031,58 +1027,60 @@
 
 
     // ── Logo pixel animation ──
-    function animateLogo(svg, delay) {
-      var onPixels = svg.querySelectorAll('.pxl-on');
-      // Group by column (x attribute) — drop col by col left to right
+    // ── Logo pixel drop animation ──
+    function animateLogo(svg, startDelay) {
+      if (!svg || svg.dataset.animated) return;
+      svg.dataset.animated = '1';
+      // Collect only the "on" pixels (the letter shapes)
       var cols = {};
-      onPixels.forEach(function(px) {
+      svg.querySelectorAll('.pxl-on').forEach(function(px) {
         var x = px.getAttribute('x');
         if (!cols[x]) cols[x] = [];
         cols[x].push(px);
       });
       var colKeys = Object.keys(cols).map(Number).sort(function(a,b){return a-b;});
       colKeys.forEach(function(x, ci) {
-        var pixels = cols[x];
-        // Sort by y so top drops first
-        pixels.sort(function(a,b){ return +a.getAttribute('y') - +b.getAttribute('y'); });
-        pixels.forEach(function(px, pi) {
-          var t = delay + ci * 55 + pi * 18;
+        // within each column, sort top→bottom and drop sequentially
+        cols[x].sort(function(a,b){ return +a.getAttribute('y') - +b.getAttribute('y'); });
+        cols[x].forEach(function(px, pi) {
+          var t = (startDelay||0) + ci * 50 + pi * 22;
           setTimeout(function() {
-            px.style.animation = 'pxlDrop 0.28s cubic-bezier(0.2,0,0.4,1) forwards';
+            px.style.animation = 'none';
+            px.style.opacity = '0';
+            // force reflow
+            px.getBoundingClientRect();
+            px.style.animation = 'pxlDrop 0.3s cubic-bezier(0.22,1,0.36,1) forwards';
           }, t);
         });
       });
-      // Mark done after all animations finish
-      var total = delay + colKeys.length * 55 + 5 * 18 + 300;
-      setTimeout(function() { svg.classList.add('logo-done'); }, total);
     }
 
-    // Run nav logo animation after boot screen exits
-    var _origSkipBoot = window.skipBoot;
-    window.skipBoot = function() {
-      _origSkipBoot && _origSkipBoot();
-      setTimeout(function() {
-        document.querySelectorAll('.dvphnc-logo').forEach(function(svg, i) {
-          animateLogo(svg, i === 0 ? 600 : 800);
-        });
-      }, 200);
-    };
+    // Hook into skipBoot — the inner IIFE exposes window.skipBoot
+    // We patch it here AFTER the boot IIFE has run
+    (function patchSkipBoot() {
+      var orig = window.skipBoot;
+      if (!orig) { setTimeout(patchSkipBoot, 50); return; }
+      window.skipBoot = function() {
+        orig();
+        // Animate nav logo shortly after boot exits
+        setTimeout(function() {
+          var navLogo = document.querySelector('.nav-logo .dvphnc-logo');
+          if (navLogo) animateLogo(navLogo, 0);
+        }, 900);
+      };
+    })();
 
-    // Contact logo: animate when scrolled into view
+    // Contact logo — fires when scrolled into view (independent of boot)
     (function() {
-      var contactLogo = document.querySelector('.contact-logo-wrap .dvphnc-logo');
-      if (!contactLogo) return;
-      var done = false;
-      var obs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) {
-          if (e.isIntersecting && !done) {
-            done = true;
-            animateLogo(contactLogo, 100);
-            obs.disconnect();
-          }
-        });
-      }, { threshold: 0.3 });
-      obs.observe(contactLogo);
+      var el = document.querySelector('.contact-logo-wrap .dvphnc-logo');
+      if (!el) return;
+      var io = new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting) {
+          animateLogo(el, 80);
+          io.disconnect();
+        }
+      }, { threshold: 0.2 });
+      io.observe(el);
     })();
     // Typewriter
     (function(){
