@@ -1022,6 +1022,17 @@
             grid[r][c]=d;
           }
         }
+        // Mark which cells are "on" (letter shape)
+        NAME.forEach(function(letter,li){
+          var sc=li*(LW+GAP);
+          for(var c=0;c<LW;c++){
+            for(var r=0;r<ROWS;r++){
+              if(FONT[letter][r][c]){
+                grid[r][sc+c].classList.add('on');
+              }
+            }
+          }
+        });
         return grid;
       }
 
