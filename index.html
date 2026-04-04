@@ -597,11 +597,11 @@
     .px-logo { display:grid; line-height:0; }
     .px-logo .px { background:currentColor; opacity:0.08; }
     .px-logo .px.on { opacity:0; }
-    /* Nav logo — 3px cells, 2px gap = ~113px wide, ~23px tall */
-    .nav-logo { display:flex; align-items:center; cursor:default; }
-    .nav-logo .px-logo { color:#ffffff; gap:2px; }
-    .nav-logo .px-logo .px { width:3px; height:3px; border-radius:1px; }
-    html:not(.dark) .nav-logo .px-logo { color:#003087; }
+    /* Nav logo — typing animation */
+    .nav-logo { display:flex; align-items:center; cursor:default; font-family:var(--mono); font-size:13px; font-weight:700; letter-spacing:0.04em; color:var(--text); }
+    .nav-cursor { animation:navBlink 1s step-end infinite; }
+    @keyframes navBlink { 0%,100%{opacity:1} 50%{opacity:0} }
+    html:not(.dark) .nav-logo { color:#003087; }
     /* Contact logo — 8px cells, 3px gap = ~250px wide */
     .contact-logo-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; margin-bottom:40px; }
     .contact-logo-wrap .px-logo { color:#4d9fff; gap:3px; }
@@ -647,7 +647,7 @@
 
   <!-- NAV -->
   <nav id="navbar">
-    <span class="nav-logo"><div id="logo-nav" class="px-logo"></div></span>
+    <span class="nav-logo"><span id="logo-nav-text"></span><span class="nav-cursor">_</span></span>
     <ul class="nav-links">
       <li><a href="#certifications">Certs</a></li>
       <li><a href="#stacks">Stacks</a></li>
@@ -1003,9 +1003,8 @@
         c:[[0,1,1],[1,0,0],[1,0,0],[1,0,0],[0,1,1]]
       };
       var NAME=['d','v','p','h','n','c'], LW=3, GAP=1, ROWS=5;
-      var GCOLS = NAME.length*(LW+GAP)-GAP;
+      var GCOLS=NAME.length*(LW+GAP)-GAP;
 
-      // Pre-compute which rows light up per column
       var colFills={};
       for(var i=0;i<GCOLS;i++) colFills[i]=[];
       NAME.forEach(function(letter,li){
@@ -1015,137 +1014,117 @@
             if(FONT[letter][r][c]) colFills[sc+c].push(r);
       });
 
-      function setup(container, cellPx, gapPx){
-        if(!container) return null;
-        container.style.display='grid';
-        container.style.gridTemplateColumns='repeat('+GCOLS+','+cellPx+'px)';
-        container.style.gridTemplateRows='repeat('+ROWS+','+cellPx+'px)';
-        container.style.gap=gapPx+'px';
-        var cells=[];
-        for(var r=0;r<ROWS;r++){
-          cells[r]=[];
-          for(var c=0;c<GCOLS;c++){
-            var d=document.createElement('div');
-            d.style.width=cellPx+'px';
-            d.style.height=cellPx+'px';
-            d.style.borderRadius=Math.max(1,Math.round(cellPx/3))+'px';
-            d.style.background='currentColor';
-            d.style.opacity='0.1';
-            container.appendChild(d);
-            cells[r][c]=d;
-          }
+      // ── NAV: typing synced with hero typewriter ──
+      window.navSync=(function(){
+        var el=document.getElementById('logo-nav-text');
+        if(!el)return{onNameStart:function(){},onNameErase:function(){}};
+        var word='dvphnc', timer=null, phase='idle';
+
+        function clearTimer(){ if(timer){clearInterval(timer);clearTimeout(timer);timer=null;} }
+
+        function typeIn(cb){
+          clearTimer(); phase='typing';
+          var i=el.textContent.length; // resume from current if partially typed
+          timer=setInterval(function(){
+            el.textContent=word.slice(0,++i);
+            if(i>=word.length){ clearTimer(); phase='done'; if(cb)cb(); }
+          },100);
         }
-        return cells;
-      }
 
-      function dropBlock(cells, col, startRow, tr, cb){
-        // startRow = first empty row to begin ghost from (skip already-landed cells)
-        if(tr<=startRow){
-          cells[tr][col].style.opacity='1';
-          setTimeout(cb,60);
-          return;
+        function eraseOut(cb){
+          clearTimer(); phase='erasing';
+          var i=el.textContent.length;
+          timer=setInterval(function(){
+            el.textContent=word.slice(0,--i);
+            if(i<=0){ clearTimer(); phase='idle'; if(cb)cb(); }
+          },70);
         }
-        var cur=startRow;
-        cells[cur][col].style.opacity='0.4';
-        var iv=setInterval(function(){
-          // Only dim if not already landed (opacity===1 means already placed)
-          if(cells[cur][col].style.opacity!=='1')
-            cells[cur][col].style.opacity='0.1';
-          cur++;
-          if(cur<tr){
-            cells[cur][col].style.opacity='0.4';
-          } else {
-            clearInterval(iv);
-            cells[tr][col].style.opacity='1';
-            setTimeout(cb,60);
+
+        return{
+          onNameStart:function(){ if(phase==='idle'||phase==='erasing') typeIn(); },
+          onNameErase:function(){ if(phase==='typing'||phase==='done') eraseOut(); }
+        };
+      })();
+
+            // ── FLAT PIXEL GRID (contact section) ──
+      (function(){
+        var conEl=document.getElementById('logo-contact');
+        if(!conEl) return;
+
+        function setup(container, cellPx, gapPx){
+          container.style.display='grid';
+          container.style.gridTemplateColumns='repeat('+GCOLS+','+cellPx+'px)';
+          container.style.gridTemplateRows='repeat('+ROWS+','+cellPx+'px)';
+          container.style.gap=gapPx+'px';
+          var cells=[];
+          for(var r=0;r<ROWS;r++){
+            cells[r]=[];
+            for(var c=0;c<GCOLS;c++){
+              var d=document.createElement('div');
+              d.style.width=cellPx+'px';
+              d.style.height=cellPx+'px';
+              d.style.borderRadius=Math.max(1,Math.round(cellPx/3))+'px';
+              d.style.background='currentColor';
+              d.style.opacity='0.1';
+              container.appendChild(d);
+              cells[r][c]=d;
+            }
           }
-        },20);
-      }
+          return cells;
+        }
 
-      function runCycle(cells, delay){
-        // Reset all to dim
-        for(var r=0;r<ROWS;r++)
-          for(var c=0;c<GCOLS;c++){
-            cells[r][c].style.transition='';
-            cells[r][c].style.opacity='0.1';
-          }
+        function dropBlock(cells,col,startRow,tr,cb){
+          if(tr<=startRow){ cells[tr][col].style.opacity='1'; setTimeout(cb,60); return; }
+          var cur=startRow;
+          cells[cur][col].style.opacity='0.4';
+          var iv=setInterval(function(){
+            if(cells[cur][col].style.opacity!=='1') cells[cur][col].style.opacity='0.1';
+            cur++;
+            if(cur<tr){ cells[cur][col].style.opacity='0.4'; }
+            else { clearInterval(iv); cells[tr][col].style.opacity='1'; setTimeout(cb,60); }
+          },20);
+        }
 
-        var lettersFinished=0;
-
-        NAME.forEach(function(letter,li){
-          setTimeout(function(){
-            var sc=li*(LW+GAP);
-            // Count active cols for this letter
-            var activeCols=[];
-            for(var c=0;c<LW;c++) if(colFills[sc+c].length) activeCols.push(sc+c);
-
-            if(!activeCols.length){ lettersFinished++; if(lettersFinished===NAME.length) onAllDone(); return; }
-
-            var colsFinished=0;
-            activeCols.forEach(function(col){
-              var rows=colFills[col];
-              var ri=0, lastLanded=-1;
-              function nextRow(){
-                if(ri>=rows.length){
-                  colsFinished++;
-                  if(colsFinished===activeCols.length){
-                    lettersFinished++;
-                    if(lettersFinished===NAME.length) onAllDone();
-                  }
-                  return;
-                }
-                var tr=rows[ri++];
-                // Start ghost from just below last landed block (or row 0)
-                var startRow=lastLanded+1;
-                lastLanded=tr;
-                dropBlock(cells, col, startRow, tr, function(){ setTimeout(nextRow,20); });
-              }
-              nextRow();
-            });
-          }, li*delay);
-        });
-
-        function onAllDone(){
-          // Hold 2s, fade out, restart
-          setTimeout(function(){
-            for(var r=0;r<ROWS;r++)
-              for(var c=0;c<GCOLS;c++)
-                cells[r][c].style.transition='opacity 0.5s';
+        function runCycle(cells){
+          for(var r=0;r<ROWS;r++) for(var c=0;c<GCOLS;c++){ cells[r][c].style.transition=''; cells[r][c].style.opacity='0.1'; }
+          var lettersFinished=0;
+          NAME.forEach(function(letter,li){
             setTimeout(function(){
-              for(var r=0;r<ROWS;r++)
-                for(var c=0;c<GCOLS;c++)
-                  cells[r][c].style.opacity='0.1';
-              setTimeout(function(){ runCycle(cells, delay); }, 600);
-            },50);
-          },2000);
-        }
-      }
-
-      var navEl  = document.getElementById('logo-nav');
-      var conEl  = document.getElementById('logo-contact');
-      var navCells = setup(navEl,  3, 2);
-      var conCells = setup(conEl,  5, 2);
-
-      // Nav: start after bootDone event
-      document.addEventListener('bootDone', function(){
-        if(navCells) setTimeout(function(){ runCycle(navCells, 90); }, 200);
-      });
-      // Fallback for skip/fast-load
-      setTimeout(function(){
-        if(navCells && !navEl.dataset.r){ navEl.dataset.r='1'; runCycle(navCells, 90); }
-      }, 4000);
-      document.addEventListener('bootDone', function(){ if(navEl) navEl.dataset.r='1'; });
-
-      // Contact: start on scroll into view
-      if(conCells && conEl){
-        var io=new IntersectionObserver(function(entries){
-          if(entries[0].isIntersecting){
-            io.disconnect();
-            runCycle(conCells, 110);
+              var sc=li*(LW+GAP);
+              var activeCols=[];
+              for(var c=0;c<LW;c++) if(colFills[sc+c].length) activeCols.push(sc+c);
+              if(!activeCols.length){ if(++lettersFinished===NAME.length) onDone(); return; }
+              var colsFinished=0;
+              activeCols.forEach(function(col){
+                var rows=colFills[col], ri=0, lastLanded=-1;
+                function nextRow(){
+                  if(ri>=rows.length){ if(++colsFinished===activeCols.length) if(++lettersFinished===NAME.length) onDone(); return; }
+                  var tr=rows[ri++], start=lastLanded+1; lastLanded=tr;
+                  dropBlock(cells,col,start,tr,function(){ setTimeout(nextRow,20); });
+                }
+                nextRow();
+              });
+            }, li*110);
+          });
+          function onDone(){
+            setTimeout(function(){
+              for(var r=0;r<ROWS;r++) for(var c=0;c<GCOLS;c++) cells[r][c].style.transition='opacity 0.5s';
+              setTimeout(function(){
+                for(var r=0;r<ROWS;r++) for(var c=0;c<GCOLS;c++) cells[r][c].style.opacity='0.1';
+                setTimeout(function(){ runCycle(cells); },600);
+              },50);
+            },2000);
           }
+        }
+
+        var conCells=setup(conEl,5,2);
+        var conStarted=false;
+        var io=new IntersectionObserver(function(entries){
+          if(entries[0].isIntersecting&&!conStarted){ conStarted=true; runCycle(conCells); }
         },{threshold:0.1});
         io.observe(conEl);
-      }
+      })();
+
     })();
 
     // Typewriter
@@ -1180,7 +1159,9 @@
           nameEl.style.fontFamily=lang.nameFont||"'Inter',-apple-system,sans-serif";
           nameEl.style.fontSize=lang.nameFont?'clamp(36px,5.5vw,68px)':'';
           await type(gt,lang.greet,58);await sleep(110);
+          if(window.navSync) window.navSync.onNameStart();
           await type(nt,lang.name,50);await sleep(2500);
+          if(window.navSync) window.navSync.onNameErase();
           await erase(nt,26);await sleep(80);await erase(gt,26);
           await sleep(360);i=(i+1)%langs.length;
         }
