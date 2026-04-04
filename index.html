@@ -995,20 +995,20 @@
     })();
 
 
-    // ── Logo pixel animation ──
-    // ── Pixel Grid Logo — build + animate ──
+    // ── Pixel Logo — continuous Tetris loop ──
     (function(){
       var FONT={d:[[1,1,0],[1,0,1],[1,0,1],[1,0,1],[1,1,0]],v:[[1,0,1],[1,0,1],[1,0,1],[0,1,0],[0,1,0]],p:[[1,1,0],[1,0,1],[1,1,0],[1,0,0],[1,0,0]],h:[[1,0,1],[1,0,1],[1,1,1],[1,0,1],[1,0,1]],n:[[1,0,1],[1,1,1],[1,0,1],[1,0,1],[1,0,1]],c:[[0,1,1],[1,0,0],[1,0,0],[1,0,0],[0,1,1]]};
       var NAME=['d','v','p','h','n','c'],LW=3,GAP=1,ROWS=5;
-      var GCOLS=NAME.length*(LW+GAP)-GAP; // 23 cols
+      var GCOLS=NAME.length*(LW+GAP)-GAP;
 
-      // Build a pixel grid logo into a container div
-      // cellSize = px size of each cell (without gap)
+      // Colours cycling per letter — same palette as boot screen
+      var FC=['filled','filled-alt','filled-deep'];
+
       function buildLogo(el){
-        if(!el)return;
+        if(!el)return null;
         el.style.gridTemplateColumns='repeat('+GCOLS+',1fr)';
         el.style.gridTemplateRows='repeat('+ROWS+',1fr)';
-        var grid=[]; // grid[row][col] = div
+        var grid=[];
         for(var r=0;r<ROWS;r++){
           grid[r]=[];
           for(var c=0;c<GCOLS;c++){
@@ -1018,97 +1018,118 @@
             grid[r][c]=d;
           }
         }
-        // Mark filled cells
-        NAME.forEach(function(letter,li){
-          var sc=li*(LW+GAP);
-          for(var c=0;c<LW;c++){
-            for(var r=0;r<ROWS;r++){
-              if(FONT[letter][r][c]){
-                grid[r][sc+c].classList.add('on');
-              }
-            }
-          }
-        });
         return grid;
       }
 
-      // Animate: like boot screen — each column's "on" pixels drop in sequentially
-      // Uses the same setInterval stepping with ghost trail per column
-      function dropColPixels(colCells, filled, startDelay){
-        // colCells: all ROWS cells in this column (grid[0..4][col])
-        // filled: set of row indices that are "on"
-        setTimeout(function(){
-          var ROWS_=colCells.length;
-          // For each filled row, animate a block falling from top to its target row
-          filled.forEach(function(targetRow, fi){
-            // Stagger each block within the column
-            setTimeout(function(){
-              var cur=0;
-              // Ghost drop
-              var step=setInterval(function(){
-                // Clear ghost from prev row
-                if(cur>0) colCells[cur-1].style.opacity='0.08';
-                // Show ghost at current row
-                if(cur<targetRow){
-                  colCells[cur].style.opacity='0.35';
-                  colCells[cur].style.background='currentColor';
-                  cur++;
-                } else {
-                  // Land: flash then stay
-                  clearInterval(step);
-                  colCells[targetRow].style.opacity='1';
-                  colCells[targetRow].style.background='currentColor';
-                  // brief white flash
-                  colCells[targetRow].style.boxShadow='0 0 6px rgba(255,255,255,0.8)';
-                  setTimeout(function(){
-                    colCells[targetRow].style.boxShadow='';
-                  }, 80);
-                }
-              }, 28);
-            }, fi*120);
-          });
-        }, startDelay);
+      // Reset all cells to dim/off state
+      function resetGrid(grid){
+        for(var r=0;r<ROWS;r++)
+          for(var c=0;c<GCOLS;c++){
+            grid[r][c].style.opacity='0.08';
+            grid[r][c].style.boxShadow='';
+            grid[r][c].style.transition='opacity 0.18s';
+          }
       }
 
-      function animateGrid(grid, startDelay){
-        var GCOLS_=grid[0].length, ROWS_=grid.length;
-        for(var col=0;col<GCOLS_;col++){
-          // Collect which rows in this column are "on"
-          var filledRows=[];
-          for(var row=0;row<ROWS_;row++){
-            if(grid[row][col].classList.contains('on')) filledRows.push(row);
-          }
-          if(filledRows.length===0) continue;
-          // All cells in this column
-          var colCells=[];
-          for(var r=0;r<ROWS_;r++) colCells.push(grid[r][col]);
-          // Stagger columns: 22ms between each letter column
-          dropColPixels(colCells, filledRows, startDelay + col*22);
-        }
+      // Drop a single block in column `col` to target row `tr`, returns a Promise
+      function dropBlock(grid, col, tr, colorClass){
+        return new Promise(function(res){
+          var cur=0;
+          // ghost at row 0
+          grid[cur][col].style.opacity='0.3';
+          grid[cur][col].style.transition='none';
+          var iv=setInterval(function(){
+            // clear ghost from current row
+            if(!grid[cur][col].style.opacity || grid[cur][col].style.opacity==='0.3'){
+              grid[cur][col].style.opacity='0.08';
+            }
+            cur++;
+            if(cur<=tr){
+              // move ghost down
+              grid[cur][col].style.transition='none';
+              grid[cur][col].style.opacity='0.3';
+            } else {
+              clearInterval(iv);
+              // land with flash
+              grid[tr][col].style.transition='none';
+              grid[tr][col].style.opacity='1';
+              grid[tr][col].style.boxShadow='0 0 8px rgba(255,255,255,0.9)';
+              setTimeout(function(){
+                grid[tr][col].style.boxShadow='';
+                res();
+              },70);
+            }
+          },22);
+        });
+      }
+
+      // Run one full animation cycle: drop all columns letter by letter, then pause, then reset and repeat
+      function runCycle(grid, isNav){
+        resetGrid(grid);
+        var ci=0;
+        // Drop letters in parallel with 120ms stagger between letters (same as boot)
+        var letterPromises=NAME.map(function(letter,li){
+          return new Promise(function(res){
+            setTimeout(function(){
+              var sc=li*(LW+GAP);
+              // All 3 cols of this letter drop in parallel
+              var colPromises=[0,1,2].map(function(c){
+                return (function(){
+                  var col=sc+c;
+                  var filled=[];
+                  for(var r=0;r<ROWS;r++) if(FONT[letter][r][c]) filled.push(r);
+                  if(!filled.length) return Promise.resolve();
+                  // Drop blocks top-to-bottom sequentially
+                  return filled.reduce(function(chain, tr, pi){
+                    return chain.then(function(){
+                      return dropBlock(grid, col, tr, FC[ci++%FC.length]);
+                    }).then(function(){
+                      return new Promise(function(r){setTimeout(r, isNav?18:22);});
+                    });
+                  }, Promise.resolve());
+                })();
+              });
+              Promise.all(colPromises).then(res);
+            }, li*(isNav?100:120));
+          });
+        });
+
+        Promise.all(letterPromises).then(function(){
+          // Hold the completed logo for a moment, then fade out and restart
+          setTimeout(function(){
+            // Fade all on-pixels out
+            for(var r=0;r<ROWS;r++)
+              for(var c=0;c<GCOLS;c++){
+                grid[r][c].style.transition='opacity 0.4s';
+                grid[r][c].style.opacity='0.08';
+              }
+            // Restart cycle after fade
+            setTimeout(function(){ runCycle(grid, isNav); }, 600);
+          }, isNav?2000:2500);
+        });
       }
 
       // Build both logos
       var navGrid=buildLogo(document.getElementById('logo-nav'));
       var contactGrid=buildLogo(document.getElementById('logo-contact'));
 
-      // Nav: animate after boot exits (hook into skipBoot)
+      // Nav: start after boot exits
       (function patch(){
         var orig=window.skipBoot;
         if(!orig){setTimeout(patch,30);return;}
         window.skipBoot=function(){
           orig();
-          setTimeout(function(){ if(navGrid) animateGrid(navGrid, 0); }, 800);
+          setTimeout(function(){ if(navGrid) runCycle(navGrid, true); }, 800);
         };
       })();
 
-      // Contact: animate on scroll into view
+      // Contact: start when scrolled into view, then keep looping
       if(contactGrid){
-        var done=false;
+        var started=false;
         var io=new IntersectionObserver(function(entries){
-          if(entries[0].isIntersecting && !done){
-            done=true;
-            animateGrid(contactGrid, 0);
-            io.disconnect();
+          if(entries[0].isIntersecting && !started){
+            started=true;
+            runCycle(contactGrid, false);
           }
         },{threshold:0.25});
         io.observe(document.getElementById('logo-contact'));
