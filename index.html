@@ -594,24 +594,18 @@
     @media(max-width:600px){ #globe-container{width:340px;height:340px;} .skill-icon .icon-badge{width:36px;height:36px;} .skill-icon .icon-badge svg{width:26px;height:26px;} }
 
     /* ── Pixel Grid Logo ── */
-    .px-logo { display:grid; gap:3px; line-height:0; }
-    .px-logo .px { border-radius:2px; background:currentColor; opacity:0.08; }
+    .px-logo { display:grid; line-height:0; }
+    .px-logo .px { background:currentColor; opacity:0.08; }
     .px-logo .px.on { opacity:0; }
-    @keyframes pxDrop {
-      0%   { opacity:0; transform:translateY(-8px); }
-      60%  { opacity:1; transform:translateY(1.5px); }
-      80%  { transform:translateY(-0.5px); }
-      100% { opacity:1; transform:translateY(0); }
-    }
-    /* Nav logo */
+    /* Nav logo — 3px cells, 2px gap = ~113px wide, ~23px tall */
     .nav-logo { display:flex; align-items:center; cursor:default; }
-    .nav-logo .px-logo { color:#ffffff; }
-    .nav-logo .px-logo .px { width:5px; height:5px; border-radius:2px; }
+    .nav-logo .px-logo { color:#ffffff; gap:2px; }
+    .nav-logo .px-logo .px { width:3px; height:3px; border-radius:1px; }
     html:not(.dark) .nav-logo .px-logo { color:#003087; }
-    /* Contact logo */
+    /* Contact logo — 8px cells, 3px gap = ~250px wide */
     .contact-logo-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; margin-bottom:40px; }
-    .contact-logo-wrap .px-logo { color:#4d9fff; }
-    .contact-logo-wrap .px-logo .px { width:10px; height:10px; border-radius:3px; }
+    .contact-logo-wrap .px-logo { color:#4d9fff; gap:3px; }
+    .contact-logo-wrap .px-logo .px { width:8px; height:8px; border-radius:2px; }
     .contact-logo-sub { font-family:var(--mono); font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--text4); }
     html:not(.dark) .contact-logo-wrap .px-logo { color:#003087; }
   </style>
