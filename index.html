@@ -333,7 +333,11 @@
     /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        CERTIFICATIONS
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-    .cert-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px; }
+    .cert-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; flex:1; min-width:0; }
+    .cert-layout { display:flex; align-items:flex-start; gap:36px; }
+    .credly-wrap { display:flex; flex-direction:column; align-items:center; gap:8px; flex-shrink:0; }
+    .credly-label { font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--text4); }
+    @media(max-width:720px){ .cert-layout{flex-direction:column;align-items:stretch;} .credly-wrap{align-items:center;} }
     .notes-card { background:var(--glass); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid var(--glass-border); border-radius:var(--r-lg); box-shadow:var(--glass-shadow); overflow:hidden; position:relative; transition:transform 0.26s,box-shadow 0.26s; }
     .notes-card::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(180,160,255,0.18),transparent); pointer-events:none; }
     .notes-card:hover { transform:translateY(-3px); box-shadow:var(--glass-shadow-lg); }
@@ -678,43 +682,50 @@
     <div class="section-inner">
       <p class="sec-label reveal">Certifications</p>
       <h2 class="sec-title reveal rd1">Oracle Cloud Certified</h2>
-      <div class="cert-grid">
-        <div class="notes-card reveal rd1">
-          <div class="notes-card-header">
-            <span class="notes-card-platform" style="background:rgba(199,70,52,0.12);color:#c74634;border:1px solid rgba(199,70,52,0.22);">Oracle University</span>
-            <span class="notes-card-diff" style="background:rgba(184,112,64,0.1);color:#c08040;border:1px solid rgba(184,112,64,0.2);">2024</span>
+      <div class="cert-layout">
+        <div class="cert-grid">
+          <div class="notes-card reveal rd1">
+            <div class="notes-card-header">
+              <span class="notes-card-platform" style="background:rgba(199,70,52,0.12);color:#c74634;border:1px solid rgba(199,70,52,0.22);">Oracle University</span>
+              <span class="notes-card-diff" style="background:rgba(184,112,64,0.1);color:#c08040;border:1px solid rgba(184,112,64,0.2);">2024</span>
+            </div>
+            <div class="notes-card-body">
+              <h3 class="notes-title">OCI AI Foundations Associate</h3>
+              <p class="notes-desc">Oracle Cloud Infrastructure · AI and Machine Learning fundamentals, generative AI, and cloud-native services.</p>
+            </div>
+            <div class="notes-footer"><span class="notes-tag">AI</span><span class="notes-tag">OCI</span><span class="notes-tag">Cloud</span></div>
           </div>
-          <div class="notes-card-body">
-            <h3 class="notes-title">OCI AI Foundations Associate</h3>
-            <p class="notes-desc">Oracle Cloud Infrastructure · AI and Machine Learning fundamentals, generative AI, and cloud-native services.</p>
+          <div class="notes-card reveal rd2">
+            <div class="notes-card-header">
+              <span class="notes-card-platform" style="background:rgba(199,70,52,0.12);color:#c74634;border:1px solid rgba(199,70,52,0.22);">Oracle University</span>
+              <span class="notes-card-diff" style="background:rgba(184,112,64,0.1);color:#c08040;border:1px solid rgba(184,112,64,0.2);">2024</span>
+            </div>
+            <div class="notes-card-body">
+              <h3 class="notes-title">OCI Foundations Associate</h3>
+              <p class="notes-desc">Oracle Cloud Infrastructure · Core cloud services, architecture, security, and pricing fundamentals.</p>
+            </div>
+            <div class="notes-footer"><span class="notes-tag">Infrastructure</span><span class="notes-tag">OCI</span><span class="notes-tag">Cloud</span></div>
           </div>
-          <div class="notes-footer"><span class="notes-tag">AI</span><span class="notes-tag">OCI</span><span class="notes-tag">Cloud</span></div>
+          <div class="notes-card reveal rd3">
+            <div class="notes-card-header">
+              <span class="notes-card-platform" style="background:rgba(199,70,52,0.12);color:#c74634;border:1px solid rgba(199,70,52,0.22);">Oracle University</span>
+              <span class="notes-card-diff" style="background:rgba(184,112,64,0.1);color:#c08040;border:1px solid rgba(184,112,64,0.2);">2024</span>
+            </div>
+            <div class="notes-card-body">
+              <h3 class="notes-title">OCI Data Foundations Associate</h3>
+              <p class="notes-desc">Oracle Cloud Data · Data management, analytics, Autonomous Database, and data lake services.</p>
+            </div>
+            <div class="notes-footer"><span class="notes-tag">Data</span><span class="notes-tag">Analytics</span><span class="notes-tag">OCI</span></div>
+          </div>
         </div>
-        <div class="notes-card reveal rd2">
-          <div class="notes-card-header">
-            <span class="notes-card-platform" style="background:rgba(199,70,52,0.12);color:#c74634;border:1px solid rgba(199,70,52,0.22);">Oracle University</span>
-            <span class="notes-card-diff" style="background:rgba(184,112,64,0.1);color:#c08040;border:1px solid rgba(184,112,64,0.2);">2024</span>
-          </div>
-          <div class="notes-card-body">
-            <h3 class="notes-title">OCI Foundations Associate</h3>
-            <p class="notes-desc">Oracle Cloud Infrastructure · Core cloud services, architecture, security, and pricing fundamentals.</p>
-          </div>
-          <div class="notes-footer"><span class="notes-tag">Infrastructure</span><span class="notes-tag">OCI</span><span class="notes-tag">Cloud</span></div>
-        </div>
-        <div class="notes-card reveal rd3">
-          <div class="notes-card-header">
-            <span class="notes-card-platform" style="background:rgba(199,70,52,0.12);color:#c74634;border:1px solid rgba(199,70,52,0.22);">Oracle University</span>
-            <span class="notes-card-diff" style="background:rgba(184,112,64,0.1);color:#c08040;border:1px solid rgba(184,112,64,0.2);">2024</span>
-          </div>
-          <div class="notes-card-body">
-            <h3 class="notes-title">OCI Data Foundations Associate</h3>
-            <p class="notes-desc">Oracle Cloud Data · Data management, analytics, Autonomous Database, and data lake services.</p>
-          </div>
-          <div class="notes-footer"><span class="notes-tag">Data</span><span class="notes-tag">Analytics</span><span class="notes-tag">OCI</span></div>
+        <div class="credly-wrap reveal rd4">
+          <p class="credly-label">Verified Badge</p>
+          <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="7a7ef255-2b1a-4832-8a8d-5d4a397603e4" data-share-badge-host="https://www.credly.com"></div>
         </div>
       </div>
     </div>
   </section>
+  <script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
 
   <div class="divider"></div>
 
@@ -838,7 +849,7 @@
       <div class="reveal rd2">
         <div class="email-block" onclick="copyEmail()">
           <p class="email-label">Email — click to copy</p>
-          <p class="email-addr">jdsoffcl@gmail.com</p>
+          <p class="email-addr"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="28424c5b474e4e4b44684f45494144064b4745">[email&#160;protected]</a></p>
         </div>
         <div class="contact-links">
           <a href="https://github.com/dvphnc" target="_blank" class="contact-link card reveal rd1">
@@ -866,7 +877,7 @@
     <p>© 2025 Joana Daphne Sy · dvphnc · BSIT 3rd Year · SyberVault</p>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // Hidden flag
     document.body.insertAdjacentHTML('beforeend','<!-- CTF FLAG: dvphnc{y0u_f0und_m3_g00d_r3c0n} -->');
 
@@ -1133,6 +1144,7 @@
         el.style.zIndex=Math.round((p.z+1)*50)+'';
       }
     }
+    
     animate();
     window.addEventListener('resize',function(){var nW=container.offsetWidth,nH=container.offsetHeight;renderer.setSize(nW,nH);camera.aspect=nW/nH;camera.updateProjectionMatrix();});
   })();
