@@ -254,8 +254,55 @@
     /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        REVEAL
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-    .reveal { opacity:0; transform:translateY(20px); transition:opacity 0.65s cubic-bezier(0.16,1,0.3,1),transform 0.65s cubic-bezier(0.16,1,0.3,1); }
+    /* ── Scroll Reveal Variants ── */
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1),transform 0.7s cubic-bezier(0.16,1,0.3,1); }
     .reveal.visible { opacity:1; transform:translateY(0); }
+    .reveal-left  { opacity:0; transform:translateX(-40px); transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1),transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal-left.visible  { opacity:1; transform:translateX(0); }
+    .reveal-right { opacity:0; transform:translateX(40px);  transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1),transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal-right.visible { opacity:1; transform:translateX(0); }
+    .reveal-scale { opacity:0; transform:scale(0.88); transition:opacity 0.65s cubic-bezier(0.16,1,0.3,1),transform 0.65s cubic-bezier(0.16,1,0.3,1); }
+    .reveal-scale.visible { opacity:1; transform:scale(1); }
+    .reveal-flip  { opacity:0; transform:perspective(600px) rotateX(18deg); transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1),transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal-flip.visible  { opacity:1; transform:perspective(600px) rotateX(0deg); }
+
+    /* Card tilt on hover */
+    .tilt-card { transform-style:preserve-3d; transition:transform 0.18s ease, box-shadow 0.18s ease; will-change:transform; }
+
+    /* Section active glow */
+    .section-active-line {
+      position:fixed; left:0; top:50%; transform:translateY(-50%);
+      width:3px; border-radius:2px;
+      background:linear-gradient(to bottom, transparent, #4d9fff, transparent);
+      opacity:0; transition:opacity 0.4s, height 0.4s;
+      pointer-events:none; z-index:100;
+      height:0;
+    }
+    .section-active-line.show { opacity:0.7; height:80px; }
+
+    /* Floating particles on scroll */
+    @keyframes floatUp {
+      0%   { transform:translateY(0) scale(1);   opacity:0.6; }
+      100% { transform:translateY(-80px) scale(0); opacity:0; }
+    }
+    .scroll-particle {
+      position:fixed; pointer-events:none; z-index:9998;
+      width:4px; height:4px; border-radius:50%;
+      background:#4d9fff;
+      animation:floatUp 1s ease-out forwards;
+    }
+
+    /* Highlight shimmer on section titles when entering view */
+    @keyframes titleShimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position:  200% center; }
+    }
+    .sec-title.shimmer {
+      background: linear-gradient(90deg, var(--text) 0%, #4d9fff 40%, #80c0ff 50%, var(--text) 60%);
+      background-size: 200% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: titleShimmer 1.2s ease forwards;
+    }
     .rd1{transition-delay:.07s} .rd2{transition-delay:.14s} .rd3{transition-delay:.21s}
     .rd4{transition-delay:.28s} .rd5{transition-delay:.35s} .rd6{transition-delay:.42s}
     @keyframes fadeUp { to{opacity:1;transform:translateY(0)} }
@@ -714,7 +761,7 @@
       <!-- Oracle -->
       <h2 class="sec-title reveal rd1" style="margin-bottom:20px;">Oracle Cloud Certified</h2>
       <div class="cert-grid" style="margin-bottom:48px;">
-        <a class="cert-card reveal rd1" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=C40D337A86BE52AE8C02A90C0BC838A9226F3044D11CF05F86A518AAFDF7103F" target="_blank" rel="noopener">
+        <a class="cert-card reveal-flip tilt-card rd1" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=C40D337A86BE52AE8C02A90C0BC838A9226F3044D11CF05F86A518AAFDF7103F" target="_blank" rel="noopener">
           <div class="cert-badge-wrap">
             <img src="https://images.credly.com/images/e30ee47b-8ca4-43b5-85a7-6b3075c937c1/OCI24AICFA_cached_image_20260404-33-ad4s94.png" alt="OCI AI Foundations Associate badge" class="cert-badge-img"/>
           </div>
@@ -725,7 +772,7 @@
             <div class="cert-tags"><span class="notes-tag">AI</span><span class="notes-tag">OCI</span><span class="notes-tag">2024</span></div>
           </div>
         </a>
-        <a class="cert-card reveal rd2" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=D43A8C93FE30161F5AF6077AE49AB9FE797A13EA6EB10947B7E30B9B0DFD2DC1" target="_blank" rel="noopener">
+        <a class="cert-card reveal-flip tilt-card rd2" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=D43A8C93FE30161F5AF6077AE49AB9FE797A13EA6EB10947B7E30B9B0DFD2DC1" target="_blank" rel="noopener">
           <div class="cert-badge-wrap">
             <img src="https://images.credly.com/images/38273805-7c52-4a63-8776-af6bcd738b75/OCI2024FNDCFA_cached_image_20260404-31-kcldvz.png" alt="OCI Foundations Associate badge" class="cert-badge-img"/>
           </div>
@@ -736,7 +783,7 @@
             <div class="cert-tags"><span class="notes-tag">Infrastructure</span><span class="notes-tag">OCI</span><span class="notes-tag">2024</span></div>
           </div>
         </a>
-        <a class="cert-card reveal rd3" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=D43A8C93FE30161F5AF6077AE49AB9FE612D8698DFBD1116CC92691601BF4C03" target="_blank" rel="noopener">
+        <a class="cert-card reveal-flip tilt-card rd3" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=D43A8C93FE30161F5AF6077AE49AB9FE612D8698DFBD1116CC92691601BF4C03" target="_blank" rel="noopener">
           <div class="cert-badge-wrap">
             <img src="https://images.credly.com/images/21a3c458-5a88-4327-9e6a-066ae0ee8b5f/OCI2024DCFA_cached_image_20260404-33-aeswth.png" alt="OCI Data Foundations Associate badge" class="cert-badge-img"/>
           </div>
@@ -792,12 +839,12 @@
       <p class="sec-label reveal">CTF Writeups</p>
       <h2 class="sec-title reveal rd1">Rooms &amp; Machines</h2>
       <div class="vault-grid">
-        <div class="notes-card reveal rd1"><div class="notes-card-header"><span class="notes-card-platform thm">TryHackMe</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body"><h3 class="notes-title">Pickle Rick</h3><p class="notes-desc">Web enumeration, directory brute-forcing, and RCE to retrieve flags. Used Gobuster and crafted a reverse shell via the web command panel.</p></div><div class="notes-footer"><span class="notes-tag">RCE</span><span class="notes-tag">Gobuster</span><span class="notes-tag">PrivEsc</span></div></div>
-        <div class="notes-card reveal rd2"><div class="notes-card-header"><span class="notes-card-platform thm">TryHackMe</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body"><h3 class="notes-title">Basic Pentesting</h3><p class="notes-desc">SMB enumeration, hash cracking, and SSH key exploitation. Cracked a password hash using John the Ripper.</p></div><div class="notes-footer"><span class="notes-tag">SMB</span><span class="notes-tag">John</span><span class="notes-tag">SSH</span></div></div>
-        <div class="notes-card reveal rd3"><div class="notes-card-header"><span class="notes-card-platform thm">TryHackMe</span><span class="notes-card-diff diff-medium">Medium</span></div><div class="notes-card-body"><h3 class="notes-title">Mr Robot CTF</h3><p class="notes-desc">Three-flag challenge. WordPress exploitation, hidden wordlist, WPScan brute-force, SUID binary abuse for root.</p></div><div class="notes-footer"><span class="notes-tag">WordPress</span><span class="notes-tag">SUID</span><span class="notes-tag">WPScan</span></div></div>
-        <div class="notes-card reveal rd4"><div class="notes-card-header"><span class="notes-card-platform htb">HackTheBox</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body"><h3 class="notes-title">Meow</h3><p class="notes-desc">Telnet misconfiguration with unauthenticated root login — Nmap scan, service enumeration, direct flag retrieval.</p></div><div class="notes-footer"><span class="notes-tag">Telnet</span><span class="notes-tag">Recon</span><span class="notes-tag">Nmap</span></div></div>
-        <div class="notes-card reveal rd5"><div class="notes-card-header"><span class="notes-card-platform htb">HackTheBox</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body"><h3 class="notes-title">Fawn</h3><p class="notes-desc">Anonymous FTP login vulnerability. Enumerated FTP with Nmap, connected with default anonymous credentials.</p></div><div class="notes-footer"><span class="notes-tag">FTP</span><span class="notes-tag">Anonymous</span><span class="notes-tag">Nmap</span></div></div>
-        <div class="notes-card reveal rd6"><div class="notes-card-header"><span class="notes-card-platform htb">HackTheBox</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body"><h3 class="notes-title">Dancing</h3><p class="notes-desc">SMB share enumeration without credentials. Used smbclient to access a misconfigured guest-readable share.</p></div><div class="notes-footer"><span class="notes-tag">SMB</span><span class="notes-tag">smbclient</span><span class="notes-tag">Enum</span></div></div>
+        <div class="notes-card reveal-left tilt-card rd1"><div class="notes-card-header"><span class="notes-card-platform thm">TryHackMe</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body"><h3 class="notes-title">Pickle Rick</h3><p class="notes-desc">Web enumeration, directory brute-forcing, and RCE to retrieve flags. Used Gobuster and crafted a reverse shell via the web command panel.</p></div><div class="notes-footer"><span class="notes-tag">RCE</span><span class="notes-tag">Gobuster</span><span class="notes-tag">PrivEsc</span></div></div>
+        <div class="notes-card reveal-right tilt-card rd2"><div class="notes-card-header"><span class="notes-card-platform thm">TryHackMe</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body"><h3 class="notes-title">Basic Pentesting</h3><p class="notes-desc">SMB enumeration, hash cracking, and SSH key exploitation. Cracked a password hash using John the Ripper.</p></div><div class="notes-footer"><span class="notes-tag">SMB</span><span class="notes-tag">John</span><span class="notes-tag">SSH</span></div></div>
+        <div class="notes-card reveal-left tilt-card rd3"><div class="notes-card-header"><span class="notes-card-platform thm">TryHackMe</span><span class="notes-card-diff diff-medium">Medium</span></div><div class="notes-card-body"><h3 class="notes-title">Mr Robot CTF</h3><p class="notes-desc">Three-flag challenge. WordPress exploitation, hidden wordlist, WPScan brute-force, SUID binary abuse for root.</p></div><div class="notes-footer"><span class="notes-tag">WordPress</span><span class="notes-tag">SUID</span><span class="notes-tag">WPScan</span></div></div>
+        <div class="notes-card reveal-right tilt-card rd4"><div class="notes-card-header"><span class="notes-card-platform htb">HackTheBox</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body"><h3 class="notes-title">Meow</h3><p class="notes-desc">Telnet misconfiguration with unauthenticated root login — Nmap scan, service enumeration, direct flag retrieval.</p></div><div class="notes-footer"><span class="notes-tag">Telnet</span><span class="notes-tag">Recon</span><span class="notes-tag">Nmap</span></div></div>
+        <div class="notes-card reveal-left tilt-card rd5"><div class="notes-card-header"><span class="notes-card-platform htb">HackTheBox</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body"><h3 class="notes-title">Fawn</h3><p class="notes-desc">Anonymous FTP login vulnerability. Enumerated FTP with Nmap, connected with default anonymous credentials.</p></div><div class="notes-footer"><span class="notes-tag">FTP</span><span class="notes-tag">Anonymous</span><span class="notes-tag">Nmap</span></div></div>
+        <div class="notes-card reveal-right tilt-card rd6"><div class="notes-card-header"><span class="notes-card-platform htb">HackTheBox</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body"><h3 class="notes-title">Dancing</h3><p class="notes-desc">SMB share enumeration without credentials. Used smbclient to access a misconfigured guest-readable share.</p></div><div class="notes-footer"><span class="notes-tag">SMB</span><span class="notes-tag">smbclient</span><span class="notes-tag">Enum</span></div></div>
       </div>
     </div>
   </section>
@@ -894,19 +941,19 @@
           <p class="email-addr"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="28424c5b474e4e4b44684f45494144064b4745">[email&#160;protected]</a></p>
         </div>
         <div class="contact-links">
-          <a href="https://github.com/dvphnc" target="_blank" class="contact-link card reveal rd1">
+          <a href="https://github.com/dvphnc" target="_blank" class="contact-link card reveal-scale tilt-card rd1">
             <div class="contact-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg></div>
             <div><p class="contact-link-name">GitHub</p><p class="contact-link-handle">@dvphnc</p></div>
           </a>
-          <a href="https://linkedin.com/in/dvphnc" target="_blank" class="contact-link card reveal rd2">
+          <a href="https://linkedin.com/in/dvphnc" target="_blank" class="contact-link card reveal-scale tilt-card rd2">
             <div class="contact-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
             <div><p class="contact-link-name">LinkedIn</p><p class="contact-link-handle">@dvphnc</p></div>
           </a>
-          <a href="https://tryhackme.com/p/dvphnc" target="_blank" class="contact-link card reveal rd3">
+          <a href="https://tryhackme.com/p/dvphnc" target="_blank" class="contact-link card reveal-scale tilt-card rd3">
             <div class="contact-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M10.705 0C7.54 0 4.902 2.235 4.313 5.233a4.393 4.393 0 0 0-.673-.051C1.636 5.182 0 6.818 0 8.822s1.636 3.64 3.64 3.64h7.065V0zm1.59 0v12.462h7.065c2.004 0 3.64-1.636 3.64-3.64S22.364 5.182 20.36 5.182c-.228 0-.452.018-.673.051C19.098 2.235 16.46 0 13.295 0zM3.64 13.538C1.636 13.538 0 15.174 0 17.178s1.636 3.64 3.64 3.64h7.065v-7.28zm9.655 0v7.28h7.065c2.004 0 3.64-1.636 3.64-3.64s-1.636-3.64-3.64-3.64z"/></svg></div>
             <div><p class="contact-link-name">TryHackMe</p><p class="contact-link-handle">@dvphnc</p></div>
           </a>
-          <a href="https://app.hackthebox.com/profile/dvphnc" target="_blank" class="contact-link card reveal rd4">
+          <a href="https://app.hackthebox.com/profile/dvphnc" target="_blank" class="contact-link card reveal-scale tilt-card rd4">
             <div class="contact-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M11.996 0L2 5.836V17.51L12 23.346l10-5.836V5.836zm0 1.734l8.275 4.83v2.352l-8.275 4.503-8.27-4.503V6.564zm-8.27 8.56l8.27 4.498 8.275-4.498v2.55l-8.276 4.83-8.27-4.83z"/></svg></div>
             <div><p class="contact-link-name">HackTheBox</p><p class="contact-link-handle">@dvphnc</p></div>
           </a>
@@ -928,8 +975,19 @@
     window.addEventListener('scroll',()=>{const h=document.documentElement;sp.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'});
 
     // Reveal
-    const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:0.06,rootMargin:'0px 0px -20px 0px'});
-    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+    // ── Enhanced scroll observer ──
+    const revealClasses=['reveal','reveal-left','reveal-right','reveal-scale','reveal-flip'];
+    const obs=new IntersectionObserver(e=>e.forEach(x=>{
+      if(x.isIntersecting){
+        x.target.classList.add('visible');
+        // Shimmer on section titles
+        if(x.target.classList.contains('sec-title')){
+          x.target.classList.add('shimmer');
+          setTimeout(()=>x.target.classList.remove('shimmer'),1400);
+        }
+      }
+    }),{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+    revealClasses.forEach(cls=>document.querySelectorAll('.'+cls).forEach(el=>obs.observe(el)));
 
     // Nav shrink
     const navEl=document.getElementById('navbar');
@@ -1202,7 +1260,87 @@
       else{tPrint(`zsh: command not found: ${cmd}`,'t-output red');tPrint('Type <span style="color:#c08040">help</span> for commands.','t-output dim')}
     });
 
-    // Konami + triple-click flag
+    // ── Scroll interactions ──
+    (function(){
+      // Card tilt effect
+      document.querySelectorAll('.tilt-card').forEach(function(card){
+        card.addEventListener('mousemove',function(e){
+          var r=card.getBoundingClientRect();
+          var x=(e.clientX-r.left)/r.width-0.5;
+          var y=(e.clientY-r.top)/r.height-0.5;
+          card.style.transform='perspective(600px) rotateY('+(x*10)+'deg) rotateX('+(-y*8)+'deg) translateY(-3px)';
+          card.style.boxShadow='0 20px 40px rgba(0,0,0,0.3), '+(x*20)+'px '+(y*20)+'px 30px rgba(77,159,255,0.15)';
+        });
+        card.addEventListener('mouseleave',function(){
+          card.style.transform='';
+          card.style.boxShadow='';
+        });
+      });
+
+      // Scroll progress particles
+      var lastScrollY=0, ticking=false;
+      var particleCount=0;
+      window.addEventListener('scroll',function(){
+        var sy=window.scrollY;
+        var delta=Math.abs(sy-lastScrollY);
+        if(delta>30 && particleCount<3){
+          particleCount++;
+          var p=document.createElement('div');
+          p.className='scroll-particle';
+          p.style.left=Math.random()*window.innerWidth+'px';
+          p.style.top=(window.innerHeight*0.3+Math.random()*window.innerHeight*0.4)+'px';
+          p.style.background=Math.random()>0.5?'#4d9fff':'#80c0ff';
+          p.style.width=p.style.height=(2+Math.random()*4)+'px';
+          document.body.appendChild(p);
+          setTimeout(function(){ p.remove(); particleCount=Math.max(0,particleCount-1); },1000);
+        }
+        lastScrollY=sy;
+
+        // Parallax on film orbs
+        var orbs=document.querySelectorAll('.film-orb-1,.film-orb-2,.film-orb-3,.film-orb-4');
+        orbs.forEach(function(o,i){
+          var speed=[0.08,0.05,0.06,0.04][i]||0.05;
+          o.style.transform='translateY('+(sy*speed*(i%2===0?1:-1))+'px)';
+        });
+      },{passive:true});
+
+      // Section highlight — active nav link on scroll
+      var sections=['certifications','stacks','vault','sybervault','terminal-section','contact'];
+      var navLinks=document.querySelectorAll('.nav-links a');
+      var sectionObs=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){
+            var id=e.target.id;
+            navLinks.forEach(function(a){
+              var href=a.getAttribute('href');
+              a.style.color=href&&href.slice(1)===id?'var(--text)':'';
+              a.style.opacity=href&&href.slice(1)===id?'1':'';
+            });
+          }
+        });
+      },{threshold:0.4});
+      sections.forEach(function(id){
+        var el=document.getElementById(id);
+        if(el) sectionObs.observe(el);
+      });
+
+      // Stagger children of sections as they enter
+      var childObs=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){
+            var children=e.target.querySelectorAll('.cert-card,.notes-card,.contact-link,.pill');
+            children.forEach(function(c,i){
+              if(!c.classList.contains('visible')){
+                setTimeout(function(){c.classList.add('visible');},i*60);
+              }
+            });
+          }
+        });
+      },{threshold:0.1});
+      document.querySelectorAll('section').forEach(function(s){ childObs.observe(s); });
+    })();
+
+    // ── Konami + triple-click flag
     let ks=[];const K=[38,38,40,40,37,39,37,39,66,65];
     document.addEventListener('keydown',e=>{
       ks.push(e.keyCode);ks=ks.slice(-10);
