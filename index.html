@@ -333,11 +333,22 @@
     /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        CERTIFICATIONS
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-    .cert-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; flex:1; min-width:0; }
-    .cert-layout { display:flex; align-items:flex-start; gap:36px; }
-    .credly-wrap { display:flex; flex-direction:column; align-items:center; gap:8px; flex-shrink:0; }
-    .credly-label { font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--text4); }
-    @media(max-width:720px){ .cert-layout{flex-direction:column;align-items:stretch;} .credly-wrap{align-items:center;} }
+    .cert-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:16px; }
+    .cert-card { display:flex; flex-direction:column; gap:0; background:var(--glass); border:1px solid var(--glass-border); border-radius:var(--r-lg); overflow:hidden; text-decoration:none; color:inherit; transition:all 0.22s; cursor:pointer; }
+    .cert-card:hover { transform:translateY(-3px); box-shadow:var(--glass-shadow-lg); border-color:rgba(199,70,52,0.35); }
+    .cert-badge-wrap { display:flex; align-items:center; justify-content:center; padding:20px; background:rgba(255,255,255,0.03); border-bottom:1px solid var(--glass-border-subtle); min-height:140px; }
+    .cert-badge-img { width:110px; height:110px; object-fit:contain; border-radius:8px; transition:transform 0.22s; filter:drop-shadow(0 4px 16px rgba(0,0,0,0.3)); }
+    .cert-card:hover .cert-badge-img { transform:scale(1.07); }
+    .cert-card-body { padding:16px 18px 18px; display:flex; flex-direction:column; gap:8px; }
+    .cert-issuer { font-family:var(--mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#c74634; font-weight:600; }
+    .cert-name { font-size:14px; font-weight:700; color:var(--text); line-height:1.3; }
+    .cert-desc { font-size:12px; color:var(--text3); line-height:1.5; }
+    .cert-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:2px; }
+    .cert-credly .cert-badge-wrap { min-height:290px; padding:10px; }
+    .cert-credly:hover { border-color:rgba(77,159,255,0.35); }
+    html:not(.dark) .cert-card { background:rgba(255,255,255,0.92); border-color:rgba(0,48,135,0.1); }
+    html:not(.dark) .cert-card:hover { border-color:rgba(199,70,52,0.35); box-shadow:0 8px 32px rgba(0,48,135,0.1); }
+    html:not(.dark) .cert-badge-wrap { background:rgba(0,48,135,0.02); border-color:rgba(0,48,135,0.06); }
     .notes-card { background:var(--glass); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid var(--glass-border); border-radius:var(--r-lg); box-shadow:var(--glass-shadow); overflow:hidden; position:relative; transition:transform 0.26s,box-shadow 0.26s; }
     .notes-card::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(180,160,255,0.18),transparent); pointer-events:none; }
     .notes-card:hover { transform:translateY(-3px); box-shadow:var(--glass-shadow-lg); }
@@ -682,45 +693,50 @@
     <div class="section-inner">
       <p class="sec-label reveal">Certifications</p>
       <h2 class="sec-title reveal rd1">Oracle Cloud Certified</h2>
-      <div class="cert-layout">
-        <div class="cert-grid">
-          <div class="notes-card reveal rd1">
-            <div class="notes-card-header">
-              <span class="notes-card-platform" style="background:rgba(199,70,52,0.12);color:#c74634;border:1px solid rgba(199,70,52,0.22);">Oracle University</span>
-              <span class="notes-card-diff" style="background:rgba(184,112,64,0.1);color:#c08040;border:1px solid rgba(184,112,64,0.2);">2024</span>
-            </div>
-            <div class="notes-card-body">
-              <h3 class="notes-title">OCI AI Foundations Associate</h3>
-              <p class="notes-desc">Oracle Cloud Infrastructure · AI and Machine Learning fundamentals, generative AI, and cloud-native services.</p>
-            </div>
-            <div class="notes-footer"><span class="notes-tag">AI</span><span class="notes-tag">OCI</span><span class="notes-tag">Cloud</span></div>
+      <div class="cert-grid">
+        <a class="cert-card reveal rd1" href="https://images.credly.com/images/e30ee47b-8ca4-43b5-85a7-6b3075c937c1/OCI24AICFA_cached_image_20260404-33-ad4s94.png" target="_blank" rel="noopener">
+          <div class="cert-badge-wrap">
+            <img src="https://images.credly.com/images/e30ee47b-8ca4-43b5-85a7-6b3075c937c1/OCI24AICFA_cached_image_20260404-33-ad4s94.png" alt="OCI AI Foundations Associate badge" class="cert-badge-img"/>
           </div>
-          <div class="notes-card reveal rd2">
-            <div class="notes-card-header">
-              <span class="notes-card-platform" style="background:rgba(199,70,52,0.12);color:#c74634;border:1px solid rgba(199,70,52,0.22);">Oracle University</span>
-              <span class="notes-card-diff" style="background:rgba(184,112,64,0.1);color:#c08040;border:1px solid rgba(184,112,64,0.2);">2024</span>
-            </div>
-            <div class="notes-card-body">
-              <h3 class="notes-title">OCI Foundations Associate</h3>
-              <p class="notes-desc">Oracle Cloud Infrastructure · Core cloud services, architecture, security, and pricing fundamentals.</p>
-            </div>
-            <div class="notes-footer"><span class="notes-tag">Infrastructure</span><span class="notes-tag">OCI</span><span class="notes-tag">Cloud</span></div>
+          <div class="cert-card-body">
+            <span class="cert-issuer">Oracle University</span>
+            <h3 class="cert-name">OCI AI Foundations Associate</h3>
+            <p class="cert-desc">AI &amp; Machine Learning fundamentals, generative AI, cloud-native services.</p>
+            <div class="cert-tags"><span class="notes-tag">AI</span><span class="notes-tag">OCI</span><span class="notes-tag">2024</span></div>
           </div>
-          <div class="notes-card reveal rd3">
-            <div class="notes-card-header">
-              <span class="notes-card-platform" style="background:rgba(199,70,52,0.12);color:#c74634;border:1px solid rgba(199,70,52,0.22);">Oracle University</span>
-              <span class="notes-card-diff" style="background:rgba(184,112,64,0.1);color:#c08040;border:1px solid rgba(184,112,64,0.2);">2024</span>
-            </div>
-            <div class="notes-card-body">
-              <h3 class="notes-title">OCI Data Foundations Associate</h3>
-              <p class="notes-desc">Oracle Cloud Data · Data management, analytics, Autonomous Database, and data lake services.</p>
-            </div>
-            <div class="notes-footer"><span class="notes-tag">Data</span><span class="notes-tag">Analytics</span><span class="notes-tag">OCI</span></div>
+        </a>
+        <a class="cert-card reveal rd2" href="https://images.credly.com/images/38273805-7c52-4a63-8776-af6bcd738b75/OCI2024FNDCFA_cached_image_20260404-31-kcldvz.png" target="_blank" rel="noopener">
+          <div class="cert-badge-wrap">
+            <img src="https://images.credly.com/images/38273805-7c52-4a63-8776-af6bcd738b75/OCI2024FNDCFA_cached_image_20260404-31-kcldvz.png" alt="OCI Foundations Associate badge" class="cert-badge-img"/>
           </div>
-        </div>
-        <div class="credly-wrap reveal rd4">
-          <p class="credly-label">Verified Badge</p>
-          <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="7a7ef255-2b1a-4832-8a8d-5d4a397603e4" data-share-badge-host="https://www.credly.com"></div>
+          <div class="cert-card-body">
+            <span class="cert-issuer">Oracle University</span>
+            <h3 class="cert-name">OCI Foundations Associate</h3>
+            <p class="cert-desc">Core cloud services, architecture, security, and pricing fundamentals.</p>
+            <div class="cert-tags"><span class="notes-tag">Infrastructure</span><span class="notes-tag">OCI</span><span class="notes-tag">2024</span></div>
+          </div>
+        </a>
+        <a class="cert-card reveal rd3" href="https://images.credly.com/images/21a3c458-5a88-4327-9e6a-066ae0ee8b5f/OCI2024DCFA_cached_image_20260404-33-aeswth.png" target="_blank" rel="noopener">
+          <div class="cert-badge-wrap">
+            <img src="https://images.credly.com/images/21a3c458-5a88-4327-9e6a-066ae0ee8b5f/OCI2024DCFA_cached_image_20260404-33-aeswth.png" alt="OCI Data Foundations Associate badge" class="cert-badge-img"/>
+          </div>
+          <div class="cert-card-body">
+            <span class="cert-issuer">Oracle University</span>
+            <h3 class="cert-name">OCI Data Foundations Associate</h3>
+            <p class="cert-desc">Data management, analytics, Autonomous Database, and data lake services.</p>
+            <div class="cert-tags"><span class="notes-tag">Data</span><span class="notes-tag">Analytics</span><span class="notes-tag">2024</span></div>
+          </div>
+        </a>
+        <div class="cert-card cert-credly reveal rd4">
+          <div class="cert-badge-wrap">
+            <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="7a7ef255-2b1a-4832-8a8d-5d4a397603e4" data-share-badge-host="https://www.credly.com"></div>
+          </div>
+          <div class="cert-card-body">
+            <span class="cert-issuer">Credly</span>
+            <h3 class="cert-name">Verified Credential</h3>
+            <p class="cert-desc">Click the badge to verify this credential on Credly.</p>
+            <div class="cert-tags"><span class="notes-tag">Verified</span><span class="notes-tag">Oracle</span></div>
+          </div>
         </div>
       </div>
     </div>
