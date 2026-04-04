@@ -346,12 +346,8 @@
     .cert-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:2px; }
     .cert-credly .cert-badge-wrap { min-height:290px; padding:10px; }
     .cert-credly:hover { border-color:rgba(77,159,255,0.35); }
-    .isc2-wrap { display:flex; justify-content:flex-start; }
-    .isc2-card { max-width:360px; flex-direction:row; align-items:center; gap:0; }
-    .isc2-card .cert-badge-wrap { min-height:auto; padding:20px; border-bottom:none; border-right:1px solid var(--glass-border-subtle); flex-shrink:0; width:140px; }
-    .isc2-card .cert-card-body { padding:20px 22px; }
+    .isc2-grid { margin-bottom:0; }
     .isc2-card:hover { border-color:rgba(0,179,136,0.35)!important; }
-    @media(max-width:600px){ .isc2-card{flex-direction:column;max-width:100%;} .isc2-card .cert-badge-wrap{border-right:none;border-bottom:1px solid var(--glass-border-subtle);} }
     html:not(.dark) .cert-card { background:rgba(255,255,255,0.92); border-color:rgba(0,48,135,0.1); }
     html:not(.dark) .cert-card:hover { border-color:rgba(199,70,52,0.35); box-shadow:0 8px 32px rgba(0,48,135,0.1); }
     html:not(.dark) .cert-badge-wrap { background:rgba(0,48,135,0.02); border-color:rgba(0,48,135,0.06); }
@@ -740,7 +736,7 @@
       <!-- ISC2 -->
       <p class="sec-label reveal" style="margin-bottom:10px;">ISC2</p>
       <h2 class="sec-title reveal rd1" style="margin-bottom:20px;">Certified in Cybersecurity</h2>
-      <div class="isc2-wrap reveal rd2">
+      <div class="cert-grid isc2-grid reveal rd2">
         <a class="cert-card isc2-card" href="https://www.credly.com/badges/7a7ef255-2b1a-4832-8a8d-5d4a397603e4" target="_blank" rel="noopener">
           <div class="cert-badge-wrap">
             <img src="https://images.credly.com/images/9180921d-4a13-429e-9357-6f9706a554f0/image.png" alt="ISC2 Certified in Cybersecurity badge" class="cert-badge-img"/>
