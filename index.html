@@ -1052,7 +1052,7 @@
               <textarea id="msgBody" class="form-input form-textarea" placeholder="Hi Joana, I came across your portfolio and..."></textarea>
             </div>
             <div class="form-actions">
-              <button class="btn btn-primary form-send-btn" onclick="sendMessage()">
+              <button class="btn btn-primary form-send-btn" id="formSend" onclick="sendMessage()">
                 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
                 Send Message
               </button>
@@ -1374,15 +1374,43 @@
       if(!name||!email||!body){ showToast('Please fill in name, email and message.'); return; }
       var emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if(!emailRe.test(email)){ showToast('Please enter a valid email.'); return; }
-      var mailtoUrl='mailto:jdsoffcl@gmail.com'
-        +'?subject='+encodeURIComponent(subject||'Message from '+name)
-        +'&body='+encodeURIComponent('Hi Joana,\n\n'+body+'\n\n— '+name+'\n'+email);
-      window.location.href=mailtoUrl;
-      setTimeout(function(){
-        var fb=document.getElementById('formBody');
-        var fs=document.getElementById('formSent');
-        if(fb&&fs){ fb.style.display='none'; fs.style.display='flex'; document.getElementById('sentName').textContent=name; }
-      },400);
+
+      // Show loading state
+      var btn=document.getElementById('formSend')||document.querySelector('.form-send-btn');
+      if(btn){ btn.disabled=true; btn.textContent='Sending...'; }
+
+      // Submit to Formspree
+      fetch('https://formspree.io/f/xeokvvza',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body:JSON.stringify({
+          name:name,
+          email:email,
+          subject:subject||'Portfolio message from '+name,
+          message:body
+        })
+      })
+      .then(function(res){
+        if(res.ok){
+          var fb=document.getElementById('formBody');
+          var fs=document.getElementById('formSent');
+          if(fb&&fs){
+            fb.style.display='none';
+            fs.style.display='flex';
+            document.getElementById('sentName').textContent=name;
+          }
+          if(typeof gsap!=='undefined') gsap.from('#formSent',{opacity:0,y:20,duration:0.5,ease:'power2.out'});
+        } else {
+          res.json().then(function(data){
+            showToast(data.errors?data.errors[0].message:'Something went wrong. Try emailing directly.');
+          });
+          if(btn){ btn.disabled=false; btn.innerHTML='<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Send Message'; }
+        }
+      })
+      .catch(function(){
+        showToast('Network error. Try emailing jdsoffcl@gmail.com directly.');
+        if(btn){ btn.disabled=false; btn.innerHTML='<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Send Message'; }
+      });
     }
     function clearForm(){
       ['msgName','msgEmail','msgSubject','msgBody'].forEach(function(id){ var el=document.getElementById(id); if(el)el.value=''; });
