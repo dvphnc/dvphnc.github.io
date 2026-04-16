@@ -254,36 +254,9 @@
     /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        REVEAL
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-    /* ── Scroll Reveal — GSAP-style smooth ── */
-    .reveal,.reveal-left,.reveal-right,.reveal-scale,.reveal-flip {
-      opacity:0;
-      will-change:opacity,transform;
-      transition:
-        opacity 0.9s cubic-bezier(0.22,1,0.36,1),
-        transform 0.9s cubic-bezier(0.22,1,0.36,1);
-    }
-    .reveal       { transform:translateY(50px); }
-    .reveal-left  { transform:translateX(-60px) translateY(20px); }
-    .reveal-right { transform:translateX(60px) translateY(20px); }
-    .reveal-scale { transform:scale(0.85) translateY(30px); }
-    .reveal-flip  { transform:perspective(800px) rotateX(20deg) translateY(30px); }
-    .reveal.visible      { opacity:1; transform:translateY(0); }
-    .reveal-left.visible { opacity:1; transform:translateX(0) translateY(0); }
-    .reveal-right.visible{ opacity:1; transform:translateX(0) translateY(0); }
-    .reveal-scale.visible{ opacity:1; transform:scale(1) translateY(0); }
-    .reveal-flip.visible { opacity:1; transform:perspective(800px) rotateX(0deg) translateY(0); }
-    /* Stagger delays */
-    .rd1{transition-delay:0s}
-    .rd2{transition-delay:0.1s}
-    .rd3{transition-delay:0.2s}
-    .rd4{transition-delay:0.3s}
-    .rd5{transition-delay:0.4s}
-    .rd6{transition-delay:0.5s}
-    /* Card tilt */
-    .tilt-card {
-      will-change:transform;
-      transition:transform 0.25s cubic-bezier(0.22,1,0.36,1), box-shadow 0.25s ease;
-    }
+    /* ── Scroll Reveal — managed by GSAP ── */
+    /* opacity set by GSAP gsap.set() on init, not CSS */
+    .tilt-card { will-change:transform; }
     .rd1{transition-delay:.07s} .rd2{transition-delay:.14s} .rd3{transition-delay:.21s}
     .rd4{transition-delay:.28s} .rd5{transition-delay:.35s} .rd6{transition-delay:.42s}
     @keyframes fadeUp { to{opacity:1;transform:translateY(0)} }
@@ -304,31 +277,31 @@
       background:rgba(74,122,90,0.12); border:1px solid rgba(74,122,90,0.28);
       font-family:var(--mono); font-size:11px; font-weight:600; color:#5a9a6a;
       letter-spacing:0.04em; margin-bottom:20px;
-      opacity:0; transform:translateY(12px); animation:fadeUp 0.6s 0.05s ease forwards;
+
     }
     .avail-dot { width:6px; height:6px; border-radius:50%; background:#5a9a6a; box-shadow:0 0 0 0 rgba(90,154,106,0.4); animation:availPulse 2s infinite; }
     @keyframes availPulse { 0%{box-shadow:0 0 0 0 rgba(90,154,106,0.5)} 70%{box-shadow:0 0 0 7px rgba(90,154,106,0)} 100%{box-shadow:0 0 0 0 rgba(90,154,106,0)} }
 
-    .hero-tag { font-family:var(--mono); font-size:11px; font-weight:500; color:var(--accent); letter-spacing:0.16em; text-transform:uppercase; margin-bottom:20px; opacity:0; transform:translateY(12px); animation:fadeUp 0.6s 0.1s ease forwards; }
+    .hero-tag { font-family:var(--mono); font-size:11px; font-weight:500; color:var(--accent); letter-spacing:0.16em; text-transform:uppercase; margin-bottom:20px; }
 
-    .hero-name { font-weight:800; line-height:1.0; margin-bottom:14px; opacity:0; transform:translateY(18px); animation:fadeUp 0.7s 0.2s ease forwards; }
+    .hero-name { font-weight:800; line-height:1.0; margin-bottom:14px; }
     .hero-greeting { display:block; font-size:clamp(12px,1.4vw,15px); font-weight:400; color:var(--text3); letter-spacing:0.18em; text-transform:uppercase; font-family:var(--mono); margin-bottom:8px; min-height:1.4em; }
     .hero-fullname { display:block; font-size:clamp(44px,6.5vw,82px); font-weight:800; letter-spacing:-0.045em; line-height:1.0; background:linear-gradient(140deg,#ffffff 0%,#80c0ff 50%,#4d9fff 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; word-break:break-word; }
     .hero-cursor { display:inline-block; width:2.5px; height:0.82em; background:var(--accent2); margin-left:3px; vertical-align:middle; border-radius:2px; animation:cursorBlink 0.75s step-end infinite; }
     @keyframes cursorBlink { 0%,100%{opacity:1} 50%{opacity:0} }
 
-    .hero-handle { font-family:var(--mono); font-size:clamp(13px,1.6vw,16px); font-weight:300; color:var(--text4); letter-spacing:0.05em; margin-bottom:28px; opacity:0; transform:translateY(12px); animation:fadeUp 0.6s 0.35s ease forwards; }
+    .hero-handle { font-family:var(--mono); font-size:clamp(13px,1.6vw,16px); font-weight:300; color:var(--text4); letter-spacing:0.05em; margin-bottom:28px; }
     .hero-handle span { color:var(--accent2); }
 
-    .hero-desc { font-size:17px; font-weight:400; line-height:1.75; color:var(--text3); max-width:520px; letter-spacing:-0.01em; opacity:0; transform:translateY(12px); animation:fadeUp 0.6s 0.45s ease forwards; }
+    .hero-desc { font-size:17px; font-weight:400; line-height:1.75; color:var(--text3); max-width:520px; letter-spacing:-0.01em; }
     .hero-desc strong { color:var(--text); font-weight:600; }
 
-    .hero-badges { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:28px; opacity:0; transform:translateY(12px); animation:fadeUp 0.6s 0.55s ease forwards; }
+    .hero-badges { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:28px; }
     .hero-badge { display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:980px; background:var(--glass); border:1px solid var(--glass-border); color:var(--text2); font-size:12px; font-weight:500; font-family:var(--mono); backdrop-filter:blur(20px); transition:all 0.2s; }
     .hero-badge:hover { transform:translateY(-2px); box-shadow:var(--glass-shadow); }
     .badge-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
 
-    .hero-cta { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:32px; opacity:0; transform:translateY(12px); animation:fadeUp 0.6s 0.65s ease forwards; }
+    .hero-cta { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:32px; }
     .btn { display:inline-flex; align-items:center; gap:6px; padding:12px 24px; border-radius:980px; font-size:15px; font-weight:600; letter-spacing:-0.01em; text-decoration:none; transition:all 0.22s; cursor:pointer; border:none; position:relative; overflow:hidden; }
     .btn-primary { background:linear-gradient(135deg,#0044cc,#4d9fff); color:#fff; box-shadow:0 4px 20px rgba(0,68,204,0.5),0 1px 0 rgba(255,255,255,0.18) inset; }
     .btn-primary:hover { transform:scale(1.04); box-shadow:0 8px 30px rgba(77,159,255,0.45); }
@@ -395,6 +368,50 @@
     .notes-footer { display:flex; gap:6px; flex-wrap:wrap; padding:10px 16px 14px; border-top:1px solid var(--glass-border-subtle); }
     .notes-tag { font-family:var(--mono); font-size:10px; padding:2px 8px; border-radius:6px; background:rgba(123,140,222,0.1); color:var(--accent); border:1px solid rgba(123,140,222,0.2); }
     .vault-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px; }
+    /* ── Projects ── */
+    .project-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:18px; }
+    .project-card { background:var(--glass); border:1px solid var(--glass-border); border-radius:var(--r-lg); padding:22px; display:flex; flex-direction:column; gap:14px; transition:border-color 0.2s,box-shadow 0.2s; }
+    .project-card:hover { border-color:rgba(77,159,255,0.35); box-shadow:0 12px 40px rgba(0,0,0,0.25); }
+    .project-header { display:flex; align-items:center; justify-content:space-between; }
+    .project-tag { font-family:var(--mono); font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); background:rgba(77,159,255,0.1); border:1px solid rgba(77,159,255,0.2); padding:3px 10px; border-radius:6px; }
+    .project-links { display:flex; gap:8px; }
+    .project-link { color:var(--text3); transition:color 0.2s; }
+    .project-link:hover { color:var(--text); }
+    .project-title { font-size:16px; font-weight:700; color:var(--text); letter-spacing:-0.02em; }
+    .project-desc { font-size:13px; color:var(--text3); line-height:1.65; flex:1; }
+    .project-stack { display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; }
+    html:not(.dark) .project-card { background:rgba(255,255,255,0.9); border-color:rgba(0,48,135,0.1); }
+    html:not(.dark) .project-card:hover { border-color:rgba(0,68,204,0.3); }
+    html:not(.dark) .project-tag { color:#003087; background:rgba(0,48,135,0.07); border-color:rgba(0,48,135,0.18); }
+    /* ── Contact form ── */
+    .contact-layout { display:grid; grid-template-columns:1fr 300px; gap:36px; align-items:start; margin-top:8px; }
+    .contact-form-card { background:var(--glass); border:1px solid var(--glass-border); border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--glass-shadow-lg); }
+    .form-header { display:flex; align-items:center; gap:10px; padding:12px 18px; border-bottom:1px solid var(--glass-border-subtle); background:rgba(255,255,255,0.03); }
+    .form-dots { display:flex; gap:6px; }
+    .form-dots span { width:11px; height:11px; border-radius:50%; }
+    .form-dots span:nth-child(1){background:#ff5f57;} .form-dots span:nth-child(2){background:#febc2e;} .form-dots span:nth-child(3){background:#28c840;}
+    .form-title { font-family:var(--mono); font-size:12px; color:var(--text3); flex:1; text-align:center; }
+    .form-to { font-family:var(--mono); font-size:11px; color:var(--text4); }
+    .form-to strong { color:var(--accent); }
+    .form-body { padding:20px; display:flex; flex-direction:column; gap:14px; }
+    .form-field { display:flex; flex-direction:column; gap:6px; }
+    .form-label { font-family:var(--mono); font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--text3); }
+    .form-input { background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); border-radius:10px; padding:10px 14px; font-size:14px; color:var(--text); font-family:inherit; outline:none; transition:border-color 0.2s,box-shadow 0.2s; resize:none; width:100%; box-sizing:border-box; }
+    .form-input:focus { border-color:rgba(77,159,255,0.5); box-shadow:0 0 0 3px rgba(77,159,255,0.12); }
+    .form-textarea { min-height:110px; }
+    .form-actions { display:flex; gap:10px; align-items:center; margin-top:4px; }
+    .form-send { display:inline-flex; align-items:center; gap:8px; }
+    .form-sent { padding:48px 20px; display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center; }
+    .sent-icon { color:var(--accent); }
+    .sent-title { font-size:20px; font-weight:700; color:var(--text); }
+    .sent-sub { color:var(--text3); font-size:14px; }
+    .contact-side { display:flex; flex-direction:column; gap:16px; }
+    .contact-side-label { font-family:var(--mono); font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--text4); }
+    html:not(.dark) .contact-form-card { background:rgba(255,255,255,0.95); border-color:rgba(0,48,135,0.12); }
+    html:not(.dark) .form-header { background:rgba(0,48,135,0.02); border-color:rgba(0,48,135,0.08); }
+    html:not(.dark) .form-input { background:rgba(0,48,135,0.03); border-color:rgba(0,48,135,0.14); color:#003087; }
+    html:not(.dark) .form-input:focus { border-color:rgba(0,68,204,0.35); box-shadow:0 0 0 3px rgba(0,68,204,0.07); }
+    @media(max-width:860px){ .contact-layout{grid-template-columns:1fr;} }
 
     /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        STACKS
@@ -679,9 +696,8 @@
     <ul class="nav-links">
       <li><a href="#certifications">Certs</a></li>
       <li><a href="#stacks">Stacks</a></li>
-      <li><a href="#vault">CTF</a></li>
+      <li><a href="#projects">Projects</a></li>
       <li><a href="#sybervault">SyberVault</a></li>
-      <li><a href="#terminal-section">Terminal</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="nav-right">
@@ -698,9 +714,8 @@
   <div class="mobile-menu" id="mobileMenu">
     <a href="#certifications" class="mobile-link">Certs</a>
     <a href="#stacks" class="mobile-link">Stacks</a>
-    <a href="#vault" class="mobile-link">CTF</a>
+    <a href="#projects" class="mobile-link">Projects</a>
     <a href="#sybervault" class="mobile-link">SyberVault</a>
-    <a href="#terminal-section" class="mobile-link">Terminal</a>
     <a href="#contact" class="mobile-link">Contact</a>
   </div>
 
@@ -815,17 +830,85 @@
   <div class="divider"></div>
 
   <!-- CTF VAULT -->
-  <section id="vault">
+  <section id="projects">
     <div class="section-inner">
-      <p class="sec-label reveal">CTF Writeups</p>
-      <h2 class="sec-title reveal rd1">Rooms &amp; Machines</h2>
-      <div class="vault-grid">
-        <div class="notes-card reveal-left tilt-card rd1"><div class="notes-card-header"><span class="notes-card-platform thm">TryHackMe</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body"><h3 class="notes-title">Pickle Rick</h3><p class="notes-desc">Web enumeration, directory brute-forcing, and RCE to retrieve flags. Used Gobuster and crafted a reverse shell via the web command panel.</p></div><div class="notes-footer"><span class="notes-tag">RCE</span><span class="notes-tag">Gobuster</span><span class="notes-tag">PrivEsc</span></div></div>
-        <div class="notes-card reveal-right tilt-card rd2"><div class="notes-card-header"><span class="notes-card-platform thm">TryHackMe</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body"><h3 class="notes-title">Basic Pentesting</h3><p class="notes-desc">SMB enumeration, hash cracking, and SSH key exploitation. Cracked a password hash using John the Ripper.</p></div><div class="notes-footer"><span class="notes-tag">SMB</span><span class="notes-tag">John</span><span class="notes-tag">SSH</span></div></div>
-        <div class="notes-card reveal-left tilt-card rd3"><div class="notes-card-header"><span class="notes-card-platform thm">TryHackMe</span><span class="notes-card-diff diff-medium">Medium</span></div><div class="notes-card-body"><h3 class="notes-title">Mr Robot CTF</h3><p class="notes-desc">Three-flag challenge. WordPress exploitation, hidden wordlist, WPScan brute-force, SUID binary abuse for root.</p></div><div class="notes-footer"><span class="notes-tag">WordPress</span><span class="notes-tag">SUID</span><span class="notes-tag">WPScan</span></div></div>
-        <div class="notes-card reveal-right tilt-card rd4"><div class="notes-card-header"><span class="notes-card-platform htb">HackTheBox</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body"><h3 class="notes-title">Meow</h3><p class="notes-desc">Telnet misconfiguration with unauthenticated root login — Nmap scan, service enumeration, direct flag retrieval.</p></div><div class="notes-footer"><span class="notes-tag">Telnet</span><span class="notes-tag">Recon</span><span class="notes-tag">Nmap</span></div></div>
-        <div class="notes-card reveal-left tilt-card rd5"><div class="notes-card-header"><span class="notes-card-platform htb">HackTheBox</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body"><h3 class="notes-title">Fawn</h3><p class="notes-desc">Anonymous FTP login vulnerability. Enumerated FTP with Nmap, connected with default anonymous credentials.</p></div><div class="notes-footer"><span class="notes-tag">FTP</span><span class="notes-tag">Anonymous</span><span class="notes-tag">Nmap</span></div></div>
-        <div class="notes-card reveal-right tilt-card rd6"><div class="notes-card-header"><span class="notes-card-platform htb">HackTheBox</span><span class="notes-card-diff diff-easy">Easy</span></div><div class="notes-card-body"><h3 class="notes-title">Dancing</h3><p class="notes-desc">SMB share enumeration without credentials. Used smbclient to access a misconfigured guest-readable share.</p></div><div class="notes-footer"><span class="notes-tag">SMB</span><span class="notes-tag">smbclient</span><span class="notes-tag">Enum</span></div></div>
+      <p class="sec-label reveal">Work</p>
+      <h2 class="sec-title reveal rd1">Projects</h2>
+      <div class="project-grid">
+
+        <div class="project-card reveal rd1 tilt-card">
+          <div class="project-header">
+            <span class="project-tag">Web Dev</span>
+            <div class="project-links">
+              <a href="https://github.com/dvphnc" target="_blank" rel="noopener" class="project-link" title="GitHub">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+              </a>
+            </div>
+          </div>
+          <h3 class="project-title">SyberVault Notes System</h3>
+          <p class="project-desc">A personal cybersecurity knowledge base built with vanilla HTML/CSS/JS. Organized notes on OWASP Top 10, encryption, cloud security, and penetration testing tools.</p>
+          <div class="project-stack"><span class="pill">HTML</span><span class="pill">CSS</span><span class="pill">JavaScript</span></div>
+        </div>
+
+        <div class="project-card reveal rd2 tilt-card">
+          <div class="project-header">
+            <span class="project-tag">Full Stack</span>
+            <div class="project-links">
+              <a href="https://github.com/dvphnc" target="_blank" rel="noopener" class="project-link" title="GitHub">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+              </a>
+            </div>
+          </div>
+          <h3 class="project-title">Laravel Web Application</h3>
+          <p class="project-desc">A full-stack web application built with Laravel and MySQL featuring user authentication, CRUD operations, Blade templating, and RESTful API endpoints.</p>
+          <div class="project-stack"><span class="pill">Laravel</span><span class="pill">PHP</span><span class="pill">MySQL</span><span class="pill">Blade</span></div>
+        </div>
+
+        <div class="project-card reveal rd3 tilt-card">
+          <div class="project-header">
+            <span class="project-tag">Security</span>
+            <div class="project-links">
+              <a href="https://tryhackme.com/p/dvphnc" target="_blank" rel="noopener" class="project-link" title="TryHackMe">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M10.705 0C7.54 0 4.902 2.235 4.313 5.233a4.393 4.393 0 0 0-.673-.051C1.636 5.182 0 6.818 0 8.822s1.636 3.64 3.64 3.64h7.065V0zm1.59 0v12.462h7.065c2.004 0 3.64-1.636 3.64-3.64S22.364 5.182 20.36 5.182c-.228 0-.452.018-.673.051C19.098 2.235 16.46 0 13.295 0zM3.64 13.538C1.636 13.538 0 15.174 0 17.178s1.636 3.64 3.64 3.64h7.065v-7.28zm9.655 0v7.28h7.065c2.004 0 3.64-1.636 3.64-3.64s-1.636-3.64-3.64-3.64z"/></svg>
+              </a>
+            </div>
+          </div>
+          <h3 class="project-title">CTF Writeups & Pentesting</h3>
+          <p class="project-desc">Completed rooms on TryHackMe and HackTheBox including Pickle Rick, Mr Robot CTF, and Basic Pentesting. Skills: enumeration, privilege escalation, web exploitation.</p>
+          <div class="project-stack"><span class="pill">Nmap</span><span class="pill">Burp Suite</span><span class="pill">Gobuster</span><span class="pill">Linux</span></div>
+        </div>
+
+        <div class="project-card reveal rd4 tilt-card">
+          <div class="project-header">
+            <span class="project-tag">Cloud</span>
+            <div class="project-links">
+              <a href="https://github.com/dvphnc" target="_blank" rel="noopener" class="project-link" title="GitHub">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+              </a>
+            </div>
+          </div>
+          <h3 class="project-title">Oracle Cloud Portfolio</h3>
+          <p class="project-desc">Hands-on labs and deployments using Oracle Cloud Infrastructure — AI services, autonomous database, and cloud-native architecture patterns for certified OCI practitioner work.</p>
+          <div class="project-stack"><span class="pill">Oracle Cloud</span><span class="pill">OCI</span><span class="pill">AI/ML</span></div>
+        </div>
+
+        <div class="project-card reveal rd5 tilt-card">
+          <div class="project-header">
+            <span class="project-tag">Frontend</span>
+            <div class="project-links">
+              <a href="https://github.com/dvphnc/dvphnc.github.io" target="_blank" rel="noopener" class="project-link" title="GitHub">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+              </a>
+              <a href="https://dvphnc.github.io" target="_blank" rel="noopener" class="project-link" title="Live">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
+          <h3 class="project-title">This Portfolio</h3>
+          <p class="project-desc">A hand-crafted portfolio with a Tetris boot screen, 3D skill globe, animated pixel logo, GSAP scroll animations, and a dark/light navy theme. Pure HTML, CSS, and JS — no frameworks.</p>
+          <div class="project-stack"><span class="pill">HTML</span><span class="pill">CSS</span><span class="pill">GSAP</span><span class="pill">Three.js</span></div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -889,56 +972,83 @@
 
   <div class="divider"></div>
 
-  <!-- TERMINAL -->
-  <section id="terminal-section">
-    <div class="section-inner">
-      <p class="sec-label reveal">Live Recon</p>
-      <h2 class="sec-title reveal rd1">Terminal</h2>
-      <div class="terminal-window reveal rd2">
-        <div class="terminal-titlebar">
-          <div class="tbar-dot r"></div><div class="tbar-dot a"></div><div class="tbar-dot g"></div>
-          <span class="tbar-title">dvphnc@sybervault — zsh</span>
-        </div>
-        <div class="terminal-body" id="termBody"></div>
-        <div class="terminal-input-row">
-          <span class="t-input-prompt">dvphnc@sybervault:~$</span>
-          <input class="t-input" id="termInput" type="text" placeholder="type a command..." autocomplete="off" spellcheck="false"/>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
   <!-- CONTACT -->
   <section id="contact">
     <div class="section-inner">
-      <p class="sec-label reveal">Contact</p>
+      <p class="sec-label reveal">Get In Touch</p>
       <h2 class="sec-title reveal rd1">Let's Connect</h2>
       <div class="contact-logo-wrap reveal rd1"><div id="logo-contact" class="px-logo"></div><span class="contact-logo-sub">Joana Daphne Sy</span></div>
-      <div class="reveal rd2">
-        <div class="email-block" onclick="copyEmail()">
-          <p class="email-label">Email — click to copy</p>
-          <p class="email-addr"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="28424c5b474e4e4b44684f45494144064b4745">[email&#160;protected]</a></p>
+
+      <div class="contact-layout reveal rd2">
+
+        <!-- Message form -->
+        <div class="contact-form-wrap">
+          <div class="contact-form-card" id="contactCard">
+            <div class="form-header">
+              <div class="form-dots"><span></span><span></span><span></span></div>
+              <span class="form-title">New Message</span>
+              <span class="form-to">To: <strong>jdsoffcl@gmail.com</strong></span>
+            </div>
+            <div class="form-body" id="formBody">
+              <div class="form-field">
+                <label class="form-label">Your Name</label>
+                <input type="text" id="msgName" class="form-input" placeholder="e.g. Jane Smith" autocomplete="off"/>
+              </div>
+              <div class="form-field">
+                <label class="form-label">Your Email</label>
+                <input type="email" id="msgEmail" class="form-input" placeholder="jane@company.com" autocomplete="off"/>
+              </div>
+              <div class="form-field">
+                <label class="form-label">Subject</label>
+                <input type="text" id="msgSubject" class="form-input" placeholder="Job opportunity, collaboration..." autocomplete="off"/>
+              </div>
+              <div class="form-field">
+                <label class="form-label">Message</label>
+                <textarea id="msgBody" class="form-input form-textarea" placeholder="Hi Joana, I came across your portfolio and..."></textarea>
+              </div>
+              <div class="form-actions">
+                <button class="btn-primary form-send" id="formSend" onclick="sendMessage()">
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                  Send Message
+                </button>
+                <button class="btn-ghost form-clear" onclick="clearForm()">Clear</button>
+              </div>
+            </div>
+            <!-- Sent state -->
+            <div class="form-sent" id="formSent" style="display:none">
+              <div class="sent-icon">
+                <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+              <h3 class="sent-title">Message Sent!</h3>
+              <p class="sent-sub">Thanks, <span id="sentName"></span>. I'll get back to you soon.</p>
+              <button class="btn-ghost" onclick="resetForm()" style="margin-top:16px">Send Another</button>
+            </div>
+          </div>
         </div>
-        <div class="contact-links">
-          <a href="https://github.com/dvphnc" target="_blank" class="contact-link card reveal-scale tilt-card rd1">
-            <div class="contact-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg></div>
-            <div><p class="contact-link-name">GitHub</p><p class="contact-link-handle">@dvphnc</p></div>
-          </a>
-          <a href="https://linkedin.com/in/dvphnc" target="_blank" class="contact-link card reveal-scale tilt-card rd2">
-            <div class="contact-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
-            <div><p class="contact-link-name">LinkedIn</p><p class="contact-link-handle">@dvphnc</p></div>
-          </a>
-          <a href="https://tryhackme.com/p/dvphnc" target="_blank" class="contact-link card reveal-scale tilt-card rd3">
-            <div class="contact-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M10.705 0C7.54 0 4.902 2.235 4.313 5.233a4.393 4.393 0 0 0-.673-.051C1.636 5.182 0 6.818 0 8.822s1.636 3.64 3.64 3.64h7.065V0zm1.59 0v12.462h7.065c2.004 0 3.64-1.636 3.64-3.64S22.364 5.182 20.36 5.182c-.228 0-.452.018-.673.051C19.098 2.235 16.46 0 13.295 0zM3.64 13.538C1.636 13.538 0 15.174 0 17.178s1.636 3.64 3.64 3.64h7.065v-7.28zm9.655 0v7.28h7.065c2.004 0 3.64-1.636 3.64-3.64s-1.636-3.64-3.64-3.64z"/></svg></div>
-            <div><p class="contact-link-name">TryHackMe</p><p class="contact-link-handle">@dvphnc</p></div>
-          </a>
-          <a href="https://app.hackthebox.com/profile/dvphnc" target="_blank" class="contact-link card reveal-scale tilt-card rd4">
-            <div class="contact-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M11.996 0L2 5.836V17.51L12 23.346l10-5.836V5.836zm0 1.734l8.275 4.83v2.352l-8.275 4.503-8.27-4.503V6.564zm-8.27 8.56l8.27 4.498 8.275-4.498v2.55l-8.276 4.83-8.27-4.83z"/></svg></div>
-            <div><p class="contact-link-name">HackTheBox</p><p class="contact-link-handle">@dvphnc</p></div>
-          </a>
+
+        <!-- Social links -->
+        <div class="contact-side">
+          <p class="contact-side-label">Or find me on</p>
+          <div class="contact-links">
+            <a href="https://github.com/dvphnc" target="_blank" class="contact-link card reveal-scale tilt-card rd1">
+              <div class="contact-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg></div>
+              <div><p class="contact-link-name">GitHub</p><p class="contact-link-handle">@dvphnc</p></div>
+            </a>
+            <a href="https://linkedin.com/in/dvphnc" target="_blank" class="contact-link card reveal-scale tilt-card rd2">
+              <div class="contact-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
+              <div><p class="contact-link-name">LinkedIn</p><p class="contact-link-handle">@dvphnc</p></div>
+            </a>
+            <a href="https://tryhackme.com/p/dvphnc" target="_blank" class="contact-link card reveal-scale tilt-card rd3">
+              <div class="contact-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M10.705 0C7.54 0 4.902 2.235 4.313 5.233a4.393 4.393 0 0 0-.673-.051C1.636 5.182 0 6.818 0 8.822s1.636 3.64 3.64 3.64h7.065V0zm1.59 0v12.462h7.065c2.004 0 3.64-1.636 3.64-3.64S22.364 5.182 20.36 5.182c-.228 0-.452.018-.673.051C19.098 2.235 16.46 0 13.295 0zM3.64 13.538C1.636 13.538 0 15.174 0 17.178s1.636 3.64 3.64 3.64h7.065v-7.28zm9.655 0v7.28h7.065c2.004 0 3.64-1.636 3.64-3.64s-1.636-3.64-3.64-3.64z"/></svg></div>
+              <div><p class="contact-link-name">TryHackMe</p><p class="contact-link-handle">@dvphnc</p></div>
+            </a>
+            <a href="https://app.hackthebox.com/profile/dvphnc" target="_blank" class="contact-link card reveal-scale tilt-card rd4">
+              <div class="contact-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M11.996 0L2 5.836V17.51L12 23.346l10-5.836V5.836zm0 1.734l8.275 4.83v2.352l-8.275 4.503-8.27-4.503V6.564zm-8.27 8.56l8.27 4.498 8.275-4.498v2.55l-8.276 4.83-8.27-4.83z"/></svg></div>
+              <div><p class="contact-link-name">HackTheBox</p><p class="contact-link-handle">@dvphnc</p></div>
+            </a>
+          </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -956,90 +1066,7 @@
     window.addEventListener('scroll',()=>{const h=document.documentElement;sp.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'});
 
     // Reveal
-    // ── Scroll animation engine ──
-    (function(){
-      var revealClasses=['reveal','reveal-left','reveal-right','reveal-scale','reveal-flip'];
-      var elements=[];
-
-      // Collect all animatable elements
-      revealClasses.forEach(function(cls){
-        document.querySelectorAll('.'+cls).forEach(function(el){
-          elements.push(el);
-        });
-      });
-
-      // IntersectionObserver for triggering — once element is 12% in view, play
-      var obs=new IntersectionObserver(function(entries){
-        entries.forEach(function(entry){
-          if(entry.isIntersecting){
-            entry.target.classList.add('visible');
-            // Don't unobserve — allow re-trigger logic below if needed
-          }
-        });
-      },{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
-
-      elements.forEach(function(el){ obs.observe(el); });
-
-      // ── Tilt cards on mouse move ──
-      document.querySelectorAll('.tilt-card').forEach(function(card){
-        card.addEventListener('mousemove',function(e){
-          var r=card.getBoundingClientRect();
-          var nx=(e.clientX-r.left)/r.width-0.5;   // -0.5 to 0.5
-          var ny=(e.clientY-r.top)/r.height-0.5;
-          var tiltX=ny*-10, tiltY=nx*12;
-          card.style.transform=
-            'perspective(700px) rotateX('+tiltX+'deg) rotateY('+tiltY+'deg) translateY(-4px) scale(1.02)';
-          card.style.boxShadow=
-            '0 24px 48px rgba(0,0,0,0.25), '+
-            (nx*16)+'px '+(ny*16)+'px 32px rgba(77,159,255,0.18)';
-        });
-        card.addEventListener('mouseleave',function(){
-          card.style.transform='';
-          card.style.boxShadow='';
-        });
-      });
-
-      // ── Parallax on background orbs ──
-      var orbs=[
-        {el:document.querySelector('.film-orb-1'),speed:0.06,dir:1},
-        {el:document.querySelector('.film-orb-2'),speed:0.04,dir:-1},
-        {el:document.querySelector('.film-orb-3'),speed:0.05,dir:1},
-        {el:document.querySelector('.film-orb-4'),speed:0.03,dir:-1},
-      ];
-
-      // ── Section active nav highlight ──
-      var navLinks=document.querySelectorAll('.nav-links a');
-      var sectionIds=['certifications','stacks','vault','sybervault','terminal-section','contact'];
-      var secObs=new IntersectionObserver(function(entries){
-        entries.forEach(function(e){
-          if(e.isIntersecting){
-            var id=e.target.id;
-            navLinks.forEach(function(a){
-              var match=a.getAttribute('href')==='#'+id;
-              a.style.opacity=match?'1':'';
-              a.style.fontWeight=match?'700':'';
-            });
-          }
-        });
-      },{threshold:0.35});
-      sectionIds.forEach(function(id){
-        var s=document.getElementById(id);
-        if(s)secObs.observe(s);
-      });
-
-      // ── rAF scroll loop for parallax ──
-      var scrollY=0,targetScrollY=0,rafRunning=false;
-      function onScroll(){targetScrollY=window.scrollY; if(!rafRunning){rafRunning=true;rafLoop();}}
-      function rafLoop(){
-        scrollY+=(targetScrollY-scrollY)*0.08; // lerp — smooth lag
-        orbs.forEach(function(o){
-          if(o.el) o.el.style.transform='translateY('+(scrollY*o.speed*o.dir)+'px)';
-        });
-        if(Math.abs(scrollY-targetScrollY)>0.5){requestAnimationFrame(rafLoop);}
-        else{rafRunning=false;}
-      }
-      window.addEventListener('scroll',onScroll,{passive:true});
-    })();
+    // placeholder — GSAP handles this below
 
     // Nav shrink
     const navEl=document.getElementById('navbar');
@@ -1279,40 +1306,36 @@
       run().catch(()=>{gt.nodeValue="Hi, I'm";nt.nodeValue="Joana Daphne Sy"});
     })();
 
-    // Terminal
-    const termBody=document.getElementById('termBody'),termInput=document.getElementById('termInput');
-    function tPrint(html,cls='t-output'){const l=document.createElement('div');l.className='t-line';const s=document.createElement('span');s.className=cls;s.innerHTML=html;l.appendChild(s);termBody.appendChild(l);termBody.scrollTop=termBody.scrollHeight}
-    function tCmd(cmd){const l=document.createElement('div');l.className='t-line';l.innerHTML=`<span class="t-prompt">dvphnc@sybervault</span><span class="t-at">:</span><span class="t-host">~</span><span class="t-prompt">$</span>&nbsp;<span class="t-cmd">${cmd}</span>`;termBody.appendChild(l);termBody.scrollTop=termBody.scrollHeight}
-    const cmds={
-      help:()=>{tPrint('Available commands:','t-output blue');['whoami','nmap','skills','certs','ctf','cat flag.txt','clear'].forEach(c=>tPrint('  '+c))},
-      whoami:()=>{tPrint('joana-daphne-sy','t-output green');tPrint('uid=1337(dvphnc) gid=1337(sybervault) groups=1337(sybervault),0(oracle),42(ctf)')},
-      nmap:()=>{
-        tPrint('Starting Nmap 7.94 — scanning dvphnc.github.io...','t-output dim');
-        setTimeout(()=>tPrint('PORT     STATE  SERVICE'),400);
-        setTimeout(()=>tPrint('80/tcp   open   http — GitHub Pages'),700);
-        setTimeout(()=>tPrint('443/tcp  open   https — TLS 1.3'),900);
-        setTimeout(()=>{tPrint('');tPrint('Host results:','t-output blue')},1100);
-        setTimeout(()=>tPrint('| oracle-certs: OCI AI · OCI Foundations · OCI Data [2024]'),1300);
-        setTimeout(()=>tPrint('| ctf-rooms: TryHackMe (3) · HackTheBox (3)'),1500);
-        setTimeout(()=>tPrint('| tech-stack: Laravel · React · PHP · MySQL'),1700);
-        setTimeout(()=>{tPrint('');tPrint('Nmap done. 1 host up.','t-output green')},1900);
-      },
-      skills:()=>{tPrint('Proficiencies:','t-output blue');[['Web Development','██████████░░ 82%'],['Laravel / PHP','█████████░░░ 75%'],['OCI Cloud','████████░░░░ 70%'],['Cybersecurity','████████░░░░ 65%'],['Virtual Assistance','███████████░ 88%']].forEach(([k,v])=>tPrint(`  [${v}]  ${k}`))},
-      certs:()=>{tPrint('Oracle Certifications:','t-output blue');['OCI AI Foundations Associate [2024]','OCI Foundations Associate [2024]','OCI Data Foundations Associate [2024]'].forEach(c=>tPrint('  ✓ '+c,'t-output green'))},
-      ctf:()=>{tPrint('CTF Stats:','t-output blue');tPrint('  TryHackMe: 3 rooms · Pickle Rick, Basic Pentesting, Mr Robot');tPrint('  HackTheBox: 3 machines · Meow, Fawn, Dancing','t-output yellow')},
-      'cat flag.txt':()=>{tPrint('Permission denied.','t-output red');setTimeout(()=>tPrint('Hint: check the page source. 👀','t-output yellow'),600)},
-      clear:()=>{termBody.innerHTML=''},
-    };
-    setTimeout(()=>tPrint('SyberVault Terminal — type <span style="color:#c08040">help</span> to begin','t-output dim'),200);
-    termInput.addEventListener('keydown',e=>{
-      if(e.key!=='Enter')return;
-      const cmd=termInput.value.trim().toLowerCase();termInput.value='';
-      if(!cmd)return;tCmd(cmd);
-      if(cmds[cmd])cmds[cmd]();
-      else{tPrint(`zsh: command not found: ${cmd}`,'t-output red');tPrint('Type <span style="color:#c08040">help</span> for commands.','t-output dim')}
-    });
+    // ── Contact form ──
+    function sendMessage(){
+      var name=document.getElementById('msgName').value.trim();
+      var email=document.getElementById('msgEmail').value.trim();
+      var subject=document.getElementById('msgSubject').value.trim();
+      var body=document.getElementById('msgBody').value.trim();
+      if(!name||!email||!body){ showToast('Please fill in name, email and message.'); return; }
+      var emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if(!emailRe.test(email)){ showToast('Please enter a valid email.'); return; }
+      var mailtoUrl='mailto:jdsoffcl@gmail.com'
+        +'?subject='+encodeURIComponent(subject||'Message from '+name)
+        +'&body='+encodeURIComponent('Hi Joana,\n\n'+body+'\n\n— '+name+'\n'+email);
+      window.location.href=mailtoUrl;
+      setTimeout(function(){
+        var fb=document.getElementById('formBody');
+        var fs=document.getElementById('formSent');
+        if(fb&&fs){ fb.style.display='none'; fs.style.display='flex'; document.getElementById('sentName').textContent=name; }
+      },400);
+    }
+    function clearForm(){
+      ['msgName','msgEmail','msgSubject','msgBody'].forEach(function(id){ var el=document.getElementById(id); if(el)el.value=''; });
+      var el=document.getElementById('msgName'); if(el)el.focus();
+    }
+    function resetForm(){
+      var fb=document.getElementById('formBody'); if(fb)fb.style.display='flex';
+      var fs=document.getElementById('formSent'); if(fs)fs.style.display='none';
+      clearForm();
+    }
 
-    // ── Konami + triple-click flag
+        // ── Konami + triple-click flag
     let ks=[];const K=[38,38,40,40,37,39,37,39,66,65];
     document.addEventListener('keydown',e=>{
       ks.push(e.keyCode);ks=ks.slice(-10);
@@ -1435,6 +1458,223 @@
     
     animate();
     window.addEventListener('resize',function(){var nW=container.offsetWidth,nH=container.offsetHeight;renderer.setSize(nW,nH);camera.aspect=nW/nH;camera.updateProjectionMatrix();});
+  })();
+  </script>
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+  (function(){
+    gsap.registerPlugin(ScrollTrigger);
+
+    var ST = function(trigger, extra) {
+      return Object.assign({
+        trigger: trigger,
+        start: 'top 95%',
+        toggleActions: 'play none none none',
+        once: true
+      }, extra||{});
+    };
+
+    // Set initial hidden state via GSAP (not CSS) so fallback is visible if GSAP fails
+    var revealSels = [
+      '.reveal', '.reveal-left', '.reveal-right', '.reveal-scale', '.reveal-flip'
+    ];
+    revealSels.forEach(function(sel){
+      var els = gsap.utils.toArray(sel);
+      if(els.length) gsap.set(els, {opacity:0});
+    });
+
+    // ── 1. Section labels — slide up + fade ──
+    gsap.utils.toArray('.sec-label').forEach(function(el){
+      gsap.from(el,{
+        opacity:0, y:20, duration:0.6, ease:'power2.out',
+        scrollTrigger: ST(el)
+      });
+    });
+
+    // ── 2. Section titles — clip reveal (text wipe) ──
+    gsap.utils.toArray('.sec-title').forEach(function(el){
+      gsap.from(el,{
+        opacity:0, y:40, skewY:1.5, duration:0.9, ease:'expo.out',
+        scrollTrigger: ST(el)
+      });
+    });
+
+    // ── 3. Reveal elements ──
+    function getDelay(el){ var d=0; for(var i=1;i<=6;i++) if(el.classList.contains('rd'+i)) d=(i-1)*0.1; return d; }
+
+    gsap.utils.toArray('.reveal').forEach(function(el){
+      gsap.fromTo(el,{opacity:0,y:50},{
+        opacity:1,y:0,duration:0.9,delay:getDelay(el),ease:'expo.out',
+        scrollTrigger:ST(el)
+      });
+    });
+    gsap.utils.toArray('.reveal-left').forEach(function(el){
+      gsap.fromTo(el,{opacity:0,x:-60,y:20},{
+        opacity:1,x:0,y:0,duration:0.9,delay:getDelay(el),ease:'expo.out',
+        scrollTrigger:ST(el)
+      });
+    });
+    gsap.utils.toArray('.reveal-right').forEach(function(el){
+      gsap.fromTo(el,{opacity:0,x:60,y:20},{
+        opacity:1,x:0,y:0,duration:0.9,delay:getDelay(el),ease:'expo.out',
+        scrollTrigger:ST(el)
+      });
+    });
+    gsap.utils.toArray('.reveal-scale').forEach(function(el){
+      gsap.fromTo(el,{opacity:0,scale:0.88,y:30},{
+        opacity:1,scale:1,y:0,duration:0.9,delay:getDelay(el),ease:'expo.out',
+        scrollTrigger:ST(el)
+      });
+    });
+    gsap.utils.toArray('.reveal-flip').forEach(function(el){
+      gsap.fromTo(el,{opacity:0,rotationX:18,y:30},{
+        opacity:1,rotationX:0,y:0,duration:1.0,delay:getDelay(el),
+        ease:'expo.out',transformOrigin:'top center',
+        scrollTrigger:ST(el)
+      });
+    });
+
+    // ── 4. Cert cards — stagger as a batch ──
+    var certGrids = gsap.utils.toArray('.cert-grid');
+    certGrids.forEach(function(grid){
+      var cards = grid.querySelectorAll('.cert-card');
+      gsap.from(cards,{
+        opacity:0, y:50, scale:0.94, rotationX:12,
+        duration:0.9, stagger:0.12, ease:'expo.out',
+        transformOrigin:'top center',
+        scrollTrigger: ST(grid, {start:'top 85%'})
+      });
+    });
+
+    // ── 5. Notes/CTF cards — wave stagger ──
+    var vaultGrid = document.querySelector('#vault .notes-grid, #vault .card-grid, #vault');
+    var ctfCards = gsap.utils.toArray('#vault .notes-card, #vault .card');
+    if(ctfCards.length){
+      gsap.from(ctfCards,{
+        opacity:0, y:60, duration:0.85, stagger:{each:0.13,from:'start'},
+        ease:'expo.out',
+        scrollTrigger: ST(ctfCards[0], {start:'top 88%'})
+      });
+    }
+
+    // ── 6. Contact links — fan in ──
+    var contactLinks = gsap.utils.toArray('.contact-links .contact-link');
+    if(contactLinks.length){
+      gsap.from(contactLinks,{
+        opacity:0, y:40, scale:0.92,
+        duration:0.8, stagger:0.1, ease:'back.out(1.4)',
+        scrollTrigger: ST(contactLinks[0], {start:'top 90%'})
+      });
+    }
+
+    // ── 7. Hero section — cinematic entrance ──
+    document.addEventListener('bootDone',function(){
+      var heroEls = ['.hero-tag','.hero-name','.hero-handle','.hero-desc','.hero-badges','.hero-cta'];
+      // Ensure elements exist before animating
+      var tl = gsap.timeline({delay:0.1});
+      heroEls.forEach(function(sel, i){
+        if(document.querySelector(sel)){
+          tl.from(sel, {opacity:0, y:20, duration:0.6, ease:'power2.out'}, i===0?0:'-=0.3');
+        }
+      });
+    });
+    // Fallback if boot already done
+    setTimeout(function(){
+      if(document.querySelector('.hero-tag') &&
+         getComputedStyle(document.querySelector('.hero-tag')).opacity==='0'){
+        gsap.set(['.hero-tag','.hero-name','.hero-handle','.hero-desc','.hero-badges','.hero-cta'],{opacity:1,y:0,clearProps:'all'});
+      }
+    },5000);
+
+    // ── 8. Parallax — orbs drift as you scroll ──
+    ['.film-orb-1','.film-orb-2','.film-orb-3','.film-orb-4'].forEach(function(sel,i){
+      var el=document.querySelector(sel);
+      if(!el)return;
+      var speeds=[80,-60,70,-50];
+      gsap.to(el,{
+        y: speeds[i],
+        ease:'none',
+        scrollTrigger:{
+          trigger:'body', start:'top top', end:'bottom bottom',
+          scrub: 1.5
+        }
+      });
+    });
+
+    // ── 9. Scroll progress bar — GSAP scrub ──
+    gsap.to('#scroll-progress',{
+      scaleX:1, ease:'none',
+      scrollTrigger:{trigger:'body',start:'top top',end:'bottom bottom',scrub:true}
+    });
+    gsap.set('#scroll-progress',{scaleX:0, transformOrigin:'left center'});
+
+    // ── 10. SyberVault heading — split char animation ──
+    var svHeading = document.querySelector('.sv-heading');
+    if(svHeading){
+      gsap.from(svHeading,{
+        opacity:0, y:50, scale:0.95, duration:1.2, ease:'expo.out',
+        scrollTrigger: ST(svHeading, {start:'top 80%'})
+      });
+    }
+
+    // ── 11. Dividers — wipe in ──
+    gsap.utils.toArray('.divider').forEach(function(el){
+      gsap.from(el,{
+        scaleX:0, transformOrigin:'left center', duration:1.0, ease:'expo.out',
+        scrollTrigger: ST(el, {start:'top 95%'})
+      });
+    });
+
+    // ── 12. Globe — rotate in on scroll ──
+    var globeSection = document.querySelector('#globe-section');
+    if(globeSection){
+      gsap.from(globeSection,{
+        opacity:0, scale:0.8, duration:1.2, ease:'expo.out',
+        scrollTrigger: ST(globeSection, {start:'top 80%'})
+      });
+    }
+
+    // ── 13. Card magnetic hover effect ──
+    gsap.utils.toArray('.tilt-card, .cert-card, .notes-card').forEach(function(card){
+      card.addEventListener('mousemove',function(e){
+        var r=card.getBoundingClientRect();
+        var nx=(e.clientX-r.left)/r.width-0.5;
+        var ny=(e.clientY-r.top)/r.height-0.5;
+        gsap.to(card,{
+          rotationY: nx*14, rotationX: ny*-10,
+          transformPerspective:700, translateY:-5, scale:1.02,
+          duration:0.4, ease:'power2.out', overwrite:'auto'
+        });
+      });
+      card.addEventListener('mouseleave',function(){
+        gsap.to(card,{
+          rotationY:0, rotationX:0, translateY:0, scale:1,
+          duration:0.6, ease:'elastic.out(1,0.5)', overwrite:'auto'
+        });
+      });
+    });
+
+    // ── 14. Nav active section highlight ──
+    var navLinks = document.querySelectorAll('.nav-links a');
+    ['certifications','stacks','projects','sybervault','contact'].forEach(function(id){
+      var sec = document.getElementById(id);
+      if(!sec) return;
+      ScrollTrigger.create({
+        trigger:sec, start:'top 50%', end:'bottom 50%',
+        onEnter:function(){ highlight(id); },
+        onEnterBack:function(){ highlight(id); }
+      });
+    });
+    function highlight(id){
+      navLinks.forEach(function(a){
+        var match = a.getAttribute('href')==='#'+id;
+        gsap.to(a,{opacity:match?1:0.5, fontWeight:match?700:400, duration:0.3});
+      });
+    }
+
   })();
   </script>
 </body>
