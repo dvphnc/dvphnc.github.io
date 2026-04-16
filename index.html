@@ -383,9 +383,21 @@
     .project-meta { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:-4px; }
     .project-role { font-family:var(--mono); font-size:11px; color:var(--accent); opacity:0.8; }
     .project-date { font-family:var(--mono); font-size:11px; color:var(--text4); }
+    .project-footer { display:flex; align-items:center; gap:8px; flex-wrap:wrap; padding-top:10px; border-top:1px solid var(--glass-border-subtle); margin-top:4px; }
+    .project-btn-live { display:inline-flex; align-items:center; gap:6px; padding:7px 14px; border-radius:8px; background:var(--accent); color:#fff; font-size:12px; font-weight:600; font-family:var(--mono); text-decoration:none; transition:all 0.2s; letter-spacing:0.02em; }
+    .project-btn-live:hover { background:#3a8fff; transform:translateY(-1px); box-shadow:0 6px 20px rgba(77,159,255,0.4); }
+    .project-btn-gh { display:inline-flex; align-items:center; gap:6px; padding:7px 14px; border-radius:8px; background:rgba(255,255,255,0.07); border:1px solid var(--glass-border); color:var(--text2); font-size:12px; font-weight:600; font-family:var(--mono); text-decoration:none; transition:all 0.2s; }
+    .project-btn-gh:hover { background:rgba(255,255,255,0.13); border-color:rgba(255,255,255,0.25); color:var(--text); }
+    .project-note { font-family:var(--mono); font-size:11px; color:var(--text4); font-style:italic; }
+    html:not(.dark) .project-btn-live { background:#003087; }
+    html:not(.dark) .project-btn-live:hover { background:#0044cc; box-shadow:0 6px 20px rgba(0,48,135,0.3); }
+    html:not(.dark) .project-btn-gh { background:rgba(0,48,135,0.06); border-color:rgba(0,48,135,0.15); color:#003087; }
+    html:not(.dark) .project-btn-gh:hover { background:rgba(0,48,135,0.12); border-color:rgba(0,48,135,0.25); }
     html:not(.dark) .project-card { background:rgba(255,255,255,0.9); border-color:rgba(0,48,135,0.1); }
     html:not(.dark) .project-card:hover { border-color:rgba(0,68,204,0.3); }
     html:not(.dark) .project-tag { color:#003087; background:rgba(0,48,135,0.07); border-color:rgba(0,48,135,0.18); }
+    /* Contact form and side always visible by default, GSAP animates them in */
+    .contact-form-wrap, .contact-side, .contact-logo-wrap { opacity:1; }
     /* ── Contact form ── */
     .contact-layout { display:grid; grid-template-columns:1fr 300px; gap:36px; align-items:start; margin-top:8px; }
     .contact-form-card { background:var(--glass); border:1px solid var(--glass-border); border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--glass-shadow-lg); }
@@ -822,7 +834,7 @@
     <div class="section-inner">
       <p class="sec-label reveal">Tech Stacks</p>
       <h2 class="sec-title reveal rd1">My Skills</h2>
-      <div id="globe-section" class="reveal rd2">
+      <div id="globe-section">
         <div id="globe-container">
           <canvas id="globe-canvas"></canvas>
           <div id="globe-icons"></div>
@@ -849,6 +861,7 @@
           <div class="project-meta"><span class="project-role">Web Developer &amp; Owner</span><span class="project-date">2025 – Present</span></div>
           <p class="project-desc">Architected a live travel blog at travia.lovestoblog.com using Laravel, PHP, HTML5, and CSS. Handled all backend logic and deployment on a third-party domain. Curates digital content and manages technical maintenance.</p>
           <div class="project-stack"><span class="pill">Laravel</span><span class="pill">PHP</span><span class="pill">HTML5</span><span class="pill">CSS</span></div>
+          <div class="project-footer"><a href="https://travia.lovestoblog.com" target="_blank" rel="noopener" class="project-btn-live"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Visit Site</a><a href="https://github.com/dvphnc" target="_blank" rel="noopener" class="project-btn-gh"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg> Code</a></div>
         </div>
 
         <div class="project-card reveal rd2 tilt-card">
@@ -860,6 +873,7 @@
           <div class="project-meta"><span class="project-role">Project Manager</span><span class="project-date">Nov – Dec 2025</span></div>
           <p class="project-desc">Primary point of contact for team coordination on a Patient Management System. Managed communications and milestone tracking through the full SDLC. Optimized clinical workflows through systems analysis — directly applicable to executive productivity.</p>
           <div class="project-stack"><span class="pill">Agile/Scrum</span><span class="pill">SDLC</span><span class="pill">Systems Analysis</span><span class="pill">Documentation</span></div>
+          <div class="project-footer"><span class="project-note">Academic project — available on request</span></div>
         </div>
 
         <div class="project-card reveal rd3 tilt-card">
@@ -871,6 +885,7 @@
           <div class="project-meta"><span class="project-role">Scrum Master &amp; UI/UX Designer</span><span class="project-date">Apr – May 2025</span></div>
           <p class="project-desc">Led a cross-functional team to build an HR Management System using Agile/Scrum. Designed high-fidelity interfaces improving UX, streamlined recruitment tracking, and maintained strict confidentiality of project data following strict SOPs.</p>
           <div class="project-stack"><span class="pill">Figma</span><span class="pill">Canva</span><span class="pill">Agile</span><span class="pill">UI/UX</span><span class="pill">Scrum</span></div>
+          <div class="project-footer"><span class="project-note">Academic project — available on request</span></div>
         </div>
 
         <div class="project-card reveal rd4 tilt-card">
@@ -882,6 +897,7 @@
           <div class="project-meta"><span class="project-role">Solo Developer</span><span class="project-date">2025</span></div>
           <p class="project-desc">A personal cybersecurity knowledge base with organized notes on OWASP Top 10, encryption, cloud security, and penetration testing tools. Deployed alongside this portfolio on GitHub Pages.</p>
           <div class="project-stack"><span class="pill">HTML</span><span class="pill">CSS</span><span class="pill">JavaScript</span></div>
+          <div class="project-footer"><a href="https://dvphnc.github.io" target="_blank" rel="noopener" class="project-btn-live"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> View Live</a><a href="https://github.com/dvphnc" target="_blank" rel="noopener" class="project-btn-gh"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg> Code</a></div>
         </div>
 
         <div class="project-card reveal rd5 tilt-card">
@@ -893,6 +909,7 @@
           <div class="project-meta"><span class="project-role">Security Researcher</span><span class="project-date">2024 – Present</span></div>
           <p class="project-desc">Active on TryHackMe and HackTheBox. Completed Pickle Rick, Mr Robot CTF, and Basic Pentesting — covering web enumeration, privilege escalation, hash cracking with John the Ripper, and SUID exploitation.</p>
           <div class="project-stack"><span class="pill">Nmap</span><span class="pill">Burp Suite</span><span class="pill">Gobuster</span><span class="pill">Linux</span><span class="pill">John</span></div>
+          <div class="project-footer"><a href="https://tryhackme.com/p/dvphnc" target="_blank" rel="noopener" class="project-btn-live"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> TryHackMe Profile</a></div>
         </div>
 
         <div class="project-card reveal rd6 tilt-card">
@@ -904,6 +921,7 @@
           <div class="project-meta"><span class="project-role">Solo Developer</span><span class="project-date">2025</span></div>
           <p class="project-desc">Hand-crafted with a Tetris boot screen, 3D skill globe, animated pixel logo, GSAP scroll animations, and a Tommy Hilfiger navy theme. Pure HTML, CSS, and JS — no frameworks.</p>
           <div class="project-stack"><span class="pill">HTML</span><span class="pill">CSS</span><span class="pill">GSAP</span><span class="pill">Three.js</span></div>
+          <div class="project-footer"><a href="https://dvphnc.github.io" target="_blank" rel="noopener" class="project-btn-live"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> View Live</a><a href="https://github.com/dvphnc/dvphnc.github.io" target="_blank" rel="noopener" class="project-btn-gh"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg> Code</a></div>
         </div>
 
       </div>
@@ -974,9 +992,9 @@
     <div class="section-inner">
       <p class="sec-label reveal">Get In Touch</p>
       <h2 class="sec-title reveal rd1">Let's Connect</h2>
-      <div class="contact-logo-wrap reveal rd1"><div id="logo-contact" class="px-logo"></div><span class="contact-logo-sub">Joana Daphne Sy</span></div>
+      <div class="contact-logo-wrap"><div id="logo-contact" class="px-logo"></div><span class="contact-logo-sub">Joana Daphne Sy</span></div>
 
-      <div class="contact-layout reveal rd2">
+      <div class="contact-layout">
 
         <!-- Message form -->
         <div class="contact-form-wrap">
@@ -1395,8 +1413,14 @@
     if(!container||typeof THREE==='undefined')return;
     var canvas=document.getElementById('globe-canvas');
     var iconsEl=document.getElementById('globe-icons');
-    // Read dimensions after layout settles
-    function getWH(){ return {W:container.offsetWidth||520, H:container.offsetHeight||520}; }
+    // Wait for element to be in view and have dimensions
+    function getWH(){
+      var w=container.offsetWidth, h=container.offsetHeight;
+      // Fallback to CSS-defined size if layout hasn't happened yet
+      if(!w){ w=520; container.style.width='520px'; }
+      if(!h){ h=520; container.style.height='520px'; }
+      return {W:w, H:h};
+    }
     var dim=getWH(), W=dim.W, H=dim.H;
     var renderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:true});
     renderer.setSize(W,H);renderer.setPixelRatio(Math.min(devicePixelRatio,2));
@@ -1479,12 +1503,14 @@
     };
 
     // Set initial hidden state via GSAP (not CSS) so fallback is visible if GSAP fails
-    var revealSels = [
-      '.reveal', '.reveal-left', '.reveal-right', '.reveal-scale', '.reveal-flip'
-    ];
-    revealSels.forEach(function(sel){
-      var els = gsap.utils.toArray(sel);
-      if(els.length) gsap.set(els, {opacity:0});
+    // Set initial opacity via GSAP
+    gsap.utils.toArray('.reveal, .reveal-left, .reveal-right, .reveal-flip').forEach(function(el){
+      gsap.set(el, {opacity:0});
+    });
+    // reveal-scale: only hide if NOT already in viewport
+    gsap.utils.toArray('.reveal-scale').forEach(function(el){
+      var rect = el.getBoundingClientRect();
+      if(rect.top > window.innerHeight) gsap.set(el, {opacity:0});
     });
 
     // ── 1. Section labels — slide up + fade ──
@@ -1564,11 +1590,12 @@
     // ── 6. Contact links — fan in ──
     var contactLinks = gsap.utils.toArray('.contact-links .contact-link');
     if(contactLinks.length){
-      gsap.from(contactLinks,{
-        opacity:0, y:40, scale:0.92,
-        duration:0.8, stagger:0.1, ease:'back.out(1.4)',
-        scrollTrigger: ST(contactLinks[0], {start:'top 90%'})
-      });
+      gsap.fromTo(contactLinks,
+        {opacity:0, y:30, scale:0.94},
+        {opacity:1, y:0, scale:1, duration:0.7, stagger:0.08, ease:'back.out(1.2)',
+         scrollTrigger:{trigger:'#contact', start:'top 85%', once:true}
+        }
+      );
     }
 
     // ── 7. Hero section — cinematic entrance ──
@@ -1630,13 +1657,7 @@
     });
 
     // ── 12. Globe — rotate in on scroll ──
-    var globeSection = document.querySelector('#globe-section');
-    if(globeSection){
-      gsap.from(globeSection,{
-        opacity:0, scale:0.8, duration:1.2, ease:'expo.out',
-        scrollTrigger: ST(globeSection, {start:'top 80%'})
-      });
-    }
+    // Globe just shows naturally — no GSAP opacity control
 
     // ── 13. Card magnetic hover effect ──
     gsap.utils.toArray('.tilt-card, .cert-card, .notes-card').forEach(function(card){
@@ -1657,6 +1678,29 @@
         });
       });
     });
+
+    // ── Contact logo + form ──
+    var contactSec = document.getElementById('contact');
+    if(contactSec){
+      gsap.fromTo('.contact-logo-wrap',
+        {opacity:0, y:20},
+        {opacity:1, y:0, duration:0.8, ease:'expo.out',
+         scrollTrigger:{trigger:contactSec, start:'top 85%', once:true}
+        }
+      );
+      gsap.fromTo('.contact-form-wrap',
+        {opacity:0, x:-30},
+        {opacity:1, x:0, duration:0.9, ease:'expo.out',
+         scrollTrigger:{trigger:contactSec, start:'top 80%', once:true}
+        }
+      );
+      gsap.fromTo('.contact-side',
+        {opacity:0, x:30},
+        {opacity:1, x:0, duration:0.9, ease:'expo.out',
+         scrollTrigger:{trigger:contactSec, start:'top 80%', once:true}
+        }
+      );
+    }
 
     // ── 14. Nav active section highlight ──
     var navLinks = document.querySelectorAll('.nav-links a');
