@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap"/>
-  <link rel="stylesheet" href="assets/css/site.css?v=202611064"/>
+  <link rel="stylesheet" href="assets/css/site.css?v=202611065"/>
 </head>
 <body>
 
@@ -113,7 +113,7 @@
             <!-- Blue duotone: one copy per theme, cross-faded by .dark (filters defined below) -->
             <!-- fine-grain dithered portrait: 1-bit dither made at 2x the display size, scaled smoothly so the grain stays fine -->
             <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-grain-480.png"/><img class="duo duo-light" src="assets/img/headshot-grain-272.png" alt="Portrait of Joana Daphne Sy" width="240" height="240" fetchpriority="high"/></picture>
-            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-grain-480.png"/><img class="duo duo-dark" src="assets/img/headshot-grain-272.png" alt="" aria-hidden="true" width="240" height="240"/></picture>
+            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-grain-dark-480.png"/><img class="duo duo-dark" src="assets/img/headshot-grain-dark-272.png" alt="" aria-hidden="true" width="240" height="240"/></picture>
             <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
               <!-- light theme: shadows #002a78 → highlights #e8f1ff -->
               <filter id="duo-light" color-interpolation-filters="sRGB">
@@ -124,14 +124,14 @@
                   <feFuncB type="table" tableValues="0.47 0.75 1"/>
                 </feComponentTransfer>
               </filter>
-              <!-- dark theme: shadows #0b2a77 (a step lighter than the #001a5e page, so hair/blazer stay readable)
-                   → muted highlights #7f9fdc (no glowing box); edges are feathered into the page in CSS -->
+              <!-- dark theme: uses the background-free dither (headshot-grain-dark-*), mapped
+                   black → the page navy #001a5e (so the photo has no visible edge) and white → #eaf2ff grain -->
               <filter id="duo-dark" color-interpolation-filters="sRGB">
                 <feColorMatrix type="matrix" values=".2126 .7152 .0722 0 0  .2126 .7152 .0722 0 0  .2126 .7152 .0722 0 0  0 0 0 1 0"/>
                 <feComponentTransfer>
-                  <feFuncR type="table" tableValues="0.043 0.2 0.498"/>
-                  <feFuncG type="table" tableValues="0.165 0.34 0.624"/>
-                  <feFuncB type="table" tableValues="0.467 0.66 0.863"/>
+                  <feFuncR type="table" tableValues="0 0.918"/>
+                  <feFuncG type="table" tableValues="0.102 0.949"/>
+                  <feFuncB type="table" tableValues="0.369 1"/>
                 </feComponentTransfer>
               </filter>
             </svg>
@@ -427,10 +427,10 @@
     </div>
   </div>
 
-  <script src="assets/js/boot.js?v=202611064"></script>
-  <script src="assets/js/theme.js?v=202611064"></script>
-  <script src="assets/js/main.js?v=202611064"></script>
+  <script src="assets/js/boot.js?v=202611065"></script>
+  <script src="assets/js/theme.js?v=202611065"></script>
+  <script src="assets/js/main.js?v=202611065"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="assets/js/globe.js?v=202611064"></script>
+  <script src="assets/js/globe.js?v=202611065"></script>
 </body>
 </html>

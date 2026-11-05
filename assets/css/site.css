@@ -216,15 +216,15 @@ html.theme-switching *, html.theme-switching *::before, html.theme-switching *::
 /* blue duotone that follows the theme — two stacked copies, cross-faded */
 .portrait .duo { position: absolute; inset: 0; transition: opacity .5s; }
 .portrait .duo-light { filter: url(#duo-light) contrast(1.05); }
-.portrait .duo-dark { filter: url(#duo-dark) contrast(1.08); opacity: 0; }
+.portrait .duo-dark { filter: url(#duo-dark); opacity: 0; } /* no extra contrast: its black must equal the page navy exactly */
 html.dark .portrait .duo-light { opacity: 0; }
 html.dark .portrait .duo-dark { opacity: 1; }
-/* dark mode: the photo background can't match the navy page, so feather the edges into it
-   instead of showing a bright square — the portrait "settles" like it does in light mode */
+/* dark mode: background-free dither, white grain on the page navy — the backdrop IS the page,
+   so no frame or shadow; just a soft fade where the blazer is cut off at the bottom */
 html.dark .portrait {
-  background: transparent; box-shadow: none;
-  -webkit-mask-image: radial-gradient(ellipse 62% 66% at 50% 46%, #000 58%, transparent 100%);
-          mask-image: radial-gradient(ellipse 62% 66% at 50% 46%, #000 58%, transparent 100%);
+  background: transparent; box-shadow: none; border-radius: 0;
+  -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 80%, transparent 100%);
 }
 html.dark .portrait::after { display: none; }
 @media (max-width: 719px) { .portrait { max-width: 8.5rem; border-radius: 14px; } .portrait-ph span:first-child { font-size: 30px; } .hero-name { min-height: 0; } }
