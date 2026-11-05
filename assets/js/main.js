@@ -2,14 +2,7 @@
 (function () {
   var root = document.documentElement;
 
-  /* ── Theme (persisted; defaults to the OS preference) ── */
-  function setTheme(dark) {
-    root.classList.toggle('dark', dark);
-    try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) {}
-  }
-  document.querySelectorAll('[data-theme-toggle]').forEach(function (btn) {
-    btn.addEventListener('click', function () { setTheme(!root.classList.contains('dark')); });
-  });
+  /* Theme switching lives in theme.js (shared with the note pages). */
 
   /* ── Mobile overlay menu ── */
   var overlay = document.getElementById('overlay');

@@ -7,15 +7,19 @@ Live at **https://dvphnc.github.io**
 ## Structure
 
 ```
-index.html              the whole page (static HTML, no build step)
-assets/css/site.css     layout, type, light/dark palette
+index.html              the homepage (static HTML, no build step)
+assets/css/site.css     layout, type, light/dark palette (shared)
+assets/css/note.css     long-form styles for the note pages
+assets/js/theme.js      light / dark / system theme + circular reveal (shared)
 assets/js/boot.js       Tetris "dvphnc" boot screen
-assets/js/main.js       theme toggle, nav, multilingual name, easter eggs
+assets/js/main.js       nav, multilingual name, easter eggs
 assets/js/globe.js      Three.js skills globe
+assets/js/note.js       reading time, copy buttons, table of contents
 assets/img/             headshot (480px + 960px WebP)
 assets/logos/           issuer logos for certifications and events
-notes/                  SyberVault security notes (one HTML page each)
-covers/                 cover images used by the notes
+notes/                  12 SyberVault security notes (one HTML page each)
+covers/                 note cover images (*.webp is what the pages use)
+.claude/skills/dvphnc-design/   design-system skill so Claude keeps edits on-brand
 ```
 
 ## Editing

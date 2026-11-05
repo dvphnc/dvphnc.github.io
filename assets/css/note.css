@@ -1,0 +1,80 @@
+/* SyberVault note pages — long-form recipe from bryl-minimal (serif body, narrow measure),
+   on top of site.css tokens. */
+
+.read { max-width: 42rem; padding-top: 2.5rem; }
+@media (min-width: 1024px) { .read { padding-top: 4rem; } }
+
+.crumb a { text-decoration: none; }
+.crumb a:hover { color: var(--ink); }
+.read-title { font-size: clamp(1.7rem, 4.2vw, 2.3rem); font-weight: 600; letter-spacing: -.025em; line-height: 1.15; margin-top: .9rem; }
+.read-sub { font-family: 'Source Serif 4', Georgia, serif; font-style: italic; font-size: 1.15rem; color: var(--g500); margin-top: .5rem; }
+.read-meta { margin-top: 1rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--g200); }
+
+.read-cover { position: relative; margin: 2rem 0 0; border-radius: 16px; overflow: hidden; border: 1px solid var(--g200); aspect-ratio: 16 / 7; background: var(--g100); }
+.read-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); }
+.read-cover:hover img { transform: scale(1.04); }
+.read-cover::after { content: ''; position: absolute; inset: auto 0 0 0; height: 45%; pointer-events: none;
+  background-image: radial-gradient(var(--bg) 1.1px, transparent 1.4px); background-size: 6px 6px;
+  -webkit-mask-image: linear-gradient(to top, #000 5%, transparent); mask-image: linear-gradient(to top, #000 5%, transparent); }
+
+/* prose */
+.prose { margin-top: 2rem; font-family: 'Source Serif 4', Georgia, serif; font-size: 1.0625rem; line-height: 1.75; color: var(--ink); }
+.prose > * + * { margin-top: 1rem; }
+.prose h2 { font-family: var(--sans); font-size: 1.3rem; font-weight: 600; letter-spacing: -.02em; line-height: 1.3; margin-top: 2.75rem; padding-top: 1.25rem; border-top: 1px solid var(--g200); scroll-margin-top: 72px; }
+.prose h3 { font-family: var(--sans); font-size: 1.05rem; font-weight: 600; letter-spacing: -.01em; margin-top: 1.75rem; }
+.prose h2 + *, .prose h3 + * { margin-top: .6rem; }
+.prose strong { font-weight: 600; }
+.prose em { color: var(--g500); }
+.prose a { text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 25%, transparent); text-underline-offset: 3px; }
+.prose a:hover { text-decoration-color: currentColor; }
+.prose ul, .prose ol { padding-left: 1.4rem; }
+.prose li + li { margin-top: .35rem; }
+.prose li::marker { color: var(--g400); }
+.prose ol li::marker { font-family: var(--mono); font-size: .85em; }
+.prose code { font-family: var(--mono); font-size: .82em; padding: .1em .4em; border-radius: 5px; background: var(--g100); border: 1px solid var(--g200); color: var(--accent); }
+.prose pre { position: relative; padding: 1rem 1.1rem; border-radius: 12px; background: var(--g50); border: 1px solid var(--g200); overflow-x: auto; }
+.prose pre code { padding: 0; border: 0; background: none; color: var(--ink); font-size: 13px; line-height: 1.7; }
+.copy-btn { position: absolute; top: 8px; right: 8px; font-family: var(--mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--g400); background: var(--bg); border: 1px solid var(--g200); border-radius: 6px; padding: 3px 8px; cursor: pointer; transition: color .2s, border-color .2s; }
+.copy-btn:hover { color: var(--ink); border-color: var(--g300); }
+.tbl-wrap { overflow-x: auto; border: 1px solid var(--g200); border-radius: 12px; }
+.prose table { width: 100%; border-collapse: collapse; font-family: var(--sans); font-size: 14px; line-height: 1.5; min-width: 420px; }
+.prose th { text-align: left; font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--g400); padding: .7rem .9rem; border-bottom: 1px solid var(--g200); background: var(--g50); }
+.prose td { padding: .7rem .9rem; border-bottom: 1px solid var(--g200); vertical-align: top; color: var(--g500); }
+.prose td strong { color: var(--ink); }
+.prose tr:last-child td { border-bottom: 0; }
+
+/* pull quote */
+.read-quote { margin: 2.75rem 0 0; padding: .25rem 0 .25rem 1.25rem; border-left: 2px solid var(--ink); font-family: 'Source Serif 4', Georgia, serif; font-style: italic; font-size: 1.25rem; line-height: 1.6; color: var(--ink); }
+
+/* quick review (flashcards) */
+.read-block { margin-top: 3.5rem; }
+.review { border-top: 1px solid var(--g200); }
+.review details { border-bottom: 1px solid var(--g200); }
+.review summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 1rem; padding: .85rem 0; font-weight: 600; font-size: 14.5px; }
+.review summary::-webkit-details-marker { display: none; }
+.review summary::after { content: '+'; font-family: var(--mono); color: var(--g400); transition: transform .2s; }
+.review details[open] summary::after { transform: rotate(45deg); }
+.review details p { padding: 0 0 .95rem; font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; line-height: 1.7; color: var(--g500); }
+
+/* key terms */
+.terms { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--g200); }
+.terms div { padding: .8rem 1rem .8rem 0; border-bottom: 1px solid var(--g200); }
+.terms div:nth-child(even) { padding-left: 1rem; border-left: 1px solid var(--g200); }
+.terms dt { font-family: var(--mono); font-size: 11px; letter-spacing: .5px; color: var(--accent); }
+.terms dd { font-size: 13.5px; color: var(--g500); margin-top: 2px; }
+@media (max-width: 520px) { .terms { grid-template-columns: 1fr; } .terms div:nth-child(even) { padding-left: 0; border-left: 0; } }
+
+/* prev / next */
+.pager { display: grid; gap: .75rem; margin-top: 3.5rem; }
+@media (min-width: 560px) { .pager { grid-template-columns: 1fr 1fr; } }
+.pager .card { padding: 1rem 1.1rem; }
+.pager .next { text-align: right; }
+.pager-title { font-size: 14px; font-weight: 600; margin-top: .3rem; line-height: 1.35; }
+
+/* sidebar table of contents */
+.toc a { font-family: var(--sans); font-size: 12.5px; line-height: 1.35; }
+.toc a::before { flex-shrink: 0; }
+.side-back { font-family: var(--mono); font-size: 12px; color: var(--g500); text-decoration: none; transition: color .2s; }
+.side-back:hover { color: var(--ink); }
+.side-cat { font-size: 13px; font-weight: 600; margin-top: .25rem; }
+.topbar .side-back { margin-right: 4px; }
