@@ -67,32 +67,37 @@
     var scene=new THREE.Scene();
     var camera=new THREE.PerspectiveCamera(45,W/H,0.1,100);
     camera.position.z=2.8;
-    var globeMesh=new THREE.Mesh(new THREE.SphereGeometry(1,40,40),new THREE.MeshBasicMaterial({color:0x2255cc,wireframe:true,transparent:true,opacity:0.1}));
+    var wireMat=new THREE.MeshBasicMaterial({color:0x2255cc,wireframe:true,transparent:true,opacity:0.1});
+    var shellMat=new THREE.MeshBasicMaterial({color:0x003087,transparent:true,opacity:0.06,side:THREE.BackSide});
+    var dotMat=new THREE.PointsMaterial({color:0x4488ff,size:0.012,transparent:true,opacity:0.4});
+    var globeMesh=new THREE.Mesh(new THREE.SphereGeometry(1,40,40),wireMat);
     scene.add(globeMesh);
-    scene.add(new THREE.Mesh(new THREE.SphereGeometry(1.01,32,32),new THREE.MeshBasicMaterial({color:0x003087,transparent:true,opacity:0.06,side:THREE.BackSide})));
+    scene.add(new THREE.Mesh(new THREE.SphereGeometry(1.01,32,32),shellMat));
     var dp=[];for(var di=0;di<700;di++){var phi=Math.acos(2*Math.random()-1),theta=2*Math.PI*Math.random();dp.push(Math.sin(phi)*Math.cos(theta),Math.sin(phi)*Math.sin(theta),Math.cos(phi));}
     var dg=new THREE.BufferGeometry();dg.setAttribute('position',new THREE.Float32BufferAttribute(dp,3));
-    scene.add(new THREE.Points(dg,new THREE.PointsMaterial({color:0x4488ff,size:0.012,transparent:true,opacity:0.4})));
+    scene.add(new THREE.Points(dg,dotMat));
+
+    // Theme-aware mesh: on navy the blue lines need more strength; on white the same values
+    // turn into a dense blue cage that drowns the icons, so light mode is much lighter.
+    function themeGlobe(){
+      var dark=document.documentElement.classList.contains('dark');
+      wireMat.color.setHex(dark?0x2255cc:0x4d7fe0); wireMat.opacity=dark?0.1:0.045;
+      shellMat.color.setHex(dark?0x003087:0xdce8ff); shellMat.opacity=dark?0.06:0.35;
+      dotMat.color.setHex(dark?0x4488ff:0x3366cc); dotMat.opacity=dark?0.4:0.22;
+    }
+    themeGlobe();
+    new MutationObserver(themeGlobe).observe(document.documentElement,{attributes:true,attributeFilter:['class']});
     var pos3D=SKILLS.map(function(_,i){var p=Math.acos(1-2*(i+0.5)/SKILLS.length),t=Math.PI*(1+Math.sqrt(5))*(i+0.5);return new THREE.Vector3(Math.sin(p)*Math.cos(t),Math.sin(p)*Math.sin(t),Math.cos(p));});
     var iconEls=SKILLS.map(function(sk,i){
       var d=document.createElement('div');d.className='skill-icon';
       var svg=S[sk.key]||'';
       d.innerHTML='<div class="icon-badge">'+svg+'</div><span class="icon-label">'+sk.label+'</span>';
       iconsEl.appendChild(d);
-      var badge=d.querySelector('.icon-badge');
-      var lbl=d.querySelector('.icon-label');
-      d.addEventListener('mouseenter',function(){
-        badge.style.filter='drop-shadow(0 0 12px '+sk.color+') drop-shadow(0 0 5px '+sk.color+'99)';
-        badge.style.opacity='1';
-        badge.style.transform='scale(1.22)';
-        lbl.style.opacity='1';
-      });
-      d.addEventListener('mouseleave',function(){
-        badge.style.filter='brightness(0) invert(1)';
-        badge.style.opacity='0.28';
-        badge.style.transform='';
-        lbl.style.opacity='0';
-      });
+      // Hover state lives in CSS (.skill-icon.hot) so it follows the theme; never hard-code
+      // colours inline here — that is what made icons turn white and vanish in light mode.
+      d.style.setProperty('--brand',sk.color);
+      d.addEventListener('mouseenter',function(){d.classList.add('hot');});
+      d.addEventListener('mouseleave',function(){d.classList.remove('hot');});
       return d;
     });
     var rotX=0.12,rotY=0,vx=0,vy=0,drag=false,lx=0,ly=0;
