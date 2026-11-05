@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap"/>
-  <link rel="stylesheet" href="assets/css/site.css?v=20261106"/>
+  <link rel="stylesheet" href="assets/css/site.css?v=202611062"/>
 </head>
 <body>
 
@@ -111,9 +111,9 @@
         <div class="hero-grid">
           <div class="portrait enter" style="--d:50ms">
             <!-- Blue duotone: one copy per theme, cross-faded by .dark (filters defined below) -->
-            <!-- 1-bit dithered portrait, made at the exact display sizes (240 / 136 px) so dots stay crisp -->
-            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-dither-240.png"/><img class="duo duo-light" src="assets/img/headshot-dither-136.png" alt="Portrait of Joana Daphne Sy" width="240" height="240" fetchpriority="high"/></picture>
-            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-dither-240.png"/><img class="duo duo-dark" src="assets/img/headshot-dither-136.png" alt="" aria-hidden="true" width="240" height="240"/></picture>
+            <!-- fine-grain dithered portrait: 1-bit dither made at 2x the display size, scaled smoothly so the grain stays fine -->
+            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-grain-480.png"/><img class="duo duo-light" src="assets/img/headshot-grain-272.png" alt="Portrait of Joana Daphne Sy" width="240" height="240" fetchpriority="high"/></picture>
+            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-grain-480.png"/><img class="duo duo-dark" src="assets/img/headshot-grain-272.png" alt="" aria-hidden="true" width="240" height="240"/></picture>
             <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
               <!-- light theme: shadows #002a78 → highlights #e8f1ff -->
               <filter id="duo-light" color-interpolation-filters="sRGB">
@@ -426,10 +426,10 @@
     </div>
   </div>
 
-  <script src="assets/js/boot.js?v=20261106"></script>
-  <script src="assets/js/theme.js?v=20261106"></script>
-  <script src="assets/js/main.js?v=20261106"></script>
+  <script src="assets/js/boot.js?v=202611062"></script>
+  <script src="assets/js/theme.js?v=202611062"></script>
+  <script src="assets/js/main.js?v=202611062"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="assets/js/globe.js?v=20261106"></script>
+  <script src="assets/js/globe.js?v=202611062"></script>
 </body>
 </html>

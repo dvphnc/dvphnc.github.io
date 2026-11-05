@@ -209,9 +209,8 @@ html.theme-switching *, html.theme-switching *::before, html.theme-switching *::
   border: 1px solid var(--g200); background: var(--g100);
   box-shadow: var(--shadow);
 }
-.portrait img { width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; }
-/* dithered photo carries its own texture: hairline as an inset ring (not a border) so the
-   image renders at exactly 240 / 136 px, and no halftone dissolve on top */
+.portrait img { width: 100%; height: 100%; object-fit: cover; }
+/* grain photo carries its own texture: hairline as an inset ring (not a border), no halftone dissolve on top */
 .portrait { border: 0; }
 .portrait::after { content: ''; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px var(--g200); pointer-events: none; }
 /* blue duotone that follows the theme — two stacked copies, cross-faded */
