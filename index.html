@@ -110,14 +110,34 @@
         <div class="halftone hero-dots" aria-hidden="true"></div>
         <div class="hero-grid">
           <div class="portrait enter" style="--d:50ms">
-            <img src="assets/img/headshot-480.webp" srcset="assets/img/headshot-480.webp 480w, assets/img/headshot-960.webp 960w" sizes="(min-width: 720px) 240px, 136px" alt="Portrait of Joana Daphne Sy" width="480" height="480" fetchpriority="high"/>
+            <!-- Blue duotone: one copy per theme, cross-faded by .dark (filters defined below) -->
+            <img class="duo duo-light" src="assets/img/headshot-480.webp" srcset="assets/img/headshot-480.webp 480w, assets/img/headshot-960.webp 960w" sizes="(min-width: 720px) 240px, 136px" alt="Portrait of Joana Daphne Sy" width="480" height="480" fetchpriority="high"/>
+            <img class="duo duo-dark" src="assets/img/headshot-480.webp" srcset="assets/img/headshot-480.webp 480w, assets/img/headshot-960.webp 960w" sizes="(min-width: 720px) 240px, 136px" alt="" aria-hidden="true" width="480" height="480"/>
+            <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+              <!-- light theme: shadows #002a78 → highlights #e8f1ff -->
+              <filter id="duo-light" color-interpolation-filters="sRGB">
+                <feColorMatrix type="matrix" values=".2126 .7152 .0722 0 0  .2126 .7152 .0722 0 0  .2126 .7152 .0722 0 0  0 0 0 1 0"/>
+                <feComponentTransfer>
+                  <feFuncR type="table" tableValues="0 0.18 0.909"/>
+                  <feFuncG type="table" tableValues="0.165 0.36 0.945"/>
+                  <feFuncB type="table" tableValues="0.47 0.75 1"/>
+                </feComponentTransfer>
+              </filter>
+              <!-- dark theme: shadows #000c33 → highlights #80c0ff -->
+              <filter id="duo-dark" color-interpolation-filters="sRGB">
+                <feColorMatrix type="matrix" values=".2126 .7152 .0722 0 0  .2126 .7152 .0722 0 0  .2126 .7152 .0722 0 0  0 0 0 1 0"/>
+                <feComponentTransfer>
+                  <feFuncR type="table" tableValues="0 0.08 0.502"/>
+                  <feFuncG type="table" tableValues="0.047 0.22 0.753"/>
+                  <feFuncB type="table" tableValues="0.2 0.55 1"/>
+                </feComponentTransfer>
+              </filter>
+            </svg>
           </div>
 
           <div>
-            <div class="status micro enter" style="--d:100ms"><span class="pulse"></span>open to opportunities · gmt+8</div>
             <span class="hero-greet micro enter" id="heroGreet" style="--d:120ms">Hi, I'm</span>
             <h1 class="hero-name enter" id="heroName" style="--d:160ms"><span class="caret" aria-hidden="true"></span></h1>
-            <p class="hero-handle enter" style="--d:190ms">@<b>dvphnc</b></p>
 
             <p class="bio enter" style="--d:230ms">
               I'm a
