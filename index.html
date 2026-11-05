@@ -335,7 +335,7 @@
        CERTIFICATIONS
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
     .cert-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:16px; }
-    .cert-card { display:flex; flex-direction:column; gap:0; background:var(--glass); border:1px solid var(--glass-border); border-radius:var(--r-lg); overflow:hidden; text-decoration:none; color:inherit; transition:all 0.22s; cursor:pointer; }
+    .cert-card { display:flex; flex-direction:column; gap:0; background:var(--glass); border:1px solid var(--glass-border); border-radius:var(--r-lg); overflow:hidden; text-decoration:none; color:inherit; transition:border-color 0.22s, box-shadow 0.22s, background 0.22s; cursor:pointer; }
     .cert-card:hover { transform:translateY(-3px); box-shadow:var(--glass-shadow-lg); border-color:rgba(199,70,52,0.35); }
     .cert-badge-wrap { display:flex; align-items:center; justify-content:center; padding:20px; background:rgba(255,255,255,0.03); border-bottom:1px solid var(--glass-border-subtle); min-height:140px; }
     .cert-badge-img { width:110px; height:110px; object-fit:contain; border-radius:8px; transition:transform 0.22s; filter:drop-shadow(0 4px 16px rgba(0,0,0,0.3)); }
@@ -349,6 +349,9 @@
     .cert-credly:hover { border-color:rgba(77,159,255,0.35); }
     .isc2-grid { margin-bottom:0; }
     .isc2-card:hover { border-color:rgba(0,179,136,0.35)!important; }
+    .gemini-card:hover { border-color:rgba(79,141,247,0.4)!important; }
+    .cert-badge-icon { transition:transform 0.22s; filter:drop-shadow(0 4px 16px rgba(0,0,0,0.25)); }
+    .cert-card:hover .cert-badge-icon { transform:scale(1.07); }
     html:not(.dark) .cert-card { background:rgba(255,255,255,0.92); border-color:rgba(0,48,135,0.1); }
     html:not(.dark) .cert-card:hover { border-color:rgba(199,70,52,0.35); box-shadow:0 8px 32px rgba(0,48,135,0.1); }
     html:not(.dark) .cert-badge-wrap { background:rgba(0,48,135,0.02); border-color:rgba(0,48,135,0.06); }
@@ -803,7 +806,7 @@
       <!-- Oracle -->
       <h2 class="sec-title reveal rd1" style="margin-bottom:20px;">Oracle Cloud Certified</h2>
       <div class="cert-grid" style="margin-bottom:48px;">
-        <a class="cert-card reveal-flip tilt-card rd1" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=C40D337A86BE52AE8C02A90C0BC838A9226F3044D11CF05F86A518AAFDF7103F" target="_blank" rel="noopener">
+        <a class="cert-card tilt-card" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=C40D337A86BE52AE8C02A90C0BC838A9226F3044D11CF05F86A518AAFDF7103F" target="_blank" rel="noopener">
           <div class="cert-badge-wrap">
             <img src="https://images.credly.com/images/e30ee47b-8ca4-43b5-85a7-6b3075c937c1/OCI24AICFA_cached_image_20260404-33-ad4s94.png" alt="OCI AI Foundations Associate badge" class="cert-badge-img"/>
           </div>
@@ -811,10 +814,10 @@
             <span class="cert-issuer">Oracle University</span>
             <h3 class="cert-name">OCI AI Foundations Associate</h3>
             <p class="cert-desc">AI &amp; Machine Learning fundamentals, generative AI, cloud-native services.</p>
-            <div class="cert-tags"><span class="notes-tag">AI</span><span class="notes-tag">OCI</span><span class="notes-tag">2024</span></div>
+            <div class="cert-tags"><span class="notes-tag">AI</span><span class="notes-tag">Dec 2024</span><span class="notes-tag">Valid to Dec 2026</span></div>
           </div>
         </a>
-        <a class="cert-card reveal-flip tilt-card rd2" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=D43A8C93FE30161F5AF6077AE49AB9FE797A13EA6EB10947B7E30B9B0DFD2DC1" target="_blank" rel="noopener">
+        <a class="cert-card tilt-card" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=D43A8C93FE30161F5AF6077AE49AB9FE797A13EA6EB10947B7E30B9B0DFD2DC1" target="_blank" rel="noopener">
           <div class="cert-badge-wrap">
             <img src="https://images.credly.com/images/38273805-7c52-4a63-8776-af6bcd738b75/OCI2024FNDCFA_cached_image_20260404-31-kcldvz.png" alt="OCI Foundations Associate badge" class="cert-badge-img"/>
           </div>
@@ -822,10 +825,10 @@
             <span class="cert-issuer">Oracle University</span>
             <h3 class="cert-name">OCI Foundations Associate</h3>
             <p class="cert-desc">Core cloud services, architecture, security, and pricing fundamentals.</p>
-            <div class="cert-tags"><span class="notes-tag">Infrastructure</span><span class="notes-tag">OCI</span><span class="notes-tag">2024</span></div>
+            <div class="cert-tags"><span class="notes-tag">Cloud</span><span class="notes-tag">Dec 2024</span><span class="notes-tag">Valid to Dec 2026</span></div>
           </div>
         </a>
-        <a class="cert-card reveal-flip tilt-card rd3" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=D43A8C93FE30161F5AF6077AE49AB9FE612D8698DFBD1116CC92691601BF4C03" target="_blank" rel="noopener">
+        <a class="cert-card tilt-card" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=D43A8C93FE30161F5AF6077AE49AB9FE612D8698DFBD1116CC92691601BF4C03" target="_blank" rel="noopener">
           <div class="cert-badge-wrap">
             <img src="https://images.credly.com/images/21a3c458-5a88-4327-9e6a-066ae0ee8b5f/OCI2024DCFA_cached_image_20260404-33-aeswth.png" alt="OCI Data Foundations Associate badge" class="cert-badge-img"/>
           </div>
@@ -833,24 +836,41 @@
             <span class="cert-issuer">Oracle University</span>
             <h3 class="cert-name">OCI Data Foundations Associate</h3>
             <p class="cert-desc">Data management, analytics, Autonomous Database, and data lake services.</p>
-            <div class="cert-tags"><span class="notes-tag">Data</span><span class="notes-tag">Analytics</span><span class="notes-tag">2024</span></div>
+            <div class="cert-tags"><span class="notes-tag">Data</span><span class="notes-tag">Dec 2024</span><span class="notes-tag">Valid to Dec 2026</span></div>
           </div>
         </a>
       </div>
 
-      <!-- ISC2 -->
-      <p class="sec-label reveal" style="margin-bottom:10px;">ISC2</p>
-      <h2 class="sec-title reveal rd1" style="margin-bottom:20px;">Certified in Cybersecurity</h2>
-      <div class="cert-grid isc2-grid reveal rd2">
-        <a class="cert-card isc2-card" href="https://www.credly.com/badges/7a7ef255-2b1a-4832-8a8d-5d4a397603e4" target="_blank" rel="noopener">
+      <!-- Google -->
+      <p class="sec-label reveal" style="margin-bottom:10px;">Google for Education</p>
+      <h2 class="sec-title reveal rd1" style="margin-bottom:20px;">Gemini Certified</h2>
+      <div class="cert-grid" style="margin-bottom:48px;">
+        <a class="cert-card gemini-card" href="https://edu.google.accredible.com/79c03d03-4077-4696-8a07-d2b83d14b78a" target="_blank" rel="noopener">
           <div class="cert-badge-wrap">
-            <img src="https://images.credly.com/images/9180921d-4a13-429e-9357-6f9706a554f0/image.png" alt="ISC2 Certified in Cybersecurity badge" class="cert-badge-img"/>
+            <svg class="cert-badge-icon" viewBox="0 0 24 24" width="64" height="64" aria-hidden="true"><defs><linearGradient id="gemGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f8df7"/><stop offset="1" stop-color="#a77bf3"/></linearGradient></defs><path fill="url(#gemGrad)" d="M12 1c.6 5.8 5.2 10.4 11 11-5.8.6-10.4 5.2-11 11-.6-5.8-5.2-10.4-11-11C6.8 11.4 11.4 6.8 12 1z"/></svg>
           </div>
           <div class="cert-card-body">
-            <span class="cert-issuer" style="color:#00b388;">ISC2</span>
-            <h3 class="cert-name">Certified in Cybersecurity (CC)</h3>
-            <p class="cert-desc">Security principles, business continuity, access controls, network security, and security operations.</p>
-            <div class="cert-tags"><span class="notes-tag">Security</span><span class="notes-tag">ISC2</span><span class="notes-tag">2024</span></div>
+            <span class="cert-issuer" style="color:#4f8df7;">Google for Education</span>
+            <h3 class="cert-name">Gemini Certified University Student</h3>
+            <p class="cert-desc">Generative AI fundamentals and Gemini's core features and capabilities.</p>
+            <div class="cert-tags"><span class="notes-tag">Generative AI</span><span class="notes-tag">Jan 2026</span><span class="notes-tag">Valid to Jan 2029</span></div>
+          </div>
+        </a>
+      </div>
+
+      <!-- ISC2 training (completed course, not the CC exam) -->
+      <p class="sec-label reveal" style="margin-bottom:10px;">ISC2 · Coursera</p>
+      <h2 class="sec-title reveal rd1" style="margin-bottom:20px;">Security Training</h2>
+      <div class="cert-grid isc2-grid">
+        <a class="cert-card isc2-card" href="https://www.coursera.org/account/accomplishments/specialization/Y05IYRFJA1MY" target="_blank" rel="noopener">
+          <div class="cert-badge-wrap">
+            <svg class="cert-badge-icon" viewBox="0 0 24 24" width="60" height="60" fill="none" stroke="#00b388" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>
+          </div>
+          <div class="cert-card-body">
+            <span class="cert-issuer" style="color:#00b388;">ISC2 · Coursera</span>
+            <h3 class="cert-name">Certified in Cybersecurity (CC) — Official Training</h3>
+            <p class="cert-desc">Completed ISC2's 5-course specialization: security principles, incident response &amp; BC/DR, access control, network security, and security operations.</p>
+            <div class="cert-tags"><span class="notes-tag">Security</span><span class="notes-tag">Training</span><span class="notes-tag">Oct 2025</span></div>
           </div>
         </a>
       </div>
@@ -1704,8 +1724,8 @@
     var certGrids = gsap.utils.toArray('.cert-grid');
     certGrids.forEach(function(grid){
       var cards = grid.querySelectorAll('.cert-card');
-      gsap.from(cards,{
-        opacity:0, y:50, scale:0.94, rotationX:12,
+      gsap.fromTo(cards,{opacity:0, y:50, scale:0.94, rotationX:12},{
+        opacity:1, y:0, scale:1, rotationX:0,
         duration:0.9, stagger:0.12, ease:'expo.out',
         transformOrigin:'top center',
         scrollTrigger: ST(grid, {start:'top 85%'})
