@@ -1,19 +1,22 @@
-// Knock the plain studio background out of a grayscale raw frame: flood-fill from the
-// image border through bright pixels, soften the mask, and paint the background black.
-// Usage: node knockout.mjs <in.gray> <out.gray> <size> <threshold 0-255>
+// Dark-mode headshot from the LIGHT-mode dither, so both themes share the exact same dots.
+// The studio backdrop is found on the source photo (flood fill from the top/left/right edges
+// through bright pixels, grown 1px to swallow the hair fringe) and those pixels of the light
+// dither are set to black. Every other pixel is copied unchanged.
+// Usage: node knockout.mjs <light-dither.gray> <source.gray> <out.gray> <size> <threshold 0-255>
 import { readFileSync, writeFileSync } from 'fs';
 
-const [, , inPath, outPath, sizeArg, thrArg] = process.argv;
+const [, , ditherPath, srcPath, outPath, sizeArg, thrArg] = process.argv;
 const N = Number(sizeArg), T = Number(thrArg);
-const px = readFileSync(inPath);
-if (px.length !== N * N) throw new Error(`expected ${N * N} bytes, got ${px.length}`);
+const dither = readFileSync(ditherPath);
+const src = readFileSync(srcPath);
+for (const [name, buf] of [['dither', dither], ['source', src]]) {
+  if (buf.length !== N * N) throw new Error(`${name}: expected ${N * N} bytes, got ${buf.length}`);
+}
 
-// 1) flood fill (4-connected) from every border pixel brighter than T
+// flood fill from top, left and right edges (the shirt's white V touches the bottom edge)
 const bg = new Uint8Array(N * N);
 const stack = [];
-const push = (i) => { if (!bg[i] && px[i] >= T) { bg[i] = 1; stack.push(i); } };
-// seed from top, left and right edges only — the shirt's white V touches the bottom edge
-// and must not be treated as backdrop
+const push = (i) => { if (!bg[i] && src[i] >= T) { bg[i] = 1; stack.push(i); } };
 for (let k = 0; k < N; k++) { push(k); push(k * N); push(k * N + N - 1); }
 while (stack.length) {
   const i = stack.pop(), x = i % N, y = (i / N) | 0;
@@ -21,30 +24,16 @@ while (stack.length) {
   if (y > 0) push(i - N); if (y < N - 1) push(i + N);
 }
 
-// 2) grow the mask by 1px to swallow the bright fringe around hair, then box-blur it
-const grown = new Float32Array(N * N);
+// grow by 1px, then black out the backdrop in the light dither; copy everything else
+const out = Buffer.from(dither);
+let changed = 0, bgCount = 0;
 for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
   let m = 0;
   for (let dy = -1; dy <= 1 && !m; dy++) for (let dx = -1; dx <= 1; dx++) {
     const xx = x + dx, yy = y + dy;
     if (xx >= 0 && yy >= 0 && xx < N && yy < N && bg[yy * N + xx]) { m = 1; break; }
   }
-  grown[y * N + x] = m;
+  if (m) { bgCount++; if (out[y * N + x] !== 0) { out[y * N + x] = 0; changed++; } }
 }
-const R = Math.max(1, Math.round(N / 160));
-const soft = new Float32Array(N * N);
-for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
-  let s = 0, c = 0;
-  for (let dy = -R; dy <= R; dy++) for (let dx = -R; dx <= R; dx++) {
-    const xx = x + dx, yy = y + dy;
-    if (xx >= 0 && yy >= 0 && xx < N && yy < N) { s += grown[yy * N + xx]; c++; }
-  }
-  soft[y * N + x] = s / c;
-}
-
-// 3) background -> black, subject unchanged, soft edge between
-const out = Buffer.alloc(N * N);
-let bgCount = 0;
-for (let i = 0; i < N * N; i++) { out[i] = Math.round(px[i] * (1 - soft[i])); if (bg[i]) bgCount++; }
 writeFileSync(outPath, out);
-console.log(`background ${(100 * bgCount / (N * N)).toFixed(1)}% of frame`);
+console.log(`backdrop ${(100 * bgCount / (N * N)).toFixed(1)}% of frame, ${changed} px changed, all other pixels identical to the light version`);
