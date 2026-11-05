@@ -350,6 +350,21 @@
     .isc2-grid { margin-bottom:0; }
     .isc2-card:hover { border-color:rgba(0,179,136,0.35)!important; }
     .gemini-card:hover { border-color:rgba(79,141,247,0.4)!important; }
+    .gci-card { cursor:default; }
+    .gci-card:hover { border-color:rgba(232,163,61,0.4)!important; }
+    .adobe-card:hover { border-color:rgba(255,79,79,0.4)!important; }
+    .notes-tag.training-live { color:#e8a33d; border-color:rgba(232,163,61,0.35); background:rgba(232,163,61,0.1); }
+    /* Workshops & events list */
+    .training-list { list-style:none; border:1px solid var(--glass-border); border-radius:var(--r-lg); background:var(--glass); overflow:hidden; }
+    .training-row { display:grid; grid-template-columns:84px 1fr auto; align-items:center; gap:18px; padding:16px 20px; border-bottom:1px solid var(--glass-border-subtle); }
+    .training-row:last-child { border-bottom:none; }
+    .training-date { font-family:var(--mono); font-size:11px; color:var(--text3); letter-spacing:0.04em; }
+    .training-name { font-size:14px; font-weight:600; color:var(--text); line-height:1.35; }
+    .training-name a { color:inherit; text-decoration:none; }
+    .training-name a:hover { color:var(--accent); }
+    .training-issuer { font-size:12px; color:var(--text3); margin-top:3px; }
+    .training-kind { font-family:var(--mono); font-size:10px; padding:2px 8px; border-radius:6px; background:rgba(123,140,222,0.1); color:var(--accent); border:1px solid rgba(123,140,222,0.2); white-space:nowrap; }
+    @media(max-width:640px){ .training-row { grid-template-columns:1fr; gap:6px; padding:14px 16px; } .training-kind { justify-self:start; } }
     .cert-badge-icon { transition:transform 0.22s; filter:drop-shadow(0 4px 16px rgba(0,0,0,0.25)); }
     .cert-card:hover .cert-badge-icon { transform:scale(1.07); }
     html:not(.dark) .cert-card { background:rgba(255,255,255,0.92); border-color:rgba(0,48,135,0.1); }
@@ -858,10 +873,32 @@
         </a>
       </div>
 
-      <!-- ISC2 training (completed course, not the CC exam) -->
-      <p class="sec-label reveal" style="margin-bottom:10px;">ISC2 · Coursera</p>
-      <h2 class="sec-title reveal rd1" style="margin-bottom:20px;">Security Training</h2>
-      <div class="cert-grid isc2-grid">
+      <!-- Training programs & courses (completed courses, not certification exams) -->
+      <p class="sec-label reveal" style="margin-bottom:10px;">Programs &amp; Courses</p>
+      <h2 class="sec-title reveal rd1" style="margin-bottom:20px;">Training</h2>
+      <div class="cert-grid isc2-grid" style="margin-bottom:48px;">
+        <div class="cert-card gci-card">
+          <div class="cert-badge-wrap">
+            <svg class="cert-badge-icon" viewBox="0 0 24 24" width="60" height="60" fill="none" stroke="#e8a33d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/><circle cx="19" cy="7" r="1.2" fill="#e8a33d"/></svg>
+          </div>
+          <div class="cert-card-body">
+            <span class="cert-issuer" style="color:#e8a33d;">Matsuo-Iwasawa Lab · U-Tokyo</span>
+            <h3 class="cert-name">GCI World 2026 — Data Science &amp; AI Program</h3>
+            <p class="cert-desc">3-month program: Python data workflows (NumPy, Pandas, Matplotlib), EDA, supervised &amp; unsupervised ML, ML competitions, and a final business data project.</p>
+            <div class="cert-tags"><span class="notes-tag">Data Science</span><span class="notes-tag">Sep 2026</span><span class="notes-tag training-live">In progress</span></div>
+          </div>
+        </div>
+        <a class="cert-card adobe-card" href="https://www.linkedin.com/learning/certificates/f41501f6eb854424385a648f7e826349e9b04b92a62885f6f95aca9b3bdb5e67/" target="_blank" rel="noopener">
+          <div class="cert-badge-wrap">
+            <svg class="cert-badge-icon" viewBox="0 0 24 24" width="60" height="60" fill="none" stroke="#ff4f4f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg>
+          </div>
+          <div class="cert-card-body">
+            <span class="cert-issuer" style="color:#ff4f4f;">Adobe · LinkedIn Learning</span>
+            <h3 class="cert-name">Essential Skills in Generative AI for Creatives</h3>
+            <p class="cert-desc">4-course learning path with final exam: generative AI tools in Adobe Creative Cloud and Photoshop.</p>
+            <div class="cert-tags"><span class="notes-tag">Generative AI</span><span class="notes-tag">Aug 2025</span></div>
+          </div>
+        </a>
         <a class="cert-card isc2-card" href="https://www.coursera.org/account/accomplishments/specialization/Y05IYRFJA1MY" target="_blank" rel="noopener">
           <div class="cert-badge-wrap">
             <svg class="cert-badge-icon" viewBox="0 0 24 24" width="60" height="60" fill="none" stroke="#00b388" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>
@@ -874,6 +911,42 @@
           </div>
         </a>
       </div>
+
+      <!-- Workshops & events (certificates of participation / attendance) -->
+      <p class="sec-label reveal" style="margin-bottom:10px;">Certificates of Participation</p>
+      <h2 class="sec-title reveal rd1" style="margin-bottom:20px;">Workshops &amp; Events</h2>
+      <ul class="training-list">
+        <li class="training-row">
+          <span class="training-date">Sep 2026</span>
+          <div class="training-main"><p class="training-name">ASEAN Campus Connect &amp; Youth Leadership Summit 2026</p><p class="training-issuer">PH Commission on Higher Education (CHED NCR)</p></div>
+          <span class="training-kind">Leadership</span>
+        </li>
+        <li class="training-row">
+          <span class="training-date">Jun 2026</span>
+          <div class="training-main"><p class="training-name"><a href="https://cert.vjal.ai/certificate/?uid=6582547825718493249" target="_blank" rel="noopener">Artificial Intelligence Empowerment for Communities Workshop ↗</a></p><p class="training-issuer">Vjal Institute</p></div>
+          <span class="training-kind">AI</span>
+        </li>
+        <li class="training-row">
+          <span class="training-date">Jun 2026</span>
+          <div class="training-main"><p class="training-name">Artificial Intelligence Prompts 101</p><p class="training-issuer">Department of Information and Communications Technology (DICT)</p></div>
+          <span class="training-kind">AI</span>
+        </li>
+        <li class="training-row">
+          <span class="training-date">Oct 2025</span>
+          <div class="training-main"><p class="training-name">The Role of Language Educators in the Era of AI</p><p class="training-issuer">British Council · ASEAN TeachingEnglish Online Conference 2025</p></div>
+          <span class="training-kind">AI</span>
+        </li>
+        <li class="training-row">
+          <span class="training-date">Oct 2025</span>
+          <div class="training-main"><p class="training-name">ELT and Sustainability — What Should I Be Doing?</p><p class="training-issuer">British Council · ASEAN TeachingEnglish Online Conference 2025</p></div>
+          <span class="training-kind">Sustainability</span>
+        </li>
+        <li class="training-row">
+          <span class="training-date">Mar 2025</span>
+          <div class="training-main"><p class="training-name">Lessons, Trends, and Opportunity in the IT Industry: Web Development</p><p class="training-issuer">New Era University</p></div>
+          <span class="training-kind">Web Dev</span>
+        </li>
+      </ul>
     </div>
   </section>
 
