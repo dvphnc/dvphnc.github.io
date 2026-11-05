@@ -356,7 +356,17 @@
     .notes-tag.training-live { color:#e8a33d; border-color:rgba(232,163,61,0.35); background:rgba(232,163,61,0.1); }
     /* Workshops & events list */
     .training-list { list-style:none; border:1px solid var(--glass-border); border-radius:var(--r-lg); background:var(--glass); overflow:hidden; }
-    .training-row { display:grid; grid-template-columns:84px 1fr auto; align-items:center; gap:18px; padding:16px 20px; border-bottom:1px solid var(--glass-border-subtle); }
+    .training-row { display:grid; grid-template-columns:72px 44px 1fr auto; align-items:center; gap:16px; padding:14px 20px; border-bottom:1px solid var(--glass-border-subtle); }
+    .training-logo { width:44px; height:44px; border-radius:10px; background:#fff; padding:6px; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(0,0,0,0.18); }
+    .training-logo img { max-width:100%; max-height:100%; object-fit:contain; display:block; }
+    /* Issuer logos on cert cards — white tiles so dark and light logos both read on any theme */
+    .cert-issuer { display:inline-flex; align-items:center; gap:8px; }
+    .issuer-logo { display:inline-flex; align-items:center; justify-content:center; height:20px; padding:3px 6px; border-radius:5px; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,0.2); flex-shrink:0; }
+    .issuer-logo img { height:14px; width:auto; max-width:64px; object-fit:contain; display:block; }
+    .cert-logo-tile { display:flex; align-items:center; justify-content:center; gap:16px; width:180px; height:100px; padding:18px 22px; border-radius:18px; background:#fff; box-shadow:0 6px 20px rgba(0,0,0,0.25); transition:transform 0.22s; }
+    .cert-logo-tile img { width:100%; height:100%; object-fit:contain; display:block; min-width:0; }
+    .cert-logo-pair img { width:50%; height:70%; }
+    .cert-card:hover .cert-logo-tile { transform:scale(1.05); }
     .training-row:last-child { border-bottom:none; }
     .training-date { font-family:var(--mono); font-size:11px; color:var(--text3); letter-spacing:0.04em; }
     .training-name { font-size:14px; font-weight:600; color:var(--text); line-height:1.35; }
@@ -364,7 +374,7 @@
     .training-name a:hover { color:var(--accent); }
     .training-issuer { font-size:12px; color:var(--text3); margin-top:3px; }
     .training-kind { font-family:var(--mono); font-size:10px; padding:2px 8px; border-radius:6px; background:rgba(123,140,222,0.1); color:var(--accent); border:1px solid rgba(123,140,222,0.2); white-space:nowrap; }
-    @media(max-width:640px){ .training-row { grid-template-columns:1fr; gap:6px; padding:14px 16px; } .training-kind { justify-self:start; } }
+    @media(max-width:640px){ .training-row { grid-template-columns:44px 1fr; grid-template-areas:"logo date" "logo main" "logo kind"; column-gap:14px; row-gap:4px; padding:14px 16px; } .training-logo { grid-area:logo; align-self:start; } .training-date { grid-area:date; } .training-main { grid-area:main; } .training-kind { grid-area:kind; justify-self:start; } }
     .cert-badge-icon { transition:transform 0.22s; filter:drop-shadow(0 4px 16px rgba(0,0,0,0.25)); }
     .cert-card:hover .cert-badge-icon { transform:scale(1.07); }
     html:not(.dark) .cert-card { background:rgba(255,255,255,0.92); border-color:rgba(0,48,135,0.1); }
@@ -826,7 +836,7 @@
             <img src="https://images.credly.com/images/e30ee47b-8ca4-43b5-85a7-6b3075c937c1/OCI24AICFA_cached_image_20260404-33-ad4s94.png" alt="OCI AI Foundations Associate badge" class="cert-badge-img"/>
           </div>
           <div class="cert-card-body">
-            <span class="cert-issuer">Oracle University</span>
+            <span class="cert-issuer"><span class="issuer-logo"><img src="assets/logos/oracle.svg" alt="Oracle logo"/></span>Oracle University</span>
             <h3 class="cert-name">OCI AI Foundations Associate</h3>
             <p class="cert-desc">AI &amp; Machine Learning fundamentals, generative AI, cloud-native services.</p>
             <div class="cert-tags"><span class="notes-tag">AI</span><span class="notes-tag">Dec 2024</span><span class="notes-tag">Valid to Dec 2026</span></div>
@@ -837,7 +847,7 @@
             <img src="https://images.credly.com/images/38273805-7c52-4a63-8776-af6bcd738b75/OCI2024FNDCFA_cached_image_20260404-31-kcldvz.png" alt="OCI Foundations Associate badge" class="cert-badge-img"/>
           </div>
           <div class="cert-card-body">
-            <span class="cert-issuer">Oracle University</span>
+            <span class="cert-issuer"><span class="issuer-logo"><img src="assets/logos/oracle.svg" alt="Oracle logo"/></span>Oracle University</span>
             <h3 class="cert-name">OCI Foundations Associate</h3>
             <p class="cert-desc">Core cloud services, architecture, security, and pricing fundamentals.</p>
             <div class="cert-tags"><span class="notes-tag">Cloud</span><span class="notes-tag">Dec 2024</span><span class="notes-tag">Valid to Dec 2026</span></div>
@@ -848,7 +858,7 @@
             <img src="https://images.credly.com/images/21a3c458-5a88-4327-9e6a-066ae0ee8b5f/OCI2024DCFA_cached_image_20260404-33-aeswth.png" alt="OCI Data Foundations Associate badge" class="cert-badge-img"/>
           </div>
           <div class="cert-card-body">
-            <span class="cert-issuer">Oracle University</span>
+            <span class="cert-issuer"><span class="issuer-logo"><img src="assets/logos/oracle.svg" alt="Oracle logo"/></span>Oracle University</span>
             <h3 class="cert-name">OCI Data Foundations Associate</h3>
             <p class="cert-desc">Data management, analytics, Autonomous Database, and data lake services.</p>
             <div class="cert-tags"><span class="notes-tag">Data</span><span class="notes-tag">Dec 2024</span><span class="notes-tag">Valid to Dec 2026</span></div>
@@ -862,10 +872,10 @@
       <div class="cert-grid" style="margin-bottom:48px;">
         <a class="cert-card gemini-card" href="https://edu.google.accredible.com/79c03d03-4077-4696-8a07-d2b83d14b78a" target="_blank" rel="noopener">
           <div class="cert-badge-wrap">
-            <svg class="cert-badge-icon" viewBox="0 0 24 24" width="64" height="64" aria-hidden="true"><defs><linearGradient id="gemGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f8df7"/><stop offset="1" stop-color="#a77bf3"/></linearGradient></defs><path fill="url(#gemGrad)" d="M12 1c.6 5.8 5.2 10.4 11 11-5.8.6-10.4 5.2-11 11-.6-5.8-5.2-10.4-11-11C6.8 11.4 11.4 6.8 12 1z"/></svg>
+            <span class="cert-logo-tile"><img src="assets/logos/google.svg" alt="Google logo"/></span>
           </div>
           <div class="cert-card-body">
-            <span class="cert-issuer" style="color:#4f8df7;">Google for Education</span>
+            <span class="cert-issuer" style="color:#4f8df7;"><span class="issuer-logo"><img src="assets/logos/google.svg" alt=""/></span>Google for Education</span>
             <h3 class="cert-name">Gemini Certified University Student</h3>
             <p class="cert-desc">Generative AI fundamentals and Gemini's core features and capabilities.</p>
             <div class="cert-tags"><span class="notes-tag">Generative AI</span><span class="notes-tag">Jan 2026</span><span class="notes-tag">Valid to Jan 2029</span></div>
@@ -879,10 +889,10 @@
       <div class="cert-grid isc2-grid" style="margin-bottom:48px;">
         <div class="cert-card gci-card">
           <div class="cert-badge-wrap">
-            <svg class="cert-badge-icon" viewBox="0 0 24 24" width="60" height="60" fill="none" stroke="#e8a33d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/><circle cx="19" cy="7" r="1.2" fill="#e8a33d"/></svg>
+            <span class="cert-logo-tile"><img src="assets/logos/utokyo.svg" alt="The University of Tokyo logo"/></span>
           </div>
           <div class="cert-card-body">
-            <span class="cert-issuer" style="color:#e8a33d;">Matsuo-Iwasawa Lab · U-Tokyo</span>
+            <span class="cert-issuer" style="color:#e8a33d;"><span class="issuer-logo"><img src="assets/logos/utokyo.svg" alt=""/></span>Matsuo-Iwasawa Lab · U-Tokyo</span>
             <h3 class="cert-name">GCI World 2026 — Data Science &amp; AI Program</h3>
             <p class="cert-desc">3-month program: Python data workflows (NumPy, Pandas, Matplotlib), EDA, supervised &amp; unsupervised ML, ML competitions, and a final business data project.</p>
             <div class="cert-tags"><span class="notes-tag">Data Science</span><span class="notes-tag">Sep 2026</span><span class="notes-tag training-live">In progress</span></div>
@@ -890,10 +900,10 @@
         </div>
         <a class="cert-card adobe-card" href="https://www.linkedin.com/learning/certificates/f41501f6eb854424385a648f7e826349e9b04b92a62885f6f95aca9b3bdb5e67/" target="_blank" rel="noopener">
           <div class="cert-badge-wrap">
-            <svg class="cert-badge-icon" viewBox="0 0 24 24" width="60" height="60" fill="none" stroke="#ff4f4f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg>
+            <span class="cert-logo-tile"><img src="assets/logos/adobe.svg" alt="Adobe logo"/></span>
           </div>
           <div class="cert-card-body">
-            <span class="cert-issuer" style="color:#ff4f4f;">Adobe · LinkedIn Learning</span>
+            <span class="cert-issuer" style="color:#ff4f4f;"><span class="issuer-logo"><img src="assets/logos/adobe.svg" alt=""/></span>Adobe · LinkedIn Learning</span>
             <h3 class="cert-name">Essential Skills in Generative AI for Creatives</h3>
             <p class="cert-desc">4-course learning path with final exam: generative AI tools in Adobe Creative Cloud and Photoshop.</p>
             <div class="cert-tags"><span class="notes-tag">Generative AI</span><span class="notes-tag">Aug 2025</span></div>
@@ -901,10 +911,10 @@
         </a>
         <a class="cert-card isc2-card" href="https://www.coursera.org/account/accomplishments/specialization/Y05IYRFJA1MY" target="_blank" rel="noopener">
           <div class="cert-badge-wrap">
-            <svg class="cert-badge-icon" viewBox="0 0 24 24" width="60" height="60" fill="none" stroke="#00b388" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>
+            <span class="cert-logo-tile cert-logo-pair"><img src="assets/logos/isc2.svg" alt="ISC2 logo"/><img src="assets/logos/coursera.svg" alt="Coursera logo"/></span>
           </div>
           <div class="cert-card-body">
-            <span class="cert-issuer" style="color:#00b388;">ISC2 · Coursera</span>
+            <span class="cert-issuer" style="color:#00b388;"><span class="issuer-logo"><img src="assets/logos/isc2.svg" alt=""/></span>ISC2 · Coursera</span>
             <h3 class="cert-name">Certified in Cybersecurity (CC) — Official Training</h3>
             <p class="cert-desc">Completed ISC2's 5-course specialization: security principles, incident response &amp; BC/DR, access control, network security, and security operations.</p>
             <div class="cert-tags"><span class="notes-tag">Security</span><span class="notes-tag">Training</span><span class="notes-tag">Oct 2025</span></div>
@@ -918,31 +928,37 @@
       <ul class="training-list">
         <li class="training-row">
           <span class="training-date">Sep 2026</span>
+          <span class="training-logo"><img src="assets/logos/ched.svg" alt="CHED logo"/></span>
           <div class="training-main"><p class="training-name">ASEAN Campus Connect &amp; Youth Leadership Summit 2026</p><p class="training-issuer">PH Commission on Higher Education (CHED NCR)</p></div>
           <span class="training-kind">Leadership</span>
         </li>
         <li class="training-row">
           <span class="training-date">Jun 2026</span>
+          <span class="training-logo"><img src="assets/logos/vjal.png" alt="Vjal Institute logo"/></span>
           <div class="training-main"><p class="training-name"><a href="https://cert.vjal.ai/certificate/?uid=6582547825718493249" target="_blank" rel="noopener">Artificial Intelligence Empowerment for Communities Workshop ↗</a></p><p class="training-issuer">Vjal Institute</p></div>
           <span class="training-kind">AI</span>
         </li>
         <li class="training-row">
           <span class="training-date">Jun 2026</span>
+          <span class="training-logo"><img src="assets/logos/dict.svg" alt="DICT logo"/></span>
           <div class="training-main"><p class="training-name">Artificial Intelligence Prompts 101</p><p class="training-issuer">Department of Information and Communications Technology (DICT)</p></div>
           <span class="training-kind">AI</span>
         </li>
         <li class="training-row">
           <span class="training-date">Oct 2025</span>
+          <span class="training-logo"><img src="assets/logos/british-council.svg" alt="British Council logo"/></span>
           <div class="training-main"><p class="training-name">The Role of Language Educators in the Era of AI</p><p class="training-issuer">British Council · ASEAN TeachingEnglish Online Conference 2025</p></div>
           <span class="training-kind">AI</span>
         </li>
         <li class="training-row">
           <span class="training-date">Oct 2025</span>
+          <span class="training-logo"><img src="assets/logos/british-council.svg" alt="British Council logo"/></span>
           <div class="training-main"><p class="training-name">ELT and Sustainability — What Should I Be Doing?</p><p class="training-issuer">British Council · ASEAN TeachingEnglish Online Conference 2025</p></div>
           <span class="training-kind">Sustainability</span>
         </li>
         <li class="training-row">
           <span class="training-date">Mar 2025</span>
+          <span class="training-logo"><img src="assets/logos/neu.webp" alt="New Era University logo"/></span>
           <div class="training-main"><p class="training-name">Lessons, Trends, and Opportunity in the IT Industry: Web Development</p><p class="training-issuer">New Era University</p></div>
           <span class="training-kind">Web Dev</span>
         </li>
