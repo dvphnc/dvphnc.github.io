@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap"/>
-  <link rel="stylesheet" href="assets/css/site.css?v=202611063"/>
+  <link rel="stylesheet" href="assets/css/site.css?v=202611064"/>
 </head>
 <body>
 
@@ -124,13 +124,14 @@
                   <feFuncB type="table" tableValues="0.47 0.75 1"/>
                 </feComponentTransfer>
               </filter>
-              <!-- dark theme: shadows #000c33 → highlights #80c0ff -->
+              <!-- dark theme: shadows #0b2a77 (a step lighter than the #001a5e page, so hair/blazer stay readable)
+                   → muted highlights #7f9fdc (no glowing box); edges are feathered into the page in CSS -->
               <filter id="duo-dark" color-interpolation-filters="sRGB">
                 <feColorMatrix type="matrix" values=".2126 .7152 .0722 0 0  .2126 .7152 .0722 0 0  .2126 .7152 .0722 0 0  0 0 0 1 0"/>
                 <feComponentTransfer>
-                  <feFuncR type="table" tableValues="0 0.08 0.502"/>
-                  <feFuncG type="table" tableValues="0.047 0.22 0.753"/>
-                  <feFuncB type="table" tableValues="0.2 0.55 1"/>
+                  <feFuncR type="table" tableValues="0.043 0.2 0.498"/>
+                  <feFuncG type="table" tableValues="0.165 0.34 0.624"/>
+                  <feFuncB type="table" tableValues="0.467 0.66 0.863"/>
                 </feComponentTransfer>
               </filter>
             </svg>
@@ -426,10 +427,10 @@
     </div>
   </div>
 
-  <script src="assets/js/boot.js?v=202611063"></script>
-  <script src="assets/js/theme.js?v=202611063"></script>
-  <script src="assets/js/main.js?v=202611063"></script>
+  <script src="assets/js/boot.js?v=202611064"></script>
+  <script src="assets/js/theme.js?v=202611064"></script>
+  <script src="assets/js/main.js?v=202611064"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="assets/js/globe.js?v=202611063"></script>
+  <script src="assets/js/globe.js?v=202611064"></script>
 </body>
 </html>

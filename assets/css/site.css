@@ -219,6 +219,14 @@ html.theme-switching *, html.theme-switching *::before, html.theme-switching *::
 .portrait .duo-dark { filter: url(#duo-dark) contrast(1.08); opacity: 0; }
 html.dark .portrait .duo-light { opacity: 0; }
 html.dark .portrait .duo-dark { opacity: 1; }
+/* dark mode: the photo background can't match the navy page, so feather the edges into it
+   instead of showing a bright square — the portrait "settles" like it does in light mode */
+html.dark .portrait {
+  background: transparent; box-shadow: none;
+  -webkit-mask-image: radial-gradient(ellipse 62% 66% at 50% 46%, #000 58%, transparent 100%);
+          mask-image: radial-gradient(ellipse 62% 66% at 50% 46%, #000 58%, transparent 100%);
+}
+html.dark .portrait::after { display: none; }
 @media (max-width: 719px) { .portrait { max-width: 8.5rem; border-radius: 14px; } .portrait-ph span:first-child { font-size: 30px; } .hero-name { min-height: 0; } }
 .portrait-ph {
   position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
