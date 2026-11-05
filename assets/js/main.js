@@ -55,12 +55,12 @@
       onNameStart: function () {
         if (phase === 'typing' || phase === 'done') return;
         stop(); phase = 'typing';
-        timer = setInterval(function () { len++; paint(); if (len >= word.length) { stop(); phase = 'done'; } }, 100);
+        timer = setInterval(function () { len++; paint(); if (len >= word.length) { stop(); phase = 'done'; } }, 150);
       },
       onNameErase: function () {
         if (phase === 'idle' || phase === 'erasing') return;
         stop(); phase = 'erasing';
-        timer = setInterval(function () { len--; paint(); if (len <= 0) { stop(); phase = 'idle'; } }, 70);
+        timer = setInterval(function () { len--; paint(); if (len <= 0) { stop(); phase = 'idle'; } }, 100);
       }
     };
   })();
@@ -106,12 +106,13 @@
       var l = langs[i];
       nameEl.style.fontFamily = l.font || '';
       nameEl.style.fontWeight = l.font ? '700' : '';
-      await type(gt, l.greet, 58); await sleep(110);
+      // Calm pace: ~85 ms per character, each language held ~4 s so it can actually be read.
+      await type(gt, l.greet, 80); await sleep(180);
       navSync.onNameStart();
-      await type(nt, l.name, 50); await sleep(2500);
+      await type(nt, l.name, 85); await sleep(4000);
       navSync.onNameErase();
-      await erase(nt, 26); await sleep(80); await erase(gt, 26);
-      await sleep(360); i = (i + 1) % langs.length;
+      await erase(nt, 40); await sleep(120); await erase(gt, 40);
+      await sleep(650); i = (i + 1) % langs.length;
     }
   }
 
