@@ -9,6 +9,8 @@ This site uses the **bryl-minimal** design language (Bryl Lim, MIT — see `LICE
 
 Plain HTML/CSS/JS, no build step, no framework. Never add one.
 
+**Cache-busting:** every page links CSS/JS as `assets/...?v=YYYYMMDD`. Whenever you change a file in `assets/css` or `assets/js`, bump that value on all pages (`index.html` and every `notes/*.html`) so returning visitors don't get stale styles with new markup.
+
 ## Never remove or replace
 
 These are Joana's signature features. Keep them working after every change:
@@ -17,7 +19,7 @@ These are Joana's signature features. Keep them working after every change:
 2. **Navy palette** — the tokens below. Don't collapse to black-and-white, don't introduce new hues.
 3. **Skills globe** — Three.js wireframe globe with orbiting icons (`#globe-container`, `assets/js/globe.js`, three.js r128 from cdnjs).
 4. **Name in different languages** — typewriter cycling 11 greetings incl. Korean/Japanese/Chinese (`langs` in `assets/js/main.js`); the sidebar "dvphnc" types/erases in sync (`navSync`).
-5. **Blue duotone headshot** — two stacked copies with SVG filters `#duo-light` / `#duo-dark`, cross-faded by `html.dark`.
+5. **Dithered blue duotone headshot** — a 1-bit Floyd–Steinberg dither of the photo (`assets/img/headshot-dither-240.png` desktop, `-136.png` phone, served via `<picture>` at exactly those sizes with `image-rendering: pixelated`, no border so nothing rescales it), coloured by SVG filters `#duo-light` / `#duo-dark` on two stacked copies cross-faded by `html.dark`. To regenerate from a new photo (ffmpeg): `scale=S:S:flags=lanczos,format=gray,curves=all='0/0 0.3/0.16 0.6/0.48 0.8/0.74 0.87/0.95 0.9/1 1/1',unsharp=5:5:0.7` → `paletteuse=dither=floyd_steinberg` against a 16×16 black/white palette → `format=monob`, for S = 240 and 136.
 6. **Easter eggs** — Konami code opens the flag modal; the hidden HTML-comment flag `dvphnc{y0u_f0und_m3_g00d_r3c0n}`.
 
 ## Tokens (`assets/css/site.css`)

@@ -209,7 +209,11 @@ html.theme-switching *, html.theme-switching *::before, html.theme-switching *::
   border: 1px solid var(--g200); background: var(--g100);
   box-shadow: var(--shadow);
 }
-.portrait img { width: 100%; height: 100%; object-fit: cover; }
+.portrait img { width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; }
+/* dithered photo carries its own texture: hairline as an inset ring (not a border) so the
+   image renders at exactly 240 / 136 px, and no halftone dissolve on top */
+.portrait { border: 0; }
+.portrait::after { content: ''; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px var(--g200); pointer-events: none; }
 /* blue duotone that follows the theme — two stacked copies, cross-faded */
 .portrait .duo { position: absolute; inset: 0; transition: opacity .5s; }
 .portrait .duo-light { filter: url(#duo-light) contrast(1.05); }
@@ -217,13 +221,6 @@ html.theme-switching *, html.theme-switching *::before, html.theme-switching *::
 html.dark .portrait .duo-light { opacity: 0; }
 html.dark .portrait .duo-dark { opacity: 1; }
 @media (max-width: 719px) { .portrait { max-width: 8.5rem; border-radius: 14px; } .portrait-ph span:first-child { font-size: 30px; } .hero-name { min-height: 0; } }
-.portrait::after { /* halftone dissolve along the bottom */
-  content: ''; position: absolute; inset: auto 0 0 0; height: 38%;
-  background-image: radial-gradient(var(--bg) 1.1px, transparent 1.4px);
-  background-size: 6px 6px;
-  -webkit-mask-image: linear-gradient(to top, #000 10%, transparent);
-          mask-image: linear-gradient(to top, #000 10%, transparent);
-}
 .portrait-ph {
   position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
   background-image: radial-gradient(var(--dot) 1px, transparent 1.3px); background-size: 9px 9px;
