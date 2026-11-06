@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>CWE-89: SQL Injection · SyberVault · dvphnc</title>
-  <meta name="description" content="The crown jewel of web vulnerabilities — a SyberVault security note by Joana Daphne Sy (dvphnc)."/>
+  <meta name="description" content="The crown jewel of web vulnerabilities. A SyberVault security note by Joana Daphne Sy (dvphnc)."/>
   <meta name="color-scheme" content="light dark"/>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23001a5e'/%3E%3Cg fill='%234d9fff'%3E%3Crect x='7' y='8' width='4' height='16'/%3E%3Crect x='11' y='8' width='6' height='4'/%3E%3Crect x='11' y='20' width='6' height='4'/%3E%3Crect x='17' y='12' width='4' height='8'/%3E%3C/g%3E%3Crect x='23' y='20' width='3' height='4' fill='%2380c0ff'/%3E%3C/svg%3E"/>
   <script>
@@ -13,8 +13,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap"/>
-  <link rel="stylesheet" href="../assets/css/site.css?v=202611071"/>
-  <link rel="stylesheet" href="../assets/css/note.css?v=202611071"/>
+  <link rel="stylesheet" href="../assets/css/site.css?v=202611072"/>
+  <link rel="stylesheet" href="../assets/css/note.css?v=202611072"/>
 </head>
 <body>
 
@@ -63,7 +63,7 @@
       <p class="micro crumb enter" style="--d:50ms"><a href="index.html">notes archive</a> / threats &amp; attacks</p>
       <h1 class="read-title enter" style="--d:90ms">CWE-89: SQL Injection</h1>
       <p class="read-sub enter" style="--d:130ms">The crown jewel of web vulnerabilities</p>
-      <p class="read-meta micro enter" style="--d:170ms"><span id="readTime">— min read</span> · joana daphne sy</p>
+      <p class="read-meta micro enter" style="--d:170ms"><span id="readTime">min read</span> · joana daphne sy</p>
 
       <figure class="read-cover enter" style="--d:210ms"><img src="../covers/sqli.webp" alt="CWE-89: SQL Injection" width="1200" height="525"/></figure>
 
@@ -72,7 +72,7 @@
         SQL Injection (SQLi) is one of the most notorious and impactful web vulnerabilities. It occurs when a web application builds a database query using <strong>unvalidated user input</strong>, allowing attackers to manipulate SQL commands and gain unauthorized access to data.
       </p>
 <p>
-        When software fails to <strong>neutralize special characters</strong> (like <code>'</code>, <code>"</code>, <code>;</code>, <code>--</code>), attackers can alter how queries are executed — often with devastating results.
+        When software fails to <strong>neutralize special characters</strong> (like <code>'</code>, <code>"</code>, <code>;</code>, <code>--</code>), attackers can alter how queries are executed, often with devastating results.
       </p>
 <h2 id="sec-what-is-sql">What Is SQL?</h2>
 <p>
@@ -99,7 +99,7 @@ cursor.execute(query)</code></pre>
 <table>
 <tr><th>Input Field</th><th>Attacker Enters</th><th>Result</th></tr>
 <tr><td><strong>Username</strong></td><td><code>' OR '1'='1</code></td><td>Bypasses authentication</td></tr>
-<tr><td><strong>Password</strong></td><td><code>anything</code></td><td>Ignored — always true</td></tr>
+<tr><td><strong>Password</strong></td><td><code>anything</code></td><td>Ignored, always true</td></tr>
 </table>
 <h2 id="sec-why-sql-injection-is-dangerous">Why SQL Injection Is Dangerous</h2>
 <table>
@@ -130,7 +130,7 @@ cursor.execute(query)</code></pre>
         <div class="review">
         <details><summary>What is SQL Injection?</summary><p>Inserting malicious SQL via unvalidated input to manipulate database operations.</p></details>
         <details><summary>What does ' OR '1'='1 do?</summary><p>Makes the WHERE clause always true, bypassing login authentication.</p></details>
-        <details><summary>Best prevention for SQLi?</summary><p>Prepared statements — input is treated as data, never as executable SQL.</p></details>
+        <details><summary>Best prevention for SQLi?</summary><p>Prepared statements: input is treated as data, never as executable SQL.</p></details>
         <details><summary>What else can SQLi lead to?</summary><p>RCE via database features like xp_cmdshell; full server compromise.</p></details>
         </div>
       </section>
@@ -159,7 +159,7 @@ cursor.execute(query)</code></pre>
     </article>
   </main>
 
-  <script src="../assets/js/theme.js?v=202611071"></script>
-  <script src="../assets/js/note.js?v=202611071"></script>
+  <script src="../assets/js/theme.js?v=202611072"></script>
+  <script src="../assets/js/note.js?v=202611072"></script>
 </body>
 </html>

@@ -129,15 +129,11 @@
     setTimeout(start, 9000); // failsafe
   } else start();
 
-  /* ── Easter eggs (retained): Konami code → flag ── */
-  var modal = document.getElementById('flagModal');
-  function closeModal() { modal.classList.remove('show'); modal.setAttribute('aria-hidden', 'true'); }
-  modal.addEventListener('click', function (e) { if (e.target === modal || e.target.hasAttribute('data-close')) closeModal(); });
-  var ks = [], K = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+  /* Escape closes the phone menu */
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') { closeModal(); if (overlay.classList.contains('open')) menu(false); }
-    ks.push(e.keyCode); ks = ks.slice(-10);
-    if (ks.join(',') === K.join(',')) { modal.classList.add('show'); modal.setAttribute('aria-hidden', 'false'); }
+    if (e.key === 'Escape' && overlay.classList.contains('open')) menu(false);
   });
+
+  /* Hidden CTF flag for source readers */
   document.body.insertAdjacentHTML('beforeend', '<!-- CTF FLAG: dvphnc{y0u_f0und_m3_g00d_r3c0n} -->');
 })();

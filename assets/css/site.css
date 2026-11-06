@@ -459,14 +459,9 @@ footer.foot::before {
           mask-image: linear-gradient(to right, transparent, #000 25%, #000 75%, transparent);
 }
 
-/* ── Toast / flag modal ─────────────────────────────────── */
+/* ── Toast ─────────────────────────────────────────────── */
 .toast { position: fixed; bottom: 24px; left: 50%; transform: translate(-50%, 12px); z-index: 90; background: var(--ink); color: var(--bg); font-family: var(--mono); font-size: 12px; padding: 8px 14px; border-radius: 8px; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
-.modal { position: fixed; inset: 0; z-index: 95; display: flex; align-items: center; justify-content: center; padding: 1rem; background: rgba(0, 10, 40, .3); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); opacity: 0; pointer-events: none; transition: opacity .2s; }
-.modal.show { opacity: 1; pointer-events: auto; }
-.modal-panel { width: 100%; max-width: 24rem; background: var(--bg); border: 1px solid var(--g200); border-radius: 16px; padding: 1.75rem; text-align: center; box-shadow: 0 40px 90px -20px rgba(0, 10, 40, .35); transform: scale(.95); transition: transform .2s var(--ease); }
-.modal.show .modal-panel { transform: scale(1); }
-.flag-value { margin: 1rem 0; padding: 10px; border-radius: 8px; background: var(--g100); border: 1px solid var(--g200); font-family: var(--mono); font-size: 12.5px; color: var(--accent); word-break: break-all; }
 
 /* ── Entrance motion ────────────────────────────────────── */
 .js .enter { opacity: 0; transform: translateY(12px); }
