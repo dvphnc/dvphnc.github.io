@@ -166,6 +166,9 @@ html.theme-switching *, html.theme-switching *::before, html.theme-switching *::
 .overlay nav { margin-top: 2rem; }
 .overlay .side-nav a { font-size: 20px; padding: 10px 0; color: var(--g500); border-bottom: 1px solid var(--g200); }
 .overlay .side-nav .num { font-size: 14px; }
+.overlay-foot { margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--g200); display: flex; align-items: center; justify-content: space-between; }
+.overlay-foot .theme-seg button { width: 40px; height: 34px; }
+.overlay-foot .theme-seg svg { width: 16px; height: 16px; }
 
 /* ── Main column ────────────────────────────────────────── */
 .main { position: relative; }
@@ -218,7 +221,8 @@ html.theme-switching *, html.theme-switching *::before, html.theme-switching *::
 .portrait .duo-dark { filter: url(#duo-dark); opacity: 0; }
 html.dark .portrait .duo-light { opacity: 0; }
 html.dark .portrait .duo-dark { opacity: 1; }
-@media (max-width: 719px) { .portrait { max-width: 8.5rem; } .portrait-ph span:first-child { font-size: 30px; } .hero-name { min-height: 0; } }
+/* phones: the portrait leads, large and centred (after bryllim.com's mobile hero) */
+@media (max-width: 719px) { .portrait { max-width: 18rem; margin-inline: auto; } .portrait-ph span:first-child { font-size: 30px; } .hero-name { min-height: 0; } }
 .portrait-ph {
   position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
   background-image: radial-gradient(var(--dot) 1px, transparent 1.3px); background-size: 9px 9px;
@@ -260,12 +264,15 @@ html.dark .portrait .duo-dark { opacity: 1; }
 .cell { padding: 1rem 1rem 1rem 0; border-bottom: 1px solid var(--g200); display: flex; align-items: center; gap: 12px; min-width: 0; }
 .cell + .cell { padding-left: 1rem; border-left: 1px solid var(--g200); }
 @media (min-width: 640px) { .cell:nth-child(3n+1) { padding-left: 0; border-left: 0; } }
+/* phones: highlights stack as full-width rows, the three stats stay in one row of three */
 @media (max-width: 639px) {
-  .cell:nth-child(odd) { padding-left: 0; border-left: 0; }
-  .cell:nth-child(3) { grid-column: 1 / -1; }
-  .cell:nth-child(n+4) { padding-left: 1rem; border-left: 1px solid var(--g200); }
-  .cell:nth-child(4) { padding-left: 0; border-left: 0; }
-  .cell:nth-child(6) { grid-column: 1 / -1; padding-left: 0; border-left: 0; }
+  .cells { grid-template-columns: repeat(3, 1fr); }
+  .cell, .cell + .cell { padding: .8rem 0; border-left: 0; }
+  .cell:not(.stat) { grid-column: 1 / -1; }
+  .cell.stat { padding: .9rem .75rem; min-width: 0; }
+  .cell.stat:nth-child(4) { padding-left: 0; }
+  .cell.stat + .cell.stat { border-left: 1px solid var(--g200); }
+  .cell-stat { font-size: 1.6rem; }
 }
 .cell-logo { width: 30px; height: 30px; border-radius: 7px; background: #fff; padding: 4px; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,.15); display: flex; align-items: center; justify-content: center; }
 .cell-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
@@ -387,7 +394,13 @@ a.cert:hover .cert-verify { color: var(--accent); }
 .note-desc { font-size: 13px; color: var(--g500); }
 .note .arr { font-family: var(--mono); font-size: 12px; color: var(--g400); transition: transform .2s, color .2s; }
 .note a:hover .arr { transform: translate(2px, -2px); color: var(--ink); }
-@media (max-width: 560px) { .note a { grid-template-columns: 1fr auto; } .note-tag { grid-column: 1 / -1; } }
+/* phones: one compact line per note — tag · title (truncated) · arrow, descriptions hidden */
+@media (max-width: 560px) {
+  .note a { grid-template-columns: 4.25rem minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: .75rem 0; }
+  .note a > div { min-width: 0; }
+  .note-title { font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .note-desc { display: none; }
+}
 
 /* ── Contact ────────────────────────────────────────────── */
 .contact-card { padding: 1.5rem; }
