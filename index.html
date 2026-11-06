@@ -19,9 +19,24 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap"/>
-  <link rel="stylesheet" href="assets/css/site.css?v=202611070"/>
+  <link rel="stylesheet" href="assets/css/site.css?v=202611071"/>
 </head>
 <body>
+
+  <!-- Logo filters: every issuer/brand logo is drawn in the theme ink (navy in light, white in dark).
+       #ink  = solid silhouette for simple marks; #ink-line = keeps the line detail of seals (dark parts -> ink, light parts -> clear). -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <filter id="ink" color-interpolation-filters="sRGB">
+      <feFlood class="ink-flood" result="c"/>
+      <feComposite in="c" in2="SourceAlpha" operator="in"/>
+    </filter>
+    <filter id="ink-line" color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -0.2126 -0.7152 -0.0722 0 1" result="dark"/>
+      <feComposite in="dark" in2="SourceAlpha" operator="in" result="mask"/>
+      <feFlood class="ink-flood" result="c"/>
+      <feComposite in="c" in2="mask" operator="in"/>
+    </filter>
+  </svg>
 
   <!-- Boot screen (retained) -->
   <div id="boot-screen" aria-hidden="true">
@@ -113,12 +128,13 @@
       <!-- ═══ Hero ═══ -->
       <section class="hero" aria-labelledby="heroName">
         <div class="halftone hero-dots" aria-hidden="true"></div>
+        <div class="halftone hero-dots-bl" aria-hidden="true"></div>
         <div class="hero-grid">
           <div class="portrait enter" style="--d:50ms">
             <!-- Blue duotone: one copy per theme, cross-faded by .dark (filters defined below) -->
             <!-- fine-grain dithered portrait with a transparent backdrop (one file for both themes, identical dots): 1-bit dither made at 2x the display size, scaled smoothly so the grain stays fine -->
-            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611070"/><img class="duo duo-light" src="assets/img/headshot-cutout-576.png?v=202611070" alt="Portrait of Joana Daphne Sy" width="240" height="240" fetchpriority="high"/></picture>
-            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611070"/><img class="duo duo-dark" src="assets/img/headshot-cutout-576.png?v=202611070" alt="" aria-hidden="true" width="240" height="240"/></picture>
+            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611071"/><img class="duo duo-light" src="assets/img/headshot-cutout-576.png?v=202611071" alt="Portrait of Joana Daphne Sy" width="240" height="240" fetchpriority="high"/></picture>
+            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611071"/><img class="duo duo-dark" src="assets/img/headshot-cutout-576.png?v=202611071" alt="" aria-hidden="true" width="240" height="240"/></picture>
             <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
               <!-- light theme: shadows #002a78 → highlights #e8f1ff -->
               <filter id="duo-light" color-interpolation-filters="sRGB">
@@ -176,11 +192,11 @@
             <div><p class="cell-title">AI Vision Challenge</p><p class="micro">winner · aivf manila 2026</p></div>
           </div>
           <div class="cell">
-            <span class="cell-logo"><img src="assets/logos/neu.webp" alt="" width="22" height="22"/></span>
+            <span class="cell-logo"><img class="logo logo-seal" src="assets/logos/neu.webp" alt="" width="22" height="22"/></span>
             <div><p class="cell-title">Youth Forum Org</p><p class="micro">president · 10 student orgs</p></div>
           </div>
           <div class="cell">
-            <span class="cell-logo"><img src="assets/logos/utokyo.svg" alt="" width="22" height="22"/></span>
+            <span class="cell-logo"><img class="logo" src="assets/logos/utokyo.svg" alt="" width="22" height="22"/></span>
             <div><p class="cell-title">GCI World · U-Tokyo</p><p class="micro">data science &amp; ai trainee</p></div>
           </div>
           <div class="cell stat"><span class="cell-stat">7</span><span class="micro">events &amp; summits</span></div>
@@ -194,12 +210,12 @@
         <div class="sec-head"><h2 class="sec-num" id="h-events">01 — events &amp; conferences</h2><span class="micro">open to ai &amp; youth events</span></div>
         <ul class="events">
           <li class="event"><span class="event-date">Oct 2026</span><span class="row-logo row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span><div class="event-main"><p class="event-name">AI Vision Forum Manila 2026</p><p class="event-org">Shangri-La The Fort, BGC · won the AI Vision Challenge</p></div><span class="pill inv">winner</span></li>
-          <li class="event"><span class="event-date">Sep 2026</span><span class="row-logo"><img src="assets/logos/ched.svg" alt="CHED"/></span><div class="event-main"><p class="event-name">ASEAN Campus Connect &amp; Youth Leadership Summit 2026</p><p class="event-org">CHED NCR · ~300 student leaders from 53 schools</p></div><span class="pill">student leader</span></li>
-          <li class="event"><span class="event-date">Jun 2026</span><span class="row-logo"><img src="assets/logos/vjal.png" alt="Vjal Institute"/></span><div class="event-main"><p class="event-name"><a class="tl" href="https://cert.vjal.ai/certificate/?uid=6582547825718493249" target="_blank" rel="noopener">AI Empowerment for Communities Workshop ↗</a></p><p class="event-org">Vjal Institute · prompt engineering &amp; AI workflows</p></div><span class="pill">workshop</span></li>
-          <li class="event"><span class="event-date">Jun 2026</span><span class="row-logo"><img src="assets/logos/dict.svg" alt="DICT"/></span><div class="event-main"><p class="event-name">Artificial Intelligence Prompts 101</p><p class="event-org">Department of Information and Communications Technology</p></div><span class="pill">workshop</span></li>
-          <li class="event"><span class="event-date">Oct 2025</span><span class="row-logo"><img src="assets/logos/british-council.svg" alt="British Council"/></span><div class="event-main"><p class="event-name">The Role of Language Educators in the Era of AI</p><p class="event-org">British Council · ASEAN TeachingEnglish Conference 2025</p></div><span class="pill">conference</span></li>
-          <li class="event"><span class="event-date">Oct 2025</span><span class="row-logo"><img src="assets/logos/british-council.svg" alt="British Council"/></span><div class="event-main"><p class="event-name">ELT and Sustainability — What Should I Be Doing?</p><p class="event-org">British Council · ASEAN TeachingEnglish Conference 2025</p></div><span class="pill">conference</span></li>
-          <li class="event"><span class="event-date">Mar 2025</span><span class="row-logo"><img src="assets/logos/neu.webp" alt="New Era University"/></span><div class="event-main"><p class="event-name">Lessons, Trends &amp; Opportunity in the IT Industry: Web Development</p><p class="event-org">New Era University</p></div><span class="pill">talk</span></li>
+          <li class="event"><span class="event-date">Sep 2026</span><span class="row-logo"><img class="logo logo-seal" src="assets/logos/ched.svg" alt="CHED"/></span><div class="event-main"><p class="event-name">ASEAN Campus Connect &amp; Youth Leadership Summit 2026</p><p class="event-org">CHED NCR · ~300 student leaders from 53 schools</p></div><span class="pill">student leader</span></li>
+          <li class="event"><span class="event-date">Jun 2026</span><span class="row-logo"><img class="logo" src="assets/logos/vjal.png" alt="Vjal Institute"/></span><div class="event-main"><p class="event-name"><a class="tl" href="https://cert.vjal.ai/certificate/?uid=6582547825718493249" target="_blank" rel="noopener">AI Empowerment for Communities Workshop ↗</a></p><p class="event-org">Vjal Institute · prompt engineering &amp; AI workflows</p></div><span class="pill">workshop</span></li>
+          <li class="event"><span class="event-date">Jun 2026</span><span class="row-logo"><img class="logo logo-seal" src="assets/logos/dict.svg" alt="DICT"/></span><div class="event-main"><p class="event-name">Artificial Intelligence Prompts 101</p><p class="event-org">Department of Information and Communications Technology</p></div><span class="pill">workshop</span></li>
+          <li class="event"><span class="event-date">Oct 2025</span><span class="row-logo"><img class="logo" src="assets/logos/british-council.svg" alt="British Council"/></span><div class="event-main"><p class="event-name">The Role of Language Educators in the Era of AI</p><p class="event-org">British Council · ASEAN TeachingEnglish Conference 2025</p></div><span class="pill">conference</span></li>
+          <li class="event"><span class="event-date">Oct 2025</span><span class="row-logo"><img class="logo" src="assets/logos/british-council.svg" alt="British Council"/></span><div class="event-main"><p class="event-name">ELT and Sustainability — What Should I Be Doing?</p><p class="event-org">British Council · ASEAN TeachingEnglish Conference 2025</p></div><span class="pill">conference</span></li>
+          <li class="event"><span class="event-date">Mar 2025</span><span class="row-logo"><img class="logo logo-seal" src="assets/logos/neu.webp" alt="New Era University"/></span><div class="event-main"><p class="event-name">Lessons, Trends &amp; Opportunity in the IT Industry: Web Development</p><p class="event-org">New Era University</p></div><span class="pill">talk</span></li>
         </ul>
       </section>
 
@@ -210,11 +226,11 @@
         <ol class="rows">
           <li class="row">
             <span class="row-year">2022</span>
-            <div class="row-side"><span class="row-logo"><img src="assets/logos/neu.webp" alt="" width="24" height="24"/></span><div><p class="row-title">President</p><p class="row-org">Youth Forum Organization · New Era University</p><p class="row-note">Led strategy and operations for 10 academic organizations, organized campus events and leadership summits, and automated event logistics across the clubs.</p></div></div>
+            <div class="row-side"><span class="row-logo"><img class="logo logo-seal" src="assets/logos/neu.webp" alt="" width="24" height="24"/></span><div><p class="row-title">President</p><p class="row-org">Youth Forum Organization · New Era University</p><p class="row-note">Led strategy and operations for 10 academic organizations, organized campus events and leadership summits, and automated event logistics across the clubs.</p></div></div>
           </li>
           <li class="row">
             <span class="row-year">2021</span>
-            <div class="row-side"><span class="row-logo"><img src="assets/logos/neu.webp" alt="" width="24" height="24"/></span><div><p class="row-title">Executive Secretary</p><p class="row-org">Youth Forum Organization · New Era University</p><p class="row-note">Automated event registration and attendee tracking, and used AI tools to prepare agendas, summarize minutes and track action items.</p></div></div>
+            <div class="row-side"><span class="row-logo"><img class="logo logo-seal" src="assets/logos/neu.webp" alt="" width="24" height="24"/></span><div><p class="row-title">Executive Secretary</p><p class="row-org">Youth Forum Organization · New Era University</p><p class="row-note">Automated event registration and attendee tracking, and used AI tools to prepare agendas, summarize minutes and track action items.</p></div></div>
           </li>
           <li class="row">
             <span class="row-year">2025</span>
@@ -229,11 +245,11 @@
         <ol class="rows">
           <li class="row">
             <span class="row-year">2026</span>
-            <div class="row-side"><span class="row-logo"><img src="assets/logos/utokyo.svg" alt="" width="24" height="24"/></span><div><p class="row-title">Data Science &amp; AI Trainee</p><p class="row-org">GCI World · Matsuo-Iwasawa Lab, The University of Tokyo</p></div></div>
+            <div class="row-side"><span class="row-logo"><img class="logo" src="assets/logos/utokyo.svg" alt="" width="24" height="24"/></span><div><p class="row-title">Data Science &amp; AI Trainee</p><p class="row-org">GCI World · Matsuo-Iwasawa Lab, The University of Tokyo</p></div></div>
           </li>
           <li class="row">
             <span class="row-year">now</span>
-            <div class="row-side"><span class="row-logo"><img src="assets/logos/neu.webp" alt="" width="24" height="24"/></span><div><p class="row-title">BS Information Technology — senior year</p><p class="row-org">New Era University · Quezon City</p><div class="pills" style="margin-top:.45rem"><span class="pill inv">president's lister</span></div></div></div>
+            <div class="row-side"><span class="row-logo"><img class="logo logo-seal" src="assets/logos/neu.webp" alt="" width="24" height="24"/></span><div><p class="row-title">BS Information Technology — senior year</p><p class="row-org">New Era University · Quezon City</p><div class="pills" style="margin-top:.45rem"><span class="pill inv">president's lister</span></div></div></div>
           </li>
         </ol>
       </section>
@@ -326,28 +342,28 @@
 
         <div class="grid-3">
           <a class="card cert" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=C40D337A86BE52AE8C02A90C0BC838A9226F3044D11CF05F86A518AAFDF7103F" target="_blank" rel="noopener">
-            <span class="cert-logo wide"><img src="assets/logos/oracle.svg" alt="Oracle"/></span>
+            <span class="cert-logo wide"><img class="logo" src="assets/logos/oracle.svg" alt="Oracle"/></span>
             <h3 class="cert-name">OCI AI Foundations Associate</h3>
             <p class="micro cert-issuer">oracle</p>
             <p class="cert-meta">Dec 2024 · valid to Dec 2026</p>
             <span class="cert-verify">‹ verify ›</span>
           </a>
           <a class="card cert" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=D43A8C93FE30161F5AF6077AE49AB9FE797A13EA6EB10947B7E30B9B0DFD2DC1" target="_blank" rel="noopener">
-            <span class="cert-logo wide"><img src="assets/logos/oracle.svg" alt="Oracle"/></span>
+            <span class="cert-logo wide"><img class="logo" src="assets/logos/oracle.svg" alt="Oracle"/></span>
             <h3 class="cert-name">OCI Foundations Associate</h3>
             <p class="micro cert-issuer">oracle</p>
             <p class="cert-meta">Dec 2024 · valid to Dec 2026</p>
             <span class="cert-verify">‹ verify ›</span>
           </a>
           <a class="card cert" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=D43A8C93FE30161F5AF6077AE49AB9FE612D8698DFBD1116CC92691601BF4C03" target="_blank" rel="noopener">
-            <span class="cert-logo wide"><img src="assets/logos/oracle.svg" alt="Oracle"/></span>
+            <span class="cert-logo wide"><img class="logo" src="assets/logos/oracle.svg" alt="Oracle"/></span>
             <h3 class="cert-name">OCI Data Foundations Associate</h3>
             <p class="micro cert-issuer">oracle</p>
             <p class="cert-meta">Dec 2024 · valid to Dec 2026</p>
             <span class="cert-verify">‹ verify ›</span>
           </a>
           <a class="card cert" href="https://edu.google.accredible.com/79c03d03-4077-4696-8a07-d2b83d14b78a" target="_blank" rel="noopener">
-            <span class="cert-logo"><img src="assets/logos/google.svg" alt="Google"/></span>
+            <span class="cert-logo"><img class="logo" src="assets/logos/google.svg" alt="Google"/></span>
             <h3 class="cert-name">Gemini Certified University Student</h3>
             <p class="micro cert-issuer">google for education</p>
             <p class="cert-meta">Jan 2026 · valid to Jan 2029</p>
@@ -358,28 +374,28 @@
         <h3 class="sub-head">training</h3>
         <div class="grid-3">
           <div class="card cert">
-            <span class="cert-logo"><img src="assets/logos/utokyo.svg" alt="The University of Tokyo"/></span>
+            <span class="cert-logo"><img class="logo" src="assets/logos/utokyo.svg" alt="The University of Tokyo"/></span>
             <h3 class="cert-name">GCI World 2026 — Data Science &amp; AI</h3>
             <p class="micro cert-issuer">matsuo-iwasawa lab · u-tokyo</p>
             <p class="cert-meta">Sep 2026 · 3-month program</p>
             <span class="pill inv">in progress</span>
           </div>
           <a class="card cert" href="https://www.coursera.org/account/accomplishments/specialization/Y05IYRFJA1MY" target="_blank" rel="noopener">
-            <span class="cert-logo wide pair"><img src="assets/logos/isc2.svg" alt="ISC2"/><img src="assets/logos/coursera.svg" alt="Coursera"/></span>
+            <span class="cert-logo wide pair"><img class="logo" src="assets/logos/isc2.svg" alt="ISC2"/><img class="logo" src="assets/logos/coursera.svg" alt="Coursera"/></span>
             <h3 class="cert-name">Certified in Cybersecurity (CC) — Official Training</h3>
             <p class="micro cert-issuer">isc2 · coursera</p>
             <p class="cert-meta">Oct 2025 · 5-course specialization</p>
             <span class="cert-verify">‹ verify ›</span>
           </a>
           <a class="card cert" href="https://www.linkedin.com/learning/certificates/f41501f6eb854424385a648f7e826349e9b04b92a62885f6f95aca9b3bdb5e67/" target="_blank" rel="noopener">
-            <span class="cert-logo"><img src="assets/logos/adobe.svg" alt="Adobe"/></span>
+            <span class="cert-logo"><img class="logo" src="assets/logos/adobe.svg" alt="Adobe"/></span>
             <h3 class="cert-name">Essential Skills in Generative AI for Creatives</h3>
             <p class="micro cert-issuer">adobe · linkedin learning</p>
             <p class="cert-meta">Aug 2025 · passed final exam</p>
             <span class="cert-verify">‹ verify ›</span>
           </a>
           <a class="card cert" href="https://courses.cognitiveclass.ai/certificates/fea1a489739a4b02ab4c9d266a0ade0f" target="_blank" rel="noopener">
-            <span class="cert-logo wide"><svg viewBox="0 0 24 24" fill="#052FAD" role="img" aria-label="IBM" style="width:100%;height:100%"><path d="M23.544 15.993c.038 0 .06-.017.06-.053v-.036c0-.035-.022-.052-.06-.052h-.09v.14zm-.09.262h-.121v-.498h.225c.112 0 .169.066.169.157 0 .079-.036.129-.09.15l.111.19h-.133l-.092-.17h-.07zm.434-.222v-.062c0-.2-.157-.357-.363-.357a.355.355 0 00-.363.357v.062c0 .2.156.358.363.358a.355.355 0 00.363-.358zm-.838-.03c0-.28.212-.492.475-.492.264 0 .475.213.475.491 0 .279-.211.491-.475.491a.477.477 0 01-.475-.49zM16.21 8.13l-.216-.624h-3.56v.624zm.413 1.19l-.216-.623h-3.973v.624zm2.65 7.147h3.107v-.624h-3.108zm0-1.192h3.107v-.623h-3.108zm0-1.19h1.864v-.624h-1.865zm0-1.191h1.864v-.624h-1.865zm0-1.191h1.864v-.624h-3.555l-.175.504-.175-.504h-3.555v.624h1.865v-.574l.2.574h3.33l.2-.574zm1.864-1.815h-3.142l-.217.624h3.359zm-7.46 3.006h1.865v-.624h-1.865zm0 1.19h1.865v-.623h-1.865zm-1.243 1.191h3.108v-.623h-3.108zm0 1.192h3.108v-.624h-3.108zm6.386-8.961l-.216.624h3.776v-.624zm-.629 1.815h4.19v-.624h-3.974zm-4.514 1.19h3.359l-.216-.623h-3.143zm2.482 2.383h2.496l.218-.624h-2.932zm.417 1.19h1.662l.218-.623h-2.098zm.416 1.191h.83l.218-.623h-1.266zm.414 1.192l.217-.624h-.432zm-12.433-.006l4.578.006c.622 0 1.18-.237 1.602-.624h-6.18zm4.86-3v.624h2.092c0-.216-.03-.425-.083-.624zm-3.616.624h1.865v-.624H6.217zm3.617-3.573h2.008c.053-.199.083-.408.083-.624H9.834zm-3.617 0h1.865v-.624H6.217zM9.55 7.507H4.973v.624h6.18a2.36 2.36 0 00-1.602-.624zm2.056 1.191H4.973v.624h6.884a2.382 2.382 0 00-.25-.624zm-5.39 2.382v.624h4.87c.207-.176.382-.387.519-.624zm4.87 1.191h-4.87v.624h5.389a2.39 2.39 0 00-.519-.624zm-6.114 3.006h6.634c.11-.193.196-.402.25-.624H4.973zM0 8.13h4.352v-.624H0zm0 1.191h4.352v-.624H0zm1.243 1.191h1.865v-.624H1.243zm0 1.191h1.865v-.624H1.243zm0 1.19h1.865v-.623H1.243zm0 1.192h1.865v-.624H1.243zM0 15.276h4.352v-.623H0zm0 1.192h4.352v-.624H0Z"/></svg></span>
+            <span class="cert-logo wide"><svg viewBox="0 7.3 24 9.4" fill="currentColor" role="img" aria-label="IBM" class="logo-svg"><path d="M23.544 15.993c.038 0 .06-.017.06-.053v-.036c0-.035-.022-.052-.06-.052h-.09v.14zm-.09.262h-.121v-.498h.225c.112 0 .169.066.169.157 0 .079-.036.129-.09.15l.111.19h-.133l-.092-.17h-.07zm.434-.222v-.062c0-.2-.157-.357-.363-.357a.355.355 0 00-.363.357v.062c0 .2.156.358.363.358a.355.355 0 00.363-.358zm-.838-.03c0-.28.212-.492.475-.492.264 0 .475.213.475.491 0 .279-.211.491-.475.491a.477.477 0 01-.475-.49zM16.21 8.13l-.216-.624h-3.56v.624zm.413 1.19l-.216-.623h-3.973v.624zm2.65 7.147h3.107v-.624h-3.108zm0-1.192h3.107v-.623h-3.108zm0-1.19h1.864v-.624h-1.865zm0-1.191h1.864v-.624h-1.865zm0-1.191h1.864v-.624h-3.555l-.175.504-.175-.504h-3.555v.624h1.865v-.574l.2.574h3.33l.2-.574zm1.864-1.815h-3.142l-.217.624h3.359zm-7.46 3.006h1.865v-.624h-1.865zm0 1.19h1.865v-.623h-1.865zm-1.243 1.191h3.108v-.623h-3.108zm0 1.192h3.108v-.624h-3.108zm6.386-8.961l-.216.624h3.776v-.624zm-.629 1.815h4.19v-.624h-3.974zm-4.514 1.19h3.359l-.216-.623h-3.143zm2.482 2.383h2.496l.218-.624h-2.932zm.417 1.19h1.662l.218-.623h-2.098zm.416 1.191h.83l.218-.623h-1.266zm.414 1.192l.217-.624h-.432zm-12.433-.006l4.578.006c.622 0 1.18-.237 1.602-.624h-6.18zm4.86-3v.624h2.092c0-.216-.03-.425-.083-.624zm-3.616.624h1.865v-.624H6.217zm3.617-3.573h2.008c.053-.199.083-.408.083-.624H9.834zm-3.617 0h1.865v-.624H6.217zM9.55 7.507H4.973v.624h6.18a2.36 2.36 0 00-1.602-.624zm2.056 1.191H4.973v.624h6.884a2.382 2.382 0 00-.25-.624zm-5.39 2.382v.624h4.87c.207-.176.382-.387.519-.624zm4.87 1.191h-4.87v.624h5.389a2.39 2.39 0 00-.519-.624zm-6.114 3.006h6.634c.11-.193.196-.402.25-.624H4.973zM0 8.13h4.352v-.624H0zm0 1.191h4.352v-.624H0zm1.243 1.191h1.865v-.624H1.243zm0 1.191h1.865v-.624H1.243zm0 1.19h1.865v-.623H1.243zm0 1.192h1.865v-.624H1.243zM0 15.276h4.352v-.623H0zm0 1.192h4.352v-.624H0Z"/></svg></span>
             <h3 class="cert-name">SQL and Relational Databases 101</h3>
             <p class="micro cert-issuer">ibm skills network · cognitive class</p>
             <p class="cert-meta">Oct 2024 · DB0101EN, passed</p>
@@ -435,10 +451,10 @@
     </div>
   </div>
 
-  <script src="assets/js/boot.js?v=202611070"></script>
-  <script src="assets/js/theme.js?v=202611070"></script>
-  <script src="assets/js/main.js?v=202611070"></script>
+  <script src="assets/js/boot.js?v=202611071"></script>
+  <script src="assets/js/theme.js?v=202611071"></script>
+  <script src="assets/js/main.js?v=202611071"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="assets/js/globe.js?v=202611070"></script>
+  <script src="assets/js/globe.js?v=202611071"></script>
 </body>
 </html>

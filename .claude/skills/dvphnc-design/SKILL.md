@@ -72,11 +72,11 @@ Shadows: `--shadow` / `--shadow-hover` (soft, big negative spread). In dark mode
 - `.events` / `.event` list (date · logo · name/org · pill)
 - `.notes` / `.note` list linking into `notes/`
 - `.btn` / `.btn.primary` (ink fill), `.theme-seg` (light / system / dark), `.toast`, `.modal`
-- Issuer logos live in `assets/logos/` and always sit on a **white tile** (several are dark and vanish on navy).
+- Issuer logos live in `assets/logos/` and are drawn **in the theme ink — no tiles, no colour** (after bryllim.com). Give marks `class="logo"` (SVG filter `#ink`: a solid ink silhouette) and seals/crests `class="logo logo-seal"` (`#ink-line`: dark parts → ink, light parts → clear, so CHED / DICT / NEU keep their detail instead of becoming discs). Both filters live in the hidden `<svg>` right after `<body>` in `index.html` and are coloured by `.ink-flood { flood-color: var(--ink) }`. Inline SVG marks use `fill="currentColor"`. Never reintroduce white tiles.
 
 ## Texture — halftone
 
-Dots via `radial-gradient(var(--dot) 1px, transparent 1.3px)` on a 9px grid (6px for photo dissolves), always masked so they fade out. **At most two per page**: the hero corner (`.hero-dots`) and photo/cover bottom dissolves. Don't add more.
+Dots via `radial-gradient(var(--dot) 1px, transparent 1.3px)` on a 13px grid for strips/fields (9px for clusters, 6px for photo dissolves), always masked so they fade out, at ~.5 opacity. Joana asked for the dots **throughout the page**, as bryllim.com does: the hero has two fields (`.hero-dots` top-right, `.hero-dots-bl` bottom-left); **every `.sec` opens with a dotted divider strip** (`.sec::before`); every other section has a round cluster blooming off the right end of that strip (`.sec:nth-of-type(odd)::after`, kept clear of headings and links); and `footer.foot::before` is a dotted band. Keep dots behind content, never over text.
 
 ## Motion
 

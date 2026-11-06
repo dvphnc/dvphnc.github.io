@@ -274,9 +274,9 @@ html.dark .portrait .duo-dark { opacity: 1; }
   .cell.stat + .cell.stat { border-left: 1px solid var(--g200); }
   .cell-stat { font-size: 1.6rem; }
 }
-.cell-logo { width: 30px; height: 30px; border-radius: 7px; background: #fff; padding: 4px; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,.15); display: flex; align-items: center; justify-content: center; }
-.cell-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
-.cell-icon { width: 30px; height: 30px; flex-shrink: 0; color: var(--accent); display: flex; align-items: center; justify-content: center; }
+.cell-logo { min-width: 34px; height: 28px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.cell-logo img { height: 24px; width: auto; max-width: 84px; object-fit: contain; }
+.cell-icon { width: 34px; height: 28px; flex-shrink: 0; color: var(--ink); display: flex; align-items: center; justify-content: center; }
 .cell-title { font-size: 13px; font-weight: 600; line-height: 1.3; }
 .cell-stat { display: block; font-family: var(--pixel); font-size: 1.9rem; line-height: 1; }
 .cell.stat { flex-direction: column; align-items: flex-start; gap: 6px; }
@@ -328,9 +328,10 @@ a.card:hover, .card.hoverable:hover { transform: translateY(-2px); box-shadow: v
 .row-org { font-size: 13px; color: var(--g500); }
 .row-note { font-size: 13px; color: var(--g400); margin-top: .25rem; }
 .row-side { display: flex; align-items: center; gap: 12px; }
-.row-logo { width: 34px; height: 34px; border-radius: 8px; background: #fff; padding: 5px; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,.15); display: flex; align-items: center; justify-content: center; }
+.row-logo { width: 34px; height: 30px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
 .row-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
-.row-icon { background: var(--g100); color: var(--accent); box-shadow: none; border: 1px solid var(--g200); }
+.row-logo img[src*="utokyo"] { max-width: none; width: 40px; } /* wordmark: let it run a little wider than the square marks */
+.row-icon { color: var(--ink); }
 
 /* ── Globe (retained) ───────────────────────────────────── */
 #globe-section { display: flex; justify-content: center; padding: .5rem 0 1rem; }
@@ -358,11 +359,10 @@ html:not(.dark) .skill-icon.hot .icon-badge { color: var(--ink); } /* light bran
 
 /* ── Certifications ─────────────────────────────────────── */
 .cert { align-items: center; text-align: center; padding: 1.4rem 1rem 1.1rem; }
-.cert-logo { width: 46px; height: 46px; border-radius: 10px; background: #fff; padding: 7px; box-shadow: 0 2px 8px rgba(0,0,0,.14); display: flex; align-items: center; justify-content: center; gap: 4px; }
-.cert-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
-.cert-logo.wide { width: 112px; padding: 8px 12px; }
-.cert-logo.pair { width: 156px; gap: 10px; }
-.cert-logo.wide img { width: 100%; height: 100%; min-width: 0; flex: 1 1 0; object-fit: contain; }
+.cert-logo { height: 34px; display: flex; align-items: center; justify-content: center; gap: 12px; }
+.cert-logo img { height: 100%; width: auto; max-width: 110px; object-fit: contain; }
+.cert-logo.wide img { height: 22px; } /* wordmarks sit smaller so they carry the same weight as square marks */
+.cert-logo .logo-svg { height: 22px; width: auto; aspect-ratio: 24 / 9.4; color: var(--ink); opacity: .85; }
 .cert-name { font-size: 14px; font-weight: 600; line-height: 1.35; margin-top: .9rem; letter-spacing: -.01em; }
 .cert-issuer { margin-top: .35rem; }
 .cert-meta { margin-top: .2rem; font-family: var(--mono); font-size: 10.5px; color: var(--g400); }
@@ -420,7 +420,44 @@ a.cert:hover .cert-verify { color: var(--accent); }
 @media (min-width: 640px) { .contact-meta { grid-template-columns: repeat(3, auto); justify-content: start; gap: 1.5rem; } }
 .contact-meta a:hover { color: var(--ink); }
 
-footer.foot { margin-top: 4rem; padding: 1.5rem 0 2.5rem; border-top: 1px solid var(--g200); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+footer.foot { position: relative; margin-top: 5rem; padding: 1.5rem 0 2.5rem; border-top: 1px solid var(--g200); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+
+/* ── Logos in ink (after bryllim.com: no tiles, single-colour marks) ── */
+.ink-flood { flood-color: var(--ink); }
+img.logo { filter: url(#ink); opacity: .85; transition: opacity .2s; }
+img.logo-seal { filter: url(#ink-line); opacity: .9; }
+a.card:hover img.logo, .event:hover img.logo, .row:hover img.logo { opacity: 1; }
+
+/* ── Halftone through the page (after bryllim.com) ── */
+/* a dotted strip opens every numbered section, fading in and out at the edges */
+.sec { position: relative; padding-top: 2.25rem; }
+.sec::before {
+  content: ''; display: block; height: 26px; margin-bottom: 1.6rem; opacity: .55;
+  background-image: radial-gradient(var(--dot) 1px, transparent 1.3px); background-size: 13px 13px;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 30%, #000 70%, transparent);
+          mask-image: linear-gradient(to right, transparent, #000 30%, #000 70%, transparent);
+}
+/* every other section: a small round cluster blooming out of the divider's right end (clear of headings and links) */
+.sec:nth-of-type(odd)::after {
+  content: ''; position: absolute; right: 2%; top: -10px; width: 112px; height: 112px; pointer-events: none; opacity: .5; z-index: 0;
+  background-image: radial-gradient(var(--dot) 1px, transparent 1.3px); background-size: 9px 9px;
+  -webkit-mask-image: radial-gradient(circle, #000 30%, transparent 70%);
+          mask-image: radial-gradient(circle, #000 30%, transparent 70%);
+}
+.sec-head { position: relative; z-index: 1; }
+/* second hero field, fading in from the bottom-left */
+.hero-dots-bl {
+  left: -1rem; bottom: -2rem; width: min(55%, 420px); height: 260px; opacity: .55;
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 0% 100%, #000 0%, transparent 70%);
+          mask-image: radial-gradient(ellipse 80% 80% at 0% 100%, #000 0%, transparent 70%);
+}
+/* dotted band above the footer */
+footer.foot::before {
+  content: ''; position: absolute; left: 0; right: 0; top: -44px; height: 30px; opacity: .55; pointer-events: none;
+  background-image: radial-gradient(var(--dot) 1px, transparent 1.3px); background-size: 13px 13px;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 25%, #000 75%, transparent);
+          mask-image: linear-gradient(to right, transparent, #000 25%, #000 75%, transparent);
+}
 
 /* ── Toast / flag modal ─────────────────────────────────── */
 .toast { position: fixed; bottom: 24px; left: 50%; transform: translate(-50%, 12px); z-index: 90; background: var(--ink); color: var(--bg); font-family: var(--mono); font-size: 12px; padding: 8px 14px; border-radius: 8px; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; }
