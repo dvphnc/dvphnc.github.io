@@ -98,7 +98,7 @@ To add a note: copy an existing note page, replace title, subtitle, category, co
 
 - Lead with **AI automation & youth leadership** (Joana's chosen direction, Nov 2026): AI-powered workflows, leading student communities, attending/volunteering/speaking at AI conferences and youth summits. Data & AI (GCI World) and web projects support it; security is archive-only.
 - Only describe automation work that's on her LinkedIn (Youth Forum: automated registration, attendee tracking, AI-assisted agendas/minutes). Never invent tools or numbers — the "Event operations automation" card is a placeholder until she confirms the tools and time saved.
-- The "read reflection ↗" / "original post" links point at her LinkedIn activity page until she shares the exact post URLs.
+- Story pages link her exact LinkedIn posts (tracking query strings like `utm_*` and `rcm` stripped). Any other "read reflection ↗" link points at her activity page until she shares that post's URL.
 - Keep the events count in the stat cell equal to featured cards + list rows in `01 · events & conferences`.
 
 ## Event stories (`events/*.html`), after bryllim.com's events
