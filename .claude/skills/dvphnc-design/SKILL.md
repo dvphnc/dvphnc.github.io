@@ -51,7 +51,7 @@ Shadows: `--shadow` / `--shadow-hover` (soft, big negative spread). In dark mode
 | Long-form | **Source Serif 4** | note-page body, pull quotes, flashcard answers only |
 
 - **Micro-label register** (`.micro`): 9–11px mono, UPPERCASE, +1px tracking, `--g400`. Timestamps, tags, captions.
-- **Section headers**: `<h2 class="sec-num">NN — name</h2>` in pixel font, lowercase, numbered in order. Homepage: 01 projects · 02 experience · 03 stack · 04 certifications · 05 notes · 06 contact.
+- **Section headers**: `<h2 class="sec-num">NN — name</h2>` in pixel font, lowercase, numbered in order. Homepage: 01 events & conferences · 02 leadership & experience · 03 projects · 04 stack · 05 certifications & training · 06 writing · 07 contact. Keep the sidebar and overlay nav lists in sync with these ids (`#events #experience #projects #stack #certifications #writing #contact`).
 - **Links**: text links get `class="tl"` (underline at 25% → 100% on hover). External links end in `↗`. Nav, cards and buttons are not underlined.
 
 ## Layout
@@ -86,15 +86,18 @@ Dots via `radial-gradient(var(--dot) 1px, transparent 1.3px)` on a 9px grid (6px
 - Everything is disabled under `prefers-reduced-motion`; the page must be complete when still.
 - **Never hide content until scroll** (no scroll-triggered reveals). The old site broke this way.
 
-## Note pages (`notes/*.html`)
+## Note pages (`notes/*.html`) — an archive, not a homepage section
 
-Twelve SyberVault notes share `assets/css/note.css` + `assets/js/note.js`. Structure: sidebar (← all notes, "on this page" TOC, category, theme switch) → crumb `05 — notes / category` → title → serif italic subtitle → reading time → cover (`covers/*.webp`, halftone dissolve) → `.prose` (serif 17px / 1.75) → pull quote → `quick review` (`<details>` flashcards) → `key terms` (`<dl class="terms">`) → prev/next `.pager` cards.
+Security is no longer part of the positioning, so the twelve SyberVault notes live at `notes/index.html` (the **notes archive**), linked once from the homepage footer ("security notes archive ↗"). Don't add them back to the homepage. Each note links to the archive (`index.html`), not to `../index.html#notes`. Notes share `assets/css/note.css` + `assets/js/note.js`. Structure: sidebar (← notes archive, "on this page" TOC, category, theme switch) → crumb `notes archive / category` → title → serif italic subtitle → reading time → cover (`covers/*.webp`, halftone dissolve) → `.prose` (serif 17px / 1.75) → pull quote → `quick review` (`<details>` flashcards) → `key terms` (`<dl class="terms">`) → prev/next `.pager` cards.
 
-To add a note: copy an existing note page, replace title, subtitle, category, cover, TOC (`<a href="#id">` matching each `<h2 id>`), prose, quote, flashcards and terms; then add it to the homepage `.notes` list, update the "NN notes" counts (stat cell + section header), and fix the prev/next links of its neighbours.
+To add a note: copy an existing note page, replace title, subtitle, category, cover, TOC (`<a href="#id">` matching each `<h2 id>`), prose, quote, flashcards and terms; then add it to the archive list in `notes/index.html` (and its "12 notes" meta line), and fix the prev/next links of its neighbours.
 
 ## Content rules
 
-- Lead with **Data & AI**; security, web dev and leadership support it.
+- Lead with **AI automation & youth leadership** (Joana's chosen direction, Nov 2026): AI-powered workflows, leading student communities, attending/volunteering/speaking at AI conferences and youth summits. Data & AI (GCI World) and web projects support it; security is archive-only.
+- Only describe automation work that's on her LinkedIn (Youth Forum: automated registration, attendee tracking, AI-assisted agendas/minutes). Never invent tools or numbers — the "Event operations automation" card is a placeholder until she confirms the tools and time saved.
+- `06 — writing` links her LinkedIn reflections; the hrefs currently point at her activity page until she shares the exact post URLs.
+- Keep the events count in the stat cell equal to the rows in `01 — events & conferences`.
 - Only claim what a credential page verifies. ISC2 is **CC official training (Coursera)**, not the CC certification. Oracle certs show "valid to" dates — update them on renewal.
 - Keep counts honest (certifications, training programs, notes).
 - Contact email: `dvphnc@gmail.com`. TryHackMe: `tryhackme.com/p/dvphnc`.
