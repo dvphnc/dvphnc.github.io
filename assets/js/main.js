@@ -133,7 +133,4 @@
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && overlay.classList.contains('open')) menu(false);
   });
-
-  /* Hidden CTF flag for source readers */
-  document.body.insertAdjacentHTML('beforeend', '<!-- CTF FLAG: dvphnc{y0u_f0und_m3_g00d_r3c0n} -->');
 })();
