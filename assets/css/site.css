@@ -422,6 +422,22 @@ a.cert:hover .cert-verify { color: var(--accent); }
 
 footer.foot { position: relative; margin-top: 5rem; padding: 1.5rem 0 2.5rem; border-top: 1px solid var(--g200); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
 
+/* ── Featured events: photo cards → story pages ── */
+.event-feature { margin-bottom: 1.25rem; }
+.event-card { padding: 0; overflow: hidden; }
+.event-cover { position: relative; display: block; aspect-ratio: 16 / 10; overflow: hidden; background: var(--g100); border-bottom: 1px solid var(--g200); }
+.event-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); }
+a.event-card:hover .event-cover img { transform: scale(1.04); }
+.event-cover-empty { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  background-image: radial-gradient(var(--dot) 1px, transparent 1.3px); background-size: 9px 9px; }
+.event-card-body { display: flex; flex-direction: column; gap: .4rem; padding: 1rem 1.15rem 1.1rem; }
+.event-card-title { font-size: 16px; font-weight: 600; letter-spacing: -.02em; line-height: 1.3; }
+.event-card-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: .35rem; }
+.event-card-more { font-family: var(--mono); font-size: 10.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--g500); }
+.event-card-more .arr { display: inline-block; transition: transform .2s; }
+a.event-card:hover .event-card-more { color: var(--ink); }
+a.event-card:hover .event-card-more .arr { transform: translateX(3px); }
+
 /* ── Logos in ink (after bryllim.com: no tiles, single-colour marks) ── */
 .ink-flood { flood-color: var(--ink); }
 img.logo { filter: url(#ink); opacity: .85; transition: opacity .2s; }

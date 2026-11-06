@@ -9,7 +9,7 @@ This site uses the **bryl-minimal** design language (Bryl Lim, MIT — see `LICE
 
 Plain HTML/CSS/JS, no build step, no framework. Never add one.
 
-**Cache-busting:** every page links CSS/JS as `assets/...?v=YYYYMMDD`. Whenever you change a file in `assets/css` or `assets/js`, bump that value on all pages (`index.html` and every `notes/*.html`) so returning visitors don't get stale styles with new markup.
+**Cache-busting:** every page links CSS/JS as `assets/...?v=YYYYMMDD`. Whenever you change a file in `assets/css` or `assets/js`, bump that value on all pages (`index.html`, every `notes/*.html` and every `events/*.html`) so returning visitors don't get stale styles with new markup.
 
 ## Never remove or replace
 
@@ -98,8 +98,16 @@ To add a note: copy an existing note page, replace title, subtitle, category, co
 
 - Lead with **AI automation & youth leadership** (Joana's chosen direction, Nov 2026): AI-powered workflows, leading student communities, attending/volunteering/speaking at AI conferences and youth summits. Data & AI (GCI World) and web projects support it; security is archive-only.
 - Only describe automation work that's on her LinkedIn (Youth Forum: automated registration, attendee tracking, AI-assisted agendas/minutes). Never invent tools or numbers — the "Event operations automation" card is a placeholder until she confirms the tools and time saved.
-- The "read reflection ↗" links on events point at her LinkedIn activity page until she shares the exact post URLs. Event photos (a slideshow/gallery inside `01 · events`) are welcome once she provides them.
-- Keep the events count in the stat cell equal to the rows in `01 — events & conferences`.
+- The "read reflection ↗" / "original post" links point at her LinkedIn activity page until she shares the exact post URLs.
+- Keep the events count in the stat cell equal to featured cards + list rows in `01 · events & conferences`.
+
+## Event stories (`events/*.html`), after bryllim.com's events
+
+Her biggest events get a **featured photo card** at the top of `01 · events` (`.event-feature.grid-2` → `a.card.event-card`: `.event-cover` 16:10 photo, then date · venue micro-label, title, role pill, "read the story →") linking to a story page; the rest stay one-line `.event` rows. Don't list an event twice.
+
+A story page reuses the note template (`note.css`, `note.js`) plus `gallery.js`: sidebar (← all events, on-this-page TOC, event date/venue, role) → crumb `events / slug` → title → serif subtitle → read time → `.story-cover` (3:2, full colour, **no duotone or dither on event photos**) → `.prose` her own LinkedIn reflection (em dashes and hashtags removed, short h2 chapters, the speaker quote as `.read-quote` with `<cite>`) → `#sec-photos` `.gallery` (2 cols phone, 3 desktop) → photo credit + event feature link → `.pager` between stories → `#lightbox` viewer (tap to enlarge, arrows/swipe, Escape, focus trapped).
+
+**Photos:** `assets/img/events/<slug>/cover.webp` and `01.webp, 02.webp…` (long edge ~1600 px, WebP q≈80, keep each under ~300 KB). Empty slots show the dotted `.story-cover-empty` / `.shot-empty` placeholders; swap each for `<img>` (cover) or `<button class="shot" data-full="…"><img loading="lazy" alt="…"/></button>` (gallery) as the HTML comments in each page explain. Always credit the official photographer.
 - Only claim what a credential page verifies. ISC2 is **CC official training (Coursera)**, not the CC certification. Oracle certs show "valid to" dates — update them on renewal.
 - Keep counts honest (certifications, training programs, notes).
 - Contact email: `dvphnc@gmail.com`. TryHackMe: `tryhackme.com/p/dvphnc`.

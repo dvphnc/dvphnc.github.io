@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap"/>
-  <link rel="stylesheet" href="assets/css/site.css?v=202611073"/>
+  <link rel="stylesheet" href="assets/css/site.css?v=202611074"/>
 </head>
 <body>
 
@@ -131,8 +131,8 @@
           <div class="portrait enter" style="--d:50ms">
             <!-- Blue duotone: one copy per theme, cross-faded by .dark (filters defined below) -->
             <!-- fine-grain dithered portrait with a transparent backdrop (one file for both themes, identical dots): 1-bit dither made at 2x the display size, scaled smoothly so the grain stays fine -->
-            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611073"/><img class="duo duo-light" src="assets/img/headshot-cutout-576.png?v=202611073" alt="Portrait of Joana Daphne Sy" width="240" height="240" fetchpriority="high"/></picture>
-            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611073"/><img class="duo duo-dark" src="assets/img/headshot-cutout-576.png?v=202611073" alt="" aria-hidden="true" width="240" height="240"/></picture>
+            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611074"/><img class="duo duo-light" src="assets/img/headshot-cutout-576.png?v=202611074" alt="Portrait of Joana Daphne Sy" width="240" height="240" fetchpriority="high"/></picture>
+            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611074"/><img class="duo duo-dark" src="assets/img/headshot-cutout-576.png?v=202611074" alt="" aria-hidden="true" width="240" height="240"/></picture>
             <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
               <!-- light theme: shadows #002a78 → highlights #e8f1ff -->
               <filter id="duo-light" color-interpolation-filters="sRGB">
@@ -205,9 +205,28 @@
       <!-- TODO: swap the reflection hrefs for the exact LinkedIn post URLs when Joana shares them -->
       <section class="sec" id="events" aria-labelledby="h-events">
         <div class="sec-head"><h2 class="sec-num" id="h-events">01 · events &amp; conferences</h2><span class="micro">open to ai &amp; youth events</span></div>
+        <!-- Featured events: photo cards linking to story pages (events/*.html).
+             PHOTOS: drop a cover into assets/img/events/<slug>/cover.webp, then replace the .event-cover-empty span with
+             <img src="assets/img/events/<slug>/cover.webp" alt="..." loading="lazy"/> -->
+        <div class="event-feature grid-2">
+          <a class="card event-card" href="events/aivf-manila-2026.html">
+            <span class="event-cover"><span class="event-cover-empty" aria-hidden="true"><span class="micro">photo soon</span></span></span>
+            <span class="event-card-body">
+              <span class="micro">oct 2026 · shangri-la the fort, bgc</span>
+              <span class="event-card-title">AI Vision Forum Manila 2026</span>
+              <span class="event-card-foot"><span class="pill inv">challenge winner</span><span class="event-card-more">read the story <span class="arr">→</span></span></span>
+            </span>
+          </a>
+          <a class="card event-card" href="events/asean-youth-summit-2026.html">
+            <span class="event-cover"><span class="event-cover-empty" aria-hidden="true"><span class="micro">photo soon</span></span></span>
+            <span class="event-card-body">
+              <span class="micro">sep 2026 · u.p. town center</span>
+              <span class="event-card-title">ASEAN Campus Connect &amp; Youth Leadership Summit</span>
+              <span class="event-card-foot"><span class="pill">student leader</span><span class="event-card-more">read the story <span class="arr">→</span></span></span>
+            </span>
+          </a>
+        </div>
         <ul class="events">
-          <li class="event"><span class="event-date">Oct 2026</span><span class="row-logo row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span><div class="event-main"><p class="event-name">AI Vision Forum Manila 2026</p><p class="event-org">Shangri-La The Fort, BGC · <a class="tl" href="https://www.linkedin.com/in/dvphnc/recent-activity/all/" target="_blank" rel="noopener">read reflection ↗</a></p></div><span class="pill inv">challenge winner</span></li>
-          <li class="event"><span class="event-date">Sep 2026</span><span class="row-logo"><img class="logo logo-seal" src="assets/logos/ched.svg" alt="CHED"/></span><div class="event-main"><p class="event-name">ASEAN Campus Connect &amp; Youth Leadership Summit</p><p class="event-org">CHED NCR · <a class="tl" href="https://www.linkedin.com/in/dvphnc/recent-activity/all/" target="_blank" rel="noopener">read reflection ↗</a></p></div><span class="pill">student leader</span></li>
           <li class="event"><span class="event-date">Jun 2026</span><span class="row-logo"><img class="logo" src="assets/logos/vjal.png" alt="Vjal Institute"/></span><div class="event-main"><p class="event-name"><a class="tl" href="https://cert.vjal.ai/certificate/?uid=6582547825718493249" target="_blank" rel="noopener">AI Empowerment for Communities ↗</a></p><p class="event-org">Vjal Institute</p></div><span class="pill">workshop</span></li>
           <li class="event"><span class="event-date">Jun 2026</span><span class="row-logo"><img class="logo logo-seal" src="assets/logos/dict.svg" alt="DICT"/></span><div class="event-main"><p class="event-name">Artificial Intelligence Prompts 101</p><p class="event-org">DICT</p></div><span class="pill">workshop</span></li>
           <li class="event"><span class="event-date">Oct 2025</span><span class="row-logo"><img class="logo" src="assets/logos/british-council.svg" alt="British Council"/></span><div class="event-main"><p class="event-name">ASEAN TeachingEnglish Online Conference</p><p class="event-org">British Council · AI in education, sustainability</p></div><span class="pill">conference</span></li>
@@ -389,10 +408,10 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="assets/js/boot.js?v=202611073"></script>
-  <script src="assets/js/theme.js?v=202611073"></script>
-  <script src="assets/js/main.js?v=202611073"></script>
+  <script src="assets/js/boot.js?v=202611074"></script>
+  <script src="assets/js/theme.js?v=202611074"></script>
+  <script src="assets/js/main.js?v=202611074"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="assets/js/globe.js?v=202611073"></script>
+  <script src="assets/js/globe.js?v=202611074"></script>
 </body>
 </html>
