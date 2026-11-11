@@ -85,7 +85,7 @@ html.dark .lightbox { background: rgb(0 0 0 / .45); }
 .lb-close { top: 1rem; right: 1rem; }
 .lb-prev { left: 1rem; top: 50%; transform: translateY(-50%); }
 .lb-next { right: 1rem; top: 50%; transform: translateY(-50%); }
-.lb-count { position: absolute; bottom: 1.1rem; left: 0; right: 0; text-align: center; }
+.lb-count { position: absolute; bottom: 1.1rem; left: 0; right: 0; text-align: center; color: var(--ink); } /* ink, so it stays readable on the tinted overlay in light mode */
 @media (max-width: 640px) { .lb-prev, .lb-next { top: auto; bottom: .7rem; transform: none; } }
 
 /* quick review (flashcards) */

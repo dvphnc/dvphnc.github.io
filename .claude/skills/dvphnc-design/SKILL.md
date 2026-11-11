@@ -33,8 +33,8 @@ Colors are semantic tokens swapped wholesale by `html.dark`. Use the tokens, nev
 | `--g50` / `--g100` | `#f7f9fe` / `#eef3fc` | white 3.5% / 6% | faint fills (cards, code) |
 | `--g200` | navy 12% | blue-white 16% | **all hairlines and borders** |
 | `--g300` | navy 22% | blue-white 28% | strong borders, pills, scrollbar |
-| `--g400` | navy 56% | 62% | micro-labels, meta — lightest allowed for text |
-| `--g500` | navy 74% | 80% | secondary / muted text |
+| `--g400` | navy 68% (≈4.8:1, raised from 56% which failed contrast) | 62% | micro-labels, meta — lightest allowed for text |
+| `--g500` | navy 80% | 80% | secondary / muted text |
 | `--accent` / `--accent-2` | `#0044cc` / `#4d9fff` | `#4d9fff` / `#80c0ff` | links on hover, code, focus, caret |
 | `--red` | `#cc0000` | `#ff4d4d` | CWE / threat tags only |
 | `--ok` | green | green | "live" pills, status dot |
