@@ -6,7 +6,8 @@
 
   var img = box.querySelector('.lb-img'), count = box.querySelector('.lb-count');
   var prev = box.querySelector('.lb-prev'), next = box.querySelector('.lb-next'), close = box.querySelector('.lb-close');
-  var i = 0, opener = null;
+  var i = 0, opener = null, hideT = null;
+  var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function show(n) {
     i = (n + shots.length) % shots.length;
@@ -18,13 +19,17 @@
   function open(n) {
     opener = document.activeElement;
     show(n);
+    clearTimeout(hideT);
     box.hidden = false;
+    void box.offsetWidth; // let the closed state paint so the fade/scale runs
+    box.classList.add('open');
     document.body.style.overflow = 'hidden';
     close.focus();
   }
   function shut() {
-    box.hidden = true;
+    box.classList.remove('open');
     document.body.style.overflow = '';
+    hideT = setTimeout(function () { box.hidden = true; }, still ? 0 : 200);
     if (opener) opener.focus();
   }
 
@@ -38,7 +43,7 @@
   box.addEventListener('click', function (e) { if (e.target === box) shut(); });
 
   document.addEventListener('keydown', function (e) {
-    if (box.hidden) return;
+    if (!box.classList.contains('open')) return;
     if (e.key === 'Escape') shut();
     else if (e.key === 'ArrowLeft' && !single) show(i - 1);
     else if (e.key === 'ArrowRight' && !single) show(i + 1);

@@ -87,6 +87,9 @@ a { color: inherit; }
   transition: text-decoration-color .2s, color .2s;
 }
 .tl:hover { text-decoration-color: currentColor; }
+/* the trailing ↗ nudges up-and-right on hover (bryl-minimal), on every link that ends in one */
+a .arr { display: inline-block; transition: transform .2s var(--ease); }
+a:hover .arr, a:focus-visible .arr { transform: translate(2px, -2px); }
 
 /* micro-label register */
 .micro {

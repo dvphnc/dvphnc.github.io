@@ -1,0 +1,70 @@
+{
+  "skill_name": "dvphnc-design",
+  "note": "Test requests for this site's design skill, in the style of bryl-minimal-design's evals. Run one after changing SKILL.md and check the result against must / must_not.",
+  "evals": [
+    {
+      "id": 0,
+      "eval_name": "add-event-story",
+      "prompt": "I attended the Google I/O Extended Manila 2026 meetup on Nov 20, 2026 as a volunteer. Add it to my events with a story page; here are 5 photos and my LinkedIn reflection.",
+      "must": [
+        "A featured .event-card in 01 · events linking to events/<slug>.html, OR a one-line .event row, never both",
+        "Story page built from the existing event-story template (note.css, note.js, gallery.js), sidebar TOC ids match the h2 ids",
+        "Photos as assets/img/events/<slug>/cover.webp, cover-800.webp, NN.webp and NN-thumb.webp, EXIF stripped, each under ~300 KB, full colour",
+        "Prose is her own reflection with em dashes and hashtags removed; photographer credited",
+        "Events stat cell count updated; pager links between stories updated",
+        "Asset ?v= bumped on every page if any CSS/JS changed"
+      ],
+      "must_not": [
+        "Em dashes anywhere in the copy",
+        "Duotone or dither applied to event photos",
+        "Invented quotes, numbers or roles not in her reflection",
+        "Bare ↗ without <span class=\"arr\">"
+      ]
+    },
+    {
+      "id": 1,
+      "eval_name": "add-certification",
+      "prompt": "Add my new Microsoft Azure AI Fundamentals (AI-900) certification, here's the Credly link.",
+      "must": [
+        "A .cert card in 05 · certifications & training with an ink-drawn issuer logo (class=\"logo\", no tile) and a ‹ verify › link to the credential",
+        "Certifications stat cell count updated",
+        "Only claims what the credential page shows (name, issuer, date, expiry if any)"
+      ],
+      "must_not": [
+        "A white or coloured logo tile",
+        "Raw hex colours in new CSS",
+        "Downloading a logo without asking her first"
+      ]
+    },
+    {
+      "id": 2,
+      "eval_name": "add-project",
+      "prompt": "Add my capstone project, an AI attendance assistant for student orgs built with Laravel and Supabase, it's live on Vercel.",
+      "must": [
+        "A project card: pills (status/role) · title · one sentence · links, matching the other cards",
+        "If a new tool is named that isn't on the globe, ask before adding it, and keep the globe identical to her GitHub README tech stack"
+      ],
+      "must_not": [
+        "Dates or stack lines on the card",
+        "More than one sentence of description",
+        "Made-up metrics such as users or hours saved"
+      ]
+    },
+    {
+      "id": 3,
+      "eval_name": "restyle-section",
+      "prompt": "The certifications section feels plain, make it look nicer.",
+      "must": [
+        "Changes stay inside existing tokens, radii ladder (16/12/8/6) and component classes",
+        "Works in light, dark and system themes and at 375px with no horizontal scroll",
+        "Respects prefers-reduced-motion"
+      ],
+      "must_not": [
+        "New hues outside the navy palette",
+        "Scroll-triggered reveals that hide content",
+        "Removing the boot screen, globe, multilingual name or duotone headshot",
+        "Adding easter eggs back"
+      ]
+    }
+  ]
+}

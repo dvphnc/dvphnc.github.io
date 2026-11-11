@@ -47,14 +47,15 @@ Shadows: `--shadow` / `--shadow-hover` (soft, big negative spread). In dark mode
 |---|---|---|
 | UI / body | **Geist** (`--sans`), 15px base | paragraphs, card titles, buttons |
 | Technical | **Geist Mono** (`--mono`) | micro-labels, dates, tags, nav, footer |
-| Display | **Geist Pixel** (`--pixel`, jsDelivr `geist@1.9.0`) | hero name, `01 — section` labels, big stats |
+| Display | **Geist Pixel** (`--pixel`, jsDelivr `geist@1.9.0`) | hero name, `01 · section` labels, big stats, listing-page titles (`.page-title`) |
 | Long-form | **Source Serif 4** | note-page body, pull quotes, flashcard answers only |
 
 - **Micro-label register** (`.micro`): 9–11px mono, UPPERCASE, +1px tracking, `--g400`. Timestamps, tags, captions.
 - **Section headers**: `<h2 class="sec-num">NN · name</h2>` in pixel font, lowercase, numbered in order (a middle dot, not an em dash). Homepage: 01 events & conferences · 02 experience · 03 projects · 04 stack · 05 certifications & training · 06 contact. Keep the sidebar and overlay nav lists in sync with these ids (`#events #experience #projects #stack #certifications #contact`).
 - **No em dashes anywhere in site copy** (Joana's rule). Use a middle dot `·` for separators, a colon, a comma, or parentheses. (Older SyberVault note prose still contains some; fix them if you touch those pages.)
 - **Say each fact once** (framing after bryllim.com). Experience rows are just year · role · organisation, no descriptions. Project cards are pills (status/role) · title · **one sentence** · links, no dates or stack lines. Events are date · logo · name · venue/org · role pill, with LinkedIn reflections as a "read reflection ↗" link on their event (there is no separate writing section). Team projects live in projects, not experience; programs (GCI World) live in experience, not training.
-- **Links**: text links get `class="tl"` (underline at 25% → 100% on hover). External links end in `↗`. Nav, cards and buttons are not underlined.
+- **Links**: text links get `class="tl"` (underline at 25% → 100% on hover). External links end in `<span class="arr">↗</span>` (never a bare `↗`), so the arrow nudges 2px up-and-right on hover (`a .arr` in `site.css`). Nav, cards and buttons are not underlined.
+- **Page titles**: listing/index pages (e.g. `notes/index.html`) title themselves with **one lowercase word in the pixel font** (`<h1 class="page-title">archive</h1>`, ~3rem, line-height 1). Article pages (notes, event stories) keep the sans `.read-title`, weight 600.
 
 ## Layout
 
@@ -69,12 +70,21 @@ Shadows: `--shadow` / `--shadow-hover` (soft, big negative spread). In dark mode
 - `.card` (16px radius, hairline, `--g50` → `--bg` fill, soft shadow; `a.card`/`.hoverable` lift 2px)
 - `.pill` (rounded mono 9.5px uppercase; `.pill.inv` = the one loud inverted chip; `.pill.live`)
 - `.chip` inline bio chips (`.chip.inv` = inverted emphasis, max one per view)
-- `.rows` / `.row` timeline (experience) with `.row-logo` white logo tile or `.row-icon`
+- `.rows` / `.row` timeline (experience) with `.row-logo` (ink-drawn logo, no tile) or `.row-icon`
 - `.cert` cards with `.cert-logo` (`.wide` for wordmarks, `.pair` for two logos) and `‹ verify ›`
 - `.events` / `.event` list (date · logo · name/org · pill)
 - `.notes` / `.note` list linking into `notes/`
 - `.btn` / `.btn.primary` (ink fill), `.theme-seg` (light / system / dark), `.toast`, `.modal`
 - Issuer logos live in `assets/logos/` and are drawn **in the theme ink — no tiles, no colour** (after bryllim.com). Give marks `class="logo"` (SVG filter `#ink`: a solid ink silhouette) and seals/crests `class="logo logo-seal"` (`#ink-line`: dark parts → ink, light parts → clear, so CHED / DICT / NEU keep their detail instead of becoming discs). Both filters live in the hidden `<svg>` right after `<body>` in `index.html` and are coloured by `.ink-flood { flood-color: var(--ink) }`. Inline SVG marks use `fill="currentColor"`. Never reintroduce white tiles.
+
+## Recipes: the exact numbers (from bryl-minimal)
+
+- **Radii ladder 16 / 12 / 8 / 6:** large cards, covers, viewer image 16px; medium cards, gallery thumbs, code blocks, tables 12px; buttons, theme switch, toast 8px; small buttons and inputs 6px; pills and chips fully rounded. Don't invent in-between values.
+- **Shadows** are low-alpha with a big negative spread (ground contact, not elevation). Light: rest `0 8px 22px -14px` navy 28%, hover `0 18px 36px -20px` navy 42% with a 2px lift. Dark: nearly gone (`--shadow` / `--shadow-hover`), borders carry the edges. Modals/viewer: `0 40px 90px -20px` black 35%.
+- **Modal / photo viewer** (`#lightbox`, `gallery.js`): overlay is ink at 30% (black 45% in dark mode, so photos aren't washed out) with a 16px backdrop blur; it fades in over 200ms while the image scales 95% → 100%, on `--ease`. Open = remove `hidden`, force a reflow, add `.open`; close = remove `.open`, set `hidden` after 200ms (0 under reduced motion). Escape closes, arrows/swipe move, focus stays inside and returns to the thumbnail.
+- **Pills:** hairline `--g300` border, 9.5px uppercase mono, `--g500`, ~2px × 8px padding.
+- **Scrollbars:** 6px, transparent track, `--g300` rounded thumb. **Selection** inverts (ink background, bg text).
+- **Durations:** micro-interactions 200ms; card shadow 350ms / transform 420ms; entrance 700ms; theme crossfade 500ms; all on `cubic-bezier(0.16, 1, 0.3, 1)`.
 
 ## Texture — halftone
 
@@ -100,6 +110,9 @@ To add a note: copy an existing note page, replace title, subtitle, category, co
 - Only describe automation work that's on her LinkedIn (Youth Forum: automated registration, attendee tracking, AI-assisted agendas/minutes). Never invent tools or numbers — the "Event operations automation" card is a placeholder until she confirms the tools and time saved.
 - Story pages link her exact LinkedIn posts (tracking query strings like `utm_*` and `rcm` stripped). Any other "read reflection ↗" link points at her activity page until she shares that post's URL.
 - Keep the events count in the stat cell equal to featured cards + list rows in `01 · events & conferences`.
+- Only claim what a credential page verifies. ISC2 is **CC official training (Coursera)**, not the CC certification. Oracle certs show "valid to" dates; update them on renewal.
+- Keep counts honest (certifications, training programs, notes).
+- Contact email: `dvphnc@gmail.com`. TryHackMe: `tryhackme.com/p/dvphnc`.
 
 ## Event stories (`events/*.html`), after bryllim.com's events
 
@@ -107,11 +120,12 @@ Her biggest events get a **featured photo card** at the top of `01 · events` (`
 
 A story page reuses the note template (`note.css`, `note.js`) plus `gallery.js`: sidebar (← all events, on-this-page TOC, event date/venue, role) → crumb `events / slug` → title → serif subtitle → read time → `.story-cover` (3:2, full colour, **no duotone or dither on event photos**) → `.prose` her own LinkedIn reflection (em dashes and hashtags removed, short h2 chapters, the speaker quote as `.read-quote` with `<cite>`) → `#sec-photos` `.gallery` (2 cols phone, 3 desktop) → photo credit + event feature link → `.pager` between stories → `#lightbox` viewer (tap to enlarge, arrows/swipe, Escape, focus trapped).
 
-**Photos:** `assets/img/events/<slug>/cover.webp` (long edge 1600) + `cover-800.webp` (homepage card), and per gallery photo `NN.webp` (long edge 1600, viewer) + `NN-thumb.webp` (short side 600, grid). ffmpeg `-c:v libwebp -quality 80 -compression_level 6 -map_metadata -1` (strips EXIF/GPS); keep each under ~300 KB. If a square crop cuts the subject, set `style="object-position:X% 50%"` on that thumb. Credit whoever took them ("photos by ai vision forum and me"). Empty slots show the dotted `.story-cover-empty` / `.shot-empty` placeholders; swap each for `<img>` (cover) or `<button class="shot" data-full="…"><img loading="lazy" alt="…"/></button>` (gallery) as the HTML comments in each page explain. Always credit the official photographer.
-- Only claim what a credential page verifies. ISC2 is **CC official training (Coursera)**, not the CC certification. Oracle certs show "valid to" dates — update them on renewal.
-- Keep counts honest (certifications, training programs, notes).
-- Contact email: `dvphnc@gmail.com`. TryHackMe: `tryhackme.com/p/dvphnc`.
+**Photos:** `assets/img/events/<slug>/cover.webp` (long edge 1600) + `cover-800.webp` (homepage card), and per gallery photo `NN.webp` (long edge 1600, viewer) + `NN-thumb.webp` (short side 600, grid). ffmpeg `-c:v libwebp -quality 80 -compression_level 6 -map_metadata -1` (strips EXIF/GPS); keep each under ~300 KB. If a square crop cuts the subject, set `style="object-position:X% 50%"` on that thumb. Credit whoever took them ("photos by ai vision forum and me"). Empty slots show the dotted `.story-cover-empty` / `.shot-empty` placeholders; swap each for `<img>` (cover) or `<button class="shot" data-full="…"><img loading="lazy" alt="…"/></button>` (gallery) as the HTML comments in each page explain. Always credit the official photographer. Official photos that carry a caption banner along the bottom keep it in the full-size viewer image but have it cropped off the cover and thumbnails. When you replace an image under the same filename, add or bump `?v=N` on its URL so cached copies refresh.
 
 ## Quality bar
 
 Semantic landmarks (`aside`/`header`/`main`/`nav`/`article`), alt text on photos and logos (empty `alt=""` for decorative duplicates), visible focus rings, Escape closes overlays, no horizontal scroll at 375px, check both themes before shipping. If a screen feels empty, that is usually correct — stop before it gets busy.
+
+## Testing the skill (after bryl-minimal's `evals/`)
+
+`evals/evals.json` in this folder holds test requests (add an event story, add a certification, add a project, restyle a section) with what a correct result must and must not contain. After changing this skill, or before trusting a big edit, run one of those requests and compare the result against its checklist; if the site drifts (an em dash slips in, a logo tile comes back, the globe stops matching the README, a count goes stale), tighten the rule here rather than fixing only the page.
