@@ -113,4 +113,6 @@ html.dark .lightbox { background: rgb(0 0 0 / .45); }
 .side-back { font-family: var(--mono); font-size: 12px; color: var(--g500); text-decoration: none; transition: color .2s; }
 .side-back:hover { color: var(--ink); }
 .side-cat { font-size: 13px; font-weight: 600; margin-top: .25rem; }
-.topbar .side-back { margin-right: 4px; }
+.topbar .side-back { margin-right: 4px; display: inline-flex; align-items: center; min-height: 40px; padding-right: 8px; } /* the phone back link: a full-size tap target */
+/* small inline links (crumb, photo credits, footer): taller hit area without changing the layout */
+.crumb a, .credit a, .read .foot a { padding-block: 10px; margin-block: -10px; }
