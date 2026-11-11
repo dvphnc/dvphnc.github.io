@@ -369,7 +369,7 @@ html:not(.dark) .skill-icon.hot .icon-badge { color: var(--ink); } /* light bran
 .cert-logo { height: 34px; display: flex; align-items: center; justify-content: center; gap: 12px; }
 .cert-logo img { height: 100%; width: auto; max-width: 110px; object-fit: contain; }
 .cert-logo.wide img { height: 22px; } /* wordmarks sit smaller so they carry the same weight as square marks */
-.cert-logo .logo-svg { height: 22px; width: auto; aspect-ratio: 24 / 9.4; color: var(--ink); opacity: .85; }
+.cert-logo .logo-svg { height: 22px; width: auto; aspect-ratio: 24 / 9.4; color: var(--ink); }
 .cert-name { font-size: 14px; font-weight: 600; line-height: 1.35; margin-top: .9rem; letter-spacing: -.01em; }
 .cert-issuer { margin-top: .35rem; }
 .cert-meta { margin-top: .2rem; font-family: var(--mono); font-size: 10.5px; color: var(--g400); }
