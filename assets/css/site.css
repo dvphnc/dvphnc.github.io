@@ -243,7 +243,7 @@ html.dark .portrait .duo-dark { opacity: 1; }
   min-height: 1.05em; display: flex; align-items: center; flex-wrap: wrap;
 }
 @media (max-width: 340px) { .hero-name { font-size: 1.85rem; } }
-.hero-name .caret { display: inline-block; width: .5ch; height: .8em; margin-left: 4px; background: var(--accent-2); animation: blink 1s step-end infinite; }
+.hero-name .caret { display: inline-block; width: .5ch; height: .8em; margin-left: 4px; background: var(--ink); /* same as the name: navy in light, white in dark */ animation: blink 1s step-end infinite; }
 .hero-handle { font-family: var(--mono); font-size: 13px; color: var(--g400); margin-top: .35rem; }
 .hero-handle b { color: var(--accent); font-weight: 500; }
 

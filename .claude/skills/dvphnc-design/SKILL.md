@@ -35,7 +35,7 @@ Colors are semantic tokens swapped wholesale by `html.dark`. Use the tokens, nev
 | `--g300` | navy 22% | blue-white 28% | strong borders, pills, scrollbar |
 | `--g400` | navy 68% (≈4.8:1, raised from 56% which failed contrast) | 62% | micro-labels, meta — lightest allowed for text |
 | `--g500` | navy 80% | 80% | secondary / muted text |
-| `--accent` / `--accent-2` | `#0044cc` / `#4d9fff` | `#4d9fff` / `#80c0ff` | links on hover, code, focus, caret |
+| `--accent` / `--accent-2` | `#0044cc` / `#4d9fff` | `#4d9fff` / `#80c0ff` | links on hover, code, focus (the hero typing cursor uses `--ink`, same as the name; Joana didn't want it light blue) |
 | `--red` | `#cc0000` | `#ff4d4d` | CWE / threat tags only |
 | `--ok` | green | green | "live" pills, status dot |
 
