@@ -69,7 +69,7 @@ Shadows: `--shadow` / `--shadow-hover` (soft, big negative spread). In dark mode
 
 - `.card` (16px radius, hairline, `--g50` → `--bg` fill, soft shadow; `a.card`/`.hoverable` lift 2px)
 - `.pill` (rounded mono 9.5px uppercase; `.pill.inv` = the one loud inverted chip; `.pill.live`)
-- `.chip` inline bio chips (`.chip.inv` = inverted emphasis, max one per view)
+- Hero bio is **plain prose with `<strong>` highlights** (ink, weight 600), two short paragraphs. Joana preferred this to the inline `.chip` pills, so don't put chips back in the bio (the `.chip` class still exists but is unused).
 - `.rows` / `.row` timeline (experience) with `.row-logo` (ink-drawn logo, no tile) or `.row-icon`
 - `.cert` cards with `.cert-logo` (`.wide` for wordmarks, `.pair` for two logos) and `‹ verify ›`
 - `.events` / `.event` list (date · logo · name/org · pill)
