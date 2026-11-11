@@ -106,7 +106,7 @@ To add a note: copy an existing note page, replace title, subtitle, category, co
 
 ## Content rules
 
-- Lead with **AI automation & youth leadership** (Joana's chosen direction, Nov 2026): AI-powered workflows, leading student communities, attending/volunteering/speaking at AI conferences and youth summits. Data & AI (GCI World) and web projects support it; security is archive-only.
+- Lead with **data & AI** (Joana's choice, 12 Nov 2026, replacing the earlier "AI automation & youth leadership" framing): data & AI trainee at U-Tokyo GCI World, senior IT student, Python for data, Laravel and the cloud for building. Page title is "Joana Daphne Sy · Data & AI"; the sidebar status says "open to data & ai internships"; the GCI World cell comes first among the hero highlights. AI events, the AI Vision Challenge and student leadership (Youth Forum Organization) support it; the automation card sits last in projects; security is archive-only (the bio's "security notebook on the side").
 - Only describe automation work that's on her LinkedIn (Youth Forum: automated registration, attendee tracking, AI-assisted agendas/minutes). Never invent tools or numbers — the "Event operations automation" card is a placeholder until she confirms the tools and time saved.
 - Story pages link her exact LinkedIn posts (tracking query strings like `utm_*` and `rcm` stripped). Any other "read reflection ↗" link points at her activity page until she shares that post's URL.
 - Keep the events count in the stat cell equal to featured cards + list rows in `01 · events & conferences`.
