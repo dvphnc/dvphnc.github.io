@@ -262,6 +262,9 @@ html.dark .portrait .duo-dark { opacity: 1; }
 
 .hero-links { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 1.25rem; font-family: var(--mono); font-size: 12px; color: var(--g500); }
 .hero-links a:hover { color: var(--ink); }
+/* small text links: a taller invisible tap area (≈36px) without moving the layout */
+.hero-links a, .sec-more, .event-name a, .contact-meta a, .foot a { padding-block: 10px; margin-block: -10px; }
+.topbar .side-brand { display: inline-flex; align-items: center; min-height: 40px; }
 
 /* hairline stat grids */
 .cells { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--g200); margin-top: 2.5rem; }
