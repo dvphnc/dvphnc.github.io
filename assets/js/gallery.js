@@ -37,6 +37,10 @@
   prev.hidden = next.hidden = single;
 
   shots.forEach(function (s, n) { s.addEventListener('click', function () { open(n); }); });
+  // any [data-shot="N"] button elsewhere on the page opens photo N (1-based), e.g. "‹ certificate ›"
+  document.querySelectorAll('[data-shot]').forEach(function (b) {
+    b.addEventListener('click', function () { open(parseInt(b.getAttribute('data-shot'), 10) - 1); });
+  });
   prev.addEventListener('click', function () { show(i - 1); });
   next.addEventListener('click', function () { show(i + 1); });
   close.addEventListener('click', shut);
