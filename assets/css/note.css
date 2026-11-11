@@ -63,6 +63,7 @@
 button.shot:hover img { transform: scale(1.05); }
 button.shot:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .credit { margin-top: .9rem; line-height: 1.7; }
+.credit a { white-space: nowrap; }
 
 /* photo viewer: bryl-minimal modal recipe, ink at 30% + strong blur, panel fades and scales 95% → 100% over 200ms */
 .lightbox { position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center; padding: 3.5rem 1rem;
