@@ -375,6 +375,19 @@ html:not(.dark) .skill-icon.hot .icon-badge { color: var(--ink); } /* light bran
 .cert-verify { margin-top: auto; padding-top: .9rem; font-family: var(--mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--g500); transition: color .2s; }
 a.cert:hover .cert-verify { color: var(--accent); }
 .cert .pill { margin-top: .6rem; }
+/* phones: compact, left-aligned cards (logo · verify on top, then name, issuer, date) instead of tall centred ones */
+@media (max-width: 639px) {
+  .cert {
+    display: grid; grid-template-columns: 1fr auto; grid-template-areas: "logo verify" "name name" "issuer issuer" "meta meta";
+    align-items: center; text-align: left; padding: .95rem 1.1rem 1rem;
+  }
+  .cert-logo { grid-area: logo; height: 20px; justify-content: flex-start; gap: 10px; }
+  .cert-logo.wide img, .cert-logo .logo-svg { height: 14px; }
+  .cert-name { grid-area: name; margin-top: .7rem; }
+  .cert-issuer { grid-area: issuer; margin-top: .3rem; }
+  .cert-meta { grid-area: meta; }
+  .cert-verify { grid-area: verify; margin-top: 0; padding-top: 0; }
+}
 
 .events { list-style: none; border-top: 1px solid var(--g200); }
 .event { display: grid; grid-template-columns: 5rem 34px 1fr auto; gap: 14px; align-items: center; padding: .8rem 0; border-bottom: 1px solid var(--g200); }
