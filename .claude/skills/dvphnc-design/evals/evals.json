@@ -7,7 +7,7 @@
       "eval_name": "add-event-story",
       "prompt": "I attended the Google I/O Extended Manila 2026 meetup on Nov 20, 2026 as a volunteer. Add it to my events with a story page; here are 5 photos and my LinkedIn reflection.",
       "must": [
-        "A featured .event-card in 01 · events linking to events/<slug>.html, OR a one-line .event row, never both",
+        "A featured .event-card in 02 · events linking to events/<slug>.html, OR a one-line .event row, never both",
         "Story page built from the existing event-story template (note.css, note.js, gallery.js), sidebar TOC ids match the h2 ids",
         "Photos as assets/img/events/<slug>/cover.webp, cover-800.webp, NN.webp and NN-thumb.webp, EXIF stripped, each under ~300 KB, full colour",
         "Prose is her own reflection with em dashes and hashtags removed; photographer credited",
@@ -26,7 +26,7 @@
       "eval_name": "add-certification",
       "prompt": "Add my new Microsoft Azure AI Fundamentals (AI-900) certification, here's the Credly link.",
       "must": [
-        "A .cert card in 05 · certifications & training with an ink-drawn issuer logo (class=\"logo\", no tile) and a ‹ verify › link to the credential",
+        "A .cert card in 06 · certifications & training with an ink-drawn issuer logo (class=\"logo\", no tile) and a ‹ verify › link to the credential",
         "Certifications stat cell count updated",
         "Only claims what the credential page shows (name, issuer, date, expiry if any)"
       ],
