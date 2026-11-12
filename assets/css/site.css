@@ -347,32 +347,28 @@ a.card:hover, .card.hoverable:hover { transform: translateY(-2px); box-shadow: v
 .row-icon { color: var(--ink); }
 @media (max-width: 719px) { .row { grid-template-columns: 4rem 1fr; gap: .6rem; } .row-side { gap: 10px; } } /* 4rem fits "2021-22" on one line */
 
-/* Scroll timeline: a thin line down the left fills with ink as you scroll through the section; each row's dot,
-   year, role and logo go from muted to full strength when the row reaches the middle of the screen.
+/* Experience, framed like bryllim.com: year · role · organisation (right-aligned), hairline rows, faint hover tint.
+   Scroll timeline on top: a thin line down the left fills with ink as you scroll through the list, and each row's
+   small square marker, year and role go from muted to full strength when the row reaches 55% down the screen.
    Without JS or under reduced motion (.tl-on is never added) everything shows fully lit. Muted text stays at
-   --g500 / --g400, so nothing is ever unreadable or hidden. */
+   --g400 / --g500, so nothing is ever unreadable or hidden. */
 .rows.timeline { position: relative; --tl: 1; }
 .rows.timeline::before, .rows.timeline::after { content: ''; position: absolute; left: 4px; top: 0; width: 1px; pointer-events: none; }
 .rows.timeline::before { bottom: 0; background: var(--g200); }
 .rows.timeline::after { height: calc(var(--tl) * 100%); background: var(--ink); }
-/* each organisation is a card on the line; the one at the reading mark (.now) gets a navy border and a soft lift */
-.rows.timeline { border-top: 0; display: flex; flex-direction: column; gap: .75rem; }
-.rows.timeline .row { position: relative; margin-left: 24px; padding: .95rem 1.1rem; border: 1px solid var(--g200); border-radius: 12px; background: var(--g50); box-shadow: none;
-  transition: border-color .35s var(--ease), box-shadow .35s var(--ease), transform .42s var(--ease), background-color .2s; }
-.rows.timeline .row.now { border-color: color-mix(in srgb, var(--ink) 45%, transparent); box-shadow: var(--shadow-hover); transform: translateY(-2px); background: var(--bg); }
-.rows.timeline .row::before { content: ''; position: absolute; left: -24px; top: calc(.95rem + 5px); width: 9px; height: 9px; border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 3px var(--bg); transition: background-color .35s var(--ease), border-color .35s var(--ease); border: 1px solid var(--ink); box-sizing: border-box; }
-.rows.timeline .row-year, .rows.timeline .row-title { transition: color .35s var(--ease); }
-.rows.timeline .row-logo img { transition: opacity .35s var(--ease); }
+.rows.timeline .row { position: relative; padding-left: 24px; grid-template-columns: 4.5rem 1fr auto; align-items: baseline; transition: background-color .2s; }
+.rows.timeline .row::before { content: ''; position: absolute; left: 0; top: calc(.95rem + 6px); width: 9px; height: 9px; border-radius: 2px; box-sizing: border-box;
+  border: 1px solid var(--ink); background: var(--ink); box-shadow: 0 0 0 3px var(--bg); transition: background-color .35s var(--ease), border-color .35s var(--ease); }
+.rows.timeline .row-org { text-align: right; }
+.row-then { font-weight: 400; color: var(--g500); }
 .rows.timeline .row-year { color: var(--ink); }
+.rows.timeline .row-year, .rows.timeline .row-title { transition: color .35s var(--ease); }
 .tl-on .row:not(.lit)::before { background: var(--bg); border-color: var(--g300); }
 .tl-on .row:not(.lit) .row-year { color: var(--g400); }
-.tl-on .row:not(.lit) .row-title, .tl-on .row:not(.lit) .row-role b { color: var(--g500); }
-.rows.timeline .row-role b { transition: color .35s var(--ease); }
-.rows.timeline .row-side { align-items: flex-start; } /* multi-role rows: logo sits with the org name, not centred on the stack */
-.tl-on .row:not(.lit) .row-logo img { opacity: .45; }
-@media (hover: hover) { .rows.timeline .row:not(.now):hover { border-color: var(--g300); } }
-/* phones: the year sits on its own line at the top of the card so the text gets the full width */
-@media (max-width: 719px) { .rows.timeline .row { grid-template-columns: 1fr; gap: .35rem; padding: .85rem 1rem; } .rows.timeline .row::before { top: calc(.85rem + 4px); } }
+.tl-on .row:not(.lit) .row-title { color: var(--g500); }
+@media (hover: hover) { .rows.timeline .row:hover { background: var(--g50); } } /* bryl's faint hover tint */
+/* phones: the organisation drops under the role (bryl's col-span-12) */
+@media (max-width: 719px) { .rows.timeline .row { grid-template-columns: 4rem 1fr; row-gap: .15rem; } .rows.timeline .row-org { grid-column: 2; text-align: left; } }
 
 /* ── Globe (retained) ───────────────────────────────────── */
 #globe-section { display: flex; justify-content: center; padding: .5rem 0 1rem; }

@@ -75,6 +75,30 @@ button.shot:focus-visible { outline: 2px solid var(--accent); outline-offset: 2p
 .meta-cert:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 
+/* experience.html: bryllim.com/experience framing. One <li> per organisation: a 48px square badge (initials in the
+   pixel font) on a hairline rail, then the organisation, its meta line, and each role with mono dates, description
+   and skill tags. */
+.xp-lead { margin-top: .9rem; font-size: 15px; line-height: 1.7; color: var(--g500); max-width: 38rem; }
+.xp { list-style: none; margin-top: 2.25rem; }
+.xp-org { display: grid; grid-template-columns: 48px 1fr; gap: 0 1.25rem; scroll-margin-top: 80px; }
+.xp-rail { display: flex; flex-direction: column; align-items: center; }
+.xp-rail::after { content: ''; flex: 1; width: 1px; margin: .6rem 0; background: var(--g200); }
+.xp-org:last-child .xp-rail::after { display: none; }
+.xp-badge { width: 48px; height: 48px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border: 1px solid var(--g200); border-radius: 12px; background: var(--bg); font-family: var(--pixel); font-size: 12px; color: var(--ink); }
+.xp-body { padding-bottom: 2.25rem; min-width: 0; }
+.xp-name { font-size: 16px; font-weight: 600; letter-spacing: -.01em; line-height: 1.35; padding-top: 3px; }
+.xp-meta { margin-top: .2rem; font-family: var(--mono); font-size: 11px; color: var(--g400); }
+.xp-role { margin-top: 1.25rem; }
+.xp-title { font-size: 15px; font-weight: 500; color: var(--ink); }
+.xp-dates { margin-top: .25rem; font-family: var(--mono); font-size: 10.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--g400); }
+.xp-text { margin-top: .75rem; font-size: 14px; line-height: 1.7; color: var(--g500); }
+.xp-desc { list-style: disc; margin-top: .75rem; padding-left: 1.1rem; font-size: 14px; line-height: 1.7; color: var(--g500); }
+.xp-desc li + li { margin-top: .35rem; }
+.xp-desc li::marker { color: var(--g400); }
+.xp-skills { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin-top: .9rem; }
+.xp-skills li { padding: 3px 10px; border: 1px solid var(--g200); border-radius: 6px; background: var(--bg); font-family: var(--mono); font-size: 11px; color: var(--g500); }
+@media (max-width: 520px) { .xp-org { grid-template-columns: 40px 1fr; gap: 0 .9rem; } .xp-badge { width: 40px; height: 40px; border-radius: 10px; font-size: 11px; } }
+
 /* quick review (flashcards) */
 .read-block { margin-top: 3.5rem; }
 .review { border-top: 1px solid var(--g200); }

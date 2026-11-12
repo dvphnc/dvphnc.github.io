@@ -8,6 +8,7 @@ Live at **https://dvphnc.github.io**
 
 ```
 index.html              the homepage (static HTML, no build step)
+experience.html         full experience history (homepage "full history →")
 events/                 event story pages with photo galleries
 notes/                  SyberVault security notes archive (notes/index.html + 12 notes)
 assets/css/site.css     layout, type, light/dark palette (shared)
