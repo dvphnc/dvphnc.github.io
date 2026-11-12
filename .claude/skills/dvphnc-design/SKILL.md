@@ -70,7 +70,7 @@ Shadows: `--shadow` / `--shadow-hover` (soft, big negative spread). In dark mode
 - `.card` (16px radius, hairline, `--g50` → `--bg` fill, soft shadow; `a.card`/`.hoverable` lift 2px)
 - `.pill` (rounded mono 9.5px uppercase; `.pill.inv` = the one loud inverted chip; `.pill.live`)
 - Hero bio is **plain prose with `<strong>` highlights** (ink, weight 600), two short paragraphs. Joana preferred this to the inline `.chip` pills, so don't put chips back in the bio (the `.chip` class still exists but is unused).
-- `.rows` / `.row` timeline (experience) with `.row-logo` (ink-drawn logo, no tile) or `.row-icon`
+- `.rows.timeline` / `.row` (experience): year · logo · role / organisation, **no pills** (President's Lister is plain text in the org line). It's a **scroll timeline**: a 1px `--g200` track down the left fills with ink (`--tl`, 0→1) as the list passes 55% of the viewport, and each row's dot, year, role and logo switch from muted to lit (`.lit`) when it reaches that mark; bryl's faint `--g50` hover tint on hover devices. `main.js` adds `.tl-on` only without reduced motion, so no-JS / reduced-motion visitors see everything lit. Muted states stay ≥4.5:1 (`--g400` year, `--g500` role, logo at .45). Never call the class `.tl`: that's the underlined text-link class and it underlines everything inside.
 - `.cert` cards with `.cert-logo` (`.wide` for wordmarks, `.pair` for two logos) and `‹ verify ›`
 - `.events` / `.event` list (date · logo · name/org · pill)
 - `.notes` / `.note` list linking into `notes/`
@@ -96,7 +96,7 @@ Dots via `radial-gradient(var(--dot) 1px, transparent 1.3px)` on a 13px grid for
 - Hovers: shadow ~350ms, transform ~420ms. Status dot pulses opacity over 1.8s.
 - Theme: `assets/js/theme.js` — light / dark / system, persisted in `localStorage.theme` (absent = system), circular view-transition reveal from the click point (540ms).
 - Everything is disabled under `prefers-reduced-motion`; the page must be complete when still.
-- **Never hide content until scroll** (no scroll-triggered reveals). The old site broke this way.
+- **Never hide content until scroll** (no scroll-triggered reveals). The old site broke this way. Scroll-linked *emphasis* is fine (the experience timeline mutes rows to a still-readable gray, it never hides them).
 
 ## Note pages (`notes/*.html`) — an archive, not a homepage section
 

@@ -129,6 +129,27 @@
     setTimeout(start, 9000); // failsafe
   } else start();
 
+  /* ── Experience scroll timeline ──
+     The line fills and each row lights up once it reaches 55% down the screen. Skipped under reduced motion
+     (then the CSS shows everything fully lit). */
+  var tl = document.querySelector('.rows.timeline');
+  if (tl && !reduced) {
+    var tlRows = Array.prototype.slice.call(tl.querySelectorAll('.row'));
+    var tlTick = false;
+    var tlUpdate = function () {
+      tlTick = false;
+      var mark = window.innerHeight * 0.55, box = tl.getBoundingClientRect();
+      var p = Math.min(1, Math.max(0, (mark - box.top) / box.height));
+      tl.style.setProperty('--tl', p.toFixed(4));
+      tlRows.forEach(function (row) { row.classList.toggle('lit', row.getBoundingClientRect().top + 20 <= mark); });
+    };
+    var tlQueue = function () { if (!tlTick) { tlTick = true; requestAnimationFrame(tlUpdate); } };
+    tl.classList.add('tl-on');
+    tlUpdate();
+    window.addEventListener('scroll', tlQueue, { passive: true });
+    window.addEventListener('resize', tlQueue);
+  }
+
   /* Escape closes the phone menu */
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && overlay.classList.contains('open')) menu(false);

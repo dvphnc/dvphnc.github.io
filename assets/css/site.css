@@ -343,6 +343,25 @@ a.card:hover, .card.hoverable:hover { transform: translateY(-2px); box-shadow: v
 .row-icon { color: var(--ink); }
 @media (max-width: 719px) { .row { grid-template-columns: 3rem 1fr; gap: .75rem; } .row-side { gap: 10px; } }
 
+/* Scroll timeline: a thin line down the left fills with ink as you scroll through the section; each row's dot,
+   year, role and logo go from muted to full strength when the row reaches the middle of the screen.
+   Without JS or under reduced motion (.tl-on is never added) everything shows fully lit. Muted text stays at
+   --g500 / --g400, so nothing is ever unreadable or hidden. */
+.rows.timeline { position: relative; --tl: 1; }
+.rows.timeline::before, .rows.timeline::after { content: ''; position: absolute; left: 4px; top: 0; width: 1px; pointer-events: none; }
+.rows.timeline::before { bottom: 0; background: var(--g200); }
+.rows.timeline::after { height: calc(var(--tl) * 100%); background: var(--ink); }
+.rows.timeline .row { position: relative; padding-left: 24px; transition: background-color .2s; }
+.rows.timeline .row::before { content: ''; position: absolute; left: 0; top: calc(.95rem + 5px); width: 9px; height: 9px; border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 3px var(--bg); transition: background-color .35s var(--ease), border-color .35s var(--ease); border: 1px solid var(--ink); box-sizing: border-box; }
+.rows.timeline .row-year, .rows.timeline .row-title { transition: color .35s var(--ease); }
+.rows.timeline .row-logo img { transition: opacity .35s var(--ease); }
+.rows.timeline .row-year { color: var(--ink); }
+.tl-on .row:not(.lit)::before { background: var(--bg); border-color: var(--g300); }
+.tl-on .row:not(.lit) .row-year { color: var(--g400); }
+.tl-on .row:not(.lit) .row-title { color: var(--g500); }
+.tl-on .row:not(.lit) .row-logo img { opacity: .45; }
+@media (hover: hover) { .rows.timeline .row:hover { background: var(--g50); } } /* bryl's faint hover tint */
+
 /* ── Globe (retained) ───────────────────────────────────── */
 #globe-section { display: flex; justify-content: center; padding: .5rem 0 1rem; }
 #globe-container { position: relative; width: 460px; height: 460px; max-width: 100%; cursor: grab; user-select: none; touch-action: pan-y; }
