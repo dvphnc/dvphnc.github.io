@@ -1,6 +1,6 @@
 # dvphnc · Joana Daphne Sy
 
-Personal portfolio: data & AI trainee at GCI World (Matsuo-Iwasawa Lab, U-Tokyo) and senior IT student at New Era University.
+Personal portfolio: AI & data science trainee at GCI World (Matsuo-Iwasawa Lab, U-Tokyo) and senior IT student at New Era University.
 
 Live at **https://dvphnc.github.io**
 
