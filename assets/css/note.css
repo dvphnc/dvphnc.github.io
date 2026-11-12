@@ -79,12 +79,21 @@ button.shot:focus-visible { outline: 2px solid var(--accent); outline-offset: 2p
    pixel font) on a hairline rail, then the organisation, its meta line, and each role with mono dates, description
    and skill tags. */
 .xp-lead { margin-top: .9rem; font-size: 15px; line-height: 1.7; color: var(--g500); max-width: 38rem; }
-.xp { list-style: none; margin-top: 2.25rem; }
+/* Same scroll timeline as the homepage experience list: one hairline runs through the badge centres and fills with
+   ink (--tl, 0→1) as you scroll; each organisation's badge and name go from muted to lit (.lit) when its badge
+   reaches 55% down the screen. note.js adds .tl-on only without reduced motion, so otherwise everything is lit. */
+.xp { --rail: 24px; --tl: 1; list-style: none; margin-top: 2.25rem; position: relative; }
+.xp::before, .xp::after { content: ''; position: absolute; left: calc(var(--rail) - .5px); top: var(--rail); width: 1px; pointer-events: none; }
+.xp::before { bottom: 2.25rem; height: var(--span); background: var(--g200); } /* --span (set by note.js) = first to last badge centre */
+.xp::after { height: calc(var(--tl) * var(--span, 0px)); background: var(--ink); }
+html:not(.js) .xp::after { display: none; }
 .xp-org { display: grid; grid-template-columns: 48px 1fr; gap: 0 1.25rem; scroll-margin-top: 80px; }
-.xp-rail { display: flex; flex-direction: column; align-items: center; }
-.xp-rail::after { content: ''; flex: 1; width: 1px; margin: .6rem 0; background: var(--g200); }
-.xp-org:last-child .xp-rail::after { display: none; }
-.xp-badge { width: 48px; height: 48px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border: 1px solid var(--g200); border-radius: 12px; background: var(--bg); font-family: var(--pixel); font-size: 12px; color: var(--ink); }
+.xp-rail { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
+.xp-badge { width: 48px; height: 48px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border: 1px solid var(--ink); border-radius: 12px; background: var(--bg); font-family: var(--pixel); font-size: 12px; color: var(--ink);
+  transition: border-color .35s var(--ease), color .35s var(--ease); }
+.xp-name { transition: color .35s var(--ease); }
+.tl-on .xp-org:not(.lit) .xp-badge { border-color: var(--g200); color: var(--g400); }
+.tl-on .xp-org:not(.lit) .xp-name { color: var(--g500); }
 .xp-body { padding-bottom: 2.25rem; min-width: 0; }
 .xp-name { font-size: 16px; font-weight: 600; letter-spacing: -.01em; line-height: 1.35; padding-top: 3px; }
 .xp-meta { margin-top: .2rem; font-family: var(--mono); font-size: 11px; color: var(--g400); }
@@ -97,7 +106,7 @@ button.shot:focus-visible { outline: 2px solid var(--accent); outline-offset: 2p
 .xp-desc li::marker { color: var(--g400); }
 .xp-skills { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin-top: .9rem; }
 .xp-skills li { padding: 3px 10px; border: 1px solid var(--g200); border-radius: 6px; background: var(--bg); font-family: var(--mono); font-size: 11px; color: var(--g500); }
-@media (max-width: 520px) { .xp-org { grid-template-columns: 40px 1fr; gap: 0 .9rem; } .xp-badge { width: 40px; height: 40px; border-radius: 10px; font-size: 11px; } }
+@media (max-width: 520px) { .xp { --rail: 20px; } .xp-org { grid-template-columns: 40px 1fr; gap: 0 .9rem; } .xp-badge { width: 40px; height: 40px; border-radius: 10px; font-size: 11px; } }
 
 /* quick review (flashcards) */
 .read-block { margin-top: 3.5rem; }
