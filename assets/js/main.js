@@ -150,6 +150,33 @@
     window.addEventListener('resize', tlQueue);
   }
 
+  /* ── Featured event cards: glide in from the left, once, when they scroll into view ──
+     Cards already on screen at load are left alone; the second card follows 160ms after the first. */
+  var glide = Array.prototype.slice.call(document.querySelectorAll('.event-feature .event-card'));
+  if (!reduced && glide.length && 'IntersectionObserver' in window) {
+    var feature = glide[0].parentElement;
+    var fr = feature.getBoundingClientRect();
+    if (fr.top > window.innerHeight * 0.75) { // only if it starts low enough that the glide will be seen
+      glide.forEach(function (c) { c.classList.add('glide-wait'); });
+      // each card glides when its own top passes 75% down the screen; cards that arrive together (side by side on
+      // desktop) are staggered 160ms, while stacked cards on phones each glide as you reach them
+      var go = new IntersectionObserver(function (es) {
+        var n = 0;
+        es.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          var c = e.target, d = (n++) * 160;
+          go.unobserve(c);
+          c.style.setProperty('--glide-delay', d + 'ms');
+          c.classList.add('glide-go');
+          void c.offsetWidth;
+          c.classList.remove('glide-wait');
+          setTimeout(function () { c.classList.remove('glide-go'); c.style.removeProperty('--glide-delay'); }, 1000 + d);
+        });
+      }, { threshold: 0, rootMargin: '0px 0px -25% 0px' });
+      glide.forEach(function (c) { go.observe(c); });
+    }
+  }
+
   /* ── Featured event cards: photo slideshow ──
      Each [data-slides] cover crossfades to its next photo every 4s, the second card offset by 2s so they don't
      change together. Pauses while hovered, while off screen, and when the tab is hidden; off under reduced motion. */

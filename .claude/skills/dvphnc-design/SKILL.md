@@ -97,7 +97,7 @@ Dots via `radial-gradient(var(--dot) 1px, transparent 1.3px)` on a 13px grid for
 - Hovers: shadow ~350ms, transform ~420ms. Status dot pulses opacity over 1.8s.
 - Theme: `assets/js/theme.js` — light / dark / system, persisted in `localStorage.theme` (absent = system), circular view-transition reveal from the click point (540ms).
 - Everything is disabled under `prefers-reduced-motion`; the page must be complete when still.
-- **Never hide content until scroll** (no scroll-triggered reveals). The old site broke this way. Scroll-linked *emphasis* is fine (the experience timeline mutes rows to a still-readable gray, it never hides them).
+- **Never hide content until scroll** (no scroll-triggered reveals). The old site broke this way. Scroll-linked *emphasis* is fine (the experience timeline mutes rows to a still-readable gray, it never hides them). The one sanctioned reveal is the **featured event cards gliding in from the left** (Joana asked for it): `main.js` adds `.glide-wait` (opacity 0, -56px) only when IntersectionObserver exists, motion isn't reduced, and the cards start below 75% of the viewport; each card glides when its own top passes 75% (side-by-side cards staggered 160ms via `--glide-delay`), once, then the classes are removed so hover lift works. Don't copy this pattern elsewhere without the same guards.
 
 ## Note pages (`notes/*.html`) — an archive, not a homepage section
 
