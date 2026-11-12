@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap"/>
-  <link rel="stylesheet" href="assets/css/site.css?v=202611150"/>
+  <link rel="stylesheet" href="assets/css/site.css?v=202611151"/>
 </head>
 <body>
 
@@ -131,8 +131,8 @@
           <div class="portrait enter" style="--d:50ms">
             <!-- Blue duotone: one copy per theme, cross-faded by .dark (filters defined below) -->
             <!-- fine-grain dithered portrait with a transparent backdrop (one file for both themes, identical dots): 1-bit dither made at 2x the display size, scaled smoothly so the grain stays fine -->
-            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611150"/><img class="duo duo-light" src="assets/img/headshot-cutout-576.png?v=202611150" alt="Portrait of Joana Daphne Sy" width="240" height="240" fetchpriority="high"/></picture>
-            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611150"/><img class="duo duo-dark" src="assets/img/headshot-cutout-576.png?v=202611150" alt="" aria-hidden="true" width="240" height="240"/></picture>
+            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611151"/><img class="duo duo-light" src="assets/img/headshot-cutout-576.png?v=202611151" alt="Portrait of Joana Daphne Sy" width="240" height="240" fetchpriority="high"/></picture>
+            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611151"/><img class="duo duo-dark" src="assets/img/headshot-cutout-576.png?v=202611151" alt="" aria-hidden="true" width="240" height="240"/></picture>
             <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
               <!-- light theme: shadows #002a78 → highlights #e8f1ff -->
               <filter id="duo-light" color-interpolation-filters="sRGB">
@@ -203,7 +203,16 @@
              <img src="assets/img/events/<slug>/cover.webp" alt="..." loading="lazy"/> -->
         <div class="event-feature grid-2">
           <a class="card event-card" href="events/aivf-manila-2026.html">
-            <span class="event-cover"><img src="assets/img/events/aivf-manila-2026/cover-800.webp" width="800" height="480" alt="Joana at the AI Vision Forum Manila 2026 backdrop" loading="lazy"/></span>
+            <!-- slideshow: the first <img> is the cover (and the only one people with reduced motion see); the rest crossfade every ~4s (main.js) -->
+            <span class="event-cover" data-slides>
+              <img class="is-on" src="assets/img/events/aivf-manila-2026/cover-800.webp" width="800" height="480" alt="Joana at the AI Vision Forum Manila 2026 backdrop" loading="lazy"/>
+              <img src="assets/img/events/aivf-manila-2026/02-thumb.webp" alt="" aria-hidden="true" loading="lazy"/>
+              <img src="assets/img/events/aivf-manila-2026/04-thumb.webp" alt="" aria-hidden="true" loading="lazy" style="object-position:72% 50%"/>
+              <img src="assets/img/events/aivf-manila-2026/03-thumb.webp" alt="" aria-hidden="true" loading="lazy"/>
+              <img src="assets/img/events/aivf-manila-2026/01-thumb.webp" alt="" aria-hidden="true" loading="lazy"/>
+              <img src="assets/img/events/aivf-manila-2026/05-thumb.webp" alt="" aria-hidden="true" loading="lazy"/>
+              <span class="slide-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+            </span>
             <span class="event-card-body">
               <span class="micro">oct 2026 · shangri-la the fort, bgc</span>
               <span class="event-card-title">AI Vision Forum Manila 2026</span>
@@ -211,7 +220,15 @@
             </span>
           </a>
           <a class="card event-card" href="events/asean-youth-summit-2026.html">
-            <span class="event-cover"><img src="assets/img/events/asean-youth-summit-2026/cover-800.webp?v=2" width="800" height="533" alt="Student leader panel on stage at the ASEAN youth leadership summit" loading="lazy"/></span>
+            <span class="event-cover" data-slides>
+              <img class="is-on" src="assets/img/events/asean-youth-summit-2026/cover-800.webp?v=2" width="800" height="533" alt="Student leader panel on stage at the ASEAN youth leadership summit" loading="lazy"/>
+              <img src="assets/img/events/asean-youth-summit-2026/04-thumb.webp?v=2" alt="" aria-hidden="true" loading="lazy"/>
+              <img src="assets/img/events/asean-youth-summit-2026/02-thumb.webp" alt="" aria-hidden="true" loading="lazy"/>
+              <img src="assets/img/events/asean-youth-summit-2026/03-thumb.webp" alt="" aria-hidden="true" loading="lazy"/>
+              <img src="assets/img/events/asean-youth-summit-2026/01-thumb.webp" alt="" aria-hidden="true" loading="lazy"/>
+              <img src="assets/img/events/asean-youth-summit-2026/05-thumb.webp" alt="" aria-hidden="true" loading="lazy"/>
+              <span class="slide-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+            </span>
             <span class="event-card-body">
               <span class="micro">sep 2026 · u.p. town center</span>
               <span class="event-card-title">ASEAN Campus Connect &amp; Youth Leadership Summit</span>
@@ -416,11 +433,11 @@
     <p class="lb-count micro"></p>
   </div>
 
-  <script src="assets/js/boot.js?v=202611150"></script>
-  <script src="assets/js/theme.js?v=202611150"></script>
-  <script src="assets/js/main.js?v=202611150"></script>
+  <script src="assets/js/boot.js?v=202611151"></script>
+  <script src="assets/js/theme.js?v=202611151"></script>
+  <script src="assets/js/main.js?v=202611151"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="assets/js/globe.js?v=202611150"></script>
-  <script src="assets/js/gallery.js?v=202611150"></script>
+  <script src="assets/js/globe.js?v=202611151"></script>
+  <script src="assets/js/gallery.js?v=202611151"></script>
 </body>
 </html>

@@ -485,6 +485,13 @@ footer.foot { position: relative; margin-top: 5rem; padding: 1.5rem 0 2.5rem; bo
 .event-cover { position: relative; display: block; aspect-ratio: 16 / 10; overflow: hidden; background: var(--g100); border-bottom: 1px solid var(--g200); }
 .event-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); }
 a.event-card:hover .event-cover img { transform: scale(1.04); }
+/* slideshow: photos stacked, the .is-on one fades in over 1s; dots show which photo is up */
+.event-cover[data-slides] img { position: absolute; inset: 0; opacity: 0; transition: opacity 1s var(--ease), transform .5s var(--ease); }
+.event-cover[data-slides] img.is-on { opacity: 1; }
+.slide-dots { position: absolute; left: 0; right: 0; bottom: 10px; z-index: 1; display: none; justify-content: center; gap: 5px; pointer-events: none; }
+.slide-dots i { width: 5px; height: 5px; border-radius: 50%; background: rgb(255 255 255 / .5); box-shadow: 0 0 0 1px rgb(0 0 0 / .15); transition: background-color .3s, width .3s var(--ease); }
+.slide-dots i.is-on { width: 14px; border-radius: 3px; background: #fff; }
+.slides-on .slide-dots { display: flex; } /* only once main.js runs the slideshow (not under reduced motion); white because they sit on photos */
 .event-cover-empty { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
   background-image: radial-gradient(var(--dot) 1px, transparent 1.3px); background-size: 9px 9px; }
 .event-card-body { display: flex; flex-direction: column; gap: .4rem; padding: 1rem 1.15rem 1.1rem; }

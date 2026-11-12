@@ -150,6 +150,36 @@
     window.addEventListener('resize', tlQueue);
   }
 
+  /* ── Featured event cards: photo slideshow ──
+     Each [data-slides] cover crossfades to its next photo every 4s, the second card offset by 2s so they don't
+     change together. Pauses while hovered, while off screen, and when the tab is hidden; off under reduced motion. */
+  if (!reduced) {
+    Array.prototype.slice.call(document.querySelectorAll('[data-slides]')).forEach(function (cover, k) {
+      var imgs = Array.prototype.slice.call(cover.querySelectorAll('img'));
+      var dots = Array.prototype.slice.call(cover.querySelectorAll('.slide-dots i'));
+      if (imgs.length < 2) return;
+      var i = 0, seen = false, hover = false;
+      var card = cover.closest('.event-card') || cover;
+      cover.classList.add('slides-on');
+      var paint = function () {
+        imgs.forEach(function (im, n) { im.classList.toggle('is-on', n === i); });
+        dots.forEach(function (d, n) { d.classList.toggle('is-on', n === i); });
+      };
+      paint();
+      card.addEventListener('mouseenter', function () { hover = true; });
+      card.addEventListener('mouseleave', function () { hover = false; });
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (es) { seen = es[0].isIntersecting; }, { threshold: 0.35 }).observe(cover);
+      } else seen = true;
+      setTimeout(function () {
+        setInterval(function () {
+          if (!seen || hover || document.hidden) return;
+          i = (i + 1) % imgs.length; paint();
+        }, 4000);
+      }, k * 2000);
+    });
+  }
+
   /* Escape closes the phone menu */
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && overlay.classList.contains('open')) menu(false);
