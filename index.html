@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap"/>
-  <link rel="stylesheet" href="assets/css/site.css?v=202611155"/>
+  <link rel="stylesheet" href="assets/css/site.css?v=202611159"/>
 </head>
 <body>
 
@@ -131,8 +131,8 @@
           <div class="portrait enter" style="--d:50ms">
             <!-- Blue duotone: one copy per theme, cross-faded by .dark (filters defined below) -->
             <!-- fine-grain dithered portrait with a transparent backdrop (one file for both themes, identical dots): 1-bit dither made at 2x the display size, scaled smoothly so the grain stays fine -->
-            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611155"/><img class="duo duo-light" src="assets/img/headshot-cutout-576.png?v=202611155" alt="Portrait of Joana Daphne Sy" width="240" height="240" fetchpriority="high"/></picture>
-            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611155"/><img class="duo duo-dark" src="assets/img/headshot-cutout-576.png?v=202611155" alt="" aria-hidden="true" width="240" height="240"/></picture>
+            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611159"/><img class="duo duo-light" src="assets/img/headshot-cutout-576.png?v=202611159" alt="Portrait of Joana Daphne Sy" width="240" height="240" fetchpriority="high"/></picture>
+            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611159"/><img class="duo duo-dark" src="assets/img/headshot-cutout-576.png?v=202611159" alt="" aria-hidden="true" width="240" height="240"/></picture>
             <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
               <!-- light theme: shadows #002a78 → highlights #e8f1ff -->
               <filter id="duo-light" color-interpolation-filters="sRGB">
@@ -194,47 +194,55 @@
         </div>
       </section>
 
-      <!-- ═══ 02 · events & conferences (reflections fold in here; photos go here when available) ═══ -->
-      <!-- TODO: swap the reflection hrefs for the exact LinkedIn post URLs when Joana shares them -->
+      <!-- ═══ 02 · events & conferences: a drifting strip of event cards (left to right), after rolex-esto.vercel.app ═══
+           main.js clones the cards once for a seamless loop, drifts the strip, pauses on hover/touch/focus, and wires
+           ‹ › and "view all" (grid). Each photo is its own slideshow ([data-slides], counter). Order: newest first. -->
       <section class="sec" id="events" aria-labelledby="h-events">
-        <div class="sec-head"><h2 class="sec-num" id="h-events">02 · events &amp; conferences</h2><span class="micro">ai &amp; data events</span></div>
-        <!-- Featured events: photo cards linking to story pages (events/*.html).
-             PHOTOS: drop a cover into assets/img/events/<slug>/cover.webp, then replace the .event-cover-empty span with
-             <img src="assets/img/events/<slug>/cover.webp" alt="..." loading="lazy"/> -->
-        <div class="event-feature grid-2">
-          <a class="card event-card" href="events/aivf-manila-2026.html">
-            <!-- slideshow: the first <img> is the cover (and the only one people with reduced motion see); the rest crossfade every ~4s (main.js) -->
-            <span class="event-cover" data-slides>
-              <img class="is-on" src="assets/img/events/aivf-manila-2026/cover-800.webp" width="800" height="480" alt="Joana at the AI Vision Forum Manila 2026 backdrop" loading="lazy"/>
-              <img src="assets/img/events/aivf-manila-2026/02-thumb.webp" alt="" aria-hidden="true" loading="lazy"/>
-              <img src="assets/img/events/aivf-manila-2026/04-thumb.webp" alt="" aria-hidden="true" loading="lazy" style="object-position:72% 50%"/>
-              <img src="assets/img/events/aivf-manila-2026/03-thumb.webp" alt="" aria-hidden="true" loading="lazy"/>
-              <img src="assets/img/events/aivf-manila-2026/01-thumb.webp" alt="" aria-hidden="true" loading="lazy"/>
-              <img src="assets/img/events/aivf-manila-2026/05-thumb.webp" alt="" aria-hidden="true" loading="lazy"/>
-              <span class="slide-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
-            </span>
-            <span class="event-card-body">
-              <span class="micro">oct 2026 · shangri-la the fort, bgc</span>
-              <span class="event-card-title">AI Vision Forum Manila 2026</span>
-              <span class="event-card-foot"><span class="event-card-more">read the story <span class="arr">→</span></span></span>
-            </span>
-          </a>
-          <a class="card event-card" href="events/asean-youth-summit-2026.html">
-            <span class="event-cover" data-slides>
-              <img class="is-on" src="assets/img/events/asean-youth-summit-2026/cover-800.webp?v=2" width="800" height="533" alt="Student leader panel on stage at the ASEAN youth leadership summit" loading="lazy"/>
-              <img src="assets/img/events/asean-youth-summit-2026/04-thumb.webp?v=2" alt="" aria-hidden="true" loading="lazy"/>
-              <img src="assets/img/events/asean-youth-summit-2026/02-thumb.webp" alt="" aria-hidden="true" loading="lazy"/>
-              <img src="assets/img/events/asean-youth-summit-2026/03-thumb.webp" alt="" aria-hidden="true" loading="lazy"/>
-              <img src="assets/img/events/asean-youth-summit-2026/01-thumb.webp" alt="" aria-hidden="true" loading="lazy"/>
-              <img src="assets/img/events/asean-youth-summit-2026/05-thumb.webp" alt="" aria-hidden="true" loading="lazy"/>
-              <span class="slide-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
-            </span>
-            <span class="event-card-body">
-              <span class="micro">sep 2026 · u.p. town center</span>
-              <span class="event-card-title">ASEAN Campus Connect &amp; Youth Leadership Summit</span>
-              <span class="event-card-foot"><span class="event-cert">‹ certificate ›</span><span class="event-card-more">read the story <span class="arr">→</span></span></span>
-            </span>
-          </a>
+        <div class="sec-head"><h2 class="sec-num" id="h-events">02 · events &amp; conferences</h2><span class="micro">6 events · forums, summits &amp; workshops</span></div>
+        <div class="ev-controls">
+          <button class="ev-btn" type="button" data-ev="prev" aria-label="Show earlier events">‹</button>
+          <button class="ev-btn" type="button" data-ev="next" aria-label="Show later events">›</button>
+          <button class="ev-btn ev-all" type="button" data-ev="all" aria-pressed="false">view all</button>
+        </div>
+        <div class="ev-strip" aria-label="Events and conferences">
+          <div class="ev-track">
+
+            <article class="ev-card">
+              <div class="ev-photo" data-slides>
+                <img class="is-on" src="assets/img/events/aivf-manila-2026/cover-800.webp" width="800" height="480" alt="Joana at the AI Vision Forum Manila 2026 backdrop" loading="lazy"/>
+                <img src="assets/img/events/aivf-manila-2026/02-thumb.webp" alt="" aria-hidden="true" loading="lazy"/>
+                <img src="assets/img/events/aivf-manila-2026/04-thumb.webp" alt="" aria-hidden="true" loading="lazy" style="object-position:72% 50%"/>
+                <img src="assets/img/events/aivf-manila-2026/03-thumb.webp" alt="" aria-hidden="true" loading="lazy"/>
+                <img src="assets/img/events/aivf-manila-2026/01-thumb.webp" alt="" aria-hidden="true" loading="lazy"/>
+                <img src="assets/img/events/aivf-manila-2026/05-thumb.webp" alt="" aria-hidden="true" loading="lazy"/>
+                <span class="ev-count" aria-hidden="true">1 / 6</span>
+              </div>
+              <div class="ev-body">
+                <p class="ev-meta">forum · oct 2026 · shangri-la the fort, bgc</p>
+                <h3 class="ev-title"><a href="events/aivf-manila-2026.html">AI Vision Forum Manila 2026</a></h3>
+                <p class="ev-desc">Won the AI Vision Challenge at a forum of AI builders and cloud leaders.</p>
+                <div class="ev-foot"><a class="ev-more" href="events/aivf-manila-2026.html">read the story <span class="arr">→</span></a></div>
+              </div>
+            </article>
+
+            <article class="ev-card">
+              <div class="ev-photo" data-slides>
+                <img class="is-on" src="assets/img/events/asean-youth-summit-2026/cover-800.webp?v=2" width="800" height="533" alt="Student leader panel on stage at the ASEAN youth leadership summit" loading="lazy"/>
+                <img src="assets/img/events/asean-youth-summit-2026/04-thumb.webp?v=2" alt="" aria-hidden="true" loading="lazy"/>
+                <img src="assets/img/events/asean-youth-summit-2026/02-thumb.webp" alt="" aria-hidden="true" loading="lazy"/>
+                <img src="assets/img/events/asean-youth-summit-2026/03-thumb.webp" alt="" aria-hidden="true" loading="lazy"/>
+                <img src="assets/img/events/asean-youth-summit-2026/01-thumb.webp" alt="" aria-hidden="true" loading="lazy"/>
+                <img src="assets/img/events/asean-youth-summit-2026/05-thumb.webp" alt="" aria-hidden="true" loading="lazy"/>
+                <span class="ev-count" aria-hidden="true">1 / 6</span>
+              </div>
+              <div class="ev-body">
+                <p class="ev-meta">summit · sep 2026 · u.p. town center</p>
+                <h3 class="ev-title"><a href="events/asean-youth-summit-2026.html">ASEAN Campus Connect &amp; Youth Leadership Summit</a></h3>
+                <p class="ev-desc">300 student leaders from 53 schools on listening-first leadership, hosted by CHED NCR.</p>
+                <div class="ev-foot"><button class="event-cert" type="button" data-photos="assets/img/events/asean-youth-summit-2026/06.webp" data-alts="Certificate of participation for Joana Daphne T. Sy from CHED NCR, ASEAN Campus Connect and Youth Leadership Summit 2026" aria-label="View the ASEAN summit certificate">‹ certificate ›</button><a class="ev-more" href="events/asean-youth-summit-2026.html">read the story <span class="arr">→</span></a></div>
+              </div>
+            </article>
+          </div>
         </div>
         <ul class="events">
           <li class="event"><span class="event-date">Jun 2026</span><span class="row-logo"><img class="logo" src="assets/logos/vjal.png" alt="Vjal Institute"/></span><div class="event-main"><p class="event-name">AI Empowerment for Communities</p><p class="event-org">Vjal Institute</p><a class="event-cert" href="https://cert.vjal.ai/certificate/?uid=6582547825718493249" target="_blank" rel="noopener">‹ certificate ›</a></div><span class="pill">workshop</span></li>
@@ -433,11 +441,11 @@
     <p class="lb-count micro"></p>
   </div>
 
-  <script src="assets/js/boot.js?v=202611155"></script>
-  <script src="assets/js/theme.js?v=202611155"></script>
-  <script src="assets/js/main.js?v=202611155"></script>
+  <script src="assets/js/boot.js?v=202611159"></script>
+  <script src="assets/js/theme.js?v=202611159"></script>
+  <script src="assets/js/main.js?v=202611159"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="assets/js/globe.js?v=202611155"></script>
-  <script src="assets/js/gallery.js?v=202611155"></script>
+  <script src="assets/js/globe.js?v=202611159"></script>
+  <script src="assets/js/gallery.js?v=202611159"></script>
 </body>
 </html>

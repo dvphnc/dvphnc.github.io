@@ -150,60 +150,106 @@
     window.addEventListener('resize', tlQueue);
   }
 
-  /* ── Featured event cards: glide in from the left, once, when they scroll into view ──
-     Cards already on screen at load are left alone; the second card follows 160ms after the first. */
-  var glide = Array.prototype.slice.call(document.querySelectorAll('.event-feature .event-card'));
-  if (!reduced && glide.length && 'IntersectionObserver' in window) {
-    var feature = glide[0].parentElement;
-    var fr = feature.getBoundingClientRect();
-    if (fr.top > window.innerHeight * 0.75) { // only if it starts low enough that the glide will be seen
-      glide.forEach(function (c) { c.classList.add('glide-wait'); });
-      // each card glides when its own top passes 75% down the screen; cards that arrive together (side by side on
-      // desktop) are staggered 160ms, while stacked cards on phones each glide as you reach them
-      var go = new IntersectionObserver(function (es) {
-        var n = 0;
-        es.forEach(function (e) {
-          if (!e.isIntersecting) return;
-          var c = e.target, d = (n++) * 160;
-          go.unobserve(c);
-          c.style.setProperty('--glide-delay', d + 'ms');
-          c.classList.add('glide-go');
-          void c.offsetWidth;
-          c.classList.remove('glide-wait');
-          setTimeout(function () { c.classList.remove('glide-go'); c.style.removeProperty('--glide-delay'); }, 1000 + d);
-        });
-      }, { threshold: 0, rootMargin: '0px 0px -25% 0px' });
-      glide.forEach(function (c) { go.observe(c); });
+  /* ── Events strip: drifts left to right, loops seamlessly (rolex-esto.vercel.app style) ──
+     The six cards are cloned once so the strip can wrap. Pauses while hovered, touched, focused, dragged, off screen
+     or in a hidden tab. ‹ › scroll by one card; "view all" switches to a grid of the real cards. Under reduced
+     motion there's no drift and no clones: it's a plain strip you scroll by hand. */
+  var evSec = document.getElementById('events');
+  var strip = evSec && evSec.querySelector('.ev-strip');
+  if (strip) {
+    var track = strip.querySelector('.ev-track');
+    var originals = Array.prototype.slice.call(track.children);
+    var loop = !reduced;
+    // with only a couple of cards, repeat them until one "set" is wider than the strip, then add a second identical
+    // set so the strip can wrap from one to the other invisibly
+    var reps = 1;
+    if (loop) {
+      var one = track.scrollWidth + 14;
+      reps = Math.max(1, Math.ceil((strip.clientWidth + 320) / one));
+      for (var r = 1; r < reps * 2; r++) originals.forEach(function (c) {
+        var k = c.cloneNode(true);
+        k.setAttribute('data-clone', ''); k.setAttribute('aria-hidden', 'true');
+        k.querySelectorAll('a, button').forEach(function (el) { el.setAttribute('tabindex', '-1'); });
+        track.appendChild(k);
+      });
     }
+    // exact width of one set (cards + gaps), measured from the first card of set 2
+    var half = function () { var k = track.children[originals.length * reps]; return k ? k.offsetLeft - track.children[0].offsetLeft : track.scrollWidth / 2; };
+    // keep the scroll position inside one copy's width; both copies look identical, so the jump is invisible
+    var wrap = function () { if (!loop || grid) return; var h = half(); if (strip.scrollLeft <= 1) strip.scrollLeft += h; else if (strip.scrollLeft >= h + 2) strip.scrollLeft -= h; };
+    // pause state: plain flags plus a "resume after" time, so nothing can get stuck paused
+    var hov = false, foc = false, dragging = false, resumeAt = 0, inView = false, grid = false, last = 0, acc = 0;
+    var later = function (ms) { resumeAt = Math.max(resumeAt, performance.now() + ms); };
+    var isPaused = function () { return hov || foc || dragging || performance.now() < resumeAt; };
+    strip.addEventListener('mouseenter', function () { hov = true; });
+    strip.addEventListener('mouseleave', function () { hov = false; later(800); });
+    strip.addEventListener('focusin', function () { foc = true; });
+    strip.addEventListener('focusout', function () { foc = false; later(800); });
+    strip.addEventListener('touchstart', function () { later(2500); }, { passive: true });
+    strip.addEventListener('touchmove', function () { later(2500); }, { passive: true });
+    strip.addEventListener('scroll', function () { wrap(); });
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { inView = es[0].isIntersecting; }).observe(strip); else inView = true;
+    if (loop) {
+      requestAnimationFrame(function () { strip.scrollLeft = half(); });
+      var SPEED = 38; // px per second
+      var frame = function (t) {
+        var dt = last ? Math.min(64, t - last) : 0; last = t;
+        if (!isPaused() && inView && !grid && !document.hidden) {
+          acc += SPEED * dt / 1000;               // content moves left → right: scroll position decreases
+          if (acc >= 1) { var step = Math.floor(acc); acc -= step; strip.scrollLeft -= step; wrap(); }
+        }
+        requestAnimationFrame(frame);
+      };
+      requestAnimationFrame(frame);
+    }
+    // drag with a mouse (touch already scrolls natively)
+    var dragX = null, startLeft = 0, moved = false;
+    strip.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse' || grid) return; dragX = e.clientX; startLeft = strip.scrollLeft; moved = false; dragging = true; });
+    window.addEventListener('pointermove', function (e) {
+      if (dragX === null) return;
+      var dx = e.clientX - dragX;
+      if (Math.abs(dx) > 4) { moved = true; strip.classList.add('is-dragging'); }
+      strip.scrollLeft = startLeft - dx; wrap();
+    });
+    window.addEventListener('pointerup', function () { if (dragX === null) return; dragX = null; dragging = false; later(1200); setTimeout(function () { strip.classList.remove('is-dragging'); }, 0); });
+    strip.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+    // ‹ › and view all
+    var cardStep = function () { var c = track.children[0]; return c.getBoundingClientRect().width + 14; };
+    evSec.querySelectorAll('[data-ev]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var k = b.getAttribute('data-ev');
+        if (k === 'all') {
+          grid = !grid; evSec.classList.toggle('ev-grid', grid); b.setAttribute('aria-pressed', String(grid));
+          b.textContent = grid ? 'show strip' : 'view all';
+          if (!grid && loop) strip.scrollLeft = half();
+          return;
+        }
+        later(2500);
+        strip.scrollBy({ left: (k === 'next' ? 1 : -1) * cardStep(), behavior: reduced ? 'auto' : 'smooth' });
+      });
+    });
   }
 
-  /* ── Featured event cards: photo slideshow ──
-     Each [data-slides] cover crossfades to its next photo every 4s, the second card offset by 2s so they don't
-     change together. Pauses while hovered, while off screen, and when the tab is hidden; off under reduced motion. */
+  /* ── Event card photos: each [data-slides] crossfades to its next photo every 4s, staggered per card, with a
+     "n / N" counter. Pauses while that card is hovered or off screen; off under reduced motion. ── */
   if (!reduced) {
     Array.prototype.slice.call(document.querySelectorAll('[data-slides]')).forEach(function (cover, k) {
       var imgs = Array.prototype.slice.call(cover.querySelectorAll('img'));
-      var dots = Array.prototype.slice.call(cover.querySelectorAll('.slide-dots i'));
+      var count = cover.querySelector('.ev-count');
       if (imgs.length < 2) return;
       var i = 0, seen = false, hover = false;
-      var card = cover.closest('.event-card') || cover;
-      cover.classList.add('slides-on');
+      var card = cover.closest('.ev-card') || cover;
       var paint = function () {
         imgs.forEach(function (im, n) { im.classList.toggle('is-on', n === i); });
-        dots.forEach(function (d, n) { d.classList.toggle('is-on', n === i); });
+        if (count) count.textContent = (i + 1) + ' / ' + imgs.length;
       };
       paint();
       card.addEventListener('mouseenter', function () { hover = true; });
       card.addEventListener('mouseleave', function () { hover = false; });
-      if ('IntersectionObserver' in window) {
-        new IntersectionObserver(function (es) { seen = es[0].isIntersecting; }, { threshold: 0.35 }).observe(cover);
-      } else seen = true;
+      if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { seen = es[0].isIntersecting; }, { threshold: 0.35 }).observe(cover); else seen = true;
       setTimeout(function () {
-        setInterval(function () {
-          if (!seen || hover || document.hidden) return;
-          i = (i + 1) % imgs.length; paint();
-        }, 4000);
-      }, k * 2000);
+        setInterval(function () { if (!seen || hover || document.hidden) return; i = (i + 1) % imgs.length; paint(); }, 4000);
+      }, (k % 6) * 700);
     });
   }
 

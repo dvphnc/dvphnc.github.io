@@ -491,10 +491,50 @@ a.event-card:hover .event-cover img { transform: scale(1.04); }
 .slide-dots { position: absolute; left: 0; right: 0; bottom: 10px; z-index: 1; display: none; justify-content: center; gap: 5px; pointer-events: none; }
 .slide-dots i { width: 5px; height: 5px; border-radius: 50%; background: rgb(255 255 255 / .5); box-shadow: 0 0 0 1px rgb(0 0 0 / .15); transition: background-color .3s, width .3s var(--ease); }
 .slide-dots i.is-on { width: 14px; border-radius: 3px; background: #fff; }
-/* featured event cards glide in from the left the first time they scroll into view (main.js adds .glide-wait only
-   when it can also reveal them, so without JS / under reduced motion they're simply visible) */
-.event-card.glide-wait { opacity: 0; transform: translateX(-56px); }
-.event-card.glide-go { transition: opacity .8s var(--ease) var(--glide-delay, 0ms), transform .9s var(--ease) var(--glide-delay, 0ms) !important; }
+/* ── Events strip (after rolex-esto.vercel.app "Events & Gatherings") ──
+   A horizontal strip of cards that drifts left to right on its own (main.js), with edge fades, ‹ › buttons and a
+   "view all" grid. Each card photo is its own slideshow with a counter. Certificates sit on a pale card (.is-doc). */
+.ev-controls { display: flex; gap: 6px; margin-bottom: .9rem; }
+.ev-btn { min-width: 36px; height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--g200); background: transparent; color: var(--ink); font-family: var(--mono); font-size: 12px; cursor: pointer; transition: border-color .2s, background-color .2s; }
+.ev-btn:hover { border-color: var(--g300); background: var(--g50); }
+.ev-btn.ev-all { margin-left: auto; letter-spacing: 1px; text-transform: uppercase; font-size: 10.5px; }
+.ev-btn.ev-all[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: transparent; }
+.ev-strip { overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; margin-inline: -4px; padding: 4px 4px 14px;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent); mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent); }
+.ev-strip::-webkit-scrollbar { display: none; }
+.ev-strip.is-dragging { cursor: grabbing; user-select: none; }
+.ev-strip.is-dragging a, .ev-strip.is-dragging button { pointer-events: none; }
+.ev-track { display: flex; gap: 14px; width: max-content; }
+.ev-card { width: 300px; flex-shrink: 0; display: flex; flex-direction: column; border: 1px solid var(--g200); border-radius: 16px; overflow: hidden; background: var(--g50); box-shadow: var(--shadow); transition: box-shadow .35s var(--ease), border-color .2s; }
+.ev-card:hover { box-shadow: var(--shadow-hover); border-color: var(--g300); }
+@media (max-width: 519px) { .ev-card { width: min(300px, 78vw); } }
+.ev-photo { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--g100); border-bottom: 1px solid var(--g200); }
+.ev-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1s var(--ease); }
+.ev-photo img.is-on { opacity: 1; }
+.ev-photo.is-doc { background: var(--g100); }
+.ev-photo.is-doc img { object-fit: contain; padding: 10px; }
+.ev-photo.is-empty { display: flex; align-items: center; justify-content: center; background-image: radial-gradient(var(--dot) 1px, transparent 1.3px); background-size: 9px 9px; }
+.ev-photo.is-empty img { position: static; opacity: 1; width: 64px; height: 64px; object-fit: contain; }
+.ev-count { position: absolute; top: 10px; right: 10px; z-index: 1; padding: 2px 7px; border-radius: 6px; background: rgb(0 0 0 / .55); color: #fff; font-family: var(--mono); font-size: 10px; letter-spacing: .5px; } /* on the photo, so fixed colours */
+.ev-body { flex: 1; display: flex; flex-direction: column; gap: .4rem; padding: .95rem 1.05rem 1rem; }
+.ev-meta { font-family: var(--mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--g400); }
+.ev-title { font-size: 15px; font-weight: 600; letter-spacing: -.015em; line-height: 1.35; }
+.ev-title a { text-decoration: none; }
+.ev-title a:hover { color: var(--accent); }
+.ev-desc { font-size: 13px; line-height: 1.55; color: var(--g500); }
+.ev-foot { margin-top: auto; padding-top: .55rem; display: flex; align-items: center; justify-content: space-between; gap: 10px; border-top: 1px solid var(--g200); }
+.ev-foot .event-cert { padding-block: 8px; margin-block: -8px; }
+.ev-more { margin-left: auto; padding-block: 8px; margin-block: -8px; font-family: var(--mono); font-size: 10.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--g500); text-decoration: none; }
+.ev-more:hover { color: var(--ink); }
+.ev-more .arr { display: inline-block; transition: transform .2s; }
+.ev-more:hover .arr { transform: translateX(3px); }
+/* "view all": the strip becomes a wrapped grid of the real cards (clones hidden) and stops drifting */
+#events.ev-grid .ev-strip { overflow: visible; -webkit-mask-image: none; mask-image: none; }
+#events.ev-grid .ev-track { width: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+#events.ev-grid .ev-card { width: auto; }
+#events.ev-grid .ev-card[data-clone] { display: none; }
+#events.ev-grid [data-ev="prev"], #events.ev-grid [data-ev="next"] { visibility: hidden; }
+
 .slides-on .slide-dots { display: flex; } /* only once main.js runs the slideshow (not under reduced motion); white because they sit on photos */
 .event-cover-empty { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
   background-image: radial-gradient(var(--dot) 1px, transparent 1.3px); background-size: 9px 9px; }
