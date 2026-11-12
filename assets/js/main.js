@@ -141,7 +141,16 @@
       var mark = window.innerHeight * 0.55, box = tl.getBoundingClientRect();
       var p = Math.min(1, Math.max(0, (mark - box.top) / box.height));
       tl.style.setProperty('--tl', p.toFixed(4));
-      tlRows.forEach(function (row) { row.classList.toggle('lit', row.getBoundingClientRect().top + 20 <= mark); });
+      var current = null;
+      tlRows.forEach(function (row) {
+        var on = row.getBoundingClientRect().top + 20 <= mark;
+        row.classList.toggle('lit', on);
+        if (on) current = row;
+      });
+      // the card that most recently crossed the mark is the one being read: border + lift
+      // (cleared once the list has scrolled most of the way off the top)
+      var reading = box.bottom > window.innerHeight * 0.2;
+      tlRows.forEach(function (row) { row.classList.toggle('now', reading && row === current); });
     };
     var tlQueue = function () { if (!tlTick) { tlTick = true; requestAnimationFrame(tlUpdate); } };
     tl.classList.add('tl-on');
