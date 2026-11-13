@@ -92,13 +92,6 @@ button.shot:focus-visible { outline: 2px solid var(--accent); outline-offset: 2p
 .pj-list { list-style: none; margin-top: .6rem; border-top: 1px solid var(--g200); }
 .pj { display: grid; grid-template-columns: 17rem 1fr; gap: 1.4rem; align-items: start; padding: 1.25rem 0; border-bottom: 1px solid var(--g200); }
 .pj[hidden] { display: none; }
-/* screenshot: 16:10 frame, hairline, soft radius; full colour (screenshots aren't duotoned) */
-.pj-shot { display: block; position: relative; aspect-ratio: 16 / 10; overflow: hidden; border-radius: 12px; border: 1px solid var(--g200); background: var(--g100); }
-.pj-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform .6s var(--ease); }
-a.pj-shot:hover img { transform: scale(1.03); }
-.pj-shot.is-empty { display: flex; align-items: center; justify-content: center;
-  background-color: var(--g50); background-image: radial-gradient(var(--dot) 1px, transparent 1.3px); background-size: 9px 9px; }
-.pj-shot.is-empty .micro { background: var(--bg); padding: 2px 8px; border-radius: 999px; }
 .pj-body { min-width: 0; }
 .pj-body .pj-title { margin-top: .3rem; }
 .pj-body .pj-links { margin-top: .8rem; }
@@ -110,7 +103,6 @@ a.pj-shot:hover img { transform: scale(1.03); }
 @media (max-width: 640px) {
   .pj { grid-template-columns: 1fr; gap: .9rem; }
 }
-@media (prefers-reduced-motion: reduce) { .pj-shot img { transition: none; } a.pj-shot:hover img { transform: none; } }
 
 /* events.html: year headings over plain .events rows */
 .ev-year { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin: 2.6rem 0 .8rem; font-family: var(--pixel); font-weight: 400; font-size: 1.35rem; line-height: 1; scroll-margin-top: 5rem; }
