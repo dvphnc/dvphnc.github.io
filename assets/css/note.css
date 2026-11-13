@@ -78,6 +78,10 @@ button.shot:focus-visible { outline: 2px solid var(--accent); outline-offset: 2p
 /* experience.html: bryllim.com/experience framing. One <li> per organisation: a 48px square badge (initials in the
    pixel font) on a hairline rail, then the organisation, its meta line, and each role with mono dates, description
    and skill tags. */
+/* events.html: year headings over plain .events rows */
+.ev-year { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin: 2.6rem 0 .8rem; font-family: var(--pixel); font-weight: 400; font-size: 1.35rem; line-height: 1; scroll-margin-top: 5rem; }
+.ev-year:first-child { margin-top: 2rem; }
+.event-links { display: flex; flex-wrap: wrap; column-gap: 1.1rem; }
 .xp-lead { margin-top: .9rem; font-size: 15px; line-height: 1.7; color: var(--g500); max-width: 38rem; }
 /* Same scroll timeline as the homepage experience list: one hairline runs through the badge centres and fills with
    ink (--tl, 0→1) as you scroll; each organisation's badge and name go from muted to lit (.lit) when its badge

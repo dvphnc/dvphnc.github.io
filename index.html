@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap"/>
-  <link rel="stylesheet" href="assets/css/site.css?v=202611159"/>
+  <link rel="stylesheet" href="assets/css/site.css?v=202611160"/>
 </head>
 <body>
 
@@ -131,8 +131,8 @@
           <div class="portrait enter" style="--d:50ms">
             <!-- Blue duotone: one copy per theme, cross-faded by .dark (filters defined below) -->
             <!-- fine-grain dithered portrait with a transparent backdrop (one file for both themes, identical dots): 1-bit dither made at 2x the display size, scaled smoothly so the grain stays fine -->
-            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611159"/><img class="duo duo-light" src="assets/img/headshot-cutout-576.png?v=202611159" alt="Portrait of Joana Daphne Sy" width="240" height="240" fetchpriority="high"/></picture>
-            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611159"/><img class="duo duo-dark" src="assets/img/headshot-cutout-576.png?v=202611159" alt="" aria-hidden="true" width="240" height="240"/></picture>
+            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611160"/><img class="duo duo-light" src="assets/img/headshot-cutout-576.png?v=202611160" alt="Portrait of Joana Daphne Sy" width="240" height="240" fetchpriority="high"/></picture>
+            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611160"/><img class="duo duo-dark" src="assets/img/headshot-cutout-576.png?v=202611160" alt="" aria-hidden="true" width="240" height="240"/></picture>
             <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
               <!-- light theme: shadows #002a78 → highlights #e8f1ff -->
               <filter id="duo-light" color-interpolation-filters="sRGB">
@@ -196,13 +196,12 @@
 
       <!-- ═══ 02 · events & conferences: a drifting strip of event cards (left to right), after rolex-esto.vercel.app ═══
            main.js clones the cards once for a seamless loop, drifts the strip, pauses on hover/touch/focus, and wires
-           ‹ › and "view all" (grid). Each photo is its own slideshow ([data-slides], counter). Order: newest first. -->
+           ‹ › and links to events.html for the full list. Each photo is its own slideshow ([data-slides], counter). Order: newest first. -->
       <section class="sec" id="events" aria-labelledby="h-events">
-        <div class="sec-head"><h2 class="sec-num" id="h-events">02 · events &amp; conferences</h2><span class="micro">6 events · forums, summits &amp; workshops</span></div>
+        <div class="sec-head"><h2 class="sec-num" id="h-events">02 · events &amp; conferences</h2><a class="sec-more" href="events.html">all events →</a></div>
         <div class="ev-controls">
           <button class="ev-btn" type="button" data-ev="prev" aria-label="Show earlier events">‹</button>
           <button class="ev-btn" type="button" data-ev="next" aria-label="Show later events">›</button>
-          <button class="ev-btn ev-all" type="button" data-ev="all" aria-pressed="false">view all</button>
         </div>
         <div class="ev-strip" aria-label="Events and conferences">
           <div class="ev-track">
@@ -244,12 +243,6 @@
             </article>
           </div>
         </div>
-        <ul class="events">
-          <li class="event"><span class="event-date">Jun 2026</span><span class="row-logo"><img class="logo" src="assets/logos/vjal.png" alt="Vjal Institute"/></span><div class="event-main"><p class="event-name">AI Empowerment for Communities</p><p class="event-org">Vjal Institute</p><a class="event-cert" href="https://cert.vjal.ai/certificate/?uid=6582547825718493249" target="_blank" rel="noopener">‹ certificate ›</a></div><span class="pill">workshop</span></li>
-          <li class="event"><span class="event-date">Jun 2026</span><span class="row-logo"><img class="logo logo-seal" src="assets/logos/dict.svg" alt="DICT"/></span><div class="event-main"><p class="event-name">Artificial Intelligence Prompts 101</p><p class="event-org">DICT · Caraga Region</p><button class="event-cert" type="button" data-photos="assets/img/events/dict-ai-prompts-2026/cert-participation.webp" data-alts="DICT certificate of participation: AI Prompts 101 webinar, National ICT Month, 16 June 2026" aria-label="View the DICT certificate">‹ certificate ›</button></div><span class="pill">workshop</span></li>
-          <li class="event"><span class="event-date">Oct 2025</span><span class="row-logo"><img class="logo" src="assets/logos/british-council.svg" alt="British Council"/></span><div class="event-main"><p class="event-name">ASEAN TeachingEnglish Online Conference</p><p class="event-org">British Council · AI in education, sustainability</p><button class="event-cert" type="button" data-photos="assets/img/events/british-council-2025/cert-ai-educators.webp|assets/img/events/british-council-2025/cert-sustainability.webp" data-alts="British Council certificate: The Role of Language Educators in the Era of AI, ASEAN TeachingEnglish Online Conference 2025, 14 October 2025|British Council certificate: ELT and Sustainability, ASEAN TeachingEnglish Online Conference 2025, 14 October 2025" aria-label="View the 2 British Council certificates">‹ 2 certificates ›</button></div><span class="pill">conference</span></li>
-          <li class="event"><span class="event-date">Mar 2025</span><span class="row-logo"><img class="logo logo-seal" src="assets/logos/neu.webp" alt="New Era University"/></span><div class="event-main"><p class="event-name">Lessons, Trends &amp; Opportunity in IT: Web Development</p><p class="event-org">New Era University</p><button class="event-cert" type="button" data-photos="assets/img/events/neu-web-dev-2025/cert-attendance.webp" data-alts="New Era University certificate of attendance: Lessons, Trends, and Opportunity in the IT Industry, Web Development, 18 March 2025" aria-label="View the New Era University certificate">‹ certificate ›</button></div><span class="pill">talk</span></li>
-        </ul>
       </section>
 
       <!-- ═══ 03 · experience (year · role · organisation, like bryllim.com) ═══ -->
@@ -441,11 +434,11 @@
     <p class="lb-count micro"></p>
   </div>
 
-  <script src="assets/js/boot.js?v=202611159"></script>
-  <script src="assets/js/theme.js?v=202611159"></script>
-  <script src="assets/js/main.js?v=202611159"></script>
+  <script src="assets/js/boot.js?v=202611160"></script>
+  <script src="assets/js/theme.js?v=202611160"></script>
+  <script src="assets/js/main.js?v=202611160"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="assets/js/globe.js?v=202611159"></script>
-  <script src="assets/js/gallery.js?v=202611159"></script>
+  <script src="assets/js/globe.js?v=202611160"></script>
+  <script src="assets/js/gallery.js?v=202611160"></script>
 </body>
 </html>
