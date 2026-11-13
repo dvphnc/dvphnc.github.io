@@ -13,8 +13,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap"/>
-  <link rel="stylesheet" href="assets/css/site.css?v=202611161"/>
-  <link rel="stylesheet" href="assets/css/note.css?v=202611161"/>
+  <link rel="stylesheet" href="assets/css/site.css?v=202611165"/>
+  <link rel="stylesheet" href="assets/css/note.css?v=202611165"/>
 </head>
 <body>
 
@@ -69,25 +69,29 @@
     <article class="wrap read">
       <p class="micro crumb enter" style="--d:50ms"><a href="index.html#events">portfolio</a> / events</p>
       <h1 class="page-title enter" style="--d:90ms">events</h1>
-      <p class="xp-lead enter" style="--d:130ms">Forums, summits, conferences, workshops and talks, newest first. Photo stories and certificates are linked on each row.</p>
+      <p class="xp-lead enter" style="--d:130ms">Forums, summits, conferences, workshops and talks, newest first. Open a row for its story or certificate.</p>
 
-      <!-- Bryl's archive framing: every event as a plain row, grouped by year. Photos stay on the homepage strip
-           and the story pages. Certificates open the viewer (#lightbox, gallery.js). Newest first. -->
+      <!-- Bryl's archive framing: every event as one plain row, grouped by year, newest first. The whole row is the
+           link: a story page (story →), a verification page or the certificate viewer (cert ↗, #lightbox + gallery.js).
+           The type sits under the date. data-peek = image for the desktop hover preview (note.js); none for Vjal. -->
       <div class="enter" style="--d:170ms">
         <h2 class="ev-year" id="y2026">2026 <span class="micro">4 events</span></h2>
-        <ul class="events">
-          <li class="event"><span class="event-date">Oct 2026</span><span class="row-logo"><img class="logo" src="assets/logos/aivf.png" alt="AI Vision Forum"/></span><div class="event-main"><p class="event-name"><a href="events/aivf-manila-2026.html">AI Vision Forum Manila 2026</a></p><p class="event-org">Shangri-La The Fort, BGC · AI Vision Challenge winner</p><a class="event-cert" href="events/aivf-manila-2026.html">‹ read the story ›</a></div><span class="pill">forum</span></li>
-          <li class="event"><span class="event-date">Sep 2026</span><span class="row-logo"><img class="logo logo-seal" src="assets/logos/ched.svg" alt="CHED"/></span><div class="event-main"><p class="event-name"><a href="events/asean-youth-summit-2026.html">ASEAN Campus Connect &amp; Youth Leadership Summit</a></p><p class="event-org">CHED NCR · U.P. Town Center</p><span class="event-links"><a class="event-cert" href="events/asean-youth-summit-2026.html">‹ read the story ›</a><button class="event-cert" type="button" data-photos="assets/img/events/asean-youth-summit-2026/06.webp" data-alts="Certificate of participation for Joana Daphne T. Sy from CHED NCR, ASEAN Campus Connect and Youth Leadership Summit 2026" aria-label="View the ASEAN summit certificate">‹ certificate ›</button></span></div><span class="pill">summit</span></li>
-          <li class="event"><span class="event-date">Jun 2026</span><span class="row-logo"><img class="logo" src="assets/logos/vjal.png" alt="Vjal Institute"/></span><div class="event-main"><p class="event-name">AI Empowerment for Communities</p><p class="event-org">Vjal Institute</p><a class="event-cert" href="https://cert.vjal.ai/certificate/?uid=6582547825718493249" target="_blank" rel="noopener">‹ certificate ›</a></div><span class="pill">workshop</span></li>
-          <li class="event"><span class="event-date">Jun 2026</span><span class="row-logo"><img class="logo logo-seal" src="assets/logos/dict.svg" alt="DICT"/></span><div class="event-main"><p class="event-name">Artificial Intelligence Prompts 101</p><p class="event-org">DICT · Caraga Region</p><button class="event-cert" type="button" data-photos="assets/img/events/dict-ai-prompts-2026/cert-participation.webp" data-alts="DICT certificate of participation: AI Prompts 101 webinar, National ICT Month, 16 June 2026" aria-label="View the DICT certificate">‹ certificate ›</button></div><span class="pill">workshop</span></li>
+        <ul class="events ev-list">
+          <li><a class="ev-row" href="events/aivf-manila-2026.html" data-peek="assets/img/events/aivf-manila-2026/cover-800.webp"><span class="ev-when">Oct 2026<span class="ev-kind">forum</span></span><span class="row-logo"><img class="logo" src="assets/logos/aivf.png" alt=""/></span><span class="ev-what"><span class="event-name">AI Vision Forum Manila 2026</span><span class="event-org">Shangri-La The Fort, BGC · AI Vision Challenge winner</span></span><span class="ev-go">story <span class="arr">→</span></span></a></li>
+          <li><a class="ev-row" href="events/asean-youth-summit-2026.html" data-peek="assets/img/events/asean-youth-summit-2026/cover-800.webp?v=2"><span class="ev-when">Sep 2026<span class="ev-kind">summit</span></span><span class="row-logo"><img class="logo logo-seal" src="assets/logos/ched.svg" alt=""/></span><span class="ev-what"><span class="event-name">ASEAN Campus Connect &amp; Youth Leadership Summit</span><span class="event-org">CHED NCR · U.P. Town Center</span></span><span class="ev-go">story <span class="arr">→</span></span></a></li>
+          <li><a class="ev-row" href="https://cert.vjal.ai/certificate/?uid=6582547825718493249" target="_blank" rel="noopener" aria-label="AI Empowerment for Communities, Vjal Institute, June 2026: verify the certificate (opens in a new tab)"><span class="ev-when">Jun 2026<span class="ev-kind">workshop</span></span><span class="row-logo"><img class="logo" src="assets/logos/vjal.png" alt=""/></span><span class="ev-what"><span class="event-name">AI Empowerment for Communities</span><span class="event-org">Vjal Institute</span></span><span class="ev-go">cert <span class="arr">↗</span></span></a></li>
+          <li><button class="ev-row" type="button" data-peek="assets/img/events/dict-ai-prompts-2026/cert-participation.webp" data-photos="assets/img/events/dict-ai-prompts-2026/cert-participation.webp" data-alts="DICT certificate of participation: AI Prompts 101 webinar, National ICT Month, 16 June 2026" aria-label="Artificial Intelligence Prompts 101, DICT Caraga Region, June 2026: view the certificate"><span class="ev-when">Jun 2026<span class="ev-kind">workshop</span></span><span class="row-logo"><img class="logo logo-seal" src="assets/logos/dict.svg" alt=""/></span><span class="ev-what"><span class="event-name">Artificial Intelligence Prompts 101</span><span class="event-org">DICT · Caraga Region</span></span><span class="ev-go">cert <span class="arr">↗</span></span></button></li>
         </ul>
 
         <h2 class="ev-year" id="y2025">2025 <span class="micro">2 events</span></h2>
-        <ul class="events">
-          <li class="event"><span class="event-date">Oct 2025</span><span class="row-logo"><img class="logo" src="assets/logos/british-council.svg" alt="British Council"/></span><div class="event-main"><p class="event-name">ASEAN TeachingEnglish Online Conference</p><p class="event-org">British Council · AI in education, sustainability</p><button class="event-cert" type="button" data-photos="assets/img/events/british-council-2025/cert-ai-educators.webp|assets/img/events/british-council-2025/cert-sustainability.webp" data-alts="British Council certificate: The Role of Language Educators in the Era of AI, ASEAN TeachingEnglish Online Conference 2025, 14 October 2025|British Council certificate: ELT and Sustainability, ASEAN TeachingEnglish Online Conference 2025, 14 October 2025" aria-label="View the 2 British Council certificates">‹ 2 certificates ›</button></div><span class="pill">conference</span></li>
-          <li class="event"><span class="event-date">Mar 2025</span><span class="row-logo"><img class="logo logo-seal" src="assets/logos/neu.webp" alt="New Era University"/></span><div class="event-main"><p class="event-name">Lessons, Trends &amp; Opportunity in IT: Web Development</p><p class="event-org">New Era University</p><button class="event-cert" type="button" data-photos="assets/img/events/neu-web-dev-2025/cert-attendance.webp" data-alts="New Era University certificate of attendance: Lessons, Trends, and Opportunity in the IT Industry, Web Development, 18 March 2025" aria-label="View the New Era University certificate">‹ certificate ›</button></div><span class="pill">talk</span></li>
+        <ul class="events ev-list">
+          <li><button class="ev-row" type="button" data-peek="assets/img/events/british-council-2025/cert-ai-educators.webp" data-photos="assets/img/events/british-council-2025/cert-ai-educators.webp|assets/img/events/british-council-2025/cert-sustainability.webp" data-alts="British Council certificate: The Role of Language Educators in the Era of AI, ASEAN TeachingEnglish Online Conference 2025, 14 October 2025|British Council certificate: ELT and Sustainability, ASEAN TeachingEnglish Online Conference 2025, 14 October 2025" aria-label="ASEAN TeachingEnglish Online Conference, British Council, October 2025: view the 2 certificates"><span class="ev-when">Oct 2025<span class="ev-kind">conference</span></span><span class="row-logo"><img class="logo" src="assets/logos/british-council.svg" alt=""/></span><span class="ev-what"><span class="event-name">ASEAN TeachingEnglish Online Conference</span><span class="event-org">British Council · AI in education, sustainability</span></span><span class="ev-go">2 certs <span class="arr">↗</span></span></button></li>
+          <li><button class="ev-row" type="button" data-peek="assets/img/events/neu-web-dev-2025/cert-attendance.webp" data-photos="assets/img/events/neu-web-dev-2025/cert-attendance.webp" data-alts="New Era University certificate of attendance: Lessons, Trends, and Opportunity in the IT Industry, Web Development, 18 March 2025" aria-label="Lessons, Trends and Opportunity in IT: Web Development, New Era University, March 2025: view the certificate"><span class="ev-when">Mar 2025<span class="ev-kind">talk</span></span><span class="row-logo"><img class="logo logo-seal" src="assets/logos/neu.webp" alt=""/></span><span class="ev-what"><span class="event-name">Lessons, Trends &amp; Opportunity in IT: Web Development</span><span class="event-org">New Era University</span></span><span class="ev-go">cert <span class="arr">↗</span></span></button></li>
         </ul>
       </div>
+
+      <!-- desktop hover preview (note.js); decorative, the row itself carries the link -->
+      <div class="ev-peek" aria-hidden="true"><img alt=""/></div>
 
       <footer class="foot">
         <span class="micro">© 2026 joana daphne sy · dvphnc</span>
@@ -105,8 +109,8 @@
     <p class="lb-count micro"></p>
   </div>
 
-  <script src="assets/js/theme.js?v=202611161"></script>
-  <script src="assets/js/note.js?v=202611161"></script>
-  <script src="assets/js/gallery.js?v=202611161"></script>
+  <script src="assets/js/theme.js?v=202611165"></script>
+  <script src="assets/js/note.js?v=202611165"></script>
+  <script src="assets/js/gallery.js?v=202611165"></script>
 </body>
 </html>

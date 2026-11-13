@@ -81,7 +81,44 @@ button.shot:focus-visible { outline: 2px solid var(--accent); outline-offset: 2p
 /* events.html: year headings over plain .events rows */
 .ev-year { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin: 2.6rem 0 .8rem; font-family: var(--pixel); font-weight: 400; font-size: 1.35rem; line-height: 1; scroll-margin-top: 5rem; }
 .ev-year:first-child { margin-top: 2rem; }
-.event-links { display: flex; flex-wrap: wrap; column-gap: 1.1rem; }
+/* whole-row links: date + type · logo · name/org · story → / cert ↗ */
+.ev-list li { border-bottom: 1px solid var(--g200); }
+.ev-row { display: grid; grid-template-columns: 5rem 34px 1fr auto; gap: 14px; align-items: center; width: 100%; padding: .85rem 0;
+  background: none; border: 0; color: inherit; font: inherit; text-align: left; text-decoration: none; cursor: pointer;
+  transition: padding-left .3s var(--ease); }
+.ev-when { font-family: var(--mono); font-size: 11px; color: var(--g400); line-height: 1.5; }
+.ev-kind { display: block; font-size: 9.5px; letter-spacing: 1px; text-transform: uppercase; }
+.ev-what { display: flex; flex-direction: column; gap: .15rem; min-width: 0; }
+.ev-what .event-name { transition: color .2s; }
+.ev-go { font-family: var(--mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--g500); white-space: nowrap; transition: color .2s; }
+.ev-go .arr { display: inline-block; transition: transform .2s var(--ease); }
+.ev-row:focus-visible { padding-left: 6px; }
+.ev-row:focus-visible .event-name { color: var(--accent); }
+@media (hover: hover) { /* touch screens would keep the hover state after a tap */
+  .ev-row:hover { padding-left: 6px; }
+  .ev-row:hover .event-name, .ev-row:hover .ev-go { color: var(--accent); }
+  .ev-row:hover img.logo { opacity: 1; }
+  a.ev-row:hover .ev-go .arr { transform: translateX(3px); }
+  .ev-row[data-photos]:hover .ev-go .arr, .ev-row[target]:hover .ev-go .arr { transform: translate(2px, -2px); }
+}
+.ev-row:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+@media (max-width: 640px) {
+  .ev-row { grid-template-columns: 34px 1fr auto; grid-template-areas: "logo when go" "logo what what"; column-gap: 12px; row-gap: 4px; align-items: start; }
+  .ev-row .row-logo { grid-area: logo; }
+  .ev-when { grid-area: when; }
+  .ev-kind { display: inline; margin-left: .5rem; }
+  .ev-kind::before { content: '· '; }
+  .ev-what { grid-area: what; }
+  .ev-go { grid-area: go; align-self: center; }
+}
+/* hover preview: follows the cursor on desktop only (note.js); never on touch or under reduced motion */
+.ev-peek { position: fixed; left: 0; top: 0; z-index: 40; width: 240px; pointer-events: none; opacity: 0; transform: translate3d(0,0,0) scale(.96);
+  border-radius: 10px; overflow: hidden; border: 1px solid var(--g200); background: var(--g100); box-shadow: var(--shadow-hover);
+  transition: opacity .2s var(--ease), scale .2s var(--ease); }
+.ev-peek img { display: block; width: 100%; height: auto; min-height: 120px; max-height: 300px; object-fit: contain; } /* natural shape, so a whole certificate shows */
+.ev-peek.is-on { opacity: 1; scale: 1.04; }
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) { .ev-peek { display: none; } }
+@media (prefers-reduced-motion: reduce) { .ev-row { transition: none; } .ev-row:hover, .ev-row:focus-visible { padding-left: 0; } }
 .xp-lead { margin-top: .9rem; font-size: 15px; line-height: 1.7; color: var(--g500); max-width: 38rem; }
 /* Same scroll timeline as the homepage experience list: one hairline runs through the badge centres and fills with
    ink (--tl, 0→1) as you scroll; each organisation's badge and name go from muted to lit (.lit) when its badge
