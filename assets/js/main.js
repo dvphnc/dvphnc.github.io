@@ -150,6 +150,28 @@
     window.addEventListener('resize', tlQueue);
   }
 
+  /* ── Projects: stacked cards (fabwaseem.com "Selected work") ──
+     The items are sticky in CSS; here each card shrinks a little (from its top edge) for every later card that
+     slides over it, so the pile reads as depth. Not run under reduced motion (CSS makes it a plain list). */
+  var stack = document.querySelector('.stack');
+  if (stack && !reduced) {
+    var sItems = Array.prototype.slice.call(stack.querySelectorAll('.stack-item'));
+    var sTick = false;
+    var sUpdate = function () {
+      sTick = false;
+      var rects = sItems.map(function (li) { return li.getBoundingClientRect(); });
+      sItems.forEach(function (li, i) {
+        var h = li.firstElementChild.offsetHeight, cover = 0;
+        for (var j = i + 1; j < sItems.length; j++) cover += Math.min(1, Math.max(0, (rects[i].top + h - rects[j].top) / h));
+        li.firstElementChild.style.setProperty('--s', (1 - 0.035 * Math.min(cover, 2.2)).toFixed(4));
+      });
+    };
+    var sQueue = function () { if (!sTick) { sTick = true; requestAnimationFrame(sUpdate); } };
+    sUpdate();
+    window.addEventListener('scroll', sQueue, { passive: true });
+    window.addEventListener('resize', sQueue);
+  }
+
   /* ── Events strip: drifts left to right, loops seamlessly (rolex-esto.vercel.app style) ──
      The six cards are cloned once so the strip can wrap. Pauses while hovered, touched, focused, dragged, off screen
      or in a hidden tab. ‹ › scroll by one card; "view all" switches to a grid of the real cards. Under reduced

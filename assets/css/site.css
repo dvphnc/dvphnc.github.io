@@ -315,6 +315,27 @@ a.card:hover, .card.hoverable:hover { transform: translateY(-2px); box-shadow: v
 .pill.inv { background: var(--ink); color: var(--bg); border-color: transparent; }
 .pill.live { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 45%, transparent); }
 
+/* projects: stacked cards (after fabwaseem.com). Each item sticks 12px lower than the one before;
+   main.js sets --s (scale) on the cards underneath as the next one slides over. */
+.stack { list-style: none; --stick: 1.5rem; }
+.stack-item { position: sticky; top: calc(var(--stick) + var(--i) * 12px); padding-bottom: 1.1rem; }
+.stack-item:last-child { padding-bottom: 0; }
+.stack-item:focus-within { z-index: 2; } /* a keyboard user tabbing into a covered card brings it to the front */
+.stack-item:focus-within .stack-card { --s: 1 !important; }
+.stack-card { min-height: 15rem; padding: 1.5rem 1.6rem 1.25rem; background: var(--bg); background-image: linear-gradient(to bottom, var(--g50), var(--bg));
+  box-shadow: 0 -10px 30px -18px rgba(0, 26, 94, .28), var(--shadow); transform-origin: 50% 0; transform: scale(var(--s, 1)); will-change: transform; }
+.stack-card:hover { border-color: var(--g300); box-shadow: 0 -10px 30px -18px rgba(0, 26, 94, .28), var(--shadow-hover); }
+.stack-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.stack-meta { display: flex; align-items: center; gap: 12px; min-width: 0; font-family: var(--mono); font-size: 10.5px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--g500); }
+.stack-num { font-family: var(--pixel); font-size: 15px; letter-spacing: 0; color: var(--ink); }
+.stack-rule { width: 28px; height: 1px; background: var(--g300); flex-shrink: 0; }
+.stack-card .proj-title { font-size: clamp(1.5rem, 4vw, 2rem); letter-spacing: -.03em; line-height: 1.15; margin-top: 1.2rem; }
+.stack-card .proj-desc { font-size: 15px; line-height: 1.6; max-width: 34rem; margin-top: .6rem; }
+.stack-card .proj-links { margin-top: 1.25rem; }
+@media (max-width: 1023px) { .stack { --stick: calc(56px + .75rem); } } /* below the sticky topbar */
+@media (max-width: 640px) { .stack-card { min-height: 14rem; padding: 1.25rem 1.2rem 1rem; } }
+@media (prefers-reduced-motion: reduce) { .stack-item { position: static; } .stack-card { transform: none; } }
+
 /* projects */
 .proj-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
 .proj-title { font-size: 17px; font-weight: 600; letter-spacing: -.02em; margin-top: .9rem; }
