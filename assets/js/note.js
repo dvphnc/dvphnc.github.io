@@ -65,6 +65,20 @@
     window.addEventListener('resize', queue);
   }
 
+  // projects.html: filter chips ([data-filter]) show only rows whose data-kind matches
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.pj-chip'));
+  if (chips.length) {
+    var pjs = Array.prototype.slice.call(document.querySelectorAll('.pj')), pjCount = document.querySelector('.pj-count');
+    chips.forEach(function (c) {
+      c.addEventListener('click', function () {
+        var k = c.getAttribute('data-filter'), n = 0;
+        chips.forEach(function (o) { o.setAttribute('aria-pressed', String(o === c)); });
+        pjs.forEach(function (p) { var on = k === 'all' || p.getAttribute('data-kind') === k; p.hidden = !on; if (on) n++; });
+        if (pjCount) pjCount.textContent = n + (n === 1 ? ' project' : ' projects');
+      });
+    });
+  }
+
   // fade the page in (timer, not rAF — rAF never fires in background tabs, which would leave content hidden)
   setTimeout(function () { root.classList.add('ready'); }, 30);
 })();

@@ -78,6 +78,30 @@ button.shot:focus-visible { outline: 2px solid var(--accent); outline-offset: 2p
 /* experience.html: bryllim.com/experience framing. One <li> per organisation: a 48px square badge (initials in the
    pixel font) on a hairline rail, then the organisation, its meta line, and each role with mono dates, description
    and skill tags. */
+/* projects.html: title + count, filter chips, hairline rows (year · type | name, sentence, role · stack | links) */
+.pj-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.pj-filters { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1.6rem; }
+.pj-chip { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--g300); background: none; color: var(--g500);
+  font-family: var(--mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: color .2s, background-color .2s, border-color .2s; }
+.pj-chip span { color: var(--g400); }
+.pj-chip:hover { color: var(--ink); border-color: var(--ink); }
+.pj-chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.pj-chip[aria-pressed="true"] span { color: inherit; opacity: .7; }
+.pj-chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.pj-count { margin-top: 1.4rem; }
+.pj-list { list-style: none; margin-top: .6rem; border-top: 1px solid var(--g200); }
+.pj { display: grid; grid-template-columns: 7.5rem 1fr auto; gap: 16px; align-items: baseline; padding: 1.1rem 0; border-bottom: 1px solid var(--g200); }
+.pj[hidden] { display: none; }
+.pj-when { font-family: var(--mono); font-size: 11px; color: var(--g400); }
+.pj-title { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 17px; font-weight: 600; letter-spacing: -.02em; line-height: 1.3; }
+.pj-desc { font-size: 13.5px; color: var(--g500); margin-top: .35rem; line-height: 1.6; }
+.pj-meta { font-family: var(--mono); font-size: 9.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--g400); margin-top: .5rem; }
+.pj-links { margin-top: 0; padding-top: 0; border-top: 0; gap: 14px; white-space: nowrap; }
+@media (max-width: 640px) {
+  .pj { grid-template-columns: 1fr; gap: .3rem; }
+  .pj-links { margin-top: .3rem; }
+}
+
 /* events.html: year headings over plain .events rows */
 .ev-year { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin: 2.6rem 0 .8rem; font-family: var(--pixel); font-weight: 400; font-size: 1.35rem; line-height: 1; scroll-margin-top: 5rem; }
 .ev-year:first-child { margin-top: 2rem; }
