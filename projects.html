@@ -13,8 +13,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap"/>
-  <link rel="stylesheet" href="assets/css/site.css?v=202611170"/>
-  <link rel="stylesheet" href="assets/css/note.css?v=202611170"/>
+  <link rel="stylesheet" href="assets/css/site.css?v=202611172"/>
+  <link rel="stylesheet" href="assets/css/note.css?v=202611172"/>
 </head>
 <body>
 
@@ -57,7 +57,7 @@
       <p class="xp-lead enter" style="--d:130ms">Web apps, a travel blog, school and barangay systems, and event automation, from solo builds to teams I led as scrum master or project manager. Newest first.</p>
 
       <!-- after fabwaseem.com/projects (count, filter chips with counts, one entry per project), in bryllim.com's
-           register: plain hairline rows, year · type in mono, name, one sentence, role, stack, links. Only facts
+           register: hairline rows, a 16:10 screenshot (assets/img/projects/*.webp, captured from the live site) beside year · type, name, one sentence, role · stack and links. No live site and no screenshot yet = dotted placeholder. Only facts
            from Joana's repos and LinkedIn. Filters: note.js ([data-filter] buttons, [data-kind] rows). -->
       <div class="pj-filters enter" style="--d:170ms" role="group" aria-label="Filter projects">
         <button type="button" class="pj-chip" data-filter="all" aria-pressed="true">all <span>7</span></button>
@@ -70,76 +70,76 @@
       <ol class="pj-list enter" style="--d:210ms">
 
         <li class="pj" data-kind="web-app">
-          <p class="pj-when">2026 · web app</p>
-          <div class="pj-main">
+          <div class="pj-shot is-empty" aria-hidden="true"><span class="micro">screenshot soon</span></div>
+          <div class="pj-body">
+            <p class="pj-when">2026 · web app</p>
             <h2 class="pj-title">NEU Information System</h2>
             <p class="pj-desc">A school information system that automates employee and student records, with a dashboard for admins.</p>
             <p class="pj-meta">solo build · Laravel</p>
+            <div class="proj-links pj-links"><a href="https://github.com/dvphnc/neu-information-system" target="_blank" rel="noopener">code <span class="arr">↗</span></a></div>
           </div>
-          <div class="proj-links pj-links"><a href="https://github.com/dvphnc/neu-information-system" target="_blank" rel="noopener">code <span class="arr">↗</span></a></div>
         </li>
-
         <li class="pj" data-kind="website">
-          <p class="pj-when">2026 · website</p>
-          <div class="pj-main">
+          <a class="pj-shot" href="https://traviajournal.vercel.app/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="assets/img/projects/travia.webp" width="1200" height="750" alt="" loading="lazy"/></a>
+          <div class="pj-body">
+            <p class="pj-when">2026 · website</p>
             <h2 class="pj-title">Travia Journal <span class="pill live">live</span></h2>
             <p class="pj-desc">A travel blog I built and run, from content model to deployment.</p>
             <p class="pj-meta">owner · JavaScript</p>
+            <div class="proj-links pj-links"><a href="https://traviajournal.vercel.app/" target="_blank" rel="noopener">visit <span class="arr">↗</span></a><a href="https://github.com/dvphnc/travia-journal" target="_blank" rel="noopener">code <span class="arr">↗</span></a></div>
           </div>
-          <div class="proj-links pj-links"><a href="https://traviajournal.vercel.app/" target="_blank" rel="noopener">visit <span class="arr">↗</span></a><a href="https://github.com/dvphnc/travia-journal" target="_blank" rel="noopener">code <span class="arr">↗</span></a></div>
         </li>
-
         <li class="pj" data-kind="web-app">
-          <p class="pj-when">2026 · web app</p>
-          <div class="pj-main">
+          <a class="pj-shot" href="https://maildrop-620d.onrender.com/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="assets/img/projects/maildrop.webp" width="1200" height="750" alt="" loading="lazy"/></a>
+          <div class="pj-body">
+            <p class="pj-when">2026 · web app</p>
             <h2 class="pj-title">MailDrop <span class="pill live">live</span></h2>
             <p class="pj-desc">An email tool that handles sending and routing end to end, built from scratch.</p>
             <p class="pj-meta">solo build · Laravel</p>
+            <div class="proj-links pj-links"><a href="https://maildrop-620d.onrender.com/" target="_blank" rel="noopener">visit <span class="arr">↗</span></a><a href="https://github.com/dvphnc/maildrop" target="_blank" rel="noopener">code <span class="arr">↗</span></a></div>
           </div>
-          <div class="proj-links pj-links"><a href="https://maildrop-620d.onrender.com/" target="_blank" rel="noopener">visit <span class="arr">↗</span></a><a href="https://github.com/dvphnc/maildrop" target="_blank" rel="noopener">code <span class="arr">↗</span></a></div>
         </li>
-
         <li class="pj" data-kind="web-app">
-          <p class="pj-when">2026 · web app</p>
-          <div class="pj-main">
+          <div class="pj-shot is-empty" aria-hidden="true"><span class="micro">screenshot soon</span></div>
+          <div class="pj-body">
+            <p class="pj-when">2026 · web app</p>
             <h2 class="pj-title">Barangay Management System</h2>
             <p class="pj-desc">Resident records, blotter cases, document requests and business permits for Barangay New Era in one system, with a portal for residents.</p>
             <p class="pj-meta">scrum master · full-stack developer · Laravel 12 · MySQL</p>
+            <div class="proj-links pj-links"><a href="https://github.com/dvphnc/anakco-bms-newera" target="_blank" rel="noopener">code <span class="arr">↗</span></a></div>
           </div>
-          <div class="proj-links pj-links"><a href="https://github.com/dvphnc/anakco-bms-newera" target="_blank" rel="noopener">code <span class="arr">↗</span></a></div>
         </li>
-
         <li class="pj" data-kind="web-app">
-          <p class="pj-when">2025 · web app</p>
-          <div class="pj-main">
+          <a class="pj-shot" href="https://smartcare-eta.vercel.app/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="assets/img/projects/smartcare.webp" width="1200" height="750" alt="" loading="lazy"/></a>
+          <div class="pj-body">
+            <p class="pj-when">2025 · web app</p>
             <h2 class="pj-title">SmartCare+ <span class="pill live">live</span></h2>
             <p class="pj-desc">A clinic patient system; I kept the team's sprints on track and bridged developers and stakeholders.</p>
             <p class="pj-meta">project manager · TypeScript</p>
+            <div class="proj-links pj-links"><a href="https://smartcare-eta.vercel.app/" target="_blank" rel="noopener">visit <span class="arr">↗</span></a><a href="https://github.com/lonzlow/smartcare" target="_blank" rel="noopener">code <span class="arr">↗</span></a></div>
           </div>
-          <div class="proj-links pj-links"><a href="https://smartcare-eta.vercel.app/" target="_blank" rel="noopener">visit <span class="arr">↗</span></a><a href="https://github.com/lonzlow/smartcare" target="_blank" rel="noopener">code <span class="arr">↗</span></a></div>
         </li>
-
         <li class="pj" data-kind="web-app">
-          <p class="pj-when">2025 · web app</p>
-          <div class="pj-main">
+          <a class="pj-shot" href="https://hirewithhirely.vercel.app/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="assets/img/projects/hirely.webp" width="1200" height="750" alt="" loading="lazy"/></a>
+          <div class="pj-body">
+            <p class="pj-when">2025 · web app</p>
             <h2 class="pj-title">HIRELY <span class="pill live">live</span></h2>
             <p class="pj-desc">A hiring platform that simplifies how applicants and recruiters move through the process.</p>
             <p class="pj-meta">scrum master · ui/ux · TypeScript</p>
+            <div class="proj-links pj-links"><a href="https://hirewithhirely.vercel.app/" target="_blank" rel="noopener">visit <span class="arr">↗</span></a><a href="https://github.com/dvphnc/hirely" target="_blank" rel="noopener">code <span class="arr">↗</span></a></div>
           </div>
-          <div class="proj-links pj-links"><a href="https://hirewithhirely.vercel.app/" target="_blank" rel="noopener">visit <span class="arr">↗</span></a><a href="https://github.com/dvphnc/hirely" target="_blank" rel="noopener">code <span class="arr">↗</span></a></div>
         </li>
-
         <!-- CASE STUDY PLACEHOLDER: add the tools used and the time saved once Joana confirms them -->
         <li class="pj" data-kind="automation">
-          <p class="pj-when">2021–23 · automation</p>
-          <div class="pj-main">
+          <div class="pj-shot is-empty" aria-hidden="true"><span class="micro">screenshot soon</span></div>
+          <div class="pj-body">
+            <p class="pj-when">2021–23 · automation</p>
             <h2 class="pj-title">Event operations automation</h2>
             <p class="pj-desc">Automated registration, attendee tracking and AI-drafted meeting minutes for 10 student organizations.</p>
             <p class="pj-meta">Youth Forum Organization</p>
+            <div class="proj-links pj-links"><span class="muted">case study soon</span></div>
           </div>
-          <div class="proj-links pj-links"><span class="muted">case study soon</span></div>
         </li>
-
       </ol>
 
       <footer class="foot">
@@ -149,7 +149,7 @@
     </article>
   </main>
 
-  <script src="assets/js/theme.js?v=202611170"></script>
-  <script src="assets/js/note.js?v=202611170"></script>
+  <script src="assets/js/theme.js?v=202611172"></script>
+  <script src="assets/js/note.js?v=202611172"></script>
 </body>
 </html>
