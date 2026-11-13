@@ -111,13 +111,6 @@ button.shot:focus-visible { outline: 2px solid var(--accent); outline-offset: 2p
   .ev-what { grid-area: what; }
   .ev-go { grid-area: go; align-self: center; }
 }
-/* hover preview: follows the cursor on desktop only (note.js); never on touch or under reduced motion */
-.ev-peek { position: fixed; left: 0; top: 0; z-index: 40; width: 240px; pointer-events: none; opacity: 0; transform: translate3d(0,0,0) scale(.96);
-  border-radius: 10px; overflow: hidden; border: 1px solid var(--g200); background: var(--g100); box-shadow: var(--shadow-hover);
-  transition: opacity .2s var(--ease), scale .2s var(--ease); }
-.ev-peek img { display: block; width: 100%; height: auto; min-height: 120px; max-height: 300px; object-fit: contain; } /* natural shape, so a whole certificate shows */
-.ev-peek.is-on { opacity: 1; scale: 1.04; }
-@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) { .ev-peek { display: none; } }
 @media (prefers-reduced-motion: reduce) { .ev-row { transition: none; } .ev-row:hover, .ev-row:focus-visible { padding-left: 0; } }
 .xp-lead { margin-top: .9rem; font-size: 15px; line-height: 1.7; color: var(--g500); max-width: 38rem; }
 /* Same scroll timeline as the homepage experience list: one hairline runs through the badge centres and fills with

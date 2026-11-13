@@ -65,33 +65,6 @@
     window.addEventListener('resize', queue);
   }
 
-  // events.html: hover preview that follows the cursor (fine pointers only, not under reduced motion)
-  var peek = document.querySelector('.ev-peek');
-  if (peek && window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
-      !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    var pImg = peek.querySelector('img'), px = 0, py = 0, raf = 0;
-    var place = function () {
-      raf = 0;
-      var w = peek.offsetWidth, h = peek.offsetHeight;
-      var x = px + 24, y = py - h / 2;
-      if (x + w > window.innerWidth - 12) x = px - w - 24;       // flip to the left near the right edge
-      y = Math.max(20, Math.min(y, window.innerHeight - h - 20)); // 20px keeps the 1.04 grow-in on screen
-      peek.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
-    };
-    pImg.addEventListener('load', place); // its height is only known once the image arrives
-    document.querySelectorAll('.ev-row[data-peek]').forEach(function (row) {
-      row.addEventListener('mouseenter', function (e) {
-        var src = row.getAttribute('data-peek');
-        if (pImg.getAttribute('src') !== src) pImg.src = src;
-        px = e.clientX; py = e.clientY; place(); peek.classList.add('is-on');
-      });
-      row.addEventListener('mousemove', function (e) { px = e.clientX; py = e.clientY; if (!raf) raf = requestAnimationFrame(place); });
-      row.addEventListener('mouseleave', function () { peek.classList.remove('is-on'); });
-      row.addEventListener('click', function () { peek.classList.remove('is-on'); });
-    });
-    window.addEventListener('scroll', function () { peek.classList.remove('is-on'); }, { passive: true });
-  }
-
   // fade the page in (timer, not rAF — rAF never fires in background tabs, which would leave content hidden)
   setTimeout(function () { root.classList.add('ready'); }, 30);
 })();
