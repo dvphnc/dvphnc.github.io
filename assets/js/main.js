@@ -172,84 +172,30 @@
     window.addEventListener('resize', sQueue);
   }
 
-  /* ── Events strip: drifts left to right, loops seamlessly (rolex-esto.vercel.app style) ──
-     The six cards are cloned once so the strip can wrap. Pauses while hovered, touched, focused, dragged, off screen
-     or in a hidden tab. ‹ › scroll by one card; "view all" switches to a grid of the real cards. Under reduced
-     motion there's no drift and no clones: it's a plain strip you scroll by hand. */
+  /* ── Events strip: just the featured photo events, once each (no clones, no auto-drift; Joana: "don't duplicate").
+     Side by side when they fit; on narrow screens the strip scrolls by swipe or ‹ ›, and the buttons only show
+     while there is something to scroll to. ── */
   var evSec = document.getElementById('events');
   var strip = evSec && evSec.querySelector('.ev-strip');
   if (strip) {
     var track = strip.querySelector('.ev-track');
-    var originals = Array.prototype.slice.call(track.children);
-    var loop = !reduced;
-    // with only a couple of cards, repeat them until one "set" is wider than the strip, then add a second identical
-    // set so the strip can wrap from one to the other invisibly
-    var reps = 1;
-    if (loop) {
-      var one = track.scrollWidth + 14;
-      reps = Math.max(1, Math.ceil((strip.clientWidth + 320) / one));
-      for (var r = 1; r < reps * 2; r++) originals.forEach(function (c) {
-        var k = c.cloneNode(true);
-        k.setAttribute('data-clone', ''); k.setAttribute('aria-hidden', 'true');
-        k.querySelectorAll('a, button').forEach(function (el) { el.setAttribute('tabindex', '-1'); });
-        track.appendChild(k);
-      });
-    }
-    // exact width of one set (cards + gaps), measured from the first card of set 2
-    var half = function () { var k = track.children[originals.length * reps]; return k ? k.offsetLeft - track.children[0].offsetLeft : track.scrollWidth / 2; };
-    // keep the scroll position inside one copy's width; both copies look identical, so the jump is invisible
-    var wrap = function () { if (!loop || grid) return; var h = half(); if (strip.scrollLeft <= 1) strip.scrollLeft += h; else if (strip.scrollLeft >= h + 2) strip.scrollLeft -= h; };
-    // pause state: plain flags plus a "resume after" time, so nothing can get stuck paused
-    var hov = false, foc = false, dragging = false, resumeAt = 0, inView = false, grid = false, last = 0, acc = 0;
-    var later = function (ms) { resumeAt = Math.max(resumeAt, performance.now() + ms); };
-    var isPaused = function () { return hov || foc || dragging || performance.now() < resumeAt; };
-    strip.addEventListener('mouseenter', function () { hov = true; });
-    strip.addEventListener('mouseleave', function () { hov = false; later(800); });
-    strip.addEventListener('focusin', function () { foc = true; });
-    strip.addEventListener('focusout', function () { foc = false; later(800); });
-    strip.addEventListener('touchstart', function () { later(2500); }, { passive: true });
-    strip.addEventListener('touchmove', function () { later(2500); }, { passive: true });
-    strip.addEventListener('scroll', function () { wrap(); });
-    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { inView = es[0].isIntersecting; }).observe(strip); else inView = true;
-    if (loop) {
-      requestAnimationFrame(function () { strip.scrollLeft = half(); });
-      var SPEED = 38; // px per second
-      var frame = function (t) {
-        var dt = last ? Math.min(64, t - last) : 0; last = t;
-        if (!isPaused() && inView && !grid && !document.hidden) {
-          acc += SPEED * dt / 1000;               // content moves left → right: scroll position decreases
-          if (acc >= 1) { var step = Math.floor(acc); acc -= step; strip.scrollLeft -= step; wrap(); }
-        }
-        requestAnimationFrame(frame);
-      };
-      requestAnimationFrame(frame);
-    }
-    // drag with a mouse (touch already scrolls natively)
-    var dragX = null, startLeft = 0, moved = false;
-    strip.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse' || grid) return; dragX = e.clientX; startLeft = strip.scrollLeft; moved = false; dragging = true; });
-    window.addEventListener('pointermove', function (e) {
-      if (dragX === null) return;
-      var dx = e.clientX - dragX;
-      if (Math.abs(dx) > 4) { moved = true; strip.classList.add('is-dragging'); }
-      strip.scrollLeft = startLeft - dx; wrap();
-    });
-    window.addEventListener('pointerup', function () { if (dragX === null) return; dragX = null; dragging = false; later(1200); setTimeout(function () { strip.classList.remove('is-dragging'); }, 0); });
-    strip.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
-    // ‹ › and view all
-    var cardStep = function () { var c = track.children[0]; return c.getBoundingClientRect().width + 14; };
+    var controls = evSec.querySelector('.ev-controls');
+    var cardStep = function () { var c = track.children[0]; return c ? c.getBoundingClientRect().width + 14 : strip.clientWidth; };
+    var sync = function () {
+      var over = strip.scrollWidth > strip.clientWidth + 2;
+      if (controls) controls.hidden = !over;
+      strip.classList.toggle('is-scroll', over);
+      evSec.querySelectorAll('[data-ev="prev"]').forEach(function (b) { b.disabled = strip.scrollLeft <= 8; }); // snapping can leave it a few px in
+      evSec.querySelectorAll('[data-ev="next"]').forEach(function (b) { b.disabled = strip.scrollLeft >= strip.scrollWidth - strip.clientWidth - 8; });
+    };
     evSec.querySelectorAll('[data-ev]').forEach(function (b) {
       b.addEventListener('click', function () {
-        var k = b.getAttribute('data-ev');
-        if (k === 'all') {
-          grid = !grid; evSec.classList.toggle('ev-grid', grid); b.setAttribute('aria-pressed', String(grid));
-          b.textContent = grid ? 'show strip' : 'view all';
-          if (!grid && loop) strip.scrollLeft = half();
-          return;
-        }
-        later(2500);
-        strip.scrollBy({ left: (k === 'next' ? 1 : -1) * cardStep(), behavior: reduced ? 'auto' : 'smooth' });
+        strip.scrollBy({ left: (b.getAttribute('data-ev') === 'next' ? 1 : -1) * cardStep(), behavior: reduced ? 'auto' : 'smooth' });
       });
     });
+    strip.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+    sync();
   }
 
   /* ── Event card photos: each [data-slides] crossfades to its next photo every 4s, staggered per card, with a
