@@ -254,6 +254,29 @@
     });
   }
 
+  /* ── Touch screens have no hover, so the event card whose centre is nearest the middle of the screen shows its
+     photo in full colour (.is-color); the rest stay blue. Checked a few times a
+     second while the strip is on screen, since it drifts. ── */
+  if (strip && window.matchMedia('(hover: none)').matches) {
+    var evCards = Array.prototype.slice.call(strip.querySelectorAll('.ev-card'));
+    var evOn = false, evTimer = null;
+    var pickCentre = function () {
+      var mid = window.innerWidth / 2, best = null, bestD = Infinity;
+      evCards.forEach(function (c) {
+        var r = c.getBoundingClientRect(), d = Math.abs(r.left + r.width / 2 - mid);
+        if (d < bestD && r.right > 0 && r.left < window.innerWidth) { bestD = d; best = c; } // always one, even as a gap passes the middle
+      });
+      evCards.forEach(function (c) { c.classList.toggle('is-color', c === best); });
+    };
+    var evWatch = function (on) {
+      if (on && !evTimer) { pickCentre(); evTimer = setInterval(pickCentre, 250); }
+      if (!on && evTimer) { clearInterval(evTimer); evTimer = null; }
+    };
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { evWatch(es[0].isIntersecting); }, { threshold: 0.4 }).observe(strip);
+    else evWatch(true);
+    strip.addEventListener('scroll', function () { if (evTimer) pickCentre(); }, { passive: true });
+  }
+
   /* ── Event card photos: each event's [data-slides] crossfades to its next photo every 4s, staggered per event, with
      a "n / N" counter. Only the original card runs the timer; every looping copy of it ([data-clone], same
      data-slide-id) shows the same photo at the same moment, so it reads as one slideshow. Pauses while any copy is

@@ -634,9 +634,10 @@ html.dark .ev-photo { --duo-lo: #001a5e; --duo-hi: #eaf2ff; }
 .ev-photo::before { background: var(--duo-lo); mix-blend-mode: lighten; }
 .ev-photo::after { background: var(--duo-hi); mix-blend-mode: darken; }
 .ev-photo img { transition: opacity 1s var(--ease), filter .6s var(--ease); }
-.ev-card:hover .ev-photo img, .ev-card:focus-within .ev-photo img { filter: none; }
+.ev-card:hover .ev-photo img, .ev-card:focus-within .ev-photo img, .ev-card.is-color .ev-photo img { filter: none; }
 .ev-card:hover .ev-photo::before, .ev-card:hover .ev-photo::after,
-.ev-card:focus-within .ev-photo::before, .ev-card:focus-within .ev-photo::after { opacity: 0; }
+.ev-card:focus-within .ev-photo::before, .ev-card:focus-within .ev-photo::after,
+.ev-card.is-color .ev-photo::before, .ev-card.is-color .ev-photo::after { opacity: 0; } /* .is-color: the centred card on touch screens (main.js) */
 .ev-photo.is-doc::before, .ev-photo.is-doc::after, .ev-photo.is-empty::before, .ev-photo.is-empty::after { display: none; }
 .ev-photo.is-doc img, .ev-photo.is-empty img { filter: none; }
 .ev-count { position: absolute; top: 10px; right: 10px; z-index: 2; padding: 2px 7px; border-radius: 6px; background: rgb(0 0 0 / .55); color: #fff; font-family: var(--mono); font-size: 10px; letter-spacing: .5px; } /* on the photo, so fixed colours */
