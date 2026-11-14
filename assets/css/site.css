@@ -358,13 +358,17 @@ a.pj-shot:hover img { transform: scale(1.03); }
   background: linear-gradient(to bottom, rgba(255,255,255,.10), transparent 40%); } /* soft sheen */
 .mock-win { position: relative; z-index: 1; display: block; width: 72%; border-radius: 7px; overflow: hidden; background: var(--win, #fff);
   box-shadow: 0 1px 0 rgba(255,255,255,.35) inset, 0 22px 40px -14px rgba(0,0,0,.55), 0 6px 14px -6px rgba(0,0,0,.35);
-  transform: rotateX(9deg) rotateY(-13deg) rotateZ(2.5deg); transform-origin: 50% 50%;
+  /* --rx/--ry/--rz/--ty are driven by scroll (assets/js/mock.js): tilted back as it enters, settling flatter
+     as it rises, then drifting on; the defaults are the resting tilt (no JS / reduced motion) */
+  transform: translateY(var(--ty, 0px)) rotateX(var(--rx, 9deg)) rotateY(var(--ry, -13deg)) rotateZ(var(--rz, 2.5deg)) scale(var(--sc, 1));
+  transform-origin: 50% 50%;
   transition: transform .7s var(--ease), box-shadow .7s var(--ease); }
+.mock-live .mock-win { transition: transform .25s ease-out, box-shadow .7s var(--ease); } /* smooths each scroll step */
 .mock-bar { display: block; height: 9px; background: color-mix(in srgb, var(--win, #fff) 92%, #888);
   background-image: radial-gradient(circle at 7px 4.5px, #ff5f57 2px, transparent 2.4px), radial-gradient(circle at 14px 4.5px, #febc2e 2px, transparent 2.4px), radial-gradient(circle at 21px 4.5px, #28c840 2px, transparent 2.4px); }
 .pj-shot.mock img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top center; transition: none; }
 a.pj-shot.mock:hover img { transform: none; }
-a.pj-shot.mock:hover .mock-win { transform: rotateX(4deg) rotateY(-6deg) rotateZ(1deg) scale(1.03); box-shadow: 0 1px 0 rgba(255,255,255,.35) inset, 0 28px 50px -16px rgba(0,0,0,.6), 0 8px 18px -8px rgba(0,0,0,.35); }
+a.pj-shot.mock:hover .mock-win { --sc: 1.04; box-shadow: 0 1px 0 rgba(255,255,255,.35) inset, 0 28px 50px -16px rgba(0,0,0,.6), 0 8px 18px -8px rgba(0,0,0,.35); }
 @media (prefers-reduced-motion: reduce) { .pj-shot img, .mock-win { transition: none; } a.pj-shot:hover img { transform: none; } }
 /* stacked card with its screenshot: text left, picture right; picture on top on phones */
 .stack-card { display: grid; grid-template-columns: 1fr 15rem; gap: 1.4rem; align-items: center; }

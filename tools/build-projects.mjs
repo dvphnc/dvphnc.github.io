@@ -205,6 +205,7 @@ P.forEach((p, i) => {
 
   <script src="../assets/js/theme.js?v=${V}"></script>
   <script src="../assets/js/note.js?v=${V}"></script>
+  <script src="../assets/js/mock.js?v=${V}"></script>
 </body>
 </html>
 `;
