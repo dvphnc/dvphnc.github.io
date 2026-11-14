@@ -623,7 +623,23 @@ a.event-card:hover .event-cover img { transform: scale(1.04); }
 .ev-photo.is-doc img { object-fit: contain; padding: 10px; }
 .ev-photo.is-empty { display: flex; align-items: center; justify-content: center; background-image: radial-gradient(var(--dot) 1px, transparent 1.3px); background-size: 9px 9px; }
 .ev-photo.is-empty img { position: static; opacity: 1; width: 64px; height: 64px; object-fit: contain; }
-.ev-count { position: absolute; top: 10px; right: 10px; z-index: 1; padding: 2px 7px; border-radius: 6px; background: rgb(0 0 0 / .55); color: #fff; font-family: var(--mono); font-size: 10px; letter-spacing: .5px; } /* on the photo, so fixed colours */
+/* blue duotone on event photos, full colour on hover (same mapping as the headshot): the photo goes grey, then
+   ::before (mix-blend lighten) lifts the shadows to a navy and ::after (mix-blend darken) caps the highlights at a
+   pale blue. Light mode: #002a78 → #e8f1ff; dark mode: page navy #001a5e → #eaf2ff. Hover, keyboard focus inside
+   the card, or reduced-colour fallbacks drop both layers. */
+.ev-photo { --duo-lo: #002a78; --duo-hi: #e8f1ff; }
+html.dark .ev-photo { --duo-lo: #001a5e; --duo-hi: #eaf2ff; }
+.ev-photo img { filter: grayscale(1) contrast(1.08); }
+.ev-photo::before, .ev-photo::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; transition: opacity .6s var(--ease); }
+.ev-photo::before { background: var(--duo-lo); mix-blend-mode: lighten; }
+.ev-photo::after { background: var(--duo-hi); mix-blend-mode: darken; }
+.ev-photo img { transition: opacity 1s var(--ease), filter .6s var(--ease); }
+.ev-card:hover .ev-photo img, .ev-card:focus-within .ev-photo img { filter: none; }
+.ev-card:hover .ev-photo::before, .ev-card:hover .ev-photo::after,
+.ev-card:focus-within .ev-photo::before, .ev-card:focus-within .ev-photo::after { opacity: 0; }
+.ev-photo.is-doc::before, .ev-photo.is-doc::after, .ev-photo.is-empty::before, .ev-photo.is-empty::after { display: none; }
+.ev-photo.is-doc img, .ev-photo.is-empty img { filter: none; }
+.ev-count { position: absolute; top: 10px; right: 10px; z-index: 2; padding: 2px 7px; border-radius: 6px; background: rgb(0 0 0 / .55); color: #fff; font-family: var(--mono); font-size: 10px; letter-spacing: .5px; } /* on the photo, so fixed colours */
 .ev-body { flex: 1; display: flex; flex-direction: column; gap: .4rem; padding: .95rem 1.05rem 1rem; }
 .ev-meta { font-family: var(--mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--g400); }
 .ev-title { font-size: 15px; font-weight: 600; letter-spacing: -.015em; line-height: 1.35; }
