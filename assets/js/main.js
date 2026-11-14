@@ -285,12 +285,12 @@
     Array.prototype.slice.call(document.querySelectorAll('[data-slides]')).filter(function (c) { return !c.closest('[data-clone]'); }).forEach(function (cover, k) {
       var id = cover.getAttribute('data-slide-id');
       var covers = id === null ? [cover] : Array.prototype.slice.call(document.querySelectorAll('[data-slides][data-slide-id="' + id + '"]'));
-      var n = cover.querySelectorAll('img').length;
+      var n = cover.querySelectorAll('.ev-slide').length;
       if (n < 2) return;
       var i = 0, seen = 0, hover = 0;
       var paint = function () {
         covers.forEach(function (cv) {
-          cv.querySelectorAll('img').forEach(function (im, j) { im.classList.toggle('is-on', j === i); });
+          cv.querySelectorAll('.ev-slide').forEach(function (sl, j) { sl.classList.toggle('is-on', j === i); });
           var count = cv.querySelector('.ev-count');
           if (count) count.textContent = (i + 1) + ' / ' + n;
         });
