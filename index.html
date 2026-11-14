@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap"/>
-  <link rel="stylesheet" href="assets/css/site.css?v=202611190"/>
+  <link rel="stylesheet" href="assets/css/site.css?v=202611191"/>
 </head>
 <body>
 
@@ -131,8 +131,8 @@
           <div class="portrait enter" style="--d:50ms">
             <!-- Blue duotone: one copy per theme, cross-faded by .dark (filters defined below) -->
             <!-- fine-grain dithered portrait with a transparent backdrop (one file for both themes, identical dots): 1-bit dither made at 2x the display size, scaled smoothly so the grain stays fine -->
-            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611190"/><img class="duo duo-light" src="assets/img/headshot-cutout-576.png?v=202611190" alt="Portrait of Joana Daphne Sy" width="240" height="240" fetchpriority="high"/></picture>
-            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611190"/><img class="duo duo-dark" src="assets/img/headshot-cutout-576.png?v=202611190" alt="" aria-hidden="true" width="240" height="240"/></picture>
+            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611191"/><img class="duo duo-light" src="assets/img/headshot-cutout-576.png?v=202611191" alt="Portrait of Joana Daphne Sy" width="240" height="240" fetchpriority="high"/></picture>
+            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611191"/><img class="duo duo-dark" src="assets/img/headshot-cutout-576.png?v=202611191" alt="" aria-hidden="true" width="240" height="240"/></picture>
             <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
               <!-- light theme: shadows #002a78 → highlights #e8f1ff -->
               <filter id="duo-light" color-interpolation-filters="sRGB">
@@ -364,71 +364,60 @@
       <section class="sec" id="certifications" aria-labelledby="h-certs">
         <div class="sec-head"><h2 class="sec-num" id="h-certs">06 · certifications &amp; training</h2><a class="sec-more" href="https://linkedin.com/in/dvphnc/details/certifications/" target="_blank" rel="noopener">all on linkedin →</a></div>
 
-        <!-- certifications and training as two fanned decks (after bryllim.com's projects): front card on top, the rest
-             tilted out behind it; clicking or focusing a back card brings it to the front (main.js), the front card opens its
-             verify link. Two decks keep certifications and training apart. -->
-        <div class="cert-decks">
-          <div class="deck">
-            <h3 class="sub-head">certifications <span>4</span></h3>
-            <div class="cert-fan" role="group" aria-label="Certifications, 4 cards">
-              <a class="card cert fan-card" data-slot="0" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=C40D337A86BE52AE8C02A90C0BC838A9226F3044D11CF05F86A518AAFDF7103F" target="_blank" rel="noopener">
+        <!-- all certifications and training in one fanned deck (after bryllim.com's projects): the front card on top, three
+             pairs fanned out behind it (left/right, wider left/right, peeking over the top). Clicking or focusing a back card
+             brings it to the front (main.js); the front card opens its verify link. -->
+        <div class="cert-fan" role="group" aria-label="Certifications and training, 7 cards">
+          <a class="card cert fan-card" data-slot="0" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=C40D337A86BE52AE8C02A90C0BC838A9226F3044D11CF05F86A518AAFDF7103F" target="_blank" rel="noopener">
             <span class="cert-logo wide"><img class="logo" src="assets/logos/oracle.svg" alt="Oracle"/></span>
             <h3 class="cert-name">OCI AI Foundations Associate</h3>
             <p class="micro cert-issuer">oracle</p>
             <p class="cert-meta">Dec 2024 · valid to Dec 2026</p>
             <span class="cert-verify">‹ verify ›</span>
           </a>
-              <a class="card cert fan-card" data-slot="1" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=D43A8C93FE30161F5AF6077AE49AB9FE797A13EA6EB10947B7E30B9B0DFD2DC1" target="_blank" rel="noopener">
+          <a class="card cert fan-card" data-slot="1" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=D43A8C93FE30161F5AF6077AE49AB9FE797A13EA6EB10947B7E30B9B0DFD2DC1" target="_blank" rel="noopener">
             <span class="cert-logo wide"><img class="logo" src="assets/logos/oracle.svg" alt="Oracle"/></span>
             <h3 class="cert-name">OCI Foundations Associate</h3>
             <p class="micro cert-issuer">oracle</p>
             <p class="cert-meta">Dec 2024 · valid to Dec 2026</p>
             <span class="cert-verify">‹ verify ›</span>
           </a>
-              <a class="card cert fan-card" data-slot="2" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=D43A8C93FE30161F5AF6077AE49AB9FE612D8698DFBD1116CC92691601BF4C03" target="_blank" rel="noopener">
+          <a class="card cert fan-card" data-slot="2" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=D43A8C93FE30161F5AF6077AE49AB9FE612D8698DFBD1116CC92691601BF4C03" target="_blank" rel="noopener">
             <span class="cert-logo wide"><img class="logo" src="assets/logos/oracle.svg" alt="Oracle"/></span>
             <h3 class="cert-name">OCI Data Foundations Associate</h3>
             <p class="micro cert-issuer">oracle</p>
             <p class="cert-meta">Dec 2024 · valid to Dec 2026</p>
             <span class="cert-verify">‹ verify ›</span>
           </a>
-              <a class="card cert fan-card" data-slot="3" href="https://edu.google.accredible.com/79c03d03-4077-4696-8a07-d2b83d14b78a" target="_blank" rel="noopener">
+          <a class="card cert fan-card" data-slot="3" href="https://edu.google.accredible.com/79c03d03-4077-4696-8a07-d2b83d14b78a" target="_blank" rel="noopener">
             <span class="cert-logo"><img class="logo" src="assets/logos/google.svg" alt="Google"/></span>
             <h3 class="cert-name">Gemini Certified University Student</h3>
             <p class="micro cert-issuer">google for education</p>
             <p class="cert-meta">Jan 2026 · valid to Jan 2029</p>
             <span class="cert-verify">‹ verify ›</span>
           </a>
-              <p class="fan-count micro" aria-hidden="true"><span class="fan-n">1</span> / 4</p>
-            </div>
-          </div>
-          <div class="deck">
-            <h3 class="sub-head">training <span>3</span></h3>
-            <div class="cert-fan" role="group" aria-label="Training, 3 cards">
-              <a class="card cert fan-card" data-slot="0" href="https://www.coursera.org/account/accomplishments/specialization/Y05IYRFJA1MY" target="_blank" rel="noopener">
+          <a class="card cert fan-card" data-slot="4" href="https://www.coursera.org/account/accomplishments/specialization/Y05IYRFJA1MY" target="_blank" rel="noopener">
             <span class="cert-logo wide pair"><img class="logo" src="assets/logos/isc2.svg" alt="ISC2"/><img class="logo" src="assets/logos/coursera.svg" alt="Coursera"/></span>
             <h3 class="cert-name">Certified in Cybersecurity (CC) Official Training</h3>
             <p class="micro cert-issuer">isc2 · coursera</p>
             <p class="cert-meta">Oct 2025 · 5-course specialization</p>
             <span class="cert-verify">‹ verify ›</span>
           </a>
-              <a class="card cert fan-card" data-slot="1" href="https://www.linkedin.com/learning/certificates/f41501f6eb854424385a648f7e826349e9b04b92a62885f6f95aca9b3bdb5e67/" target="_blank" rel="noopener">
+          <a class="card cert fan-card" data-slot="5" href="https://www.linkedin.com/learning/certificates/f41501f6eb854424385a648f7e826349e9b04b92a62885f6f95aca9b3bdb5e67/" target="_blank" rel="noopener">
             <span class="cert-logo"><img class="logo" src="assets/logos/adobe.svg" alt="Adobe"/></span>
             <h3 class="cert-name">Essential Skills in Generative AI for Creatives</h3>
             <p class="micro cert-issuer">adobe · linkedin learning</p>
             <p class="cert-meta">Aug 2025 · passed final exam</p>
             <span class="cert-verify">‹ verify ›</span>
           </a>
-              <a class="card cert fan-card" data-slot="2" href="https://courses.cognitiveclass.ai/certificates/fea1a489739a4b02ab4c9d266a0ade0f" target="_blank" rel="noopener">
+          <a class="card cert fan-card" data-slot="6" href="https://courses.cognitiveclass.ai/certificates/fea1a489739a4b02ab4c9d266a0ade0f" target="_blank" rel="noopener">
             <span class="cert-logo wide"><svg viewBox="0 7.3 24 9.4" fill="currentColor" role="img" aria-label="IBM" class="logo-svg"><path d="M23.544 15.993c.038 0 .06-.017.06-.053v-.036c0-.035-.022-.052-.06-.052h-.09v.14zm-.09.262h-.121v-.498h.225c.112 0 .169.066.169.157 0 .079-.036.129-.09.15l.111.19h-.133l-.092-.17h-.07zm.434-.222v-.062c0-.2-.157-.357-.363-.357a.355.355 0 00-.363.357v.062c0 .2.156.358.363.358a.355.355 0 00.363-.358zm-.838-.03c0-.28.212-.492.475-.492.264 0 .475.213.475.491 0 .279-.211.491-.475.491a.477.477 0 01-.475-.49zM16.21 8.13l-.216-.624h-3.56v.624zm.413 1.19l-.216-.623h-3.973v.624zm2.65 7.147h3.107v-.624h-3.108zm0-1.192h3.107v-.623h-3.108zm0-1.19h1.864v-.624h-1.865zm0-1.191h1.864v-.624h-1.865zm0-1.191h1.864v-.624h-3.555l-.175.504-.175-.504h-3.555v.624h1.865v-.574l.2.574h3.33l.2-.574zm1.864-1.815h-3.142l-.217.624h3.359zm-7.46 3.006h1.865v-.624h-1.865zm0 1.19h1.865v-.623h-1.865zm-1.243 1.191h3.108v-.623h-3.108zm0 1.192h3.108v-.624h-3.108zm6.386-8.961l-.216.624h3.776v-.624zm-.629 1.815h4.19v-.624h-3.974zm-4.514 1.19h3.359l-.216-.623h-3.143zm2.482 2.383h2.496l.218-.624h-2.932zm.417 1.19h1.662l.218-.623h-2.098zm.416 1.191h.83l.218-.623h-1.266zm.414 1.192l.217-.624h-.432zm-12.433-.006l4.578.006c.622 0 1.18-.237 1.602-.624h-6.18zm4.86-3v.624h2.092c0-.216-.03-.425-.083-.624zm-3.616.624h1.865v-.624H6.217zm3.617-3.573h2.008c.053-.199.083-.408.083-.624H9.834zm-3.617 0h1.865v-.624H6.217zM9.55 7.507H4.973v.624h6.18a2.36 2.36 0 00-1.602-.624zm2.056 1.191H4.973v.624h6.884a2.382 2.382 0 00-.25-.624zm-5.39 2.382v.624h4.87c.207-.176.382-.387.519-.624zm4.87 1.191h-4.87v.624h5.389a2.39 2.39 0 00-.519-.624zm-6.114 3.006h6.634c.11-.193.196-.402.25-.624H4.973zM0 8.13h4.352v-.624H0zm0 1.191h4.352v-.624H0zm1.243 1.191h1.865v-.624H1.243zm0 1.191h1.865v-.624H1.243zm0 1.19h1.865v-.623H1.243zm0 1.192h1.865v-.624H1.243zM0 15.276h4.352v-.623H0zm0 1.192h4.352v-.624H0Z"/></svg></span>
             <h3 class="cert-name">SQL and Relational Databases 101</h3>
             <p class="micro cert-issuer"><span class="nowrap">ibm skills network</span> · <span class="nowrap">cognitive class</span></p>
             <p class="cert-meta">Oct 2024 · DB0101EN, passed</p>
             <span class="cert-verify">‹ verify ›</span>
           </a>
-              <p class="fan-count micro" aria-hidden="true"><span class="fan-n">1</span> / 3</p>
-            </div>
-          </div>
+          <p class="fan-count micro" aria-hidden="true"><span class="fan-n">1</span> / 7 · tap a card</p>
         </div>
       </section>
 
@@ -468,12 +457,12 @@
     <p class="lb-count micro"></p>
   </div>
 
-  <script src="assets/js/boot.js?v=202611190"></script>
-  <script src="assets/js/theme.js?v=202611190"></script>
-  <script src="assets/js/main.js?v=202611190"></script>
-  <script src="assets/js/mock.js?v=202611190"></script>
+  <script src="assets/js/boot.js?v=202611191"></script>
+  <script src="assets/js/theme.js?v=202611191"></script>
+  <script src="assets/js/main.js?v=202611191"></script>
+  <script src="assets/js/mock.js?v=202611191"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="assets/js/globe.js?v=202611190"></script>
-  <script src="assets/js/gallery.js?v=202611190"></script>
+  <script src="assets/js/globe.js?v=202611191"></script>
+  <script src="assets/js/gallery.js?v=202611191"></script>
 </body>
 </html>

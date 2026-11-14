@@ -292,7 +292,7 @@
     });
   }
 
-  /* ── Certification decks: in each .cert-fan, clicking, tapping or tabbing to a back card swaps it with the front
+  /* ── Certification deck: in .cert-fan, clicking, tapping or tabbing to a back card swaps it with the front
      card instead of opening it; the front card opens its verify link. Each deck's height follows its tallest card. ── */
   Array.prototype.slice.call(document.querySelectorAll('.cert-fan')).forEach(function (fan) {
     var cards = Array.prototype.slice.call(fan.querySelectorAll('.fan-card'));
@@ -311,7 +311,7 @@
     });
     var size = function () {
       var h = 0; cards.forEach(function (c) { h = Math.max(h, c.offsetHeight); });
-      fan.style.height = (h + 82) + 'px'; // room for the peek on top, the tilt and the "n / N" line
+      fan.style.height = (h + 100) + 'px'; // room for the peek on top, the tilt and the "n / N" line
     };
     size();
     window.addEventListener('resize', size);
