@@ -333,6 +333,9 @@ a.card:hover, .card.hoverable:hover { transform: translateY(-2px); box-shadow: v
 @media (max-width: 1023px) { .stack { --stick: calc(56px + .75rem); } } /* below the sticky topbar */
 @media (prefers-reduced-motion: reduce) { .stack-item { position: static; } .stack-card { transform: none; } }
 
+/* project rows/cards that open a case study: the whole title links there */
+.pj-title a, .stack-card .proj-title a { text-decoration: none; transition: color .2s; }
+.pj-title a:hover, .stack-card .proj-title a:hover { color: var(--accent); }
 /* project screenshots (homepage stack + projects.html): 16:10 frame, hairline, soft radius, full colour */
 .pj-shot { display: block; position: relative; aspect-ratio: 16 / 10; overflow: hidden; border-radius: 12px; border: 1px solid var(--g200); background: var(--g100); }
 .pj-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform .6s var(--ease); }

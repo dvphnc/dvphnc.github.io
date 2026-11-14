@@ -104,6 +104,37 @@ button.shot:focus-visible { outline: 2px solid var(--accent); outline-offset: 2p
   .pj { grid-template-columns: 1fr; gap: .9rem; }
 }
 
+/* projects/<slug>.html case studies (after fabwaseem.com/projects/benchline): facts row, links, mockup cover,
+   prose sections, timeline, stack tags, link list */
+.cs-facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 1.4rem; border-top: 1px solid var(--g200); border-bottom: 1px solid var(--g200); }
+.cs-facts > div { padding: .8rem .9rem .85rem 0; min-width: 0; }
+.cs-facts > div + div { padding-left: .9rem; border-left: 1px solid var(--g200); }
+.cs-facts dt { font-family: var(--mono); font-size: 9.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--g400); }
+.cs-facts dd { margin-top: .3rem; font-size: 13px; line-height: 1.45; }
+.cs-more { color: var(--g400); white-space: nowrap; }
+.cs-links { border-top: 0; margin-top: .9rem; padding-top: 0; }
+.cs-cover { margin-top: 1.6rem; border-radius: 16px; }
+.cs-cover.mock .mock-win { border-radius: 9px; }
+.cs-cover.mock .mock-bar { height: 14px; background-image: radial-gradient(circle at 10px 7px, #ff5f57 3px, transparent 3.5px), radial-gradient(circle at 21px 7px, #febc2e 3px, transparent 3.5px), radial-gradient(circle at 32px 7px, #28c840 3px, transparent 3.5px); }
+.cs-timeline { margin-top: .8rem; border-top: 1px solid var(--g200); }
+.cs-timeline > div { display: grid; grid-template-columns: 7.5rem 1fr; gap: 1rem; padding: .6rem 0; border-bottom: 1px solid var(--g200); }
+.cs-timeline dt { font-family: var(--mono); font-size: 11px; color: var(--g400); padding-top: .2rem; }
+.cs-timeline dd { font-family: var(--sans); font-size: 14px; line-height: 1.55; }
+.prose .cs-stack { padding-left: 0; }
+.prose .cs-stack li { margin: 0; }
+.prose .cs-linklist { list-style: none; padding-left: 0; margin-top: 1rem; }
+.prose .cs-linklist li { display: flex; flex-wrap: wrap; align-items: baseline; gap: .6rem; padding: .5rem 0; border-bottom: 1px solid var(--g200); font-family: var(--sans); font-size: 15px; }
+.prose .cs-linklist .micro { color: var(--g400); overflow-wrap: anywhere; }
+@media (max-width: 640px) {
+  .cs-facts { grid-template-columns: 1fr 1fr; }
+  .cs-facts > div:nth-child(3) { padding-left: 0; border-left: 0; }
+  .cs-facts > div:nth-child(n+3) { border-top: 1px solid var(--g200); }
+  .cs-timeline > div { grid-template-columns: 5.5rem 1fr; gap: .7rem; }
+}
+/* project rows/cards that open a case study: the whole title links there */
+.pj-title a, .stack-card .proj-title a { text-decoration: none; transition: color .2s; }
+.pj-title a:hover, .stack-card .proj-title a:hover { color: var(--accent); }
+
 /* events.html: year headings over plain .events rows */
 .ev-year { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin: 2.6rem 0 .8rem; font-family: var(--pixel); font-weight: 400; font-size: 1.35rem; line-height: 1; scroll-margin-top: 5rem; }
 .ev-year:first-child { margin-top: 2rem; }
