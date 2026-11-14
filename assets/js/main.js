@@ -292,33 +292,31 @@
     });
   }
 
-  /* ── Oracle fan (certifications): clicking, tapping or tabbing to a back card brings it to the front instead of
-     opening it; the front card opens its verify link. Height follows the tallest card so nothing is clipped. ── */
-  var fan = document.querySelector('.cert-fan');
-  if (fan) {
-    var fanCards = Array.prototype.slice.call(fan.querySelectorAll('.fan-card'));
-    var fanN = fan.querySelector('.fan-n');
-    var fanFront = function (card) {
+  /* ── Certification decks: in each .cert-fan, clicking, tapping or tabbing to a back card swaps it with the front
+     card instead of opening it; the front card opens its verify link. Each deck's height follows its tallest card. ── */
+  Array.prototype.slice.call(document.querySelectorAll('.cert-fan')).forEach(function (fan) {
+    var cards = Array.prototype.slice.call(fan.querySelectorAll('.fan-card'));
+    var num = fan.querySelector('.fan-n');
+    var toFront = function (card) {
       var old = card.getAttribute('data-slot');
       if (old === '0') return;
-      var front = fan.querySelector('.fan-card[data-slot="0"]');
-      front.setAttribute('data-slot', old);
+      fan.querySelector('.fan-card[data-slot="0"]').setAttribute('data-slot', old);
       card.setAttribute('data-slot', '0');
-      if (fanN) fanN.textContent = String(fanCards.indexOf(card) + 1);
+      if (num) num.textContent = String(cards.indexOf(card) + 1);
     };
-    fanCards.forEach(function (c) {
-      c.addEventListener('click', function (e) { if (c.getAttribute('data-slot') !== '0') { e.preventDefault(); fanFront(c); } });
+    cards.forEach(function (c) {
+      c.addEventListener('click', function (e) { if (c.getAttribute('data-slot') !== '0') { e.preventDefault(); toFront(c); } });
       // keyboard only: a mouse click also focuses first, which would bring it forward and then open it in one go
-      c.addEventListener('focus', function () { var kb = true; try { kb = c.matches(':focus-visible'); } catch (err) {} if (kb) fanFront(c); });
+      c.addEventListener('focus', function () { var kb = true; try { kb = c.matches(':focus-visible'); } catch (err) {} if (kb) toFront(c); });
     });
-    var fanSize = function () {
-      var h = 0; fanCards.forEach(function (c) { h = Math.max(h, c.offsetHeight); });
-      fan.style.height = (h + 46) + 'px'; // room for the tilt and the "1 / 3" line
+    var size = function () {
+      var h = 0; cards.forEach(function (c) { h = Math.max(h, c.offsetHeight); });
+      fan.style.height = (h + 82) + 'px'; // room for the peek on top, the tilt and the "n / N" line
     };
-    fanSize();
-    window.addEventListener('resize', fanSize);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fanSize);
-  }
+    size();
+    window.addEventListener('resize', size);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(size);
+  });
 
   /* Escape closes the phone menu */
   document.addEventListener('keydown', function (e) {
