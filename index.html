@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap"/>
-  <link rel="stylesheet" href="assets/css/site.css?v=202611185"/>
+  <link rel="stylesheet" href="assets/css/site.css?v=202611188"/>
 </head>
 <body>
 
@@ -131,8 +131,8 @@
           <div class="portrait enter" style="--d:50ms">
             <!-- Blue duotone: one copy per theme, cross-faded by .dark (filters defined below) -->
             <!-- fine-grain dithered portrait with a transparent backdrop (one file for both themes, identical dots): 1-bit dither made at 2x the display size, scaled smoothly so the grain stays fine -->
-            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611185"/><img class="duo duo-light" src="assets/img/headshot-cutout-576.png?v=202611185" alt="Portrait of Joana Daphne Sy" width="240" height="240" fetchpriority="high"/></picture>
-            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611185"/><img class="duo duo-dark" src="assets/img/headshot-cutout-576.png?v=202611185" alt="" aria-hidden="true" width="240" height="240"/></picture>
+            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611188"/><img class="duo duo-light" src="assets/img/headshot-cutout-576.png?v=202611188" alt="Portrait of Joana Daphne Sy" width="240" height="240" fetchpriority="high"/></picture>
+            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611188"/><img class="duo duo-dark" src="assets/img/headshot-cutout-576.png?v=202611188" alt="" aria-hidden="true" width="240" height="240"/></picture>
             <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
               <!-- light theme: shadows #002a78 → highlights #e8f1ff -->
               <filter id="duo-light" color-interpolation-filters="sRGB">
@@ -364,28 +364,33 @@
       <section class="sec" id="certifications" aria-labelledby="h-certs">
         <div class="sec-head"><h2 class="sec-num" id="h-certs">06 · certifications &amp; training</h2><a class="sec-more" href="https://linkedin.com/in/dvphnc/details/certifications/" target="_blank" rel="noopener">all on linkedin →</a></div>
 
-        <div class="grid-3">
-          <a class="card cert" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=C40D337A86BE52AE8C02A90C0BC838A9226F3044D11CF05F86A518AAFDF7103F" target="_blank" rel="noopener">
+        <!-- the three Oracle certs as a fanned deck (after bryllim.com's projects): front card on top, the others tilted
+             behind; clicking or focusing a back card brings it to the front (main.js), the front card opens its verify link -->
+        <div class="cert-top">
+          <div class="cert-fan" role="group" aria-label="Oracle certifications, 3 cards">
+            <a class="card cert fan-card" data-slot="0" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=C40D337A86BE52AE8C02A90C0BC838A9226F3044D11CF05F86A518AAFDF7103F" target="_blank" rel="noopener">
             <span class="cert-logo wide"><img class="logo" src="assets/logos/oracle.svg" alt="Oracle"/></span>
             <h3 class="cert-name">OCI AI Foundations Associate</h3>
             <p class="micro cert-issuer">oracle</p>
             <p class="cert-meta">Dec 2024 · valid to Dec 2026</p>
             <span class="cert-verify">‹ verify ›</span>
           </a>
-          <a class="card cert" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=D43A8C93FE30161F5AF6077AE49AB9FE797A13EA6EB10947B7E30B9B0DFD2DC1" target="_blank" rel="noopener">
+            <a class="card cert fan-card" data-slot="1" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=D43A8C93FE30161F5AF6077AE49AB9FE797A13EA6EB10947B7E30B9B0DFD2DC1" target="_blank" rel="noopener">
             <span class="cert-logo wide"><img class="logo" src="assets/logos/oracle.svg" alt="Oracle"/></span>
             <h3 class="cert-name">OCI Foundations Associate</h3>
             <p class="micro cert-issuer">oracle</p>
             <p class="cert-meta">Dec 2024 · valid to Dec 2026</p>
             <span class="cert-verify">‹ verify ›</span>
           </a>
-          <a class="card cert" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=D43A8C93FE30161F5AF6077AE49AB9FE612D8698DFBD1116CC92691601BF4C03" target="_blank" rel="noopener">
+            <a class="card cert fan-card" data-slot="2" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=D43A8C93FE30161F5AF6077AE49AB9FE612D8698DFBD1116CC92691601BF4C03" target="_blank" rel="noopener">
             <span class="cert-logo wide"><img class="logo" src="assets/logos/oracle.svg" alt="Oracle"/></span>
             <h3 class="cert-name">OCI Data Foundations Associate</h3>
             <p class="micro cert-issuer">oracle</p>
             <p class="cert-meta">Dec 2024 · valid to Dec 2026</p>
             <span class="cert-verify">‹ verify ›</span>
           </a>
+            <p class="fan-count micro" aria-hidden="true">oracle · <span class="fan-n">1</span> / 3</p>
+          </div>
           <a class="card cert" href="https://edu.google.accredible.com/79c03d03-4077-4696-8a07-d2b83d14b78a" target="_blank" rel="noopener">
             <span class="cert-logo"><img class="logo" src="assets/logos/google.svg" alt="Google"/></span>
             <h3 class="cert-name">Gemini Certified University Student</h3>
@@ -457,12 +462,12 @@
     <p class="lb-count micro"></p>
   </div>
 
-  <script src="assets/js/boot.js?v=202611185"></script>
-  <script src="assets/js/theme.js?v=202611185"></script>
-  <script src="assets/js/main.js?v=202611185"></script>
-  <script src="assets/js/mock.js?v=202611185"></script>
+  <script src="assets/js/boot.js?v=202611188"></script>
+  <script src="assets/js/theme.js?v=202611188"></script>
+  <script src="assets/js/main.js?v=202611188"></script>
+  <script src="assets/js/mock.js?v=202611188"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="assets/js/globe.js?v=202611185"></script>
-  <script src="assets/js/gallery.js?v=202611185"></script>
+  <script src="assets/js/globe.js?v=202611188"></script>
+  <script src="assets/js/gallery.js?v=202611188"></script>
 </body>
 </html>

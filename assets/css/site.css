@@ -483,6 +483,35 @@ a.cert:hover .cert-verify { color: var(--accent); }
   .cert-verify { grid-area: verify; margin-top: 0; padding-top: 0; }
 }
 
+/* Oracle fan (after bryllim.com's projects deck): three cert cards stacked, the front one (data-slot 0) on top, the
+   others tilted out behind it. main.js swaps slots when a back card is clicked or focused and sets the height. */
+.cert-top { display: grid; grid-template-columns: 2fr 1fr; gap: .9rem; align-items: center; }
+.cert-fan { position: relative; height: 15.5rem; }
+.fan-card { position: absolute; left: 50%; top: 12px; width: min(15rem, 62%); min-height: 12.5rem;
+  background-color: var(--bg); background-image: linear-gradient(to bottom, var(--g50), var(--bg)); /* solid, so back cards don't show through */
+  transform: translateX(-50%) var(--fan, none); transform-origin: 50% 90%;
+  transition: transform .55s var(--ease), box-shadow .35s var(--ease), border-color .2s, opacity .3s; }
+.fan-card[data-slot="0"] { --fan: translateY(0) rotate(0deg); z-index: 3; }
+.fan-card[data-slot="1"] { --fan: translateX(-52%) translateY(10px) rotate(-8deg) scale(.92); z-index: 1; cursor: pointer; }
+.fan-card[data-slot="2"] { --fan: translateX(52%) translateY(10px) rotate(8deg) scale(.92); z-index: 2; cursor: pointer; }
+.cert-fan:hover .fan-card[data-slot="1"] { --fan: translateX(-60%) translateY(6px) rotate(-11deg) scale(.93); }
+.cert-fan:hover .fan-card[data-slot="2"] { --fan: translateX(60%) translateY(6px) rotate(11deg) scale(.93); }
+.fan-card[data-slot="1"] .cert-verify, .fan-card[data-slot="2"] .cert-verify { opacity: 0; } /* only the front card says verify */
+a.fan-card:hover { transform: translateX(-50%) var(--fan, none); } /* no 2px lift: the fan moves instead */
+.fan-card[data-slot="0"]:hover { --fan: translateY(-3px); }
+.fan-count { position: absolute; left: 0; right: 0; bottom: 0; text-align: center; }
+@media (max-width: 639px) {
+  .cert-top { grid-template-columns: 1fr; }
+  .cert-fan { height: 11.5rem; }
+  .fan-card { width: 80%; min-height: 0; top: 8px; }
+  /* offsets add to the centring translateX(-50%) */
+  .fan-card[data-slot="1"] { --fan: translateX(-9%) translateY(10px) rotate(-5deg) scale(.94); }
+  .fan-card[data-slot="2"] { --fan: translateX(9%) translateY(10px) rotate(5deg) scale(.94); }
+  .cert-fan:hover .fan-card[data-slot="1"] { --fan: translateX(-11%) translateY(10px) rotate(-6deg) scale(.94); }
+  .cert-fan:hover .fan-card[data-slot="2"] { --fan: translateX(11%) translateY(10px) rotate(6deg) scale(.94); }
+}
+@media (prefers-reduced-motion: reduce) { .fan-card { transition: none; } }
+
 .events { list-style: none; border-top: 1px solid var(--g200); }
 .event { display: grid; grid-template-columns: 5rem 34px 1fr auto; gap: 14px; align-items: center; padding: .8rem 0; border-bottom: 1px solid var(--g200); }
 .event-date { font-family: var(--mono); font-size: 11px; color: var(--g400); }
