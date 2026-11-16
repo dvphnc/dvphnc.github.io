@@ -151,16 +151,16 @@
   }
 
   /* ── Projects opener: a 3D fan of screenshots (anujmagar.com.np, between its featured work and experience) ──
-     The homepage mockups are copied into square tiles (three rounds of the four screenshots, 12 tiles). Scroll
+     The homepage mockups are copied into square tiles (the four screenshots in turn, 18 tiles). Scroll
      progress t runs 0 → 1 as the fan's top travels from the bottom of the screen to near the top. Every tile flies
-     forward on the same z track, each one 44px further back than the one before; once a tile is close enough it
-     swings around its pivot (bottom centre) from -200° to its place in the fan (4° → about -73°) and turns a little
+     forward on the same z track, each one 40px further back than the one before; once a tile is close enough it
+     swings around its pivot (bottom centre) from -200° to its place in the fan (4° → about -74°, 4.6° apart) and turns a little
      in 3D, so the stack opens like pages. The position eases each frame. Under reduced motion it holds the finished
      fan. Decorative: the readable cards are the list below it. */
   var fan = document.querySelector('.pf');
   var fanShots = Array.prototype.slice.call(document.querySelectorAll('#projects .stack-shot.mock'));
   if (fan && fanShots.length) {
-    var fPlane = fan.querySelector('.pf-plane'), fCards = [], fN = 12;
+    var fPlane = fan.querySelector('.pf-plane'), fCards = [], fN = 18;
     for (var fi = 0; fi < fN; fi++) {
       var src = fanShots[fi % fanShots.length], tile = document.createElement('div');
       tile.className = 'pf-card';
@@ -178,14 +178,14 @@
     var fTarget = function () {
       if (reduced) return 1;
       var r = fan.getBoundingClientRect(), vh = window.innerHeight;
-      return fClamp((vh - r.top) / (vh * 0.8), 0, 1.35);
+      return fClamp((vh - r.top) / (vh * 0.8), 0, 1.08); // stops just past open, so the fan scrolls away whole
     };
     var fPaint = function () {
       fCards.forEach(function (c, i) {
-        var z = (-2600 + 2700 * fT - 44 * i) * fK;                       // flies forward with the scroll
+        var z = (-2600 + 2700 * fT - 40 * i) * fK;                       // flies forward with the scroll
         var e = fEase(fClamp((z / fK + 1900) / 2100, 0, 1));            // swings into the fan once close
-        var rot = -200 * (1 - e) + (4 - 7 * i) * e;
-        var ry = (-20 + 0.6 * i) * e;
+        var rot = -200 * (1 - e) + (4 - 4.6 * i) * e;
+        var ry = (-20 + 0.45 * i) * e;
         c.style.transform = 'translate3d(0,0,' + z.toFixed(1) + 'px) rotate(' + rot.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg)';
         c.style.opacity = fClamp((z / fK + 2700) / 700, 0, 1).toFixed(3);
       });
