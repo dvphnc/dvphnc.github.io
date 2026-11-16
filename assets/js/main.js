@@ -150,73 +150,58 @@
     window.addEventListener('resize', tlQueue);
   }
 
-  /* ── Projects: a wheel (anujmagar.com.np "Featured work") ──
-     .wheel gets a tall height and its stage pins (CSS). The cards sit on a circle of radius R (2.4 card widths) whose
-     centre is R below the stage centre; scroll progress p (0 → last card) turns it, card i at angle (i - p) * step,
-     so one card stands upright at the top and its neighbours peek in tilted. p eases toward the scroll position each
-     frame. Tabbing into a side card scrolls the wheel to it. If a card is too tall for the screen (short landscape
-     phones) it stays a plain list, as it does under reduced motion. */
-  var wheel = document.querySelector('.wheel');
-  if (wheel && !reduced) {
-    var wStage = wheel.querySelector('.wheel-stage'), wRing = wheel.querySelector('.wheel-ring');
-    var wItems = Array.prototype.slice.call(wRing.children), wNum = wheel.querySelector('.wheel-n');
-    var wN = wItems.length, HOLD = 0.3, wSpan = wN - 1 + 2 * HOLD;
-    var wOn = false, wR = 0, wStep = 0, wTravel = 1, wTop = 0, wP = 0, wGoal = 0, wRun = false, wShown = -1;
-    var wClamp = function (v, a, b) { return Math.max(a, Math.min(b, v)); };
-    var wTarget = function () {
-      var t = wClamp((wTop - wheel.getBoundingClientRect().top) / wTravel, 0, 1);
-      return wClamp(t * wSpan - HOLD, 0, wN - 1);
+  /* ── Projects opener: a 3D fan of screenshots (anujmagar.com.np, between its featured work and experience) ──
+     The homepage mockups are copied into square tiles (three rounds of the four screenshots, 12 tiles). Scroll
+     progress t runs 0 → 1 as the fan's top travels from the bottom of the screen to near the top. Every tile flies
+     forward on the same z track, each one 44px further back than the one before; once a tile is close enough it
+     swings around its pivot (bottom centre) from -200° to its place in the fan (4° → about -73°) and turns a little
+     in 3D, so the stack opens like pages. The position eases each frame. Under reduced motion it holds the finished
+     fan. Decorative: the readable cards are the list below it. */
+  var fan = document.querySelector('.pf');
+  var fanShots = Array.prototype.slice.call(document.querySelectorAll('#projects .stack-shot.mock'));
+  if (fan && fanShots.length) {
+    var fPlane = fan.querySelector('.pf-plane'), fCards = [], fN = 12;
+    for (var fi = 0; fi < fN; fi++) {
+      var src = fanShots[fi % fanShots.length], tile = document.createElement('div');
+      tile.className = 'pf-card';
+      tile.setAttribute('style', src.getAttribute('style'));
+      var im = document.createElement('img');
+      im.src = src.querySelector('img').getAttribute('src'); im.alt = ''; im.loading = 'lazy'; im.decoding = 'async';
+      tile.appendChild(im); fPlane.appendChild(tile); fCards.push(tile);
+    }
+    fan.classList.add('is-on');
+    var fClamp = function (v, a, b) { return Math.max(a, Math.min(b, v)); };
+    var fEase = function (x) { return 1 - Math.pow(1 - x, 3); };
+    var fGoal = 1, fT = 1, fRun = false, fK = 1;
+    var fSize = function () { fK = (fCards[0].offsetWidth || 240) / 240; };
+    fSize();
+    var fTarget = function () {
+      if (reduced) return 1;
+      var r = fan.getBoundingClientRect(), vh = window.innerHeight;
+      return fClamp((vh - r.top) / (vh * 0.8), 0, 1.35);
     };
-    var wPaint = function () {
-      wItems.forEach(function (li, i) {
-        var d = i - wP, a = Math.abs(d);
-        li.style.transform = 'translate(-50%,-50%) translateY(' + wR + 'px) rotate(' + (d * wStep).toFixed(4) + 'rad) translateY(' + (-wR) + 'px)';
-        li.style.opacity = wClamp(1 - Math.max(0, a - 0.15) * 0.5, 0, 1).toFixed(3);
-        li.style.zIndex = String(100 - Math.round(a * 10));
+    var fPaint = function () {
+      fCards.forEach(function (c, i) {
+        var z = (-2600 + 2700 * fT - 44 * i) * fK;                       // flies forward with the scroll
+        var e = fEase(fClamp((z / fK + 1900) / 2100, 0, 1));            // swings into the fan once close
+        var rot = -200 * (1 - e) + (4 - 7 * i) * e;
+        var ry = (-20 + 0.6 * i) * e;
+        c.style.transform = 'translate3d(0,0,' + z.toFixed(1) + 'px) rotate(' + rot.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg)';
+        c.style.opacity = fClamp((z / fK + 2700) / 700, 0, 1).toFixed(3);
       });
-      var n = Math.round(wP) + 1;
-      if (n !== wShown && wNum) { wShown = n; wNum.textContent = (n < 10 ? '0' : '') + n; }
     };
-    var wFrame = function () {
-      var d = wGoal - wP;
-      if (Math.abs(d) < 0.001) { wP = wGoal; wRun = false; } else { wP += d * 0.2; requestAnimationFrame(wFrame); }
-      wPaint();
+    var fFrame = function () {
+      var d = fGoal - fT;
+      if (Math.abs(d) < 0.0005) { fT = fGoal; fRun = false; } else { fT += d * 0.14; requestAnimationFrame(fFrame); }
+      fPaint();
     };
-    var wKick = function () { if (!wOn) return; wGoal = wTarget(); if (!wRun) { wRun = true; requestAnimationFrame(wFrame); } };
-    var wLayout = function () {
-      wheel.classList.add('is-on');
-      wheel.style.height = '';
-      wItems.forEach(function (li) { li.style.transform = 'translate(-50%,-50%)'; });
-      var ringH = wRing.clientHeight;
-      var tallest = Math.max.apply(null, wItems.map(function (li) { return li.offsetHeight; }));
-      if (tallest > ringH - 16) {   // doesn't fit: plain list
-        wOn = false; wheel.classList.remove('is-on');
-        wItems.forEach(function (li) { li.style.transform = li.style.opacity = li.style.zIndex = ''; });
-        return;
-      }
-      wOn = true;
-      var w = wItems[0].offsetWidth, stageH = wStage.offsetHeight;
-      wR = w * 2.4; wStep = (w + Math.max(24, w * 0.06)) / wR;
-      wTop = parseFloat(getComputedStyle(wStage).top) || 0;
-      wTravel = stageH * 0.6 * wSpan;
-      wheel.style.height = Math.round(stageH + wTravel) + 'px';
-      wP = wGoal = wTarget(); wPaint();
-    };
-    wLayout();
-    var wResize = false;
-    window.addEventListener('resize', function () { if (!wResize) { wResize = true; requestAnimationFrame(function () { wResize = false; wLayout(); }); } });
-    window.addEventListener('load', wLayout);
-    window.addEventListener('scroll', wKick, { passive: true });
-    wRing.addEventListener('focusin', function (e) {
-      if (!wOn) return;
-      var i = wItems.indexOf(e.target.closest('.wheel-item'));
-      if (i < 0 || Math.abs(i - wP) < 0.3) return;
-      var y = window.scrollY + wheel.getBoundingClientRect().top - wTop + ((i + HOLD) / wSpan) * wTravel;
-      window.scrollTo(0, Math.round(y));
-      wP = wGoal = i; wPaint();
-    });
+    var fKick = function () { fGoal = fTarget(); if (!fRun) { fRun = true; requestAnimationFrame(fFrame); } };
+    fT = fGoal = fTarget(); fPaint();
+    if (!reduced) {
+      window.addEventListener('scroll', fKick, { passive: true });
+      window.addEventListener('resize', function () { fSize(); fKick(); });
+    }
   }
-
   /* ── Events strip: drifts left to right, loops seamlessly (rolex-esto.vercel.app style) ──
      The six cards are cloned once so the strip can wrap. Pauses while hovered, touched, focused, dragged, off screen
      or in a hidden tab. ‹ › scroll by one card; "view all" switches to a grid of the real cards. Under reduced

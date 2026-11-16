@@ -315,22 +315,31 @@ a.card:hover, .card.hoverable:hover { transform: translateY(-2px); box-shadow: v
 .pill.inv { background: var(--ink); color: var(--bg); border-color: transparent; }
 .pill.live { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 45%, transparent); }
 
-/* projects: a wheel (after anujmagar.com.np "Featured work"). Plain list until main.js adds .is-on: then .wheel
-   gets a tall height, .wheel-stage pins (sticky) for that scroll, and each card sits on a circle whose centre is far
-   below the stage; scrolling turns the circle, so cards come in tilted from the right, stand upright at the top and
-   leave tilted to the left. main.js sets each item's transform and opacity. */
-.wheel-ring { list-style: none; display: grid; gap: 1.1rem; }
-.wheel-count { display: none; }
-.wheel.is-on .wheel-stage { position: sticky; top: 0; height: 100vh; height: 100svh; display: flex; flex-direction: column;
-  padding-top: 1.5rem; overflow: hidden; overflow: clip; } /* clip, not hidden: focus can't scroll it sideways */
-.wheel.is-on .wheel-ring { display: block; position: relative; flex: 1; min-height: 0;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent); }
-.wheel.is-on .wheel-item { position: absolute; left: 50%; top: 50%; width: min(34rem, 82%); transform: translate(-50%, -50%); will-change: transform, opacity; }
-.wheel.is-on .wheel-count { display: block; text-align: center; padding: .4rem 0 1.1rem; }
-.wheel-n { color: var(--ink); }
-@media (max-width: 1023px) { .wheel.is-on .wheel-stage { top: 56px; height: calc(100vh - 56px); height: calc(100svh - 56px); padding-top: 1rem; } } /* below the sticky topbar */
-@media (max-width: 640px) { .wheel.is-on .wheel-item { width: calc(100% - 2.75rem); } }
+/* projects: the readable cards, a plain list */
+.proj-cards { list-style: none; display: grid; gap: 1.1rem; }
+/* projects opener: a 3D fan of the screenshots (after anujmagar.com.np). Shown once main.js has filled it (.is-on).
+   .pf-3d gives the perspective, .pf-plane is turned away (rotateY) so the tiles read as fanned pages; main.js sets
+   each tile's translateZ / rotate / rotateY from the scroll position. Clipped to the column, edges faded. */
+.pf { display: none; position: relative; height: 82vh; height: 82svh; min-height: 440px; max-height: 760px; margin-bottom: 1.5rem;
+  overflow: hidden; overflow: clip;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent); }
+.pf.is-on { display: block; }
+.pf-word { position: absolute; left: 0; right: 0; top: 76%; transform: translateY(-50%); text-align: center; pointer-events: none;
+  font-family: var(--pixel); font-size: clamp(3.6rem, 15vw, 9.5rem); line-height: 1; letter-spacing: -.02em; color: var(--g200); }
+.pf-3d { position: absolute; inset: 0; perspective: 1000px; perspective-origin: 50% 40%; }
+.pf-plane { position: absolute; left: 36%; top: 42%; width: 0; height: 0; transform-style: preserve-3d;
+  transform: rotateX(10deg) rotateY(52deg) rotateZ(-4deg); }
+.pf-card { --fw: 15rem; position: absolute; left: calc(var(--fw) / -2); top: calc(var(--fw) / -2); width: var(--fw); height: var(--fw);
+  display: flex; align-items: center; justify-content: center; border-radius: 22px; transform-origin: 50% 110%;
+  will-change: transform, opacity; opacity: 0;
+  background-color: var(--c1);
+  background-image: radial-gradient(70% 70% at 15% 90%, color-mix(in srgb, var(--c2) 85%, transparent), transparent 70%),
+    radial-gradient(60% 60% at 90% 10%, color-mix(in srgb, var(--c3) 80%, transparent), transparent 70%);
+  box-shadow: 0 1px 0 rgba(255,255,255,.3) inset, 0 30px 50px -24px rgba(0, 26, 94, .45); }
+.pf-card img { width: 86%; height: 86%; object-fit: cover; object-position: top left; border-radius: 14px; display: block;
+  box-shadow: 0 10px 24px -12px rgba(0,0,0,.5); }
+@media (max-width: 640px) { .pf { height: 54svh; min-height: 360px; } .pf-3d { perspective: 760px; } .pf-plane { left: 16%; top: 40%; } .pf-word { top: 70%; } .pf-card { --fw: 11rem; border-radius: 16px; } .pf-card img { border-radius: 10px; } }
 .stack-card { min-height: 11rem; background: var(--bg); background-image: linear-gradient(to bottom, var(--g50), var(--bg)); box-shadow: var(--shadow); }
 .stack-card:hover { border-color: var(--g300); box-shadow: var(--shadow-hover); }
 .stack-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }

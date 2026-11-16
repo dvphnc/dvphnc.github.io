@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap"/>
-  <link rel="stylesheet" href="assets/css/site.css?v=202611198"/>
+  <link rel="stylesheet" href="assets/css/site.css?v=202611199"/>
 </head>
 <body>
 
@@ -131,8 +131,8 @@
           <div class="portrait enter" style="--d:50ms">
             <!-- Blue duotone: one copy per theme, cross-faded by .dark (filters defined below) -->
             <!-- fine-grain dithered portrait with a transparent backdrop (one file for both themes, identical dots): 1-bit dither made at 2x the display size, scaled smoothly so the grain stays fine -->
-            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611198"/><img class="duo duo-light" src="assets/img/headshot-cutout-576.png?v=202611198" alt="Portrait of Joana Daphne Sy" width="240" height="240" fetchpriority="high"/></picture>
-            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611198"/><img class="duo duo-dark" src="assets/img/headshot-cutout-576.png?v=202611198" alt="" aria-hidden="true" width="240" height="240"/></picture>
+            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611199"/><img class="duo duo-light" src="assets/img/headshot-cutout-576.png?v=202611199" alt="Portrait of Joana Daphne Sy" width="240" height="240" fetchpriority="high"/></picture>
+            <picture><source media="(min-width: 720px)" srcset="assets/img/headshot-cutout-480.png?v=202611199"/><img class="duo duo-dark" src="assets/img/headshot-cutout-576.png?v=202611199" alt="" aria-hidden="true" width="240" height="240"/></picture>
             <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
               <!-- light theme: shadows #002a78 → highlights #e8f1ff -->
               <filter id="duo-light" color-interpolation-filters="sRGB">
@@ -274,18 +274,18 @@
         </ol>
       </section>
 
-      <!-- ═══ 04 · projects: a wheel (after anujmagar.com.np "Featured work"), in bryllim.com's register:
-           number · role, title, one sentence, links, with the live-site screenshot (assets/img/projects) on the right (on top on phones).
-           main.js pins .wheel-stage and turns the cards along a big arc as you scroll: the one at the top is upright and
-           readable, its neighbours peek in tilted at the sides. Without JS, under reduced motion or on a short screen
-           it stays a plain list. ═══ -->
+      <!-- ═══ 04 · projects: opens with a 3D fan of the project screenshots (after anujmagar.com.np, between its
+           featured work and experience): main.js copies the mockups below into .pf-plane as square tiles that fly in
+           from far away and swing around a pivot into a fan over a faint "projects" word as the section scrolls up.
+           Decorative only (aria-hidden); without JS it isn't shown, under reduced motion it holds the finished fan.
+           Below it, the readable cards in bryllim.com's register: number · role, title, one sentence, links, with the
+           live-site screenshot (assets/img/projects) on the right (on top on phones). ═══ -->
       <section class="sec" id="projects" aria-labelledby="h-projects">
-       <div class="wheel">
-        <div class="wheel-stage">
+        <div class="pf" aria-hidden="true"><p class="pf-word">projects</p><div class="pf-3d"><div class="pf-plane"></div></div></div>
         <div class="sec-head"><h2 class="sec-num" id="h-projects">04 · projects</h2><a class="sec-more" href="projects.html">all projects →</a></div>
-        <ol class="wheel-ring">
+        <ol class="proj-cards">
 
-          <li class="wheel-item">
+          <li>
             <article class="card stack-card">
               <div class="stack-text">
                 <div class="stack-top"><p class="stack-meta"><span class="stack-num">01</span><span class="stack-rule" aria-hidden="true"></span>scrum master · ui/ux</p></div>
@@ -296,7 +296,7 @@
               <a class="pj-shot stack-shot mock" href="projects/hirely.html" tabindex="-1" aria-hidden="true" style="--c1:#8e3fbf;--c2:#e85a4f;--c3:#f9c66a;--win:#ffffff"><span class="mock-win"><span class="mock-bar"></span><img src="assets/img/projects/hirely.webp" width="1200" height="750" alt="" loading="lazy"/></span></a>
             </article>
           </li>
-          <li class="wheel-item">
+          <li>
             <article class="card stack-card">
               <div class="stack-text">
                 <div class="stack-top"><p class="stack-meta"><span class="stack-num">02</span><span class="stack-rule" aria-hidden="true"></span>solo build</p></div>
@@ -307,7 +307,7 @@
               <a class="pj-shot stack-shot mock" href="projects/maildrop.html" tabindex="-1" aria-hidden="true" style="--c1:#0b0b0b;--c2:#1db954;--c3:#0d3b22;--win:#161616"><span class="mock-win"><span class="mock-bar"></span><img src="assets/img/projects/maildrop.webp" width="1200" height="750" alt="" loading="lazy"/></span></a>
             </article>
           </li>
-          <li class="wheel-item">
+          <li>
             <article class="card stack-card">
               <div class="stack-text">
                 <div class="stack-top"><p class="stack-meta"><span class="stack-num">03</span><span class="stack-rule" aria-hidden="true"></span>owner</p></div>
@@ -318,7 +318,7 @@
               <a class="pj-shot stack-shot mock" href="projects/travia-journal.html" tabindex="-1" aria-hidden="true" style="--c1:#efe7da;--c2:#8b6f4e;--c3:#9aa7b0;--win:#ffffff"><span class="mock-win"><span class="mock-bar"></span><img src="assets/img/projects/travia.webp" width="1200" height="750" alt="" loading="lazy"/></span></a>
             </article>
           </li>
-          <li class="wheel-item">
+          <li>
             <article class="card stack-card">
               <div class="stack-text">
                 <div class="stack-top"><p class="stack-meta"><span class="stack-num">04</span><span class="stack-rule" aria-hidden="true"></span>project manager</p></div>
@@ -330,7 +330,7 @@
             </article>
           </li>
           <!-- CASE STUDY PLACEHOLDER: add the tools used and the time saved once Joana confirms them -->
-          <li class="wheel-item">
+          <li>
             <article class="card stack-card">
               <div class="stack-text">
                 <div class="stack-top"><p class="stack-meta"><span class="stack-num">05</span><span class="stack-rule" aria-hidden="true"></span>automation · youth forum</p></div>
@@ -342,9 +342,6 @@
             </article>
           </li>
         </ol>
-        <p class="wheel-count micro" aria-hidden="true"><span class="wheel-n">01</span> / 05 · scroll</p>
-        </div>
-       </div>
       </section>
 
       <!-- ═══ 05 · stack (globe retained) ═══ -->
@@ -463,12 +460,12 @@
     <p class="lb-count micro"></p>
   </div>
 
-  <script src="assets/js/boot.js?v=202611198"></script>
-  <script src="assets/js/theme.js?v=202611198"></script>
-  <script src="assets/js/main.js?v=202611198"></script>
-  <script src="assets/js/mock.js?v=202611198"></script>
+  <script src="assets/js/boot.js?v=202611199"></script>
+  <script src="assets/js/theme.js?v=202611199"></script>
+  <script src="assets/js/main.js?v=202611199"></script>
+  <script src="assets/js/mock.js?v=202611199"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="assets/js/globe.js?v=202611198"></script>
-  <script src="assets/js/gallery.js?v=202611198"></script>
+  <script src="assets/js/globe.js?v=202611199"></script>
+  <script src="assets/js/gallery.js?v=202611199"></script>
 </body>
 </html>
