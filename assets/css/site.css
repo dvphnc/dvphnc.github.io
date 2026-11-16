@@ -623,20 +623,13 @@ a.event-card:hover .event-cover img { transform: scale(1.04); }
 .ev-slide.is-on { opacity: 1; }
 .ev-slide img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .ev-slide .ev-color { opacity: 0; transition: opacity .6s var(--ease); }
-/* blue duotone over the dither (same mapping as the headshot): ::before (mix-blend lighten) turns the black dots
-   navy, ::after (mix-blend darken) turns the white ones pale blue. Light mode #002a78 → #e8f1ff; dark mode page
-   navy #001a5e → #eaf2ff. Hover, keyboard focus or .is-color (centred card on touch screens, main.js) fades the
-   tint out and the colour photo in. */
-.ev-photo { --duo-lo: #002a78; --duo-hi: #e8f1ff; }
-html.dark .ev-photo { --duo-lo: #001a5e; --duo-hi: #eaf2ff; }
-.ev-photo::before, .ev-photo::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; transition: opacity .6s var(--ease); }
-.ev-photo::before { background: var(--duo-lo); mix-blend-mode: lighten; }
-.ev-photo::after { background: var(--duo-hi); mix-blend-mode: darken; }
+/* the dither is coloured by the headshot's own SVG filters (#duo-light / #duo-dark in index.html), so the grain and
+   the blues match the profile photo exactly. Hover, keyboard focus or .is-color (the centred card on touch screens,
+   main.js) fades the real colour photo in over it. */
+.ev-slide .ev-dither { filter: url(#duo-light) contrast(1.05); }
+html.dark .ev-slide .ev-dither { filter: url(#duo-dark); }
 .ev-card:hover .ev-color, .ev-card:focus-within .ev-color, .ev-card.is-color .ev-color { opacity: 1; }
-.ev-card:hover .ev-photo::before, .ev-card:hover .ev-photo::after,
-.ev-card:focus-within .ev-photo::before, .ev-card:focus-within .ev-photo::after,
-.ev-card.is-color .ev-photo::before, .ev-card.is-color .ev-photo::after { opacity: 0; }
-@media (prefers-reduced-motion: reduce) { .ev-slide, .ev-slide .ev-color, .ev-photo::before, .ev-photo::after { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .ev-slide, .ev-slide .ev-color { transition: none; } }
 .ev-count { position: absolute; top: 10px; right: 10px; z-index: 2; padding: 2px 7px; border-radius: 6px; background: rgb(0 0 0 / .55); color: #fff; font-family: var(--mono); font-size: 10px; letter-spacing: .5px; } /* on the photo, so fixed colours */
 .ev-body { flex: 1; display: flex; flex-direction: column; gap: .4rem; padding: .95rem 1.05rem 1rem; }
 .ev-meta { font-family: var(--mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--g400); }
@@ -757,3 +750,6 @@ html.dark .lightbox { background: rgb(0 0 0 / .45); }
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
   .js .enter { opacity: 1; transform: none; }
 }
+
+/* bigger tap area on title links (inline padding grows the hit area without moving the layout) */
+.ev-title a, .stack-card .proj-title a, .pj-title a { padding-block: 6px; }
