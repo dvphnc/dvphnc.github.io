@@ -321,16 +321,14 @@ a.card:hover, .card.hoverable:hover { transform: translateY(-2px); box-shadow: v
    .pf-3d gives the perspective, .pf-plane is turned away (rotateY) so the tiles read as fanned pages; main.js sets
    each tile's translateZ / rotate / rotateY from the scroll position. Clipped to the column, edges faded. */
 .pf { display: none; position: relative; margin-inline: calc(50% - 50vw); height: 82vh; height: 82svh; min-height: 440px; max-height: 760px; margin-bottom: 1.5rem;
-  overflow: hidden; overflow: clip;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent); }
+  overflow-x: hidden; overflow-x: clip; overflow-y: visible; pointer-events: none; } /* clip sideways only: the fan rises over the section above as it leaves */
 .pf.is-on { display: block; }
 @media (min-width: 1024px) { .pf { margin-inline: calc(50% - (100vw - var(--side)) / 2); } } /* full width of the main area, past the column, like the reference */
 .pf-word { position: absolute; left: 0; right: 0; top: 76%; transform: translateY(-50%); text-align: center; pointer-events: none;
   font-family: var(--pixel); font-size: clamp(3.6rem, 15vw, 9.5rem); line-height: 1; letter-spacing: -.02em; color: var(--g200); }
 .pf-3d { position: absolute; inset: 0; perspective: 1000px; perspective-origin: 50% 40%; }
 .pf-plane { position: absolute; left: 47%; top: 42%; width: 0; height: 0; transform-style: preserve-3d;
-  transform: rotateX(10deg) rotateY(52deg) rotateZ(-4deg); }
+  transform: translate(var(--px, 0px), var(--py, 0px)) rotateX(10deg) rotateY(52deg) rotateZ(-4deg); } /* --px/--py: the drift to the top right (main.js) */
 .pf-card { --fw: 15rem; position: absolute; left: calc(var(--fw) / -2); top: calc(var(--fw) / -2); width: var(--fw); height: var(--fw);
   display: flex; align-items: center; justify-content: center; border-radius: 22px; transform-origin: 50% 110%;
   will-change: transform, opacity; opacity: 0;

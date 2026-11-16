@@ -178,13 +178,18 @@
     var fTarget = function () {
       if (reduced) return 1;
       var r = fan.getBoundingClientRect(), vh = window.innerHeight;
-      return fClamp((vh - r.top) / (vh * 0.8), 0, 1.08); // stops just past open, so the fan scrolls away whole
+      return fClamp((vh - r.top) / (vh * 0.8), 0, 1.6);
     };
     var fPaint = function () {
+      // after it opens (t 1.08 → 1.6) the open fan stops coming closer and crosses to the top right instead,
+      // swinging a little further up, so it leaves past the top-right corner as the page scrolls on
+      var u = fEase(fClamp((fT - 1.08) / 0.52, 0, 1));
+      fPlane.style.setProperty('--px', (u * fan.offsetWidth * 0.34).toFixed(1) + 'px');
+      fPlane.style.setProperty('--py', (-u * fan.offsetHeight * 0.42).toFixed(1) + 'px');
       fCards.forEach(function (c, i) {
-        var z = (-2600 + 2700 * fT - 40 * i) * fK;                       // flies forward with the scroll
+        var z = (-2600 + 2700 * Math.min(fT, 1.08) - 40 * i) * fK;      // flies forward with the scroll
         var e = fEase(fClamp((z / fK + 1900) / 2100, 0, 1));            // swings into the fan once close
-        var rot = -200 * (1 - e) + (4 - 4.6 * i) * e;
+        var rot = -200 * (1 - e) + (4 - 4.6 * i) * e + 16 * u;
         var ry = (-20 + 0.45 * i) * e;
         c.style.transform = 'translate3d(0,0,' + z.toFixed(1) + 'px) rotate(' + rot.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg)';
         c.style.opacity = fClamp((z / fK + 2700) / 700, 0, 1).toFixed(3);
