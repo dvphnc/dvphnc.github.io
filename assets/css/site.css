@@ -315,23 +315,29 @@ a.card:hover, .card.hoverable:hover { transform: translateY(-2px); box-shadow: v
 .pill.inv { background: var(--ink); color: var(--bg); border-color: transparent; }
 .pill.live { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 45%, transparent); }
 
-/* projects: stacked cards (after fabwaseem.com). Each item sticks 12px lower than the one before;
-   main.js sets --s (scale) on the cards underneath as the next one slides over. */
-.stack { list-style: none; --stick: 1.5rem; }
-.stack-item { position: sticky; top: calc(var(--stick) + var(--i) * 12px); padding-bottom: 1.1rem; }
-.stack-item:last-child { padding-bottom: 0; }
-.stack-item:focus-within { z-index: 2; } /* a keyboard user tabbing into a covered card brings it to the front */
-.stack-item:focus-within .stack-card { --s: 1 !important; }
-.stack-card { min-height: 11rem; background: var(--bg); background-image: linear-gradient(to bottom, var(--g50), var(--bg));
-  box-shadow: 0 -10px 30px -18px rgba(0, 26, 94, .28), var(--shadow); transform-origin: 50% 0; transform: scale(var(--s, 1)); will-change: transform; }
-.stack-card:hover { border-color: var(--g300); box-shadow: 0 -10px 30px -18px rgba(0, 26, 94, .28), var(--shadow-hover); }
+/* projects: a wheel (after anujmagar.com.np "Featured work"). Plain list until main.js adds .is-on: then .wheel
+   gets a tall height, .wheel-stage pins (sticky) for that scroll, and each card sits on a circle whose centre is far
+   below the stage; scrolling turns the circle, so cards come in tilted from the right, stand upright at the top and
+   leave tilted to the left. main.js sets each item's transform and opacity. */
+.wheel-ring { list-style: none; display: grid; gap: 1.1rem; }
+.wheel-count { display: none; }
+.wheel.is-on .wheel-stage { position: sticky; top: 0; height: 100vh; height: 100svh; display: flex; flex-direction: column;
+  padding-top: 1.5rem; overflow: hidden; overflow: clip; } /* clip, not hidden: focus can't scroll it sideways */
+.wheel.is-on .wheel-ring { display: block; position: relative; flex: 1; min-height: 0;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent); }
+.wheel.is-on .wheel-item { position: absolute; left: 50%; top: 50%; width: min(34rem, 82%); transform: translate(-50%, -50%); will-change: transform, opacity; }
+.wheel.is-on .wheel-count { display: block; text-align: center; padding: .4rem 0 1.1rem; }
+.wheel-n { color: var(--ink); }
+@media (max-width: 1023px) { .wheel.is-on .wheel-stage { top: 56px; height: calc(100vh - 56px); height: calc(100svh - 56px); padding-top: 1rem; } } /* below the sticky topbar */
+@media (max-width: 640px) { .wheel.is-on .wheel-item { width: calc(100% - 2.75rem); } }
+.stack-card { min-height: 11rem; background: var(--bg); background-image: linear-gradient(to bottom, var(--g50), var(--bg)); box-shadow: var(--shadow); }
+.stack-card:hover { border-color: var(--g300); box-shadow: var(--shadow-hover); }
 .stack-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 /* type sizes stay the old project-card ones: meta = pill size (9.5px mono), title 17px, sentence 13.5px */
 .stack-meta { display: flex; align-items: center; gap: 10px; min-width: 0; font-family: var(--mono); font-size: 9.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--g500); }
 .stack-num { font-family: var(--pixel); font-size: 11px; letter-spacing: 0; color: var(--ink); }
 .stack-rule { width: 22px; height: 1px; background: var(--g300); flex-shrink: 0; }
-@media (max-width: 1023px) { .stack { --stick: calc(56px + .75rem); } } /* below the sticky topbar */
-@media (prefers-reduced-motion: reduce) { .stack-item { position: static; } .stack-card { transform: none; } }
 
 /* project rows/cards that open a case study: the whole title links there */
 .pj-title a, .stack-card .proj-title a { text-decoration: none; transition: color .2s; }

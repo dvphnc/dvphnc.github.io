@@ -150,26 +150,71 @@
     window.addEventListener('resize', tlQueue);
   }
 
-  /* ── Projects: stacked cards (fabwaseem.com "Selected work") ──
-     The items are sticky in CSS; here each card shrinks a little (from its top edge) for every later card that
-     slides over it, so the pile reads as depth. Not run under reduced motion (CSS makes it a plain list). */
-  var stack = document.querySelector('.stack');
-  if (stack && !reduced) {
-    var sItems = Array.prototype.slice.call(stack.querySelectorAll('.stack-item'));
-    var sTick = false;
-    var sUpdate = function () {
-      sTick = false;
-      var rects = sItems.map(function (li) { return li.getBoundingClientRect(); });
-      sItems.forEach(function (li, i) {
-        var h = li.firstElementChild.offsetHeight, cover = 0;
-        for (var j = i + 1; j < sItems.length; j++) cover += Math.min(1, Math.max(0, (rects[i].top + h - rects[j].top) / h));
-        li.firstElementChild.style.setProperty('--s', (1 - 0.035 * Math.min(cover, 2.2)).toFixed(4));
-      });
+  /* ── Projects: a wheel (anujmagar.com.np "Featured work") ──
+     .wheel gets a tall height and its stage pins (CSS). The cards sit on a circle of radius R (2.4 card widths) whose
+     centre is R below the stage centre; scroll progress p (0 → last card) turns it, card i at angle (i - p) * step,
+     so one card stands upright at the top and its neighbours peek in tilted. p eases toward the scroll position each
+     frame. Tabbing into a side card scrolls the wheel to it. If a card is too tall for the screen (short landscape
+     phones) it stays a plain list, as it does under reduced motion. */
+  var wheel = document.querySelector('.wheel');
+  if (wheel && !reduced) {
+    var wStage = wheel.querySelector('.wheel-stage'), wRing = wheel.querySelector('.wheel-ring');
+    var wItems = Array.prototype.slice.call(wRing.children), wNum = wheel.querySelector('.wheel-n');
+    var wN = wItems.length, HOLD = 0.3, wSpan = wN - 1 + 2 * HOLD;
+    var wOn = false, wR = 0, wStep = 0, wTravel = 1, wTop = 0, wP = 0, wGoal = 0, wRun = false, wShown = -1;
+    var wClamp = function (v, a, b) { return Math.max(a, Math.min(b, v)); };
+    var wTarget = function () {
+      var t = wClamp((wTop - wheel.getBoundingClientRect().top) / wTravel, 0, 1);
+      return wClamp(t * wSpan - HOLD, 0, wN - 1);
     };
-    var sQueue = function () { if (!sTick) { sTick = true; requestAnimationFrame(sUpdate); } };
-    sUpdate();
-    window.addEventListener('scroll', sQueue, { passive: true });
-    window.addEventListener('resize', sQueue);
+    var wPaint = function () {
+      wItems.forEach(function (li, i) {
+        var d = i - wP, a = Math.abs(d);
+        li.style.transform = 'translate(-50%,-50%) translateY(' + wR + 'px) rotate(' + (d * wStep).toFixed(4) + 'rad) translateY(' + (-wR) + 'px)';
+        li.style.opacity = wClamp(1 - Math.max(0, a - 0.15) * 0.5, 0, 1).toFixed(3);
+        li.style.zIndex = String(100 - Math.round(a * 10));
+      });
+      var n = Math.round(wP) + 1;
+      if (n !== wShown && wNum) { wShown = n; wNum.textContent = (n < 10 ? '0' : '') + n; }
+    };
+    var wFrame = function () {
+      var d = wGoal - wP;
+      if (Math.abs(d) < 0.001) { wP = wGoal; wRun = false; } else { wP += d * 0.2; requestAnimationFrame(wFrame); }
+      wPaint();
+    };
+    var wKick = function () { if (!wOn) return; wGoal = wTarget(); if (!wRun) { wRun = true; requestAnimationFrame(wFrame); } };
+    var wLayout = function () {
+      wheel.classList.add('is-on');
+      wheel.style.height = '';
+      wItems.forEach(function (li) { li.style.transform = 'translate(-50%,-50%)'; });
+      var ringH = wRing.clientHeight;
+      var tallest = Math.max.apply(null, wItems.map(function (li) { return li.offsetHeight; }));
+      if (tallest > ringH - 16) {   // doesn't fit: plain list
+        wOn = false; wheel.classList.remove('is-on');
+        wItems.forEach(function (li) { li.style.transform = li.style.opacity = li.style.zIndex = ''; });
+        return;
+      }
+      wOn = true;
+      var w = wItems[0].offsetWidth, stageH = wStage.offsetHeight;
+      wR = w * 2.4; wStep = (w + Math.max(24, w * 0.06)) / wR;
+      wTop = parseFloat(getComputedStyle(wStage).top) || 0;
+      wTravel = stageH * 0.6 * wSpan;
+      wheel.style.height = Math.round(stageH + wTravel) + 'px';
+      wP = wGoal = wTarget(); wPaint();
+    };
+    wLayout();
+    var wResize = false;
+    window.addEventListener('resize', function () { if (!wResize) { wResize = true; requestAnimationFrame(function () { wResize = false; wLayout(); }); } });
+    window.addEventListener('load', wLayout);
+    window.addEventListener('scroll', wKick, { passive: true });
+    wRing.addEventListener('focusin', function (e) {
+      if (!wOn) return;
+      var i = wItems.indexOf(e.target.closest('.wheel-item'));
+      if (i < 0 || Math.abs(i - wP) < 0.3) return;
+      var y = window.scrollY + wheel.getBoundingClientRect().top - wTop + ((i + HOLD) / wSpan) * wTravel;
+      window.scrollTo(0, Math.round(y));
+      wP = wGoal = i; wPaint();
+    });
   }
 
   /* ── Events strip: drifts left to right, loops seamlessly (rolex-esto.vercel.app style) ──
