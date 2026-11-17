@@ -198,11 +198,11 @@
         var zIn = (-2600 + 2700 * Math.min(fT, 1.08) - 40 * i) * fK;    // flies forward with the scroll
         var e = fEase(fClamp((zIn / fK + 1900) / 2100, 0, 1));          // swings into the fan once close
         // brutal spin (Joana, 18 Nov 2026): three full turns on the way in, plus a full flip around the vertical axis.
-        // The end mirrors the start ("spin like the start and adapt it in the end"): as the open fan crosses away,
-        // each tile, in a wave from the front one, spins three more turns and flips again while it flies back into
-        // the distance and fades, the way it came in, played backwards.
-        var g = fClamp(u * 1.6 - i * 0.035, 0, 1); g = g * g * g;          // ease-in: the reverse of the entry's ease-out
-        var z = zIn - 3000 * g * fK;
+        // The end takes the start's spin ("adapt the start to the end, make it cross to the top right"): as the open
+        // fan crosses to the top right (--px/--py above), each tile, in a wave from the front one, spins three more
+        // turns and flips again on its way out. It stays at full size and opacity; the drift carries it off screen.
+        var g = fClamp(u * 1.6 - i * 0.035, 0, 1); g = g * g * (3 - 2 * g);
+        var z = zIn;
         var rot = -1080 * (1 - e) + (4 - 4.6 * i) * e + 16 * u + 1080 * g;
         var ry = (-20 + 0.45 * i) * e + 360 * (1 - e) + 360 * g;
         c.style.transform = 'translate3d(0,0,' + z.toFixed(2) + 'px) rotate(' + rot.toFixed(3) + 'deg) rotateY(' + ry.toFixed(3) + 'deg)';
