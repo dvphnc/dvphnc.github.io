@@ -350,15 +350,15 @@ a.card:hover, .card.hoverable:hover { transform: translateY(-2px); box-shadow: v
 .pf-plane { position: absolute; left: 47%; top: 42%; width: 0; height: 0; transform-style: preserve-3d;
   transform: translate(var(--px, 0px), var(--py, 0px)) rotateX(10deg) rotateY(52deg) rotateZ(-4deg); } /* --px/--py: the drift to the top right (main.js) */
 .pf-card { --fw: 15rem; position: absolute; left: calc(var(--fw) / -2); top: calc(var(--fw) / -2); width: var(--fw); height: var(--fw);
-  display: flex; align-items: center; justify-content: center; border-radius: 22px; transform-origin: 50% 110%;
+  display: flex; align-items: center; justify-content: center; transform-origin: 50% 110%;
   will-change: transform, opacity; opacity: 0;
-  background-color: var(--c1);
-  background-image: radial-gradient(70% 70% at 15% 90%, color-mix(in srgb, var(--c2) 85%, transparent), transparent 70%),
-    radial-gradient(60% 60% at 90% 10%, color-mix(in srgb, var(--c3) 80%, transparent), transparent 70%);
-  box-shadow: 0 1px 0 rgba(255,255,255,.3) inset, 0 30px 50px -24px rgba(0, 26, 94, .45); }
-.pf-card img { width: 86%; height: 86%; object-fit: cover; object-position: top left; border-radius: 14px; display: block;
-  box-shadow: 0 10px 24px -12px rgba(0,0,0,.5); }
-@media (max-width: 640px) { .pf { height: 54svh; min-height: 360px; } .pf-3d { perspective: 760px; } .pf-plane { left: 20%; top: 40%; } .pf-word { top: 70%; } .pf-card { --fw: 11rem; border-radius: 16px; } .pf-card img { border-radius: 10px; } }
+  /* the certification card look (Joana, 18 Nov 2026): solid page colour under the faint --g50 tint (so tiles behind
+     don't show through in dark mode), hairline --g200 border, 16px corners, the soft card shadow */
+  background-color: var(--bg); background-image: linear-gradient(to bottom, var(--g50), var(--bg));
+  border: 1px solid var(--g200); border-radius: 16px; box-shadow: var(--shadow); }
+.pf-card img { width: 86%; height: 86%; object-fit: cover; object-position: top left; border-radius: 10px; display: block;
+  border: 1px solid var(--g200); }
+@media (max-width: 640px) { .pf { height: 54svh; min-height: 360px; } .pf-3d { perspective: 760px; } .pf-plane { left: 20%; top: 40%; } .pf-word { top: 70%; } .pf-card { --fw: 11rem; border-radius: 14px; } .pf-card img { border-radius: 8px; } }
 .stack-card { min-height: 11rem; background: var(--bg); background-image: linear-gradient(to bottom, var(--g50), var(--bg)); box-shadow: var(--shadow); }
 .stack-card:hover { border-color: var(--g300); box-shadow: var(--shadow-hover); }
 .stack-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
