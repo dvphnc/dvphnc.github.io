@@ -340,17 +340,22 @@ a.card:hover, .card.hoverable:hover { transform: translateY(-2px); box-shadow: v
   font-family: var(--pixel); font-size: clamp(3.6rem, 15vw, 9.5rem); line-height: 1; letter-spacing: -.02em; color: var(--g200); }
 .pf-3d { position: absolute; inset: 0; perspective: 1000px; perspective-origin: 50% 40%; }
 .pf-plane { position: absolute; left: 47%; top: 42%; width: 0; height: 0; transform-style: preserve-3d;
-  transform: translate(var(--px, 0px), var(--py, 0px)) rotateX(10deg) rotateY(52deg) rotateZ(-4deg); } /* --px/--py: the drift to the top right (main.js) */
-.pf-card { --fw: 15rem; position: absolute; left: calc(var(--fw) / -2); top: calc(var(--fw) / -2); width: var(--fw); height: var(--fw);
-  display: flex; align-items: center; justify-content: center; border-radius: 22px; transform-origin: 50% 110%;
-  will-change: transform, opacity; opacity: 0;
-  background-color: var(--c1);
-  background-image: radial-gradient(70% 70% at 15% 90%, color-mix(in srgb, var(--c2) 85%, transparent), transparent 70%),
-    radial-gradient(60% 60% at 90% 10%, color-mix(in srgb, var(--c3) 80%, transparent), transparent 70%);
-  box-shadow: 0 1px 0 rgba(255,255,255,.3) inset, 0 30px 50px -24px rgba(0, 26, 94, .45); }
-.pf-card img { width: 86%; height: 86%; object-fit: cover; object-position: top left; border-radius: 14px; display: block;
-  box-shadow: 0 10px 24px -12px rgba(0,0,0,.5); }
-@media (max-width: 640px) { .pf { height: 54svh; min-height: 360px; } .pf-3d { perspective: 760px; } .pf-plane { left: 20%; top: 40%; } .pf-word { top: 70%; } .pf-card { --fw: 11rem; border-radius: 16px; } .pf-card img { border-radius: 10px; } }
+  transform: translate(var(--px, 0px), var(--py, 0px)) rotateX(8deg) rotateY(32deg) rotateZ(-24deg); } /* --px/--py: the drift to the top right (main.js) */
+/* each tile is a tall glass panel (after the reference): the screenshot in the top part, then the panel tinted with
+   the project's own colour (--c2) fading to clear, a hairline light edge and a sheen, so trailing tiles read as glass */
+.pf-card { --fw: 15rem; --glass: color-mix(in srgb, var(--c2) 55%, #dfe6ff);
+  position: absolute; left: calc(var(--fw) / -2); top: calc(var(--fw) * -.7); width: var(--fw); height: calc(var(--fw) * 1.4);
+  display: block; padding: 7%; border-radius: 20px; transform-origin: 50% -55%;
+  will-change: transform, opacity; opacity: 0; overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, #000 50%, transparent 96%); mask-image: linear-gradient(to bottom, #000 50%, transparent 96%); /* the glass tail fades out, edges and all */
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--glass) 72%, transparent) 0%, color-mix(in srgb, var(--glass) 46%, transparent) 50%, color-mix(in srgb, var(--glass) 0%, transparent) 100%);
+  border: 1px solid rgba(255,255,255,.45); border-bottom-color: transparent;
+  box-shadow: 0 1px 0 rgba(255,255,255,.5) inset, 0 26px 40px -30px rgba(0, 26, 94, .35); }
+.pf-card::before { content: ''; position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255,255,255,.32), rgba(255,255,255,0) 42%); } /* glass sheen */
+.pf-card img { position: relative; width: 100%; height: 54%; object-fit: cover; object-position: top left; border-radius: 12px; display: block;
+  box-shadow: 0 8px 20px -12px rgba(0,0,0,.45); }
+@media (max-width: 640px) { .pf { height: 54svh; min-height: 360px; } .pf-3d { perspective: 760px; } .pf-plane { left: 68%; top: 38%; } .pf-word { top: 70%; } .pf-card { --fw: 9.5rem; border-radius: 14px; } .pf-card img { border-radius: 8px; } }
 .stack-card { min-height: 11rem; background: var(--bg); background-image: linear-gradient(to bottom, var(--g50), var(--bg)); box-shadow: var(--shadow); }
 .stack-card:hover { border-color: var(--g300); box-shadow: var(--shadow-hover); }
 .stack-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
