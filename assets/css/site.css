@@ -452,7 +452,14 @@ a.pj-shot.mock:hover .mock-win { --sc: 1.04; box-shadow: 0 1px 0 rgba(255,255,25
 .view-switch button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
 .view-switch button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .cert-view[hidden] { display: none; }
-#view-stack .cert-fan { margin-top: 1rem; }
+/* stack view: square cert cards (the homepage's first layout): three to a row, two on phones */
+#view-stack .cert-grid { margin: .25rem 0 2.25rem; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .9rem; }
+@media (max-width: 639px) { #view-stack .cert-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+#view-stack .cert { min-width: 0; overflow-wrap: anywhere; }
+#view-stack .cert-logo { max-width: 100%; }
+#view-stack .cert-logo img { height: 26px; width: auto; max-width: 100%; }
+#view-stack .cert-logo.wide img { height: 18px; }
+#view-stack .cert-logo.pair img { height: 15px; max-width: 46%; }
 .row-icon { color: var(--ink); }
 @media (max-width: 719px) { .row { grid-template-columns: 4rem 1fr; gap: .6rem; } .row-side { gap: 10px; } } /* 4rem fits "2021-22" on one line */
 
@@ -527,6 +534,23 @@ a.cert:hover .cert-verify { color: var(--accent); }
   .cert-issuer { grid-area: issuer; margin-top: .3rem; }
   .cert-meta { grid-area: meta; }
   .cert-verify { grid-area: verify; margin-top: 0; padding-top: 0; }
+}
+/* certifications.html stack view: keep the tall centred square card on phones too (after the compact rule above) */
+#view-stack .cert { aspect-ratio: 1 / 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 1.2rem 1rem; }
+#view-stack .cert-logo { height: 30px; justify-content: center; }
+#view-stack .cert-logo .logo-svg { height: 18px; }
+#view-stack .cert-name { margin-top: .9rem; }
+#view-stack .cert-verify { margin-top: 0; padding-top: .9rem; }
+@media (max-width: 639px) {
+  #view-stack .cert-grid { gap: .6rem; }
+  #view-stack .cert { padding: .8rem .6rem; }
+  #view-stack .cert-logo { height: 22px; }
+  #view-stack .cert-logo img { height: 22px; }
+  #view-stack .cert-logo.wide img, #view-stack .cert-logo .logo-svg { height: 14px; }
+  #view-stack .cert-logo.pair img { height: 12px; }
+  #view-stack .cert-name { font-size: 12.5px; margin-top: .6rem; }
+  #view-stack .cert-meta { font-size: 9.5px; }
+  #view-stack .cert-verify { padding-top: .6rem; font-size: 9px; }
 }
 
 /* Certification deck (after bryllim.com's projects deck): every certification and training card in one fanned deck.
