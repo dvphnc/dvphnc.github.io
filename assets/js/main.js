@@ -172,40 +172,82 @@
     fan.classList.add('is-on');
     var fClamp = function (v, a, b) { return Math.max(a, Math.min(b, v)); };
     var fEase = function (x) { return 1 - Math.pow(1 - x, 3); };
-    var fGoal = 1, fT = 1, fRun = false, fK = 1;
-    var fSize = function () { fK = (fCards[0].offsetWidth || 240) / 240; };
+    // Smoothness: the fan's page position, its size and the screen height are measured once (and on resize),
+    // so a frame only reads window.scrollY, never layout. The screen height is the layout viewport
+    // (clientHeight), which doesn't jump when a phone's address bar slides away. The easing is time based, so
+    // it feels the same at 60 and 120 Hz, and the loop runs only while the fan is near the screen.
+    var fGoal = 1, fT = 1, fRun = false, fK = 1, fTop = 0, fW = 0, fH = 0, fVh = 1, fLast = 0, fNear = true;
+    var fSize = function () {
+      fK = (fCards[0].offsetWidth || 240) / 240;
+      fTop = fan.getBoundingClientRect().top + window.scrollY;
+      fW = fan.offsetWidth; fH = fan.offsetHeight;
+      fVh = document.documentElement.clientHeight || window.innerHeight;
+    };
     fSize();
     var fTarget = function () {
       if (reduced) return 1;
-      var r = fan.getBoundingClientRect(), vh = window.innerHeight;
-      return fClamp((vh - r.top) / (vh * 0.8), 0, 1.6);
+      return fClamp((fVh - (fTop - window.scrollY)) / (fVh * 0.8), 0, 1.6);
     };
     var fPaint = function () {
       // after it opens (t 1.08 → 1.6) the open fan stops coming closer and crosses to the top right instead,
       // swinging a little further up, so it leaves past the top-right corner as the page scrolls on
       var u = fEase(fClamp((fT - 1.08) / 0.52, 0, 1));
-      fPlane.style.setProperty('--px', (u * fan.offsetWidth * 0.34).toFixed(1) + 'px');
-      fPlane.style.setProperty('--py', (-u * fan.offsetHeight * 0.42).toFixed(1) + 'px');
+      fPlane.style.setProperty('--px', (u * fW * 0.34).toFixed(2) + 'px');
+      fPlane.style.setProperty('--py', (-u * fH * 0.42).toFixed(2) + 'px');
       fCards.forEach(function (c, i) {
         var z = (-2600 + 2700 * Math.min(fT, 1.08) - 40 * i) * fK;      // flies forward with the scroll
         var e = fEase(fClamp((z / fK + 1900) / 2100, 0, 1));            // swings into the fan once close
         var rot = -200 * (1 - e) + (4 - 4.6 * i) * e + 16 * u;
         var ry = (-20 + 0.45 * i) * e;
-        c.style.transform = 'translate3d(0,0,' + z.toFixed(1) + 'px) rotate(' + rot.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg)';
+        c.style.transform = 'translate3d(0,0,' + z.toFixed(2) + 'px) rotate(' + rot.toFixed(3) + 'deg) rotateY(' + ry.toFixed(3) + 'deg)';
         c.style.opacity = fClamp((z / fK + 2700) / 700, 0, 1).toFixed(3);
       });
     };
-    var fFrame = function () {
+    var fFrame = function (now) {
+      var dt = fLast ? Math.min(50, now - fLast) : 16.7; fLast = now;
+      fGoal = fTarget();
       var d = fGoal - fT;
-      if (Math.abs(d) < 0.0005) { fT = fGoal; fRun = false; } else { fT += d * 0.14; requestAnimationFrame(fFrame); }
+      if (Math.abs(d) < 0.0004) { fT = fGoal; fRun = false; fLast = 0; }
+      else { fT += d * (1 - Math.pow(1 - 0.16, dt / 16.7)); requestAnimationFrame(fFrame); }
       fPaint();
     };
-    var fKick = function () { fGoal = fTarget(); if (!fRun) { fRun = true; requestAnimationFrame(fFrame); } };
+    var fKick = function () { if (!fNear || fRun) return; fRun = true; fLast = 0; requestAnimationFrame(fFrame); };
     fT = fGoal = fTarget(); fPaint();
     if (!reduced) {
+      if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { fNear = es[0].isIntersecting; if (fNear) fKick(); }, { rootMargin: '50% 0px' }).observe(fan);
       window.addEventListener('scroll', fKick, { passive: true });
-      window.addEventListener('resize', function () { fSize(); fKick(); });
+      var fRz = false;
+      window.addEventListener('resize', function () { if (!fRz) { fRz = true; requestAnimationFrame(function () { fRz = false; fSize(); fKick(); }); } });
+      window.addEventListener('load', function () { fSize(); fKick(); }); // images and fonts above can move the fan
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { fSize(); fKick(); });
+      if ('ResizeObserver' in window) new ResizeObserver(function () { fSize(); fKick(); }).observe(document.body); // anything above growing or shrinking
     }
+  }
+
+  /* ── Projects: stacked cards (fabwaseem.com "Selected work") ──
+     The items are sticky in CSS; here each card shrinks a little (from its top edge) for every later card that
+     slides over it, so the pile reads as depth. Only measured while the list is near the screen. Not run under
+     reduced motion (CSS makes it a plain list). */
+  var sList = document.querySelector('.proj-cards');
+  if (sList && !reduced) {
+    var sItems = Array.prototype.slice.call(sList.children).filter(function (li) { return li.tagName === 'LI'; });
+    var sTick = false, sNear = true, sLastS = [];
+    var sUpdate = function () {
+      sTick = false;
+      var rects = sItems.map(function (li) { return li.getBoundingClientRect(); });
+      var hs = sItems.map(function (li) { return li.firstElementChild.offsetHeight; });
+      sItems.forEach(function (li, i) {
+        var h = hs[i], cover = 0;
+        for (var j = i + 1; j < sItems.length; j++) cover += Math.min(1, Math.max(0, (rects[i].top + h - rects[j].top) / h));
+        var s = (1 - 0.035 * Math.min(cover, 2.2)).toFixed(4);
+        if (s !== sLastS[i]) { sLastS[i] = s; li.firstElementChild.style.setProperty('--s', s); }
+      });
+    };
+    var sQueue = function () { if (sNear && !sTick) { sTick = true; requestAnimationFrame(sUpdate); } };
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { sNear = es[0].isIntersecting; sQueue(); }, { rootMargin: '20% 0px' }).observe(sList);
+    sUpdate();
+    window.addEventListener('scroll', sQueue, { passive: true });
+    window.addEventListener('resize', sQueue);
   }
   /* ── Events strip: drifts left to right, loops seamlessly (rolex-esto.vercel.app style) ──
      The six cards are cloned once so the strip can wrap. Pauses while hovered, touched, focused, dragged, off screen
@@ -354,7 +396,8 @@
      card instead of opening it; the front card opens its verify link. Each deck's height follows its tallest card. ── */
   Array.prototype.slice.call(document.querySelectorAll('.cert-fan')).forEach(function (fan) {
     var cards = Array.prototype.slice.call(fan.querySelectorAll('.fan-card'));
-    var num = fan.querySelector('.fan-n');
+    var num = fan.querySelector('.fan-n'), hint = fan.querySelector('.fan-hint');
+    if (hint) hint.textContent = window.matchMedia('(hover: none)').matches ? 'swipe a card' : 'click a card';
     var toFront = function (card) {
       var old = card.getAttribute('data-slot');
       if (old === '0') return;
@@ -362,8 +405,46 @@
       card.setAttribute('data-slot', '0');
       if (num) num.textContent = String(cards.indexOf(card) + 1);
     };
+    // touch: swipe the front card sideways. It follows the finger; past 45px (or a quick flick) the next card
+    // (swipe left) or the previous one (swipe right) comes to the front, otherwise it springs back. Vertical
+    // drags stay page scrolls (touch-action: pan-y in CSS).
+    var front = function () { return fan.querySelector('.fan-card[data-slot="0"]'); };
+    var sw = null, swiped = false;
+    fan.addEventListener('touchstart', function (e) {
+      if (e.touches.length !== 1) { sw = null; return; }
+      var t = e.touches[0];
+      sw = { x: t.clientX, y: t.clientY, t: performance.now(), dx: 0, dir: null, card: front() };
+    }, { passive: true });
+    fan.addEventListener('touchmove', function (e) {
+      if (!sw) return;
+      var t = e.touches[0], dx = t.clientX - sw.x, dy = t.clientY - sw.y;
+      if (!sw.dir && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) sw.dir = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+      if (sw.dir !== 'x') return;
+      if (e.cancelable) e.preventDefault();
+      sw.dx = dx;
+      sw.card.classList.add('is-drag');
+      sw.card.style.setProperty('--dx', dx.toFixed(1) + 'px');
+      sw.card.style.setProperty('--dr', (dx * 0.06).toFixed(2) + 'deg');
+    }, { passive: false });
+    var swEnd = function () {
+      if (!sw) return;
+      var s = sw; sw = null;
+      if (s.dir !== 'x') return;
+      swiped = true; setTimeout(function () { swiped = false; }, 350); // the tap that ends a swipe doesn't open the card
+      s.card.classList.remove('is-drag');
+      s.card.style.removeProperty('--dx'); s.card.style.removeProperty('--dr');
+      var fast = Math.abs(s.dx) / Math.max(1, performance.now() - s.t) > 0.5;
+      if (Math.abs(s.dx) < 45 && !fast) return;
+      var i = cards.indexOf(s.card), n = cards.length;
+      toFront(cards[(i + (s.dx < 0 ? 1 : n - 1)) % n]);
+    };
+    fan.addEventListener('touchend', swEnd);
+    fan.addEventListener('touchcancel', swEnd);
     cards.forEach(function (c) {
-      c.addEventListener('click', function (e) { if (c.getAttribute('data-slot') !== '0') { e.preventDefault(); toFront(c); } });
+      c.addEventListener('click', function (e) {
+        if (swiped) { e.preventDefault(); return; }
+        if (c.getAttribute('data-slot') !== '0') { e.preventDefault(); toFront(c); }
+      });
       // keyboard only: a mouse click also focuses first, which would bring it forward and then open it in one go
       c.addEventListener('focus', function () { var kb = true; try { kb = c.matches(':focus-visible'); } catch (err) {} if (kb) toFront(c); });
     });

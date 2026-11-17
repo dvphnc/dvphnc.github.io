@@ -315,8 +315,20 @@ a.card:hover, .card.hoverable:hover { transform: translateY(-2px); box-shadow: v
 .pill.inv { background: var(--ink); color: var(--bg); border-color: transparent; }
 .pill.live { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 45%, transparent); }
 
-/* projects: the readable cards, a plain list */
-.proj-cards { list-style: none; display: grid; gap: 1.1rem; }
+/* projects: the readable cards, stacked (after fabwaseem.com). Each item sticks 12px lower than the one before, so
+   the next card slides over it and they pile up; main.js sets --s (scale) on the cards underneath as they're covered. */
+.proj-cards { list-style: none; --stick: 1.5rem; }
+.proj-cards > li { position: sticky; top: calc(var(--stick) + var(--i, 0) * 12px); padding-bottom: 1.1rem; }
+.proj-cards > li:nth-child(2) { --i: 1; } .proj-cards > li:nth-child(3) { --i: 2; } .proj-cards > li:nth-child(4) { --i: 3; }
+.proj-cards > li:nth-child(5) { --i: 4; } .proj-cards > li:nth-child(6) { --i: 5; } .proj-cards > li:nth-child(7) { --i: 6; }
+.proj-cards > li:last-child { padding-bottom: 0; }
+.proj-cards > li:focus-within { z-index: 2; } /* a keyboard user tabbing into a covered card brings it to the front */
+.proj-cards > li:focus-within .stack-card { --s: 1 !important; }
+.proj-cards .stack-card { transform-origin: 50% 0; transform: scale(var(--s, 1)); will-change: transform;
+  box-shadow: 0 -10px 30px -18px rgba(0, 26, 94, .28), var(--shadow); }
+.proj-cards .stack-card:hover { box-shadow: 0 -10px 30px -18px rgba(0, 26, 94, .28), var(--shadow-hover); }
+@media (max-width: 1023px) { .proj-cards { --stick: calc(56px + .75rem); } } /* below the sticky topbar */
+@media (prefers-reduced-motion: reduce) { .proj-cards > li { position: static; } .proj-cards .stack-card { transform: none; } }
 /* projects opener: a 3D fan of the screenshots (after anujmagar.com.np). Shown once main.js has filled it (.is-on).
    .pf-3d gives the perspective, .pf-plane is turned away (rotateY) so the tiles read as fanned pages; main.js sets
    each tile's translateZ / rotate / rotateY from the scroll position. Clipped to the column, edges faded. */
@@ -501,10 +513,14 @@ a.cert:hover .cert-verify { color: var(--accent); }
    Slot 0 is the front card; 1/2 tilt out left/right behind it, 3/4 fan out further, 5/6 peek over the top.
    main.js swaps a back card with the front on click or keyboard focus and sizes the deck to its tallest card. */
 .cert-fan { position: relative; height: 18rem; margin-top: .5rem; }
+.cert-fan { touch-action: pan-y; } /* vertical page scroll stays native; sideways drags are swipes (main.js) */
 .fan-card { position: absolute; left: 50%; top: 58px; width: min(15rem, 46%); min-height: 12.5rem;
   background-color: var(--bg); background-image: linear-gradient(to bottom, var(--g50), var(--bg)); /* solid, so back cards don't show through */
-  transform: translateX(-50%) var(--fan, none); transform-origin: 50% 90%;
+  /* --dx / --dr: the finger drag on the front card while swiping (main.js), 0 otherwise */
+  transform: translateX(-50%) translateX(var(--dx, 0px)) rotate(var(--dr, 0deg)) var(--fan, none); transform-origin: 50% 90%;
   transition: transform .55s var(--ease), box-shadow .35s var(--ease), border-color .2s; }
+.fan-card.is-drag { transition: box-shadow .35s var(--ease), border-color .2s; }
+.fan-card { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; }
 /* --fan is added to the centring translateX(-50%) */
 .fan-card[data-slot="0"] { --fan: translateY(0) rotate(0deg); z-index: 7; }
 .fan-card[data-slot="1"] { --fan: translateX(-42%) translateY(8px) rotate(-7deg) scale(.93); z-index: 6; }
@@ -521,7 +537,7 @@ a.cert:hover .cert-verify { color: var(--accent); }
 .cert-fan:hover .fan-card[data-slot="5"] { --fan: translateX(-16%) translateY(-42px) rotate(-4deg) scale(.88); }
 .cert-fan:hover .fan-card[data-slot="6"] { --fan: translateX(16%) translateY(-54px) rotate(4deg) scale(.84); }
 .fan-card:not([data-slot="0"]) .cert-verify { opacity: 0; } /* only the front card says verify */
-a.fan-card:hover { transform: translateX(-50%) var(--fan, none); } /* no 2px lift: the fan moves instead */
+a.fan-card:hover { transform: translateX(-50%) translateX(var(--dx, 0px)) rotate(var(--dr, 0deg)) var(--fan, none); } /* no 2px lift: the fan moves instead */
 .fan-card[data-slot="0"]:hover { --fan: translateY(-3px); }
 .fan-count { position: absolute; left: 0; right: 0; bottom: 0; text-align: center; }
 @media (max-width: 639px) {
