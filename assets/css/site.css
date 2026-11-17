@@ -443,6 +443,16 @@ a.pj-shot.mock:hover .mock-win { --sc: 1.04; box-shadow: 0 1px 0 rgba(255,255,25
 .row-logo img[src*="utokyo"] { max-width: none; width: 40px; } /* wordmark: let it run a little wider than the square marks */
 .row-logo.wide img, .row-logo.wide .logo-svg { max-width: none; width: 40px; height: auto; } /* wordmarks (Oracle, IBM) on certifications.html */
 .row-logo .logo-svg { display: block; color: var(--ink); }
+/* certifications.html: list / stack switch (two pills, the active one filled with ink) */
+.view-switch { display: inline-flex; gap: 4px; padding: 3px; margin: .9rem 0 1.5rem; border: 1px solid var(--g200); border-radius: 999px; }
+.view-switch button { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 14px; border: 0; border-radius: 999px; background: none; cursor: pointer;
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--g500); transition: background .2s, color .2s; }
+.view-switch button svg { width: 14px; height: 14px; }
+.view-switch button:hover { color: var(--ink); }
+.view-switch button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.view-switch button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.cert-view[hidden] { display: none; }
+#view-stack .cert-fan { margin-top: 1rem; }
 .row-icon { color: var(--ink); }
 @media (max-width: 719px) { .row { grid-template-columns: 4rem 1fr; gap: .6rem; } .row-side { gap: 10px; } } /* 4rem fits "2021-22" on one line */
 
