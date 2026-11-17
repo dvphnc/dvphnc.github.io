@@ -263,10 +263,11 @@ html.dark .portrait .duo-dark { opacity: 1; }
 .hero-links { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 1.25rem; font-family: var(--mono); font-size: 12px; color: var(--g500); }
 .hero-links a:hover { color: var(--ink); }
 /* intro profile links: a small line icon, the name in mono, ↗ when it leaves the site; muted, ink on hover */
-.hero-links { align-items: center; gap: 8px 28px; font-size: 13px; }
-.ic-link { display: inline-flex; align-items: center; gap: 7px; color: var(--g500); text-decoration: none; transition: color .2s; }
-.ic-link svg { width: 16px; height: 16px; flex-shrink: 0; display: block; }
-.ic-link .arr { font-size: 11px; transition: transform .25s var(--ease); }
+.hero-links { align-items: center; gap: 8px 24px; margin-top: 1.4rem; font-size: 12.5px; line-height: 1; letter-spacing: .01em; }
+.ic-link { display: inline-flex; align-items: center; gap: 7px; color: var(--g500); text-decoration: none; white-space: nowrap; transition: color .2s; }
+.ic-link svg { width: 15px; height: 15px; flex-shrink: 0; display: block; stroke-width: 1.7; }
+.ic-link .arr { font-size: 10px; margin-left: -2px; opacity: .8; transition: transform .25s var(--ease); }
+@media (max-width: 480px) { .hero-links { gap: 8px 15px; font-size: 11.5px; } .ic-link { gap: 5px; } .ic-link svg { width: 14px; height: 14px; } } /* all four on one row at 375px */
 .ic-link:hover .arr { transform: translate(2px, -2px); }
 .ic-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
 /* small text links: a taller invisible tap area (≈36px) without moving the layout */
