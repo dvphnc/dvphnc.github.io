@@ -176,24 +176,30 @@
     // so a frame only reads window.scrollY, never layout. The screen height is the layout viewport
     // (clientHeight), which doesn't jump when a phone's address bar slides away. The easing is time based, so
     // it feels the same at 60 and 120 Hz, and the loop runs only while the fan is near the screen.
-    var fGoal = 1, fT = 1, fRun = false, fK = 1, fTop = 0, fW = 0, fH = 0, fVh = 1, fLast = 0, fNear = true;
+    var fGoal = 1, fT = 1, fRun = false, fK = 1, fTop = 0, fW = 0, fH = 0, fVh = 1, fLast = 0, fNear = true, fEnd = 1.6;
     var fSize = function () {
       fK = (fCards[0].offsetWidth || 240) / 240;
       fTop = fan.getBoundingClientRect().top + window.scrollY;
       fW = fan.offsetWidth; fH = fan.offsetHeight;
       fVh = document.documentElement.clientHeight || window.innerHeight;
+      // where the exit to the top right ends. Desktop: t 1.6. Phones: the fan box is short next to the screen, so
+      // a 1.6 exit left it empty while still in view; there it ends as the box's last 15% scrolls off the top.
+      fEnd = fW <= 640 ? Math.max(1.6, (fVh + fH * 0.85) / (fVh * 0.8)) : 1.6;
     };
     fSize();
     var fTarget = function () {
       if (reduced) return 1;
-      return fClamp((fVh - (fTop - window.scrollY)) / (fVh * 0.8), 0, 1.6);
+      return fClamp((fVh - (fTop - window.scrollY)) / (fVh * 0.8), 0, fEnd);
     };
     var fPaint = function () {
       // after it opens (t 1.08 → 1.6) the open fan stops coming closer and crosses to the top right instead,
       // swinging a little further up, so it leaves past the top-right corner as the page scrolls on
-      var u = fEase(fClamp((fT - 1.08) / 0.52, 0, 1));
-      fPlane.style.setProperty('--px', (u * fW * 0.34).toFixed(2) + 'px');
-      fPlane.style.setProperty('--py', (-u * fH * 0.42).toFixed(2) + 'px');
+      // Phones: the page scroll already carries the fan up, so it drifts mostly right and a little down within its
+      // box (a slower climb than the page), and still reads as leaving through the top right of the screen.
+      var x = fClamp((fT - 1.08) / (fEnd - 1.08), 0, 1), phone = fW <= 640;
+      var u = phone ? x * x * (3 - 2 * x) : fEase(x);
+      fPlane.style.setProperty('--px', (u * fW * (phone ? 0.55 : 0.34)).toFixed(2) + 'px');
+      fPlane.style.setProperty('--py', (u * fH * (phone ? 0.28 : -0.42)).toFixed(2) + 'px');
       fCards.forEach(function (c, i) {
         var z = (-2600 + 2700 * Math.min(fT, 1.08) - 40 * i) * fK;      // flies forward with the scroll
         var e = fEase(fClamp((z / fK + 1900) / 2100, 0, 1));            // swings into the fan once close
