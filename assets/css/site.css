@@ -441,6 +441,8 @@ a.pj-shot.mock:hover .mock-win { --sc: 1.04; box-shadow: 0 1px 0 rgba(255,255,25
 .row-logo { width: 34px; height: 30px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
 .row-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
 .row-logo img[src*="utokyo"] { max-width: none; width: 40px; } /* wordmark: let it run a little wider than the square marks */
+.row-logo.wide img, .row-logo.wide .logo-svg { max-width: none; width: 40px; height: auto; } /* wordmarks (Oracle, IBM) on certifications.html */
+.row-logo .logo-svg { display: block; color: var(--ink); }
 .row-icon { color: var(--ink); }
 @media (max-width: 719px) { .row { grid-template-columns: 4rem 1fr; gap: .6rem; } .row-side { gap: 10px; } } /* 4rem fits "2021-22" on one line */
 
