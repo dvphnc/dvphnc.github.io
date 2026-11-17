@@ -331,27 +331,25 @@
     });
   }
 
-  /* ── Touch screens have no hover, so the event card whose centre is nearest the middle of the screen shows its
-     photo in full colour (.is-color); the rest stay blue. Checked a few times a
-     second while the strip is on screen, since it drifts. ── */
-  if (strip && window.matchMedia('(hover: none)').matches) {
-    var evCards = Array.prototype.slice.call(strip.querySelectorAll('.ev-card'));
-    var evOn = false, evTimer = null;
-    var pickCentre = function () {
-      var mid = window.innerWidth / 2, best = null, bestD = Infinity;
-      evCards.forEach(function (c) {
-        var r = c.getBoundingClientRect(), d = Math.abs(r.left + r.width / 2 - mid);
-        if (d < bestD && r.right > 0 && r.left < window.innerWidth) { bestD = d; best = c; } // always one, even as a gap passes the middle
-      });
-      evCards.forEach(function (c) { c.classList.toggle('is-color', c === best); });
+  /* ── Touch screens: every event photo stays textured (blue dither) until a finger touches its card. The touched
+     card shows its photo in full colour (.is-color) and keeps it until another card is touched, a touch lands
+     anywhere else on the page, or the card leaves the screen. (Joana, 17 Nov 2026: textured until touched.) ── */
+  if (strip) {
+    var evShown = null;
+    var evSet = function (card) {
+      if (evShown === card) return;
+      if (evShown) evShown.classList.remove('is-color');
+      evShown = card;
+      if (card) card.classList.add('is-color');
     };
-    var evWatch = function (on) {
-      if (on && !evTimer) { pickCentre(); evTimer = setInterval(pickCentre, 250); }
-      if (!on && evTimer) { clearInterval(evTimer); evTimer = null; }
-    };
-    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { evWatch(es[0].isIntersecting); }, { threshold: 0.4 }).observe(strip);
-    else evWatch(true);
-    strip.addEventListener('scroll', function () { if (evTimer) pickCentre(); }, { passive: true });
+    document.addEventListener('touchstart', function (e) {
+      var card = e.target.closest && e.target.closest('#events .ev-card');
+      evSet(card || null);
+    }, { passive: true });
+    if ('IntersectionObserver' in window) {
+      var evIO = new IntersectionObserver(function (es) { es.forEach(function (en) { if (!en.isIntersecting && en.target === evShown) evSet(null); }); });
+      Array.prototype.forEach.call(strip.querySelectorAll('.ev-card'), function (c) { evIO.observe(c); });
+    }
   }
 
   /* ── Event card photos: each event's [data-slides] crossfades to its next photo every 4s, staggered per event, with

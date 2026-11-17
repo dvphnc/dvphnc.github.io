@@ -662,11 +662,12 @@ a.event-card:hover .event-cover img { transform: scale(1.04); }
 .ev-slide img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .ev-slide .ev-color { opacity: 0; transition: opacity .6s var(--ease); }
 /* the dither is coloured by the headshot's own SVG filters (#duo-light / #duo-dark in index.html), so the grain and
-   the blues match the profile photo exactly. Hover, keyboard focus or .is-color (the centred card on touch screens,
-   main.js) fades the real colour photo in over it. */
+   the blues match the profile photo exactly. Hover (mouse only), keyboard focus or .is-color (the card a finger is
+   touching on touch screens, main.js) fades the real colour photo in over it; untouched cards stay textured. */
 .ev-slide .ev-dither { filter: url(#duo-light) contrast(1.05); }
 html.dark .ev-slide .ev-dither { filter: url(#duo-dark); }
-.ev-card:hover .ev-color, .ev-card:focus-within .ev-color, .ev-card.is-color .ev-color { opacity: 1; }
+.ev-card:focus-visible .ev-color, .ev-card:has(:focus-visible) .ev-color, .ev-card.is-color .ev-color { opacity: 1; }
+@media (hover: hover) { .ev-card:hover .ev-color { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .ev-slide, .ev-slide .ev-color { transition: none; } }
 .ev-count { position: absolute; top: 10px; right: 10px; z-index: 2; padding: 2px 7px; border-radius: 6px; background: rgb(0 0 0 / .55); color: #fff; font-family: var(--mono); font-size: 10px; letter-spacing: .5px; } /* on the photo, so fixed colours */
 .ev-body { flex: 1; display: flex; flex-direction: column; gap: .4rem; padding: .95rem 1.05rem 1rem; }
