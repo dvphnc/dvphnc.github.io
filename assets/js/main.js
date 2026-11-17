@@ -198,11 +198,11 @@
         var z = (-2600 + 2700 * Math.min(fT, 1.08) - 40 * i) * fK;      // flies forward with the scroll
         var e = fEase(fClamp((z / fK + 1900) / 2100, 0, 1));            // swings into the fan once close
         // brutal spin (Joana, 18 Nov 2026): three full turns on the way in, plus a full flip around the vertical axis
-        var rot = -1080 * (1 - e) + (4 - 4.6 * i) * e + 16 * u;
-        // and once open, as the fan crosses away mid-scroll, every tile flips over again, front to back, in a wave
-        // from the front tile to the last
+        // and at the end, as the open fan crosses away, every tile spins two more turns, in a wave from the front
+        // tile to the last ("spin it at the end")
         var fl = fClamp(u * 1.6 - i * 0.035, 0, 1); fl = fl * fl * (3 - 2 * fl);
-        var ry = (-20 + 0.45 * i) * e + 360 * (1 - e) + 360 * fl;
+        var rot = -1080 * (1 - e) + (4 - 4.6 * i) * e + 16 * u + 720 * fl;
+        var ry = (-20 + 0.45 * i) * e + 360 * (1 - e);
         c.style.transform = 'translate3d(0,0,' + z.toFixed(2) + 'px) rotate(' + rot.toFixed(3) + 'deg) rotateY(' + ry.toFixed(3) + 'deg)';
         c.style.opacity = fClamp((z / fK + 2700) / 700, 0, 1).toFixed(3);
       });
