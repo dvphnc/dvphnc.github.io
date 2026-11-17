@@ -151,11 +151,12 @@
   }
 
   /* ── Projects opener: a 3D fan of screenshot tiles (anujmagar.com.np, between its featured work and experience) ──
-     The homepage mockups are copied into square tiles (the screenshots in turn, 18 tiles). Scroll progress t
-     runs 0 → 1 as the fan's top travels from the bottom of the screen to near the top; the phases are in fPaint.
-     Tiles hang from a pivot far above them, so the open fan sweeps wide, the lead square low right and the tail
-     climbing up and away to the left (3.6° apart). The position eases each frame. Under reduced motion it holds the finished fan. Decorative: the
-     readable cards are the list below it. */
+     The homepage mockups are copied into square tiles (the screenshots in turn, 18 tiles). Scroll
+     progress t runs 0 → 1 as the fan's top travels from the bottom of the screen to near the top. Every tile flies
+     forward on the same z track, each one 40px further back than the one before; once a tile is close enough it
+     swings around its pivot (bottom centre) from -200° to its place in the fan (4° → about -74°, 4.6° apart) and turns a little
+     in 3D, so the stack opens like pages. The position eases each frame. Under reduced motion it holds the finished
+     fan. Decorative: the readable cards are the list below it. */
   var fan = document.querySelector('.pf');
   var fanShots = Array.prototype.slice.call(document.querySelectorAll('#projects .stack-shot.mock'));
   if (fan && fanShots.length) {
@@ -175,46 +176,31 @@
     // so a frame only reads window.scrollY, never layout. The screen height is the layout viewport
     // (clientHeight), which doesn't jump when a phone's address bar slides away. The easing is time based, so
     // it feels the same at 60 and 120 Hz, and the loop runs only while the fan is near the screen.
-    var fGoal = 1, fT = 1, fRun = false, fK = 1, fTop = 0, fW = 0, fH = 0, fVh = 1, fLast = 0, fNear = true, fEnd = 1.6;
+    var fGoal = 1, fT = 1, fRun = false, fK = 1, fTop = 0, fW = 0, fH = 0, fVh = 1, fLast = 0, fNear = true, fEnd = 1.6; // fEnd: where the exit ends
     var fSize = function () {
       fK = (fCards[0].offsetWidth || 240) / 240;
       fTop = fan.getBoundingClientRect().top + window.scrollY;
       fW = fan.offsetWidth; fH = fan.offsetHeight;
       fVh = document.documentElement.clientHeight || window.innerHeight;
-      // where the exit to the top right ends: as the box's last 15% scrolls off the top, so the open fan never
-      // leaves its box empty while it is still on screen
-      fEnd = Math.max(1.6, (fVh + fH * 0.85) / (fVh * 0.8));
     };
     fSize();
     var fTarget = function () {
       if (reduced) return 1;
       return fClamp((fVh - (fTop - window.scrollY)) / (fVh * 0.8), 0, fEnd);
     };
-    var fSmooth = function (x) { x = fClamp(x, 0, 1); return x * x * (3 - 2 * x); };
     var fPaint = function () {
-      // three overlapping phases, all on the same scroll progress t, so the motion never stops or jumps:
-      //  1. arrive (t 0 → 0.6): the closed stack glides in from the top left, tilting upright as it comes
-      //  2. open   (t 0.35 → 1.1): the tiles peel off the stack into a fan, the back ones curving away to the left
-      //     and further back in depth, fading a little toward the tail
-      //  3. leave  (t 1.1 → end): the open fan swings a little further and crosses out through the top right. The
-      //     page scroll already lifts it, so it drifts right (and, on phones, a little down within its box).
-      var phone = fW <= 640;
-      var a = fEase(fClamp(fT / 0.6, 0, 1));
-      var f = fSmooth((fT - 0.35) / 0.75);
-      var u = fSmooth((fT - 1.1) / (fEnd - 1.1));
-      var px = -(1 - a) * fW * (phone ? 0.75 : 0.55) + u * fW * (phone ? 0.45 : 0.4);
-      var py = -(1 - a) * fH * 0.35 + u * fH * (phone ? 0.2 : -0.1);
-      fPlane.style.setProperty('--px', px.toFixed(2) + 'px');
-      fPlane.style.setProperty('--py', py.toFixed(2) + 'px');
-      // tiles hang from a pivot above them (CSS transform-origin), so turning each one further clockwise carries the
-      // tail up and away to the left, like the reference
-      var lead = -6 + 30 * (1 - a) - 16 * u, show = fClamp(fT / 0.18, 0, 1);
+      // after it opens (t 1.08 → 1.6) the open fan stops coming closer and crosses to the top right instead,
+      // swinging a little further up, so it leaves past the top-right corner as the page scrolls on
+      var u = fEase(fClamp((fT - 1.08) / 0.52, 0, 1));
+      fPlane.style.setProperty('--px', (u * fW * 0.34).toFixed(2) + 'px');
+      fPlane.style.setProperty('--py', (-u * fH * 0.42).toFixed(2) + 'px');
       fCards.forEach(function (c, i) {
-        var z = -i * (4 + 34 * f) * fK;
-        var rot = lead + i * 3.6 * f + i * 0.25 * (1 - f);
-        var ry = -14 - 6 * f + 0.45 * i * f;
+        var z = (-2600 + 2700 * Math.min(fT, 1.08) - 40 * i) * fK;      // flies forward with the scroll
+        var e = fEase(fClamp((z / fK + 1900) / 2100, 0, 1));            // swings into the fan once close
+        var rot = -200 * (1 - e) + (4 - 4.6 * i) * e + 16 * u;
+        var ry = (-20 + 0.45 * i) * e;
         c.style.transform = 'translate3d(0,0,' + z.toFixed(2) + 'px) rotate(' + rot.toFixed(3) + 'deg) rotateY(' + ry.toFixed(3) + 'deg)';
-        c.style.opacity = (show * (1 - 0.034 * i * (0.25 + 0.75 * f))).toFixed(3);
+        c.style.opacity = fClamp((z / fK + 2700) / 700, 0, 1).toFixed(3);
       });
     };
     var fFrame = function (now) {

@@ -340,11 +340,9 @@ a.card:hover, .card.hoverable:hover { transform: translateY(-2px); box-shadow: v
   font-family: var(--pixel); font-size: clamp(3.6rem, 15vw, 9.5rem); line-height: 1; letter-spacing: -.02em; color: var(--g200); }
 .pf-3d { position: absolute; inset: 0; perspective: 1000px; perspective-origin: 50% 40%; }
 .pf-plane { position: absolute; left: 47%; top: 42%; width: 0; height: 0; transform-style: preserve-3d;
-  transform: translate(var(--px, 0px), var(--py, 0px)) rotateX(8deg) rotateY(32deg) rotateZ(14deg); } /* --px/--py: the drift to the top right (main.js) */
-/* each tile: a square of the project's own gradient with its screenshot inset. Tiles hang from a pivot above them
-   (transform-origin), so turning each one further clockwise lifts the fan's tail up and away to the left */
-.pf-card { --fw: 14rem; position: absolute; left: calc(var(--fw) / -2); top: calc(var(--fw) / -2); width: var(--fw); height: var(--fw);
-  display: flex; align-items: center; justify-content: center; border-radius: 22px; transform-origin: 50% -200%;
+  transform: translate(var(--px, 0px), var(--py, 0px)) rotateX(10deg) rotateY(52deg) rotateZ(-4deg); } /* --px/--py: the drift to the top right (main.js) */
+.pf-card { --fw: 15rem; position: absolute; left: calc(var(--fw) / -2); top: calc(var(--fw) / -2); width: var(--fw); height: var(--fw);
+  display: flex; align-items: center; justify-content: center; border-radius: 22px; transform-origin: 50% 110%;
   will-change: transform, opacity; opacity: 0;
   background-color: var(--c1);
   background-image: radial-gradient(70% 70% at 15% 90%, color-mix(in srgb, var(--c2) 85%, transparent), transparent 70%),
@@ -352,7 +350,7 @@ a.card:hover, .card.hoverable:hover { transform: translateY(-2px); box-shadow: v
   box-shadow: 0 1px 0 rgba(255,255,255,.3) inset, 0 30px 50px -24px rgba(0, 26, 94, .45); }
 .pf-card img { width: 86%; height: 86%; object-fit: cover; object-position: top left; border-radius: 14px; display: block;
   box-shadow: 0 10px 24px -12px rgba(0,0,0,.5); }
-@media (max-width: 640px) { .pf { height: 54svh; min-height: 360px; } .pf-3d { perspective: 760px; } .pf-plane { left: 68%; top: 40%; } .pf-word { top: 70%; } .pf-card { --fw: 10rem; border-radius: 16px; } .pf-card img { border-radius: 10px; } }
+@media (max-width: 640px) { .pf { height: 54svh; min-height: 360px; } .pf-3d { perspective: 760px; } .pf-plane { left: 20%; top: 40%; } .pf-word { top: 70%; } .pf-card { --fw: 11rem; border-radius: 16px; } .pf-card img { border-radius: 10px; } }
 .stack-card { min-height: 11rem; background: var(--bg); background-image: linear-gradient(to bottom, var(--g50), var(--bg)); box-shadow: var(--shadow); }
 .stack-card:hover { border-color: var(--g300); box-shadow: var(--shadow-hover); }
 .stack-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
