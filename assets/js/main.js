@@ -154,7 +154,7 @@
      The homepage mockups are copied into square tiles (the screenshots in turn, 18 tiles). Scroll
      progress t runs 0 → 1 as the fan's top travels from the bottom of the screen to near the top. Every tile flies
      forward on the same z track, each one 40px further back than the one before; once a tile is close enough it
-     spins three full turns around its pivot (bottom centre) while flipping once in 3D, from -1080° to its place in the fan (4° → about -74°, 4.6° apart) and turns a little
+     swings around its pivot (bottom centre) from -200° to its place in the fan (4° → about -74°, 4.6° apart) and turns a little
      in 3D, so the stack opens like pages. The position eases each frame. Under reduced motion it holds the finished
      fan. Decorative: the readable cards are the list below it. */
   var fan = document.querySelector('.pf');
@@ -195,16 +195,10 @@
       fPlane.style.setProperty('--px', (u * fW * 0.34).toFixed(2) + 'px');
       fPlane.style.setProperty('--py', (-u * fH * 0.42).toFixed(2) + 'px');
       fCards.forEach(function (c, i) {
-        var zIn = (-2600 + 2700 * Math.min(fT, 1.08) - 40 * i) * fK;    // flies forward with the scroll
-        var e = fEase(fClamp((zIn / fK + 1900) / 2100, 0, 1));          // swings into the fan once close
-        // brutal spin (Joana, 18 Nov 2026): three full turns on the way in, plus a full flip around the vertical axis.
-        // The end takes the start's spin ("adapt the start to the end, make it cross to the top right"): as the open
-        // fan crosses to the top right (--px/--py above), each tile, in a wave from the front one, spins three more
-        // turns and flips again on its way out. It stays at full size and opacity; the drift carries it off screen.
-        var g = fClamp(u * 1.6 - i * 0.035, 0, 1); g = g * g * (3 - 2 * g);
-        var z = zIn;
-        var rot = -1080 * (1 - e) + (4 - 4.6 * i) * e + 16 * u + 1080 * g;
-        var ry = (-20 + 0.45 * i) * e + 360 * (1 - e) + 360 * g;
+        var z = (-2600 + 2700 * Math.min(fT, 1.08) - 40 * i) * fK;      // flies forward with the scroll
+        var e = fEase(fClamp((z / fK + 1900) / 2100, 0, 1));            // swings into the fan once close
+        var rot = -200 * (1 - e) + (4 - 4.6 * i) * e + 16 * u;
+        var ry = (-20 + 0.45 * i) * e;
         c.style.transform = 'translate3d(0,0,' + z.toFixed(2) + 'px) rotate(' + rot.toFixed(3) + 'deg) rotateY(' + ry.toFixed(3) + 'deg)';
         c.style.opacity = fClamp((z / fK + 2700) / 700, 0, 1).toFixed(3);
       });
