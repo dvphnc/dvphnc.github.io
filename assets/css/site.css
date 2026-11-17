@@ -355,8 +355,9 @@ a.card:hover, .card.hoverable:hover { transform: translateY(-2px); box-shadow: v
   /* the certification card look (Joana, 18 Nov 2026): solid page colour under the faint --g50 tint (so tiles behind
      don't show through in dark mode), hairline --g200 border, 16px corners, the soft card shadow */
   background-color: var(--bg); background-image: linear-gradient(to bottom, var(--g50), var(--bg));
-  border: 1px solid var(--g200); border-radius: 16px; box-shadow: var(--shadow); }
-.pf-card img { width: 86%; height: 86%; object-fit: cover; object-position: top left; border-radius: 10px; display: block;
+  border: 1px solid var(--g200); border-radius: 16px; box-shadow: 0 10px 24px -18px rgba(0, 26, 94, .3); }
+/* thin edges (Joana, 18 Nov 2026): the screenshot nearly fills the tile, so each card reads like a thin sheet */
+.pf-card img { width: 94%; height: 94%; object-fit: cover; object-position: top left; border-radius: 11px; display: block;
   border: 1px solid var(--g200); }
 @media (max-width: 640px) { .pf { height: 54svh; min-height: 360px; } .pf-3d { perspective: 760px; } .pf-plane { left: 20%; top: 40%; } .pf-word { top: 70%; } .pf-card { --fw: 11rem; border-radius: 14px; } .pf-card img { border-radius: 8px; } }
 .stack-card { min-height: 11rem; background: var(--bg); background-image: linear-gradient(to bottom, var(--g50), var(--bg)); box-shadow: var(--shadow); }
