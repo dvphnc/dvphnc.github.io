@@ -150,11 +150,11 @@
     window.addEventListener('resize', tlQueue);
   }
 
-  /* ── Projects opener: a 3D fan of glass screenshot tiles (anujmagar.com.np, between its featured work and experience) ──
-     The homepage mockups are copied into tall glass tiles (the screenshots in turn, 18 tiles). Scroll progress t
+  /* ── Projects opener: a 3D fan of screenshot tiles (anujmagar.com.np, between its featured work and experience) ──
+     The homepage mockups are copied into square tiles (the screenshots in turn, 18 tiles). Scroll progress t
      runs 0 → 1 as the fan's top travels from the bottom of the screen to near the top; the phases are in fPaint.
-     Tiles pivot on a point well below them, so the open fan curves like a hand of cards (6° → about -69°, 4.4°
-     apart). The position eases each frame. Under reduced motion it holds the finished fan. Decorative: the
+     Tiles hang from a pivot far above them, so the open fan sweeps wide, the lead square low right and the tail
+     climbing up and away to the left (3.6° apart). The position eases each frame. Under reduced motion it holds the finished fan. Decorative: the
      readable cards are the list below it. */
   var fan = document.querySelector('.pf');
   var fanShots = Array.prototype.slice.call(document.querySelectorAll('#projects .stack-shot.mock'));
@@ -195,7 +195,7 @@
       // three overlapping phases, all on the same scroll progress t, so the motion never stops or jumps:
       //  1. arrive (t 0 → 0.6): the closed stack glides in from the top left, tilting upright as it comes
       //  2. open   (t 0.35 → 1.1): the tiles peel off the stack into a fan, the back ones curving away to the left
-      //     and further back in depth, fading like glass toward the tail
+      //     and further back in depth, fading a little toward the tail
       //  3. leave  (t 1.1 → end): the open fan swings a little further and crosses out through the top right. The
       //     page scroll already lifts it, so it drifts right (and, on phones, a little down within its box).
       var phone = fW <= 640;
@@ -211,7 +211,7 @@
       var lead = -6 + 30 * (1 - a) - 16 * u, show = fClamp(fT / 0.18, 0, 1);
       fCards.forEach(function (c, i) {
         var z = -i * (4 + 34 * f) * fK;
-        var rot = lead + i * 5 * f + i * 0.25 * (1 - f);
+        var rot = lead + i * 3.6 * f + i * 0.25 * (1 - f);
         var ry = -14 - 6 * f + 0.45 * i * f;
         c.style.transform = 'translate3d(0,0,' + z.toFixed(2) + 'px) rotate(' + rot.toFixed(3) + 'deg) rotateY(' + ry.toFixed(3) + 'deg)';
         c.style.opacity = (show * (1 - 0.034 * i * (0.25 + 0.75 * f))).toFixed(3);
