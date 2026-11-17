@@ -270,7 +270,14 @@ html.dark .portrait .duo-dark { opacity: 1; }
 .hero-links a.icon-link { padding: 0; margin: 0; }
 .icon-link:hover { color: var(--ink); border-color: var(--g300); transform: translateY(-2px); box-shadow: var(--shadow); }
 .icon-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.hero-links .btn { height: 40px; }
+/* the resume: the one filled (ink) pill in the row, same 40px height as the icons */
+.hero-links a.resume-link { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px 0 14px; margin: 0; border-radius: 999px;
+  background: var(--ink); color: var(--bg); font-family: var(--mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease), opacity .2s; }
+.resume-link svg { width: 15px; height: 15px; display: block; }
+.hero-links a.resume-link:hover { color: var(--bg); transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+.resume-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .hero-links a.resume-link:hover { transform: none; } }
 @media (prefers-reduced-motion: reduce) { .icon-link:hover { transform: none; } }
 /* small text links: a taller invisible tap area (≈36px) without moving the layout */
 .hero-links a, .sec-more, .event-name a, .contact-meta a, .foot a { padding-block: 10px; margin-block: -10px; }
