@@ -345,14 +345,14 @@ a.card:hover, .card.hoverable:hover { transform: translateY(-2px); box-shadow: v
 /* projects opener: a 3D fan of the screenshots (after anujmagar.com.np). Shown once main.js has filled it (.is-on).
    .pf-3d gives the perspective, .pf-plane is turned away (rotateY) so the tiles read as fanned pages; main.js sets
    each tile's translateZ / rotate / rotateY from the scroll position. Clipped to the column, edges faded. */
-.pf { display: none; position: relative; margin-inline: calc(50% - 50vw); height: 82vh; height: 82svh; min-height: 440px; max-height: 760px; margin-bottom: 1.5rem;
+.pf { display: none; position: relative; margin-inline: calc(50% - 50vw); height: 64vh; height: 64svh; min-height: 400px; max-height: 600px; margin-bottom: 1.5rem;
   overflow-x: hidden; overflow-x: clip; overflow-y: visible; pointer-events: none; } /* clip sideways only: the fan rises over the section above as it leaves */
 .pf.is-on { display: block; }
 @media (min-width: 1024px) { .pf { margin-inline: calc(50% - (100vw - var(--side)) / 2); } } /* full width of the main area, past the column, like the reference */
 .pf-word { position: absolute; left: 0; right: 0; top: 62%; transform: translateY(-50%); text-align: center; pointer-events: none;
   font-family: var(--pixel); font-size: clamp(3.6rem, 15vw, 9.5rem); line-height: 1; letter-spacing: -.02em; color: var(--g200); }
-.pf-3d { position: absolute; inset: 0; perspective: 1000px; perspective-origin: 50% 40%; }
-.pf-plane { position: absolute; left: 47%; top: 42%; width: 0; height: 0; transform-style: preserve-3d;
+.pf-3d { position: absolute; inset: 0; perspective: 1000px; perspective-origin: 50% 34%; }
+.pf-plane { position: absolute; left: 47%; top: 36%; width: 0; height: 0; transform-style: preserve-3d;
   transform: translate(var(--px, 0px), var(--py, 0px)) rotateX(10deg) rotateY(52deg) rotateZ(-4deg); } /* --px/--py: the drift to the top right (main.js) */
 .pf-card { --fw: 15rem; position: absolute; left: calc(var(--fw) / -2); top: calc(var(--fw) / -2); width: var(--fw); height: var(--fw);
   display: flex; align-items: center; justify-content: center; transform-origin: 50% 110%;
@@ -364,7 +364,7 @@ a.card:hover, .card.hoverable:hover { transform: translateY(-2px); box-shadow: v
 /* thin edges (Joana, 18 Nov 2026): the screenshot nearly fills the tile, so each card reads like a thin sheet */
 .pf-card img { width: 94%; height: 94%; object-fit: cover; object-position: top left; border-radius: 11px; display: block;
   border: 1px solid var(--g200); }
-@media (max-width: 640px) { .pf { height: 54svh; min-height: 360px; } .pf-3d { perspective: 760px; } .pf-plane { left: 20%; top: 40%; } .pf-word { top: 60%; } .pf-card { --fw: 11rem; border-radius: 14px; } .pf-card img { border-radius: 8px; } }
+@media (max-width: 640px) { .pf { height: 46svh; min-height: 320px; } .pf-3d { perspective: 760px; perspective-origin: 50% 30%; } .pf-plane { left: 20%; top: 30%; } .pf-word { top: 53%; } .pf-card { --fw: 11rem; border-radius: 14px; } .pf-card img { border-radius: 8px; } }
 .stack-card { min-height: 11rem; background: var(--bg); background-image: linear-gradient(to bottom, var(--g50), var(--bg)); box-shadow: var(--shadow); }
 .stack-card:hover { border-color: var(--g300); box-shadow: var(--shadow-hover); }
 .stack-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
