@@ -2,7 +2,8 @@
    Sources:
    - gallery thumbnails: [data-gallery] button.shot  (full image in data-full, alt from the <img>)
    - [data-shot="N"]: opens gallery photo N (1-based)
-   - [data-photos="a.webp|b.webp"] with optional data-alts="…|…": opens its own set of images */
+   - [data-photos="a.webp|b.webp"] with optional data-alts="…|…": opens its own set of images (buttons, or links
+     whose href is the image as a no-JS fallback; a click another script already prevented is ignored) */
 (function () {
   var box = document.getElementById('lightbox');
   if (!box) return;
@@ -52,7 +53,10 @@
     b.addEventListener('click', function () { open(gallery, parseInt(b.getAttribute('data-shot'), 10) - 1); });
   });
   document.querySelectorAll('[data-photos]').forEach(function (b) {
-    b.addEventListener('click', function () {
+    b.addEventListener('click', function (e) {
+      // a back card in the certification deck: the deck already used this click to bring it forward
+      if (e.defaultPrevented) return;
+      e.preventDefault(); // links with data-photos (cert cards) fall back to the image itself without JS
       var srcs = b.getAttribute('data-photos').split('|'), alts = (b.getAttribute('data-alts') || '').split('|');
       open(srcs.map(function (s, k) { return { src: s, alt: alts[k] || '' }; }), 0);
     });

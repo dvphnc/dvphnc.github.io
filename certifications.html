@@ -13,8 +13,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap"/>
-  <link rel="stylesheet" href="assets/css/site.css?v=202611222"/>
-  <link rel="stylesheet" href="assets/css/note.css?v=202611222"/>
+  <link rel="stylesheet" href="assets/css/site.css?v=202611223"/>
+  <link rel="stylesheet" href="assets/css/note.css?v=202611223"/>
 </head>
 <body>
 
@@ -69,13 +69,13 @@
     <article class="wrap read">
       <p class="micro crumb enter" style="--d:50ms"><a href="index.html#certifications">portfolio</a> / certifications</p>
       <h1 class="page-title enter" style="--d:90ms">certifications &amp; training</h1>
-      <p class="xp-lead enter" style="--d:130ms">Certifications first, then training courses, newest first. Open one to verify it with the issuer, as a list or as a stack.</p>
+      <p class="xp-lead enter" style="--d:130ms">Certifications first, then training (courses, a workshop and a webinar), newest first. Open one to verify it with the issuer, as a list or as a stack.</p>
 
       <!-- Same archive framing as events.html: one plain row per credential, grouped, newest first. The whole row links
            to the issuer's verification page (verify ↗). The kind sits under the date; validity or detail after the
            issuer. Keep in step with the deck on index.html (#certifications) and its counts. Oracle certs show
            "valid to": update on renewal. -->
-      <!-- two views of the same seven credentials (Joana, 17 Nov 2026): the list (default) and the square cards the
+      <!-- two views of the same nine credentials (Joana, 17 Nov 2026): the list (default) and the square cards the
            homepage first used (a grid of .card.cert). The choice is remembered (localStorage "certView"). -->
       <div class="view-switch enter" style="--d:150ms" role="group" aria-label="View">
         <button type="button" data-view="list" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></svg>list</button>
@@ -115,8 +115,22 @@
           </a>
         </div>
 
-        <h2 class="ev-year">training <span class="micro">3</span></h2>
+        <h2 class="ev-year">training <span class="micro">5</span></h2>
         <div class="grid-3 cert-grid">
+          <a class="card cert hoverable" href="https://cert.vjal.ai/certificate/?uid=6582547825718493249" target="_blank" rel="noopener">
+            <span class="cert-logo"><img class="logo" src="assets/logos/vjal.png" alt="Vjal Institute"/></span>
+            <h3 class="cert-name">AI Empowerment for Communities</h3>
+            <p class="micro cert-issuer">vjal institute</p>
+            <p class="cert-meta">Jun 2026 · workshop</p>
+            <span class="cert-verify">‹ verify ›</span>
+          </a>
+          <a class="card cert hoverable" href="assets/img/events/dict-ai-prompts-2026/cert-participation.webp" data-photos="assets/img/events/dict-ai-prompts-2026/cert-participation.webp" data-alts="DICT certificate of participation: AI Prompts 101 webinar, National ICT Month, 16 June 2026">
+            <span class="cert-logo"><img class="logo logo-seal" src="assets/logos/dict.svg" alt="DICT"/></span>
+            <h3 class="cert-name">Artificial Intelligence Prompts 101</h3>
+            <p class="micro cert-issuer">dict · caraga region</p>
+            <p class="cert-meta">Jun 2026 · webinar</p>
+            <span class="cert-verify">‹ certificate ›</span>
+          </a>
           <a class="card cert hoverable" href="https://www.coursera.org/account/accomplishments/specialization/Y05IYRFJA1MY" target="_blank" rel="noopener">
             <span class="cert-logo wide pair"><img class="logo" src="assets/logos/isc2.svg" alt="ISC2"/><img class="logo" src="assets/logos/coursera.svg" alt="Coursera"/></span>
             <h3 class="cert-name">Certified in Cybersecurity (CC) Official Training</h3>
@@ -150,8 +164,10 @@
           <li><a class="ev-row" href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=D43A8C93FE30161F5AF6077AE49AB9FE612D8698DFBD1116CC92691601BF4C03" target="_blank" rel="noopener" aria-label="OCI Data Foundations Associate, Oracle, December 2024: verify (opens in a new tab)"><span class="ev-when">Dec 2024<span class="ev-kind">certification</span></span><span class="row-logo wide"><img class="logo" src="assets/logos/oracle.svg" alt=""/></span><span class="ev-what"><span class="event-name">OCI Data Foundations Associate</span><span class="event-org">Oracle · valid to Dec 2026</span></span><span class="ev-go">verify <span class="arr">↗</span></span></a></li>
         </ul>
 
-        <h2 class="ev-year" id="training">training <span class="micro">3</span></h2>
+        <h2 class="ev-year" id="training">training <span class="micro">5</span></h2>
         <ul class="events ev-list">
+          <li><a class="ev-row" href="https://cert.vjal.ai/certificate/?uid=6582547825718493249" target="_blank" rel="noopener" aria-label="AI Empowerment for Communities, Vjal Institute, June 2026: verify (opens in a new tab)"><span class="ev-when">Jun 2026<span class="ev-kind">workshop</span></span><span class="row-logo"><img class="logo" src="assets/logos/vjal.png" alt=""/></span><span class="ev-what"><span class="event-name">AI Empowerment for Communities</span><span class="event-org">Vjal Institute · workshop certificate</span></span><span class="ev-go">verify <span class="arr">↗</span></span></a></li>
+          <li><button class="ev-row" type="button" data-photos="assets/img/events/dict-ai-prompts-2026/cert-participation.webp" data-alts="DICT certificate of participation: AI Prompts 101 webinar, National ICT Month, 16 June 2026" aria-label="Artificial Intelligence Prompts 101, DICT Caraga Region, June 2026: view the certificate"><span class="ev-when">Jun 2026<span class="ev-kind">webinar</span></span><span class="row-logo"><img class="logo logo-seal" src="assets/logos/dict.svg" alt=""/></span><span class="ev-what"><span class="event-name">Artificial Intelligence Prompts 101</span><span class="event-org">DICT · Caraga Region · certificate of participation</span></span><span class="ev-go">cert <span class="arr">↗</span></span></button></li>
           <li><a class="ev-row" href="https://www.coursera.org/account/accomplishments/specialization/Y05IYRFJA1MY" target="_blank" rel="noopener" aria-label="Certified in Cybersecurity (CC) Official Training, ISC2 on Coursera, October 2025: verify (opens in a new tab)"><span class="ev-when">Oct 2025<span class="ev-kind">training</span></span><span class="row-logo"><img class="logo" src="assets/logos/isc2.svg" alt=""/></span><span class="ev-what"><span class="event-name">Certified in Cybersecurity (CC) Official Training</span><span class="event-org">ISC2 · Coursera · 5-course specialization</span></span><span class="ev-go">verify <span class="arr">↗</span></span></a></li>
           <li><a class="ev-row" href="https://www.linkedin.com/learning/certificates/f41501f6eb854424385a648f7e826349e9b04b92a62885f6f95aca9b3bdb5e67/" target="_blank" rel="noopener" aria-label="Essential Skills in Generative AI for Creatives, Adobe on LinkedIn Learning, August 2025: verify (opens in a new tab)"><span class="ev-when">Aug 2025<span class="ev-kind">training</span></span><span class="row-logo"><img class="logo" src="assets/logos/adobe.svg" alt=""/></span><span class="ev-what"><span class="event-name">Essential Skills in Generative AI for Creatives</span><span class="event-org">Adobe · LinkedIn Learning · passed final exam</span></span><span class="ev-go">verify <span class="arr">↗</span></span></a></li>
           <li><a class="ev-row" href="https://courses.cognitiveclass.ai/certificates/fea1a489739a4b02ab4c9d266a0ade0f" target="_blank" rel="noopener" aria-label="SQL and Relational Databases 101, IBM Skills Network on Cognitive Class, October 2024: verify (opens in a new tab)"><span class="ev-when">Oct 2024<span class="ev-kind">training</span></span><span class="row-logo wide"><svg viewBox="0 7.3 24 9.4" fill="currentColor" aria-hidden="true" class="logo-svg"><path d="M23.544 15.993c.038 0 .06-.017.06-.053v-.036c0-.035-.022-.052-.06-.052h-.09v.14zm-.09.262h-.121v-.498h.225c.112 0 .169.066.169.157 0 .079-.036.129-.09.15l.111.19h-.133l-.092-.17h-.07zm.434-.222v-.062c0-.2-.157-.357-.363-.357a.355.355 0 00-.363.357v.062c0 .2.156.358.363.358a.355.355 0 00.363-.358zm-.838-.03c0-.28.212-.492.475-.492.264 0 .475.213.475.491 0 .279-.211.491-.475.491a.477.477 0 01-.475-.49zM16.21 8.13l-.216-.624h-3.56v.624zm.413 1.19l-.216-.623h-3.973v.624zm2.65 7.147h3.107v-.624h-3.108zm0-1.192h3.107v-.623h-3.108zm0-1.19h1.864v-.624h-1.865zm0-1.191h1.864v-.624h-1.865zm0-1.191h1.864v-.624h-3.555l-.175.504-.175-.504h-3.555v.624h1.865v-.574l.2.574h3.33l.2-.574zm1.864-1.815h-3.142l-.217.624h3.359zm-7.46 3.006h1.865v-.624h-1.865zm0 1.19h1.865v-.623h-1.865zm-1.243 1.191h3.108v-.623h-3.108zm0 1.192h3.108v-.624h-3.108zm6.386-8.961l-.216.624h3.776v-.624zm-.629 1.815h4.19v-.624h-3.974zm-4.514 1.19h3.359l-.216-.623h-3.143zm2.482 2.383h2.496l.218-.624h-2.932zm.417 1.19h1.662l.218-.623h-2.098zm.416 1.191h.83l.218-.623h-1.266zm.414 1.192l.217-.624h-.432zm-12.433-.006l4.578.006c.622 0 1.18-.237 1.602-.624h-6.18zm4.86-3v.624h2.092c0-.216-.03-.425-.083-.624zm-3.616.624h1.865v-.624H6.217zm3.617-3.573h2.008c.053-.199.083-.408.083-.624H9.834zm-3.617 0h1.865v-.624H6.217zM9.55 7.507H4.973v.624h6.18a2.36 2.36 0 00-1.602-.624zm2.056 1.191H4.973v.624h6.884a2.382 2.382 0 00-.25-.624zm-5.39 2.382v.624h4.87c.207-.176.382-.387.519-.624zm4.87 1.191h-4.87v.624h5.389a2.39 2.39 0 00-.519-.624zm-6.114 3.006h6.634c.11-.193.196-.402.25-.624H4.973zM0 8.13h4.352v-.624H0zm0 1.191h4.352v-.624H0zm1.243 1.191h1.865v-.624H1.243zm0 1.191h1.865v-.624H1.243zm0 1.19h1.865v-.623H1.243zm0 1.192h1.865v-.624H1.243zM0 15.276h4.352v-.623H0zm0 1.192h4.352v-.624H0Z"/></svg></span><span class="ev-what"><span class="event-name">SQL and Relational Databases 101</span><span class="event-org">IBM Skills Network · Cognitive Class · DB0101EN, passed</span></span><span class="ev-go">verify <span class="arr">↗</span></span></a></li>
@@ -164,9 +180,18 @@
       </footer>
     </article>
   </main>
+  <!-- certificate viewer (assets/js/gallery.js): opened by the DICT row and card -->
+  <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Certificate viewer">
+    <button class="lb-btn lb-close" type="button" aria-label="Close">×</button>
+    <button class="lb-btn lb-prev" type="button" aria-label="Previous">←</button>
+    <img class="lb-img" alt=""/>
+    <button class="lb-btn lb-next" type="button" aria-label="Next">→</button>
+    <p class="lb-count micro"></p>
+  </div>
 
-  <script src="assets/js/theme.js?v=202611222"></script>
-  <script src="assets/js/note.js?v=202611222"></script>
+  <script src="assets/js/theme.js?v=202611223"></script>
+  <script src="assets/js/note.js?v=202611223"></script>
+  <script src="assets/js/gallery.js?v=202611223"></script>
     <script>
     /* certifications.html: list / stack switch. Shows one view and remembers it. */
     (function () {

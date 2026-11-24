@@ -574,6 +574,11 @@ a.cert:hover .cert-verify { color: var(--accent); }
 .fan-card[data-slot="4"] { --fan: translateX(82%) translateY(22px) rotate(13deg) scale(.86); z-index: 3; }
 .fan-card[data-slot="5"] { --fan: translateX(-14%) translateY(-34px) rotate(-3deg) scale(.88); z-index: 2; }
 .fan-card[data-slot="6"] { --fan: translateX(14%) translateY(-46px) rotate(3deg) scale(.84); z-index: 1; }
+/* 7/8 (added 24 Nov 2026, Vjal + DICT): peek out between the wide pair and the top pair, furthest back */
+.fan-card[data-slot="7"] { --fan: translateX(-60%) translateY(-14px) rotate(-10deg) scale(.82); z-index: 0; }
+.fan-card[data-slot="8"] { --fan: translateX(60%) translateY(-14px) rotate(10deg) scale(.82); z-index: 0; }
+.cert-fan:hover .fan-card[data-slot="7"] { --fan: translateX(-70%) translateY(-20px) rotate(-12deg) scale(.82); }
+.cert-fan:hover .fan-card[data-slot="8"] { --fan: translateX(70%) translateY(-20px) rotate(12deg) scale(.82); }
 .fan-card:not([data-slot="0"]) { cursor: pointer; }
 .cert-fan:hover .fan-card[data-slot="1"] { --fan: translateX(-48%) translateY(5px) rotate(-9deg) scale(.93); }
 .cert-fan:hover .fan-card[data-slot="2"] { --fan: translateX(48%) translateY(5px) rotate(9deg) scale(.93); }
@@ -599,6 +604,10 @@ a.fan-card:hover { transform: translateX(-50%) translateX(var(--dx, 0px)) rotate
   .cert-fan:hover .fan-card[data-slot="4"] { --fan: translateX(12%) translateY(16px) rotate(8deg) scale(.9); }
   .cert-fan:hover .fan-card[data-slot="5"] { --fan: translateX(-4%) translateY(-24px) rotate(-2deg) scale(.92); }
   .cert-fan:hover .fan-card[data-slot="6"] { --fan: translateX(4%) translateY(-34px) rotate(2deg) scale(.88); }
+  .fan-card[data-slot="7"] { --fan: translateX(-10%) translateY(-10px) rotate(-6deg) scale(.86); }
+  .fan-card[data-slot="8"] { --fan: translateX(10%) translateY(-10px) rotate(6deg) scale(.86); }
+  .cert-fan:hover .fan-card[data-slot="7"] { --fan: translateX(-11%) translateY(-12px) rotate(-7deg) scale(.86); }
+  .cert-fan:hover .fan-card[data-slot="8"] { --fan: translateX(11%) translateY(-12px) rotate(7deg) scale(.86); }
 }
 @media (prefers-reduced-motion: reduce) { .fan-card { transition: none; } }
 
