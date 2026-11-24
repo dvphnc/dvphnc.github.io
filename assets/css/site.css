@@ -349,7 +349,7 @@ a.card:hover, .card.hoverable:hover { transform: translateY(-2px); box-shadow: v
   overflow-x: hidden; overflow-x: clip; overflow-y: visible; pointer-events: none; } /* clip sideways only: the fan rises over the section above as it leaves */
 .pf.is-on { display: block; }
 @media (min-width: 1024px) { .pf { margin-inline: calc(50% - (100vw - var(--side)) / 2); } } /* full width of the main area, past the column, like the reference */
-.pf-word { position: absolute; left: 0; right: 0; top: 76%; transform: translateY(-50%); text-align: center; pointer-events: none;
+.pf-word { position: absolute; left: 0; right: 0; top: 62%; transform: translateY(-50%); text-align: center; pointer-events: none;
   font-family: var(--pixel); font-size: clamp(3.6rem, 15vw, 9.5rem); line-height: 1; letter-spacing: -.02em; color: var(--g200); }
 .pf-3d { position: absolute; inset: 0; perspective: 1000px; perspective-origin: 50% 40%; }
 .pf-plane { position: absolute; left: 47%; top: 42%; width: 0; height: 0; transform-style: preserve-3d;
@@ -364,7 +364,7 @@ a.card:hover, .card.hoverable:hover { transform: translateY(-2px); box-shadow: v
 /* thin edges (Joana, 18 Nov 2026): the screenshot nearly fills the tile, so each card reads like a thin sheet */
 .pf-card img { width: 94%; height: 94%; object-fit: cover; object-position: top left; border-radius: 11px; display: block;
   border: 1px solid var(--g200); }
-@media (max-width: 640px) { .pf { height: 54svh; min-height: 360px; } .pf-3d { perspective: 760px; } .pf-plane { left: 20%; top: 40%; } .pf-word { top: 70%; } .pf-card { --fw: 11rem; border-radius: 14px; } .pf-card img { border-radius: 8px; } }
+@media (max-width: 640px) { .pf { height: 54svh; min-height: 360px; } .pf-3d { perspective: 760px; } .pf-plane { left: 20%; top: 40%; } .pf-word { top: 60%; } .pf-card { --fw: 11rem; border-radius: 14px; } .pf-card img { border-radius: 8px; } }
 .stack-card { min-height: 11rem; background: var(--bg); background-image: linear-gradient(to bottom, var(--g50), var(--bg)); box-shadow: var(--shadow); }
 .stack-card:hover { border-color: var(--g300); box-shadow: var(--shadow-hover); }
 .stack-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
