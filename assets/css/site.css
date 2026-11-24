@@ -342,6 +342,27 @@ a.card:hover, .card.hoverable:hover { transform: translateY(-2px); box-shadow: v
 .proj-cards .stack-card:hover { box-shadow: 0 -10px 30px -18px rgba(0, 26, 94, .28), var(--shadow-hover); }
 @media (max-width: 1023px) { .proj-cards { --stick: calc(56px + .75rem); } } /* below the sticky topbar */
 @media (prefers-reduced-motion: reduce) { .proj-cards > li { position: static; } .proj-cards .stack-card { transform: none; } }
+/* covered cards turn textured (Joana, 25 Nov 2026), like the event photos: the card on top of the pile stays in
+   colour; main.js adds .is-tex as the next card slides over. Then the screenshot fades to its 1-bit dither
+   (<shot>-dither.png, coloured by the headshot's #duo-light / #duo-dark filters) and the colourful backdrop fades to a
+   fine grain in the same two blues. Mouse hover or keyboard focus brings the colour back. */
+.proj-cards .pj-shot.mock::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0;
+  background-color: #e8f1ff; background-image: radial-gradient(#002a78 .75px, transparent 1px), radial-gradient(#002a78 .75px, transparent 1px);
+  background-size: 4px 4px; background-position: 0 0, 2px 2px; transition: opacity .6s var(--ease); }
+html.dark .proj-cards .pj-shot.mock::before { background-color: #001a5e; background-image: radial-gradient(#eaf2ff .75px, transparent 1px), radial-gradient(#eaf2ff .75px, transparent 1px); }
+.pj-dither { position: absolute; left: 0; right: 0; bottom: 0; top: 9px; width: 100%; height: calc(100% - 9px); object-fit: cover; object-position: top center;
+  opacity: 0; pointer-events: none; filter: url(#duo-light) contrast(1.05); transition: opacity .6s var(--ease); }
+html.dark .pj-dither { filter: url(#duo-dark); }
+.proj-cards .mock-bar { transition: filter .6s var(--ease); }
+.proj-cards .stack-card.is-tex .pj-shot.mock::before, .proj-cards .stack-card.is-tex .pj-dither { opacity: 1; }
+.proj-cards .stack-card.is-tex .mock-bar { filter: grayscale(1); }
+.proj-cards .stack-card.is-tex:focus-within .pj-shot.mock::before, .proj-cards .stack-card.is-tex:focus-within .pj-dither { opacity: 0; }
+.proj-cards .stack-card.is-tex:focus-within .mock-bar { filter: none; }
+@media (hover: hover) {
+  .proj-cards .stack-card.is-tex:hover .pj-shot.mock::before, .proj-cards .stack-card.is-tex:hover .pj-dither { opacity: 0; }
+  .proj-cards .stack-card.is-tex:hover .mock-bar { filter: none; }
+}
+@media (prefers-reduced-motion: reduce) { .pj-dither, .proj-cards .pj-shot.mock::before, .proj-cards .mock-bar { transition: none; } }
 /* projects opener: a 3D fan of the screenshots (after anujmagar.com.np). Shown once main.js has filled it (.is-on).
    .pf-3d gives the perspective, .pf-plane is turned away (rotateY) so the tiles read as fanned pages; main.js sets
    each tile's translateZ / rotate / rotateY from the scroll position. Clipped to the column, edges faded. */

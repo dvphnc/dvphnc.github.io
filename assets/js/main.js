@@ -241,6 +241,7 @@
         for (var j = i + 1; j < sItems.length; j++) cover += Math.min(1, Math.max(0, (rects[i].top + h - rects[j].top) / h));
         var s = (1 - 0.035 * Math.min(cover, 2.2)).toFixed(4);
         if (s !== sLastS[i]) { sLastS[i] = s; li.firstElementChild.style.setProperty('--s', s); }
+        li.firstElementChild.classList.toggle('is-tex', cover > 0.15); // covered: textured (CSS); the top card keeps its colour
       });
     };
     var sQueue = function () { if (sNear && !sTick) { sTick = true; requestAnimationFrame(sUpdate); } };
