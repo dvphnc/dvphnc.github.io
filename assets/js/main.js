@@ -236,13 +236,19 @@
       sTick = false;
       var rects = sItems.map(function (li) { return li.getBoundingClientRect(); });
       var hs = sItems.map(function (li) { return li.firstElementChild.offsetHeight; });
+      // the card resting on top of the pile: the last one that has reached its sticky spot, but only once the card
+      // after it has not started covering it yet; before any card sticks, the first card. Only that card is in
+      // colour; every other card, covered or still sliding up from below, is textured (Joana, 25 Nov 2026).
+      var top = 0;
+      sItems.forEach(function (li, i) { if (rects[i].top <= (parseFloat(getComputedStyle(li).top) || 0) + 2) top = i; });
       sItems.forEach(function (li, i) {
         var h = hs[i], cover = 0;
         for (var j = i + 1; j < sItems.length; j++) cover += Math.min(1, Math.max(0, (rects[i].top + h - rects[j].top) / h));
         var s = (1 - 0.035 * Math.min(cover, 2.2)).toFixed(4);
         if (s !== sLastS[i]) { sLastS[i] = s; li.firstElementChild.style.setProperty('--s', s); }
-        li.firstElementChild.classList.toggle('is-tex', cover > 0.15); // covered: textured (CSS); the top card keeps its colour
+        if (i === top && cover > 0.15 && sItems[i + 1]) top = i + 1; // the next card is sliding over: it takes the top
       });
+      sItems.forEach(function (li, i) { li.firstElementChild.classList.toggle('is-tex', i !== top); });
     };
     var sQueue = function () { if (sNear && !sTick) { sTick = true; requestAnimationFrame(sUpdate); } };
     if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { sNear = es[0].isIntersecting; sQueue(); }, { rootMargin: '20% 0px' }).observe(sList);
