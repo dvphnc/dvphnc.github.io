@@ -280,8 +280,9 @@ html.dark .portrait .duo-dark { opacity: 1; }
 .cell { padding: 1rem 1rem 1rem 0; border-bottom: 1px solid var(--g200); display: flex; align-items: center; gap: 12px; min-width: 0; }
 .cell + .cell { padding-left: 1rem; border-left: 1px solid var(--g200); }
 @media (min-width: 640px) { .cell:nth-child(3n+1) { padding-left: 0; border-left: 0; } }
-/* phones: highlights stack as full-width rows, the three stats stay in one row of three */
-@media (max-width: 639px) {
+/* phones and tablets: highlights stack as full-width rows (so each subline fits on one line), the three stats stay in
+   one row of three */
+@media (max-width: 1023px) {
   .cells { grid-template-columns: repeat(3, 1fr); }
   .cell, .cell + .cell { padding: .8rem 0; border-left: 0; }
   .cell:not(.stat) { grid-column: 1 / -1; }
@@ -291,7 +292,11 @@ html.dark .portrait .duo-dark { opacity: 1; }
   .cell-stat { font-size: 1.6rem; }
 }
 .cell-logo { min-width: 34px; height: 28px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-.cell-logo img { height: 24px; width: auto; max-width: 84px; object-fit: contain; }
+.cell-logo img { height: 24px; width: auto; max-width: 72px; object-fit: contain; }
+/* every highlight's subline stays on one line (Joana, 24 Nov 2026); between phone and wide desktop the columns are
+   narrow, so the sublines tighten a touch there to fit "ai & data science trainee" beside the U-Tokyo wordmark */
+.cell:not(.stat) .micro { white-space: nowrap; }
+@media (min-width: 1024px) and (max-width: 1279px) { .cell { gap: 10px; } .cell .micro { font-size: 9.5px; letter-spacing: .4px; } }
 .cell-icon { width: 34px; height: 28px; flex-shrink: 0; color: var(--ink); display: flex; align-items: center; justify-content: center; }
 .cell-title { font-size: 13px; font-weight: 600; line-height: 1.3; }
 .cell-stat { display: block; font-family: var(--pixel); font-size: 1.9rem; line-height: 1; }
@@ -590,7 +595,7 @@ a.cert:hover .cert-verify { color: var(--accent); }
 a.fan-card:hover { transform: translateX(-50%) translateX(var(--dx, 0px)) rotate(var(--dr, 0deg)) var(--fan, none); } /* no 2px lift: the fan moves instead */
 .fan-card[data-slot="0"]:hover { --fan: translateY(-3px); }
 .fan-count { position: absolute; left: 0; right: 0; bottom: 0; text-align: center; }
-@media (max-width: 639px) {
+@media (max-width: 767px) {
   .fan-card { width: 78%; min-height: 0; top: 44px; }
   .fan-card[data-slot="1"] { --fan: translateX(-8%) translateY(8px) rotate(-4deg) scale(.95); }
   .fan-card[data-slot="2"] { --fan: translateX(8%) translateY(8px) rotate(4deg) scale(.95); }
