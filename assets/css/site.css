@@ -346,10 +346,11 @@ a.card:hover, .card.hoverable:hover { transform: translateY(-2px); box-shadow: v
    colour; main.js adds .is-tex as the next card slides over. Then the screenshot fades to its 1-bit dither
    (<shot>-dither.png, coloured by the headshot's #duo-light / #duo-dark filters) and the colourful backdrop fades to a
    fine grain in the same two blues. Mouse hover or keyboard focus brings the colour back. */
+/* the backdrop's texture is a real 1-bit dither of that project's own gradient (--tex, set inline:
+   <shot>-bg-dither.png, 600x375, same recipe as the event photos), coloured by the same duotone filters */
 .proj-cards .pj-shot.mock::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0;
-  background-color: #e8f1ff; background-image: radial-gradient(#002a78 .75px, transparent 1px), radial-gradient(#002a78 .75px, transparent 1px);
-  background-size: 4px 4px; background-position: 0 0, 2px 2px; transition: opacity .6s var(--ease); }
-html.dark .proj-cards .pj-shot.mock::before { background-color: #001a5e; background-image: radial-gradient(#eaf2ff .75px, transparent 1px), radial-gradient(#eaf2ff .75px, transparent 1px); }
+  background: #002a78 var(--tex) center / cover no-repeat; filter: url(#duo-light) contrast(1.05); transition: opacity .6s var(--ease); }
+html.dark .proj-cards .pj-shot.mock::before { filter: url(#duo-dark); }
 .pj-dither { position: absolute; left: 0; right: 0; bottom: 0; top: 9px; width: 100%; height: calc(100% - 9px); object-fit: cover; object-position: top center;
   opacity: 0; pointer-events: none; filter: url(#duo-light) contrast(1.05); transition: opacity .6s var(--ease); }
 html.dark .pj-dither { filter: url(#duo-dark); }
