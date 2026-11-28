@@ -231,27 +231,28 @@
   var sList = document.querySelector('.proj-cards');
   if (sList && !reduced) {
     var sItems = Array.prototype.slice.call(sList.children).filter(function (li) { return li.tagName === 'LI'; });
-    var sTick = false, sNear = true, sLastS = [];
+    var sTick = false, sLastS = [];
     var sUpdate = function () {
       sTick = false;
       var rects = sItems.map(function (li) { return li.getBoundingClientRect(); });
       var hs = sItems.map(function (li) { return li.firstElementChild.offsetHeight; });
-      // the card resting on top of the pile: the last one that has reached its sticky spot, but only once the card
-      // after it has not started covering it yet; before any card sticks, the first card. Only that card is in
-      // colour; every other card, covered or still sliding up from below, is textured (Joana, 25 Nov 2026).
-      var top = 0;
-      sItems.forEach(function (li, i) { if (rects[i].top <= (parseFloat(getComputedStyle(li).top) || 0) + 2) top = i; });
+      // the card you are reading is in colour, every other one textured (Joana, 25-28 Nov 2026). "Reading" = the card
+      // on top at a line 42% down the screen: later cards stack over earlier ones, so it is the last card whose top
+      // has passed that line (the first card until any has). Tying it to the line, not to the pinned top card, keeps
+      // the colour on the card in view even when several short cards fit on screen.
+      var line = window.innerHeight * 0.42, top = 0;
+      sItems.forEach(function (li, i) { if (rects[i].top <= line) top = i; });
       sItems.forEach(function (li, i) {
         var h = hs[i], cover = 0;
         for (var j = i + 1; j < sItems.length; j++) cover += Math.min(1, Math.max(0, (rects[i].top + h - rects[j].top) / h));
         var s = (1 - 0.035 * Math.min(cover, 2.2)).toFixed(4);
         if (s !== sLastS[i]) { sLastS[i] = s; li.firstElementChild.style.setProperty('--s', s); }
-        if (i === top && cover > 0.15 && sItems[i + 1]) top = i + 1; // the next card is sliding over: it takes the top
       });
       sItems.forEach(function (li, i) { li.firstElementChild.classList.toggle('is-tex', i !== top); });
     };
-    var sQueue = function () { if (sNear && !sTick) { sTick = true; requestAnimationFrame(sUpdate); } };
-    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { sNear = es[0].isIntersecting; sQueue(); }, { rootMargin: '20% 0px' }).observe(sList);
+    // runs on every scroll (five cards, cheap): skipping it while the list was off screen also skipped the frame right
+    // after a fast flick into the list, which left the colour on the wrong card until the next scroll
+    var sQueue = function () { if (!sTick) { sTick = true; requestAnimationFrame(sUpdate); } };
     sUpdate();
     window.addEventListener('scroll', sQueue, { passive: true });
     window.addEventListener('resize', sQueue);
