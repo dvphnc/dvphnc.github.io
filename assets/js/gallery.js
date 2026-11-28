@@ -81,6 +81,16 @@
     }
   });
 
+  // Tetris photo board: drop the pieces in once, when the board is first a third on screen (CSS does the fall)
+  var board = document.querySelector('.gallery.tetris');
+  if (board && !still && 'IntersectionObserver' in window) {
+    var bio = new IntersectionObserver(function (es) {
+      if (!es[0].isIntersecting) return;
+      board.classList.add('drop'); bio.disconnect();
+    }, { threshold: 0.15 });
+    bio.observe(board);
+  }
+
   // swipe on phones
   var x0 = null;
   box.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
